@@ -1,5 +1,5 @@
 @extends('panel.index')
-@section('pageTitle', 'Convênios')
+@section('pageTitle', 'Mandatos')
 
 @section('content')
 <div class="card">
@@ -12,7 +12,7 @@
                 <button type="button" class="btn-dropdown-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">Página</a>
-                    <a class="dropdown-item" href="{{ route('councilors.create') }}">Novo</a>
+                    <a class="dropdown-item" href="{{ route('mandates.create', 'vereador') }}">Novo</a>
                     <a class="dropdown-item" href="#">Tipos</a>
                 </div>
             </div>
@@ -44,7 +44,6 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="{{ route('mandates.index', 'vereador') }}">Mandatos</a>
-                                    <a class="dropdown-item" href="#">Arquivos</a>
                                     <a class="dropdown-item" href="#">Editar</a>
                                     <a class="dropdown-item" data-toggle="modal" data-target="#myModal" href="#">Excluir</a>
                                 </div>
