@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->morphs('transactionable');
+            $table->date('date');
+            $table->string('session');
+            $table->string('expedient')->nullable();
+            $table->string('stage')->nullable();
+            $table->string('status')->nullable();
+            $table->text('observation')->nullable();
+            $table->string('slug');
             $table->timestamps();
         });
     }

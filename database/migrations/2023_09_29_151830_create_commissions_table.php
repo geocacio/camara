@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('commissions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('councilor_id');
             $table->timestamps();
+            $table->foreign('councilor_id')->references('id')->on('councilors');
         });
     }
 
