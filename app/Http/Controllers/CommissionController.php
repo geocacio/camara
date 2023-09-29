@@ -12,7 +12,7 @@ class CommissionController extends Controller
      */
     public function index()
     {
-        //
+        return view('panel.councilor.commission.index');
     }
 
     /**
@@ -20,7 +20,7 @@ class CommissionController extends Controller
      */
     public function create()
     {
-        //
+        return view('panel.councilor.commission.create');
     }
 
     /**
@@ -44,7 +44,7 @@ class CommissionController extends Controller
      */
     public function edit(Commission $commission)
     {
-        //
+        return view('panel.councilor.commission.edit');
     }
 
     /**
