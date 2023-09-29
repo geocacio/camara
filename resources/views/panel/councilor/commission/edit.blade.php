@@ -1,5 +1,5 @@
 @extends('panel.index')
-@section('pageTitle', 'Nova Comissão')
+@section('pageTitle', 'Atualizar Comissão')
 
 @section('breadcrumb')
 <li><a href="{{ route('councilors.index') }}">Vereadores</a></li>
