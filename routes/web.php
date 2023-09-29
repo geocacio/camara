@@ -8,6 +8,7 @@ use App\Http\Controllers\AgreementTransferController;
 use App\Http\Controllers\AvailableFilesController;
 use App\Http\Controllers\BiddingController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ConfigureOfficialDiaryController;
 use App\Http\Controllers\ConstructionArtController;
@@ -46,6 +47,7 @@ use App\Http\Controllers\OrganController;
 use App\Http\Controllers\OutsourcedController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PageServiceLetterController;
+use App\Http\Controllers\PartyAffiliationController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\PcgController;
@@ -147,6 +149,8 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('/councilors', CouncilorController::class);
         Route::resource('/councilors/{councilor:slug}/mandates', MandateController::class);
+        Route::resource('/councilors/{councilor:slug}/commissions', CommissionController::class);
+        Route::resource('/councilors/{councilor:slug}/party-affiliation', PartyAffiliationController::class);
 
         Route::resource('/secretaries', SecretaryController::class);
         //creating reponsible of secretary
