@@ -17,6 +17,7 @@ use App\Http\Controllers\ConstructionFileController;
 use App\Http\Controllers\ConstructionMeasurementsController;
 use App\Http\Controllers\ConstructionProgressController;
 use App\Http\Controllers\ContractController;
+use App\Http\Controllers\CouncilorController;
 use App\Http\Controllers\CsvController;
 use App\Http\Controllers\CsvExportController;
 use App\Http\Controllers\DailyController;
@@ -31,6 +32,7 @@ use App\Http\Controllers\LawController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\LRFController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\MandateController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ModelController;
 use App\Http\Controllers\OfficeController;
@@ -142,6 +144,9 @@ Route::middleware('auth')->group(function () {
 
         Route::get('types/{type:slug}/subtypes', [TypeController::class, 'index'])->name('subtypes.index');
         Route::get('types/{type:slug}/subtypes/create', [TypeController::class, 'create'])->name('subtypes.create');
+
+        Route::resource('/councilors', CouncilorController::class);
+        Route::resource('/councilors/{councilor:slug}/mandates', MandateController::class);
 
         Route::resource('/secretaries', SecretaryController::class);
         //creating reponsible of secretary

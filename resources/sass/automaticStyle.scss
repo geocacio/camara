@@ -1,3 +1,42 @@
+.night-mode .custom-menu {
+    background-color: #050505;
+}
+
+.night-mode .custom-menu .dropdown-menu {
+    background-color: #050505;
+}
+
+.night-mode .custom-menu .navbar-nav .nav-item .nav-link {
+    color: #e8eaed;
+}
+
+.night-mode .custom-menu .navbar-nav .nav-item .nav-link:hover {
+    background-color: #18191a;
+    color: #e8eaed;
+}
+
+.night-mode .custom-menu .dropdown-menu li a {
+    color: #e8eaed;
+}
+
+.night-mode .custom-menu .dropdown-menu li a:hover {
+    background-color: #18191a;
+    color: #e8eaed;
+}
+
+.night-mode #menu-topo {
+    background-color: #000000;
+}
+
+.night-mode #menu-topo .menu-topo .menu-item .menu-link {
+    color: #e8eaed;
+}
+
+.night-mode #menu-topo .menu-topo .menu-item .menu-link:hover {
+    background-color: #262626;
+    color: #e8eaed;
+}
+
 .night-mode .menu-topo {
     background-color: #000000;
 }
@@ -841,6 +880,114 @@
 
 .night-mode .section-site-map .main-card .accordion-site-map .accordion-item {
     color: #9d9d9d;
+}
+
+.night-mode .container-service {
+    background-color: #1b1c1e;
+    color: #ffffff;
+}
+
+.night-mode .container-service:hover {
+    background-color: #1d1f42;
+    color: #ffffff;
+}
+
+.night-mode .container-service .description .title {
+    color: #ffffff;
+}
+
+.night-mode .container-service:hover .description .title {
+    color: #ffffff;
+}
+
+.night-mode .container-service .description .text {
+    color: #e8eaed;
+}
+
+.night-mode .container-service:hover .description .text {
+    color: #ffffff;
+}
+
+.night-mode .container-service i {
+    color: #c5c5c5;
+}
+
+.night-mode .container-service:hover i {
+    color: #ffffff;
+}
+
+.night-mode .posts-container .post {
+    background-color: #1b1c1e;
+}
+
+.night-mode .posts-container .post .content .date {
+    color: #dbdbdb;
+}
+
+.night-mode .posts-container .post .content .title {
+    color: #7276b9;
+}
+
+.night-mode .posts-container .post .content .text {
+    color: #dbdbdb;
+}
+
+.night-mode .main-style-list .item .link {
+    background-color: #1b1c1e;
+}
+
+.night-mode .main-style-list .item .link .title {
+    color: #dbdbdb;
+}
+
+.night-mode .main-style-list .item .link .description {
+    color: #f7f7f7;
+}
+
+.night-mode .main-style-list .item .link .additional-informations {
+    color: #f7f7f7;
+}
+
+.custom-menu {
+    background-color: #30358c;
+}
+
+.custom-menu .dropdown-menu {
+    background-color: #30358c;
+}
+
+.custom-menu .navbar-nav .nav-item .nav-link {
+    color: #ffffff;
+    font-size: 13px;
+}
+
+.custom-menu .navbar-nav .nav-item .nav-link:hover {
+    background-color: #242768;
+    color: #ffffff;
+}
+
+.custom-menu .dropdown-menu li a {
+    color: #ffffff;
+    font-size: 13px;
+}
+
+.custom-menu .dropdown-menu li a:hover {
+    background-color: #242768;
+    color: #ffffff;
+}
+
+#menu-topo {
+    background-color: #004080;
+}
+
+#menu-topo .menu-topo .menu-item .menu-link {
+    color: #ffffff;
+    font-size: 13px;
+}
+
+#menu-topo .menu-topo .menu-item .menu-link:hover {
+    background-color: #033464;
+    color: #ffffff;
 }
 
 .menu-topo {
@@ -1690,5 +1837,76 @@
 
 .section-site-map .main-card .accordion-site-map .accordion-item {
     color: #3c3e41;
+}
+
+.container-service {
+    background-color: #e1e5e7;
+    color: #303030;
+}
+
+.container-service:hover {
+    background-color: #3F45B6;
+    color: #ffffff;
+}
+
+.container-service .description .title {
+    color: #303030;
+    font-size: 14px;
+}
+
+.container-service:hover .description .title {
+    color: #ffffff;
+}
+
+.container-service .description .text {
+    color: #303030;
+    font-size: 12px;
+}
+
+.container-service:hover .description .text {
+    color: #ffffff;
+}
+
+.container-service i {
+    color: #303030;
+}
+
+.container-service:hover i {
+    color: #ffffff;
+}
+
+.posts-container .post {
+    background-color: #ffffff;
+}
+
+.posts-container .post .content .date {
+    color: #212529;
+}
+
+.posts-container .post .content .title {
+    color: #242768;
+}
+
+.posts-container .post .content .text {
+    color: #212529;
+}
+
+.main-style-list .item .link {
+    background-color: #30358c;
+}
+
+.main-style-list .item .link .title {
+    color: #303030;
+    font-size: 14px;
+}
+
+.main-style-list .item .link .description {
+    color: #555555;
+    font-size: 13px;
+}
+
+.main-style-list .item .link .additional-informations {
+    color: #555555;
+    font-size: 13px;
 }
 
