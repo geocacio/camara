@@ -13,7 +13,20 @@ return new class extends Migration
     {
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('councilor_id');
+            $table->unsignedBigInteger('session_id');
+            $table->date('date');
+            $table->date('start_period');
+            $table->date('end_period');
+            $table->string('status');
+            $table->string('exercise');
+            $table->text('description');
+            $table->integer('views');
+            $table->string('slug');
             $table->timestamps();
+
+            $table->foreign('councilor_id')->references('id')->on('councilors');
+            $table->foreign('session_id')->references('id')->on('sessions');
         });
     }
 

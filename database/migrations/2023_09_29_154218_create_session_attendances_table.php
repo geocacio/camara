@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('session_attendances', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('councilor_id');
+            $table->unsignedBigInteger('session_id');
+            $table->string('call');
             $table->timestamps();
+            $table->foreign('councilor_id')->references('id')->on('councilors');
+            $table->foreign('session_id')->references('id')->on('sessions');
         });
     }
 

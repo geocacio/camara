@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('recipients', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('material_id');
+            $table->string('name');
+            $table->string('position');
+            $table->string('organization');
             $table->timestamps();
+            $table->foreign('material_id')->references('id')->on('materials');
         });
     }
 

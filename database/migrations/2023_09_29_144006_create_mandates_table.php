@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('mandates', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('councilor_id');
+            $table->string('office');
+            $table->string('relationship');
+            $table->string('legislature');
+            $table->string('period');
+            $table->string('slug');
             $table->timestamps();
+            $table->foreign('councilor_id')->references('id')->on('councilors');
         });
     }
 

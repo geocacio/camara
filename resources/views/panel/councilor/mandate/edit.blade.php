@@ -24,8 +24,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="current_bond">Cargo</label>
-                        <select name="current_bond" class="form-control">
+                        <label for="office">Cargo</label>
+                        <select name="office" class="form-control">
                             <option value="">Selecione</option>
                             <option value="">Vice Presidente</option>
                             <option value="">Vereador (a)</option>
@@ -35,8 +35,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="current_position">Vinculo</label>
-                        <select name="current_position" class="form-control">
+                        <label for="relationship">Vinculo</label>
+                        <select name="relationship" class="form-control">
                             <option value="">Selecione</option>
                             <option value="">Mesa Diretora</option>
                             <option value="">Vereador Exercício</option>
@@ -47,8 +47,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="current_position">Legislatura</label>
-                        <select name="current_position" class="form-control">
+                        <label for="legislature">Legislatura</label>
+                        <select name="legislature" class="form-control">
                             <option value="">Selecione</option>
                             <option value="">Mesa Diretora</option>
                             <option value="">Vereador Exercício</option>
@@ -57,8 +57,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="current_bond">Período</label>
-                        <select name="current_bond" class="form-control">
+                        <label for="period">Período</label>
+                        <select name="period" class="form-control">
                             <option value="">Selecione</option>
                             <option value="">option</option>
                         </select>
