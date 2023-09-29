@@ -1,0 +1,123 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Department;
+use App\Models\Employee;
+use App\Models\Sector;
+use App\Services\GeneralCrudSErvice;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
+class SectorController extends Controller
+{
+    private $crud;
+
+    public function __construct(GeneralCrudSErvice $crud)
+    {
+        $this->crud = $crud;
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+
+    public function index(Request $request)
+    {
+        $search = $request->query('search');
+        $perPage = $request->query('perPage', 10);
+        $sectors = Sector::with('department', 'responsible.employee')
+            ->when($search, function ($query, $search) {
+                return $query->where(function($query) use ($search){
+                    $query->where('name', 'like', '%'.$search.'%')
+                    ->orWhereHas('responsible.employee', function($query) use ($search){
+                        $query->where('name', 'like', '%'.$search.'%');
+                    })
+                    ->orWhereHas('department', function($query) use ($search){
+                        $query->where(function($query) use ($search){
+                            $query->where('name', 'like', '%'.$search.'%')
+                            ->orWhereHas('organ', function($query) use ($search){
+                                $query->where('name', 'like', '%'.$search.'%');
+                            });
+                        });
+                    });
+                });
+            })
+            ->paginate($perPage)
+            ->appends(['search' => $search, 'perPage' => $perPage]);
+
+        return view('panel.secretaries.sectors.index', compact('sectors', 'search', 'perPage'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $departments = Department::all();
+        $employees = Employee::all();
+        return view('panel.secretaries.sectors.create', compact('departments', 'employees'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'department_id' => 'required',
+            'description' => 'nullable',
+        ]);
+        $validatedData['slug'] = Str::slug($request->name);
+
+        $redirect = ['route' => 'sectors.index'];
+        return $this->crud->initCrud('create', 'Sector', $validatedData, $request, $redirect);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Sector $sector)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Sector $sector)
+    {
+        $departments = Department::all();
+        $employees = Employee::all();
+        return view('panel.secretaries.sectors.edit', compact('sector', 'employees', 'departments'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Sector $sector)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'department_id' => 'required',
+            'description' => 'nullable',
+        ]);
+
+        $redirect = ['route' => 'sectors.index'];
+        return $this->crud->initCrud('update', 'Sector', $validatedData, $request, $redirect, $sector);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Sector $sector)
+    {
+        if ($sector->employee) {
+            $sector->employee->delete();
+        }
+
+        $sector->delete();
+        return redirect()->route('sectors.index')->with('success', 'Setor excluído com sucesso!');
+    }
+}

@@ -1,0 +1,95 @@
+.night-mode{
+    .custom-menu{
+        .navbar-toggler{
+            color: $cNightColor1;
+            background-color: $bgNightColor2;
+        }
+    }
+    .default-tabnav-site .nav-tabs .nav-item .nav-link:not(.active){
+        background-color: #1e1e1e;
+        color: #f7f7f7;
+        &:hover{
+            background-color: #3f44b5;
+            color: #fff;
+        }
+    }
+    .default-tabnav-site
+    {
+        .tab-content{
+            border: 1px solid #272727;
+            .link-with-info{
+                border: 1px solid #575757;
+            }
+        }
+    }
+
+    .empty-data{
+        color: #e2e2e2;
+    }
+    
+
+    .section-map{
+        &:after{
+            background: #000;
+            opacity: 0.7;
+        }
+    }
+    .carousel-header{
+        .link{
+            position: relative;
+            &:after{
+                content: "";
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: #000;
+                opacity: 0.5;
+                pointer-events: none;
+            }
+        }
+    }
+    .smaller-header{
+        position: relative;
+        &:after{
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #000;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    }
+    .card-with-links .footer .links{
+        border-color: transparent;
+    }
+}
+
+.container-button{
+    .link{
+        color: #f7f7f7;
+    }
+}
+.night-mode .section-service-letters .search-advanced form .form-control{
+    border: none;
+}
+
+.night-mode .section-ombudsman .form-default .form-control{
+    border-color: transparent;
+}
+
+.night-mode .container-table{
+    border-color: #212121;
+}
+
+.night-mode .section-ombudsman-faq .container-faq .accordion-item{
+    border-color: #1e1e1e;
+}
+
+.night-mode .light-link{
+    border-color: transparent;
+}

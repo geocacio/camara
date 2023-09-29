@@ -1,0 +1,19 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+// Variables
+@import 'variables';
+
+@import 'styles';
+
+@import 'nightMode';
+@import 'automaticStyle';
+
+
+//genreal styles
+.no-padding{
+    padding: 0!important;
+}

@@ -1,0 +1,1 @@
+<h3>{{ $decree->number }}/{{ $decree->exercicy->name }}</h3>
