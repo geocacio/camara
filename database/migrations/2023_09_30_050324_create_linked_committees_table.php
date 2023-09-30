@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('commissions', function (Blueprint $table) {
+        Schema::create('linked_committees', function (Blueprint $table) {
             $table->id();
-            $table->string('description');
-            $table->text('information')->nullable();
-            $table->text('slug')->nullable();
+            $table->unsignedBigInteger('commission_id');
+            $table->string('office');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->timestamps();
+            $table->foreign('commission_id')->references('id')->on('commissions');
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('commissions');
+        Schema::dropIfExists('linked_committees');
     }
 };

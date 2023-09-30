@@ -21,6 +21,17 @@
     <div class="card-body">
         <form action="#" method="post" enctype="multipart/form-data">
             @csrf
+            
+            <div class="form-group">
+                <label for="type_id">Tipo</label>
+                <select name="type_id" class="form-control">
+                    <option value="">Selecione</option>
+                    <option value="">Vice Presidente</option>
+                    <option value="">Vereador (a)</option>
+                    <option value="">1º Secretário</option>
+                </select>
+            </div>
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -36,7 +47,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Descrição</label>
-                        <input type="text" name="description" class="form-control" value="{{ old('description') }}"/>
+                        <input type="text" name="description" class="form-control" value="{{ old('description') }}" />
                     </div>
                 </div>
             </div>
