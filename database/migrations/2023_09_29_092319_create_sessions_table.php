@@ -14,12 +14,14 @@ return new class extends Migration
     {
         Schema::create('sessions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('status_id');
+            $table->unsignedBigInteger('exercicy_id');
             $table->date('date');
-            $table->string('status');
-            $table->string('exercise');
             $table->text('description');
             $table->string('slug');
             $table->timestamps();
+            $table->foreign('status_id')->references('id')->on('categories');
+            $table->foreign('exercicy_id')->references('id')->on('categories');
         });
     }
 
