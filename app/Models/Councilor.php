@@ -25,6 +25,27 @@ class Councilor extends Model
         'slug',
     ];
 
+    public function legislatureRelations()
+    {
+        return $this->morphMany(LegislatureRelation::class, 'legislatureable');
+    }
+
+    public function mandates(){
+        return $this->hasMany(Mandate::class);
+    }
+
+    public function commissions(){
+        return $this->hasMany(Commission::class);
+    }
+
+    public function partyAffiliations(){
+        return $this->hasMany(PartyAffiliation::class);
+    }
+
+    public function materials(){
+        return $this->hasMany(Material::class);
+    }
+
     public static function uniqSlug($name)
     {
         $slug = Str::slug($name);
@@ -43,22 +64,6 @@ class Councilor extends Model
         }
 
         return $slug;
-    }
-
-    public function mandates(){
-        return $this->hasMany(Mandate::class);
-    }
-
-    public function commissions(){
-        return $this->hasMany(Commission::class);
-    }
-
-    public function partyAffiliations(){
-        return $this->hasMany(PartyAffiliation::class);
-    }
-
-    public function materials(){
-        return $this->hasMany(Material::class);
     }
 
     public function getRouteKeyName()
