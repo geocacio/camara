@@ -70,6 +70,7 @@ use App\Http\Controllers\SelectiveProcessController;
 use App\Http\Controllers\SelectiveProcessPageController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceLetterController;
+use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SicController;
 use App\Http\Controllers\SicFaqController;
@@ -151,6 +152,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('/councilors/{councilor:slug}/mandates', MandateController::class);
         Route::resource('/councilors/{councilor:slug}/commissions', CommissionController::class);
         Route::resource('/councilors/{councilor:slug}/party-affiliation', PartyAffiliationController::class);
+
+        Route::resource('/sessions', SessionController::class);
 
         Route::resource('/secretaries', SecretaryController::class);
         //creating reponsible of secretary
