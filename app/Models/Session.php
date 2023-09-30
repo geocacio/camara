@@ -12,8 +12,8 @@ class Session extends Model
 
     protected $fillable = [
         'date',
-        'status',
-        'exercise',
+        'status_id',
+        'exercicy_id',
         'description',
         'slug',
     ];
@@ -21,6 +21,16 @@ class Session extends Model
     public function materials()
     {
         return $this->hasMany(Material::class);
+    }
+
+    public function exercicy()
+    {
+        return $this->belongsTo(Category::class, 'exercicy_id');
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Category::class, 'status_id');
     }
 
     public static function uniqSlug($name)

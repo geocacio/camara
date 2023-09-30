@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('legislature_relations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('legislature_id');
-            $table->morphs('legislatureable');
+            $table->morphs('legislatureable', 'legislatureable_index');
             $table->timestamps();
             $table->foreign('legislature_id')->references('id')->on('legislatures');
         });
