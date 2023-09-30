@@ -64,6 +64,7 @@ class AppServiceProvider extends ServiceProvider
             'ConstructionArt' => 'App\Models\ConstructionArt',
             'Pcg' => 'App\Models\Pcg',
             'Pcs' => 'App\Models\Pcs',
+            'Session' => 'App\Models\Session',
         ]);
 
 

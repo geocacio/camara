@@ -25,30 +25,29 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Lei</th>
                         <th>Data</th>
+                        <th>Status</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($sessions as $session)
                     <tr>
-                        <td>01</td>
-                        <td>Lei</td>
-                        <td>Data</td>
+                        <td>{{ $session->id }}</td>
+                        <td>{{ date('d/m/Y', strtotime($session->date)) }}</td>
+                        <td>{{ $session->status->name }}</td>
                         <td class="actions text-center">
                             <div class="btn-group dropleft">
                                 <a class="link create" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa-solid fa-gear"></i>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="{{ route('mandates.index', 'vereador') }}">Mandatos</a>
-                                    <a class="dropdown-item" href="{{ route('commissions.index', 'vereador') }}">Comissões</a>
-                                    <a class="dropdown-item" href="#">Editar</a>
-                                    <a class="dropdown-item" data-toggle="modal" data-target="#myModal" href="#">Excluir</a>
+                                    <a class="dropdown-item" href="{{ route('attendances.create', $session->slug) }}">Fazer chamada</a>
+                                    <a class="dropdown-item" href="{{ route('sessions.edit', $session->slug) }}">Editar</a>
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#myModal-{{ $session->id }}" href="#">Excluir</a>
                                 </div>
 
-                                <div id="myModal" class="modal fade modal-warning" role="dialog">
+                                <div id="myModal-{{ $session->id }}" class="modal fade modal-warning" role="dialog">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <!-- Modal content-->
                                         <div class="modal-content">
@@ -64,11 +63,11 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-cancel" data-dismiss="modal">Cancelar</button>
                                                 <a href="#" class="btn btn-default" onclick="event.preventDefault();
-                                                document.getElementById('delete-form').submit();">
+                                                document.getElementById('delete-form-{{ $session->id }}').submit();">
                                                     Deletar
                                                 </a>
 
-                                                <form id="delete-form" action="#" method="post" style="display: none;">
+                                                <form id="delete-form-{{ $session->id }}" action="{{ route('sessions.destroy', $session->slug) }}" method="post" style="display: none;">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>

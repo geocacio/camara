@@ -33,6 +33,11 @@ class Session extends Model
         return $this->belongsTo(Category::class, 'status_id');
     }
     
+    public function types()
+    {
+        return $this->morphToMany(Type::class, 'typeable', 'type_contents');
+    }
+    
     public static function uniqSlug()
     {
         $countId = self::max('id');
