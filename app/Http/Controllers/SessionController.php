@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Session;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class SessionController extends Controller
@@ -12,7 +14,8 @@ class SessionController extends Controller
      */
     public function index()
     {
-        //
+    $sessions = Session::all();
+        return view('panel.sessions.index', compact('sessions'));
     }
 
     /**
@@ -20,7 +23,10 @@ class SessionController extends Controller
      */
     public function create()
     {
-        //
+        $types = Type::where('slug', 'sessions')->first();
+        $status = Category::where('slug', 'status')->with('children')->first();
+        $exercicies = Category::where('slug', 'exercicios')->with('children')->first();
+        return view('panel.sessions.create', compact('types', 'exercicies', 'status'));
     }
 
     /**
@@ -38,6 +44,7 @@ class SessionController extends Controller
             'date.status_id' => 'O campo status é obrigatório',
             'date.exercicy_id' => 'O campo exercício é obrigatório',
         ]);
+        $validateData['slug'] = Session::uniqSlug();
 
         $session = Session::create($validateData);
 

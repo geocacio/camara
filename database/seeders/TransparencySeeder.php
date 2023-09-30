@@ -96,6 +96,17 @@ class TransparencySeeder extends Seeder
             'parent_id' => $serviceLetter->id,
             'slug' => Str::slug('Atendimento')
         ]);
+        
+        $status = Category::create([
+            'name' => 'Status',
+            'parent_id' => $serviceLetter->id,
+            'slug' => Str::slug('Status')
+        ]);
+        Category::create([
+            'name' => 'Aberta',
+            'parent_id' => $status->id,
+            'slug' => Str::slug('Aberta')
+        ]);
 
         OmbudsmanPage::create(['route' => 'ouvidoria.show']);
 

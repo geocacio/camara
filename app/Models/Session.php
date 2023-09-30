@@ -32,24 +32,13 @@ class Session extends Model
     {
         return $this->belongsTo(Category::class, 'status_id');
     }
-
-    public static function uniqSlug($name)
+    
+    public static function uniqSlug()
     {
-        $slug = Str::slug($name);
-
-        $count = self::where('slug', $slug)->count();
-
-        if ($count > 0) {
-            $newSlug = $slug . '-' . ($count + 1);
-
-            while (self::where('slug', $newSlug)->count() > 0) {
-                $count++;
-                $newSlug = $slug . '-' . ($count + 1);
-            }
-
-            return $newSlug;
-        }
-
+        $countId = self::max('id');
+        $nextId = $countId ? $countId + 1 : 1;
+        $year = date('Y');
+        $slug = $year . '-' . str_pad($nextId, 5, '0', STR_PAD_LEFT);
         return $slug;
     }
 
