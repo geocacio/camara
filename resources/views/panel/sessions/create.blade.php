@@ -18,8 +18,9 @@
     @endif
 
     <div class="card-body">
-        <form action="{{ route('sessions.create') }}" method="post">
+        <form action="{{ route('sessions.store') }}" method="post">
             @csrf
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -32,7 +33,11 @@
                         <label for="type_id">Tipo</label>
                         <select name="type_id" class="form-control">
                             <option value="">Selecione</option>
-                            <option value="">Vice Presidente</option>
+                            @if($types)
+                            @foreach($types->children as $type)
+                            <option value="{{ $type->id }}">{{ $type->name }}</option>
+                            @endforeach
+                            @endif
                         </select>
                     </div>
                 </div>
@@ -43,7 +48,11 @@
                         <label for="status_id">Status</label>
                         <select name="status_id" class="form-control">
                             <option value="">Selecione</option>
-                            <option value="">Vice Presidente</option>
+                            @if($status)
+                            @foreach($status->children as $statu)
+                            <option value="{{ $statu->id }}">{{ $statu->name }}</option>
+                            @endforeach
+                            @endif
                         </select>
                     </div>
                 </div>
@@ -52,7 +61,11 @@
                         <label for="exercicy_id">Exercício</label>
                         <select name="exercicy_id" class="form-control">
                             <option value="">Selecione</option>
-                            <option value="">Vice Presidente</option>
+                            @if($exercicies)
+                            @foreach($exercicies->children as $exercicy)
+                            <option value="{{ $exercicy->id}}">{{ $exercicy->name}}</option>
+                            @endforeach
+                            @endif
                         </select>
                     </div>
                 </div>

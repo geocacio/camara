@@ -1,26 +1,25 @@
 @extends('panel.index')
-@section('pageTitle', 'Vereadores')
+@section('pageTitle', 'Sessões')
 
 @section('content')
 <div class="card">
     <div class="card-body">
         
         <div class="card-header text-right header-with-search">
-            {{--<a href="#" class="btn-default">Novo</a>--}}
 
             <div class="btn-group dropleft">
                 <button type="button" class="btn-dropdown-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">Página</a>
-                    <a class="dropdown-item" href="{{ route('councilors.create') }}">Novo</a>
-                    <a class="dropdown-item" href="#">Tipos</a>
+                    <a class="dropdown-item" href="{{ route('sessions.create') }}">Novo</a>
+                    <a class="dropdown-item" href="{{ route('subtypes.index', 'sessions') }}">Tipos</a>
                 </div>
             </div>
         
         </div>
 
 
-        <!-- if(laws && laws->count() > 0) -->
+        @if($sessions && $sessions->count() > 0)
         <div class="table-responsive">
             <table class="table table-striped table-with-dropdown">
                 <thead>
@@ -32,7 +31,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- foreach(laws as law) -->
+                    @foreach($sessions as $session)
                     <tr>
                         <td>01</td>
                         <td>Lei</td>
@@ -82,15 +81,15 @@
 
                         </td>
                     </tr>
-                    <!-- endforeach -->
+                    @endforeach
                 </tbody>
             </table>
         </div>
-        <!-- else -->
+        @else
         <div class="no-data">
-            <span>Ainda não existem leis cadastradas.</span>
+            <span>Ainda não existem sessões cadastradas.</span>
         </div>
-        <!-- endif -->
+        @endif
 
     </div>
     
