@@ -119,7 +119,7 @@ class SessionController extends Controller
             $typeContent->delete();
         }
 
-        if ($session->udelete()){
+        if ($session->delete()){
             return redirect()->route('sessions.index')->with('success', 'Sessão removida com sucesso!');
         }
         return redirect()->back()->with('error', 'Error, por favor tente novamente!');
