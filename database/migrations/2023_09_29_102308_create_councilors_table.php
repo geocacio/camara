@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('surname');
             $table->string('email')->unique();
             $table->string('phone')->nullable();
-            $table->string('current_position')->nullable();
-            $table->string('current_bond')->nullable();
+            $table->unsignedBigInteger('office_id');
+            $table->unsignedBigInteger('bond_id');
             $table->date('start_mandate')->nullable();
             $table->date('end_mandate')->nullable();
             $table->date('birth_date')->nullable();
@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('profile_image')->nullable();
             $table->string('slug');
             $table->timestamps();
+            $table->foreign('office_id')->references('id')->on('offices');
+            $table->foreign('bond_id')->references('id')->on('categories');
         });
     }
 

@@ -51,8 +51,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="current_position">Cargo Atual</label>
-                        <select name="current_position" class="form-control">
+                        <label for="office_id">Cargo Atual</label>
+                        <select name="office_id" class="form-control">
                             <option value="">Selecione</option>
                             <option value="">Vice Presidente</option>
                         </select>
@@ -60,8 +60,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="current_bond">Vínculo atual</label>
-                        <select name="current_bond" class="form-control">
+                        <label for="bond_id">Vínculo atual</label>
+                        <select name="bond_id" class="form-control">
                             <option value="">Selecione</option>
                             <option value="">option</option>
                         </select>

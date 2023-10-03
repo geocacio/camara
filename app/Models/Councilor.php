@@ -15,8 +15,8 @@ class Councilor extends Model
         'surname',
         'email',
         'phone',
-        'current_position',
-        'current_bond',
+        'office_id',
+        'bond_id',
         'start_mandate',
         'end_mandate',
         'birth_date',
@@ -44,6 +44,16 @@ class Councilor extends Model
 
     public function materials(){
         return $this->hasMany(Material::class);
+    }
+
+    public function categories()
+    {
+        return $this->morphMany(CategoryContent::class, 'categoryable');
+    }
+    
+    public function office()
+    {
+        return $this->belongsTo(Office::class, 'office_id');
     }
 
     public static function uniqSlug($name)

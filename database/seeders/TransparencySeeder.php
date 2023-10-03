@@ -31,10 +31,31 @@ class TransparencySeeder extends Seeder
             'slug' => Str::slug('Portal da Transparência')
         ]);
 
-        Office::create([
-            'office' => 'Advogado',
-            'slug' => 'Advogado',
-        ]);
+        $officies = [
+            'Cargo',
+            'PRESIDENTE',
+            'VICE-PRESIDENTE',
+            '1º SECRETÁRIO',
+            '2º SECRETÁRIO',
+            'VEREADOR (A)',
+            'OUVIDORA',
+            'ASSISTENTE LEGISLATIVO',
+            'TESOUREIRO',
+            'CHEFE DE ARQUIVO GERAL',
+            'CHEFE DE GABINETE DA PRESIDÊNCIA',
+            'ASSESSOR ADMINISTRATIVO ',
+            'ASSESSOR PARLAMENTAR',
+            'CONTROLADORA INTERNA',
+            'DIRETORA ADMINISTRATIVA',
+            'MOTORISTA',
+            'AUXILIAR ADMINISTRATIVO',
+        ];
+        foreach($officies as $office){
+            Office::create([
+                'office' => $office,
+                'slug' => $office,
+            ]);
+        }
 
         $law = Type::create([
             'name' => 'Laws',
@@ -66,7 +87,7 @@ class TransparencySeeder extends Seeder
             'parent_id' => $office->id,
             'slug' => Str::slug('2023')
         ]);
-        
+
         $typeLeaf = Category::create([
             'name' => 'Tipo de folha',
             'slug' => Str::slug('Tipo de folha')
@@ -96,7 +117,7 @@ class TransparencySeeder extends Seeder
             'parent_id' => $serviceLetter->id,
             'slug' => Str::slug('Atendimento')
         ]);
-        
+
         $status = Category::create([
             'name' => 'Status',
             'parent_id' => $serviceLetter->id,
@@ -108,29 +129,30 @@ class TransparencySeeder extends Seeder
             'slug' => Str::slug('Aberta')
         ]);
 
+        $vinculo = Category::create([
+            'name' => 'Vínculo',
+            'parent_id' => $serviceLetter->id,
+            'slug' => Str::slug('Vínculo')
+        ]);
+
+        $vinculos = [
+            'MESA DIRETORA',
+            'VEREADOR EM EXERCÍCIO',
+            'VEREADOR LICENCIADO',
+            'EX-VEREADOR',
+            'SERVIDORES',
+            'VEREADOR SUPLENTE',
+            'VEREADOR AFASTADO',
+        ];
+
+        foreach($vinculos as $item){
+            Category::create([
+                'name' => $item,
+                'parent_id' => $vinculo->id,
+                'slug' => Str::slug($item)
+            ]);
+        }
+
         OmbudsmanPage::create(['route' => 'ouvidoria.show']);
-
-        // $childLawCategory = $lawCategory->children()->create([
-        //     'name' => 'Lei Nº 12.527 (Acesso a Informação) - Lei Nº 13.460 (Carta de Serviços)',
-        //     'slug' => Str::slug('Lei Nº 12.527 (Acesso a Informação) - Lei Nº 13.460 (Carta de Serviços)')
-        // ]);
-
-        // $transparencyCategory = Category::create([
-        //     'name' => 'Categorias da Transparência',
-        //     'slug' => Str::slug('Categorias da Transparência')
-        // ]);
-
-        // $childTransparencyCategory = $transparencyCategory->children()->create([
-        //     'name' => 'Canais de atendimento',
-        //     'slug' => Str::slug('Canais de atendimento')
-        // ]);
-
-        // $transparencyGroup = TransparencyGroup::create([
-        //     'transparency_id' => $transparencyPortal->id,
-        //     'law_id' => $childLawCategory->id,
-        //     'slug' => Str::slug('Transparency Group 1')
-        // ]);
-
-        // $transparencyGroup->categories()->create(['category_id' => $childTransparencyCategory->id,]);
     }
 }
