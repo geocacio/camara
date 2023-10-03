@@ -23,7 +23,6 @@ return new class extends Migration
             // $table->date('end_mandate')->nullable();
             $table->date('birth_date')->nullable();
             $table->text('biography')->nullable();
-            $table->string('profile_image')->nullable();
             $table->string('slug');
             $table->timestamps();
             $table->foreign('office_id')->references('id')->on('offices');

@@ -21,7 +21,6 @@ class Councilor extends Model
         // 'end_mandate',
         'birth_date',
         'biography',
-        'profile_image',
         'slug',
     ];
 
@@ -54,6 +53,11 @@ class Councilor extends Model
     public function office()
     {
         return $this->belongsTo(Office::class, 'office_id');
+    }
+    
+    public function files()
+    {
+        return $this->morphMany(FileContent::class, 'fileable');
     }
 
     public static function uniqSlug($name)

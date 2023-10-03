@@ -6,7 +6,6 @@
     <div class="card-body">
         
         <div class="card-header text-right header-with-search">
-            {{--<a href="#" class="btn-default">Novo</a>--}}
 
             <div class="btn-group dropleft">
                 <button type="button" class="btn-dropdown-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
@@ -20,21 +19,27 @@
         </div>
 
 
-        <!-- if(laws && laws->count() > 0) -->
+        @if($councilors && $councilors->count() > 0)
         <div class="table-responsive">
             <table class="table table-striped table-with-dropdown">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Lei</th>
+                        <th>Imagem</th>
+                        <th>Nome</th>
                         <th>Data</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- foreach(laws as law) -->
+                    @foreach($councilors as $councilor)
                     <tr>
                         <td>01</td>
+                        <td>
+                            @if($councilor->file)
+                            <img class="image-table" src="{{ asset('storage/'.$councilor->file) }}" />
+                            @endif
+                        </td>
                         <td>Lei</td>
                         <td>Data</td>
                         <td class="actions text-center">
@@ -45,11 +50,11 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="{{ route('mandates.index', 'vereador') }}">Mandatos</a>
                                     <a class="dropdown-item" href="{{ route('commissions.index', 'vereador') }}">Comissões</a>
-                                    <a class="dropdown-item" href="#">Editar</a>
-                                    <a class="dropdown-item" data-toggle="modal" data-target="#myModal" href="#">Excluir</a>
+                                    <a class="dropdown-item" href="{{ route('councilors.edit', $councilor->slug) }}">Editar</a>
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#myModal-{{$councilor->id}}" href="#">Excluir</a>
                                 </div>
 
-                                <div id="myModal" class="modal fade modal-warning" role="dialog">
+                                <div id="myModal-{{$councilor->id}}" class="modal fade modal-warning" role="dialog">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <!-- Modal content-->
                                         <div class="modal-content">
@@ -65,11 +70,11 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-cancel" data-dismiss="modal">Cancelar</button>
                                                 <a href="#" class="btn btn-default" onclick="event.preventDefault();
-                                                document.getElementById('delete-form').submit();">
+                                                document.getElementById('delete-form-{{$councilor->id}}').submit();">
                                                     Deletar
                                                 </a>
 
-                                                <form id="delete-form" action="#" method="post" style="display: none;">
+                                                <form id="delete-form-{{$councilor->id}}" action="{{ route('councilors.destroy', $councilor->slug) }}" method="post" style="display: none;">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
@@ -82,15 +87,15 @@
 
                         </td>
                     </tr>
-                    <!-- endforeach -->
+                    @endforeach
                 </tbody>
             </table>
         </div>
-        <!-- else -->
+        @else
         <div class="no-data">
-            <span>Ainda não existem leis cadastradas.</span>
+            <span>Ainda não existem Vereadores cadastrados.</span>
         </div>
-        <!-- endif -->
+        @endif
 
     </div>
     
