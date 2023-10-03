@@ -152,10 +152,11 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('/legislatures', LegislatureController::class);
         Route::resource('/affiliations', PartyAffiliationController::class);
+        Route::resource('/commissions', CommissionController::class);
 
         Route::resource('/councilors', CouncilorController::class);
         Route::resource('/councilors/{councilor:slug}/mandates', MandateController::class);
-        Route::resource('/councilors/{councilor:slug}/commissions', CommissionController::class);
+        // Route::resource('/councilors/{councilor:slug}/commissions', CommissionController::class);
         Route::resource('/councilors/{councilor:slug}/party-affiliation', PartyAffiliationController::class);
 
         Route::resource('/sessions', SessionController::class);

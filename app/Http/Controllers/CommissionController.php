@@ -12,7 +12,8 @@ class CommissionController extends Controller
      */
     public function index()
     {
-        return view('panel.councilor.commission.index');
+        $commissions = Commission::all();
+        return view('panel.commission.index', compact('commissions'));
     }
 
     /**
@@ -44,7 +45,7 @@ class CommissionController extends Controller
      */
     public function edit(Commission $commission)
     {
-        return view('panel.councilor.commission.edit');
+        return view('panel.councilor.commission.edit', compact('commission'));
     }
 
     /**
