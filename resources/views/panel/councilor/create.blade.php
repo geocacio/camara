@@ -18,7 +18,7 @@
     @endif
 
     <div class="card-body">
-        <form action="#" method="post" enctype="multipart/form-data">
+        <form action="{{ route('councilors.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-md-6">
@@ -54,7 +54,9 @@
                         <label for="office_id">Cargo Atual</label>
                         <select name="office_id" class="form-control">
                             <option value="">Selecione</option>
-                            <option value="">Vice Presidente</option>
+                            @foreach($offices as $office)
+                            <option value="{{ $office->id }}">{{ $office->office }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -63,25 +65,21 @@
                         <label for="bond_id">Vínculo atual</label>
                         <select name="bond_id" class="form-control">
                             <option value="">Selecione</option>
-                            <option value="">option</option>
+                            @foreach($bonds->children as $bond)
+                            <option value="{{ $bond->id }}">{{ $bond->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label>Inicio do mandato</label>
-                        <input type="date" name="start_mandate" class="form-control" value="{{ old('start_mandate') }}" />
+                        <label>Inicio do vínculo</label>
+                        <input type="date" name="start_bond" class="form-control" value="{{ old('start_bond') }}" />
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Fim do mandato</label>
-                        <input type="date" name="end_mandate" class="form-control" value="{{ old('end_mandate') }}" />
-                    </div>
-                </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
                         <label>Data de Nascimento</label>
                         <input type="date" name="birth_date" class="form-control" value="{{ old('birth_date') }}" />
@@ -96,7 +94,7 @@
             <div class="form-group">
                 <div class="custom-input-file">
                     <label for="logo">Foto do Vereador</label>
-                    <input type="file" name="file" accept="image/*" class="form-control" onchange="showTempFile(event, 'custom-input-file', 'container-temp-file')">
+                    <input type="file" name="profile_image" accept="image/*" class="form-control" onchange="showTempFile(event, 'custom-input-file', 'container-temp-file')">
                     <div class="container-temp-file">
                         <button type="button" class="btn btn-toggle-file" onclick="toggleFile(event)">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit">

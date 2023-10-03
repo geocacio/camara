@@ -16,7 +16,7 @@ class CouncilorController extends Controller
     {
         $this->fileUploadService = $fileUploadService;
     }
-    
+
     /**
      * Display a listing of the resource.
      */
@@ -32,7 +32,7 @@ class CouncilorController extends Controller
     {
         $bonds = Category::where('slug', 'vinculo')->with('children')->first();
         $offices = Office::all();
-        return view('panel.councilor.create', compact('bonds', 'office'));
+        return view('panel.councilor.create', compact('bonds', 'offices'));
     }
 
     /**
@@ -47,12 +47,23 @@ class CouncilorController extends Controller
             'phone' => 'required',
             'office_id' => 'required',
             'bond_id' => 'required',
-            'start_mandate' => 'required',
-            'end_mandate' => 'required',
+            'start_bond' => 'required',
             'birth_date' => 'required|date',
             'biography' => 'nullable',
             'profile_image' => "nullable|image|mimes:jpeg,png,jpg,gif|max:{$this->fileUploadService->getMaxSize()}",
-            'slug' => 'required|unique:seu_models',
+        ], [
+            'name.required' => 'O campo nome é obrigatório.',
+            'surname.required' => 'O campo sobrenome é obrigatório.',
+            'email.required' => 'O campo email é obrigatório.',
+            'email.email' => 'O campo email deve ser um endereço de email válido.',
+            'phone.required' => 'O campo telefone é obrigatório.',
+            'office_id.required' => 'O campo cargo atual é obrigatório.',
+            'bond_id.required' => 'O campo vínculo atual é obrigatório.',
+            'start_bond.required' => 'O campo data de início do vínculo é obrigatório.',
+            'birth_date.required' => 'O campo data de nascimento é obrigatório.',
+            'profile_image.mimes' => "O campo imagem do perfil deve ser um dos tipos: jpeg, png, jpg, gif.",
+            'profile_image.max' => "O campo imagem do perfil não pode ter mais de {$this->fileUploadService->getMaxSize()} bytes.",
+
         ]);
 
         $validateData['slug'] = Councilor::uniqSlug($validateData['name']);

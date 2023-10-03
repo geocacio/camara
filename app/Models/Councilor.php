@@ -17,8 +17,8 @@ class Councilor extends Model
         'phone',
         'office_id',
         'bond_id',
-        'start_mandate',
-        'end_mandate',
+        'start_bond',
+        // 'end_mandate',
         'birth_date',
         'biography',
         'profile_image',
@@ -50,7 +50,7 @@ class Councilor extends Model
     {
         return $this->morphMany(CategoryContent::class, 'categoryable');
     }
-    
+
     public function office()
     {
         return $this->belongsTo(Office::class, 'office_id');

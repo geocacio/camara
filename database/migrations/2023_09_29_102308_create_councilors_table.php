@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->unsignedBigInteger('office_id');
             $table->unsignedBigInteger('bond_id');
-            $table->date('start_mandate')->nullable();
-            $table->date('end_mandate')->nullable();
+            $table->date('start_bond')->nullable();
+            // $table->date('end_mandate')->nullable();
             $table->date('birth_date')->nullable();
             $table->text('biography')->nullable();
             $table->string('profile_image')->nullable();

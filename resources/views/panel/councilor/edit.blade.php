@@ -72,7 +72,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Inicio do mandato</label>
-                        <input type="date" name="start_mandate" class="form-control" value="{{ old('start_mandate', $councilor->start_mandate) }}" />
+                        <input type="date" name="start_bond" class="form-control" value="{{ old('start_bond', $councilor->start_bond) }}" />
                     </div>
                 </div>
                 <div class="col-md-4">
