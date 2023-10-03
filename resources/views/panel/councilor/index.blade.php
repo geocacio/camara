@@ -27,7 +27,8 @@
                         <th>#</th>
                         <th>Imagem</th>
                         <th>Nome</th>
-                        <th>Data</th>
+                        <th>E-mail</th>
+                        <th>Telefone</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
@@ -36,20 +37,21 @@
                     <tr>
                         <td>01</td>
                         <td>
-                            @if($councilor->file)
-                            <img class="image-table" src="{{ asset('storage/'.$councilor->file) }}" />
+                            @if($councilor->files->count() > 0)
+                            <img class="image-table" src="{{ asset('storage/'.$councilor->files[0]->file->url) }}" />
                             @endif
                         </td>
-                        <td>Lei</td>
-                        <td>Data</td>
+                        <td>{{ $councilor->name }}</td>
+                        <td>{{ $councilor->email }}</td>
+                        <td>{{ $councilor->phone }}</td>
                         <td class="actions text-center">
                             <div class="btn-group dropleft">
                                 <a class="link create" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa-solid fa-gear"></i>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="{{ route('mandates.index', 'vereador') }}">Mandatos</a>
-                                    <a class="dropdown-item" href="{{ route('commissions.index', 'vereador') }}">Comissões</a>
+                                    <a class="dropdown-item" href="{{ route('mandates.index', $councilor->slug) }}">Mandatos</a>
+                                    <a class="dropdown-item" href="{{ route('commissions.index', $councilor->slug) }}">Comissões</a>
                                     <a class="dropdown-item" href="{{ route('councilors.edit', $councilor->slug) }}">Editar</a>
                                     <a class="dropdown-item" data-toggle="modal" data-target="#myModal-{{$councilor->id}}" href="#">Excluir</a>
                                 </div>
