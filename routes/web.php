@@ -30,6 +30,7 @@ use App\Http\Controllers\ExternalLinkController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\LawController;
+use App\Http\Controllers\LegislatureController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\LRFController;
 use App\Http\Controllers\ManagerController;
@@ -148,6 +149,8 @@ Route::middleware('auth')->group(function () {
 
         Route::get('types/{type:slug}/subtypes', [TypeController::class, 'index'])->name('subtypes.index');
         Route::get('types/{type:slug}/subtypes/create', [TypeController::class, 'create'])->name('subtypes.create');
+
+        Route::resource('/legislatures', LegislatureController::class);
 
         Route::resource('/councilors', CouncilorController::class);
         Route::resource('/councilors/{councilor:slug}/mandates', MandateController::class);
