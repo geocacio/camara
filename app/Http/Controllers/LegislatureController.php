@@ -47,7 +47,7 @@ class LegislatureController extends Controller
             return redirect()->route('legislatures.index')->with('success', 'Legislatura cadastrado com sucesso!');
         }
 
-        return redirect()->route('legislatures.create')->with('error', 'Erro ao cadastrar Legislatura. Por favor, tente novamente.');
+        return redirect()->back()->with('error', 'Erro ao cadastrar Legislatura. Por favor, tente novamente.');
     }
 
     /**

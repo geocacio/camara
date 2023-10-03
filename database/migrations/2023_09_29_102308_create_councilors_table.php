@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('councilors', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('party_affiliation_id');
             $table->string('name');
             $table->string('surname');
             $table->string('email')->unique();
@@ -25,6 +26,7 @@ return new class extends Migration
             $table->text('biography')->nullable();
             $table->string('slug');
             $table->timestamps();
+            $table->foreign('party_affiliation_id')->references('id')->on('party_affiliations');
             $table->foreign('office_id')->references('id')->on('offices');
             $table->foreign('bond_id')->references('id')->on('categories');
         });

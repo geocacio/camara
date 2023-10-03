@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PartyAffiliation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PartyAffiliationController extends Controller
 {
@@ -12,7 +13,8 @@ class PartyAffiliationController extends Controller
      */
     public function index()
     {
-        //
+        $affiliations = PartyAffiliation::all();
+        return view('panel.affiliation.index', compact('affiliations'));
     }
 
     /**
@@ -20,7 +22,7 @@ class PartyAffiliationController extends Controller
      */
     public function create()
     {
-        //
+        return view('panel.affiliation.create');
     }
 
     /**
@@ -28,7 +30,21 @@ class PartyAffiliationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'name' => 'required',
+            'acronym' => 'nullable',
+        ], [
+            'name.required' => 'O campo nome é obrigatório.',
+        ]);
+        $validateData['slug'] = Str::Slug($validateData['name']);
+
+        $legislature = PartyAffiliation::create($validateData);
+
+        if ($legislature) {
+            return redirect()->route('affiliations.index')->with('success', 'Partido cadastrado com sucesso!');
+        }
+
+        return redirect()->back()->with('error', 'Erro ao cadastrar Partido. Por favor, tente novamente.');
     }
 
     /**
@@ -42,24 +58,40 @@ class PartyAffiliationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PartyAffiliation $party_affiliation)
+    public function edit(PartyAffiliation $affiliation)
     {
-        //
+        return view('panel.affiliation.edit', compact('affiliation'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PartyAffiliation $party_affiliation)
+    public function update(Request $request, PartyAffiliation $affiliation)
     {
-        //
+        $validateData = $request->validate([
+            'name' => 'required',
+            'acronym' => 'nullable',
+        ], [
+            'name.required' => 'O campo nome é obrigatório.',
+        ]);
+        $validateData['slug'] = Str::Slug($validateData['name']);
+
+        if ($affiliation->update($validateData)) {
+            return redirect()->route('affiliations.index')->with('success', 'Partido atualizado com sucesso!');
+        }
+
+        return redirect()->back()->with('error', 'Erro ao atualizar Partido. Por favor, tente novamente.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PartyAffiliation $party_affiliation)
+    public function destroy(PartyAffiliation $affiliation)
     {
-        //
+        if ($affiliation->delete()) {
+            return redirect()->route('affiliations.index')->with('success', 'Partido excluída com sucesso!');
+        }
+
+        return redirect()->route('affiliations.index')->with('error', 'Partido não encontrada ou já excluído.');
     }
 }

@@ -11,33 +11,13 @@ class PartyAffiliation extends Model
     use HasFactory;
 
     protected $fillable = [
-        'period',
+        'name',
         'acronym',
-        'party',
+        'slug',
     ];
     
     public function councilor(){
         return $this->belongsTo(Councilor::class);
-    }
-
-    public static function uniqSlug($name)
-    {
-        $slug = Str::slug($name);
-
-        $count = self::where('slug', $slug)->count();
-
-        if ($count > 0) {
-            $newSlug = $slug . '-' . ($count + 1);
-
-            while (self::where('slug', $newSlug)->count() > 0) {
-                $count++;
-                $newSlug = $slug . '-' . ($count + 1);
-            }
-
-            return $newSlug;
-        }
-
-        return $slug;
     }
 
     public function getRouteKeyName()
