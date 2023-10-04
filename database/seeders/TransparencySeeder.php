@@ -50,7 +50,7 @@ class TransparencySeeder extends Seeder
             'MOTORISTA',
             'AUXILIAR ADMINISTRATIVO',
         ];
-        foreach($officies as $office){
+        foreach ($officies as $office) {
             Office::create([
                 'office' => $office,
                 'slug' => $office,
@@ -120,7 +120,6 @@ class TransparencySeeder extends Seeder
 
         $status = Category::create([
             'name' => 'Status',
-            'parent_id' => $serviceLetter->id,
             'slug' => Str::slug('Status')
         ]);
         Category::create([
@@ -131,7 +130,6 @@ class TransparencySeeder extends Seeder
 
         $vinculo = Category::create([
             'name' => 'Vínculo',
-            'parent_id' => $serviceLetter->id,
             'slug' => Str::slug('Vínculo')
         ]);
 
@@ -145,10 +143,77 @@ class TransparencySeeder extends Seeder
             'VEREADOR AFASTADO',
         ];
 
-        foreach($vinculos as $item){
+        foreach ($vinculos as $item) {
             Category::create([
                 'name' => $item,
                 'parent_id' => $vinculo->id,
+                'slug' => Str::slug($item)
+            ]);
+        }
+
+        $situacao = Category::create([
+            'name' => 'Situação',
+            'slug' => Str::slug('Situação')
+        ]);
+        $situacoes = [
+            'ARQUIVADO',
+            'EM TRAMITAÇÃO',
+            'APROVADA',
+            'NÃO APROVADA',
+            'ENCAMINHADA AO ÓRGÃO COMPETENTE',
+            'PEDIDO DE VISTO',
+            '1º TURNO DE VOTAÇÃO',
+            '2º TURNO DE VOTAÇÃO',
+            'RETIRADA PELO O AUTOR',
+            'LEITURA',
+            'EMENDA CONSTITUCIONAL',
+            'VOTAÇÃO',
+            'RETIRADA DE PAUTA',
+            'ENCAMINHADO ÀS COMISSÕES',
+            'CANCELADA',
+            'RETIRADA',
+            'REIRADA DA MATÉRIA',
+            'AGUARDANDO EMENDA',
+        ];
+        foreach ($situacoes as $item) {
+            Category::create([
+                'name' => $item,
+                'parent_id' => $situacao->id,
+                'slug' => Str::slug($item)
+            ]);
+        }
+
+        $material = Type::create([
+            'name' => 'Materials',
+            'slug' => Str::slug('Materials')
+        ]);
+        $materiais = [
+            'ATA DA SESSÃO ANTERIOR',
+            'CÉDULA DE VOTAÇÃO PARA PRESIDÊNCIA',
+            'DECRETO LEGISLATIVO',
+            'EMENDA A LEI ORGÂNICA',
+            'INDICAÇÃO',
+            'MOÇÃO DE APLAUSO',
+            'MOÇÃO DE APOIO',
+            'MOÇÃO DE PESAR',
+            'MOÇÃO DE REPÚDIO',
+            'PRESTAÇÃO DE CONTAS DE GOVERNO',
+            'PROJETO DE DECRETO LEGISLATIVO',
+            'PROJETO DE LEI - EXECUTIVO',
+            'PROJETO DE LEI - LEGISLATIVO',
+            'PROJETO DE LEI COMPLEMENTAR',
+            'PROJETO DE RESOLUÇÃO',
+            'PROPOSTA DE EMENDA A LEI ORGÂNICA',
+            'REGIMENTO INTERNO ',
+            'REQUERIMENTO',
+            'RESOLUÇÃO',
+            'VETO ',
+        ];
+
+        foreach ($materiais as $item) {
+            Type::create([
+                'name' => $item,
+                'parent_id' => $material->id,
                 'slug' => Str::slug($item)
             ]);
         }

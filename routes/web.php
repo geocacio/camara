@@ -35,6 +35,7 @@ use App\Http\Controllers\LinkController;
 use App\Http\Controllers\LRFController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\MandateController;
+use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ModelController;
 use App\Http\Controllers\OfficeController;
@@ -153,6 +154,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('/legislatures', LegislatureController::class);
         Route::resource('/affiliations', PartyAffiliationController::class);
         Route::resource('/commissions', CommissionController::class);
+        Route::resource('/materials', MaterialController::class);
 
         Route::resource('/councilors', CouncilorController::class);
         Route::resource('/councilors/{councilor:slug}/mandates', MandateController::class);

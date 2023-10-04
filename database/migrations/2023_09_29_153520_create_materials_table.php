@@ -16,10 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('councilor_id');
             $table->unsignedBigInteger('session_id');
             $table->date('date');
-            $table->date('start_period');
-            $table->date('end_period');
             $table->string('status');
-            $table->string('exercise');
             $table->text('description');
             $table->integer('views');
             $table->string('slug');

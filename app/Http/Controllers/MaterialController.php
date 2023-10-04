@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Material;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class MaterialController extends Controller
@@ -12,7 +14,8 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        //
+        $materials = Material::all();
+        return view('panel.materials.index', compact('materials'));
     }
 
     /**
@@ -20,7 +23,12 @@ class MaterialController extends Controller
      */
     public function create()
     {
-        //
+        $getType = Type::where('slug', 'materials')->first();
+        $types = $getType ? $getType->children : [];
+        $category = Category::where('slug', 'situacao')->with('children')->get();
+        $situations = $category[0]->children;
+        
+        return view('panel.materials.create', compact('types', 'situations'));
     }
 
     /**

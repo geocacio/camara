@@ -14,14 +14,17 @@ class Material extends Model
         'councilor_id',
         'session_id',
         'date',
-        'start_period',
-        'end_period',
         'status',
         'exercise',
         'description',
         'views',
         'slug',
     ];
+
+    public function categories()
+    {
+        return $this->morphMany(CategoryContent::class, 'categoryable');
+    }
 
     public function councilor()
     {
