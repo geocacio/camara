@@ -41,7 +41,7 @@ class SiteContentSeeder extends Seeder
             ]);
         }
         //Cria os tipos padrão
-        $types = ['LRFs', 'Contracts', 'Biddings', 'PCG', 'Sessions', 'Agreements', 'Constructions', 'Constructions ART'];
+        $types = ['LRFs', 'Contracts', 'Biddings', 'PCG', 'Sessions', 'Commissions', 'Agreements', 'Constructions', 'Constructions ART'];
         foreach($types as $type){
             Type::firstOrCreate([
                 'name' => $type,

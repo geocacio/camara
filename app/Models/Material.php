@@ -53,6 +53,11 @@ class Material extends Model
         return $this->morphMany(Vote::class, 'voteable');
     }
 
+    public function commissionLinks()
+    {
+        return $this->morphMany(CommissionLink::class, 'linkable');
+    }
+
     public static function uniqSlug($name)
     {
         $slug = Str::slug($name);

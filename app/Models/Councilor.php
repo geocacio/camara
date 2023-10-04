@@ -60,6 +60,11 @@ class Councilor extends Model
         return $this->morphMany(FileContent::class, 'fileable');
     }
 
+    public function commissionLinks()
+    {
+        return $this->morphMany(CommissionLink::class, 'linkable');
+    }
+
     public static function uniqSlug($name)
     {
         $slug = Str::slug($name);

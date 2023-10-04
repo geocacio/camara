@@ -8,14 +8,14 @@
         <div class="card-header text-right header-with-search">
             <a href="{{ route('commissions.create') }}" class="btn-default">Novo</a>
 
-            <!-- <div class="btn-group dropleft">
+            <div class="btn-group dropleft">
                 <button type="button" class="btn-dropdown-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">Página</a>
-                    <a class="dropdown-item" href="{{ route('commissions.create', 'vereador') }}">Novo</a>
-                    <a class="dropdown-item" href="#">Tipos</a>
+                    <a class="dropdown-item" href="{{ route('commissions.create') }}">Novo</a>
+                    <a class="dropdown-item" href="{{ route('subtypes.index', 'commissions') }}">Tipos</a>
                 </div>
-            </div> -->
+            </div>
         
         </div>
 
@@ -26,7 +26,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <!-- <th>Tipo</th> -->
+                        <th>Tipo</th>
                         <th>Descrição</th>
                         <th class="text-center">Actions</th>
                     </tr>
@@ -35,10 +35,10 @@
                     @foreach($commissions as $comission)
                     <tr>
                         <td>{{ $comission->id }}</td>
-                        <!-- <td>{{ $comission->type }}</td> -->
+                        <td>{{ $comission->types[0]->name }}</td>
                         <td>{{ $comission->description }}</td>
                         <td class="actions text-center">
-                            <a href="{{ route('comissions.edit', $comission->slug) }}" class="link edit"><i class="fas fa-edit"></i></a>
+                            <a href="{{ route('commissions.edit', $comission->slug) }}" class="link edit"><i class="fas fa-edit"></i></a>
                         
                             <a data-toggle="modal" data-target="#myModal-{{ $comission->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a>
                         
@@ -62,7 +62,7 @@
                                                 Deletar
                                             </a>
 
-                                            <form id="delete-form-{{ $comission->id }}" action="{{ route('comissions.destroy', $comission->slug) }}" method="post" style="display: none;">
+                                            <form id="delete-form-{{ $comission->id }}" action="{{ route('commissions.destroy', $comission->slug) }}" method="post" style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>

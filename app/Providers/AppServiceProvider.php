@@ -66,6 +66,8 @@ class AppServiceProvider extends ServiceProvider
             'Pcs' => 'App\Models\Pcs',
             'Session' => 'App\Models\Session',
             'Councilor' => 'App\Models\Councilor',
+            'Commission' => 'App\Models\Commission',
+            'Material' => 'App\Models\Material',
         ]);
 
 

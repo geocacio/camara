@@ -15,10 +15,38 @@ class Commission extends Model
         'information',
         'slug',
     ];
+    
+    public function types()
+    {
+        return $this->morphToMany(Type::class, 'typeable', 'type_contents');
+    }
 
     public function linkedCommittees()
     {
         return $this->hasMany(LinkedCommittee::class, 'commission_id');
+    }
+
+    public function commissionLinks()
+    {
+        return $this->hasMany(CommissionLink::class);
+    }
+
+    public function sessions()
+    {
+        return $this->morphToMany(Session::class, 'linkable', 'commission_links', 'linkable_id', 'linkable_type')
+            ->where('linkable_type', Session::class);
+    }
+
+    public function materials()
+    {
+        return $this->morphToMany(Material::class, 'linkable', 'commission_links', 'linkable_id', 'linkable_type')
+            ->where('linkable_type', Material::class);
+    }
+
+    public function members()
+    {
+        return $this->morphToMany(Member::class, 'linkable', 'commission_links', 'linkable_id', 'linkable_type')
+            ->where('linkable_type', Member::class);
     }
 
     public static function uniqSlug($name)
