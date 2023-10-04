@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Councilor;
 use App\Models\Material;
+use App\Models\Session;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
@@ -25,10 +27,11 @@ class MaterialController extends Controller
     {
         $getType = Type::where('slug', 'materials')->first();
         $types = $getType ? $getType->children : [];
-        $category = Category::where('slug', 'situacao')->with('children')->get();
+        $category = Category::where('slug', 'status')->with('children')->get();
         $situations = $category[0]->children;
+        $sessions = Session::all();
         
-        return view('panel.materials.create', compact('types', 'situations'));
+        return view('panel.materials.create', compact('types', 'situations', 'sessions'));
     }
 
     /**

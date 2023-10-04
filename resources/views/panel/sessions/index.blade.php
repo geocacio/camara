@@ -13,6 +13,7 @@
                     <a class="dropdown-item" href="#">Página</a>
                     <a class="dropdown-item" href="{{ route('sessions.create') }}">Novo</a>
                     <a class="dropdown-item" href="{{ route('subtypes.index', 'sessions') }}">Tipos</a>
+                    <a class="dropdown-item" href="{{ route('subcategories.index', 'status') }}">Status</a>
                 </div>
             </div>
         

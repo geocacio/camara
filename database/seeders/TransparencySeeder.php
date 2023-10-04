@@ -118,16 +118,6 @@ class TransparencySeeder extends Seeder
             'slug' => Str::slug('Atendimento')
         ]);
 
-        $status = Category::create([
-            'name' => 'Status',
-            'slug' => Str::slug('Status')
-        ]);
-        Category::create([
-            'name' => 'Aberta',
-            'parent_id' => $status->id,
-            'slug' => Str::slug('Aberta')
-        ]);
-
         $vinculo = Category::create([
             'name' => 'Vínculo',
             'slug' => Str::slug('Vínculo')
@@ -151,11 +141,11 @@ class TransparencySeeder extends Seeder
             ]);
         }
 
-        $situacao = Category::create([
-            'name' => 'Situação',
-            'slug' => Str::slug('Situação')
+        $status = Category::create([
+            'name' => 'Status',
+            'slug' => Str::slug('Status')
         ]);
-        $situacoes = [
+        $statusArray = [
             'ARQUIVADO',
             'EM TRAMITAÇÃO',
             'APROVADA',
@@ -175,13 +165,7 @@ class TransparencySeeder extends Seeder
             'REIRADA DA MATÉRIA',
             'AGUARDANDO EMENDA',
         ];
-        foreach ($situacoes as $item) {
-            Category::create([
-                'name' => $item,
-                'parent_id' => $situacao->id,
-                'slug' => Str::slug($item)
-            ]);
-        }
+        $this->storeCategories($status->id, $statusArray);
 
         $material = Type::create([
             'name' => 'Materials',
@@ -209,15 +193,48 @@ class TransparencySeeder extends Seeder
             'RESOLUÇÃO',
             'VETO ',
         ];
+        $this->storeTypes($material->id, $materiais);
 
-        foreach ($materiais as $item) {
+        $session = Type::create([
+            'name' => 'Sessions',
+            'slug' => Str::slug('Sessions')
+        ]);
+        $sessoes = [
+            'ORDINÁRIA',
+            'EXTRAORDINÁRIA',
+            'AUDIÊNCIA PÚBLICA',
+            'SOLENE',
+            'ABERTURA DE PERÍODO LEGISLATIVO',
+            'ENCERRAMENTO DE PERÍODO LEGISLATIVO',
+            'ORDINÁRIA ITINERANTE',
+            'ADMINISTRATIVA',
+            'ESPECIAL',
+        ];
+        $this->storeTypes($session->id, $sessoes);
+
+        OmbudsmanPage::create(['route' => 'ouvidoria.show']);
+    }
+
+    private function storeCategories($parent_id, $array){
+        foreach ($array as $item) {
+            Category::create([
+                'name' => $item,
+                'parent_id' => $parent_id,
+                'slug' => Str::slug($item)
+            ]);
+        }
+        return true;
+    }
+
+    private function storeTypes($parent_id, $array){
+        foreach ($array as $item) {
             Type::create([
                 'name' => $item,
-                'parent_id' => $material->id,
+                'parent_id' => $parent_id,
                 'slug' => Str::slug($item)
             ]);
         }
 
-        OmbudsmanPage::create(['route' => 'ouvidoria.show']);
+        return true;
     }
 }

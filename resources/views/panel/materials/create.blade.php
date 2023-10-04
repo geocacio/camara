@@ -74,9 +74,9 @@
                         <label for="session_id">Sessão</label>
                         <select name="session_id" class="form-control">
                             <option value="">Selecione</option>
-                            @if($types->count() > 0)
-                            @foreach($types as $type)
-                            <option value="{{ $type->id }}">{{ $type->name }}</option>
+                            @if($sessions->count() > 0)
+                            @foreach($sessions as $session)
+                            <option value="{{ $session->id }}">{{ $session->date }}</option>
                             @endforeach
                             @endif
                         </select>
