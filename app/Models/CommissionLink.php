@@ -9,7 +9,7 @@ class CommissionLink extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['commission_id', 'linkable_id', 'linkable_type'];
+    protected $fillable = ['commission_id', 'linkable_id', 'linkable_type', 'start_date', 'end_date'];
 
     public function commission()
     {

@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('commission_id');
             $table->morphs('linkable');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->timestamps();
             $table->foreign('commission_id')->references('id')->on('commissions');
         });
