@@ -1,49 +1,42 @@
 @extends('panel.index')
-@section('pageTitle', 'Mandatos')
+@section('pageTitle', 'Legislaturas')
+
+@section('breadcrumb')
+<li><a href="{{ route('councilors.index') }}">Vereadores</a></li>
+<li><span>Legislaturas</span></li>
+@endsection
 
 @section('content')
 <div class="card">
     <div class="card-body">
         
         <div class="card-header text-right header-with-search">
-            {{--<a href="#" class="btn-default">Novo</a>--}}
-
-            <div class="btn-group dropleft">
-                <button type="button" class="btn-dropdown-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Página</a>
-                    <a class="dropdown-item" href="{{ route('mandates.create', 'vereador') }}">Novo</a>
-                    <a class="dropdown-item" href="#">Tipos</a>
-                </div>
-            </div>
-        
+            <a href="{{ route('councilor.legislature.create', $councilor->slug) }}" class="btn-default">Novo</a>        
         </div>
 
 
-        <!-- if(laws && laws->count() > 0) -->
+        @if($councilor->legislatureRelations && $councilor->legislatureRelations->count() > 0)
         <div class="table-responsive">
             <table class="table table-striped table-with-dropdown">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Lei</th>
-                        <th>Data</th>
+                        <th>Período</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- foreach(laws as law) -->
+                    @foreach($councilor->legislatureRelations as $legislature)
                     <tr>
-                        <td>01</td>
-                        <td>Lei</td>
-                        <td>Data</td>
+                        <td>{{ $legislature->id }}</td>
+                        <td>{{ date('d/m/Y', strtotime($legislature->start_date)) }} - {{ date('d/m/Y', strtotime($legislature->end_date)) }}</td>
                         <td class="actions text-center">
                             <div class="btn-group dropleft">
                                 <a class="link create" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa-solid fa-gear"></i>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="{{ route('mandates.index', 'vereador') }}">Mandatos</a>
+                                    <a class="dropdown-item" href="#">Mandatos</a>
                                     <a class="dropdown-item" href="#">Editar</a>
                                     <a class="dropdown-item" data-toggle="modal" data-target="#myModal" href="#">Excluir</a>
                                 </div>
@@ -78,18 +71,17 @@
                                 </div>
 
                             </div>
-
                         </td>
                     </tr>
-                    <!-- endforeach -->
+                    @endforeach
                 </tbody>
             </table>
         </div>
-        <!-- else -->
+        @else
         <div class="no-data">
-            <span>Ainda não existem leis cadastradas.</span>
+            <span>Ainda não existem Legislaturas cadastradas.</span>
         </div>
-        <!-- endif -->
+        @endif
 
     </div>
     

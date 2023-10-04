@@ -19,6 +19,7 @@ use App\Http\Controllers\ConstructionMeasurementsController;
 use App\Http\Controllers\ConstructionProgressController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\CouncilorController;
+use App\Http\Controllers\CouncilorLegislatureController;
 use App\Http\Controllers\CsvController;
 use App\Http\Controllers\CsvExportController;
 use App\Http\Controllers\DailyController;
@@ -157,7 +158,15 @@ Route::middleware('auth')->group(function () {
         Route::resource('/materials', MaterialController::class);
 
         Route::resource('/councilors', CouncilorController::class);
-        Route::resource('/councilors/{councilor:slug}/mandates', MandateController::class);
+        Route::resource('/councilors/{councilor:slug}/legislatures', CouncilorLegislatureController::class)->names([
+            'index' => 'councilor.legislature.index',
+            'create' => 'councilor.legislature.create',
+            'store' => 'councilor.legislature.store',
+            'show' => 'councilor.legislature.show',
+            'edit' => 'councilor.legislature.edit',
+            'update' => 'councilor.legislature.update',
+            'destroy' => 'councilor.legislature.destroy',
+        ]);
         // Route::resource('/councilors/{councilor:slug}/commissions', CommissionController::class);
         Route::resource('/councilors/{councilor:slug}/party-affiliation', PartyAffiliationController::class);
 
