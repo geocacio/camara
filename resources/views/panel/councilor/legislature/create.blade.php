@@ -1,5 +1,5 @@
 @extends('panel.index')
-@section('pageTitle', 'Nova Legislatura')
+@section('pageTitle', 'Nova Legislatura de '.$councilor->name)
 
 @section('breadcrumb')
 <li><a href="{{ route('councilors.index') }}">Vereadores</a></li>
@@ -19,7 +19,7 @@
     @endif
 
     <div class="card-body">
-        <form action="#" method="post" enctype="multipart/form-data">
+        <form action="{{ route('councilor.legislature.store', $councilor->slug) }}" method="post">
             @csrf
             <div class="row">
                 <div class="col-md-6">
