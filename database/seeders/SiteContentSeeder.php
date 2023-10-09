@@ -57,30 +57,35 @@ class SiteContentSeeder extends Seeder
                 'styles' => [
                     'classes' => [
                         '.custom-menu' => [
+                            'type_style' => 'Cor de fundo do menu',
                             'background_color' => '#30358c',
                             'background_color_night' => $cores['bgn'],
                         ],
                         '.custom-menu .dropdown-menu' => [
+                            'type_style' => 'Cor de fundo do sub-menu',
                             'background_color' => '#30358c',
                             'background_color_night' => $cores['bgn'],
                         ],                        
                         '.custom-menu .navbar-nav .nav-item .nav-link' => [
+                            'type_style' => 'Cor do texto do menu',
                             'title_color' => '#ffffff',
-                            'title_size' => '13',
                             'title_color_night' => $cores['cn'],
                         ],
                         '.custom-menu .navbar-nav .nav-item .nav-link:hover' => [
+                            'type_style' => 'Efeito do link do menu',
                             'background_color' => '#242768',
                             'background_color_night' => '#18191a',
                             'title_color' => '#ffffff',
                             'title_color_night' => $cores['cn'],
                         ],
                         '.custom-menu .dropdown-menu li a' => [
+                            'type_style' => 'Cor do texto do sub-menu',
                             'title_color' => '#ffffff',
                             'title_size' => '13',
                             'title_color_night' => $cores['cn'],
                         ],
                         '.custom-menu .dropdown-menu li a:hover' => [
+                            'type_style' => 'Efeito do link do sub-menu',
                             'background_color' => '#242768',
                             'background_color_night' => '#18191a',
                             'title_color' => '#ffffff',
@@ -200,7 +205,7 @@ class SiteContentSeeder extends Seeder
                         'url' => null,
                     ],
                 ]
-                ],
+            ],
                 // [
                 //     'menu' => 'Menu de redes Sociais',
                 //     'styles' => [
@@ -238,6 +243,7 @@ class SiteContentSeeder extends Seeder
             $styleData = $menuData['styles'];
             if (isset($styleData['classes'])) {
                 foreach ($styleData['classes'] as $class => $classStyles) {
+                    // dd($class);
                     $classStyles['classes'] = $class;
                     $style = new Style($classStyles);
                     $newMenu->styles()->save($style);
@@ -298,6 +304,7 @@ class SiteContentSeeder extends Seeder
                         // Verificar se existem classes definidas para o estilo
                         if (isset($styleData['classes'])) {
                             foreach ($styleData['classes'] as $class => $classStyles) {
+                                // dd($classStyles);
                                 $classStyles['classes'] = $class;
                                 $style = new Style($classStyles);
                                 $newSection->styles()->save($style);

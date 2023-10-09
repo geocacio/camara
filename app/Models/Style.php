@@ -11,6 +11,8 @@ class Style extends Model
     protected $fillable = [
         'styleable_type',
         'styleable_id',
+        'name',
+        'type_style',
         'classes',
         'background_color',
         'background_color_night',

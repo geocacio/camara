@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('styles', function (Blueprint $table) {
             $table->id();
             $table->morphs('styleable');
+            $table->string('name')->nullable();
+            $table->string('type_style')->nullable();
             $table->string('classes');
             $table->string('background_color')->nullable();
             $table->string('background_color_night')->nullable();

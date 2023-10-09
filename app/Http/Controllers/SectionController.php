@@ -35,35 +35,36 @@ class SectionController extends Controller
 
         $section = Section::find($request->section_id);
         $section->update(['visibility' => $visibility]);
-
-        $styleData = $request->except(['_token', 'page_id', 'section_id', 'visibility', 'classes']);
-        $classes = $request->classes;
-
-        foreach ($classes as $class) {
+// dd('bora ver');
+        // $styleData = $request->except(['_token', 'page_id', 'section_id', 'visibility', 'classes']);
+        $classes = $request->class;
+        foreach($classes as $column => $class){
+            // dd($class);
             $style = Style::where('styleable_type', 'section')
                 ->where('styleable_id', $request->section_id)
-                ->where('classes', $class)
+                ->where('classes', $column)
                 ->first();
 
             if ($style) {
                 $existingAttributes = $style->getAttributes();
                 $updatedFields = [];
-
+                // dd($existingAttributes);
                 foreach ($existingAttributes as $attribute => $value) {
-                    if ($value !== null && isset($styleData[$attribute])) {
-                        $updatedFields[$attribute] = $styleData[$attribute];
+                    if ($value !== null && isset($class[$attribute])) {
+                        $updatedFields[$attribute] = $class[$attribute];
                     }
                 }
-
-                foreach ($updatedFields as $attribute => $value) {
-                    if (isset($styleData[$attribute])) {
-                        $updatedFields[$attribute] = $styleData[$attribute];
-                    }
-                }
-                $style->update($updatedFields);
             }
-        }
 
+            foreach ($updatedFields as $attribute => $value) {
+                if (isset($styleData[$attribute])) {
+                    $updatedFields[$attribute] = $styleData[$attribute];
+                }
+            }
+
+            $style->update($updatedFields);
+        }
+        
         GenerateStyles::generate();
 
         return redirect()->route('section.show', $section->slug)->with('success', 'Section atualizada com Sucesso!');
@@ -76,8 +77,17 @@ class SectionController extends Controller
     public function show(Section $section)
     {
         $section['styles'] = $section->styles;
+        $properties = ['background_color', 'title_color', 'subtitle_color', 'description_color', 'button_text_color', 'button_background_color'];
+        $propertyLabels = [
+            'background_color' => 'Cor de fundo',
+            'title_color' => 'Cor do título',
+            'subtitle_color' => 'Cor do subtítulo',
+            'description_color' => 'Cor da descrição',
+            'button_text_color' => 'Cor do texto do botão',
+            'button_background_color' => 'Cor de fundo do botão',
+        ];
 
-        return view('panel.configurations.pages.style', compact('section'));
+        return view('panel.configurations.pages.style', compact('section', 'propertyLabels', 'properties'));
     }
 
     /**
