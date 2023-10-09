@@ -1,42 +1,3 @@
-.night-mode .custom-menu {
-    background-color: #050505;
-}
-
-.night-mode .custom-menu .dropdown-menu {
-    background-color: #050505;
-}
-
-.night-mode .custom-menu .navbar-nav .nav-item .nav-link {
-    color: #e8eaed;
-}
-
-.night-mode .custom-menu .navbar-nav .nav-item .nav-link:hover {
-    background-color: #18191a;
-    color: #e8eaed;
-}
-
-.night-mode .custom-menu .dropdown-menu li a {
-    color: #e8eaed;
-}
-
-.night-mode .custom-menu .dropdown-menu li a:hover {
-    background-color: #18191a;
-    color: #e8eaed;
-}
-
-.night-mode #menu-topo {
-    background-color: #000000;
-}
-
-.night-mode #menu-topo .menu-topo .menu-item .menu-link {
-    color: #e8eaed;
-}
-
-.night-mode #menu-topo .menu-topo .menu-item .menu-link:hover {
-    background-color: #262626;
-    color: #e8eaed;
-}
-
 .night-mode .menu-topo {
     background-color: #000000;
 }
@@ -47,6 +8,58 @@
 }
 
 .night-mode .menu-topo .menu-item .menu-link:hover {
+    background-color: #18191a;
+    color: #ffffff;
+}
+
+.night-mode .section-header {
+    background-color: #0c0c0c;
+}
+
+.night-mode .section-header .form-search-default .form-control {
+    background-color: #3a3a3a;
+    color: #e1e1e1;
+}
+
+.night-mode .section-header .form-search-default .form-control:focus {
+    background-color: #3a3a3a;
+    color: #e1e1e1;
+}
+
+.night-mode .section-header .form-search-default .form-control::placeholder {
+    color: #e1e1e1;
+}
+
+.night-mode .section-header .form-search-default .btn-submit {
+    background-color: #1f1f1f;
+    color: #ffffff;
+}
+
+.night-mode .section-header .form-search-default .btn-submit:hover {
+    background-color: #09090a;
+    color: #ffffff;
+}
+
+.night-mode .social-networks .item .link {
+    background-color: transparent;
+    color: #ffffff;
+}
+
+.night-mode .social-networks .item .link:hover {
+    background-color: #3a3a3a;
+    color: #ffffff;
+}
+
+.night-mode .main-header .custom-menu {
+    background-color: #1f1f1f;
+}
+
+.night-mode .main-header .custom-menu .navbar-nav .nav-item .nav-link {
+    background-color: transparent;
+    color: #ffffff;
+}
+
+.night-mode .main-header .custom-menu .navbar-nav .nav-item .nav-link:hover {
     background-color: #18191a;
     color: #ffffff;
 }
@@ -117,49 +130,8 @@
     color: #f7f7f7;
 }
 
-.custom-menu {
-    background-color: #30358c;
-}
-
-.custom-menu .dropdown-menu {
-    background-color: #30358c;
-}
-
-.custom-menu .navbar-nav .nav-item .nav-link {
-    color: #ffffff;
-}
-
-.custom-menu .navbar-nav .nav-item .nav-link:hover {
-    background-color: #242768;
-    color: #ffffff;
-}
-
-.custom-menu .dropdown-menu li a {
-    color: #ffffff;
-    font-size: 13px;
-}
-
-.custom-menu .dropdown-menu li a:hover {
-    background-color: #242768;
-    color: #ffffff;
-}
-
-#menu-topo {
-    background-color: #004080;
-}
-
-#menu-topo .menu-topo .menu-item .menu-link {
-    color: #ffffff;
-    font-size: 13px;
-}
-
-#menu-topo .menu-topo .menu-item .menu-link:hover {
-    background-color: #033464;
-    color: #ffffff;
-}
-
 .menu-topo {
-    background-color: #02c74c;
+    background-color: #004080;
 }
 
 .menu-topo .menu-item .menu-link {
@@ -169,6 +141,58 @@
 
 .menu-topo .menu-item .menu-link:hover {
     background-color: #033464;
+    color: #ffffff;
+}
+
+.section-header {
+    background-color: #00668b;
+}
+
+.section-header .form-search-default .form-control {
+    background-color: #ffffff;
+    color: #121212;
+}
+
+.section-header .form-search-default .form-control:focus {
+    background-color: #ffffff;
+    color: #121212;
+}
+
+.section-header .form-search-default .form-control::placeholder {
+    color: #121212;
+}
+
+.section-header .form-search-default .btn-submit {
+    background-color: #3c42a7;
+    color: #ffffff;
+}
+
+.section-header .form-search-default .btn-submit:hover {
+    background-color: #004080;
+    color: #ffffff;
+}
+
+.social-networks .item .link {
+    background-color: transparent;
+    color: #ffffff;
+}
+
+.social-networks .item .link:hover {
+    background-color: #004080;
+    color: #ffffff;
+}
+
+.main-header .custom-menu {
+    background-color: #30358c;
+}
+
+.main-header .custom-menu .navbar-nav .nav-item .nav-link {
+    background-color: transparent;
+    color: #ffffff;
+}
+
+.main-header .custom-menu .navbar-nav .nav-item .nav-link:hover {
+    background-color: #242768;
     color: #ffffff;
 }
 

@@ -55,43 +55,43 @@ class SiteContentSeeder extends Seeder
             [
                 'menu' => 'Menu Principal',
                 'styles' => [
-                    'classes' => [
-                        '.custom-menu' => [
-                            'type_style' => 'Cor de fundo do menu',
-                            'background_color' => '#30358c',
-                            'background_color_night' => $cores['bgn'],
-                        ],
-                        '.custom-menu .dropdown-menu' => [
-                            'type_style' => 'Cor de fundo do sub-menu',
-                            'background_color' => '#30358c',
-                            'background_color_night' => $cores['bgn'],
-                        ],                        
-                        '.custom-menu .navbar-nav .nav-item .nav-link' => [
-                            'type_style' => 'Cor do texto do menu',
-                            'title_color' => '#ffffff',
-                            'title_color_night' => $cores['cn'],
-                        ],
-                        '.custom-menu .navbar-nav .nav-item .nav-link:hover' => [
-                            'type_style' => 'Efeito do link do menu',
-                            'background_color' => '#242768',
-                            'background_color_night' => '#18191a',
-                            'title_color' => '#ffffff',
-                            'title_color_night' => $cores['cn'],
-                        ],
-                        '.custom-menu .dropdown-menu li a' => [
-                            'type_style' => 'Cor do texto do sub-menu',
-                            'title_color' => '#ffffff',
-                            'title_size' => '13',
-                            'title_color_night' => $cores['cn'],
-                        ],
-                        '.custom-menu .dropdown-menu li a:hover' => [
-                            'type_style' => 'Efeito do link do sub-menu',
-                            'background_color' => '#242768',
-                            'background_color_night' => '#18191a',
-                            'title_color' => '#ffffff',
-                            'title_color_night' => $cores['cn'],
-                        ],
-                    ]
+                    // 'classes' => [
+                    //     '.custom-menu' => [
+                    //         'type_style' => 'Cor de fundo do menu',
+                    //         'background_color' => '#30358c',
+                    //         'background_color_night' => $cores['bgn'],
+                    //     ],
+                    //     '.custom-menu .dropdown-menu' => [
+                    //         'type_style' => 'Cor de fundo do sub-menu',
+                    //         'background_color' => '#30358c',
+                    //         'background_color_night' => $cores['bgn'],
+                    //     ],                        
+                    //     '.custom-menu .navbar-nav .nav-item .nav-link' => [
+                    //         'type_style' => 'Cor do texto do menu',
+                    //         'title_color' => '#ffffff',
+                    //         'title_color_night' => $cores['cn'],
+                    //     ],
+                    //     '.custom-menu .navbar-nav .nav-item .nav-link:hover' => [
+                    //         'type_style' => 'Efeito do link do menu',
+                    //         'background_color' => '#242768',
+                    //         'background_color_night' => '#18191a',
+                    //         'title_color' => '#ffffff',
+                    //         'title_color_night' => $cores['cn'],
+                    //     ],
+                    //     '.custom-menu .dropdown-menu li a' => [
+                    //         'type_style' => 'Cor do texto do sub-menu',
+                    //         'title_color' => '#ffffff',
+                    //         'title_size' => '13',
+                    //         'title_color_night' => $cores['cn'],
+                    //     ],
+                    //     '.custom-menu .dropdown-menu li a:hover' => [
+                    //         'type_style' => 'Efeito do link do sub-menu',
+                    //         'background_color' => '#242768',
+                    //         'background_color_night' => '#18191a',
+                    //         'title_color' => '#ffffff',
+                    //         'title_color_night' => $cores['cn'],
+                    //     ],
+                    // ]
                 ],
                 'links' => [
                     [
@@ -147,36 +147,36 @@ class SiteContentSeeder extends Seeder
             [
                 'menu' => 'Menu do Rodapé',
                 'styles' => [
-                    'background_color' => '#30358c',
-                    'background_color_night' => $cores['bgn2'],
-                    'title_color' => '#ffffff',
-                    'title_color_night' => $cores['cn'],
-                    'button_text_color' => '#ffffff',
-                    'button_text_color_night' => '#ffffff',
-                    'button_text_size' => '13',
-                    'button_background_color' => '#3F45B6',
-                    'button_background_color_night' => $cores['btnn1'],
+                    // 'background_color' => '#30358c',
+                    // 'background_color_night' => $cores['bgn2'],
+                    // 'title_color' => '#ffffff',
+                    // 'title_color_night' => $cores['cn'],
+                    // 'button_text_color' => '#ffffff',
+                    // 'button_text_color_night' => '#ffffff',
+                    // 'button_text_size' => '13',
+                    // 'button_background_color' => '#3F45B6',
+                    // 'button_background_color_night' => $cores['btnn1'],
                 ]
             ],
             [
                 'menu' => 'Menu do Topo',
                 'styles' => [
                     'classes' => [
-                        '#menu-topo' => [
-                            'background_color' => '#004080',
-                            'background_color_night' => $cores['bgn1'],
-                        ],
-                        '#menu-topo .menu-topo .menu-item .menu-link' => [
-                            'title_color' => '#ffffff',
-                            'title_size' => '13',
-                            'title_color_night' => $cores['cn'],
-                        ],
-                        '#menu-topo .menu-topo .menu-item .menu-link:hover' => [
-                            'background_color' => '#033464',
-                            'background_color_night' => $cores['bgn4'],
-                            'title_color' => '#ffffff',
-                            'title_color_night' => $cores['cn'],
-                        ],
+                        // '#menu-topo' => [
+                        //     'background_color' => '#004080',
+                        //     'background_color_night' => $cores['bgn1'],
+                        // ],
+                        // '#menu-topo .menu-topo .menu-item .menu-link' => [
+                        //     'title_color' => '#ffffff',
+                        //     'title_size' => '13',
+                        //     'title_color_night' => $cores['cn'],
+                        // ],
+                        // '#menu-topo .menu-topo .menu-item .menu-link:hover' => [
+                        //     'background_color' => '#033464',
+                        //     'background_color_night' => $cores['bgn4'],
+                        //     'title_color' => '#ffffff',
+                        //     'title_color_night' => $cores['cn'],
+                        // ],
                     ]
                 ],
                 'links' => [

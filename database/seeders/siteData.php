@@ -169,13 +169,11 @@ $data = [
                 'styles' => [
                     'classes' => [
                         '.menu-topo' => [
-                            'type_style' => 'Cor de fundo do menu',
                             'name' => 'Menu',
                             'background_color' => $dayColors["main_menu"],
                             'background_color_night' => $darkColors["main_menu"],
                         ],
                         '.menu-topo .menu-item .menu-link' => [
-                            'type_style' => 'Cor de fundo do link',
                             'name' => 'Link',
                             'title_color' => $dayColors["main_menu_link_color"],
                             'title_color_night' => $darkColors["main_menu_link_color"],
@@ -183,7 +181,6 @@ $data = [
                             'background_color_night' =>  $darkColors['main_menu_link_color'],
                         ],
                         '.menu-topo .menu-item .menu-link:hover' => [
-                            'type_style' => 'Efeito do link do menu',
                             'name' => 'Efeito do link do menu',
                             'title_color' => $dayColors["main_menu_link_color_hover"],
                             'title_color_night' => $darkColors["main_menu_link_color_hover"],
@@ -193,82 +190,93 @@ $data = [
                     ]
                 ]
             ],
-            // [
-            //     'component' => 'Banner-header',
-            //     'name' => 'Banner principal',
-            //     'styles' => [
-            //         'classes' => [
-            //             '.section-header' => [
-            //                 'background_color' => $dayColors["bg_main_banner"],
-            //                 'background_color_night' => $darkColors["bg_main_banner"],
-            //             ],
-            //             '.section-header .form-search-default .form-control' => [
-            //                 'background_color' => $dayColors["bg_input"],
-            //                 'background_color_night' => $darkColors["bg_input"],
-            //                 'title_color' => $dayColors["input_text_color"],
-            //                 'title_color_night' => $darkColors["input_text_color"],
-            //             ],
-            //             '.section-header .form-search-default .form-control:focus' => [
-            //                 'background_color' => $dayColors["bg_input"],
-            //                 'background_color_night' => $darkColors["bg_input"],
-            //                 'title_color' => $dayColors["input_text_color"],
-            //                 'title_color_night' => $darkColors["input_text_color"],
-            //             ],
-            //             '.section-header .form-search-default .form-control::placeholder' => [
-            //                 'title_color' => $dayColors["input_text_color"],
-            //                 'title_color_night' => $darkColors["input_text_color"],
-            //             ],
-            //             '.section-header .form-search-default .btn-submit' => [
-            //                 'background_color' => $dayColors["form_btn_bg_color"],
-            //                 'background_color_night' => $darkColors["form_btn_bg_color"],
-            //                 'title_color' => $dayColors["form_btn_color"],
-            //                 'title_color_night' => $darkColors["form_btn_color"],
-            //             ],
-            //             '.section-header .form-search-default .btn-submit:hover' => [
-            //                 'background_color' => $dayColors["form_btn_bg_color_hover"],
-            //                 'background_color_night' => $darkColors["form_btn_bg_color_hover"],
-            //                 'title_color' => $dayColors["form_btn_color_hover"],
-            //                 'title_color_night' => $darkColors["form_btn_color_hover"],
-            //             ],
-            //             '.social-networks .item .link' => [
-            //                 'background_color' => $dayColors["network_link_bg_color"],
-            //                 'background_color_night' => $darkColors["network_link_bg_color"],
-            //                 'title_color' => $dayColors["network_link_color"],
-            //                 'title_color_night' => $darkColors["network_link_color"],
-            //             ],
-            //             '.social-networks .item .link:hover' => [
-            //                 'background_color' => $dayColors["network_link_bg_color_hover"],
-            //                 'background_color_night' => $darkColors["network_link_bg_color_hover"],
-            //                 'title_color' => $dayColors["network_link_color_hover"],
-            //                 'title_color_night' => $darkColors["network_link_color_hover"],
-            //             ],
-            //         ]
-            //     ]
-            // ],
-            // [
-            //     'component' => 'Secondary-menu',
-            //     'name' => 'Menu secundário',
-            //     'styles' => [
-            //         'classes' => [
-            //             '.main-header .custom-menu' => [
-            //                 'background_color' =>  $dayColors['secondary_menu'],
-            //                 'background_color_night' =>  $darkColors['secondary_menu'],
-            //             ],
-            //             '.main-header .custom-menu .navbar-nav .nav-item .nav-link' => [
-            //                 'title_color' => $dayColors["secondary_menu_link_color"],
-            //                 'title_color_night' => $darkColors["secondary_menu_link_color"],
-            //                 'background_color' =>  $dayColors['secondary_menu_link_bg_color'],
-            //                 'background_color_night' =>  $darkColors['secondary_menu_link_bg_color'],
-            //             ],
-            //             '.main-header .custom-menu .navbar-nav .nav-item .nav-link:hover' => [
-            //                 'title_color' => $dayColors["secondary_menu_link_color_hover"],
-            //                 'title_color_night' => $darkColors["secondary_menu_link_color_hover"],
-            //                 'background_color' =>  $dayColors['secondary_menu_link_bg_color_hover'],
-            //                 'background_color_night' =>  $darkColors['secondary_menu_link_bg_color_hover'],
-            //             ]
-            //         ]
-            //     ],
-            // ],
+            [
+                'component' => 'Banner-header',
+                'name' => 'Banner principal',
+                'styles' => [
+                    'classes' => [
+                        '.section-header' => [
+                            'name' => 'Banner',
+                            'background_color' => $dayColors["bg_main_banner"],
+                            'background_color_night' => $darkColors["bg_main_banner"],
+                        ],
+                        '.section-header .form-search-default .form-control' => [
+                            'name' => 'Busca',
+                            'background_color' => $dayColors["bg_input"],
+                            'background_color_night' => $darkColors["bg_input"],
+                            'title_color' => $dayColors["input_text_color"],
+                            'title_color_night' => $darkColors["input_text_color"],
+                        ],
+                        '.section-header .form-search-default .form-control:focus' => [
+                            'name' => 'Busca em foco',
+                            'background_color' => $dayColors["bg_input"],
+                            'background_color_night' => $darkColors["bg_input"],
+                            'title_color' => $dayColors["input_text_color"],
+                            'title_color_night' => $darkColors["input_text_color"],
+                        ],
+                        '.section-header .form-search-default .form-control::placeholder' => [
+                            'name' => 'Texto da busca',
+                            'title_color' => $dayColors["input_text_color"],
+                            'title_color_night' => $darkColors["input_text_color"],
+                        ],
+                        '.section-header .form-search-default .btn-submit' => [
+                            'name' => 'Botão da busca',
+                            'background_color' => $dayColors["form_btn_bg_color"],
+                            'background_color_night' => $darkColors["form_btn_bg_color"],
+                            'title_color' => $dayColors["form_btn_color"],
+                            'title_color_night' => $darkColors["form_btn_color"],
+                        ],
+                        '.section-header .form-search-default .btn-submit:hover' => [
+                            'name' => 'Efeito do botão da busca',
+                            'background_color' => $dayColors["form_btn_bg_color_hover"],
+                            'background_color_night' => $darkColors["form_btn_bg_color_hover"],
+                            'title_color' => $dayColors["form_btn_color_hover"],
+                            'title_color_night' => $darkColors["form_btn_color_hover"],
+                        ],
+                        '.social-networks .item .link' => [
+                            'name' => 'Link da rede social',
+                            'background_color' => $dayColors["network_link_bg_color"],
+                            'background_color_night' => $darkColors["network_link_bg_color"],
+                            'title_color' => $dayColors["network_link_color"],
+                            'title_color_night' => $darkColors["network_link_color"],
+                        ],
+                        '.social-networks .item .link:hover' => [
+                            'name' => 'Efeito do link da rede social',
+                            'background_color' => $dayColors["network_link_bg_color_hover"],
+                            'background_color_night' => $darkColors["network_link_bg_color_hover"],
+                            'title_color' => $dayColors["network_link_color_hover"],
+                            'title_color_night' => $darkColors["network_link_color_hover"],
+                        ],
+                    ]
+                ]
+            ],
+            [
+                'component' => 'Secondary-menu',
+                'name' => 'Menu secundário',
+                'styles' => [
+                    'classes' => [
+                        '.main-header .custom-menu' => [
+                            'name' => 'Menu',
+                            'background_color' =>  $dayColors['secondary_menu'],
+                            'background_color_night' =>  $darkColors['secondary_menu'],
+                        ],
+                        '.main-header .custom-menu .navbar-nav .nav-item .nav-link' => [
+                            'name' => 'Link',
+                            'title_color' => $dayColors["secondary_menu_link_color"],
+                            'title_color_night' => $darkColors["secondary_menu_link_color"],
+                            'background_color' =>  $dayColors['secondary_menu_link_bg_color'],
+                            'background_color_night' =>  $darkColors['secondary_menu_link_bg_color'],
+                        ],
+                        '.main-header .custom-menu .navbar-nav .nav-item .nav-link:hover' => [
+                            'name' => 'Efeito do link',
+                            'title_color' => $dayColors["secondary_menu_link_color_hover"],
+                            'title_color_night' => $darkColors["secondary_menu_link_color_hover"],
+                            'background_color' =>  $dayColors['secondary_menu_link_bg_color_hover'],
+                            'background_color_night' =>  $darkColors['secondary_menu_link_bg_color_hover'],
+                        ]
+                    ]
+                ],
+            ],
             // [
             //     'component' => 'Breadcrumb',
             //     'name' => 'Breadcrumb',
