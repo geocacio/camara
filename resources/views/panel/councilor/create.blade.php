@@ -44,7 +44,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Telefone</label>
-                        <input type="phone" name="phone" class="form-control" value="{{ old('phone') }}"/>
+                        <input type="phone" name="phone" class="form-control mask-phone" value="{{ old('phone') }}"/>
                     </div>
                 </div>
             </div>

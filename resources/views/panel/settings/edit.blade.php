@@ -32,8 +32,22 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                        <label>Plenário</label>
+                        <input type="text" name="plenary" class="form-control" value="{{ old('plenary', $settings->plenary) }}" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <input type="text" name="email" class="form-control" value="{{ old('email', $settings->email) }}" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
                         <label>Telefone</label>
-                        <input type="text" name="phone" class="form-control" value="{{ old('phone', $settings->phone) }}" />
+                        <input type="text" name="phone" class="form-control mask-phone" value="{{ old('phone', $settings->phone) }}" />
                     </div>
                 </div>
             </div>
@@ -83,6 +97,13 @@
                         <label>Estado</label>
                         <input type="text" name="state" class="form-control" value="{{ old('state', $settings->state) }}" />
                     </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Horário de funcionamento</label>
+                    <input type="text" name="opening_hours" class="form-control" value="{{ old('opening_hours', $settings->opening_hours) }}" />
                 </div>
             </div>
 

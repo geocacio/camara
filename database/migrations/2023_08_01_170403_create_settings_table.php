@@ -14,13 +14,16 @@ return new class extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->string('system_name');
-            $table->string('phone');
+            $table->string('plenary');
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
             $table->string('cnpj');
             $table->string('cep');
             $table->string('address');
-            $table->string('number');
+            $table->string('number')->nullable();
             $table->string('neighborhood');
             $table->string('city');
+            $table->string('opening_hours')->nullable();
             $table->string('state');
             $table->timestamps();
         });

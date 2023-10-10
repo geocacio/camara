@@ -11,13 +11,16 @@ class Setting extends Model
 
     protected $fillable = [
         'system_name',
+        'plenary',
         'phone',
+        'email',
         'cnpj',
         'cep',
         'address',
         'number',
         'neighborhood',
         'city',
+        'opening_hours',
         'state',
     ];
 

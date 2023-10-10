@@ -56,13 +56,16 @@ class SettingController extends Controller
     {
         $validatedData = $request->validate([
             'system_name' => 'required',
+            'plenary' => 'required',
             'phone' => 'required',
+            'email' => 'nullable',
             'cnpj' => 'required',
             'cep' => 'required',
             'address' => 'required',
             'number' => 'required',
             'neighborhood' => 'required',
             'city' => 'required',
+            'opening_hours' => 'nullable',
             'state' => 'required',
             'logo' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
             'favicon' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",

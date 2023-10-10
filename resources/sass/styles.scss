@@ -2882,3 +2882,23 @@ section{
         text-align: left;
     }
 }
+
+.container-descriptions{
+    .title{
+        font-family: Roboto, Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.5rem;
+        color: #212529;
+        font-weight: bold;
+        margin-bottom: 0;
+        text-align: left;
+    }
+    .description{
+        font-family: Roboto, Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.5rem;
+        color: #212529;
+        font-weight: 300;
+        text-align: left;
+    }
+}

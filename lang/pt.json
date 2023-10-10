@@ -25,5 +25,8 @@
     "November" : "Novembro",
     "December" : "Dezembro",
     "male" : "Masculino",
-    "female" : "Feminino"
+    "female" : "Feminino",
+    "institutional" : "Institucional",
+    "councilors" : "Vereadores",
+    "sessions" : "Sessões"
 }

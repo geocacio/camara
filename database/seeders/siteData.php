@@ -277,121 +277,154 @@ $data = [
                     ]
                 ],
             ],
-            // [
-            //     'component' => 'Breadcrumb',
-            //     'name' => 'Breadcrumb',
-            //     'styles' => [
-            //         'classes' => [
-            //             '.section-page-header' => [
-            //                 'background_color' => $dayColors["bg_section"],
-            //                 'background_color_night' => $darkColors['bg_section'],
-            //             ],
-            //             '.section-page-header .breadcrumb li a' => [
-            //                 'title_color' => $dayColors["breadcrumb_color"],
-            //                 'title_color_night' => $darkColors["breadcrumb_color"],
-            //             ],
-            //             '.section-page-header .breadcrumb li span' => [
-            //                 'title_color' => $dayColors["breadcrumb_color_span"],
-            //                 'title_color_night' => $darkColors["breadcrumb_color_span"],
-            //             ],
-            //             '.section-page-header .title' => [
-            //                 'title_color' => $dayColors["title_color"],
-            //                 'title_color_night' => $darkColors["title_color"],
-            //             ],
-            //             '.section-page-header .title-sub-page' => [
-            //                 'title_color' => $dayColors["title_color"],
-            //                 'title_color_night' => $darkColors["title_color"],
-            //             ],
-            //             '.section-page-header .description-text' => [
-            //                 'title_color' => $dayColors["subtitle_color"],
-            //                 'title_color_night' => $darkColors["subtitle_color"],
-            //             ],
-            //         ]
-            //     ]
-            // ],
-            // [
-            //     'component' => 'search-within-pages',
-            //     'name' => 'Formulário de pesquisa geral',
-            //     'styles' => [
-            //         'classes' => [
-            //             '.container-search-advanced' => [
-            //                 'background_color' => $dayColors["bg_card"],
-            //                 'background_color_night' => $darkColors['bg_card'],
-            //             ],
-            //             '.container-search-advanced .search-advanced .title' => [
-            //                 'title_color' => $dayColors["title_color"],
-            //                 'title_color_night' => $darkColors["title_color"],
-            //             ],
-            //             '.container-search-advanced .search-advanced form label' => [
-            //                 'title_color' => $dayColors["subtitle_color"],
-            //                 'title_color_night' => $darkColors["subtitle_color"],
-            //             ],
-            //             '.container-search-advanced .search-advanced form .form-control' => [
-            //                 'background_color' => $dayColors["bg_input"],
-            //                 'background_color_night' => $darkColors["bg_input"],
-            //                 'title_color' => $dayColors["input_text_color"],
-            //                 'title_color_night' => $darkColors["input_text_color"],
-            //             ],
-            //             '.container-search-advanced .search-advanced form .form-control:focus' => [
-            //                 'background_color' => $dayColors["bg_input"],
-            //                 'background_color_night' => $darkColors["bg_input"],
-            //                 'title_color' => $dayColors["input_text_color"],
-            //                 'title_color_night' => $darkColors["input_text_color"],
-            //             ],
-            //             '.container-search-advanced .search-advanced form .form-control::placeholder' => [
-            //                 'title_color' => $dayColors["input_text_color"],
-            //                 'title_color_night' => $darkColors["input_text_color"],
-            //             ],
-            //         ]
-            //     ]
-            // ],
-            // [
-            //     'component' => 'satisfaction-survey',
-            //     'name' => 'Pesquisa de satisfação',
-            //     'styles' => [
-            //         'classes' => [
-            //             '.section-satisfaction-survey' => [
-            //                 'background_color' => $dayColors["bg_section_survey"],
-            //                 'background_color_night' => $darkColors['bg_section_survey'],
-            //             ],
-            //             '.section-satisfaction-survey .title' => [
-            //                 'title_color' => $dayColors["title_color"],
-            //                 'title_color_night' => $darkColors["title_color"],
-            //             ],
-            //             '.section-satisfaction-survey .container-options .option' => [
-            //                 'title_color' => $dayColors["subtitle_color"],
-            //                 'title_color_night' => $darkColors["subtitle_color"],
-            //             ],
-            //             '.section-satisfaction-survey .container-options .option' => [
-            //                 'title_color' => $dayColors["subtitle_color"],
-            //                 'title_color_night' => $darkColors["subtitle_color"],
-            //             ],
-            //         ]
-            //     ]
-            // ],
-            // [
-            //     'component' => 'Footer',
-            //     'name' => 'Rodapé',
-            //     'styles' => [
-            //         'classes' => [
-            //             '.footer' => [
-            //                 'background_color' => $dayColors["footer_menu"],
-            //                 'background_color_night' => $darkColors['footer_menu'],
-            //             ],
-            //             '.footer .container-list .title' => [
-            //                 'title_color' => $dayColors["title_color"],
-            //                 'title_color_night' => $darkColors["title_color"],
-            //             ],
-            //             '.footer .container-list .list .item' => [
-            //                 'button_text_color' => $dayColors["link_color"],
-            //                 'button_text_color_night' => $darkColors["link_color"],
-            //                 'button_text_size' => '11',
-            //             ]
-            //         ]
-            //     ]
-            // ]
+            [
+                'component' => 'Breadcrumb',
+                'name' => 'Breadcrumb',
+                'styles' => [
+                    'classes' => [
+                        '.section-page-header' => [
+                            'name' => 'Menu',
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                        '.section-page-header .breadcrumb li a' => [
+                            'name' => 'Link',
+                            'title_color' => $dayColors["breadcrumb_color"],
+                            'title_color_night' => $darkColors["breadcrumb_color"],
+                        ],
+                        '.section-page-header .breadcrumb li span' => [
+                            'name' => 'Nome',
+                            'title_color' => $dayColors["breadcrumb_color_span"],
+                            'title_color_night' => $darkColors["breadcrumb_color_span"],
+                        ],
+                        '.section-page-header .title' => [
+                            'name' => 'Título',
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors["title_color"],
+                        ],
+                        '.section-page-header .title-sub-page' => [
+                            'name' => 'Subtítulo',
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors["title_color"],
+                        ],
+                        '.section-page-header .description-text' => [
+                            'name' => 'Descrição',
+                            'title_color' => $dayColors["subtitle_color"],
+                            'title_color_night' => $darkColors["subtitle_color"],
+                        ],
+                    ]
+                ]
+            ],
+            [
+                'component' => 'search-within-pages',
+                'name' => 'Formulário de pesquisa geral',
+                'styles' => [
+                    'classes' => [
+                        '.container-search-advanced' => [
+                            'name' => 'Busca',
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.container-search-advanced .search-advanced .title' => [
+                            'name' => 'Título',
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors["title_color"],
+                        ],
+                        '.container-search-advanced .search-advanced form label' => [
+                            'name' => 'Rótulo',
+                            'title_color' => $dayColors["subtitle_color"],
+                            'title_color_night' => $darkColors["subtitle_color"],
+                        ],
+                        '.container-search-advanced .search-advanced form .form-control' => [
+                            'name' => 'Campo de busca',
+                            'background_color' => $dayColors["bg_input"],
+                            'background_color_night' => $darkColors["bg_input"],
+                            'title_color' => $dayColors["input_text_color"],
+                            'title_color_night' => $darkColors["input_text_color"],
+                        ],
+                        '.container-search-advanced .search-advanced form .form-control:focus' => [
+                            'name' => 'Campo de busca em foco',
+                            'background_color' => $dayColors["bg_input"],
+                            'background_color_night' => $darkColors["bg_input"],
+                            'title_color' => $dayColors["input_text_color"],
+                            'title_color_night' => $darkColors["input_text_color"],
+                        ],
+                        '.container-search-advanced .search-advanced form .form-control::placeholder' => [
+                            'name' => 'Texto do campo',
+                            'title_color' => $dayColors["input_text_color"],
+                            'title_color_night' => $darkColors["input_text_color"],
+                        ],
+                    ]
+                ]
+            ],
+            [
+                'component' => 'satisfaction-survey',
+                'name' => 'Pesquisa de satisfação',
+                'styles' => [
+                    'classes' => [
+                        '.section-satisfaction-survey' => [
+                            'name' => 'Pesquisa de satisfação',
+                            'background_color' => $dayColors["bg_section_survey"],
+                            'background_color_night' => $darkColors['bg_section_survey'],
+                        ],
+                        '.section-satisfaction-survey .title' => [
+                            'name' => 'Título',
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors["title_color"],
+                        ],
+                        '.section-satisfaction-survey .container-options .option' => [
+                            'name' => 'Opção',
+                            'title_color' => $dayColors["subtitle_color"],
+                            'title_color_night' => $darkColors["subtitle_color"],
+                        ],
+                    ]
+                ]
+            ],
+            [
+                'component' => 'Footer',
+                'name' => 'Rodapé',
+                'styles' => [
+                    'classes' => [
+                        '.footer' => [
+                            'name' => 'Rodapé',
+                            'background_color' => $dayColors["footer_menu"],
+                            'background_color_night' => $darkColors['footer_menu'],
+                        ],
+                        '.footer .container-list .title' => [
+                            'name' => 'Título',
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors["title_color"],
+                        ],
+                        '.footer .container-list .list .item' => [
+                            'name' => 'Item',
+                            'button_text_color' => $dayColors["link_color"],
+                            'button_text_color_night' => $darkColors["link_color"],
+                            'button_text_size' => '11',
+                        ]
+                    ]
+                ]
+            ]
         ]
     ],
+    // [
+    //     'page' => 'A Câmara',
+    //     'route' => 'acamara.show',
+    //     'sections' => [
+    //         [
+    //             'component' => 'About',
+    //             'name' => 'Carrousel de banners',
+    //             'styles' => [
+    //                 'classes' => [
+    //                     '.carousel-header' => [
+    //                         'background_color' => $dayColors["Pure White"],
+    //                         'background_color_night' => $cores['bgn2'],
+    //                     ]
+    //                 ]
+    //             ]
+    //         ],
+    //     ]
+    // ],
+
     // [
     //     'page' => 'Home',
     //     'route' => 'home',

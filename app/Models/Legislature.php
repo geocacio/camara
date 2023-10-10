@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,6 +19,14 @@ class Legislature extends Model
     public function legislatureRelations()
     {
         return $this->hasMany(LegislatureRelation::class);
+    }
+
+    public function getCurrentLegislature()
+    {
+        $currentDate = Carbon::now();
+        return $this->where('start_date', '<=', $currentDate)
+            ->where('end_date', '>=', $currentDate)
+            ->first();
     }
 
     public function getRouteKeyName()

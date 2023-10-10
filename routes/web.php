@@ -8,6 +8,7 @@ use App\Http\Controllers\AgreementTransferController;
 use App\Http\Controllers\AvailableFilesController;
 use App\Http\Controllers\BiddingController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChamberController;
 use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ConfigureOfficialDiaryController;
@@ -468,6 +469,7 @@ Route::get('/posts/{post:slug}', [App\Http\Controllers\PostController::class, 's
 //Services Routes
 Route::match(['get', 'post'], '/cartaservicos', [ServiceLetterController::class, 'page'])->name('serviceLetter.page');
 Route::get('/cartaservicos/{serviceLetter:slug}', [ServiceLetterController::class, 'show'])->name('serviceLetter.show');
+Route::resource('/a-camara', ChamberController::class);
 
 //Transparency Routes
 Route::get('/transparencia', [App\Http\Controllers\TransparencyPortalController::class, 'show'])->name('transparency.show');
