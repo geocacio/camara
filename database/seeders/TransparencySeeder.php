@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Office;
 use App\Models\OmbudsmanPage;
+use App\Models\PartyAffiliation;
 use App\Models\TransparencyGroup;
 use App\Models\TransparencyPortal;
 use App\Models\Type;
@@ -213,7 +214,99 @@ class TransparencySeeder extends Seeder
         $this->storeTypes($session->id, $sessoes);
 
         OmbudsmanPage::create(['route' => 'ouvidoria.show']);
+
+        $partyAffiliations = [
+            [
+                "name" => "Partido dos Trabalhadores",
+                "acronym" => "PT",
+            ],
+            [
+                "name" => "Partido da Social Democracia Brasileira",
+                "acronym" => "PSDB",
+            ],
+            [
+                "name" => "Movimento Democrático Brasileiro",
+                "acronym" => "MDB",
+            ],
+            [
+                "name" => "Partido Socialista Brasileiro",
+                "acronym" => "PSB",
+            ],
+            [
+                "name" => "Partido Democrático Trabalhista",
+                "acronym" => "PDT",
+            ],
+            [
+                "name" => "Partido da República",
+                "acronym" => "PR",
+            ],
+            [
+                "name" => "Partido Progressista",
+                "acronym" => "PP",
+            ],
+            [
+                "name" => "Partido Social Cristão",
+                "acronym" => "PSC",
+            ],
+            [
+                "name" => "Partido Verde",
+                "acronym" => "PV",
+            ],
+            [
+                "name" => "Partido Comunista do Brasil",
+                "acronym" => "PCdoB",
+            ],
+            [
+                "name" => "Partido Social Liberal",
+                "acronym" => "PSL",
+            ],
+            [
+                "name" => "Partido Trabalhista Brasileiro",
+                "acronym" => "PTB",
+            ],
+            [
+                "name" => "Partido Popular Socialista",
+                "acronym" => "PPS",
+            ],
+            [
+                "name" => "Partido Democrático Brasileiro",
+                "acronym" => "PDB",
+            ],
+            [
+                "name" => "Rede Sustentabilidade",
+                "acronym" => "REDE",
+            ],
+            [
+                "name" => "Partido Republicano da Ordem Social",
+                "acronym" => "PROS",
+            ],
+            [
+                "name" => "Partido Socialismo e Liberdade",
+                "acronym" => "PSOL",
+            ],
+            [
+                "name" => "Partido Humanista da Solidariedade",
+                "acronym" => "PHS",
+            ],
+            [
+                "name" => "Partido da Mobilização Nacional",
+                "acronym" => "PMN",
+            ],
+            [
+                "name" => "Partido Socialista dos Trabalhadores Unificado",
+                "acronym" => "PSTU",
+            ]
+        ];
+    
+        foreach($partyAffiliations as $party){
+            PartyAffiliation::create([
+                'name' => $party['name'],
+                'acronym' => $party['acronym'],
+                'slug' => Str::slug($party['name']),
+            ]);
+        }
     }
+    
 
     private function storeCategories($parent_id, $array){
         foreach ($array as $item) {
