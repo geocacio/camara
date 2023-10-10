@@ -28,5 +28,7 @@
     "female" : "Feminino",
     "institutional" : "Institucional",
     "councilors" : "Vereadores",
-    "sessions" : "Sessões"
+    "sessions" : "Sessões",
+    "commissions" : "Comisões",
+    "boards" : "Mesa diretora"
 }

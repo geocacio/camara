@@ -21,12 +21,20 @@ class ChamberController extends Controller
         
         $chamber['institutional'] = Setting::first();
         $chamber['institutional']['icon'] = 'fa-solid fa-building-columns';
+        if($currentLegislature){
+            $chamber['boards']['councilors'] = Councilor::whereHas('legislatureRelations', function ($query) use ($currentLegislature) {
+                $query->where('legislature_id', $currentLegislature->id);
+            })->where('bond_id', 19)->get();
+        }else{
+            $chamber['boards']['councilors'] = [];
+        }
+        $chamber['boards']['icon'] = "fa-solid fa-users";
         $chamber['legislature']['councilors'] = $currentLegislature ? $currentLegislature->legislatureRelations : [];
-        $chamber['legislature']['icon'] = "fa-solid fa-users";
+        $chamber['legislature']['icon'] = "fa-solid fa-user-tie";
         $chamber['commissions']['items'] = Commission::select(['id', 'description as Descrição'])->get();
         $chamber['commissions']['icon'] = "fa-solid fa-newspaper";
 
-        // dd($legislatureAtual->legislatureRelations[0]->legislatureable);
+        // dd($chamber['boards']['councilors'][0]->office);
         return view('pages.chamber.index', compact('chamber'));
     }
 
