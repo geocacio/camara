@@ -34,7 +34,7 @@ class ChamberController extends Controller
         $chamber['commissions']['items'] = Commission::select(['id', 'description as Descrição'])->get();
         $chamber['commissions']['icon'] = "fa-solid fa-newspaper";
 
-        // dd($chamber['boards']['councilors'][0]->office);
+        // dd($chamber['boards']['councilors'][0]);
         return view('pages.chamber.index', compact('chamber'));
     }
 

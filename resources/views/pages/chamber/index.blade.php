@@ -83,13 +83,13 @@
 
                                 @foreach($item['councilors'] as $councilor)
                                 
-                                    <a href="#" class="councilor-container">
+                                    <a href="{{ route('vereador.show', $councilor->legislatureable->slug) }}" class="councilor-container">
                                         <figure class="figure">
                                             <img class="image" src="{{ asset('storage/'.$councilor->legislatureable->files[0]->file->url) }}" alt="">
                                         </figure>
                                         <div class="info">
                                             <span class="title">{{  $councilor->legislatureable->name }}</span>
-                                            <span class="text">Vereador (A)</span>
+                                            <span class="text">{{  $councilor->legislatureable->office->office }}</span>
                                         </div>
                                     </a>
                                 
@@ -101,7 +101,7 @@
 
                                 @foreach($item['councilors'] as $councilor)
                                 
-                                    <a href="#" class="councilor-container">
+                                    <a href="{{ route('vereador.show', $councilor->slug) }}" class="councilor-container">
                                         <figure class="figure">
                                             <img class="image" src="{{ asset('storage/'.$councilor->files[0]->file->url) }}" alt="">
                                         </figure>
@@ -116,21 +116,7 @@
                             @endif
 
                             @if($index == 'commissions')
-                            @include('partials.tableDefault', ['data' => $chamber['commissions']['items'], 'actions' => [ 'route' => 'comissoes.single', 'param_type' => 'slug' ] ])
-                               {{--  @foreach($item['councilors'] as $councilor)
-                                
-                                    <a href="#" class="councilor-container">
-                                        <figure class="figure">
-                                            <img class="image" src="{{ asset('storage/'.$councilor->legislatureable->files[0]->file->url) }}" alt="">
-                                        </figure>
-                                        <div class="info">
-                                            <span class="title">{{  $councilor->legislatureable->name }}</span>
-                                            <span class="text">{{  $councilor->legislatureable->office->office }}</span>
-                                        </div>
-                                    </a>
-                                
-                                @endforeach --}}
-
+                                @include('partials.tableDefault', ['data' => $chamber['commissions']['items'], 'actions' => [ 'route' => 'comissoes.single', 'param_type' => 'slug' ] ])
                             @endif
 
                         </div>

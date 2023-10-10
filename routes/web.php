@@ -470,6 +470,7 @@ Route::get('/posts/{post:slug}', [App\Http\Controllers\PostController::class, 's
 Route::match(['get', 'post'], '/cartaservicos', [ServiceLetterController::class, 'page'])->name('serviceLetter.page');
 Route::get('/cartaservicos/{serviceLetter:slug}', [ServiceLetterController::class, 'show'])->name('serviceLetter.show');
 Route::resource('/a-camara', ChamberController::class);
+Route::get('/vereadores/{councilor:slug}', [CouncilorController::class, 'show'])->name('vereador.show');
 Route::get('/comissoes/{commission}', [CommissionController::class, 'single'])->name('comissoes.single');
 
 //Transparency Routes

@@ -91,7 +91,7 @@ class CouncilorController extends Controller
      */
     public function show(Councilor $councilor)
     {
-        //
+        return view('pages.councilors.single', compact('councilor'));
     }
 
     /**
