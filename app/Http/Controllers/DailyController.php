@@ -145,7 +145,7 @@ class DailyController extends Controller
         
         $searchData = $request->only(['number', 'trip_start', 'agent']);
 
-        $query = Daily::query();        
+        $query = Daily::query();
 
         if($request->filled('number')){
             $query->where('number', 'LIKE', '%' . $request->input('number') . '%');

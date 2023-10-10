@@ -22,7 +22,7 @@
 
         @if($commissions && $commissions->count() > 0)
         <div class="table-responsive">
-            <table class="table table-striped table-with-dropdown">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>#</th>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Commission;
 use App\Models\Councilor;
 use App\Models\Legislature;
 use App\Models\Session;
@@ -22,8 +23,8 @@ class ChamberController extends Controller
         $chamber['institutional']['icon'] = 'fa-solid fa-building-columns';
         $chamber['legislature']['councilors'] = $currentLegislature ? $currentLegislature->legislatureRelations : [];
         $chamber['legislature']['icon'] = "fa-solid fa-users";
-        $chamber['sessions'] = Session::all();
-        $chamber['sessions']['icon'] = "fa-solid fa-newspaper";
+        $chamber['commissions']['items'] = Commission::select(['id', 'description as Descrição'])->get();
+        $chamber['commissions']['icon'] = "fa-solid fa-newspaper";
 
         // dd($legislatureAtual->legislatureRelations[0]->legislatureable);
         return view('pages.chamber.index', compact('chamber'));
