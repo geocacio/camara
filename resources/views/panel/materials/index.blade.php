@@ -21,23 +21,27 @@
         </div>
 
 
-        <!-- if(laws && laws->count() > 0) -->
+        @if($materials && $materials->count() > 0)
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Lei</th>
                         <th>Data</th>
+                        <th>Vereador</th>
+                        <th>Tipo</th>
+                        <th>Situação</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- foreach(laws as law) -->
+                    @foreach($materials as $material)
                     <tr>
-                        <td>01</td>
-                        <td>Lei</td>
-                        <td>Data</td>
+                        <td>{{ $material->id}}</td>
+                        <td>{{ date('d/m/y', strtotime($material->date)) }}</td>
+                        <td>{{ $material->councilor->name}}</td>
+                        <td>teste</td>
+                        <td>teste</td>
                         <td class="actions text-center">
                             <a href="#" class="link edit"><i class="fas fa-edit"></i></a>
                             <a data-toggle="modal" data-target="#myModal" class="link delete"><i class="fas fa-trash-alt"></i></a>
@@ -75,15 +79,15 @@
 
                         </td>
                     </tr>
-                    <!-- endforeach -->
+                    @endforeach
                 </tbody>
             </table>
         </div>
-        <!-- else -->
+        @else
         <div class="no-data">
-            <span>Ainda não existem leis cadastradas.</span>
+            <span>Ainda não existem materiais cadastrados.</span>
         </div>
-        <!-- endif -->
+        @endif
 
     </div>
     

@@ -30,6 +30,7 @@ class MaterialController extends Controller
     public function index()
     {
         $materials = Material::all();
+        dd($materials[0]->categories);
         return view('panel.materials.index', compact('materials'));
     }
 
