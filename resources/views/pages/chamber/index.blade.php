@@ -17,6 +17,7 @@
 @section('content')
 
 @include('layouts.header')
+@if(isset($chamber))
 
 <section class="section-chamber adjust-min-height margin-fixed-top">
     <div class="container">
@@ -49,23 +50,23 @@
                             <div class="row container-descriptions">
                                 <div class="col-md-6">
                                     <p class="title">Endereço</p>
-                                    <p class="description">{{ $item->address }}, {{ $item->number }} - CEP: {{ $item->cep }} - {{ $item->city }}/{{ $item->state }}</p>
+                                    <p class="description">{{ isset($item['address']) ? $item['address'].', ' : '' }} {{ isset($item['number']) ? $item['number'] : '' }} {{ isset($item['cep']) ? '- CEP:'.$item['cep'] : '' }} {{ isset($item['city']) ? ' - '.$item['city'] : '' }}{{ isset($item['state']) ? '/'.$item['state'] : '' }}</p>
                                 </div>
                                 <div class="col-md-6">
                                     <p class="title">Horário</p>
-                                    <p class="description">{{ $item->opening_hours }}</p>
+                                    <p class="description">{{ isset($item['opening_hours']) ? $item['opening_hours'] : '' }}</p>
                                 </div>
                                 <div class="col-md-6">
                                     <p class="title">Telefone</p>
-                                    <p class="description">{{ $item->phone }}</p>
+                                    <p class="description">{{ isset($item['phone']) ? $item['phone'] : '' }}</p>
                                 </div>
                                 <div class="col-md-6">
                                     <p class="title">E-mail</p>
-                                    <p class="description">{{ $item->email }}</p>
+                                    <p class="description">{{ isset($item['email']) ? $item['email'] : '' }}</p>
                                 </div>
                                 <div class="col-md-6">
                                     <p class="title">Plenário</p>
-                                    <p class="description">{{ $item->plenary }}</p>
+                                    <p class="description">{{ isset($item['plenary']) ? $item['plenary'] : '' }}</p>
                                 </div>
                             </div>
                             <div class="row container-descriptions">
@@ -129,6 +130,7 @@
     </div>
 
 </section>
+@endif
 
 @include('pages.partials.satisfactionSurvey', ['page_name' => 'A Câmara'])
 
