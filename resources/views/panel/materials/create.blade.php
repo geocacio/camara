@@ -61,9 +61,9 @@
                         <label for="councilor_id">Vereador</label>
                         <select name="councilor_id" class="form-control">
                             <option value="">Selecione</option>
-                            @if($types->count() > 0)
-                            @foreach($types as $type)
-                            <option value="{{ $type->id }}">{{ $type->name }}</option>
+                            @if($councilors->count() > 0)
+                            @foreach($councilors as $councilor)
+                            <option value="{{ $councilor->id }}">{{ $councilor->name }}</option>
                             @endforeach
                             @endif
                         </select>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Councilor;
 use App\Models\Material;
+use App\Models\Legislature;
 use App\Models\Session;
 use App\Models\Type;
 use Illuminate\Http\Request;
@@ -30,8 +31,18 @@ class MaterialController extends Controller
         $category = Category::where('slug', 'status')->with('children')->get();
         $situations = $category[0]->children;
         $sessions = Session::all();
+
+        $legislature = new Legislature;
+        $currentLegislature = $legislature->getCurrentLegislature();
+        if($currentLegislature){
+            $councilors = Councilor::whereHas('legislatureRelations', function ($query) use ($currentLegislature) {
+                $query->where('legislature_id', $currentLegislature->id);
+            })->where('bond_id', 19)->get();
+        }else{
+            $councilors = [];
+        }
         
-        return view('panel.materials.create', compact('types', 'situations', 'sessions'));
+        return view('panel.materials.create', compact('types', 'situations', 'sessions', 'councilors'));
     }
 
     /**
