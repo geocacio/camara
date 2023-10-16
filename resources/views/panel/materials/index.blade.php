@@ -40,13 +40,13 @@
                         <td>{{ $material->id}}</td>
                         <td>{{ date('d/m/y', strtotime($material->date)) }}</td>
                         <td>{{ $material->councilor->name}}</td>
-                        <td>teste</td>
+                        <td>{{ $material->type->name}}</td>
                         <td>{{ $material->category->name}}</td>
                         <td class="actions text-center">
-                            <a href="#" class="link edit"><i class="fas fa-edit"></i></a>
-                            <a data-toggle="modal" data-target="#myModal" class="link delete"><i class="fas fa-trash-alt"></i></a>
+                            <a href="{{ route('materials.edit', $material->slug) }}" class="link edit"><i class="fas fa-edit"></i></a>
+                            <a data-toggle="modal" data-target="#myModal-{{$material->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a>
 
-                            <div id="myModal" class="modal fade modal-warning" role="dialog">
+                            <div id="myModal-{{$material->id}}" class="modal fade modal-warning" role="dialog">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <!-- Modal content-->
                                     <div class="modal-content">
@@ -62,13 +62,13 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-cancel" data-dismiss="modal">Cancelar</button>
                                             <a href="#" class="btn btn-default" onclick="event.preventDefault();
-                                                document.getElementById('delete-form-').submit();">
+                                                document.getElementById('delete-form-{{$material->id}}').submit();">
                                                 Deletar
                                             </a>
 
 
 
-                                            <form id="delete-form-" action="#" method="post" style="display: none;">
+                                            <form id="delete-form-{{$material->id}}" action="{{ route('materials.destroy', $material->slug) }}" method="post" style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>

@@ -1,9 +1,9 @@
 @extends('panel.index')
-@section('pageTitle', 'Novo Material')
+@section('pageTitle', 'Atualizar Material')
 
 @section('breadcrumb')
 <li><a href="{{ route('materials.index') }}">Materiais</a></li>
-<li><span>Novo</span></li>
+<li><span>Atualizar</span></li>
 @endsection
 
 @section('content')
@@ -16,16 +16,17 @@
         </ul>
     </div>
     @endif
-
+    
     <div class="card-body">
-        <form action="{{ route('materials.store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('materials.update', $material->slug) }}" method="post" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
 
             <div class="row">
                 <div class="col-md-2">
                     <div class="form-group">
                         <label>Data</label>
-                        <input type="date" name="date" class="form-control" value="{{ old('date') }}" />
+                        <input type="date" name="date" class="form-control" value="{{ old('date', $material->date) }}" />
                     </div>
                 </div>
                 <div class="col-md-5">
@@ -35,7 +36,7 @@
                             <option value="">Selecione</option>
                             @if($types->count() > 0)
                             @foreach($types as $type)
-                            <option value="{{ $type->id }}">{{ $type->name }}</option>
+                            <option value="{{ $type->id }}" {{ $type->id == $material->type_id ? 'selected' : ''}}>{{ $type->name }}</option>
                             @endforeach
                             @endif
                         </select>
@@ -48,7 +49,7 @@
                             <option value="">Selecione</option>
                             @if($situations->count() > 0)
                             @foreach($situations as $situation)
-                            <option value="{{ $situation->id }}">{{ $situation->name }}</option>
+                            <option value="{{ $situation->id }}" {{ $situation->id == $material->status_id ? 'selected' : ''}}>{{ $situation->name }}</option>
                             @endforeach
                             @endif
                         </select>
@@ -63,7 +64,7 @@
                             <option value="">Selecione</option>
                             @if($councilors->count() > 0)
                             @foreach($councilors as $councilor)
-                            <option value="{{ $councilor->id }}">{{ $councilor->name }}</option>
+                            <option value="{{ $councilor->id }}" {{ $councilor->id == $material->councilor->id ? 'selected' : ''}}>{{ $councilor->name }}</option>
                             @endforeach
                             @endif
                         </select>
@@ -76,7 +77,7 @@
                             <option value="">Selecione</option>
                             @if($sessions->count() > 0)
                             @foreach($sessions as $session)
-                            <option value="{{ $session->id }}">{{ $session->date }}</option>
+                            <option value="{{ $session->id }}" {{ $session->id == $material->session->id ? 'selected' : '' }}>{{ $session->date }}</option>
                             @endforeach
                             @endif
                         </select>
@@ -88,7 +89,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label>Descrição</label>
-                        <textarea name="description" class="form-control">{{ old('description') }}</textarea>
+                        <textarea name="description" class="form-control">{{ old('description', $material->description) }}</textarea>
                     </div>
                 </div>
             </div>
