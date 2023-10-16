@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('session_id');
             $table->date('date');
             $table->string('status');
-            $table->text('description');
-            $table->integer('views');
+            $table->text('description')->nullable();
+            $table->integer('views')->nullable();
             $table->string('slug');
             $table->timestamps();
 

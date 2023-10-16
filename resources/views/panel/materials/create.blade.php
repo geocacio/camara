@@ -93,6 +93,11 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label for="logo">Arquivo</label>
+                <input type="file" name="file" accept="application/pdf" class="form-control">
+            </div>
+
             <div class="form-footer text-right">
                 <button type="submit" class="btn-submit-default">Guardar</button>
             </div>

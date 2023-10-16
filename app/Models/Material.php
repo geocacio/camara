@@ -60,6 +60,11 @@ class Material extends Model
     {
         return $this->morphMany(CommissionLink::class, 'linkable');
     }
+    
+    public function files()
+    {
+        return $this->morphMany(FileContent::class, 'fileable');
+    }
 
     public static function uniqSlug($name)
     {
