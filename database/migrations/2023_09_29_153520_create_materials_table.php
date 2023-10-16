@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('councilor_id');
             $table->unsignedBigInteger('session_id');
+            $table->unsignedBigInteger('status_id');
+            $table->unsignedBigInteger('type_id');
             $table->date('date');
-            $table->string('status');
             $table->text('description')->nullable();
             $table->integer('views')->nullable();
             $table->string('slug');
@@ -24,6 +25,8 @@ return new class extends Migration
 
             $table->foreign('councilor_id')->references('id')->on('councilors');
             $table->foreign('session_id')->references('id')->on('sessions');
+            $table->foreign('status_id')->references('id')->on('categories');
+            $table->foreign('type_id')->references('id')->on('types');
         });
     }
 

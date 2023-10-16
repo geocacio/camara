@@ -44,7 +44,7 @@
                 <div class="col-md-5">
                     <div class="form-group">
                         <label for="status">Situação</label>
-                        <select name="status" class="form-control">
+                        <select name="status_id" class="form-control">
                             <option value="">Selecione</option>
                             @if($situations->count() > 0)
                             @foreach($situations as $situation)

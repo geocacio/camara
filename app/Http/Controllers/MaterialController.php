@@ -30,7 +30,7 @@ class MaterialController extends Controller
     public function index()
     {
         $materials = Material::all();
-        dd($materials[0]->categories);
+        // dd($materials[0]->category);
         return view('panel.materials.index', compact('materials'));
     }
 
@@ -66,7 +66,7 @@ class MaterialController extends Controller
         $validateData = $request->validate([
             "date" => "required",
             "type_id" => "required",
-            "status" => "required",
+            "status_id" => "required",
             "councilor_id" => "required",
             "session_id" => "required",
             "description" => "nullable",
@@ -76,6 +76,13 @@ class MaterialController extends Controller
         $material = Material::create($validateData);
 
         if($material){
+
+            if ($request->hasFile('file')) {
+                $url = $this->fileUploadService->upload($request->file('file'), 'materials');
+                $file = File::create(['url' => $url]);
+                $material->files()->create(['file_id' => $file->id]);
+            }
+
             return redirect()->route('materials.index')->with('success', 'Material cadastrado com sucesso!');
         }
         return redirect()->back()->with('error', 'Error, por favor tente novamente!');

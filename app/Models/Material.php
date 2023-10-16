@@ -13,13 +13,24 @@ class Material extends Model
     protected $fillable = [
         'councilor_id',
         'session_id',
+        'status_id',
+        'type_id',
         'date',
-        'status',
         'exercise',
         'description',
         'views',
         'slug',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'status_id');
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class, 'type_id');
+    }
 
     public function categories()
     {

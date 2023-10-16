@@ -41,7 +41,7 @@
                         <td>{{ date('d/m/y', strtotime($material->date)) }}</td>
                         <td>{{ $material->councilor->name}}</td>
                         <td>teste</td>
-                        <td>teste</td>
+                        <td>{{ $material->category->name}}</td>
                         <td class="actions text-center">
                             <a href="#" class="link edit"><i class="fas fa-edit"></i></a>
                             <a data-toggle="modal" data-target="#myModal" class="link delete"><i class="fas fa-trash-alt"></i></a>
