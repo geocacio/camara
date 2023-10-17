@@ -1,9 +1,9 @@
 @extends('panel.index')
-@section('pageTitle', 'Novo Vereador')
+@section('pageTitle', 'Fazer chamada')
 
 @section('breadcrumb')
-<li><a href="{{ route('councilors.index') }}">Vereadores</a></li>
-<li><span>Novo</span></li>
+<li><a href="{{ route('sessions.index') }}">Sessões</a></li>
+<li><span>Chamada</span></li>
 @endsection
 
 @section('content')
@@ -18,28 +18,36 @@
     @endif
 
     <div class="card-body">
-        <form action="#" method="post" enctype="multipart/form-data">
+        <form action="{{ route('attendances.store', $session->slug) }}" method="post">
             @csrf
             <div class="row">
-                <div class="col-md-6">
+                
+                @if($councilors->count() > 0)
+                @foreach($councilors as $councilor)
+                <input type="hidden" name="councilors[{{ $loop->index }}][id]" value="{{ $councilor->id }}">
+                    <div class="col-md-6">
+                        <div class="form-group group-inline-form">
+                            @if($councilor->files->count() > 0)
+                            <figure class="img-councilor-list">
+                                <img src="{{ asset('storage/'.$councilor->files[0]->file->url) }}"/>
+                            </figure>
+                            @endif
 
-                    <div class="form-group group-inline-form">
-                        <figure class="img-councilor-list">
-                            <img src="https://www.camaramunicipaldemarco.ce.gov.br/imagens/6.jpg"/>
-                        </figure>
-
-                        <div class="align-center">
-                            <h1>SOCORRO OSTERNO</h1>
-                            <div class="text-left">
-                                <label class="cursor-pointer" for="toggle">Ausente/Presente</label>
-                                <div class="toggle-switch">
-                                    <input type="checkbox" id="toggle" name="visibility" value="" class="toggle-input">
-                                    <label for="toggle" class="toggle-label"></label>
+                            <div class="align-center">
+                                <h1>{{ $councilor->surname }}</h1>
+                                <div class="text-left">
+                                    <label class="cursor-pointer" for="toggle-{{$loop->index}}">Ausente/Presente</label>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="toggle-{{$loop->index}}" name="councilors[{{ $loop->index }}][visibility]" value="" class="toggle-input" {{ $councilor->present ? 'checked' : ''}}>
+                                        <label for="toggle-{{$loop->index}}" class="toggle-label"></label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
+                @endif
+
             </div>
 
             <div class="form-footer text-right">

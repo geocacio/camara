@@ -42,6 +42,10 @@ class Session extends Model
     {
         return $this->morphMany(CommissionLink::class, 'linkable');
     }
+
+    public function sessionAttendance(){
+        return $this->hasMany(SessionAttendance::class);
+    }
     
     public static function uniqSlug()
     {
