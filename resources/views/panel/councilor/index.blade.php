@@ -51,7 +51,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="{{ route('councilor.legislature.index', $councilor->slug) }}">Legislaturas</a>
-                                    <a class="dropdown-item" href="{{ route('commissions.index', $councilor->slug) }}">Comissões</a>
+                                    <a class="dropdown-item" href="{{ route('councilor.commissions.index', $councilor->slug) }}">Comissões</a>
                                     <a class="dropdown-item" href="{{ route('councilors.edit', $councilor->slug) }}">Editar</a>
                                     <a class="dropdown-item" data-toggle="modal" data-target="#myModal-{{$councilor->id}}" href="#">Excluir</a>
                                 </div>

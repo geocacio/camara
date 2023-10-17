@@ -19,57 +19,32 @@
     @endif
 
     <div class="card-body">
-        <form action="#" method="post" enctype="multipart/form-data">
+        <form action="{{ route('councilor.commissions.store', $councilor->slug) }}" method="post">
             @csrf
             
             <div class="form-group">
-                <label for="type_id">Tipo</label>
-                <select name="type_id" class="form-control">
+                <label for="commission_id">Comissão</label>
+                <select name="commission_id" class="form-control">
                     <option value="">Selecione</option>
-                    <option value="">Vice Presidente</option>
-                    <option value="">Vereador (a)</option>
-                    <option value="">1º Secretário</option>
+                    @if($commissions->count() > 0)
+                    @foreach($commissions as $commission)
+                    <option value="{{ $commission->id }}">{{ $commission->description }}</option>
+                    @endforeach
+                    @endif
                 </select>
             </div>
 
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="office">Cargo</label>
-                        <select name="office" class="form-control">
-                            <option value="">Selecione</option>
-                            <option value="">Vice Presidente</option>
-                            <option value="">Vereador (a)</option>
-                            <option value="">1º Secretário</option>
-                        </select>
+                        <label>Data de Início</label>
+                        <input type="date" name="start_date" class="form-control" value="{{ old('start_date') }}" />
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Descrição</label>
-                        <input type="text" name="description" class="form-control" value="{{ old('description') }}" />
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Data de criação</label>
-                        <input type="date" name="creation_date" class="form-control" value="{{ old('creation_date') }}" />
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Data de conclusão</label>
-                        <input type="date" name="conclusion_date" class="form-control" value="{{ old('conclusion_date') }}" />
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>Informação</label>
-                        <textarea name="information" class="form-control">{{ old('information') }}</textarea>
+                        <label>Data de Fim</label>
+                        <input type="date" name="end_date" class="form-control" value="{{ old('end_date') }}" />
                     </div>
                 </div>
             </div>
