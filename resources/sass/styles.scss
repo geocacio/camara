@@ -2281,8 +2281,8 @@ section{
                 font-family: $font-secondary;
                 font-size: 12px;
                 white-space: nowrap;
-                color: #fff;
                 margin-bottom: 0;
+                text-align: left;
                 @media screen and (min-width: 768px) {
                     font-size: 14px;
                 }
@@ -2328,7 +2328,7 @@ section{
         // align-items: center;
         // justify-content: space-between;
         gap: 20px;
-
+        width: 100%;
         .header{
             height: auto;
         }

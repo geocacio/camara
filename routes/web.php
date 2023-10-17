@@ -473,6 +473,9 @@ Route::get('/cartaservicos/{serviceLetter:slug}', [ServiceLetterController::clas
 Route::resource('/a-camara', ChamberController::class);
 Route::get('/vereadores/{councilor:slug}', [CouncilorController::class, 'show'])->name('vereador.show');
 Route::get('/comissoes/{commission}', [CommissionController::class, 'single'])->name('comissoes.single');
+Route::get('/materiais/{material}', [MaterialController::class, 'single'])->name('materiais.single');
+Route::get('/sessoes/{session}', [SessionController::class, 'single'])->name('sessoes.single');
+Route::get('/comissoes/{commission}', [CommissionController::class, 'single'])->name('comissoes.single');
 
 //Transparency Routes
 Route::get('/transparencia', [App\Http\Controllers\TransparencyPortalController::class, 'show'])->name('transparency.show');
