@@ -6,13 +6,13 @@ use App\Models\Bidding;
 use App\Models\Progress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Services\GeneralCrudSErvice;
+use App\Services\GeneralCrudService;
 
 class ProgressController extends Controller
 {
     private $crud;
 
-    public function __construct(GeneralCrudSErvice $crud)
+    public function __construct(GeneralCrudService $crud)
     {
         $this->crud = $crud;
     }

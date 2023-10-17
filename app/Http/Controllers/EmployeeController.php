@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\Models\Office;
 use App\Services\FileUploadService;
-use App\Services\GeneralCrudSErvice;
+use App\Services\GeneralCrudService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -14,7 +14,7 @@ class EmployeeController extends Controller
     private $crud;
     private $fileUploadService;
 
-    public function __construct(GeneralCrudSErvice $crud, FileUploadService $fileUploadService)
+    public function __construct(GeneralCrudService $crud, FileUploadService $fileUploadService)
     {
         $this->crud = $crud;
         $this->fileUploadService = $fileUploadService;

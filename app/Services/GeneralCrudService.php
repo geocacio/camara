@@ -13,7 +13,7 @@ use App\Models\SecretaryPublication;
 use App\Models\Sector;
 use Illuminate\Support\Facades\Storage;
 
-class GeneralCrudSErvice
+class GeneralCrudService
 {
 
     private $fileUploadService;

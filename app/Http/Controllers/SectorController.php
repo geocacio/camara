@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Sector;
-use App\Services\GeneralCrudSErvice;
+use App\Services\GeneralCrudService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -13,7 +13,7 @@ class SectorController extends Controller
 {
     private $crud;
 
-    public function __construct(GeneralCrudSErvice $crud)
+    public function __construct(GeneralCrudService $crud)
     {
         $this->crud = $crud;
     }

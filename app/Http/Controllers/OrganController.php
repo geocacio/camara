@@ -8,14 +8,14 @@ use App\Models\Secretary;
 use App\Services\FileUploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Services\GeneralCrudSErvice;
+use App\Services\GeneralCrudService;
 
 class OrganController extends Controller
 {
     private $crud;
     private $fileUploadService;
 
-    public function __construct(GeneralCrudSErvice $crud, FileUploadService $fileUploadService)
+    public function __construct(GeneralCrudService $crud, FileUploadService $fileUploadService)
     {
         $this->crud = $crud;
         $this->fileUploadService = $fileUploadService;

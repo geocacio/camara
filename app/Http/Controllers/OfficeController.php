@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Office;
-use App\Services\GeneralCrudSErvice;
+use App\Services\GeneralCrudService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -11,7 +11,7 @@ class OfficeController extends Controller
 {
     private $crud;
 
-    public function __construct(GeneralCrudSErvice $crud)
+    public function __construct(GeneralCrudService $crud)
     {
         $this->crud = $crud;
     }

@@ -8,7 +8,7 @@ use App\Models\OfficialJournal;
 use App\Models\Secretary;
 use App\Models\SecretaryPublication;
 use App\Models\User;
-use App\Services\GeneralCrudSErvice;
+use App\Services\GeneralCrudService;
 use App\Services\PdfServices;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -21,7 +21,7 @@ class SecretaryPublicationController extends Controller
     private $crud;
     private $officialDiaryPdf;
 
-    public function __construct(GeneralCrudSErvice $crud, PdfServices $officialDiaryPdf)
+    public function __construct(GeneralCrudService $crud, PdfServices $officialDiaryPdf)
     {
         $this->crud = $crud;
         $this->officialDiaryPdf = $officialDiaryPdf;
