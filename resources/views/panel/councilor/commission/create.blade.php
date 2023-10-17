@@ -19,7 +19,7 @@
     @endif
 
     <div class="card-body">
-        <form action="{{ route('councilor.commissions.store', $councilor->slug) }}" method="post">
+        <form action="{{ route('councilor-commissions.store', $councilor->slug) }}" method="post">
             @csrf
             
             <div class="form-group">

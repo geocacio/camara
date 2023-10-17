@@ -17,7 +17,7 @@
                 <button type="button" class="btn-dropdown-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">Página</a>
-                    <a class="dropdown-item" href="{{ route('councilor.commissions.create', $councilor->slug) }}">Novo</a>
+                    <a class="dropdown-item" href="{{ route('councilor-commissions.create', $councilor->slug) }}">Novo</a>
                     <a class="dropdown-item" href="#">Tipos</a>
                 </div>
             </div>
@@ -31,8 +31,9 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Lei</th>
-                        <th>Data</th>
+                        <th>Comissão</th>
+                        <th>Data de início</th>
+                        <th>Data de fim</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
@@ -40,10 +41,11 @@
                     @foreach($councilor->commissionLinks as $commission)
                     <tr>
                         <td>01</td>
-                        <td>Lei</td>
-                        <td>Data</td>
+                        <td>{{ $commission->commission->description }}</td>
+                        <td>{{ date('d/m/Y', strtotime($commission->start_date)) }}</td>
+                        <td>{{ date('d/m/Y', strtotime($commission->end_date)) }}</td>
                         <td class="actions text-center">
-                            <a href="{{ route('councilor.commissions.edit', ['councilor' => $commission->slug, 'commission' => $commission->slug]) }}" class="link edit"><i class="fas fa-edit"></i></a>
+                            <a href="{{ route('councilor-commissions.edit', ['councilor' => $councilor->slug, 'councilor_commission' => $commission->id]) }}" class="link edit"><i class="fas fa-edit"></i></a>
                         
                             <a data-toggle="modal" data-target="#myModal-{{ $commission->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a>
                         
@@ -67,7 +69,7 @@
                                                 Deletar
                                             </a>
 
-                                            <form id="delete-form-{{ $commission->id }}" action="{{ route('councilor.commissions.destroy', ['councilor' => $commission->slug, 'commission' => $commission->slug]) }}" method="post" style="display: none;">
+                                            <form id="delete-form-{{ $commission->id }}" action="{{ route('councilor-commissions.destroy', ['councilor' => $councilor->slug, 'councilor_commission' => $commission->id]) }}" method="post" style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>

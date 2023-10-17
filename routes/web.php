@@ -169,15 +169,7 @@ Route::middleware('auth')->group(function () {
             'update' => 'councilor.legislature.update',
             'destroy' => 'councilor.legislature.destroy',
         ]);
-        Route::resource('/councilors/{councilor:slug}/commissions', CouncilorComissionController::class)->names([
-            'index' => 'councilor.commissions.index',
-            'create' => 'councilor.commissions.create',
-            'store' => 'councilor.commissions.store',
-            'show' => 'councilor.commissions.show',
-            'edit' => 'councilor.commissions.edit',
-            'update' => 'councilor.commissions.update',
-            'destroy' => 'councilor.commissions.destroy',
-        ]);
+        Route::resource('/councilors/{councilor:slug}/councilor-commissions', CouncilorComissionController::class);
         Route::resource('/councilors/{councilor:slug}/party-affiliation', PartyAffiliationController::class);
 
         Route::resource('/sessions', SessionController::class);
