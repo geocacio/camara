@@ -11,7 +11,7 @@ class Secretary extends Model
 
     protected $fillable = [
         'name',
-        'abbreviation',
+        'plenary',
         'cnpj',
         'phone1',
         'phone2',
@@ -24,9 +24,9 @@ class Secretary extends Model
         'slug',
     ];
 
-    public function contentRelation() {
-        return ['responsible', 'employee_id'];
-    }
+    // public function contentRelation() {
+    //     return ['responsible', 'employee_id'];
+    // }
     
     public function categories()
     {

@@ -1,9 +1,9 @@
 @extends('panel.index')
 
-@section('pageTitle', 'Atualizar Secretaria')
+@section('pageTitle', 'Informações da Câmara')
 @section('breadcrumb')
-<li><a href="{{ route('secretaries.index') }}">Secretarias</a></li>
-<li><span>Atualizar Secretaria</span></li>
+<li><a href="{{ route('secretaries.index') }}">Câmara</a></li>
+<li><span>Informações da Câmara</span></li>
 @endsection
 @section('content')
 <div class="card">
@@ -13,28 +13,16 @@
             @method('put')
 
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
                         <label>Nome</label>
                         <input type="text" name="name" class="form-control" value="{{ old('name', $secretary->name) }}" />
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label>Sigla</label>
-                        <input type="text" name="abbreviation" class="form-control" value="{{ old('abbreviation', $secretary->abbreviation) }}" />
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="title1">Selecione o Responsável <button type="button" class="btn btn-modal-create" data-toggle="modal" data-target="#responsibleFormModal">Criar</button></label>
-                        <select name="employee_id" class="form-control">
-                            <option value="">Selecione</option>
-                            @foreach($employees as $employee)
-                            <option value="{{$employee->id}}" {{ $secretary->responsible && $employee->id === $secretary->responsible->employee->id ? 'selected' : '' }}>{{$employee->name}}</option>
-                            @endforeach
-                        </select>
+                        <label>Plenário</label>
+                        <input type="text" name="plenary" class="form-control" value="{{ old('plenary', $secretary->plenary) }}" />
                     </div>
                 </div>
             </div>

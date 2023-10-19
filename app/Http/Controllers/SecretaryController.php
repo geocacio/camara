@@ -64,9 +64,9 @@ class SecretaryController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'employee_id' => 'required',
+            // 'employee_id' => 'required',
             'name' => 'required',
-            'abbreviation' => 'nullable',
+            'plenary' => 'nullable',
             'cnpj' => 'required',
             'phone1' => 'required',
             'phone2' => 'nullable',
@@ -131,7 +131,7 @@ class SecretaryController extends Controller
         $validatedData = $request->validate([
             'employee_id' => 'required',
             'name' => 'required',
-            'abbreviation' => 'nullable',
+            'plenary' => 'nullable',
             'cnpj' => 'required',
             'phone1' => 'required',
             'phone2' => 'nullable',

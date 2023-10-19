@@ -1,5 +1,5 @@
 @extends('panel.index')
-@section('pageTitle', 'Secretarias')
+@section('pageTitle', 'Câmara')
 
 @section('content')
 <div class="card">
@@ -20,7 +20,7 @@
                         <th>#</th>
                         <th>Image</th>
                         <th>Nome</th>
-                        <th>Responsável</th>
+                        <th>Plenário</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -34,7 +34,7 @@
                             @endif
                         </td>
                         <td>{{ $secretary->name }}</td>
-                        <td>{{ $secretary->responsible && $secretary->responsible->employee->name ? $secretary->responsible->employee->name : '' }}</td>
+                        <td>{{ $secretary->plenary }}</td>
                         <td class="actions">
                             <a href="{{ route('secretaries.edit', $secretary->slug) }}" class="link edit"><i class="fas fa-edit"></i></a>
                             <a data-toggle="modal" data-target="#myModal{{$secretary->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a>
