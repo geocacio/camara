@@ -21,13 +21,22 @@ class ChamberController extends Controller
         
         $chamber['institutional'] = Setting::first();
         $chamber['institutional']['icon'] = 'fa-solid fa-building-columns';
-        if($currentLegislature){
+        if ($currentLegislature) {
             $chamber['boards']['councilors'] = Councilor::whereHas('legislatureRelations', function ($query) use ($currentLegislature) {
-                $query->where('legislature_id', $currentLegislature->id);
-            })->where('bond_id', 19)->get();
-        }else{
+                $query->where('legislature_id', $currentLegislature->id)
+                      ->where('bond_id', 19); // Substitua 'office_id' pelo nome da nova coluna, se necessário.
+            })->get();
+        } else {
             $chamber['boards']['councilors'] = [];
         }
+        // dd($chamber['boards']['councilors']);
+        // if($currentLegislature){
+        //     $chamber['boards']['councilors'] = Councilor::whereHas('legislatureRelations', function ($query) use ($currentLegislature) {
+        //         $query->where('legislature_id', $currentLegislature->id);
+        //     })->where('bond_id', 19)->get();
+        // }else{
+        //     $chamber['boards']['councilors'] = [];
+        // }
         $chamber['boards']['icon'] = "fa-solid fa-users";
         $chamber['legislature']['councilors'] = $currentLegislature ? $currentLegislature->legislatureRelations : [];
         $chamber['legislature']['icon'] = "fa-solid fa-user-tie";

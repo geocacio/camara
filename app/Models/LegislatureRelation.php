@@ -25,6 +25,22 @@ class LegislatureRelation extends Model
         return $this->belongsTo(Legislature::class);
     }
 
+    // public function councilors()
+    // {
+    //     return $this->hasManyThrough(Councilor::class, LegislatureRelation::class, 'legislature_id', 'id', 'id', 'councilor_id');
+    // }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'bond_id');
+    }
+
+
+    public function office()
+    {
+        return $this->belongsTo(Office::class, 'office_id');
+    }
+
     public function legislatureable()
     {
         return $this->morphTo();

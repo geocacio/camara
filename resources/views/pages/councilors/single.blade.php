@@ -206,54 +206,34 @@
                         @endif
 
                         @if($councilor->legislatureRelations)
-
-                            <div class="col-12">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-data-default">
-                                        <thead>
-                                            <tr>
-                                                <th>Cargo</th>
-                                                <th>Vínculo</th>
-                                                <th>Legislatura</th>
-                                                <th>Período</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                        
-                                            @foreach($councilor->legislatureRelations as $legislature)
-                                            <tr>
-                                                <td>{{ $legislature }}</td>
-                                            </tr>
-                                            @endforeach
-                        
-                                        </tbody>
-                                    </table>
+                            <div class="tab-pane fadeshow" id="legislature" role="tabpanel" aria-labelledby="legislature-tab">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-data-default">
+                                            <thead>
+                                                <tr>
+                                                    <th>Cargo</th>
+                                                    <th>Vínculo</th>
+                                                    <th>Legislatura</th>
+                                                    <th>Período</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                            
+                                                @foreach($councilor->legislatureRelations as $legislature)
+                                                <tr>
+                                                    <td>{{ $legislature->office->office }}</td>
+                                                    <td>{{ $legislature->category->name }}</td>
+                                                    <td>{{ date('d/m/Y', strtotime($legislature->legislature->start_date)) . ' - ' . date('d/m/Y', strtotime($legislature->legislature->end_date)) }}</td>
+                                                    <td>{{ date('d/m/Y', strtotime($legislature->first_period)) . ' - ' . date('d/m/Y', strtotime($legislature->final_period)) }}</td>
+                                                </tr>
+                                                @endforeach
+                            
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                        
-                            {{-- <div class="tab-pane fadeshow" id="legislature" role="tabpanel" aria-labelledby="legislature-tab">
-
-                                @foreach($councilor->legislatureRelations as $legislature)
-                                    
-                                    <div class="col-md-12">
-                                        <div class="card-with-links">
-                                            <a href="{{ route('comissoes.single', $legislature->legislature->slug) }}">
-                                                <div class="header">
-                                                    <i class="fa-solid fa-users"></i>
-                                                </div>
-                                                <div class="second-part">
-                                                    <div class="body">
-                                                        <h3 class="title text-left">{{ $legislature->legislature->description }}</h3>
-                                                        <p class="description">{{ Str::limit($legislature->legislature->information, '75', '...') }}</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                @endforeach
-
-                            </div> --}}
                         @endif
 
                     </div>

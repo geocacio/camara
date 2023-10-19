@@ -90,7 +90,7 @@
                                         </figure>
                                         <div class="info">
                                             <span class="title">{{  $councilor->legislatureable->name }}</span>
-                                            <span class="text">{{  $councilor->legislatureable->office->office }}</span>
+                                            {{-- <span class="text">{{  $councilor->legislatureable->office->office }}</span> --}}
                                         </div>
                                     </a>
                                 
@@ -108,7 +108,7 @@
                                         </figure>
                                         <div class="info">
                                             <span class="title">{{  $councilor->name }}</span>
-                                            <span class="text">{{ $councilor->office->office }}</span>
+                                            {{-- <span class="text">{{ $councilor->office->office }}</span> --}}
                                         </div>
                                     </a>
                                 
