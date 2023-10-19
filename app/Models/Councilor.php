@@ -15,10 +15,8 @@ class Councilor extends Model
         'surname',
         'email',
         'phone',
-        // 'office_id',
-        // 'bond_id',
-        // 'start_bond',
-        // 'end_mandate',
+        'party_affiliation_id',
+        'affiliation_date',
         'birth_date',
         'biography',
         'slug',
@@ -37,9 +35,11 @@ class Councilor extends Model
         return $this->hasMany(Commission::class);
     }
 
-    public function partyAffiliations(){
-        return $this->hasMany(PartyAffiliation::class);
+    public function partyAffiliation()
+    {
+        return $this->belongsTo(PartyAffiliation::class, 'party_affiliation_id');
     }
+
 
     public function materials(){
         return $this->hasMany(Material::class);

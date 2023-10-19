@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Councilor;
 use App\Models\File;
 use App\Models\Office;
+use App\Models\PartyAffiliation;
 use App\Services\FileUploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -35,7 +36,8 @@ class CouncilorController extends Controller
     {
         $bonds = Category::where('slug', 'vinculo')->with('children')->first();
         $offices = Office::all();
-        return view('panel.councilor.create', compact('bonds', 'offices'));
+        $affiliations = PartyAffiliation::all();
+        return view('panel.councilor.create', compact('bonds', 'offices', 'affiliations'));
     }
 
     /**
@@ -48,9 +50,8 @@ class CouncilorController extends Controller
             'surname' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
-            // 'office_id' => 'required',
-            // 'bond_id' => 'required',
-            // 'start_bond' => 'required',
+            'party_affiliation_id' => 'required',
+            'affiliation_date' => 'required',
             'birth_date' => 'required|date',
             'biography' => 'nullable',
             'file' => "nullable|image|mimes:jpeg,png,jpg,gif|max:{$this->fileUploadService->getMaxSize()}",
@@ -60,9 +61,8 @@ class CouncilorController extends Controller
             'email.required' => 'O campo email é obrigatório.',
             'email.email' => 'O campo email deve ser um endereço de email válido.',
             'phone.required' => 'O campo telefone é obrigatório.',
-            // 'office_id.required' => 'O campo cargo atual é obrigatório.',
-            // 'bond_id.required' => 'O campo vínculo atual é obrigatório.',
-            // 'start_bond.required' => 'O campo data de início do vínculo é obrigatório.',
+            'party_affiliation_id.required' => 'O campo filiação partidária é obrigatório.',
+            'affiliation_date.required' => 'O campo data da filiação é obrigatório.',
             'birth_date.required' => 'O campo data de nascimento é obrigatório.',
             'file.mimes' => "O campo imagem do perfil deve ser um dos tipos: jpeg, png, jpg, gif.",
             'file.max' => "O campo imagem do perfil não pode ter mais de {$this->fileUploadService->getMaxSize()} bytes.",
@@ -91,6 +91,7 @@ class CouncilorController extends Controller
      */
     public function show(Councilor $councilor)
     {
+        // dd($councilor->partyAffiliation);
         return view('pages.councilors.single', compact('councilor'));
     }
 
@@ -101,7 +102,8 @@ class CouncilorController extends Controller
     {
         $bonds = Category::where('slug', 'vinculo')->with('children')->first();
         $offices = Office::all();
-        return view('panel.councilor.edit', compact('councilor', 'bonds', 'offices'));
+        $affiliations = PartyAffiliation::all();
+        return view('panel.councilor.edit', compact('councilor', 'bonds', 'offices', 'affiliations'));
     }
 
     /**
@@ -114,9 +116,8 @@ class CouncilorController extends Controller
             'surname' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
-            // 'office_id' => 'required',
-            // 'bond_id' => 'required',
-            // 'start_bond' => 'required',
+            'party_affiliation_id' => 'required',
+            'affiliation_date' => 'required',
             'birth_date' => 'required|date',
             'biography' => 'nullable',
             'file' => "nullable|image|mimes:jpeg,png,jpg,gif|max:{$this->fileUploadService->getMaxSize()}",
@@ -126,9 +127,8 @@ class CouncilorController extends Controller
             'email.required' => 'O campo email é obrigatório.',
             'email.email' => 'O campo email deve ser um endereço de email válido.',
             'phone.required' => 'O campo telefone é obrigatório.',
-            // 'office_id.required' => 'O campo cargo atual é obrigatório.',
-            // 'bond_id.required' => 'O campo vínculo atual é obrigatório.',
-            // 'start_bond.required' => 'O campo data de início do vínculo é obrigatório.',
+            'party_affiliation_id.required' => 'O campo filiação partidária é obrigatório.',
+            'affiliation_date.required' => 'O campo data da filiação é obrigatório.',
             'birth_date.required' => 'O campo data de nascimento é obrigatório.',
             'file.mimes' => "O campo imagem do perfil deve ser um dos tipos: jpeg, png, jpg, gif.",
             'file.max' => "O campo imagem do perfil não pode ter mais de {$this->fileUploadService->getMaxSize()} bytes.",

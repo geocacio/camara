@@ -70,6 +70,24 @@
                             </button>
                         </li>
                         @endif
+
+                        @if($councilor->party_affiliation_id)
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="party_affiliation-tab" data-bs-toggle="tab" data-bs-target="#party_affiliation" type="button" role="tab">
+                                <i class="fa-solid fa-handshake"></i>
+                                Filiação partidária
+                            </button>
+                        </li>
+                        @endif
+
+                        @if($councilor->biography)
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="biography-tab" data-bs-toggle="tab" data-bs-target="#biography" type="button" role="tab">
+                                <i class="fa-solid fa-book"></i>
+                                Biografia
+                            </button>
+                        </li>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -232,6 +250,40 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if($councilor->party_affiliation_id)
+                            <div class="tab-pane fadeshow" id="party_affiliation" role="tabpanel" aria-labelledby="party_affiliation-tab">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-data-default">
+                                            <thead>
+                                                <tr>
+                                                    <th>Período</th>
+                                                    <th>Sigla</th>
+                                                    <th>Partido</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{ $councilor->affiliation_date }}</td>
+                                                    <td>{{ $councilor->partyAffiliation->acronym }}</td>
+                                                    <td>{{ $councilor->partyAffiliation->name }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if($councilor->biography)
+                            <div class="tab-pane fadeshow" id="biography" role="tabpanel" aria-labelledby="biography-tab">
+                                <div class="col-12">
+                                    <h1 class="title">Biografia</h1>
+                                    <p class="description">{{ $councilor->biography }}</p>
                                 </div>
                             </div>
                         @endif

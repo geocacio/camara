@@ -54,44 +54,26 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="row">
+            <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="office_id">Cargo Atual</label>
-                        <select name="office_id" class="form-control">
+                        <label for="party_affiliation_id">Filiação partidária</label>
+                        <select name="party_affiliation_id" class="form-control">
                             <option value="">Selecione</option>
-                            @foreach($offices as $office)
-                            <option value="{{ $office->id }}">{{ $office->office }}</option>
+                            @foreach($affiliations as $affiliation)
+                            <option value="{{ $affiliation->id }}">{{ $affiliation->name }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="bond_id">Vínculo atual</label>
-                        <select name="bond_id" class="form-control">
-                            <option value="">Selecione</option>
-                            @foreach($bonds->children as $bond)
-                            <option value="{{ $bond->id }}">{{ $bond->name }}</option>
-                            @endforeach
-                        </select>
+                        <label>Data da filiação</label>
+                        <input type="date" name="affiliation_date" class="form-control" value="{{ old('affiliation_date') }}" />
                     </div>
                 </div>
-            </div> --}}
-            {{-- <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Inicio do vínculo</label>
-                        <input type="date" name="start_bond" class="form-control" value="{{ old('start_bond') }}" />
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Data de Nascimento</label>
-                        <input type="date" name="birth_date" class="form-control" value="{{ old('birth_date') }}" />
-                    </div>
-                </div>
-            </div> --}}
+            </div>
+            
             <div class="form-group">
                 <label>Biografia</label>
                 <textarea name="biography" class="form-control">{{ old('biography') }}</textarea>

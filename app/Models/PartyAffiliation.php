@@ -17,7 +17,7 @@ class PartyAffiliation extends Model
     ];
     
     public function councilor(){
-        return $this->belongsTo(Councilor::class);
+        return $this->hasMany(Councilor::class);
     }
 
     public function getRouteKeyName()
