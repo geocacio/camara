@@ -20,7 +20,7 @@
 @section('content')
 
 @include('layouts.header')
-{{-- {{ dd($councilor->commissionLinks[0]->commission)}} --}}
+{{-- {{ dd($councilor->legislatureRelations)}} --}}
 <section class="section-chamber adjust-min-height margin-fixed-top">
     <div class="container">
         <div class="row">
@@ -58,6 +58,15 @@
                             <button class="nav-link" id="commission-tab" data-bs-toggle="tab" data-bs-target="#commission" type="button" role="tab">
                                 <i class="fa-solid fa-users"></i>
                                 Comissões
+                            </button>
+                        </li>
+                        @endif
+
+                        @if($councilor->legislatureRelations)
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="legislature-tab" data-bs-toggle="tab" data-bs-target="#legislature" type="button" role="tab">
+                                <i class="fa-solid fa-suitcase"></i>
+                                Legislaturas
                             </button>
                         </li>
                         @endif
@@ -194,6 +203,57 @@
                                 @endforeach
 
                             </div>
+                        @endif
+
+                        @if($councilor->legislatureRelations)
+
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-data-default">
+                                        <thead>
+                                            <tr>
+                                                <th>Cargo</th>
+                                                <th>Vínculo</th>
+                                                <th>Legislatura</th>
+                                                <th>Período</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                        
+                                            @foreach($councilor->legislatureRelations as $legislature)
+                                            <tr>
+                                                <td>{{ $legislature }}</td>
+                                            </tr>
+                                            @endforeach
+                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        
+                            {{-- <div class="tab-pane fadeshow" id="legislature" role="tabpanel" aria-labelledby="legislature-tab">
+
+                                @foreach($councilor->legislatureRelations as $legislature)
+                                    
+                                    <div class="col-md-12">
+                                        <div class="card-with-links">
+                                            <a href="{{ route('comissoes.single', $legislature->legislature->slug) }}">
+                                                <div class="header">
+                                                    <i class="fa-solid fa-users"></i>
+                                                </div>
+                                                <div class="second-part">
+                                                    <div class="body">
+                                                        <h3 class="title text-left">{{ $legislature->legislature->description }}</h3>
+                                                        <p class="description">{{ Str::limit($legislature->legislature->information, '75', '...') }}</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                @endforeach
+
+                            </div> --}}
                         @endif
 
                     </div>

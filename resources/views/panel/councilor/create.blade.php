@@ -35,20 +35,26 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label>Email</label>
                         <input type="email" name="email" class="form-control" value="{{ old('email') }}"/>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label>Telefone</label>
                         <input type="phone" name="phone" class="form-control mask-phone" value="{{ old('phone') }}"/>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Data de Nascimento</label>
+                        <input type="date" name="birth_date" class="form-control" value="{{ old('birth_date') }}" />
+                    </div>
+                </div>
             </div>
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="office_id">Cargo Atual</label>
@@ -71,21 +77,21 @@
                         </select>
                     </div>
                 </div>
-            </div>
-            <div class="row">
+            </div> --}}
+            {{-- <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Inicio do vínculo</label>
                         <input type="date" name="start_bond" class="form-control" value="{{ old('start_bond') }}" />
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label>Data de Nascimento</label>
                         <input type="date" name="birth_date" class="form-control" value="{{ old('birth_date') }}" />
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="form-group">
                 <label>Biografia</label>
                 <textarea name="biography" class="form-control">{{ old('biography') }}</textarea>

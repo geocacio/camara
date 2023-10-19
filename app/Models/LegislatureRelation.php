@@ -13,6 +13,10 @@ class LegislatureRelation extends Model
     protected $fillable = [
         'legislature_id',
         'legislatureable_id',
+        'office_id',
+        'bond_id',
+        'first_period',
+        'final_period',
         'legislatureable_type',
     ];
 

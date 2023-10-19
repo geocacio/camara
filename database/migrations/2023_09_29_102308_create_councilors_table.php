@@ -18,17 +18,17 @@ return new class extends Migration
             $table->string('surname');
             $table->string('email')->unique();
             $table->string('phone')->nullable();
-            $table->unsignedBigInteger('office_id');
-            $table->unsignedBigInteger('bond_id');
-            $table->date('start_bond')->nullable();
+            // $table->unsignedBigInteger('office_id');
+            // $table->unsignedBigInteger('bond_id');
+            // $table->date('start_bond')->nullable();
             // $table->date('end_mandate')->nullable();
             $table->date('birth_date')->nullable();
             $table->text('biography')->nullable();
             $table->string('slug');
             $table->timestamps();
             // $table->foreign('party_affiliation_id')->references('id')->on('party_affiliations');
-            $table->foreign('office_id')->references('id')->on('offices');
-            $table->foreign('bond_id')->references('id')->on('categories');
+            // $table->foreign('office_id')->references('id')->on('offices');
+            // $table->foreign('bond_id')->references('id')->on('categories');
         });
     }
 
