@@ -21,6 +21,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>Legislatura</th>
                         <th>Período</th>
                         <th class="text-center">Actions</th>
                     </tr>
@@ -30,6 +31,7 @@
                     <tr>
                         <td>{{ $legislature->id }}</td>
                         <td>{{ date('d/m/Y', strtotime($legislature->legislature->start_date)) }} - {{ date('d/m/Y', strtotime($legislature->legislature->end_date)) }}</td>
+                        <td>{{ date('d/m/Y', strtotime($legislature->first_period)) }} - {{ date('d/m/Y', strtotime($legislature->final_period)) }}</td>
                         <td class="actions text-center">
                         
                             <a data-toggle="modal" data-target="#myModal-{{ $legislature->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a>
