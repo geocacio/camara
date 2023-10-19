@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Services\FileUploadService;
 use App\Services\GeneralCrudService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class SecretaryController extends Controller
@@ -127,9 +128,9 @@ class SecretaryController extends Controller
      */
     public function update(Request $request, Secretary $secretary)
     {
-
+        // dd('passou aqui', $secretary);
         $validatedData = $request->validate([
-            'employee_id' => 'required',
+            // 'employee_id' => 'required',
             'name' => 'required',
             'plenary' => 'nullable',
             'cnpj' => 'required',
@@ -143,22 +144,22 @@ class SecretaryController extends Controller
             'description' => 'nullable',
             'file' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
         ]);
-        unset($validatedData['file']);
-        if($request->employee_id != $secretary->responsible->employee_id){
-            $user = User::where('employee_id', $secretary->responsible->employee_id)->first();
-            $user->forceFill(['status' => 'disabled']);
-            $user->save();
+        
+        // dd('passou aqui');
+        if($secretary->update($validatedData)){
+            if ($request->hasFile('file')) {
+                if (isset($secretary->files[0]) && Storage::disk('public')->exists($secretary->files[0]->file->url)){
+                    Storage::disk('public')->delete($secretary->files[0]->file->url);
+                }
 
-            //Verificar se o usuário já existe, se existir ativa...
-            $user = User::where('employee_id', $request->employee_id)->first();
-            if($user){
-                $user->forceFill(['status' => 'active']);
-                $user->save();
-            }            
+                $url = $this->fileUploadService->upload($request->file('file'), 'chamber');
+                $file = File::create(['url' => $url]);
+                $secretary->files()->create(['file_id' => $file->id]);
+            }
+
+            return redirect()->route('secretaries.index')->with('success', 'Câmara atualizada com suceso!');
         }
-
-        $redirect = ['route' => 'secretaries.index'];
-        return $this->crud->initCrud('update', 'Secretary', $validatedData, $request, $redirect, $secretary);
+        return redirect()->back()->with('error', 'Erro ao tentar atualizar Câmra, por favor tente novamente!');
     }
 
     /**

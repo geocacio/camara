@@ -8,6 +8,20 @@
 @section('content')
 <div class="card">
     <div class="card-body">
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                <li>{{ $errors->first() }}</li>
+            </ul>
+        </div>
+        @endif
+        
         <form action="{{ route('secretaries.update', $secretary->slug) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('put')
