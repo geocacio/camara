@@ -22,7 +22,7 @@
         <form action="{{ route('councilor.legislature.store', $councilor->slug) }}" method="post">
             @csrf
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-2">
                     <div class="form-group">
                         <label for="legislature_id">Legislatura</label>
                         <select name="legislature_id" class="form-control">
@@ -33,6 +33,43 @@
                             @endforeach
                             @endif
                         </select>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="office_id">Cargo Atual</label>
+                        <select name="office_id" class="form-control">
+                            <option value="">Selecione</option>
+                            @foreach($offices as $office)
+                            <option value="{{ $office->id }}">{{ $office->office }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="bond_id">Vínculo atual</label>
+                        <select name="bond_id" class="form-control">
+                            <option value="">Selecione</option>
+                            @foreach($bonds->children as $bond)
+                            <option value="{{ $bond->id }}">{{ $bond->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Período inicial</label>
+                        <input type="date" name="first_period" class="form-control" value="{{ old('first_period') }}" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Período final</label>
+                        <input type="date" name="final_period" class="form-control" value="{{ old('final_period') }}" />
                     </div>
                 </div>
             </div>
