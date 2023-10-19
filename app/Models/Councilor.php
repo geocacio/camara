@@ -73,18 +73,17 @@ class Councilor extends Model
     {
         // Obtém a legislatura atual
         $legislature = (new Legislature)->getCurrentLegislature();
-
+    
         if ($legislature) {
-            // Filtra os vereadores com base na legislatura atual e no ID do vínculo desejado (no seu caso, bond_id 19)
             return $this->whereHas('legislatureRelations', function ($query) use ($legislature) {
-                $query->where('legislature_id', $legislature->id);
-            })->where('bond_id', 19)->get();
+                $query->where('legislature_id', $legislature->id)
+                      ->where('bond_id', 19); // Verifique se a relação correta é usada
+            })->get();
         }
-
-        // Se a legislatura atual não for encontrada, retorna uma coleção vazia
+    
         return collect([]);
     }
-
+    
     public static function uniqSlug($name)
     {
         $slug = Str::slug($name);

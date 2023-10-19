@@ -46,13 +46,16 @@ class MaterialController extends Controller
 
         $legislature = new Legislature;
         $currentLegislature = $legislature->getCurrentLegislature();
-        if($currentLegislature){
+
+        if ($currentLegislature) {
             $councilors = Councilor::whereHas('legislatureRelations', function ($query) use ($currentLegislature) {
-                $query->where('legislature_id', $currentLegislature->id);
-            })->where('bond_id', 19)->get();
-        }else{
+                $query->where('legislature_id', $currentLegislature->id)
+                    ->where('bond_id', 19); // Verifique se a relação correta é usada
+            })->get();
+        } else {
             $councilors = [];
         }
+
         
         return view('panel.materials.create', compact('types', 'situations', 'sessions', 'councilors'));
     }
