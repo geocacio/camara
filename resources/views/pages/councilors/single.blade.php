@@ -6,14 +6,15 @@
         <a href="{{ route('home') }}" class="link">Início</a>
     </li>
     <li class="item">
-        <a href="{{ route('home') }}" class="link">Vereadores</a>
+        <a href="#" class="link">Vereadores</a>
+        {{-- <a href="{{ route('vereadores.index') }}" class="link">Vereadores</a> --}}
     </li>
     <li class="item">
-        <span>A Câmara</span>
+        <span>{{ $councilor->surname }}</span>
     </li>
 </ul>
 
-<h3 class="title text-center">A Câmara</h3>
+<h3 class="title text-center">{{ $councilor->surname }}</h3>
 
 @endsection
 
@@ -299,7 +300,7 @@
 
 </section>
 
-@include('pages.partials.satisfactionSurvey', ['page_name' => 'A Câmara'])
+@include('pages.partials.satisfactionSurvey', ['page_name' => 'Vereador'])
 
 @include('layouts.footer')
 
