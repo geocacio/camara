@@ -10,6 +10,7 @@ use App\Models\Session;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use App\Models\File;
+use App\Models\Page;
 use App\Services\FileUploadService;
 use Illuminate\Support\Facades\Storage;
 
@@ -31,6 +32,33 @@ class MaterialController extends Controller
         $materials = Material::all();
         // dd($materials[0]->category);
         return view('panel.materials.index', compact('materials'));
+    }
+
+    public function allMaterials(Request $request){
+        
+        $getType = Type::where('slug', 'materials')->first();
+        $types = $getType ? $getType->children : [];
+        $category = Category::where('slug', 'status')->with('children')->get();
+        $situations = $category[0]->children;
+
+        $page_material = Page::where('name', 'Materiais')->first();
+        $query = Material::query();
+
+        if($request->filled('type_id')){
+            $query->where('type_id', $request->input('type_id'));
+        }
+        
+        if($request->filled('status_id')){
+            $query->where('status_id', $request->input('status_id'));
+        }
+
+        if($request->filled('description')){
+            $query->where('description', 'LIKE', '%' . $request->input('description') . '%');
+        }
+        
+        $materials = $query->paginate(10);
+        $searchData = $request->only(['type_id', 'status_id', 'description']);
+        return view('pages.materials.index', compact('materials', 'page_material', 'searchData', 'types', 'situations'));
     }
 
     /**

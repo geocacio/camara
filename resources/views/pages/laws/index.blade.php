@@ -48,7 +48,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group mb-0">
                                         <label>Descrição</label>
-                                        <input type="text" name="description" class="form-control input-sm" value="{{ old('number', $searchData ? $searchData['description'] : '') }}" />
+                                        <input type="text" name="description" class="form-control input-sm" value="{{ old('description', $searchData ? $searchData['description'] : '') }}" />
                                     </div>
                                 </div>
                             </div>

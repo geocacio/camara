@@ -473,6 +473,8 @@ Route::get('/cartaservicos/{serviceLetter:slug}', [ServiceLetterController::clas
 Route::resource('/a-camara', ChamberController::class);
 Route::get('/vereadores/{councilor:slug}', [CouncilorController::class, 'show'])->name('vereador.show');
 Route::get('/comissoes/{commission}', [CommissionController::class, 'single'])->name('comissoes.single');
+
+Route::match(['get', 'post'], 'materiais', [MaterialController::class, 'allMaterials'])->name('materiais-all');
 Route::get('/materiais/{material}', [MaterialController::class, 'single'])->name('materiais.single');
 Route::get('/sessoes/{session}', [SessionController::class, 'single'])->name('sessoes.single');
 Route::get('/comissoes/{commission}', [CommissionController::class, 'single'])->name('comissoes.single');
