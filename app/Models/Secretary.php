@@ -38,9 +38,9 @@ class Secretary extends Model
         return $this->morphMany(FileContent::class, 'fileable');
     }
 
-    public function departments()
+    public function sectors()
     {
-        return $this->hasMany(Department::class);
+        return $this->hasMany(Sector::class);
     }
     
     public function employee()

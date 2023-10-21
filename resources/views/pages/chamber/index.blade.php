@@ -47,70 +47,81 @@
 
                             @if($index == 'institutional')
 
-                            <div class="row container-descriptions">
-                                <div class="col-md-6">
-                                    <p class="title">Endereço</p>
-                                    <p class="description">{{ isset($item['address']) ? $item['address'].', ' : '' }} {{ isset($item['number']) ? $item['number'] : '' }} {{ isset($item['cep']) ? '- CEP:'.$item['cep'] : '' }} {{ isset($item['city']) ? ' - '.$item['city'] : '' }}{{ isset($item['state']) ? '/'.$item['state'] : '' }}</p>
+                                <div class="row container-descriptions">
+                                    <div class="col-md-6">
+                                        <p class="title">Endereço</p>
+                                        <p class="description">{{ isset($item['address']) ? $item['address'].', ' : '' }} {{ isset($item['number']) ? $item['number'] : '' }} {{ isset($item['cep']) ? '- CEP:'.$item['cep'] : '' }} {{ isset($item['city']) ? ' - '.$item['city'] : '' }}{{ isset($item['state']) ? '/'.$item['state'] : '' }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="title">Horário</p>
+                                        <p class="description">{{ isset($item['business_hours']) ? $item['business_hours'] : '' }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="title">Telefone</p>
+                                        <p class="description">{{ isset($item['phone1']) ? $item['phone1'] : '' }} {{ isset($item['phone2']) ? ' - ' . $item['phone2'] : '' }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="title">E-mail</p>
+                                        <p class="description">{{ isset($item['email']) ? $item['email'] : '' }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="title">Plenário</p>
+                                        <p class="description">{{ isset($item['plenary']) ? $item['plenary'] : '' }}</p>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <p class="title">Horário</p>
-                                    <p class="description">{{ isset($item['opening_hours']) ? $item['opening_hours'] : '' }}</p>
+                                <div class="row container-descriptions">
+                                    <div class="col-md-6">
+                                        Arquivo 1
+                                    </div>
+                                    <div class="col-md-6">
+                                        Arquivo 2
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <p class="title">Telefone</p>
-                                    <p class="description">{{ isset($item['phone']) ? $item['phone'] : '' }}</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <p class="title">E-mail</p>
-                                    <p class="description">{{ isset($item['email']) ? $item['email'] : '' }}</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <p class="title">Plenário</p>
-                                    <p class="description">{{ isset($item['plenary']) ? $item['plenary'] : '' }}</p>
-                                </div>
-                            </div>
-                            <div class="row container-descriptions">
-                                <div class="col-md-6">
-                                    Arquivo 1
-                                </div>
-                                <div class="col-md-6">
-                                    Arquivo 2
-                                </div>
-                            </div>
 
                             @endif
 
                             @if($index == 'legislature')
-
-                                @foreach($item['councilors'] as $councilor)
-                                
-                                    <a href="{{ route('vereador.show', $councilor->legislatureable->slug) }}" class="councilor-container">
-                                        <figure class="figure">
-                                            <img class="image" src="{{ asset('storage/'.$councilor->legislatureable->files[0]->file->url) }}" alt="">
-                                        </figure>
-                                        <div class="info">
-                                            <span class="title">{{  $councilor->legislatureable->name }}</span>
-                                            {{-- <span class="text">{{  $councilor->legislatureable->office->office }}</span> --}}
+                                <div class="row gd-councilor-container">
+                                    @foreach($item['councilors'] as $councilor)
+                                        <div class="col-lg-6">
+                                            <a href="{{ route('vereador.show', $councilor->legislatureable->slug) }}" class="councilor-items">
+                                                <figure class="figure">
+                                                    <img class="image" src="{{ asset('storage/'.$councilor->legislatureable->files[0]->file->url) }}" alt="">
+                                                </figure>
+                                                <div class="info">
+                                                    <span class="title">{{  $councilor->legislatureable->surname }}</span>
+                                                </div>
+                                            </a>
                                         </div>
-                                    </a>
-                                
-                                @endforeach
+                                    @endforeach
+                                </div>
 
                             @endif
 
                             @if($index == 'boards')
-
-                                @foreach($item['councilors'] as $councilor)
-                                
-                                    <a href="{{ route('vereador.show', $councilor->slug) }}" class="councilor-container">
-                                        <figure class="figure">
-                                            <img class="image" src="{{ asset('storage/'.$councilor->files[0]->file->url) }}" alt="">
-                                        </figure>
-                                        <div class="info">
-                                            <span class="title">{{  $councilor->name }}</span>
-                                            {{-- <span class="text">{{ $councilor->office->office }}</span> --}}
+                                <div class="row gd-councilor-container">
+                                    @foreach($item['councilors'] as $councilor)
+                                        <div class="col-lg-6">
+                                            <a href="{{ route('vereador.show', $councilor->slug) }}" class="councilor-items">
+                                                <figure class="figure">
+                                                    <img class="image" src="{{ asset('storage/'.$councilor->files[0]->file->url) }}" alt="">
+                                                </figure>
+                                                <div class="info">
+                                                    <span class="title">{{  $councilor->name }}</span>
+                                                    <span class="text">{{ $councilor->legislatureRelations[0]->office->office }}</span>
+                                                </div>
+                                            </a>
                                         </div>
-                                    </a>
+                                    @endforeach
+                                </div>
+
+                            @endif
+
+                            @if($index == 'sectors')
+
+                                @foreach($chamber['sectors']['items'] as $sector)
+                                    
+                                    <h3 class="title">{{ $sector->name }}</h3>
                                 
                                 @endforeach
 

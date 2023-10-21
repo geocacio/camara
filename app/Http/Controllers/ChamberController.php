@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Commission;
 use App\Models\Councilor;
 use App\Models\Legislature;
+use App\Models\Secretary;
 use App\Models\Session;
 use App\Models\Setting;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class ChamberController extends Controller
         $legislature = new Legislature();
         $currentLegislature = $legislature->getCurrentLegislature();
         
-        $chamber['institutional'] = Setting::first();
+        $chamber['institutional'] = Secretary::first();
         $chamber['institutional']['icon'] = 'fa-solid fa-building-columns';
         if ($currentLegislature) {
             $chamber['boards']['councilors'] = Councilor::whereHas('legislatureRelations', function ($query) use ($currentLegislature) {
@@ -42,6 +43,9 @@ class ChamberController extends Controller
         $chamber['legislature']['icon'] = "fa-solid fa-user-tie";
         $chamber['commissions']['items'] = Commission::select(['id', 'description as Descrição'])->get();
         $chamber['commissions']['icon'] = "fa-solid fa-newspaper";
+        
+        $chamber['sectors']['items'] = $chamber['institutional']->sectors;
+        $chamber['sectors']['icon'] = "fa-solid fa-building";
 
         return view('pages.chamber.index', compact('chamber'));
     }
