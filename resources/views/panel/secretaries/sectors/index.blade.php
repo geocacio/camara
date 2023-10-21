@@ -14,10 +14,8 @@
                     <tr>
                         <th>#</th>
                         <th>Nome</th>
-                        <th>Secretaria</th>
-                        <th>Orgão</th>
-                        <th>Departamento</th>
-                        <th>Responsável</th>
+                        <th>E-mail</th>
+                        <th>Telefone</th>
                         <th class="text-right">Actions</th>
                     </tr>
                 </thead>
@@ -26,10 +24,8 @@
                     <tr>
                         <td>{{ $sector->id }}</td>
                         <td>{{ $sector->name }}</td>
-                        <td>{{ $sector->department->secretary->name }}</td>
-                        <td>{{ $sector->department->organ ? $sector->department->organ->name : '' }}</td>
-                        <td>{{ $sector->department->name }}</td>
-                        <td>{{ $sector->responsible && $sector->responsible->employee->name ? $sector->responsible->employee->name : '' }}</td>
+                        <td>{{ $sector->email }}</td>
+                        <td>{{ $sector->phone }}</td>
                         <td class="actions text-right">
                             <div class="dropdown">
                                 <button class="btn btn-table-options btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

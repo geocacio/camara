@@ -33,28 +33,17 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="title1">Selecione o Departamento</label>
-                        <select name="department_id" class="form-control">
-                            <option value="">Selecione</option>
-                            @foreach($departments as $department)
-                            <option value="{{$department->id}}">{{$department->name}}</option>
-                            @endforeach
-                        </select>
+                        <label>E-mail</label>
+                        <input type="text" name="email" class="form-control" value="{{ old('email') }}" />
                     </div>
                 </div>
-
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="title1">Selecione o Responsável</label>
-                        <select name="employee_id" class="form-control selectpicker" data-live-search="true">
-                            <option value="">Selecione</option>
-                            @foreach($employees as $employee)
-                            <option value="{{$employee->id}}">{{$employee->name}}</option>
-                            @endforeach
-                        </select>
+                        <label>Telefone</label>
+                        <input type="text" name="phone" class="form-control mask-phone" value="{{ old('phone') }}" />
                     </div>
                 </div>
-            </div>
+            </div>            
 
             <div class="form-group">
                 <label>Descrição</label>

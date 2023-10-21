@@ -15,14 +15,19 @@ class Sector extends Model
 
     protected $fillable = ['secretary_id', 'name', 'description', 'email', 'phone', 'slug'];
 
-    public function department()
-    {
-        return $this->belongsTo(Department::class);
-    }
+    // public function department()
+    // {
+    //     return $this->belongsTo(Department::class);
+    // }
     
     public function employees()
     {
         return $this->morphMany(EmployeeContent::class, 'employeeable');
+    }
+
+    public function secretary()
+    {
+        return $this->belongsTo(Secretary::class);
     }
     
     // public function responsible()

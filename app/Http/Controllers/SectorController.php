@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Department;
 use App\Models\Employee;
+use App\Models\Secretary;
 use App\Models\Sector;
 use App\Services\GeneralCrudService;
 use Illuminate\Http\Request;
@@ -26,26 +27,12 @@ class SectorController extends Controller
     {
         $search = $request->query('search');
         $perPage = $request->query('perPage', 10);
-        $sectors = Sector::with('department', 'responsible.employee')
-            ->when($search, function ($query, $search) {
-                return $query->where(function($query) use ($search){
-                    $query->where('name', 'like', '%'.$search.'%')
-                    ->orWhereHas('responsible.employee', function($query) use ($search){
-                        $query->where('name', 'like', '%'.$search.'%');
-                    })
-                    ->orWhereHas('department', function($query) use ($search){
-                        $query->where(function($query) use ($search){
-                            $query->where('name', 'like', '%'.$search.'%')
-                            ->orWhereHas('organ', function($query) use ($search){
-                                $query->where('name', 'like', '%'.$search.'%');
-                            });
-                        });
-                    });
-                });
-            })
-            ->paginate($perPage)
-            ->appends(['search' => $search, 'perPage' => $perPage]);
-
+        $sectors = Sector::when($search, function ($query, $search) {
+            return $query->where('name', 'like', '%'.$search.'%');
+        })
+        ->paginate($perPage)
+        ->appends(['search' => $search, 'perPage' => $perPage]);
+        
         return view('panel.secretaries.sectors.index', compact('sectors', 'search', 'perPage'));
     }
 
@@ -66,9 +53,15 @@ class SectorController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required',
-            'department_id' => 'required',
+            'email' => 'nullable',
+            'phone' => 'nullable',
             'description' => 'nullable',
+        ],[
+            'name.required' => 'O campo nome é obrigatório',
         ]);
+        $chamber = Secretary::first();
+
+        $validatedData['secretary_id'] = $chamber->id;
         $validatedData['slug'] = Str::slug($request->name);
 
         $redirect = ['route' => 'sectors.index'];
@@ -97,11 +90,14 @@ class SectorController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Sector $sector)
-    {
+    {        
         $validatedData = $request->validate([
             'name' => 'required',
-            'department_id' => 'required',
+            'email' => 'nullable',
+            'phone' => 'nullable',
             'description' => 'nullable',
+        ],[
+            'name.required' => 'O campo nome é obrigatório',
         ]);
 
         $redirect = ['route' => 'sectors.index'];
