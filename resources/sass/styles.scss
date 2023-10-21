@@ -2399,7 +2399,7 @@ section{
 }
 
 
-.section-managers{
+.section-managers, .gd-managers{
 
     .card-manager{
         position: relative;
@@ -2428,7 +2428,7 @@ section{
                 margin-bottom: 10px;
                 transition: 0.3s ease-out;
 
-                &.twitter{
+                &.email{
                     color: #00acee;
 
                     &:hover{
@@ -2452,7 +2452,7 @@ section{
                         background: #3b5998;
                     }
                 }
-                &.whatsapp{
+                &.phone{
                     color: #008000;
 
                     &:hover{

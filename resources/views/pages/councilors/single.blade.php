@@ -31,7 +31,7 @@
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="index-tab" data-bs-toggle="tab" data-bs-target="#index" type="button" role="tab">
                                 <i class="fa-solid fa-user-tie"></i>
-                                Título
+                                Sobre
                             </button>
                         </li>
 
@@ -95,53 +95,56 @@
 
                 <div class="card main-card card-manager">
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fadeshow active" id="index" role="tabpanel" aria-labelledby="index-tab">
 
-                            <h1 class="title">Prefeito</h1>
+                        @if($councilor->getLastLegislature())
+                            <div class="gd-managers tab-pane fadeshow active" id="index" role="tabpanel" aria-labelledby="index-tab">
 
-                            <ul class="manager-networks">
-                                <li>
-                                    <a href="https://www.instagram.com/gledsonlimabezerra/" target="_blank" class="email">
-                                        <i class="fa-solid fa-envelope"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.facebook.com/gledson.bezerra.9" target="_blank" class="phone">
-                                        <i class="fa-solid fa-phone"></i>
-                                    </a>
-                                </li>
-                            </ul>
+                                <ul class="manager-networks">
+                                    <li>
+                                        <a href="mailto:{{ $councilor->email }}" target="_blank" class="email">
+                                            <i class="fa-solid fa-envelope"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="tel:{{ $councilor->phone }}" target="_blank" class="phone">
+                                            <i class="fa-solid fa-phone"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                @if($councilor->files->count() > 0)
+                                <figure class="img-managers">
+                                    <img src="{{ asset('storage/'.$councilor->files[0]->file->url) }}" class="">
+                                </figure>
+                                @endif
 
-                            <figure class="img-managers">
-                                <img src="http://127.0.0.1:9000/storage/managers/1695380684_gestor_2_610151252.jpg" class="">
-                            </figure>
-                            <h3 class="name-managers">GLÊDSON LIMA BEZERRA</h3>
+                                <h3 class="name-managers">{{ $councilor->name }}</h3>
 
-                            <div class="row container-descriptions">
-                                <div class="col-md-6">
-                                    <p class="title">Cargo atual</p>
-                                    <p class="description">PRESIDENTE</p>
+                                <div class="row container-descriptions">
+                                    <div class="col-md-6">
+                                        <p class="title">Cargo atual</p>
+                                        <p class="description">PRESIDENTE</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="title">Vínculo atual</p>
+                                        <p class="description">MESA DIRETORA</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="title">Desde</p>
+                                        <p class="description">01/01/2023</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="title">Nascimento</p>
+                                        <p class="description">25/04/1978</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="title">Naturalidade</p>
+                                        <p class="description">MARCO</p>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <p class="title">Vínculo atual</p>
-                                    <p class="description">MESA DIRETORA</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <p class="title">Desde</p>
-                                    <p class="description">01/01/2023</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <p class="title">Nascimento</p>
-                                    <p class="description">25/04/1978</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <p class="title">Naturalidade</p>
-                                    <p class="description">MARCO</p>
-                                </div>
+
+
                             </div>
-
-
-                        </div>
+                        @endif
 
                         @if($councilor->materials)
                             <div class="tab-pane fadeshow" id="legislative" role="tabpanel" aria-labelledby="legislative-tab">

@@ -27,6 +27,13 @@ class Councilor extends Model
         return $this->morphMany(LegislatureRelation::class, 'legislatureable');
     }
 
+    public function getLastLegislature()
+    {
+        return $this->legislatureRelations()->orderBy('final_period', 'desc')->first();
+    }
+
+
+
     public function mandates(){
         return $this->hasMany(Mandate::class);
     }
