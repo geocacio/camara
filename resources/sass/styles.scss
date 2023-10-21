@@ -2942,3 +2942,16 @@ section{
         }
     }
 }
+
+.accordion-button:focus{
+    box-shadow: none;
+}
+
+.sector-list{
+    .item{
+        margin-bottom: 15px;
+        &:last-child{
+            margin-bottom: 0;
+        }
+    }
+}

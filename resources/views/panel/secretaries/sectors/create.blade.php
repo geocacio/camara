@@ -45,10 +45,10 @@
                 </div>
             </div>            
 
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label>Descrição</label>
                 <textarea name="description" class="form-control">{{ old('description') }}</textarea>
-            </div>
+            </div> --}}
 
             <div class="form-footer text-right">
                 <button type="submit" class="btn-submit-default">Guardar</button>

@@ -119,11 +119,33 @@
 
                             @if($index == 'sectors')
 
-                                @foreach($chamber['sectors']['items'] as $sector)
+                                <div class="accordion" id="accordionSector">
+                                    @foreach($chamber['sectors']['items'] as $sector)
+                                        
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="heading-{{ $sector->id }}">
+                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ $sector->id }}" aria-expanded="true" aria-controls="collapse-{{ $sector->id }}">
+                                                    <span>{{ $sector->name }}</span>
+                                                </button>
+                                            </h2>
+                                            <div id="collapse-{{ $sector->id }}" class="accordion-collapse collapse {{ $index == 0 ? 'show' : ''}}" aria-labelledby="heading-{{ $sector->id }}" data-bs-parent="#accordionSector">
+                                                <div class="accordion-body">
+                                                    <ul class="sector-list">
+                                                        <li class="item">
+                                                            <i class="fa-solid fa-envelope"></i>
+                                                            <span class="text">{{ $sector->email }}</span>    
+                                                        </li>
+                                                        <li class="item">
+                                                            <i class="fa-solid fa-phone"></i>
+                                                            <span class="text">{{ $sector->phone }}</span>    
+                                                        </li>
+                                                    </ul>    
+                                                </div>
+                                            </div>
+                                        </div>
                                     
-                                    <h3 class="title">{{ $sector->name }}</h3>
-                                
-                                @endforeach
+                                    @endforeach
+                                </div>
 
                             @endif
 
