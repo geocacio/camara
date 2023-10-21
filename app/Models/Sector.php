@@ -9,11 +9,11 @@ class Sector extends Model
 {
     use HasFactory;
 
-    public function contentRelation() {
-        return ['responsible', 'employee_id'];
-    }
+    // public function contentRelation() {
+    //     return ['responsible', 'employee_id'];
+    // }
 
-    protected $fillable = ['department_id', 'name', 'description', 'slug'];
+    protected $fillable = ['secretary_id', 'name', 'description', 'email', 'phone', 'slug'];
 
     public function department()
     {
@@ -25,10 +25,10 @@ class Sector extends Model
         return $this->morphMany(EmployeeContent::class, 'employeeable');
     }
     
-    public function responsible()
-    {
-        return $this->morphOne(Responsible::class, 'responsibleable');
-    }
+    // public function responsible()
+    // {
+    //     return $this->morphOne(Responsible::class, 'responsibleable');
+    // }
 
     public function getRouteKeyName()
     {
