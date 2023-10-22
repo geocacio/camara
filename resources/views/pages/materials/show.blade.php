@@ -1,133 +1,208 @@
 @extends('layouts.app')
 
+@section('breadcrumb')
+<ul class="breadcrumb">
+    <li class="item">
+        <a href="{{ route('home') }}" class="link">Início</a>
+    </li>
+    <li class="item">
+        <a href="{{ route('materiais-all') }}" class="link">Materiais</a>
+    </li>
+    <li class="item">
+        <span>{{ $material->type->name }}: {{ $material->id }}/{{ date('Y', strtotime($material->date)) }}</span>
+    </li>
+</ul>
+
+<h3 class="title text-center">{{ $material->type->name }}: {{ $material->id }}/{{ date('Y', strtotime($material->date)) }}</h3>
+
+@endsection
+
 @section('content')
 
 @include('layouts.header')
 
-@if($serviceLetter)
-<section class="section-service-letter adjust-min-height no-padding-top">
+<section class="section-material-single adjust-min-height margin-fixed-top">
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <ul class="breadcrumb">
-                    <li class="item">
-                        <a href="{{ route('home') }}" class="link">Início</a>
-                    </li>
-                    <li class="item">
-                        <a href="{{ route('serviceLetter.page') }}" class="link">Carta de Serviços</a>
-                    </li>
-                    <li class="item">
-                        <span>{{ $serviceLetter->title }}</span>
-                    </li>
-                </ul>
-            </div>
+            <div class="col-md-4">
+                <div class="card main-card">
+                    <ul class="nav nav-tabs nav-tab-page" id="myTab" role="tablist">
 
-            <div class="col-lg-8">
-
-                <div class="content-default">
-                    <ul class="main-style-list">
-                        <li class="item">
-
-                            <h3 class="title secondary text-center">{{ $serviceLetter->title }}</h3>
-                            <p class="description seconday">{{ $serviceLetter->description }}</p>
-                            <div class="container-button">
-                                <a href="{{ asset('storage/'.$serviceLetter->files[0]->file->url) }}" target="_blank" class="link default"><i class="fa-solid fa-file"></i><span>Gerar relatório desta carta</span></a>
-                            </div>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="index-tab" data-bs-toggle="tab" data-bs-target="#index" type="button" role="tab">
+                                <i class="fa-solid fa-user-tie"></i>
+                                Sobre
+                            </button>
                         </li>
+
+                        @if($material->session)
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="tramite-tab" data-bs-toggle="tab" data-bs-target="#tramite" type="button" role="tab">
+                                <i class="fa-solid fa-suitcase"></i>
+                                Trâmite
+                            </button>
+                        </li>
+                        @endif
+
+                        @if($material->authors)
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="authors-tab" data-bs-toggle="tab" data-bs-target="#authors" type="button" role="tab">
+                                <i class="fa-solid fa-copy"></i>
+                                Autores e subescritores
+                            </button>
+                        </li>
+                        @endif
+
+                        @if($material->session)
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="votes-tab" data-bs-toggle="tab" data-bs-target="#votes" type="button" role="tab">
+                                <i class="fa-solid fa-microphone"></i>
+                                Votações
+                            </button>
+                        </li>
+                        @endif
+
+                        @if($material->recipients)
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="destinations-tab" data-bs-toggle="tab" data-bs-target="#destinations" type="button" role="tab">
+                                <i class="fa-solid fa-users"></i>
+                                Destinatários
+                            </button>
+                        </li>
+                        @endif
                     </ul>
                 </div>
+            </div>
+            <div class="col-md-8">
 
-                @if(!empty(json_decode($serviceLetter->service_letters)))
-                @foreach(json_decode($serviceLetter->service_letters) as $index => $items)
-                <div class="accordion" id="step-{{$index}}">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading-{{$index}}">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{$index}}" aria-expanded="true" aria-controls="collapse-{{$index}}">
-                                {{ $items->input_value }}
-                            </button>
-                        </h2>
-                        @if($items->checklist)
-                        <div id="collapse-{{$index}}" class="accordion-collapse collapse show" aria-labelledby="heading-{{$index}}" data-bs-parent="#step-{{$index}}">
-                            @php
-                                $currentCheckList = explode("\n", $items->textarea_value);
-                            @endphp
-                            <div class="accordion-body">
-                                <ul class="description-list">
-                                    @foreach($currentCheckList as $item)
-                                        @if($item != '')
-                                            <li class="item"><i class="fa-solid fa-square-check"></i>{{$item}}</li>
-                                        @endif
-                                    @endforeach
-                                </ul>
+                <div class="card main-card card-manager">
+                    <div class="tab-content" id="myTabContent">
+
+                        @if($material)
+                            <div class="gd-managers tab-pane fadeshow active" id="index" role="tabpanel" aria-labelledby="index-tab">
+
+                                <h3 class="name-managers">{{ $material->type->name }}: {{ $material->id }}/{{ date('Y', strtotime($material->date)) }}</h3>
+
+                                <div class="row container-descriptions">
+                                    <div class="col-md-6">
+                                        <p class="title">Autor</p>
+                                        <p class="description">{{ $material->councilor->name}}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="title">Data</p>
+                                        <p class="description">{{ date('d/m/Y', strtotime($material->date)) }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="title">Visualizações</p>
+                                        <p class="description">{{ $material->views }}</p>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <p class="title">Resumo</p>
+                                        <p class="description">{{ $material->description }}</p>
+                                    </div>
+                                </div>
+
+
                             </div>
-                        </div>
-                        @else
-                        <div id="collapse-{{$index}}" class="accordion-collapse collapse show" aria-labelledby="heading-{{$index}}" data-bs-parent="#step-{{$index}}">
-                            <div class="accordion-body">{!! nl2br($items->textarea_value) !!}</div>
-                        </div>
                         @endif
+
+                        @if($material->authors)
+                            <div class="tab-pane fadeshow" id="authors" role="tabpanel" aria-labelledby="authors-tab">
+
+                                @foreach($material->authors as $author)
+
+                                    <div class="col-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-data-default">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Nome</th>
+                                                        <th>Cargo</th>
+                                                        <th>Partido</th>
+                                                        <th>Autoria</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                
+                                                    @foreach($material->authors as $author)
+                                                    <tr>
+                                                        <td>{{ $author->name }}</td>
+                                                        <td>{{ $author->position }}</td>
+                                                        <td>{{ $author->party }}</td>
+                                                        <td>{{ $author->authorship }}</td>
+                                                    </tr>
+                                                    @endforeach
+                                
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                @endforeach
+
+                            </div>
+                        @endif
+
+                        @if($material->session)
+                        
+                            <div class="tab-pane fadeshow" id="votes" role="tabpanel" aria-labelledby="votes-tab">
+
+                                Aqui é a votação da sessão
+
+                            </div>
+                        @endif
+
+                        @if($material->recipients)
+                        
+                            <div class="tab-pane fadeshow" id="destinations" role="tabpanel" aria-labelledby="destinations-tab">
+
+                                Lista de destinatários
+
+                            </div>
+                        @endif
+
+                        @if($material->tramiteRelations)
+                            <div class="tab-pane fadeshow" id="tramite" role="tabpanel" aria-labelledby="tramite-tab">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-data-default">
+                                            <thead>
+                                                <tr>
+                                                    <th>Data</th>
+                                                    <th>Status</th>
+                                                    <th>Exercício</th>
+                                                    <th>Descrição</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                            
+                                                @foreach($material->session as $session)
+                                                <tr>
+                                                    <td>{{ date('d/m/Y', strtotime($session->date)) }}</td>
+                                                    <td>{{ $session->status_id }}</td>
+                                                    <td>{{ $session->exercicy_id }}</td>
+                                                    <td>{{ $session->description }}</td>
+                                                </tr>
+                                                @endforeach
+                            
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
                     </div>
                 </div>
-                @endforeach
-                @endif
-
             </div>
-
-            <div class="col-lg-4">
-                <div class="card main">
-                    <div class="card-header">
-                        <!-- <h3 class="title">Informações da secretaria</h3> -->
-                        <h3 class="title text-center">{{ $serviceLetter->secretary->name }}</h3>
-                        <!-- <h4 class="subtitle">{{ $serviceLetter->secretary->name }}</h4> -->
-                    </div>
-                    <div class="card-body">
-                        <ul class="information-secretary">
-                            <li class="item">
-                                <i class="fa-solid fa-phone"></i>
-                                <div class="description">
-                                    <span class="title">Telefone</span>
-                                    <span class="text">{{ $serviceLetter->secretary->phone1 }}</span>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <i class="fa-solid fa-envelope"></i>
-                                <div class="description">
-                                    <span class="title">E-mail</span>
-                                    <span class="text">{{ $serviceLetter->secretary->email }}</span>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <i class="fa-solid fa-clock"></i>
-                                <div class="description">
-                                    <span class="title">Horário de funcionamento</span>
-                                    <span class="text">{{ $serviceLetter->secretary->business_hours }}</span>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <i class="fa-solid fa-location-dot"></i>
-                                <div class="description">
-                                    <span class="title">Endereço</span>
-                                    <span class="text">{{ $serviceLetter->secretary->address }}</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
+
 </section>
-@endif
+
+@include('pages.partials.satisfactionSurvey', ['page_name' => 'Vereador'])
 
 @include('layouts.footer')
 
-@endsection
-
-@section('scripts')
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        console.log('passou aqui');
-    });
-</script>
 @endsection

@@ -90,7 +90,7 @@
                 
                 <div class="col-md-12">
                     <div class="card-with-links">
-                        <a href="{{ route('secretarias.single', $material->slug) }}">
+                        <a href="{{ route('materiais.single', $material->slug) }}">
                             <div class="header">
                                 <i class="fa-solid fa-copy"></i>
                             </div>
