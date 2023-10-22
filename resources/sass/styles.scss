@@ -2955,3 +2955,19 @@ section{
         }
     }
 }
+
+.call-status{
+    width: 13px;
+    height: 13px;
+    display: inline-block;
+    border-radius: 4px;
+    margin-right: 5px;
+    &.presente{
+        background-color: #008000;
+    }&.ausente{
+        background-color: #e42323;
+    }
+    &.licença{
+        background-color: #bc25c3;
+    }
+}

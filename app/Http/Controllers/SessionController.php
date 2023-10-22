@@ -102,7 +102,8 @@ class SessionController extends Controller
      */
     public function show(Session $session)
     {
-        //
+        // dd($session->sessionAttendance[0]);
+        return view('pages.sessions.show', compact('session'));
     }
 
     /**
