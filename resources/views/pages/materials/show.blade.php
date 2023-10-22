@@ -39,7 +39,7 @@
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="tramite-tab" data-bs-toggle="tab" data-bs-target="#tramite" type="button" role="tab">
                                 <i class="fa-solid fa-suitcase"></i>
-                                Trâmite
+                                Sessão
                             </button>
                         </li>
                         @endif
@@ -162,7 +162,7 @@
                             </div>
                         @endif
 
-                        @if($material->tramiteRelations)
+                        @if($material->session)
                             <div class="tab-pane fadeshow" id="tramite" role="tabpanel" aria-labelledby="tramite-tab">
                                 <div class="col-12">
                                     <div class="table-responsive">
@@ -173,19 +173,21 @@
                                                     <th>Status</th>
                                                     <th>Exercício</th>
                                                     <th>Descrição</th>
+                                                    <th>Ação</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                            
-                                                @foreach($material->session as $session)
                                                 <tr>
-                                                    <td>{{ date('d/m/Y', strtotime($session->date)) }}</td>
-                                                    <td>{{ $session->status_id }}</td>
-                                                    <td>{{ $session->exercicy_id }}</td>
-                                                    <td>{{ $session->description }}</td>
+                                                    <td>{{ date('d/m/Y', strtotime($material->session->date)) }}</td>
+                                                    <td>{{ $material->session->status->name }}</td>
+                                                    <td>{{ $material->session->exercicy->name }}</td>
+                                                    <td>{{ Str::limit($material->session->description, '50', '...') }}</td>
+                                                    <td class="actions">
+                                                        <a href="{{ route('sessoes.single', $material->session->id) }}" data-toggle="tooltip" title="Ver mais" class="link-view">
+                                                            <i class="fa-solid fa-eye"></i>
+                                                        </a>
+                                                    </td>
                                                 </tr>
-                                                @endforeach
-                            
                                             </tbody>
                                         </table>
                                     </div>

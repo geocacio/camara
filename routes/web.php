@@ -476,6 +476,8 @@ Route::get('/comissoes/{commission}', [CommissionController::class, 'single'])->
 
 Route::match(['get', 'post'], 'materiais', [MaterialController::class, 'allMaterials'])->name('materiais-all');
 Route::get('/materiais/{material}', [MaterialController::class, 'show'])->name('materiais.single');
+
+Route::match(['get', 'post'], 'sessoes', [SessionController::class, 'allSessions'])->name('sessoes-all');
 Route::get('/sessoes/{session}', [SessionController::class, 'single'])->name('sessoes.single');
 Route::get('/comissoes/{commission}', [CommissionController::class, 'single'])->name('comissoes.single');
 

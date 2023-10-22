@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Page;
 use App\Models\Session;
 use App\Models\Type;
 use App\Models\TypeContent;
@@ -17,6 +18,39 @@ class SessionController extends Controller
     {
     $sessions = Session::all();
         return view('panel.sessions.index', compact('sessions'));
+    }
+
+    public function allSessions(Request $request){
+
+        $getType = Type::where('slug', 'materials')->first();
+        $types = $getType ? $getType->children : [];
+        $category = Category::where('slug', 'status')->with('children')->get();
+        $situations = $category[0]->children;
+
+        $page_session = Page::where('name', 'Sessões')->first();
+        $query = Session::query();
+
+        if($request->filled('type_id')){
+            $query->where('type_id', $request->input('type_id'));
+        }
+        
+        if($request->filled('status_id')){
+            $query->where('status_id', $request->input('status_id'));
+        }
+        
+        if($request->filled('number')){
+            $query->where('number', $request->input('number'));
+        }
+
+        if($request->filled('description')){
+            $query->where('description', 'LIKE', '%' . $request->input('description') . '%');
+        }
+        
+        $sessions = $query->paginate(10);
+        // dd($sessions);
+        $searchData = $request->only(['type_id', 'status_id', 'description']);
+        return view('pages.sessions.index', compact('sessions', 'page_session', 'searchData', 'types', 'situations'));
+
     }
 
     /**

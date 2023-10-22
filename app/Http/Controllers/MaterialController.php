@@ -123,6 +123,7 @@ class MaterialController extends Controller
      */
     public function show(Material $material)
     {
+        // dd($material->votes);
         $material->update(['views' => ($material->views + 1)]);
         return view('pages.materials.show', compact('material'));
     }
