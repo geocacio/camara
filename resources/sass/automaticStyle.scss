@@ -194,6 +194,82 @@
     color: #e2e2e2;
 }
 
+.night-mode .section-councilor {
+    background-color: #121212;
+}
+
+.night-mode .section-councilor .main-card {
+    background-color: #1e1e1e;
+}
+
+.night-mode .section-councilor .main-card .nav-item .nav-link {
+    background-color: #1e1e1e;
+    color: #939393;
+}
+
+.night-mode .section-councilor .main-card .nav-item .nav-link.active {
+    background-color: #151515;
+    color: #ffffff;
+}
+
+.night-mode .section-councilor .main-card .tab-content .title-section {
+    color: #e2e2e2;
+}
+
+.night-mode .section-councilor .main-card .tab-content .title {
+    color: #e2e2e2;
+}
+
+.night-mode .section-councilor .main-card .tab-content .description {
+    color: #9d9d9d;
+}
+
+.night-mode .section-councilor .main-card .tab-content .gd-councilor-container .councilor-items {
+    background-color: #1e1e1e;
+}
+
+.night-mode .section-councilor .main-card .tab-content .gd-councilor-container .councilor-items .info .title {
+    color: #e2e2e2;
+}
+
+.night-mode .section-councilor .main-card .tab-content .gd-councilor-container .councilor-items .info .text {
+    color: #9d9d9d;
+}
+
+.night-mode .section-councilor .main-card .tab-content .table-responsive .table-data-default {
+    background-color: #1e1e1e;
+}
+
+.night-mode .section-councilor .main-card .tab-content .table-responsive .table-data-default thead {
+    background-color: #151515;
+    color: #e2e2e2;
+}
+
+.night-mode .section-councilor .main-card .tab-content .table-responsive .table-data-default tbody tr td {
+    background-color: #1e1e1e;
+    color: #e2e2e2;
+}
+
+.night-mode .section-councilor .main-card .tab-content .card-with-links {
+    background-color: #121212;
+}
+
+.night-mode .section-councilor .main-card .tab-content .card-with-links .title {
+    color: #e2e2e2;
+}
+
+.night-mode .section-councilor .main-card .tab-content .card-with-links .description {
+    color: #9d9d9d;
+}
+
+.night-mode .section-councilor .main-card .tab-content .card-with-links .header {
+    background-color: #00668b;
+}
+
+.night-mode .section-councilor .main-card .tab-content .card-with-links .header i {
+    color: #ffffff;
+}
+
 .night-mode .container-service {
     background-color: #1b1c1e;
     color: #ffffff;
@@ -402,7 +478,7 @@
 }
 
 .section-chamber {
-    background-color: #f0f0f0;
+    background-color: #e1e5e7;
 }
 
 .section-chamber .main-card {
@@ -455,6 +531,82 @@
 .section-chamber .main-card .tab-content .table-responsive .table-data-default tbody tr td {
     background-color: #ffffff;
     color: #454545;
+}
+
+.section-councilor {
+    background-color: #e1e5e7;
+}
+
+.section-councilor .main-card {
+    background-color: #ffffff;
+}
+
+.section-councilor .main-card .nav-item .nav-link {
+    background-color: #ffffff;
+    color: #373c9b;
+}
+
+.section-councilor .main-card .nav-item .nav-link.active {
+    background-color: #dbdced;
+    color: #373c9b;
+}
+
+.section-councilor .main-card .tab-content .title-section {
+    color: #212529;
+}
+
+.section-councilor .main-card .tab-content .title {
+    color: #212529;
+}
+
+.section-councilor .main-card .tab-content .description {
+    color: #3c3e41;
+}
+
+.section-councilor .main-card .tab-content .gd-councilor-container .councilor-items {
+    background-color: #ffffff;
+}
+
+.section-councilor .main-card .tab-content .gd-councilor-container .councilor-items .info .title {
+    color: #212529;
+}
+
+.section-councilor .main-card .tab-content .gd-councilor-container .councilor-items .info .text {
+    color: #3c3e41;
+}
+
+.section-councilor .main-card .tab-content .table-responsive .table-data-default {
+    background-color: #ffffff;
+}
+
+.section-councilor .main-card .tab-content .table-responsive .table-data-default thead {
+    background-color: #00668b;
+    color: #ffffff;
+}
+
+.section-councilor .main-card .tab-content .table-responsive .table-data-default tbody tr td {
+    background-color: #ffffff;
+    color: #454545;
+}
+
+.section-councilor .main-card .tab-content .card-with-links {
+    background-color: #e1e5e7;
+}
+
+.section-councilor .main-card .tab-content .card-with-links .title {
+    color: #212529;
+}
+
+.section-councilor .main-card .tab-content .card-with-links .description {
+    color: #3c3e41;
+}
+
+.section-councilor .main-card .tab-content .card-with-links .header {
+    background-color: #00668b;
+}
+
+.section-councilor .main-card .tab-content .card-with-links .header i {
+    color: #ffffff;
 }
 
 .container-service {

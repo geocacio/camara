@@ -490,6 +490,118 @@ $data = [
             ],
         ]
     ],
+    [
+        'page' => 'Vereadores',
+        'route' => 'vereadores.page',
+        'sections' => [
+            [
+                'component' => 'Section',
+                'name' => 'Seção Vereadores',
+                'styles' => [
+                    'classes' => [
+                        '.section-councilor' => [
+                            'name' => 'Seção',
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                        '.section-councilor .main-card' => [
+                            'name' => 'Card',
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.section-councilor .main-card .nav-item .nav-link' => [
+                            'name' => 'Link do menu',
+                            'title_color' => $dayColors["ombudsman_menu_link_color"],
+                            'title_color_night' => $darkColors['ombudsman_menu_link_color'],
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.section-councilor .main-card .nav-item .nav-link.active' => [
+                            'name' => 'Link Atual',
+                            'title_color' => $dayColors["ombudsman_menu_link_color_active"],
+                            'title_color_night' => $darkColors['ombudsman_menu_link_color_active'],
+                            'background_color' => $dayColors["ombudsman_menu_link_bg_color_active"],
+                            'background_color_night' => $darkColors['ombudsman_menu_link_bg_color_active'],
+                        ],
+                        '.section-councilor .main-card .tab-content .title-section' => [
+                            'name' => 'Título',
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.section-councilor .main-card .tab-content .title' => [
+                            'name' => 'Legenda',
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.section-councilor .main-card .tab-content .description' => [
+                            'name' => 'Legenda',
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                        '.section-councilor .main-card .tab-content .gd-councilor-container .councilor-items' => [
+                            'name' => 'Card dos vereadores',
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.section-councilor .main-card .tab-content .gd-councilor-container .councilor-items .info .title' => [
+                            'name' => 'Nome do Vereador',
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.section-councilor .main-card .tab-content .gd-councilor-container .councilor-items .info .text' => [
+                            'name' => 'Cargo do Vereador',
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                        '.section-councilor .main-card .tab-content .table-responsive .table-data-default' => [
+                            'name' => 'Tabela',
+                            'background_color' => $dayColors["table_bg_color"],
+                            'background_color_night' => $darkColors['table_bg_color'],
+                        ],
+                        '.section-councilor .main-card .tab-content .table-responsive .table-data-default thead' => [
+                            'name' => 'Cabeçalho da tabela',
+                            'title_color' => $dayColors["thead_table_color"],
+                            'title_color_night' => $darkColors['thead_table_color'],
+                            'background_color' => $dayColors["thead_table_bg_color"],
+                            'background_color_night' => $darkColors['thead_table_bg_color'],
+                        ],
+                        '.section-councilor .main-card .tab-content .table-responsive .table-data-default tbody tr td' => [
+                            'name' => 'Célula da tabela',
+                            'title_color' => $dayColors["td_table_color"],
+                            'title_color_night' => $darkColors['td_table_color'],
+                            'background_color' => $dayColors["table_bg_color"],
+                            'background_color_night' => $darkColors['table_bg_color'],
+                        ],
+                        '.section-councilor .main-card .tab-content .card-with-links' => [
+                            'name' => 'Sessão',
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                        '.section-councilor .main-card .tab-content .card-with-links .title' => [
+                            'name' => 'Títlo da sessão',
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.section-councilor .main-card .tab-content .card-with-links .description' => [
+                            'name' => 'Descrição da sessão',
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                        '.section-councilor .main-card .tab-content .card-with-links .header' => [
+                            'name' => 'Caixa do ícone',
+                            'background_color' => $dayColors["ombudsman_color_1"],
+                            'background_color_night' => $darkColors['ombudsman_color_1'],
+                        ],
+                        '.section-councilor .main-card .tab-content .card-with-links .header i' => [
+                            'name' => 'Ícone',
+                            'title_color' => $dayColors["link_color"],
+                            'title_color_night' => $darkColors['link_color'],
+                        ],
+                    ]
+                ]
+            ],
+        ]
+    ],
 
     // [
     //     'page' => 'Home',

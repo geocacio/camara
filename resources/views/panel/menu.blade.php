@@ -33,7 +33,7 @@
             <span>Home</span>
         </a>
     </li>
-    <li class="menu-item {{ request()->routeIs('sessions.index') || request()->routeIs('pcs.index') || request()->routeIs('pcg.index') || request()->routeIs('constructions.index') || request()->routeIs('construnctions.index') || request()->routeIs('agreements.index') || request()->routeIs('serviceLetter.indexPage') || request()->routeIs('serviceLetter.index') || Str::contains(url()->current(), 'categories/cartas-de-servicos') || request()->routeIs('proccess.selective.page') || request()->routeIs('selective-process.index') || request()->routeIs('publications.page') || request()->routeIs('all-publications.index') || Str::contains(url()->current(), 'types/publications') || request()->routeIs('ordinances.page') || request()->routeIs('ordinances.index') || Str::contains(url()->current(), 'types/ordinances') || request()->routeIs('decrees.index') || request()->routeIs('decrees.page') || Str::contains(url()->current(), 'types/decrees') || request()->routeIs('laws.page') || request()->routeIs('laws.index') || Str::contains(url()->current(), 'types/law') || request()->routeIs('symbols.index') || request()->routeIs('payrolls.index') || request()->routeIs('managers.index') || request()->routeIs('sic.faq.index') || request()->routeIs('solicitations.index') || request()->routeIs('esic.index') || request()->routeIs('ombudsman-survey.index') || request()->routeIs('dailies.index') || request()->routeIs('dailies.page') || request()->routeIs('ombudsman-feedback.index') || request()->routeIs('ombudsman-faq.index') || request()->routeIs('ombudsman-institutional.index') || request()->routeIs('ombudsman-feedback.index') || request()->routeIs('ombudsman.index') || request()->routeIs('external-links.index') || request()->routeIs('transparency.groups.index') || request()->routeIs('transparency.index') || request()->routeIs('ombudsman-faq.index') || request()->routeIs('ombudsman-institutional.index') || request()->routeIs('ombudsman-feedback.index') || request()->routeIs('all-publications.index') || request()->routeIs('all-publications.create') || request()->routeIs('all-publications.edit') || request()->routeIs('dailies.index') || request()->routeIs('ordinances.index') || Str::contains(url()->current(), 'types/ordinances') || request()->routeIs('lrfs.index') || Str::contains(url()->current(), 'types/lrfs') ? 'active' : '' }}">
+    <li class="menu-item {{ request()->routeIs('pcs.index') || request()->routeIs('pcg.index') || request()->routeIs('constructions.index') || request()->routeIs('construnctions.index') || request()->routeIs('agreements.index') || request()->routeIs('serviceLetter.indexPage') || request()->routeIs('serviceLetter.index') || Str::contains(url()->current(), 'categories/cartas-de-servicos') || request()->routeIs('proccess.selective.page') || request()->routeIs('selective-process.index') || request()->routeIs('publications.page') || request()->routeIs('all-publications.index') || Str::contains(url()->current(), 'types/publications') || request()->routeIs('ordinances.page') || request()->routeIs('ordinances.index') || Str::contains(url()->current(), 'types/ordinances') || request()->routeIs('decrees.index') || request()->routeIs('decrees.page') || Str::contains(url()->current(), 'types/decrees') || request()->routeIs('laws.page') || request()->routeIs('laws.index') || Str::contains(url()->current(), 'types/law') || request()->routeIs('symbols.index') || request()->routeIs('payrolls.index') || request()->routeIs('managers.index') || request()->routeIs('sic.faq.index') || request()->routeIs('solicitations.index') || request()->routeIs('esic.index') || request()->routeIs('ombudsman-survey.index') || request()->routeIs('dailies.index') || request()->routeIs('dailies.page') || request()->routeIs('ombudsman-feedback.index') || request()->routeIs('ombudsman-faq.index') || request()->routeIs('ombudsman-institutional.index') || request()->routeIs('ombudsman-feedback.index') || request()->routeIs('ombudsman.index') || request()->routeIs('external-links.index') || request()->routeIs('transparency.groups.index') || request()->routeIs('transparency.index') || request()->routeIs('ombudsman-faq.index') || request()->routeIs('ombudsman-institutional.index') || request()->routeIs('ombudsman-feedback.index') || request()->routeIs('all-publications.index') || request()->routeIs('all-publications.create') || request()->routeIs('all-publications.edit') || request()->routeIs('dailies.index') || request()->routeIs('ordinances.index') || Str::contains(url()->current(), 'types/ordinances') || request()->routeIs('lrfs.index') || Str::contains(url()->current(), 'types/lrfs') ? 'active' : '' }}">
         <button class="menu-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart-fill" viewBox="0 0 16 16">
                 <path d="M1 11a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3zm5-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2z" />
@@ -48,9 +48,6 @@
                 </li>
                 <li class="sub-item {{ request()->routeIs('transparency.groups.index') ? 'active' : '' }}">
                     <a href="{{ route('transparency.groups.index') }}" class="sub-link">Grupos</a>
-                </li>
-                <li class="sub-item {{ request()->routeIs('sessions.index') ? 'active' : '' }}">
-                    <a href="{{ route('sessions.index') }}" class="sub-link">Sessões</a>
                 </li>
                 <li class="sub-item-menu {{ request()->routeIs('ombudsman-survey.index') || request()->routeIs('ombudsman-feedback.index') || request()->routeIs('ombudsman-faq.index') || request()->routeIs('ombudsman-institutional.index') || request()->routeIs('ombudsman-feedback.index') || request()->routeIs('ombudsman.index') ? 'active' : '' }}">
 
@@ -303,6 +300,18 @@
                 <polyline points="10 9 9 9 8 9"></polyline>
             </svg>
             <span>Legislaturas</span>
+        </a>
+    </li>
+    <li class="menu-item {{ request()->routeIs('sessions.index') ? 'active' : '' }}">
+        <a href="{{ route('sessions.index') }}" class="menu-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            <span>Sessões</span>
         </a>
     </li>
     <li class="menu-item {{ request()->routeIs('affiliations.index') ? 'active' : '' }}">

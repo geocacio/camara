@@ -470,7 +470,7 @@ Route::get('/posts/{post:slug}', [App\Http\Controllers\PostController::class, 's
 //Services Routes
 Route::match(['get', 'post'], '/cartaservicos', [ServiceLetterController::class, 'page'])->name('serviceLetter.page');
 Route::get('/cartaservicos/{serviceLetter:slug}', [ServiceLetterController::class, 'show'])->name('serviceLetter.show');
-Route::resource('/a-camara', ChamberController::class);
+Route::get('/a-camara', [ChamberController::class, 'index'])->name('a-camara.show');
 Route::get('/vereadores/{councilor:slug}', [CouncilorController::class, 'show'])->name('vereador.show');
 
 Route::match(['get', 'post'], 'materiais', [MaterialController::class, 'allMaterials'])->name('materiais-all');
