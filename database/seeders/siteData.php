@@ -429,8 +429,8 @@ $data = [
                             'name' => 'Link do menu',
                             'title_color' => $dayColors["ombudsman_menu_link_color"],
                             'title_color_night' => $darkColors['ombudsman_menu_link_color'],
-                            'background_color' => $dayColors["ombudsman_menu_link_bg_color"],
-                            'background_color_night' => $darkColors['ombudsman_menu_link_bg_color'],
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
                         ],
                         '.section-chamber .main-card .nav-item .nav-link.active' => [
                             'name' => 'Link Atual',

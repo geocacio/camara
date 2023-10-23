@@ -20,7 +20,8 @@ class ChamberController extends Controller
         $legislature = new Legislature();
         $currentLegislature = $legislature->getCurrentLegislature();
         
-        $chamber['institutional'] = Secretary::first();
+        $chamber['institutional'] = Setting::first();
+        // dd($chamber['institutional']);
         $chamber['institutional']['icon'] = 'fa-solid fa-building-columns';
         if ($currentLegislature) {
             $chamber['boards']['councilors'] = Councilor::whereHas('legislatureRelations', function ($query) use ($currentLegislature) {
@@ -43,8 +44,8 @@ class ChamberController extends Controller
         $chamber['legislature']['icon'] = "fa-solid fa-user-tie";
         $chamber['commissions']['items'] = Commission::select(['id', 'description as Descrição'])->get();
         $chamber['commissions']['icon'] = "fa-solid fa-newspaper";
-        
-        $chamber['sectors']['items'] = $chamber['institutional']->sectors;
+        // dd(isset($chamber['institutional']->sectors));
+        $chamber['sectors']['items'] = isset($chamber['institutional']->sectors) ? $chamber['institutional']->sectors : [];
         $chamber['sectors']['icon'] = "fa-solid fa-building";
 
         return view('pages.chamber.index', compact('chamber'));

@@ -54,11 +54,11 @@
                                     </div>
                                     <div class="col-md-6">
                                         <p class="title">Horário</p>
-                                        <p class="description">{{ isset($item['business_hours']) ? $item['business_hours'] : '' }}</p>
+                                        <p class="description">{{ isset($item['opening_hours']) ? $item['opening_hours'] : '' }}</p>
                                     </div>
                                     <div class="col-md-6">
                                         <p class="title">Telefone</p>
-                                        <p class="description">{{ isset($item['phone1']) ? $item['phone1'] : '' }} {{ isset($item['phone2']) ? ' - ' . $item['phone2'] : '' }}</p>
+                                        <p class="description">{{ isset($item['phone']) ? $item['phone'] : '' }}</p>
                                     </div>
                                     <div class="col-md-6">
                                         <p class="title">E-mail</p>
@@ -69,14 +69,14 @@
                                         <p class="description">{{ isset($item['plenary']) ? $item['plenary'] : '' }}</p>
                                     </div>
                                 </div>
-                                <div class="row container-descriptions">
+                                {{-- <div class="row container-descriptions">
                                     <div class="col-md-6">
                                         Arquivo 1
                                     </div>
                                     <div class="col-md-6">
                                         Arquivo 2
                                     </div>
-                                </div>
+                                </div> --}}
 
                             @endif
 
