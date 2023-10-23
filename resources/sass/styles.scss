@@ -200,10 +200,11 @@ section{
         justify-content: space-between;
         min-height: 34px;
         .menu-item{
+            height: 100%;
             .menu-link{
                 font-size: 13px;
                 border: 0;
-                // background: none;
+                height: 100%;
                 box-shadow: none;
                 outline: none;
                 display: block;

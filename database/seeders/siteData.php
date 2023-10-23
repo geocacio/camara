@@ -177,8 +177,8 @@ $data = [
                             'name' => 'Link',
                             'title_color' => $dayColors["main_menu_link_color"],
                             'title_color_night' => $darkColors["main_menu_link_color"],
-                            'background_color' =>  $dayColors['main_menu_link_color'],
-                            'background_color_night' =>  $darkColors['main_menu_link_color'],
+                            'background_color' =>  $dayColors['main_menu'],
+                            'background_color_night' =>  $darkColors['main_menu'],
                         ],
                         '.menu-topo .menu-item .menu-link:hover' => [
                             'name' => 'Efeito do link do menu',
@@ -406,24 +406,90 @@ $data = [
             ]
         ]
     ],
-    // [
-    //     'page' => 'A Câmara',
-    //     'route' => 'acamara.show',
-    //     'sections' => [
-    //         [
-    //             'component' => 'About',
-    //             'name' => 'Carrousel de banners',
-    //             'styles' => [
-    //                 'classes' => [
-    //                     '.carousel-header' => [
-    //                         'background_color' => $dayColors["Pure White"],
-    //                         'background_color_night' => $cores['bgn2'],
-    //                     ]
-    //                 ]
-    //             ]
-    //         ],
-    //     ]
-    // ],
+    [
+        'page' => 'A Câmara',
+        'route' => 'a-camara.show',
+        'sections' => [
+            [
+                'component' => 'Section',
+                'name' => 'Seção A Câmara',
+                'styles' => [
+                    'classes' => [
+                        '.section-chamber' => [
+                            'name' => 'Seção',
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                        '.section-chamber .main-card' => [
+                            'name' => 'Card',
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.section-chamber .main-card .nav-item .nav-link' => [
+                            'name' => 'Link do menu',
+                            'title_color' => $dayColors["ombudsman_menu_link_color"],
+                            'title_color_night' => $darkColors['ombudsman_menu_link_color'],
+                            'background_color' => $dayColors["ombudsman_menu_link_bg_color"],
+                            'background_color_night' => $darkColors['ombudsman_menu_link_bg_color'],
+                        ],
+                        '.section-chamber .main-card .nav-item .nav-link.active' => [
+                            'name' => 'Link Atual',
+                            'title_color' => $dayColors["ombudsman_menu_link_color_active"],
+                            'title_color_night' => $darkColors['ombudsman_menu_link_color_active'],
+                            'background_color' => $dayColors["ombudsman_menu_link_bg_color_active"],
+                            'background_color_night' => $darkColors['ombudsman_menu_link_bg_color_active'],
+                        ],
+                        '.section-chamber .main-card .tab-content .title-section' => [
+                            'name' => 'Título',
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.section-chamber .main-card .tab-content .title' => [
+                            'name' => 'Legenda',
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.section-chamber .main-card .tab-content .description' => [
+                            'name' => 'Legenda',
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                        '.section-chamber .main-card .tab-content .gd-councilor-container .councilor-items' => [
+                            'name' => 'Card dos vereadores',
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.section-chamber .main-card .tab-content .gd-councilor-container .councilor-items .info .title' => [
+                            'name' => 'Nome do Vereador',
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.section-chamber .main-card .tab-content .gd-councilor-container .councilor-items .info .text' => [
+                            'name' => 'Cargo do Vereador',
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                        '.section-chamber .main-card .tab-content .table-responsive .table-data-default' => [
+                            'background_color' => $dayColors["table_bg_color"],
+                            'background_color_night' => $darkColors['table_bg_color'],
+                        ],
+                        '.section-chamber .main-card .tab-content .table-responsive .table-data-default thead' => [
+                            'title_color' => $dayColors["thead_table_color"],
+                            'title_color_night' => $darkColors['thead_table_color'],
+                            'background_color' => $dayColors["thead_table_bg_color"],
+                            'background_color_night' => $darkColors['thead_table_bg_color'],
+                        ],
+                        '.section-chamber .main-card .tab-content .table-responsive .table-data-default tbody tr td' => [
+                            'title_color' => $dayColors["td_table_color"],
+                            'title_color_night' => $darkColors['td_table_color'],
+                            'background_color' => $dayColors["table_bg_color"],
+                            'background_color_night' => $darkColors['table_bg_color'],
+                        ],
+                    ]
+                ]
+            ],
+        ]
+    ],
 
     // [
     //     'page' => 'Home',

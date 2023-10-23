@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if(Schema::hasColumn('sectors', 'email')) return;
         Schema::table('sectors', function (Blueprint $table) {
             $table->dropForeign(['department_id']);
-            $table->dropColumn(['department_id']);
+            $table->dropColumn('department_id');
 
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
@@ -29,6 +30,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        if(Schema::hasColumn('sectors', 'department_id')) return;
         Schema::table('sectors', function (Blueprint $table) {
             $table->dropForeign(['secretary_id']);
             $table->dropColumn('secretary_id');

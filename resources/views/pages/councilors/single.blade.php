@@ -181,7 +181,7 @@
                                     
                                     <div class="col-md-12">
                                         <div class="card-with-links">
-                                            <a href="{{ route('comissoes.single', $session->session->slug) }}">
+                                            <a href="{{ route('sessoes.single', $session->session->slug) }}">
                                                 <div class="header">
                                                     <i class="fa-solid fa-microphone"></i>
                                                 </div>
