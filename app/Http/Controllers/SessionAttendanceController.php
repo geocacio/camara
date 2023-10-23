@@ -15,7 +15,7 @@ class SessionAttendanceController extends Controller
     {
         // Listar todos os vereadores da legislatura atual
         $allCouncilors = (new Councilor)->getCurrentCouncilors();
-
+        
         // Obter a lista de vereadores presentes nesta sessão
         $presentCouncilors = $session->sessionAttendance->where('call', 'Presente')->pluck('councilor_id');
 

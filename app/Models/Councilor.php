@@ -83,8 +83,8 @@ class Councilor extends Model
     
         if ($legislature) {
             return $this->whereHas('legislatureRelations', function ($query) use ($legislature) {
-                $query->where('legislature_id', $legislature->id)
-                      ->where('bond_id', 19); // Verifique se a relação correta é usada
+                $query->where('legislature_id', $legislature->id);
+                    //   ->where('bond_id', 19); // Verifique se a relação correta é usada
             })->get();
         }
     
