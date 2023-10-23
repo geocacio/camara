@@ -22,7 +22,7 @@
 
 @include('layouts.header')
 {{-- {{ dd($councilor->legislatureRelations)}} --}}
-<section class="section-chamber adjust-min-height margin-fixed-top">
+<section class="section-councilor adjust-min-height margin-fixed-top">
     <div class="container">
         <div class="row">
             <div class="col-md-4">
