@@ -602,6 +602,524 @@ $data = [
             ],
         ]
     ],
+    [
+        'page' => 'Materiais',
+        'route' => 'materiais-all',
+        'sections' => [
+            [
+                'component' => 'Section',
+                'name' => 'Seção Materiais',
+                'styles' => [
+                    'classes' => [
+                        '.ssection-materials' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                        '.ssection-materials .card-with-links' => [
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.ssection-materials .card-with-links .body' => [
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.ssection-materials .card-with-links .body .title' => [
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.ssection-materials .card-with-links .body .description' => [
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                        '.ssection-materials .card-with-links .footer .links' => [
+                            'title_color' => $dayColors["link_color_2"],
+                            'title_color_night' => $darkColors['link_color_2'],
+                            'background_color' => $dayColors["link_bg_color_2"],
+                            'background_color_night' => $darkColors['link_bg_color'],
+                        ],
+                        '.ssection-materials .card-with-links .footer .links:hover' => [
+                            'title_color' => $dayColors["link_color_hover"],
+                            'title_color_night' => $darkColors['link_color_hover'],
+                            'background_color' => $dayColors["link_bg_color_hover"],
+                            'background_color_night' => $darkColors['link_bg_color_hover'],
+                        ],
+                    ]
+                ]
+            ],
+        ]
+    ],
+    [
+        'page' => 'Material',
+        'route' => 'materiais.single',
+        'sections' => [
+            [
+                'component' => 'Section',
+                'name' => 'Seção Material',
+                'styles' => [
+                    'classes' => [
+                        '.section-material' => [
+                            'name' => 'Seção',
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                        '.section-material .main-card' => [
+                            'name' => 'Card',
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.section-material .main-card .nav-item .nav-link' => [
+                            'name' => 'Link do menu',
+                            'title_color' => $dayColors["ombudsman_menu_link_color"],
+                            'title_color_night' => $darkColors['ombudsman_menu_link_color'],
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.section-material .main-card .nav-item .nav-link.active' => [
+                            'name' => 'Link Atual',
+                            'title_color' => $dayColors["ombudsman_menu_link_color_active"],
+                            'title_color_night' => $darkColors['ombudsman_menu_link_color_active'],
+                            'background_color' => $dayColors["ombudsman_menu_link_bg_color_active"],
+                            'background_color_night' => $darkColors['ombudsman_menu_link_bg_color_active'],
+                        ],
+                        '.section-material .main-card .tab-content .name-managers' => [
+                            'name' => 'Título',
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.section-material .main-card .tab-content .title' => [
+                            'name' => 'Legenda',
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.section-material .main-card .tab-content .description' => [
+                            'name' => 'Legenda',
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                        '.section-material .main-card .tab-content .table-responsive .table-data-default' => [
+                            'name' => 'Tabela',
+                            'background_color' => $dayColors["table_bg_color"],
+                            'background_color_night' => $darkColors['table_bg_color'],
+                        ],
+                        '.section-material .main-card .tab-content .table-responsive .table-data-default thead' => [
+                            'name' => 'Cabeçalho da tabela',
+                            'title_color' => $dayColors["thead_table_color"],
+                            'title_color_night' => $darkColors['thead_table_color'],
+                            'background_color' => $dayColors["thead_table_bg_color"],
+                            'background_color_night' => $darkColors['thead_table_bg_color'],
+                        ],
+                        '.section-material .main-card .tab-content .table-responsive .table-data-default tbody tr td' => [
+                            'name' => 'Célula da tabela',
+                            'title_color' => $dayColors["td_table_color"],
+                            'title_color_night' => $darkColors['td_table_color'],
+                            'background_color' => $dayColors["table_bg_color"],
+                            'background_color_night' => $darkColors['table_bg_color'],
+                        ],
+                    ]
+                ]
+            ],
+        ]
+    ],
+    [
+        'page' => 'Sessões',
+        'route' => 'sessoes-all',
+        'sections' => [
+            [
+                'component' => 'Section',
+                'name' => 'Seção Sessão',
+                'styles' => [
+                    'classes' => [
+                        '.ssection-sessions' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                        '.ssection-sessions .card-with-links' => [
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.ssection-sessions .card-with-links .body' => [
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.ssection-sessions .card-with-links .body .title' => [
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.ssection-sessions .card-with-links .body .description' => [
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                        '.ssection-sessions .card-with-links .footer .links' => [
+                            'title_color' => $dayColors["link_color_2"],
+                            'title_color_night' => $darkColors['link_color_2'],
+                            'background_color' => $dayColors["link_bg_color_2"],
+                            'background_color_night' => $darkColors['link_bg_color'],
+                        ],
+                        '.ssection-sessions .card-with-links .footer .links:hover' => [
+                            'title_color' => $dayColors["link_color_hover"],
+                            'title_color_night' => $darkColors['link_color_hover'],
+                            'background_color' => $dayColors["link_bg_color_hover"],
+                            'background_color_night' => $darkColors['link_bg_color_hover'],
+                        ],
+                    ]
+                ]
+            ],
+        ]
+    ],
+    [
+        'page' => 'Sessão',
+        'route' => 'sessoes.single',
+        'sections' => [
+            [
+                'component' => 'Section',
+                'name' => 'Seção Sessão',
+                'styles' => [
+                    'classes' => [
+                        '.ssection-session-single' => [
+                            'name' => 'Seção',
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                        '.ssection-session-single .main-card' => [
+                            'name' => 'Card',
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.ssection-session-single .main-card .nav-item .nav-link' => [
+                            'name' => 'Link do menu',
+                            'title_color' => $dayColors["ombudsman_menu_link_color"],
+                            'title_color_night' => $darkColors['ombudsman_menu_link_color'],
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.ssection-session-single .main-card .nav-item .nav-link.active' => [
+                            'name' => 'Link Atual',
+                            'title_color' => $dayColors["ombudsman_menu_link_color_active"],
+                            'title_color_night' => $darkColors['ombudsman_menu_link_color_active'],
+                            'background_color' => $dayColors["ombudsman_menu_link_bg_color_active"],
+                            'background_color_night' => $darkColors['ombudsman_menu_link_bg_color_active'],
+                        ],
+                        '.ssection-session-single .main-card .tab-content .name-managers' => [
+                            'name' => 'Título',
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.ssection-session-single .main-card .tab-content .title' => [
+                            'name' => 'Legenda',
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.ssection-session-single .main-card .tab-content .description' => [
+                            'name' => 'Legenda',
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                        '.ssection-session-single .main-card .tab-content .table-responsive .table-data-default' => [
+                            'name' => 'Tabela',
+                            'background_color' => $dayColors["table_bg_color"],
+                            'background_color_night' => $darkColors['table_bg_color'],
+                        ],
+                        '.ssection-session-single .main-card .tab-content .table-responsive .table-data-default thead' => [
+                            'name' => 'Cabeçalho da tabela',
+                            'title_color' => $dayColors["thead_table_color"],
+                            'title_color_night' => $darkColors['thead_table_color'],
+                            'background_color' => $dayColors["thead_table_bg_color"],
+                            'background_color_night' => $darkColors['thead_table_bg_color'],
+                        ],
+                        '.ssection-session-single .main-card .tab-content .table-responsive .table-data-default tbody tr td' => [
+                            'name' => 'Célula da tabela',
+                            'title_color' => $dayColors["td_table_color"],
+                            'title_color_night' => $darkColors['td_table_color'],
+                            'background_color' => $dayColors["table_bg_color"],
+                            'background_color_night' => $darkColors['table_bg_color'],
+                        ],
+                    ]
+                ]
+            ],
+        ]
+    ],
+    [
+        'page' => 'Comissões',
+        'route' => 'comissoes-all',
+        'sections' => [
+            [
+                'component' => 'Section',
+                'name' => 'Seção Comissão',
+                'styles' => [
+                    'classes' => [
+                        '.ssection-commissions' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                        '.ssection-commissions .card-with-links' => [
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.ssection-commissions .card-with-links .body' => [
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.ssection-commissions .card-with-links .body .title' => [
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.ssection-commissions .card-with-links .body .description' => [
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                        '.ssection-commissions .card-with-links .footer .links' => [
+                            'title_color' => $dayColors["link_color_2"],
+                            'title_color_night' => $darkColors['link_color_2'],
+                            'background_color' => $dayColors["link_bg_color_2"],
+                            'background_color_night' => $darkColors['link_bg_color'],
+                        ],
+                        '.ssection-commissions .card-with-links .footer .links:hover' => [
+                            'title_color' => $dayColors["link_color_hover"],
+                            'title_color_night' => $darkColors['link_color_hover'],
+                            'background_color' => $dayColors["link_bg_color_hover"],
+                            'background_color_night' => $darkColors['link_bg_color_hover'],
+                        ],
+                    ]
+                ]
+            ],
+        ]
+    ],
+    [
+        'page' => 'Comissão',
+        'route' => 'comissoes.single',
+        'sections' => [
+            [
+                'component' => 'Section',
+                'name' => 'Seção Comissão',
+                'styles' => [
+                    'classes' => [
+                        '.ssection-commission-single' => [
+                            'name' => 'Seção',
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                        '.ssection-commission-single .main-card' => [
+                            'name' => 'Card',
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.ssection-commission-single .main-card .nav-item .nav-link' => [
+                            'name' => 'Link do menu',
+                            'title_color' => $dayColors["ombudsman_menu_link_color"],
+                            'title_color_night' => $darkColors['ombudsman_menu_link_color'],
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.ssection-commission-single .main-card .nav-item .nav-link.active' => [
+                            'name' => 'Link Atual',
+                            'title_color' => $dayColors["ombudsman_menu_link_color_active"],
+                            'title_color_night' => $darkColors['ombudsman_menu_link_color_active'],
+                            'background_color' => $dayColors["ombudsman_menu_link_bg_color_active"],
+                            'background_color_night' => $darkColors['ombudsman_menu_link_bg_color_active'],
+                        ],
+                        '.ssection-commission-single .main-card .tab-content .name-managers' => [
+                            'name' => 'Título',
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.ssection-commission-single .main-card .tab-content .title' => [
+                            'name' => 'Legenda',
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.ssection-commission-single .main-card .tab-content .description' => [
+                            'name' => 'Legenda',
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                        '.ssection-commission-single .main-card .tab-content .table-responsive .table-data-default' => [
+                            'name' => 'Tabela',
+                            'background_color' => $dayColors["table_bg_color"],
+                            'background_color_night' => $darkColors['table_bg_color'],
+                        ],
+                        '.ssection-commission-single .main-card .tab-content .table-responsive .table-data-default thead' => [
+                            'name' => 'Cabeçalho da tabela',
+                            'title_color' => $dayColors["thead_table_color"],
+                            'title_color_night' => $darkColors['thead_table_color'],
+                            'background_color' => $dayColors["thead_table_bg_color"],
+                            'background_color_night' => $darkColors['thead_table_bg_color'],
+                        ],
+                        '.ssection-commission-single .main-card .tab-content .table-responsive .table-data-default tbody tr td' => [
+                            'name' => 'Célula da tabela',
+                            'title_color' => $dayColors["td_table_color"],
+                            'title_color_night' => $darkColors['td_table_color'],
+                            'background_color' => $dayColors["table_bg_color"],
+                            'background_color_night' => $darkColors['table_bg_color'],
+                        ],
+                    ]
+                ]
+            ],
+        ]
+    ],
+    [
+        'page' => 'Votações',
+        'route' => 'votacoes-all',
+        'sections' => [
+            [
+                'component' => 'Section',
+                'name' => 'Seção Votações',
+                'styles' => [
+                    'classes' => [
+                        '.ssection-votes' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                        '.ssection-votes .card-with-links' => [
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.ssection-votes .card-with-links .body' => [
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.ssection-votes .card-with-links .body .title' => [
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.ssection-votes .card-with-links .body .description' => [
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                        '.ssection-votes .card-with-links .footer .links' => [
+                            'title_color' => $dayColors["link_color_2"],
+                            'title_color_night' => $darkColors['link_color_2'],
+                            'background_color' => $dayColors["link_bg_color_2"],
+                            'background_color_night' => $darkColors['link_bg_color'],
+                        ],
+                        '.ssection-votes .card-with-links .footer .links:hover' => [
+                            'title_color' => $dayColors["link_color_hover"],
+                            'title_color_night' => $darkColors['link_color_hover'],
+                            'background_color' => $dayColors["link_bg_color_hover"],
+                            'background_color_night' => $darkColors['link_bg_color_hover'],
+                        ],
+                    ]
+                ]
+            ],
+        ]
+    ],
+    [
+        'page' => 'Votação',
+        'route' => 'votacoes.single',
+        'sections' => [
+            [
+                'component' => 'Section',
+                'name' => 'Seção Votação',
+                'styles' => [
+                    'classes' => [
+                        '.ssection-votes-single' => [
+                            'name' => 'Seção',
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                        '.ssection-votes-single .main-card' => [
+                            'name' => 'Card',
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.ssection-votes-single .main-card .nav-item .nav-link' => [
+                            'name' => 'Link do menu',
+                            'title_color' => $dayColors["ombudsman_menu_link_color"],
+                            'title_color_night' => $darkColors['ombudsman_menu_link_color'],
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.ssection-votes-single .main-card .nav-item .nav-link.active' => [
+                            'name' => 'Link Atual',
+                            'title_color' => $dayColors["ombudsman_menu_link_color_active"],
+                            'title_color_night' => $darkColors['ombudsman_menu_link_color_active'],
+                            'background_color' => $dayColors["ombudsman_menu_link_bg_color_active"],
+                            'background_color_night' => $darkColors['ombudsman_menu_link_bg_color_active'],
+                        ],
+                        '.ssection-votes-single .main-card .tab-content .name-managers' => [
+                            'name' => 'Título',
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.ssection-votes-single .main-card .tab-content .title' => [
+                            'name' => 'Legenda',
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.ssection-votes-single .main-card .tab-content .description' => [
+                            'name' => 'Legenda',
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                        '.ssection-votes-single .main-card .tab-content .table-responsive .table-data-default' => [
+                            'name' => 'Tabela',
+                            'background_color' => $dayColors["table_bg_color"],
+                            'background_color_night' => $darkColors['table_bg_color'],
+                        ],
+                        '.ssection-votes-single .main-card .tab-content .table-responsive .table-data-default thead' => [
+                            'name' => 'Cabeçalho da tabela',
+                            'title_color' => $dayColors["thead_table_color"],
+                            'title_color_night' => $darkColors['thead_table_color'],
+                            'background_color' => $dayColors["thead_table_bg_color"],
+                            'background_color_night' => $darkColors['thead_table_bg_color'],
+                        ],
+                        '.ssection-votes-single .main-card .tab-content .table-responsive .table-data-default tbody tr td' => [
+                            'name' => 'Célula da tabela',
+                            'title_color' => $dayColors["td_table_color"],
+                            'title_color_night' => $darkColors['td_table_color'],
+                            'background_color' => $dayColors["table_bg_color"],
+                            'background_color_night' => $darkColors['table_bg_color'],
+                        ],
+                    ]
+                ]
+            ],
+        ]
+    ],
+    [
+        'page' => 'Dicionário',
+        'route' => 'dicionario',
+        'sections' => [
+            [
+                'component' => 'Section',
+                'name' => 'Seção Dicionário',
+                'styles' => [
+                    'classes' => [
+                        '.ssection-dictionary' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                        '.ssection-dictionary .card-with-links' => [
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.ssection-dictionary .card-with-links .body' => [
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.ssection-dictionary .card-with-links .body .title' => [
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.ssection-dictionary .card-with-links .body .description' => [
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                        '.ssection-dictionary .card-with-links .footer .links' => [
+                            'title_color' => $dayColors["link_color_2"],
+                            'title_color_night' => $darkColors['link_color_2'],
+                            'background_color' => $dayColors["link_bg_color_2"],
+                            'background_color_night' => $darkColors['link_bg_color'],
+                        ],
+                        '.ssection-dictionary .card-with-links .footer .links:hover' => [
+                            'title_color' => $dayColors["link_color_hover"],
+                            'title_color_night' => $darkColors['link_color_hover'],
+                            'background_color' => $dayColors["link_bg_color_hover"],
+                            'background_color_night' => $darkColors['link_bg_color_hover'],
+                        ],
+                    ]
+                ]
+            ],
+        ]
+    ],
 
     // [
     //     'page' => 'Home',

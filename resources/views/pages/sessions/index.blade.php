@@ -20,7 +20,7 @@
 
 
 
-<section class="section-materials adjust-min-height no-padding-top">
+<section class="section-sessions adjust-min-height no-padding-top">
     <div class="container">
         <div class="row">
             <div class="col-12">
