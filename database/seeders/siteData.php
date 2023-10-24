@@ -2096,7 +2096,7 @@ $data = [
         ]
     ],
     [
-        'page' => 'Legislatuas',
+        'page' => 'Legislaturas',
         'route' => 'legislaturas.show',        
         'sections' => [
             [

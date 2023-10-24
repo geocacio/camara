@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Legislature;
+use App\Models\Page;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -15,6 +16,22 @@ class LegislatureController extends Controller
     {
         $legislatures = Legislature::all();
         return view('panel.legislature.index', compact('legislatures'));
+    }
+    
+    public function allLegislatures(Request $request){
+        
+        $allLegislatures = Legislature::all();
+        
+        $page_legislature = Page::where('name', 'Legislaturas')->first();
+        $query = Legislature::query();
+
+        if($request->filled('legislature_id')){
+            $query->where('id', $request->input('legislature_id'));
+        }
+        
+        $legislatures = $query->paginate(10);
+        $searchData = $request->only(['legislature_id']);
+        return view('pages.legislature.index', compact('legislatures', 'allLegislatures', 'page_legislature', 'searchData'));
     }
 
     /**
