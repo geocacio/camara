@@ -3,12 +3,46 @@
 namespace App\Http\Controllers;
 
 use App\Models\Commission;
+use App\Models\Page;
+use App\Models\TransparencyGroup;
 use App\Models\Type;
 use App\Models\TypeContent;
 use Illuminate\Http\Request;
 
 class CommissionController extends Controller
 {
+
+    public function page()
+    {
+        $page_commission = Page::where('name', 'Materiais')->first();
+        $groups = TransparencyGroup::all();
+        return view('panel.commission.page.edit', compact('page_commission', 'groups'));
+    }
+
+    public function pageUpdate(Request $request)
+    {
+        $validateData = $request->validate([
+            'transparency_group_id' => 'required',
+            'main_title' => 'required',
+            'title' => 'required',
+            'icon' => 'nullable',
+            'description' => 'nullable',
+        ], [
+            'main_title.required' => 'O campo título principal é obrigatório',
+            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
+            'title.required' => 'O campo título é obrigatório'
+        ]);
+        $validateData['visibility'] = $request->visibility ? $request->visibility : 'disabled';
+
+        $page_commission = Page::where('name', 'Materiais')->first();
+
+        if ($page_commission->update($validateData)) {
+            $page_commission->groupContents()->delete();
+            $page_commission->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+            return redirect()->route('commissions.page')->with('success', 'Informações atualizadas com sucesso!');
+        }
+        return redirect()->route('commissions.page')->with('error', 'Por favor tente novamente!');
+    }
     /**
      * Display a listing of the resource.
      */

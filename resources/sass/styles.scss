@@ -207,8 +207,10 @@ section{
                 height: 100%;
                 box-shadow: none;
                 outline: none;
-                display: block;
                 padding: 0 10px;
+                display: flex;
+                align-items: center;
+                gap: 3px;
             }
         }
     }

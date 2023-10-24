@@ -159,6 +159,10 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('/legislatures', LegislatureController::class);
         Route::resource('/affiliations', PartyAffiliationController::class);
+
+
+        Route::get('commissions-page', [CommissionController::class, 'page'])->name('commissions.page');
+        Route::put('commissions-page', [CommissionController::class, 'pageUpdate'])->name('commissions.page.update');
         Route::resource('/commissions', CommissionController::class);
 
         Route::get('materials-page', [MaterialController::class, 'page'])->name('materials.page');
