@@ -20,8 +20,6 @@
 
 @include('layouts.header')
 
-
-
 <section class="section-legislature adjust-min-height no-padding-top">
     <div class="container">
         <div class="row">
@@ -37,8 +35,8 @@
                                 <select name="legislature_id" class="form-control">
                                     <option value="">Selecione</option>
                                     @if($allLegislatures->count() > 0)
-                                    @foreach($allLegislatures as $legislature)
-                                    <option value="{{ $legislature->id }}">({{ date('d/m/Y', strtotime($legislature->start_date)) }} {{ date('d/m/Y', strtotime($legislature->end_date)) }})</option>
+                                    @foreach($allLegislatures as $item)
+                                    <option value="{{ $item->id }}">({{ date('d/m/Y', strtotime($item->start_date)) }} {{ date('d/m/Y', strtotime($item->end_date)) }})</option>
                                     @endforeach
                                     @endif
                                 </select>
