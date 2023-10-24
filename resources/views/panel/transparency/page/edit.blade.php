@@ -25,11 +25,11 @@
 
             <div class="form-group">
                 <label>Título</label>
-                <input type="text" name="title" class="form-control" value="{{ old('title', $transparencyPortal->title) }}" />
+                <input type="text" name="title" class="form-control" value="{{ old('title', isset($transparencyPortal->title) ? $transparencyPortal->title : '') }}" />
             </div>
             <div class="form-group">
                 <label>Descrição</label>
-                <textarea name="description" class="form-control">{{ old('description', $transparencyPortal->description) }}</textarea>
+                <textarea name="description" class="form-control">{{ old('description', isset($transparencyPortal->description) ? $transparencyPortal->description : '') }}</textarea>
             </div>
 
             <div class="form-footer text-right">

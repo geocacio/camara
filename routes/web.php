@@ -130,6 +130,9 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('panel')->group(function () {
         Route::resource('modelo', ModelController::class);
+
+        Route::get('settings-page', [SettingController::class, 'page'])->name('settings.page');
+        Route::put('settings-page', [SettingController::class, 'pageUpdate'])->name('settings.page.update');
         Route::resource('/settings', SettingController::class);
         Route::resource('/users', UserController::class);
 

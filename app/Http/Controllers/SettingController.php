@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
+use App\Models\Page;
 use App\Models\Setting;
+use App\Models\TransparencyGroup;
 use App\Services\FileUploadService;
 use Illuminate\Http\Request;
 
@@ -14,6 +16,38 @@ class SettingController extends Controller
     public function __construct(FileUploadService $fileUploadService)
     {
         $this->fileUploadService = $fileUploadService;
+    }
+
+    public function page()
+    {
+        $page_setting = Page::where('name', 'A Câmara')->first();
+        $groups = TransparencyGroup::all();
+        return view('panel.settings.page.edit', compact('page_setting', 'groups'));
+    }
+
+    public function pageUpdate(Request $request)
+    {
+        $validateData = $request->validate([
+            'transparency_group_id' => 'required',
+            'main_title' => 'required',
+            'title' => 'required',
+            'icon' => 'nullable',
+            'description' => 'nullable',
+        ], [
+            'main_title.required' => 'O campo título principal é obrigatório',
+            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
+            'title.required' => 'O campo título é obrigatório'
+        ]);
+        $validateData['visibility'] = $request->visibility ? $request->visibility : 'disabled';
+
+        $page_setting = Page::where('name', 'A Câmara')->first();
+
+        if ($page_setting->update($validateData)) {
+            $page_setting->groupContents()->delete();
+            $page_setting->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+            return redirect()->route('settings.page')->with('success', 'Informações atualizadas com sucesso!');
+        }
+        return redirect()->route('settings.page')->with('error', 'Por favor tente novamente!');
     }
 
     /**
