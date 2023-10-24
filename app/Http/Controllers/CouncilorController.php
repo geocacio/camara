@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Councilor;
 use App\Models\File;
+use App\Models\Legislature;
 use App\Models\Office;
 use App\Models\Page;
 use App\Models\PartyAffiliation;
@@ -61,6 +62,12 @@ class CouncilorController extends Controller
     {
         $councilors = Councilor::all();
         return view('panel.councilor.index', compact('councilors'));
+    }
+
+    public function allcouncilors(Legislature $legislature = null){
+        $allLegislatures = Legislature::all();
+        $legislature = !$legislature ? (new Legislature)->getCurrentLegislature() : $legislature;
+        return view('pages.councilors.index', compact('legislature', 'allLegislatures'));
     }
 
     /**
@@ -125,8 +132,6 @@ class CouncilorController extends Controller
      */
     public function show(Councilor $councilor)
     {
-        // dd($councilor->partyAffiliation);
-        // dd($councilor);
         return view('pages.councilors.single', compact('councilor'));
     }
 

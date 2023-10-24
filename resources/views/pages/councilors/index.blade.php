@@ -9,11 +9,11 @@
         <a href="{{ route('transparency.show') }}" class="link">Portal da transparência</a>
     </li>
     <li class="item">
-        <span>Legislaturas</span>
+        <span>Legislatura: ({{ date('d/m/Y', strtotime($legislature->start_date)) }} - {{ date('d/m/Y', strtotime($legislature->end_date)) }})</span>
     </li>
 </ul>
 
-<h3 class="title-sub-page main">Legislaturas</h3>
+<h3 class="title-sub-page main">Legislatura: ({{ date('d/m/Y', strtotime($legislature->start_date)) }} - {{ date('d/m/Y', strtotime($legislature->end_date)) }})</h3>
 @endsection
 
 @section('content')
@@ -60,9 +60,28 @@
             </div>
         </div>
 
-        @if($legislatures->count() > 0)
+        @if($legislature->legislatureRelations)
 
-            <div class="row">
+            <div class="row gd-councilor-container">
+                <div class="col-12">
+                    <div class="card main-card">
+                        @foreach($legislature->legislatureRelations as $councilor)
+                            <div class="col-lg-6">
+                                <a href="{{ route('vereador.show', $councilor->legislatureable->slug) }}" class="councilor-items">
+                                    <figure class="figure">
+                                        <img class="image" src="{{ asset('storage/'.$councilor->legislatureable->files[0]->file->url) }}" alt="">
+                                    </figure>
+                                    <div class="info">
+                                        <span class="title">{{  $councilor->legislatureable->surname }}</span>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+            {{-- <div class="row">
                 
                 @foreach($legislatures as $legislature)
                 
@@ -95,10 +114,10 @@
 
                 {{ $legislatures->render() }}
 
-            </div>
+            </div> --}}
 
         @else
-            <div class="empty-data">Nenhuma legislatura encontrada.</div>
+            <div class="empty-data">Nenhum vereador encontrado.</div>
         @endif
 
     </div>
