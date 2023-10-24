@@ -64,10 +64,21 @@ class CouncilorController extends Controller
         return view('panel.councilor.index', compact('councilors'));
     }
 
-    public function allcouncilors(Legislature $legislature = null){
+    public function allcouncilors(Request $request, Legislature $legislature = null){
         $allLegislatures = Legislature::all();
+        
         $legislature = !$legislature ? (new Legislature)->getCurrentLegislature() : $legislature;
-        return view('pages.councilors.index', compact('legislature', 'allLegislatures'));
+
+        $page_councilor = Page::where('name', 'Vereadores')->first();
+        $query = Legislature::query();
+
+        if($request->filled('legislature_id')){
+            $query->where('id', $request->input('legislature_id'));
+            $legislature = $query->first();
+        }
+
+        $searchData = $request->only(['legislature_id']);
+        return view('pages.councilors.index', compact('legislature', 'allLegislatures', 'searchData'));
     }
 
     /**

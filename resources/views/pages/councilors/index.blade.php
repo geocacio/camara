@@ -36,7 +36,7 @@
                                     <option value="">Selecione</option>
                                     @if($allLegislatures->count() > 0)
                                     @foreach($allLegislatures as $item)
-                                    <option value="{{ $item->id }}">({{ date('d/m/Y', strtotime($item->start_date)) }} {{ date('d/m/Y', strtotime($item->end_date)) }})</option>
+                                    <option value="{{ $item->id }}" {{ count($searchData) > 0 ? ($item->id == $searchData['legislature_id'] ? 'selected' : '') : '' }}>({{ date('d/m/Y', strtotime($item->start_date)) }} {{ date('d/m/Y', strtotime($item->end_date)) }})</option>
                                     @endforeach
                                     @endif
                                 </select>
