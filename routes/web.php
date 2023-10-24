@@ -493,7 +493,7 @@ Route::match(['get', 'post'], 'sessoes', [SessionController::class, 'allSessions
 Route::get('/sessoes/{session}', [SessionController::class, 'show'])->name('sessoes.single');
 
 Route::match(['get', 'post'], 'comissoes', [CommissionController::class, 'allCommissions'])->name('comissoes-all');
-Route::get('/comissoes/{commission}', [CommissionController::class, 'single'])->name('comissoes.single');
+Route::get('/comissoes/{commission}', [CommissionController::class, 'show'])->name('comissoes.single');
 
 //Transparency Routes
 Route::get('/transparencia', [App\Http\Controllers\TransparencyPortalController::class, 'show'])->name('transparency.show');

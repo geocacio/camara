@@ -2095,6 +2095,82 @@ $data = [
             ],
         ]
     ],
+    [
+        'page' => 'Legislatuas',
+        'route' => 'legislaturas.show',        
+        'sections' => [
+            [
+                'component' => 'legislature',
+                'name' => 'Legislatuas',
+                'styles' => [
+                    'classes' => [
+                        '.section-legislatures' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                    ]
+                ]
+            ]
+        ]
+                
+    ],
+    [
+        'page' => 'Faq',
+        'route' => 'faq.show',        
+        'sections' => [
+            [
+                'component' => 'faq',
+                'name' => 'Faq',
+                'styles' => [
+                    'classes' => [
+                        '.section-faq-general' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                    ]
+                ]
+            ]
+        ]
+                
+    ],
+    [
+        'page' => 'Glossário',
+        'route' => 'glossario.show',        
+        'sections' => [
+            [
+                'component' => 'glossario',
+                'name' => 'Glossário',
+                'styles' => [
+                    'classes' => [
+                        '.section-glossario' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                    ]
+                ]
+            ]
+        ]
+                
+    ],
+    [
+        'page' => 'Dados abertos',
+        'route' => 'dados.show',        
+        'sections' => [
+            [
+                'component' => 'dados',
+                'name' => 'Dados abertos',
+                'styles' => [
+                    'classes' => [
+                        '.section-open-data' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                    ]
+                ]
+            ]
+        ]
+                
+    ],
     // [
     //     'page' => 'Prefeito e vice',
     //     'route' => 'gestores.page',
