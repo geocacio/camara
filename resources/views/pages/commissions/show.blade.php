@@ -9,14 +9,14 @@
         <a href="{{ route('transparency.show') }}" class="link">Portal da transparência</a>
     </li>
     <li class="item">
-        <a href="{{ route('materiais-all') }}" class="link">Materiais</a>
+        <a href="{{ route('comissoes-all') }}" class="link">Comissões</a>
     </li>
     <li class="item">
-        <span>{{ $material->type->name }}: {{ $material->id }}/{{ date('Y', strtotime($material->date)) }}</span>
+        <span>{{ Str::limit($commission->description, '30', '...') }}</span>
     </li>
 </ul>
 
-<h3 class="title text-center">{{ $material->type->name }}: {{ $material->id }}/{{ date('Y', strtotime($material->date)) }}</h3>
+<h3 class="title text-center">{{ Str::limit($commission->description, '30', '...') }}</h3>
 
 @endsection
 
@@ -24,7 +24,7 @@
 
 @include('layouts.header')
 
-<section class="section-material-single adjust-min-height margin-fixed-top">
+<section class="section-commission-single adjust-min-height margin-fixed-top">
     <div class="container">
         <div class="row">
             <div class="col-md-4">
@@ -38,7 +38,7 @@
                             </button>
                         </li>
 
-                        @if($material->session)
+                        @if($commission->session)
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="tramite-tab" data-bs-toggle="tab" data-bs-target="#tramite" type="button" role="tab">
                                 <i class="fa-solid fa-suitcase"></i>
@@ -47,7 +47,7 @@
                         </li>
                         @endif
 
-                        @if($material->authors)
+                        @if($commission->authors)
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="authors-tab" data-bs-toggle="tab" data-bs-target="#authors" type="button" role="tab">
                                 <i class="fa-solid fa-copy"></i>
@@ -56,7 +56,7 @@
                         </li>
                         @endif
 
-                        @if($material->session)
+                        @if($commission->session)
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="votes-tab" data-bs-toggle="tab" data-bs-target="#votes" type="button" role="tab">
                                 <i class="fa-solid fa-microphone"></i>
@@ -65,7 +65,7 @@
                         </li>
                         @endif
 
-                        @if($material->recipients)
+                        @if($commission->recipients)
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="destinations-tab" data-bs-toggle="tab" data-bs-target="#destinations" type="button" role="tab">
                                 <i class="fa-solid fa-users"></i>
@@ -81,28 +81,28 @@
                 <div class="card main-card card-manager">
                     <div class="tab-content" id="myTabContent">
 
-                        @if($material)
+                        @if($commission)
                             <div class="gd-managers tab-pane fadeshow active" id="index" role="tabpanel" aria-labelledby="index-tab">
 
-                                <h3 class="name-managers">{{ $material->type->name }}: {{ $material->id }}/{{ date('Y', strtotime($material->date)) }}</h3>
+                                <h3 class="name-managers">{{ $commission->description }}</h3>
 
                                 <div class="row container-descriptions">
                                     <div class="col-md-6">
                                         <p class="title">Autor</p>
-                                        <p class="description">{{ $material->councilor->name}}</p>
+                                        {{-- <p class="description">{{ $commission->councilor->name}}</p> --}}
                                     </div>
                                     <div class="col-md-6">
                                         <p class="title">Data</p>
-                                        <p class="description">{{ date('d/m/Y', strtotime($material->date)) }}</p>
+                                        <p class="description">{{ date('d/m/Y', strtotime($commission->date)) }}</p>
                                     </div>
                                     <div class="col-md-6">
                                         <p class="title">Visualizações</p>
-                                        <p class="description">{{ $material->views }}</p>
+                                        <p class="description">{{ $commission->views }}</p>
                                     </div>
 
                                     <div class="col-md-12">
                                         <p class="title">Resumo</p>
-                                        <p class="description">{{ $material->description }}</p>
+                                        <p class="description">{{ $commission->description }}</p>
                                     </div>
                                 </div>
 
@@ -110,10 +110,10 @@
                             </div>
                         @endif
 
-                        @if($material->authors)
+                        @if($commission->authors)
                             <div class="tab-pane fadeshow" id="authors" role="tabpanel" aria-labelledby="authors-tab">
 
-                                @foreach($material->authors as $author)
+                                @foreach($commission->authors as $author)
 
                                     <div class="col-12">
                                         <div class="table-responsive">
@@ -128,7 +128,7 @@
                                                 </thead>
                                                 <tbody>
                                 
-                                                    @foreach($material->authors as $author)
+                                                    @foreach($commission->authors as $author)
                                                     <tr>
                                                         <td>{{ $author->name }}</td>
                                                         <td>{{ $author->position }}</td>
@@ -147,7 +147,7 @@
                             </div>
                         @endif
 
-                        @if($material->session)
+                        @if($commission->session)
                         
                             <div class="tab-pane fadeshow" id="votes" role="tabpanel" aria-labelledby="votes-tab">
 
@@ -156,7 +156,7 @@
                             </div>
                         @endif
 
-                        @if($material->recipients)
+                        @if($commission->recipients)
                         
                             <div class="tab-pane fadeshow" id="destinations" role="tabpanel" aria-labelledby="destinations-tab">
 
@@ -165,7 +165,7 @@
                             </div>
                         @endif
 
-                        @if($material->session)
+                        @if($commission->session)
                             <div class="tab-pane fadeshow" id="tramite" role="tabpanel" aria-labelledby="tramite-tab">
                                 <div class="col-12">
                                     <div class="table-responsive">
@@ -181,12 +181,12 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>{{ date('d/m/Y', strtotime($material->session->date)) }}</td>
-                                                    <td>{{ $material->session->status->name }}</td>
-                                                    <td>{{ $material->session->exercicy->name }}</td>
-                                                    <td>{{ Str::limit($material->session->description, '50', '...') }}</td>
+                                                    <td>{{ date('d/m/Y', strtotime($commission->session->date)) }}</td>
+                                                    <td>{{ $commission->session->status->name }}</td>
+                                                    <td>{{ $commission->session->exercicy->name }}</td>
+                                                    <td>{{ Str::limit($commission->session->description, '50', '...') }}</td>
                                                     <td class="actions">
-                                                        <a href="{{ route('sessoes.single', $material->session->id) }}" data-toggle="tooltip" title="Ver mais" class="link-view">
+                                                        <a href="{{ route('sessoes.single', $commission->session->id) }}" data-toggle="tooltip" title="Ver mais" class="link-view">
                                                             <i class="fa-solid fa-eye"></i>
                                                         </a>
                                                     </td>
@@ -206,7 +206,7 @@
 
 </section>
 
-@include('pages.partials.satisfactionSurvey', ['page_name' => 'Material'])
+@include('pages.partials.satisfactionSurvey', ['page_name' => 'Comissão'])
 
 @include('layouts.footer')
 

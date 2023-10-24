@@ -124,7 +124,7 @@
     </div>
 </section>
 
-@include('pages.partials.satisfactionSurvey', ['page_name' => 'Leis'])
+@include('pages.partials.satisfactionSurvey', ['page_name' => 'Materiais'])
 
 @include('layouts.footer')
 

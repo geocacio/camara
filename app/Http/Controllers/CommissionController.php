@@ -14,7 +14,7 @@ class CommissionController extends Controller
 
     public function page()
     {
-        $page_commission = Page::where('name', 'Materiais')->first();
+        $page_commission = Page::where('name', 'Comissões')->first();
         $groups = TransparencyGroup::all();
         return view('panel.commission.page.edit', compact('page_commission', 'groups'));
     }
@@ -34,7 +34,7 @@ class CommissionController extends Controller
         ]);
         $validateData['visibility'] = $request->visibility ? $request->visibility : 'disabled';
 
-        $page_commission = Page::where('name', 'Materiais')->first();
+        $page_commission = Page::where('name', 'Comissões')->first();
 
         if ($page_commission->update($validateData)) {
             $page_commission->groupContents()->delete();
@@ -50,6 +50,15 @@ class CommissionController extends Controller
     {
         $commissions = Commission::all();
         return view('panel.commission.index', compact('commissions'));
+    }
+
+    public function allCommissions(Request $request){
+
+        $page_commission = Page::where('name', 'Comissões')->first();
+        $query = Commission::query();
+        
+        $commissions = $query->paginate(10);
+        return view('pages.commissions.index', compact('commissions', 'page_commission'));
     }
 
     /**
@@ -97,7 +106,7 @@ class CommissionController extends Controller
      */
     public function show(Commission $commission)
     {
-        //
+        return view('pages.commissions.show', compact('commission'));
     }
 
     /**
