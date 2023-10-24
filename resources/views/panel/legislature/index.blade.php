@@ -6,7 +6,14 @@
     <div class="card-body">
         
         <div class="card-header text-right header-with-search">
-            <a href="{{ route('legislatures.create') }}" class="btn-default">Novo</a>        
+
+            <div class="btn-group dropleft">
+                <button type="button" class="btn-dropdown-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{ route('legislatures.page') }}">Página</a>
+                    <a class="dropdown-item" href="{{ route('legislatures.create') }}">Novo</a>
+                </div>
+            </div>
         </div>
 
 
@@ -22,6 +29,7 @@
                 </thead>
                 <tbody>
                     @foreach($legislatures as $legislature)
+                    
                     <tr>
                         <td>{{ $legislature->id }}</td>
                         <td>{{ date('d/m/Y', strtotime($legislature->start_date)) }} - {{ date('d/m/Y', strtotime($legislature->end_date)) }}</td>

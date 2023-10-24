@@ -157,6 +157,9 @@ Route::middleware('auth')->group(function () {
         Route::get('types/{type:slug}/subtypes', [TypeController::class, 'index'])->name('subtypes.index');
         Route::get('types/{type:slug}/subtypes/create', [TypeController::class, 'create'])->name('subtypes.create');
 
+        Route::get('legislatures-page', [LegislatureController::class, 'page'])->name('legislatures.page');
+        Route::put('legislatures-page', [LegislatureController::class, 'pageUpdate'])->name('legislatures.page.update');
+
         Route::resource('/legislatures', LegislatureController::class);
         Route::resource('/affiliations', PartyAffiliationController::class);
 

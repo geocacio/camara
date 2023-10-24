@@ -65,6 +65,7 @@ class CouncilorController extends Controller
     }
 
     public function allcouncilors(Legislature $legislature = null){
+        dd('passou aqui');
         $allLegislatures = Legislature::all();
         $legislature = !$legislature ? (new Legislature)->getCurrentLegislature() : $legislature;
         return view('pages.councilors.index', compact('legislature', 'allLegislatures'));

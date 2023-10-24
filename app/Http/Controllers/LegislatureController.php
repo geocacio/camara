@@ -4,11 +4,44 @@ namespace App\Http\Controllers;
 
 use App\Models\Legislature;
 use App\Models\Page;
+use App\Models\TransparencyGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class LegislatureController extends Controller
 {
+
+    public function page()
+    {
+        $page_legislature = Page::where('name', 'Legislaturas')->first();
+        $groups = TransparencyGroup::all();
+        return view('panel.legislature.page.edit', compact('page_legislature', 'groups'));
+    }
+
+    public function pageUpdate(Request $request)
+    {
+        $validateData = $request->validate([
+            'transparency_group_id' => 'required',
+            'main_title' => 'required',
+            'title' => 'required',
+            'icon' => 'nullable',
+            'description' => 'nullable',
+        ], [
+            'main_title.required' => 'O campo título principal é obrigatório',
+            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
+            'title.required' => 'O campo título é obrigatório'
+        ]);
+        $validateData['visibility'] = $request->visibility ? $request->visibility : 'disabled';
+
+        $page_legislature = Page::where('name', 'Legislaturas')->first();
+
+        if ($page_legislature->update($validateData)) {
+            $page_legislature->groupContents()->delete();
+            $page_legislature->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+            return redirect()->route('legislatures.page')->with('success', 'Informações atualizadas com sucesso!');
+        }
+        return redirect()->route('legislatures.page')->with('error', 'Por favor tente novamente!');
+    }
     /**
      * Display a listing of the resource.
      */

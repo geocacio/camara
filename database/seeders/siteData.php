@@ -2097,11 +2097,11 @@ $data = [
     ],
     [
         'page' => 'Legislaturas',
-        'route' => 'legislaturas.show',        
+        'route' => 'legislaturas-all',
         'sections' => [
             [
                 'component' => 'legislature',
-                'name' => 'Legislatuas',
+                'name' => 'Legislaturas',
                 'styles' => [
                     'classes' => [
                         '.section-legislatures' => [
