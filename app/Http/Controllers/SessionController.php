@@ -5,12 +5,46 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Page;
 use App\Models\Session;
+use App\Models\TransparencyGroup;
 use App\Models\Type;
 use App\Models\TypeContent;
 use Illuminate\Http\Request;
 
 class SessionController extends Controller
 {
+
+    public function page()
+    {
+        $page_session = Page::where('name', 'Sessões')->first();
+        $groups = TransparencyGroup::all();
+        return view('panel.sessions.page.edit', compact('page_session', 'groups'));
+    }
+
+    public function pageUpdate(Request $request)
+    {
+        $validateData = $request->validate([
+            'transparency_group_id' => 'required',
+            'main_title' => 'required',
+            'title' => 'required',
+            'icon' => 'nullable',
+            'description' => 'nullable',
+        ], [
+            'main_title.required' => 'O campo título principal é obrigatório',
+            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
+            'title.required' => 'O campo título é obrigatório'
+        ]);
+        $validateData['visibility'] = $request->visibility ? $request->visibility : 'disabled';
+
+        $page_session = Page::where('name', 'Sessões')->first();
+
+        if ($page_session->update($validateData)) {
+            $page_session->groupContents()->delete();
+            $page_session->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+            return redirect()->route('sessions.page')->with('success', 'Informações atualizadas com sucesso!');
+        }
+        return redirect()->route('sessions.page')->with('error', 'Por favor tente novamente!');
+    }
+    
     /**
      * Display a listing of the resource.
      */

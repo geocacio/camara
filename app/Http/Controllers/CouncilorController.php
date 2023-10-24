@@ -6,7 +6,9 @@ use App\Models\Category;
 use App\Models\Councilor;
 use App\Models\File;
 use App\Models\Office;
+use App\Models\Page;
 use App\Models\PartyAffiliation;
+use App\Models\TransparencyGroup;
 use App\Services\FileUploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -18,6 +20,38 @@ class CouncilorController extends Controller
     public function __construct(FileUploadService $fileUploadService)
     {
         $this->fileUploadService = $fileUploadService;
+    }
+
+    public function page()
+    {
+        $page_councilor = Page::where('name', 'Vereadores')->first();
+        $groups = TransparencyGroup::all();
+        return view('panel.councilor.page.edit', compact('page_councilor', 'groups'));
+    }
+
+    public function pageUpdate(Request $request)
+    {
+        $validateData = $request->validate([
+            'transparency_group_id' => 'required',
+            'main_title' => 'required',
+            'title' => 'required',
+            'icon' => 'nullable',
+            'description' => 'nullable',
+        ], [
+            'main_title.required' => 'O campo título principal é obrigatório',
+            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
+            'title.required' => 'O campo título é obrigatório'
+        ]);
+        $validateData['visibility'] = $request->visibility ? $request->visibility : 'disabled';
+
+        $page_councilor = Page::where('name', 'Vereadores')->first();
+
+        if ($page_councilor->update($validateData)) {
+            $page_councilor->groupContents()->delete();
+            $page_councilor->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+            return redirect()->route('councilors.page')->with('success', 'Informações atualizadas com sucesso!');
+        }
+        return redirect()->route('councilors.page')->with('error', 'Por favor tente novamente!');
     }
 
     /**

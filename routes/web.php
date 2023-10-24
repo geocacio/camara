@@ -162,6 +162,8 @@ Route::middleware('auth')->group(function () {
         Route::put('materials-page', [MaterialController::class, 'pageUpdate'])->name('materials.page.update');
         Route::resource('/materials', MaterialController::class);
 
+        Route::get('councilors-page', [CouncilorController::class, 'page'])->name('councilors.page');
+        Route::put('councilors-page', [CouncilorController::class, 'pageUpdate'])->name('councilors.page.update');
         Route::resource('/councilors', CouncilorController::class);
         Route::resource('/councilors/{councilor:slug}/legislatures', CouncilorLegislatureController::class)->names([
             'index' => 'councilor.legislature.index',
@@ -175,6 +177,9 @@ Route::middleware('auth')->group(function () {
         Route::resource('/councilors/{councilor:slug}/councilor-commissions', CouncilorComissionController::class);
         Route::resource('/councilors/{councilor:slug}/party-affiliation', PartyAffiliationController::class);
 
+        
+        Route::get('sessions-page', [SessionController::class, 'page'])->name('sessions.page');
+        Route::put('sessions-page', [SessionController::class, 'pageUpdate'])->name('sessions.page.update');
         Route::resource('/sessions', SessionController::class);
         Route::resource('/sessions/{session:slug}/attendances', SessionAttendanceController::class);
 
@@ -474,6 +479,8 @@ Route::get('/posts/{post:slug}', [App\Http\Controllers\PostController::class, 's
 Route::match(['get', 'post'], '/cartaservicos', [ServiceLetterController::class, 'page'])->name('serviceLetter.page');
 Route::get('/cartaservicos/{serviceLetter:slug}', [ServiceLetterController::class, 'show'])->name('serviceLetter.show');
 Route::get('/a-camara', [ChamberController::class, 'index'])->name('a-camara.show');
+
+Route::get('/vereadores', [CouncilorController::class, 'allcouncilors'])->name('vereadores-all');
 Route::get('/vereadores/{councilor:slug}', [CouncilorController::class, 'show'])->name('vereador.show');
 
 Route::match(['get', 'post'], 'materiais', [MaterialController::class, 'allMaterials'])->name('materiais-all');

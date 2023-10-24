@@ -10,7 +10,7 @@
             <div class="btn-group dropleft">
                 <button type="button" class="btn-dropdown-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Página</a>
+                    <a class="dropdown-item" href="{{ route('councilors.page') }}">Página</a>
                     <a class="dropdown-item" href="{{ route('councilors.create') }}">Novo</a>
                     <a class="dropdown-item" href="{{ route('subcategories.index', 'vinculo') }}">Vínculos</a>
                 </div>

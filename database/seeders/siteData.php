@@ -492,7 +492,7 @@ $data = [
     ],
     [
         'page' => 'Vereadores',
-        'route' => 'vereadores.page',
+        'route' => 'vereadores-all',
         'sections' => [
             [
                 'component' => 'Section',
