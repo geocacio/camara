@@ -99,7 +99,7 @@
                                     <h3 class="title">{{ $material->type->name }}: {{ $material->id }}/{{ date('Y', strtotime($material->date)) }}</h3>
                                     <p class="description">{{ $material->description }}</p>
                                     <ul>
-                                        <li>
+                                        <li class="description">
                                             <i class="fa-solid fa-calendar-days"></i>
                                             {{ date('d/m/Y', strtotime($material->date)) }}
                                         </li>

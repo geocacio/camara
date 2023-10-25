@@ -611,37 +611,35 @@ $data = [
                 'name' => 'Seção Materiais',
                 'styles' => [
                     'classes' => [
-                        '.ssection-materials' => [
+                        '.section-materials' => [
+                            'name' => 'Seção',
                             'background_color' => $dayColors["bg_section"],
                             'background_color_night' => $darkColors['bg_section'],
                         ],
-                        '.ssection-materials .card-with-links' => [
+                        '.section-materials .card-with-links' => [
+                            'name' => 'Card',
                             'background_color' => $dayColors["bg_card"],
                             'background_color_night' => $darkColors['bg_card'],
                         ],
-                        '.ssection-materials .card-with-links .body' => [
-                            'background_color' => $dayColors["bg_card"],
-                            'background_color_night' => $darkColors['bg_card'],
+                        '.section-materials .card-with-links .header' => [
+                            'name' => 'Caixa do ícone',
+                            'background_color' => $dayColors["ombudsman_color_1"],
+                            'background_color_night' => $darkColors['ombudsman_color_1'],
                         ],
-                        '.ssection-materials .card-with-links .body .title' => [
+                        '.section-materials .card-with-links .header i' => [
+                            'name' => 'Ícone',
+                            'title_color' => $dayColors["link_color"],
+                            'title_color_night' => $darkColors['link_color'],
+                        ],
+                        '.section-materials .card-with-links .body .title' => [
+                            'name' => 'Título',
                             'title_color' => $dayColors["title_color"],
                             'title_color_night' => $darkColors['title_color'],
                         ],
-                        '.ssection-materials .card-with-links .body .description' => [
+                        '.section-materials .card-with-links .body .description' => [
+                            'name' => 'Descrição',
                             'title_color' => $dayColors["text_color"],
                             'title_color_night' => $darkColors['text_color'],
-                        ],
-                        '.ssection-materials .card-with-links .footer .links' => [
-                            'title_color' => $dayColors["link_color_2"],
-                            'title_color_night' => $darkColors['link_color_2'],
-                            'background_color' => $dayColors["link_bg_color_2"],
-                            'background_color_night' => $darkColors['link_bg_color'],
-                        ],
-                        '.ssection-materials .card-with-links .footer .links:hover' => [
-                            'title_color' => $dayColors["link_color_hover"],
-                            'title_color_night' => $darkColors['link_color_hover'],
-                            'background_color' => $dayColors["link_bg_color_hover"],
-                            'background_color_night' => $darkColors['link_bg_color_hover'],
                         ],
                     ]
                 ]
@@ -657,58 +655,58 @@ $data = [
                 'name' => 'Seção Material',
                 'styles' => [
                     'classes' => [
-                        '.section-material' => [
+                        '.section-material-single' => [
                             'name' => 'Seção',
                             'background_color' => $dayColors["bg_section"],
                             'background_color_night' => $darkColors['bg_section'],
                         ],
-                        '.section-material .main-card' => [
+                        '.section-material-single .main-card' => [
                             'name' => 'Card',
                             'background_color' => $dayColors["bg_card"],
                             'background_color_night' => $darkColors['bg_card'],
                         ],
-                        '.section-material .main-card .nav-item .nav-link' => [
+                        '.section-material-single .main-card .nav-item .nav-link' => [
                             'name' => 'Link do menu',
                             'title_color' => $dayColors["ombudsman_menu_link_color"],
                             'title_color_night' => $darkColors['ombudsman_menu_link_color'],
                             'background_color' => $dayColors["bg_card"],
                             'background_color_night' => $darkColors['bg_card'],
                         ],
-                        '.section-material .main-card .nav-item .nav-link.active' => [
+                        '.section-material-single .main-card .nav-item .nav-link.active' => [
                             'name' => 'Link Atual',
                             'title_color' => $dayColors["ombudsman_menu_link_color_active"],
                             'title_color_night' => $darkColors['ombudsman_menu_link_color_active'],
                             'background_color' => $dayColors["ombudsman_menu_link_bg_color_active"],
                             'background_color_night' => $darkColors['ombudsman_menu_link_bg_color_active'],
                         ],
-                        '.section-material .main-card .tab-content .name-managers' => [
+                        '.section-material-single .main-card .tab-content .name-managers' => [
                             'name' => 'Título',
                             'title_color' => $dayColors["title_color"],
                             'title_color_night' => $darkColors['title_color'],
                         ],
-                        '.section-material .main-card .tab-content .title' => [
+                        '.section-material-single .main-card .tab-content .title' => [
                             'name' => 'Legenda',
                             'title_color' => $dayColors["title_color"],
                             'title_color_night' => $darkColors['title_color'],
                         ],
-                        '.section-material .main-card .tab-content .description' => [
+                        '.section-material-single .main-card .tab-content .description' => [
                             'name' => 'Legenda',
                             'title_color' => $dayColors["text_color"],
                             'title_color_night' => $darkColors['text_color'],
                         ],
-                        '.section-material .main-card .tab-content .table-responsive .table-data-default' => [
+                        '.section-material-single .main-card .tab-content .table-responsive .table-data-default' => [
                             'name' => 'Tabela',
                             'background_color' => $dayColors["table_bg_color"],
                             'background_color_night' => $darkColors['table_bg_color'],
                         ],
-                        '.section-material .main-card .tab-content .table-responsive .table-data-default thead' => [
+                        '.section-material-single .main-card .tab-content .table-responsive .table-data-default thead' => [
                             'name' => 'Cabeçalho da tabela',
                             'title_color' => $dayColors["thead_table_color"],
                             'title_color_night' => $darkColors['thead_table_color'],
                             'background_color' => $dayColors["thead_table_bg_color"],
                             'background_color_night' => $darkColors['thead_table_bg_color'],
                         ],
-                        '.section-material .main-card .tab-content .table-responsive .table-data-default tbody tr td' => [
+                        '.section-material-single .main-card .tab-content .table-responsive .table-data-default tbody tr td' => [
                             'name' => 'Célula da tabela',
                             'title_color' => $dayColors["td_table_color"],
                             'title_color_night' => $darkColors['td_table_color'],

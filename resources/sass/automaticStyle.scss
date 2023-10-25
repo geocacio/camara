@@ -270,76 +270,70 @@
     color: #ffffff;
 }
 
-.night-mode .ssection-materials {
+.night-mode .section-materials {
     background-color: #121212;
 }
 
-.night-mode .ssection-materials .card-with-links {
+.night-mode .section-materials .card-with-links {
     background-color: #1e1e1e;
 }
 
-.night-mode .ssection-materials .card-with-links .body {
-    background-color: #1e1e1e;
+.night-mode .section-materials .card-with-links .header {
+    background-color: #0d0d0d;
 }
 
-.night-mode .ssection-materials .card-with-links .body .title {
+.night-mode .section-materials .card-with-links .header i {
+    color: #ffffff;
+}
+
+.night-mode .section-materials .card-with-links .body .title {
     color: #e2e2e2;
 }
 
-.night-mode .ssection-materials .card-with-links .body .description {
+.night-mode .section-materials .card-with-links .body .description {
     color: #9d9d9d;
 }
 
-.night-mode .ssection-materials .card-with-links .footer .links {
-    background-color: #3d4041;
-    color: #ffffff;
-}
-
-.night-mode .ssection-materials .card-with-links .footer .links:hover {
-    background-color: #2c2c2d;
-    color: #ffffff;
-}
-
-.night-mode .section-material {
+.night-mode .section-material-single {
     background-color: #121212;
 }
 
-.night-mode .section-material .main-card {
+.night-mode .section-material-single .main-card {
     background-color: #1e1e1e;
 }
 
-.night-mode .section-material .main-card .nav-item .nav-link {
+.night-mode .section-material-single .main-card .nav-item .nav-link {
     background-color: #1e1e1e;
     color: #939393;
 }
 
-.night-mode .section-material .main-card .nav-item .nav-link.active {
+.night-mode .section-material-single .main-card .nav-item .nav-link.active {
     background-color: #151515;
     color: #ffffff;
 }
 
-.night-mode .section-material .main-card .tab-content .name-managers {
+.night-mode .section-material-single .main-card .tab-content .name-managers {
     color: #e2e2e2;
 }
 
-.night-mode .section-material .main-card .tab-content .title {
+.night-mode .section-material-single .main-card .tab-content .title {
     color: #e2e2e2;
 }
 
-.night-mode .section-material .main-card .tab-content .description {
+.night-mode .section-material-single .main-card .tab-content .description {
     color: #9d9d9d;
 }
 
-.night-mode .section-material .main-card .tab-content .table-responsive .table-data-default {
+.night-mode .section-material-single .main-card .tab-content .table-responsive .table-data-default {
     background-color: #1e1e1e;
 }
 
-.night-mode .section-material .main-card .tab-content .table-responsive .table-data-default thead {
+.night-mode .section-material-single .main-card .tab-content .table-responsive .table-data-default thead {
     background-color: #151515;
     color: #e2e2e2;
 }
 
-.night-mode .section-material .main-card .tab-content .table-responsive .table-data-default tbody tr td {
+.night-mode .section-material-single .main-card .tab-content .table-responsive .table-data-default tbody tr td {
     background-color: #1e1e1e;
     color: #e2e2e2;
 }
@@ -1204,72 +1198,6 @@
     color: #9d9d9d;
 }
 
-.night-mode .container-service {
-    background-color: #1b1c1e;
-    color: #ffffff;
-}
-
-.night-mode .container-service:hover {
-    background-color: #1d1f42;
-    color: #ffffff;
-}
-
-.night-mode .container-service .description .title {
-    color: #ffffff;
-}
-
-.night-mode .container-service:hover .description .title {
-    color: #ffffff;
-}
-
-.night-mode .container-service .description .text {
-    color: #e8eaed;
-}
-
-.night-mode .container-service:hover .description .text {
-    color: #ffffff;
-}
-
-.night-mode .container-service i {
-    color: #c5c5c5;
-}
-
-.night-mode .container-service:hover i {
-    color: #ffffff;
-}
-
-.night-mode .posts-container .post {
-    background-color: #1b1c1e;
-}
-
-.night-mode .posts-container .post .content .date {
-    color: #dbdbdb;
-}
-
-.night-mode .posts-container .post .content .title {
-    color: #7276b9;
-}
-
-.night-mode .posts-container .post .content .text {
-    color: #dbdbdb;
-}
-
-.night-mode .main-style-list .item .link {
-    background-color: #1b1c1e;
-}
-
-.night-mode .main-style-list .item .link .title {
-    color: #dbdbdb;
-}
-
-.night-mode .main-style-list .item .link .description {
-    color: #f7f7f7;
-}
-
-.night-mode .main-style-list .item .link .additional-informations {
-    color: #f7f7f7;
-}
-
 .menu-topo {
     background-color: #004080;
 }
@@ -1543,76 +1471,70 @@
     color: #ffffff;
 }
 
-.ssection-materials {
+.section-materials {
     background-color: #e1e5e7;
 }
 
-.ssection-materials .card-with-links {
+.section-materials .card-with-links {
     background-color: #ffffff;
 }
 
-.ssection-materials .card-with-links .body {
-    background-color: #ffffff;
-}
-
-.ssection-materials .card-with-links .body .title {
-    color: #212529;
-}
-
-.ssection-materials .card-with-links .body .description {
-    color: #3c3e41;
-}
-
-.ssection-materials .card-with-links .footer .links {
-    background-color: transparent;
-    color: #00668b;
-}
-
-.ssection-materials .card-with-links .footer .links:hover {
+.section-materials .card-with-links .header {
     background-color: #00668b;
+}
+
+.section-materials .card-with-links .header i {
     color: #ffffff;
 }
 
-.section-material {
+.section-materials .card-with-links .body .title {
+    color: #212529;
+}
+
+.section-materials .card-with-links .body .description {
+    color: #3c3e41;
+}
+
+.section-material-single {
     background-color: #e1e5e7;
 }
 
-.section-material .main-card {
+.section-material-single .main-card {
     background-color: #ffffff;
 }
 
-.section-material .main-card .nav-item .nav-link {
+.section-material-single .main-card .nav-item .nav-link {
     background-color: #ffffff;
     color: #373c9b;
 }
 
-.section-material .main-card .nav-item .nav-link.active {
+.section-material-single .main-card .nav-item .nav-link.active {
     background-color: #dbdced;
     color: #373c9b;
 }
 
-.section-material .main-card .tab-content .name-managers {
+.section-material-single .main-card .tab-content .name-managers {
     color: #212529;
 }
 
-.section-material .main-card .tab-content .title {
+.section-material-single .main-card .tab-content .title {
     color: #212529;
 }
 
-.section-material .main-card .tab-content .description {
+.section-material-single .main-card .tab-content .description {
     color: #3c3e41;
 }
 
-.section-material .main-card .tab-content .table-responsive .table-data-default {
+.section-material-single .main-card .tab-content .table-responsive .table-data-default {
     background-color: #ffffff;
 }
 
-.section-material .main-card .tab-content .table-responsive .table-data-default thead {
+.section-material-single .main-card .tab-content .table-responsive .table-data-default thead {
     background-color: #00668b;
     color: #ffffff;
 }
 
-.section-material .main-card .tab-content .table-responsive .table-data-default tbody tr td {
+.section-material-single .main-card .tab-content .table-responsive .table-data-default tbody tr td {
     background-color: #ffffff;
     color: #454545;
 }
@@ -2475,76 +2397,5 @@
 
 .section-site-map .main-card .accordion-site-map .accordion-item {
     color: #3c3e41;
-}
-
-.container-service {
-    background-color: #e1e5e7;
-    color: #303030;
-}
-
-.container-service:hover {
-    background-color: #3F45B6;
-    color: #ffffff;
-}
-
-.container-service .description .title {
-    color: #303030;
-    font-size: 14px;
-}
-
-.container-service:hover .description .title {
-    color: #ffffff;
-}
-
-.container-service .description .text {
-    color: #303030;
-    font-size: 12px;
-}
-
-.container-service:hover .description .text {
-    color: #ffffff;
-}
-
-.container-service i {
-    color: #303030;
-}
-
-.container-service:hover i {
-    color: #ffffff;
-}
-
-.posts-container .post {
-    background-color: #ffffff;
-}
-
-.posts-container .post .content .date {
-    color: #212529;
-}
-
-.posts-container .post .content .title {
-    color: #242768;
-}
-
-.posts-container .post .content .text {
-    color: #212529;
-}
-
-.main-style-list .item .link {
-    background-color: #30358c;
-}
-
-.main-style-list .item .link .title {
-    color: #303030;
-    font-size: 14px;
-}
-
-.main-style-list .item .link .description {
-    color: #555555;
-    font-size: 13px;
-}
-
-.main-style-list .item .link .additional-informations {
-    color: #555555;
-    font-size: 13px;
 }
 
