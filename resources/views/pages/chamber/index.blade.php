@@ -84,7 +84,7 @@
                                 <div class="row gd-councilor-container">
                                     @foreach($item['councilors'] as $councilor)
                                         <div class="col-lg-6">
-                                            <a href="{{ route('vereador.show', $councilor->legislatureable->slug) }}" class="councilor-items">
+                                            <a href="{{ route('vereador.single', $councilor->legislatureable->slug) }}" class="councilor-items">
                                                 <figure class="figure">
                                                     <img class="image" src="{{ asset('storage/'.$councilor->legislatureable->files[0]->file->url) }}" alt="">
                                                 </figure>
@@ -102,7 +102,7 @@
                                 <div class="row gd-councilor-container">
                                     @foreach($item['councilors'] as $councilor)
                                         <div class="col-lg-6">
-                                            <a href="{{ route('vereador.show', $councilor->slug) }}" class="councilor-items">
+                                            <a href="{{ route('vereador.single', $councilor->slug) }}" class="councilor-items">
                                                 <figure class="figure">
                                                     <img class="image" src="{{ asset('storage/'.$councilor->files[0]->file->url) }}" alt="">
                                                 </figure>

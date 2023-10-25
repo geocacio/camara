@@ -490,7 +490,7 @@ Route::match(['get', 'post'], '/cartaservicos', [ServiceLetterController::class,
 Route::get('/cartaservicos/{serviceLetter:slug}', [ServiceLetterController::class, 'show'])->name('serviceLetter.show');
 Route::get('/a-camara', [ChamberController::class, 'index'])->name('a-camara.show');
 
-Route::get('/vereadores/{councilor:slug}', [CouncilorController::class, 'show'])->name('vereador.show');
+Route::get('/vereadores/{councilor:slug}', [CouncilorController::class, 'show'])->name('vereador.single');
 Route::match(['get', 'post'], '/legislaturas/vereadores/{legislature:slug?}', [CouncilorController::class, 'allcouncilors'])->name('vereadores-all');
 
 Route::match(['get', 'post'], 'materiais', [MaterialController::class, 'allMaterials'])->name('materiais-all');

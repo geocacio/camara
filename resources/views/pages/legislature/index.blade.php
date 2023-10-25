@@ -22,7 +22,7 @@
 
 
 
-<section class="section-legislature adjust-min-height no-padding-top">
+<section class="section-legislatures adjust-min-height no-padding-top">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -76,10 +76,10 @@
                                 <div class="body">
                                     <h3 class="title">Legislatura: ({{ date('Y', strtotime($legislature->start_date)) }} - {{ date('Y', strtotime($legislature->end_date)) }})</h3>
                                     <ul>
-                                        <li>Início:
+                                        <li class="description">Início:
                                             {{ date('d/m/Y', strtotime($legislature->start_date)) }}
                                         </li>
-                                        <li>
+                                        <li class="description">
                                             Fim:
                                             {{ date('d/m/Y', strtotime($legislature->end_date)) }}
                                         </li>
