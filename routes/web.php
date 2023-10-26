@@ -29,10 +29,13 @@ use App\Http\Controllers\DailyController;
 use App\Http\Controllers\DailyPageController;
 use App\Http\Controllers\DecreesController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DictionaryController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ExternalLinkController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\GlossaryController;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\LaiController;
 use App\Http\Controllers\LawController;
 use App\Http\Controllers\LegislatureController;
 use App\Http\Controllers\LinkController;
@@ -218,6 +221,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/sectors/{sector:slug}/employees/{id}/change-satus', [SectorEmployeesController::class, 'changeStatus'])->name('sectors.employee.changeStatus');
         Route::resource('/employees', EmployeeController::class);
         Route::resource('/offices', OfficeController::class);
+        Route::resource('/lai', LaiController::class);
+        Route::resource('/glossary', GlossaryController::class);
+        Route::resource('/dictionary', DictionaryController::class);
 
         //Routes linked to biddings
         Route::resource('/progress', ProgressController::class);

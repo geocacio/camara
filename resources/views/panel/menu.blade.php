@@ -501,6 +501,18 @@
             <span>Sumário</span>
         </a>
     </li>
+    <li class="menu-item {{ request()->routeIs('glossary.index') ? 'active' : '' }}">
+        <a href="{{ route('glossary.index') }}" class="menu-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            <span>Glossário</span>
+        </a>
+    </li>
     <li class="menu-item {{ request()->routeIs('biddings.index') || Str::contains(url()->current(), 'categories/modalidades') || Str::contains(url()->current(), 'categories/responsabilidades') || Str::contains(url()->current(), 'types/biddings') ? 'active' : '' }}">
         <button class="menu-link" data-toggle="collapse" data-target="#collapseBidding" aria-expanded="true" aria-controls="collapseBidding">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
@@ -558,6 +570,12 @@
         <a href="{{ route('acessibility.index') }}" class="menu-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-smile"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
             <span>Acessibilidade</span>
+        </a>
+    </li>
+    <li class="menu-item {{ request()->routeIs('lai.index') ? 'active' : '' }}">
+        <a href="{{ route('lai.index') }}" class="menu-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-smile"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+            <span>Lai</span>
         </a>
     </li>
     <li class="menu-item {{ request()->routeIs('pages.index') || request()->routeIs('links.index') || request()->routeIs('menus.index') || request()->routeIs('settings.index') ? 'active' : '' }}">
