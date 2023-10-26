@@ -71,6 +71,11 @@ class Councilor extends Model
     {
         return $this->morphMany(CommissionLink::class, 'linkable');
     }
+
+    public function authors()
+    {
+        return $this->hasMany(Author::class);
+    }
     
     public function sessionAttendance(){
         return $this->hasMany(SessionAttendance::class);

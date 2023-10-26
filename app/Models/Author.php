@@ -12,16 +12,17 @@ class Author extends Model
 
     protected $fillable = [
         'material_id',
-        'name',
-        'position',
-        'party',
+        'councilor_id',
         'authorship',
-        'slug',
     ];
 
     public function material()
     {
         return $this->belongsTo(Material::class);
+    }
+    public function councilor()
+    {
+        return $this->belongsTo(Councilor::class);
     }
 
     public static function uniqSlug($name)
@@ -42,10 +43,5 @@ class Author extends Model
         }
 
         return $slug;
-    }
-
-    public function getRouteKeyName()
-    {
-        return 'slug';
     }
 }
