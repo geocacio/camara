@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Glossary;
+use App\Models\Dictionary;
 use Illuminate\Http\Request;
 
-class GlossaryController extends Controller
+class DictionaryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $glossarys = Glossary::all();
+        $dicionaries = Dictionary::all();
 
-        return view('panel.glossary.index', compact('glossarys'));
+        return view('panel.dictionary.index', compact('dicionaries'));
     }
 
     /**
@@ -22,7 +22,7 @@ class GlossaryController extends Controller
      */
     public function create()
     {
-        return view('panel.glossary.create');
+        return view('panel.dictionary.create');
     }
 
     /**
@@ -38,12 +38,12 @@ class GlossaryController extends Controller
            'description.required' => 'O campo descrição é obrigatorio' 
         ]);
 
-        $validateData['slug'] = Glossary::uniqSlug($validateData['title']);
+        $validateData['slug'] = Dictionary::uniqSlug($validateData['title']);
 
-        $glossary = Glossary::create($validateData);
+        $dictionary = Dictionary::create($validateData);
 
-        if($glossary){
-            return redirect()->route('glossary.index')->with('success', 'Glossário cadastrado com sucesso!');
+        if($dictionary){
+            return redirect()->route('dictionary.index')->with('success', 'Dicionário cadastrado com sucesso!');
         }
         return redirect()->back()->with('error', 'Por favor tente novamente!');
     }
@@ -51,7 +51,7 @@ class GlossaryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Glossary $glossary)
+    public function show(Dictionary $dictionary)
     {
         //
     }
@@ -59,15 +59,15 @@ class GlossaryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Glossary $glossary)
+    public function edit(Dictionary $dictionary)
     {
-        return view('panel.glossary.edit', compact('glossary'));
+        return view('panel.dictionary.edit', compact('dictionary'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Glossary $glossary)
+    public function update(Request $request, Dictionary $dictionary)
     {
         $validateData = $request->validate([
             'title' => 'required',
@@ -77,8 +77,8 @@ class GlossaryController extends Controller
            'description.required' => 'O campo descrição é obrigatorio' 
         ]);
 
-        if($glossary->update($validateData)){
-            return redirect()->route('glossary.index')->with('success', 'Glossário atualizado com sucesso!');
+        if($dictionary->update($validateData)){
+            return redirect()->route('dictionary.index')->with('success', 'Dicionário atualizado com sucesso!');
         }
         return redirect()->back()->with('error', 'Por favor tente novamente!');
     }
@@ -86,10 +86,10 @@ class GlossaryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Glossary $glossary)
+    public function destroy(Dictionary $dictionary)
     {
-        if($glossary->delete()){
-            return redirect()->back()->with('success', 'Glossário excluido com sucesso');
+        if($dictionary->delete()){
+            return redirect()->back()->with('success', 'Dicionário excluido com sucesso');
         }
         return redirect()->back()->with('error', 'Por favor tente novamente');
     }

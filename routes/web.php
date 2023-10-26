@@ -28,6 +28,7 @@ use App\Http\Controllers\DailyController;
 use App\Http\Controllers\DailyPageController;
 use App\Http\Controllers\DecreesController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DictionaryController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ExternalLinkController;
 use App\Http\Controllers\FileController;
@@ -216,6 +217,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('/offices', OfficeController::class);
         Route::resource('/lai', LaiController::class);
         Route::resource('/glossary', GlossaryController::class);
+        Route::resource('/dictionary', DictionaryController::class);
 
         //Routes linked to biddings
         Route::resource('/progress', ProgressController::class);
