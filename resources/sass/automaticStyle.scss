@@ -279,7 +279,7 @@
 }
 
 .night-mode .section-materials .card-with-links .header {
-    background-color: #0d0d0d;
+    background-color: #00668b;
 }
 
 .night-mode .section-materials .card-with-links .header i {
@@ -1196,6 +1196,72 @@
 
 .night-mode .section-site-map .main-card .accordion-site-map .accordion-item {
     color: #9d9d9d;
+}
+
+.night-mode .container-service {
+    background-color: #1b1c1e;
+    color: #ffffff;
+}
+
+.night-mode .container-service:hover {
+    background-color: #1d1f42;
+    color: #ffffff;
+}
+
+.night-mode .container-service .description .title {
+    color: #ffffff;
+}
+
+.night-mode .container-service:hover .description .title {
+    color: #ffffff;
+}
+
+.night-mode .container-service .description .text {
+    color: #e8eaed;
+}
+
+.night-mode .container-service:hover .description .text {
+    color: #ffffff;
+}
+
+.night-mode .container-service i {
+    color: #c5c5c5;
+}
+
+.night-mode .container-service:hover i {
+    color: #ffffff;
+}
+
+.night-mode .posts-container .post {
+    background-color: #1b1c1e;
+}
+
+.night-mode .posts-container .post .content .date {
+    color: #dbdbdb;
+}
+
+.night-mode .posts-container .post .content .title {
+    color: #7276b9;
+}
+
+.night-mode .posts-container .post .content .text {
+    color: #dbdbdb;
+}
+
+.night-mode .main-style-list .item .link {
+    background-color: #1b1c1e;
+}
+
+.night-mode .main-style-list .item .link .title {
+    color: #dbdbdb;
+}
+
+.night-mode .main-style-list .item .link .description {
+    color: #f7f7f7;
+}
+
+.night-mode .main-style-list .item .link .additional-informations {
+    color: #f7f7f7;
 }
 
 .menu-topo {
@@ -2397,5 +2463,76 @@
 
 .section-site-map .main-card .accordion-site-map .accordion-item {
     color: #3c3e41;
+}
+
+.container-service {
+    background-color: #e1e5e7;
+    color: #303030;
+}
+
+.container-service:hover {
+    background-color: #3F45B6;
+    color: #ffffff;
+}
+
+.container-service .description .title {
+    color: #303030;
+    font-size: 14px;
+}
+
+.container-service:hover .description .title {
+    color: #ffffff;
+}
+
+.container-service .description .text {
+    color: #303030;
+    font-size: 12px;
+}
+
+.container-service:hover .description .text {
+    color: #ffffff;
+}
+
+.container-service i {
+    color: #303030;
+}
+
+.container-service:hover i {
+    color: #ffffff;
+}
+
+.posts-container .post {
+    background-color: #ffffff;
+}
+
+.posts-container .post .content .date {
+    color: #212529;
+}
+
+.posts-container .post .content .title {
+    color: #242768;
+}
+
+.posts-container .post .content .text {
+    color: #212529;
+}
+
+.main-style-list .item .link {
+    background-color: #30358c;
+}
+
+.main-style-list .item .link .title {
+    color: #303030;
+    font-size: 14px;
+}
+
+.main-style-list .item .link .description {
+    color: #555555;
+    font-size: 13px;
+}
+
+.main-style-list .item .link .additional-informations {
+    color: #555555;
+    font-size: 13px;
 }
 
