@@ -31,6 +31,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ExternalLinkController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\GlossaryController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\LaiController;
 use App\Http\Controllers\LawController;
@@ -214,6 +215,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('/employees', EmployeeController::class);
         Route::resource('/offices', OfficeController::class);
         Route::resource('/lai', LaiController::class);
+        Route::resource('/glossary', GlossaryController::class);
 
         //Routes linked to biddings
         Route::resource('/progress', ProgressController::class);
