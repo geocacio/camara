@@ -67,6 +67,7 @@ use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\PublicationFormController;
 use App\Http\Controllers\PublicationPageController;
 use App\Http\Controllers\ResponsibilityController;
+use App\Http\Controllers\RoleCouncilorController;
 use App\Http\Controllers\SatisfactionSurveyController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SecretaryController;
@@ -218,6 +219,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('/lai', LaiController::class);
         Route::resource('/glossary', GlossaryController::class);
         Route::resource('/dictionary', DictionaryController::class);
+        Route::resource('/role-councilor', RoleCouncilorController::class);
 
         //Routes linked to biddings
         Route::resource('/progress', ProgressController::class);
