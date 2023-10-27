@@ -2,11 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Page;
 use App\Models\RoleCouncilor;
+use App\Models\TransparencyGroup;
 use Illuminate\Http\Request;
 
 class RoleCouncilorController extends Controller
 {
+
+    public function page()
+    {
+        $page_role_councilor = Page::where('name', 'Papel do vereador')->first();
+        $groups = TransparencyGroup::all();
+        return view('panel.councilor.role.page.edit', compact('page_role_councilor', 'groups'));
+    }
+
+    public function pageUpdate(Request $request)
+    {
+        $validateData = $request->validate([
+            'transparency_group_id' => 'required',
+            'main_title' => 'required',
+            'title' => 'required',
+            'icon' => 'nullable',
+            'description' => 'nullable',
+        ], [
+            'main_title.required' => 'O campo título principal é obrigatório',
+            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
+            'title.required' => 'O campo título é obrigatório'
+        ]);
+        $validateData['visibility'] = $request->visibility ? $request->visibility : 'disabled';
+
+        $page_role_councilor = Page::where('name', 'Papel do vereador')->first();
+
+        if ($page_role_councilor->update($validateData)) {
+            $page_role_councilor->groupContents()->delete();
+            $page_role_councilor->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+            return redirect()->route('councilor.role.page')->with('success', 'Informações atualizadas com sucesso!');
+        }
+        return redirect()->route('councilor.role.page')->with('error', 'Por favor tente novamente!');
+    }
     /**
      * Display a listing of the resource.
      */

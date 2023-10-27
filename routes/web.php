@@ -227,6 +227,9 @@ Route::middleware('auth')->group(function () {
         Route::resource('/lai', LaiController::class);
         Route::resource('/glossary', GlossaryController::class);
         Route::resource('/dictionary', DictionaryController::class);
+
+        Route::get('role-councilor-page', [RoleCouncilorController::class, 'page'])->name('role.councilor.page');
+        Route::put('role-councilor-page', [RoleCouncilorController::class, 'pageUpdate'])->name('role.councilor.page.update');
         Route::resource('/role-councilor', RoleCouncilorController::class);
         Route::resource('/role-chambers', RoleChamberController::class);
 
