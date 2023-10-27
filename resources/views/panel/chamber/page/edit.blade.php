@@ -17,33 +17,33 @@
 @endif
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('chamber.page.update', $page_material->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('chamber.page.update', $page_role_chamber->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="row">
                 <div class="col-md-2">
                     <div class="form-group">
                         <label>Ícone</label>
-                        <input type="text" name="icon" class="form-control icon" autocomplete="off" value="{{ old('icon', $page_material->icon) }}" onfocus="getIconInputValues(event)">
+                        <input type="text" name="icon" class="form-control icon" autocomplete="off" value="{{ old('icon', $page_role_chamber->icon) }}" onfocus="getIconInputValues(event)">
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">
                         <label>Título Principal</label>
-                        <input type="text" name="main_title" class="form-control" autocomplete="off" value="{{ old('main_title', $page_material->main_title) }}">
+                        <input type="text" name="main_title" class="form-control" autocomplete="off" value="{{ old('main_title', $page_role_chamber->main_title) }}">
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">
                         <label>Título</label>
-                        <input type="text" name="title" class="form-control" autocomplete="off" value="{{ old('title', $page_material->title) }}">
+                        <input type="text" name="title" class="form-control" autocomplete="off" value="{{ old('title', $page_role_chamber->title) }}">
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
                 <label>Text</label>
-                <input type="text" name="description" class="form-control" autocomplete="off" value="{{ old('description', $page_material->description) }}">
+                <input type="text" name="description" class="form-control" autocomplete="off" value="{{ old('description', $page_role_chamber->description) }}">
             </div>
 
             <div class="form-group">
@@ -51,7 +51,7 @@
                 <select name="transparency_group_id" class="form-control">
                     <option value="">Selecione o grupo</option>
                     @foreach($groups as $group)
-                    <option value="{{ $group->id }}" {{ $page_material->groupContents && $page_material->groupContents->transparency_group_id && $group->id == $page_material->groupContents->transparency_group_id ? 'selected' : '' }}>{{ $group->title }} - {{ $group->description }}</option>
+                    <option value="{{ $group->id }}" {{ $page_role_chamber->groupContents && $page_role_chamber->groupContents->transparency_group_id && $group->id == $page_role_chamber->groupContents->transparency_group_id ? 'selected' : '' }}>{{ $group->title }} - {{ $group->description }}</option>
                     @endforeach
                 </select>
             </div>
@@ -60,7 +60,7 @@
                 <label>Ativado/Desativado</label>
                 <div class="d-flex align-items-center justify-content-center w-fit-content actions">
                     <div class="toggle-switch cmt-4">
-                        <input type="checkbox" id="checklist" name="visibility" value="enabled" class="toggle-input" {{ $page_material->visibility == 'enabled' ? 'checked' : ''}}>
+                        <input type="checkbox" id="checklist" name="visibility" value="enabled" class="toggle-input" {{ $page_role_chamber->visibility == 'enabled' ? 'checked' : ''}}>
                         <label for="checklist" class="toggle-label no-margin"></label>
                     </div>
                 </div>

@@ -32,11 +32,11 @@ class RoleChamberController extends Controller
         ]);
         $validateData['visibility'] = $request->visibility ? $request->visibility : 'disabled';
 
-        $page_material = Page::where('name', 'Papel da Câmara')->first();
+        $page_role_chamber = Page::where('name', 'Papel da Câmara')->first();
 
-        if ($page_material->update($validateData)) {
-            $page_material->groupContents()->delete();
-            $page_material->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+        if ($page_role_chamber->update($validateData)) {
+            $page_role_chamber->groupContents()->delete();
+            $page_role_chamber->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
             return redirect()->route('chamber.page')->with('success', 'Informações atualizadas com sucesso!');
         }
         return redirect()->route('chamber.page')->with('error', 'Por favor tente novamente!');
