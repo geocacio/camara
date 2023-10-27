@@ -3,10 +3,43 @@
 namespace App\Http\Controllers;
 
 use App\Models\Glossary;
+use App\Models\Page;
+use App\Models\TransparencyGroup;
 use Illuminate\Http\Request;
 
 class GlossaryController extends Controller
 {
+    public function page()
+    {
+        $page_glossaty = Page::where('name', 'Glossário')->first();
+        $groups = TransparencyGroup::all();
+        return view('panel.glossary.page.edit', compact('page_glossaty', 'groups'));
+    }
+
+    public function pageUpdate(Request $request)
+    {
+        $validateData = $request->validate([
+            'transparency_group_id' => 'required',
+            'main_title' => 'required',
+            'title' => 'required',
+            'icon' => 'nullable',
+            'description' => 'nullable',
+        ], [
+            'main_title.required' => 'O campo título principal é obrigatório',
+            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
+            'title.required' => 'O campo título é obrigatório'
+        ]);
+        $validateData['visibility'] = $request->visibility ? $request->visibility : 'disabled';
+
+        $page_glossaty = Page::where('name', 'Glossário')->first();
+
+        if ($page_glossaty->update($validateData)) {
+            $page_glossaty->groupContents()->delete();
+            $page_glossaty->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+            return redirect()->route('glossary.page')->with('success', 'Informações atualizadas com sucesso!');
+        }
+        return redirect()->back('glossary.page')->with('error', 'Por favor tente novamente!');
+    }
     /**
      * Display a listing of the resource.
      */

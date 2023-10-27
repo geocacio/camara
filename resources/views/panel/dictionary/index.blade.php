@@ -78,7 +78,7 @@
         </div>
         @else
         <div class="no-data">
-            <span>Ainda não existem glossários cadastrados.</span>
+            <span>Ainda não existem dicionários cadastrados.</span>
         </div>
         @endif
 

@@ -13,6 +13,7 @@
                 <div class="dropdown-menu">
                     {{-- <a class="dropdown-item" href="{{ route('commissions.page') }}">Página</a> --}}
                     <a class="dropdown-item" href="{{ route('glossary.create') }}">Novo</a>
+                    <a class="dropdown-item" href="{{ route('glossary.page') }}">Página</a>
                 </div>
             </div>
         
