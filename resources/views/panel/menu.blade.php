@@ -367,7 +367,30 @@
     </li>
 
 
-    <li class="menu-item {{ request()->routeIs('role-chambers.index') ? 'active' : '' }}">
+    <li class="menu-item {{ request()->routeIs('role.councilor.page') || request()->routeIs('role-councilor.index') ? 'active' : '' }}">
+        <button class="menu-link active" data-toggle="collapse" data-target="#roleCouncilor" aria-expanded="true" aria-controls="roleCouncilor">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            <span>Papel do Vereador</span>
+        </button>
+
+        <div id="roleCouncilor" class="collapse">
+            <ul class="sub-menu">
+                <li class="sub-item {{ request()->routeIs('role.councilor.page') ? 'active' : '' }}">
+                    <a href="{{ route('role.councilor.page') }}" class="sub-link">Página</a>
+                </li>
+                <li class="sub-item {{ request()->routeIs('role-councilor.index') ? 'active' : '' }}">
+                    <a href="{{ route('role-councilor.index') }}" class="sub-link">Novo</a>
+                </li>
+            </ul>
+        </div>
+    </li>
+
+    <li class="menu-item {{ request()->routeIs('chamber.page') || request()->routeIs('role-chambers.index') ? 'active' : '' }}">
         <button class="menu-link active" data-toggle="collapse" data-target="#roleChamber" aria-expanded="true" aria-controls="roleChamber">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid">
                 <rect x="3" y="3" width="7" height="7"></rect>
@@ -380,10 +403,10 @@
 
         <div id="roleChamber" class="collapse">
             <ul class="sub-menu">
-                <li class="sub-item">
+                <li class="sub-item {{ request()->routeIs('chamber.page') ? 'active' : '' }}">
                     <a href="{{ route('chamber.page') }}" class="sub-link">Página</a>
                 </li>
-                <li class="sub-item">
+                <li class="sub-item {{ request()->routeIs('role-chambers.index') ? 'active' : '' }}">
                     <a href="{{ route('role-chambers.index') }}" class="sub-link">Novo</a>
                 </li>
             </ul>
