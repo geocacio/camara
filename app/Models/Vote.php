@@ -10,10 +10,15 @@ class Vote extends Model
     use HasFactory;
 
     protected $fillable = [
+        'councilor_id',
         'voteable_id',
         'voteable_type',
         'vote',
     ];
+
+    public function councilors(){
+        return $this->belongsTo(Councilor::class);
+    }
 
     public function voteable()
     {

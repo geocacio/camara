@@ -32,8 +32,6 @@ class Councilor extends Model
         return $this->legislatureRelations()->orderBy('final_period', 'desc')->first();
     }
 
-
-
     public function mandates(){
         return $this->hasMany(Mandate::class);
     }
@@ -79,6 +77,9 @@ class Councilor extends Model
     
     public function sessionAttendance(){
         return $this->hasMany(SessionAttendance::class);
+    }
+    public function votes(){
+        return $this->hasMany(Vote::class);
     }
 
     public function getCurrentCouncilors()

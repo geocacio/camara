@@ -43,6 +43,7 @@ use App\Http\Controllers\LRFController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\MandateController;
 use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\MaterialVoteController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ModelController;
 use App\Http\Controllers\OfficeController;
@@ -181,7 +182,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('/materials', MaterialController::class);
         Route::resource('/materials/{material}/authors', AuthorController::class);
         Route::resource('/materials/{material}/recipients', RecipientController::class);
-        Route::resource('/materials/{material}/votes', VoteController::class);
+        Route::resource('/materials/{material}/votes', MaterialVoteController::class);
 
         Route::get('councilors-page', [CouncilorController::class, 'page'])->name('councilors.page');
         Route::put('councilors-page', [CouncilorController::class, 'pageUpdate'])->name('councilors.page.update');
