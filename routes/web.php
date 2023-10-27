@@ -225,12 +225,14 @@ Route::middleware('auth')->group(function () {
         Route::resource('/employees', EmployeeController::class);
         Route::resource('/offices', OfficeController::class);
         Route::resource('/lai', LaiController::class);
-        
+
         Route::resource('/glossary', GlossaryController::class);
         Route::get('glossary-page', [GlossaryController::class, 'page'])->name('glossary.page');
         Route::put('glossary-page', [GlossaryController::class, 'pageUpdate'])->name('glossary.page.update');
-
+        
         Route::resource('/dictionary', DictionaryController::class);
+        Route::get('dictionary-page', [DictionaryController::class, 'page'])->name('dictionary.page');
+        Route::put('dictionary-page', [DictionaryController::class, 'pageUpdate'])->name('dictionary.page.update');
 
         Route::get('role-councilor-page', [RoleCouncilorController::class, 'page'])->name('role.councilor.page');
         Route::put('role-councilor-page', [RoleCouncilorController::class, 'pageUpdate'])->name('role.councilor.page.update');

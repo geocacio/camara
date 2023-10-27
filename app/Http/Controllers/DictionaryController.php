@@ -3,10 +3,43 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dictionary;
+use App\Models\Page;
+use App\Models\TransparencyGroup;
 use Illuminate\Http\Request;
 
 class DictionaryController extends Controller
 {
+    public function page()
+    {
+        $page_dictionary = Page::where('name', 'Dicionário')->first();
+        $groups = TransparencyGroup::all();
+        return view('panel.dictionary.page.edit', compact('page_dictionary', 'groups'));
+    }
+
+    public function pageUpdate(Request $request)
+    {
+        $validateData = $request->validate([
+            'transparency_group_id' => 'required',
+            'main_title' => 'required',
+            'title' => 'required',
+            'icon' => 'nullable',
+            'description' => 'nullable',
+        ], [
+            'main_title.required' => 'O campo título principal é obrigatório',
+            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
+            'title.required' => 'O campo título é obrigatório'
+        ]);
+        $validateData['visibility'] = $request->visibility ? $request->visibility : 'disabled';
+
+        $page_dictionary = Page::where('name', 'Dicionário')->first();
+
+        if ($page_dictionary->update($validateData)) {
+            $page_dictionary->groupContents()->delete();
+            $page_dictionary->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+            return redirect()->route('dictionary.page')->with('success', 'Informações atualizadas com sucesso!');
+        }
+        return redirect()->back('dictionary.page')->with('error', 'Por favor tente novamente!');
+    }
     /**
      * Display a listing of the resource.
      */
