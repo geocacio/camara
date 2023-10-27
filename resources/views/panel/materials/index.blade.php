@@ -23,7 +23,7 @@
 
         @if($materials && $materials->count() > 0)
         <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-striped table-with-dropdown">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -43,7 +43,53 @@
                         <td>{{ $material->type->name}}</td>
                         <td>{{ $material->category->name}}</td>
                         <td class="actions text-center">
-                            <a href="{{ route('materials.edit', $material->slug) }}" class="link edit"><i class="fas fa-edit"></i></a>
+
+
+                            <div class="btn-group dropleft">
+                                <a class="link create" href="#" role="button" id="dropdownMenuLink7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa-solid fa-gear"></i>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="{{ route('authors.index', $material->slug) }}">Subescritores</a>
+                                    <a class="dropdown-item" href="{{ route('recipients.index', $material->slug) }}">Destinatários</a>
+                                    <a class="dropdown-item" href="{{ route('votes.index', $material->slug) }}">Votações</a>
+                                    <a class="dropdown-item" href="{{ route('materials.edit', $material->slug) }}">Editar</a>
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#myModal-{{ $material->id }}" href="#">Excluir</a>
+                                </div>
+
+                                <div id="myModal-{{ $material->id }}" class="modal fade modal-warning" role="dialog">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <span class="icon" data-v-988dbcee=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-octagon" data-v-988dbcee="">
+                                                        <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2" data-v-988dbcee=""></polygon>
+                                                        <line x1="12" y1="8" x2="12" y2="12" data-v-988dbcee=""></line>
+                                                        <line x1="12" y1="16" x2="12.01" y2="16" data-v-988dbcee=""></line>
+                                                    </svg></span>
+                                                <span class="title">Você tem certeza?</span>
+                                                <span class="message">Você realmente quer apagar este item?<br> Esta ação não poderá ser desfeita.</span>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-cancel" data-dismiss="modal">Cancelar</button>
+                                                <a href="#" class="btn btn-default" onclick="event.preventDefault();
+                                                document.getElementById('delete-form-{{ $material->id }}').submit();">
+                                                    Deletar
+                                                </a>
+
+                                                <form id="delete-form-{{ $material->id }}" action="{{ route('materials.destroy', $material->slug) }}" method="post" style="display: none;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            {{-- <a href="{{ route('materials.edit', $material->slug) }}" class="link edit"><i class="fas fa-edit"></i></a>
                             <a data-toggle="modal" data-target="#myModal-{{$material->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a>
 
                             <div id="myModal-{{$material->id}}" class="modal fade modal-warning" role="dialog">
@@ -75,7 +121,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </td>
                     </tr>

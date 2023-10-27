@@ -107,7 +107,7 @@
                                     <h3 class="title">{{ $session->id }}/{{ date('Y', strtotime($session->date)) }}</h3>
                                     <p class="description">{{ $session->description }}</p>
                                     <ul>
-                                        <li>
+                                        <li class="description">
                                             <i class="fa-solid fa-calendar-days"></i>
                                             {{ date('d/m/Y', strtotime($session->date)) }}
                                         </li>

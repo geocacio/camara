@@ -5,6 +5,7 @@ use App\Http\Controllers\AgreementContractController;
 use App\Http\Controllers\AgreementController;
 use App\Http\Controllers\AgreementFileController;
 use App\Http\Controllers\AgreementTransferController;
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\AvailableFilesController;
 use App\Http\Controllers\BiddingController;
 use App\Http\Controllers\CategoryController;
@@ -66,6 +67,7 @@ use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\PublicationFormController;
 use App\Http\Controllers\PublicationPageController;
+use App\Http\Controllers\RecipientController;
 use App\Http\Controllers\ResponsibilityController;
 use App\Http\Controllers\RoleChamberController;
 use App\Http\Controllers\RoleCouncilorController;
@@ -94,6 +96,7 @@ use App\Http\Controllers\TransparencyPortalController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\VoteController;
 use App\Models\ServiceLetter;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
@@ -176,6 +179,9 @@ Route::middleware('auth')->group(function () {
         Route::get('materials-page', [MaterialController::class, 'page'])->name('materials.page');
         Route::put('materials-page', [MaterialController::class, 'pageUpdate'])->name('materials.page.update');
         Route::resource('/materials', MaterialController::class);
+        Route::resource('/materials/{material}/authors', AuthorController::class);
+        Route::resource('/materials/{material}/recipients', RecipientController::class);
+        Route::resource('/materials/{material}/votes', VoteController::class);
 
         Route::get('councilors-page', [CouncilorController::class, 'page'])->name('councilors.page');
         Route::put('councilors-page', [CouncilorController::class, 'pageUpdate'])->name('councilors.page.update');
@@ -500,7 +506,7 @@ Route::match(['get', 'post'], '/cartaservicos', [ServiceLetterController::class,
 Route::get('/cartaservicos/{serviceLetter:slug}', [ServiceLetterController::class, 'show'])->name('serviceLetter.show');
 Route::get('/a-camara', [ChamberController::class, 'index'])->name('a-camara.show');
 
-Route::get('/vereadores/{councilor:slug}', [CouncilorController::class, 'show'])->name('vereador.show');
+Route::get('/vereadores/{councilor:slug}', [CouncilorController::class, 'show'])->name('vereador.single');
 Route::match(['get', 'post'], '/legislaturas/vereadores/{legislature:slug?}', [CouncilorController::class, 'allcouncilors'])->name('vereadores-all');
 
 Route::match(['get', 'post'], 'materiais', [MaterialController::class, 'allMaterials'])->name('materiais-all');
