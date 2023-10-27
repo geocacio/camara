@@ -1193,6 +1193,108 @@ $data = [
             ],
         ]
     ],
+    [
+        'page' => 'Papel do vereador',
+        'route' => 'papel-vereador',
+        'sections' => [
+            [
+                'component' => 'Section',
+                'name' => 'Seção Papel do vereador',
+                'styles' => [
+                    'classes' => [
+                        '.section-legislature' => [
+                            'name' => 'Seção',
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                        '.section-legislature .main-card' => [
+                            'name' => 'Card dos Vereadores',
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.section-legislature .main-card .councilor-items' => [
+                            'name' => 'Card do Vereador',
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.section-legislature .main-card .councilor-items .info .title' => [
+                            'name' => 'Título do card do vereador',
+                                'title_color' => $dayColors["title_color"],
+                                'title_color_night' => $darkColors['title_color'],
+                        ],
+                    ]
+                ]
+            ],
+        ]
+    ],
+    [
+        'page' => 'Papel da Câmara',
+        'route' => 'papel-camara',
+        'sections' => [
+            [
+                'component' => 'Section',
+                'name' => 'Seção Papel da câmara',
+                'styles' => [
+                    'classes' => [
+                        '.section-legislature' => [
+                            'name' => 'Seção',
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                        '.section-legislature .main-card' => [
+                            'name' => 'Card dos Vereadores',
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.section-legislature .main-card .councilor-items' => [
+                            'name' => 'Card do Vereador',
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.section-legislature .main-card .councilor-items .info .title' => [
+                            'name' => 'Título do card do vereador',
+                                'title_color' => $dayColors["title_color"],
+                                'title_color_night' => $darkColors['title_color'],
+                        ],
+                    ]
+                ]
+            ],
+        ]
+    ],
+    [
+        'page' => 'Regulamentação da Lai',
+        'route' => 'regulamentacao-lai',
+        'sections' => [
+            [
+                'component' => 'Section',
+                'name' => 'Seção Regulamentação da Lai',
+                'styles' => [
+                    'classes' => [
+                        '.section-legislature' => [
+                            'name' => 'Seção',
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                        '.section-legislature .main-card' => [
+                            'name' => 'Card dos Vereadores',
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.section-legislature .main-card .councilor-items' => [
+                            'name' => 'Card do Vereador',
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.section-legislature .main-card .councilor-items .info .title' => [
+                            'name' => 'Título do card do vereador',
+                                'title_color' => $dayColors["title_color"],
+                                'title_color_night' => $darkColors['title_color'],
+                        ],
+                    ]
+                ]
+            ],
+        ]
+    ],
 
     // [
     //     'page' => 'Home',
@@ -1504,8 +1606,96 @@ $data = [
         ]
     ],
     [
-        'page' => 'Pesquisa de Satisfação',
+        'page' => 'Pesquisa de Satisfação da Ouvidoria',
         'route' => 'survey.show',
+        'sections' => [
+            [
+                'component' => 'carrouselBanners',
+                'name' => 'Carrousel de banners',
+                'styles' => [
+                    'classes' => [
+                        '.section-ombudsman-survey-satisfaction' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                        '.section-ombudsman-survey-satisfaction .main-card' => [
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.section-ombudsman-survey-satisfaction .main-card .title' => [
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.section-ombudsman-survey-satisfaction .main-card .group-links .link' => [
+                            'title_color' => $dayColors["ombudsman_menu_link_color"],
+                            'title_color_night' => $darkColors['ombudsman_menu_link_color'],
+                            'background_color' => $dayColors["ombudsman_menu_link_bg_color"],
+                            'background_color_night' => $darkColors['ombudsman_menu_link_bg_color'],
+                        ],
+                        '.section-ombudsman-survey-satisfaction .main-card .group-links .link.active' => [
+                            'title_color' => $dayColors["ombudsman_menu_link_color_active"],
+                            'title_color_night' => $darkColors['ombudsman_menu_link_color_active'],
+                            'background_color' => $dayColors["ombudsman_menu_link_bg_color_active"],
+                            'background_color_night' => $darkColors['ombudsman_menu_link_bg_color_active'],
+                        ],
+                        '.section-ombudsman-survey-satisfaction .secondary-title' => [
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.section-ombudsman-survey-satisfaction .description' => [
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                        '.section-ombudsman-survey-satisfaction .form-survey-satisfaction .form-group.custom-form-group' => [
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.section-ombudsman-survey-satisfaction .form-survey-satisfaction .form-group.custom-form-group label' => [
+                            'title_color' => $dayColors["subtitle_color"],
+                            'title_color_night' => $darkColors['subtitle_color'],
+                        ],
+                        '.section-ombudsman-survey-satisfaction .form-survey-satisfaction .form-group.custom-form-group .legend-group .item span' => [
+                            'title_color' => $dayColors["subtitle_color"],
+                            'title_color_night' => $darkColors['subtitle_color'],
+                        ],
+                        '.section-ombudsman-survey-satisfaction .form-survey-satisfaction .form-group.custom-form-group .form-control' => [
+                            'background_color' => $dayColors["bg_input"],
+                            'background_color_night' => $darkColors["bg_input"],
+                            'title_color' => $dayColors["input_text_color"],
+                            'title_color_night' => $darkColors["input_text_color"],
+                        ],
+                        '.section-ombudsman-survey-satisfaction .form-survey-satisfaction .form-group.custom-form-group .form-control:focus' => [
+                            'background_color' => $dayColors["bg_input"],
+                            'background_color_night' => $darkColors["bg_input"],
+                            'title_color' => $dayColors["input_text_color"],
+                            'title_color_night' => $darkColors["input_text_color"],
+                        ],
+                        '.section-ombudsman-survey-satisfaction .form-survey-satisfaction .form-group.custom-form-group .form-control:placeholder' => [
+                            'background_color' => $dayColors["bg_input"],
+                            'background_color_night' => $darkColors["bg_input"],
+                            'title_color' => $dayColors["input_text_color"],
+                            'title_color_night' => $darkColors["input_text_color"],
+                        ],
+                        '.section-ombudsman-survey-satisfaction .form-survey-satisfaction .form-group .btn-default' => [
+                            'background_color' => $dayColors["form_btn_bg_color"],
+                            'background_color_night' => $darkColors["form_btn_bg_color"],
+                            'title_color' => $dayColors["form_btn_color"],
+                            'title_color_night' => $darkColors["form_btn_color"],
+                        ],
+                        '.section-ombudsman-survey-satisfaction .btn-pdf' => [
+                            'background_color' => $dayColors["form_btn_bg_color"],
+                            'background_color_night' => $darkColors["form_btn_bg_color"],
+                            'title_color' => $dayColors["form_btn_color"],
+                            'title_color_night' => $darkColors["form_btn_color"],
+                        ],
+                    ]
+                ]
+            ],
+        ]
+    ],
+    [
+        'page' => 'Pesquisa de Satisfação',
+        'route' => 'pesquisa-satisfacao-geral',
         'sections' => [
             [
                 'component' => 'carrouselBanners',
@@ -2167,6 +2357,63 @@ $data = [
             [
                 'component' => 'faq',
                 'name' => 'Faq',
+                'styles' => [
+                    'classes' => [
+                        '.section-faq-general' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                    ]
+                ]
+            ]
+        ]
+                
+    ],
+    [
+        'page' => 'Contas de governo',
+        'route' => 'contas-gocerno',        
+        'sections' => [
+            [
+                'component' => 'GovernementAccounts',
+                'name' => 'Contas de governo',
+                'styles' => [
+                    'classes' => [
+                        '.section-faq-general' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                    ]
+                ]
+            ]
+        ]
+                
+    ],
+    [
+        'page' => 'Contas de gestão',
+        'route' => 'contas-gocerno',        
+        'sections' => [
+            [
+                'component' => 'ManagementAccount',
+                'name' => 'Contas de gestão',
+                'styles' => [
+                    'classes' => [
+                        '.section-faq-general' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                    ]
+                ]
+            ]
+        ]
+                
+    ],
+    [
+        'page' => 'Lei de responsabilidade fiscal',
+        'route' => 'contas-gocerno',        
+        'sections' => [
+            [
+                'component' => 'lrfComponent',
+                'name' => 'Lei de responsabilidade fiscal',
                 'styles' => [
                     'classes' => [
                         '.section-faq-general' => [

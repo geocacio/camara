@@ -231,6 +231,10 @@ Route::middleware('auth')->group(function () {
         Route::get('role-councilor-page', [RoleCouncilorController::class, 'page'])->name('role.councilor.page');
         Route::put('role-councilor-page', [RoleCouncilorController::class, 'pageUpdate'])->name('role.councilor.page.update');
         Route::resource('/role-councilor', RoleCouncilorController::class);
+
+
+        Route::get('role-chambers-page', [RoleChamberController::class, 'page'])->name('chamber.page');
+        Route::put('role-chambers-page', [RoleChamberController::class, 'pageUpdate'])->name('chamber.page.update');
         Route::resource('/role-chambers', RoleChamberController::class);
 
         //Routes linked to biddings
