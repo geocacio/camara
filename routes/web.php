@@ -229,7 +229,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('/glossary', GlossaryController::class);
         Route::get('glossary-page', [GlossaryController::class, 'page'])->name('glossary.page');
         Route::put('glossary-page', [GlossaryController::class, 'pageUpdate'])->name('glossary.page.update');
-        
+
         Route::resource('/dictionary', DictionaryController::class);
         Route::get('dictionary-page', [DictionaryController::class, 'page'])->name('dictionary.page');
         Route::put('dictionary-page', [DictionaryController::class, 'pageUpdate'])->name('dictionary.page.update');
