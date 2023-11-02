@@ -37,9 +37,9 @@ class RoleCouncilorController extends Controller
         if ($page_role_councilor->update($validateData)) {
             $page_role_councilor->groupContents()->delete();
             $page_role_councilor->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
-            return redirect()->route('councilor.role.page')->with('success', 'Informações atualizadas com sucesso!');
+            return redirect()->route('role.councilor.page')->with('success', 'Informações atualizadas com sucesso!');
         }
-        return redirect()->route('councilor.role.page')->with('error', 'Por favor tente novamente!');
+        return redirect()->route('role.councilor.page')->with('error', 'Por favor tente novamente!');
     }
     /**
      * Display a listing of the resource.

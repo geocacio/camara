@@ -2008,7 +2008,7 @@ $data = [
         ]
     ],
     [
-        'page' => 'Institucional',
+        'page' => 'Ouvidoria Institucional',
         'route' => 'institucional.show',
         'sections' => [
             [

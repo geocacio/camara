@@ -42,7 +42,7 @@ class ChamberController extends Controller
         $chamber['boards']['icon'] = "fa-solid fa-users";
         $chamber['legislature']['councilors'] = $currentLegislature ? $currentLegislature->legislatureRelations : [];
         $chamber['legislature']['icon'] = "fa-solid fa-user-tie";
-        $chamber['commissions']['items'] = Commission::select(['id', 'description as Descrição'])->get();
+        $chamber['commissions']['items'] = Commission::select(['id', 'description as Descrição', 'slug'])->get();
         $chamber['commissions']['icon'] = "fa-solid fa-newspaper";
         // dd(isset($chamber['institutional']->sectors));
         $chamber['sectors']['items'] = isset($chamber['institutional']->sectors) ? $chamber['institutional']->sectors : [];

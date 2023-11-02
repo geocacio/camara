@@ -28,7 +28,7 @@
                     <h6 class="card-subtitle mb-2 text-muted">{{ $groups->description }}</h6>
                 </div>
                 <div class="card-body">
-                    <div class="row">
+                    <div class="row row-gap-1">
                         @if($groups->contents && !empty($groups->contents))
                         @foreach($groups->contents as $content)
                         

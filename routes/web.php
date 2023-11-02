@@ -519,6 +519,8 @@ Route::get('/posts/{post:slug}', [App\Http\Controllers\PostController::class, 's
 Route::match(['get', 'post'], '/cartaservicos', [ServiceLetterController::class, 'page'])->name('serviceLetter.page');
 Route::get('/cartaservicos/{serviceLetter:slug}', [ServiceLetterController::class, 'show'])->name('serviceLetter.show');
 Route::get('/a-camara', [ChamberController::class, 'index'])->name('a-camara.show');
+Route::get('/papel-verador', [RoleCouncilorController::class, 'index'])->name('papel-vereador');
+Route::get('/papel-camara', [RoleChamberController::class, 'index'])->name('papel-camara');
 
 Route::get('/vereadores/{councilor:slug}', [CouncilorController::class, 'show'])->name('vereador.single');
 Route::match(['get', 'post'], '/legislaturas/vereadores/{legislature:slug?}', [CouncilorController::class, 'allcouncilors'])->name('vereadores-all');

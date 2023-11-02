@@ -17,6 +17,7 @@
                 <tbody>
 
                     @foreach($data as $items)
+                    
                     <tr>
                         @foreach($items->getAttributes() as $key =>  $item)
                             @if ($key != 'id')
@@ -29,7 +30,7 @@
                         @endforeach
                         @if($actions)
                         <td class="actions">
-                            <a href="{{ route($actions['route'], $items->id) }}" data-toggle="tooltip" title="Ver mais" class="link-view">
+                            <a href="{{ route($actions['route'], $actions['param_type'] == 'slug' ? $items->slug : $items->id) }}" data-toggle="tooltip" title="Ver mais" class="link-view">
                                 <i class="fa-solid fa-eye"></i>
                             </a>
                         </td>
