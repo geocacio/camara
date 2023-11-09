@@ -88,9 +88,10 @@ class RoleChamberController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(RoleChamber $role_chamber)
+    public function show()
     {
-        //
+        $paper = RoleChamber::first();
+        return view('pages.chamber.paper', compact('paper'));
     }
 
     /**

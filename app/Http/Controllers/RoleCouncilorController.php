@@ -78,9 +78,10 @@ class RoleCouncilorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(RoleCouncilor $roleCouncilor)
+    public function show()
     {
-        //
+        $paper = RoleCouncilor::first();
+        return view('pages.councilors.paper', compact('paper'));
     }
 
     /**
