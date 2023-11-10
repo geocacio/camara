@@ -40,6 +40,22 @@ class DictionaryController extends Controller
         }
         return redirect()->back('dictionary.page')->with('error', 'Por favor tente novamente!');
     }
+
+    public function allDictionary(Request $request){
+        
+        $page_dictionary = Page::where('name', 'Dicionário')->first();
+        $query = Dictionary::query();
+
+        if($request->filled('description')){
+            $query->where('description', 'LIKE', '%' . $request->input('description') . '%')
+            ->orWhere('title', 'LIKE', '%' . $request->input('description') . '%');
+        }
+        
+        $dictionary = $query->paginate(10);
+        $searchData = $request->only(['description']);
+        return view('pages.dictionary.index', compact('dictionary', 'page_dictionary', 'searchData'));
+    }
+
     /**
      * Display a listing of the resource.
      */

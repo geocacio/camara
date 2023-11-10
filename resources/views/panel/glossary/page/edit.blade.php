@@ -17,33 +17,33 @@
 @endif
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('glossary.page.update', $page_glossaty->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('glossary.page.update', $page_glossary->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="row">
                 <div class="col-md-2">
                     <div class="form-group">
                         <label>Ícone</label>
-                        <input type="text" name="icon" class="form-control icon" autocomplete="off" value="{{ old('icon', $page_glossaty->icon) }}" onfocus="getIconInputValues(event)">
+                        <input type="text" name="icon" class="form-control icon" autocomplete="off" value="{{ old('icon', $page_glossary->icon) }}" onfocus="getIconInputValues(event)">
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">
                         <label>Título Principal</label>
-                        <input type="text" name="main_title" class="form-control" autocomplete="off" value="{{ old('main_title', $page_glossaty->main_title) }}">
+                        <input type="text" name="main_title" class="form-control" autocomplete="off" value="{{ old('main_title', $page_glossary->main_title) }}">
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">
                         <label>Título</label>
-                        <input type="text" name="title" class="form-control" autocomplete="off" value="{{ old('title', $page_glossaty->title) }}">
+                        <input type="text" name="title" class="form-control" autocomplete="off" value="{{ old('title', $page_glossary->title) }}">
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
                 <label>Text</label>
-                <input type="text" name="description" class="form-control" autocomplete="off" value="{{ old('description', $page_glossaty->description) }}">
+                <input type="text" name="description" class="form-control" autocomplete="off" value="{{ old('description', $page_glossary->description) }}">
             </div>
 
             <div class="form-group">
@@ -51,7 +51,7 @@
                 <select name="transparency_group_id" class="form-control">
                     <option value="">Selecione o grupo</option>
                     @foreach($groups as $group)
-                    <option value="{{ $group->id }}" {{ $page_glossaty->groupContents && $page_glossaty->groupContents->transparency_group_id && $group->id == $page_glossaty->groupContents->transparency_group_id ? 'selected' : '' }}>{{ $group->title }} - {{ $group->description }}</option>
+                    <option value="{{ $group->id }}" {{ $page_glossary->groupContents && $page_glossary->groupContents->transparency_group_id && $group->id == $page_glossary->groupContents->transparency_group_id ? 'selected' : '' }}>{{ $group->title }} - {{ $group->description }}</option>
                     @endforeach
                 </select>
             </div>
@@ -60,7 +60,7 @@
                 <label>Ativado/Desativado</label>
                 <div class="d-flex align-items-center justify-content-center w-fit-content actions">
                     <div class="toggle-switch cmt-4">
-                        <input type="checkbox" id="checklist" name="visibility" value="enabled" class="toggle-input" {{ $page_glossaty->visibility == 'enabled' ? 'checked' : ''}}>
+                        <input type="checkbox" id="checklist" name="visibility" value="enabled" class="toggle-input" {{ $page_glossary->visibility == 'enabled' ? 'checked' : ''}}>
                         <label for="checklist" class="toggle-label no-margin"></label>
                     </div>
                 </div>

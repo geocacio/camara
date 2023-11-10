@@ -11,9 +11,9 @@ class GlossaryController extends Controller
 {
     public function page()
     {
-        $page_glossaty = Page::where('name', 'Glossário')->first();
+        $page_glossary = Page::where('name', 'Glossário')->first();
         $groups = TransparencyGroup::all();
-        return view('panel.glossary.page.edit', compact('page_glossaty', 'groups'));
+        return view('panel.glossary.page.edit', compact('page_glossary', 'groups'));
     }
 
     public function pageUpdate(Request $request)
@@ -31,15 +31,31 @@ class GlossaryController extends Controller
         ]);
         $validateData['visibility'] = $request->visibility ? $request->visibility : 'disabled';
 
-        $page_glossaty = Page::where('name', 'Glossário')->first();
+        $page_glossary = Page::where('name', 'Glossário')->first();
 
-        if ($page_glossaty->update($validateData)) {
-            $page_glossaty->groupContents()->delete();
-            $page_glossaty->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+        if ($page_glossary->update($validateData)) {
+            $page_glossary->groupContents()->delete();
+            $page_glossary->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
             return redirect()->route('glossary.page')->with('success', 'Informações atualizadas com sucesso!');
         }
         return redirect()->back('glossary.page')->with('error', 'Por favor tente novamente!');
     }
+
+    public function allGlossary(Request $request){
+        
+        $page_glossary = Page::where('name', 'Glossário')->first();
+        $query = Glossary::query();
+
+        if($request->filled('description')){
+            $query->where('description', 'LIKE', '%' . $request->input('description') . '%')
+            ->orWhere('title', 'LIKE', '%' . $request->input('description') . '%');
+        }
+        
+        $glossary = $query->paginate(10);
+        $searchData = $request->only(['description']);
+        return view('pages.glossary.index', compact('glossary', 'page_glossary', 'searchData'));
+    }
+
     /**
      * Display a listing of the resource.
      */

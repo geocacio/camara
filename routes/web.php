@@ -537,6 +537,9 @@ Route::get('/legislaturas/{legislature}', [LegislatureController::class, 'show']
 Route::match(['get', 'post'], 'comissoes', [CommissionController::class, 'allCommissions'])->name('comissoes-all');
 Route::get('/comissoes/{commission}', [CommissionController::class, 'show'])->name('comissoes.single');
 
+Route::match(['get', 'post'], 'dicionario', [DictionaryController::class, 'allDictionary'])->name('dicionario');
+Route::match(['get', 'post'], 'glossario', [GlossaryController::class, 'allGlossary'])->name('glossario.show');
+
 //Transparency Routes
 Route::get('/transparencia', [App\Http\Controllers\TransparencyPortalController::class, 'show'])->name('transparency.show');
 Route::prefix('/transparencia')->group(function () {
