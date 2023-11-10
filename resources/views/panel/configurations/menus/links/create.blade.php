@@ -60,7 +60,7 @@
 
             <div class="form-group" style="display: none;">
                 <label for="title1">Selecione os links do dropdown</label>
-                <select id="select_links" name="parent[]" class="form-control" multiple>
+                <select id="select_links" name="parent[]" class="form-control search-select" multiple>
                     @foreach($links as $link)
                     <option value="{{ $link->id }}">{{ $link['name'] ? $link['name'] : $link['icon'] }}</option>
                     @endforeach
