@@ -20,7 +20,6 @@ return new class extends Migration
             $table->timestamps();
             
             $table->foreign('competency_id')->references('id')->on('categories');
-            $table->foreign('exercicy_id')->references('id')->on('categories');
         });
     }
 
