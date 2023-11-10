@@ -1296,169 +1296,140 @@ $data = [
         ]
     ],
 
-    // [
-    //     'page' => 'Home',
-    //     'route' => 'home',
-    //     'sections' => [
-    //         [
-    //             'component' => 'carrouselBanners',
-    //             'name' => 'Carrousel de banners',
-    //             'styles' => [
-    //                 'classes' => [
-    //                     '.carousel-header' => [
-    //                         'background_color' => $dayColors["Pure White"],
-    //                         'background_color_night' => $cores['bgn2'],
-    //                     ]
-    //                 ]
-    //             ]
-    //         ],
-    //         [
-    //             'component' => 'liveSection',
-    //             'name' => 'Serviços Online',
-    //             'styles' => [
-    //                 'classes' => [
-    //                     '.live-section' => [
-    //                         'background_color' => $dayColors["Pure White"],
-    //                         'background_color_night' => $cores['bgn2'],
-    //                     ],
-    //                     '.live-section .featured-title' => [
-    //                         'title_color' => '#000000',
-    //                         'title_color_night' => $cores['cn'],
-    //                     ]
-    //                 ]
-    //             ]
-    //         ],
-    //         [
-    //             'component' => 'postSection',
-    //             'name' => 'Carousel de notícias',
-    //             'styles' => [
-    //                 'classes' => [
-    //                     '#sec-blog-section' => [
-    //                         'background_color' => $dayColors["Pure White"],
-    //                         'background_color_night' => $cores['bgn2'],
-    //                     ]
-    //                 ]
-    //             ]
-    //         ],
-    //         [
-    //             'component' => 'anotherCarrouselBanners',
-    //             'name' => 'Carrousel de banners 2',
-    //             'styles' => [
-    //                 'classes' => [
-    //                     '.carousel-header' => [
-    //                         'background_color' => $dayColors["Pure White"],
-    //                         'background_color_night' => $cores['bgn2'],
-    //                     ]
-    //                 ]
-    //             ]
-    //         ],
-    //         [
-    //             'component' => 'newSection',
-    //             'name' => 'Notícias',
-    //             'styles' => [
-    //                 'classes' => [
-    //                     '.newSection' => [
-    //                         'background_color' => $dayColors["Pure White"],
-    //                         'background_color_night' => $cores['bgn2'],
-    //                     ],
-    //                     '.newSection .container-news .body .title' => [
-    //                         'title_color' => '#00759F',
-    //                         'title_color_night' => $cores['cn2'],
-    //                     ],
-    //                     '.newSection .container-news .body .category' => [
-    //                         'subtitle_color' => '#303030',
-    //                         'subtitle_size' => '13',
-    //                         'subtitle_color_night' => $cores['cn2'],
-    //                     ],
-    //                     '.newSection .container-news .body .description' => [
-    //                         'description_size' => '16',
-    //                         'description_color' => '#303030',
-    //                         'description_color_night' => $cores['cn2'],
-    //                     ]
-    //                 ]
-    //             ]
-    //         ],
-    //         [
-    //             'component' => 'careUnitSection',
-    //             'name' => 'Unidades de atendimento',
-    //             'styles' => [
-    //                 'classes' => [
-    //                     '.careUnitSection' => [
-    //                         'background_color' => '#f7f7f7',
-    //                         'background_color_night' => $cores['bgn2'],
-    //                     ],
-    //                     '.careUnitSection .container' => [
-    //                         'title_color' => '#000000',
-    //                         'title_color_night' => $cores['cn'],
-    //                     ],
-    //                 ]
-    //             ]
-    //         ],
-    //         [
-    //             'component' => 'videoSection',
-    //             'name' => 'Vídeos relacionados a gestão',
-    //             'styles' => [
-    //                 'classes' => [
-    //                     '#videoSection' => [
-    //                         'background_color' => '#f7f7f7',
-    //                         'background_color_night' => $cores['bgn2'],
-    //                     ],
-    //                     '#videoSection .container .title' => [
-    //                         'title_color' => '#000000',
-    //                         'title_color_night' => $cores['cn'],
-    //                     ],
-    //                     '#videoSection .container .btn-site' => [
-    //                         'button_text_color' => $dayColors["Pure White"],
-    //                         'button_text_size' => '18',
-    //                         'button_background_color' => '#3f44b5',
-    //                         'button_text_color_night' => $cores['cn'],
-    //                         'button_background_color_night' => $cores['btnn1'],
-    //                     ],
-    //                 ]
-    //             ]
-    //         ],
-    //         [
-    //             'component' => 'lastLRFSection',
-    //             'name' => 'Últimos LRF',
-    //             'styles' => [
-    //                 'classes' => [
-    //                     '.last_LRF_section' => [
-    //                         'background_color' => $dayColors["Pure White"],
-    //                         'background_color_night' => $cores['bgn2'],
-    //                     ],
-    //                     '.last_LRF_section .container .title-default-site' => [
-    //                         'title_color' => '#000000',
-    //                         'title_color_night' => $cores['cn2'],
-    //                     ],
-    //                 ]
-    //             ]
-    //         ],
-    //         [
-    //             'component' => 'lastPublicationSection',
-    //             'name' => 'Publicações e licitações',
-    //             'styles' => [
-    //                 'classes' => [
-    //                     '.last_publications_section' => [
-    //                         'background_color' => $dayColors["Pure White"],
-    //                         'background_color_night' => $cores['bgn2'],
-    //                     ],
-    //                     '.last_publications_section .container .title-default-site' => [
-    //                         'title_color' => '#000000',
-    //                         'title_color_night' => $cores['cn2'],
-    //                     ],
-    //                 ]
-    //             ]
-    //         ],
-    //         [
-    //             'component' => 'bannerSection',
-    //             'name' => 'Banner'
-    //         ],
-    //         [
-    //             'component' => 'secScheduleSection',
-    //             'name' => 'Agenda e diário'
-    //         ],
-    //     ]
-    // ],
+    [
+        'page' => 'Home',
+        'route' => 'home',
+        'sections' => [
+            [
+                'component' => 'carrouselBanners',
+                'name' => 'Carrousel de banners',
+                'styles' => [
+                    'classes' => [
+                        '.carousel-header' => [
+                            'background_color' => $dayColors["Pure White"],
+                            'background_color_night' => $cores['bgn2'],
+                        ]
+                    ]
+                ]
+            ],
+            [
+                'component' => 'sectionMenu',
+                'name' => 'Lista de links',
+                'styles' => [
+                    'classes' => [
+                        '.live-section' => [
+                            'background_color' => $dayColors["Pure White"],
+                            'background_color_night' => $cores['bgn2'],
+                        ],
+                        '.live-section .featured-title' => [
+                            'title_color' => '#000000',
+                            'title_color_night' => $cores['cn'],
+                        ]
+                    ]
+                ]
+            ],
+            [
+                'component' => 'postSection',
+                'name' => 'Notícias',
+                'styles' => [
+                    'classes' => [
+                        '#sec-blog-section' => [
+                            'background_color' => $dayColors["Pure White"],
+                            'background_color_night' => $cores['bgn2'],
+                        ]
+                    ]
+                ]
+            ],
+            [
+                'component' => 'OmbudsmanListSection',
+                'name' => 'Vereadores',
+                'styles' => [
+                    'classes' => [
+                        '.newSection' => [
+                            'background_color' => $dayColors["Pure White"],
+                            'background_color_night' => $cores['bgn2'],
+                        ],
+                        '.newSection .container-news .body .title' => [
+                            'title_color' => '#00759F',
+                            'title_color_night' => $cores['cn2'],
+                        ],
+                        '.newSection .container-news .body .category' => [
+                            'subtitle_color' => '#303030',
+                            'subtitle_size' => '13',
+                            'subtitle_color_night' => $cores['cn2'],
+                        ],
+                        '.newSection .container-news .body .description' => [
+                            'description_size' => '16',
+                            'description_color' => '#303030',
+                            'description_color_night' => $cores['cn2'],
+                        ]
+                    ]
+                ]
+            ],
+            [
+                'component' => 'bannerContentSection',
+                'name' => 'Banner',
+                'styles' => [
+                    'classes' => [
+                        '.careUnitSection' => [
+                            'background_color' => '#f7f7f7',
+                            'background_color_night' => $cores['bgn2'],
+                        ],
+                        '.careUnitSection .container' => [
+                            'title_color' => '#000000',
+                            'title_color_night' => $cores['cn'],
+                        ],
+                    ]
+                ]
+            ],
+            [
+                'component' => 'videoSection',
+                'name' => 'Vídeos',
+                'styles' => [
+                    'classes' => [
+                        '#videoSection' => [
+                            'background_color' => '#f7f7f7',
+                            'background_color_night' => $cores['bgn2'],
+                        ],
+                        '#videoSection .container .title' => [
+                            'title_color' => '#000000',
+                            'title_color_night' => $cores['cn'],
+                        ],
+                        '#videoSection .container .btn-site' => [
+                            'button_text_color' => $dayColors["Pure White"],
+                            'button_text_size' => '18',
+                            'button_background_color' => '#3f44b5',
+                            'button_text_color_night' => $cores['cn'],
+                            'button_background_color_night' => $cores['btnn1'],
+                        ],
+                    ]
+                ]
+            ],
+            [
+                'component' => 'publicationSection',
+                'name' => 'Publicações',
+                'styles' => [
+                    'classes' => [
+                        '#videoSection' => [
+                            'background_color' => '#f7f7f7',
+                            'background_color_night' => $cores['bgn2'],
+                        ],
+                        '#videoSection .container .title' => [
+                            'title_color' => '#000000',
+                            'title_color_night' => $cores['cn'],
+                        ],
+                        '#videoSection .container .btn-site' => [
+                            'button_text_color' => $dayColors["Pure White"],
+                            'button_text_size' => '18',
+                            'button_background_color' => '#3f44b5',
+                            'button_text_color_night' => $cores['cn'],
+                            'button_background_color_night' => $cores['btnn1'],
+                        ],
+                    ]
+                ]
+            ],
+        ]
+    ],
     [
         'page' => 'Transparência',
         'route' => 'transparency.show',
@@ -1781,52 +1752,52 @@ $data = [
             ],
         ]
     ],
-    // [
-    //     'page' => 'Decretos',
-    //     'route' => 'decretos.show',
-    //     'sections' => [
-    //         [
-    //             'component' => 'decrees',
-    //             'name' => 'Decretos',
-    //             'styles' => [
-    //                 'classes' => [
-    //                     '.section-decrees' => [
-    //                         'background_color' => $dayColors["bg_section"],
-    //                         'background_color_night' => $darkColors['bg_section'],
-    //                     ],
-    //                     '.section-decrees .card-with-links' => [
-    //                         'background_color' => $dayColors["bg_card"],
-    //                         'background_color_night' => $darkColors['bg_card'],
-    //                     ],
-    //                     '.section-decrees .card-with-links .body' => [
-    //                         'background_color' => $dayColors["bg_card"],
-    //                         'background_color_night' => $darkColors['bg_card'],
-    //                     ],
-    //                     '.section-decrees .card-with-links .body .title' => [
-    //                         'title_color' => $dayColors["title_color"],
-    //                         'title_color_night' => $darkColors['title_color'],
-    //                     ],
-    //                     '.section-decrees .card-with-links .body .description' => [
-    //                         'title_color' => $dayColors["text_color"],
-    //                         'title_color_night' => $darkColors['text_color'],
-    //                     ],
-    //                     '.section-decrees .card-with-links .footer .links' => [
-    //                         'title_color' => $dayColors["link_color_2"],
-    //                         'title_color_night' => $darkColors['link_color_2'],
-    //                         'background_color' => $dayColors["link_bg_color_2"],
-    //                         'background_color_night' => $darkColors['link_bg_color'],
-    //                     ],
-    //                     '.section-decrees .card-with-links .footer .links:hover' => [
-    //                         'title_color' => $dayColors["link_color_hover"],
-    //                         'title_color_night' => $darkColors['link_color_hover'],
-    //                         'background_color' => $dayColors["link_bg_color_hover"],
-    //                         'background_color_night' => $darkColors['link_bg_color_hover'],
-    //                     ],
-    //                 ]
-    //             ]
-    //         ],
-    //     ]
-    // ],
+    [
+        'page' => 'Decretos',
+        'route' => 'decretos.show',
+        'sections' => [
+            [
+                'component' => 'decrees',
+                'name' => 'Decretos',
+                'styles' => [
+                    'classes' => [
+                        '.section-decrees' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                        '.section-decrees .card-with-links' => [
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.section-decrees .card-with-links .body' => [
+                            'background_color' => $dayColors["bg_card"],
+                            'background_color_night' => $darkColors['bg_card'],
+                        ],
+                        '.section-decrees .card-with-links .body .title' => [
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
+                        ],
+                        '.section-decrees .card-with-links .body .description' => [
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                        '.section-decrees .card-with-links .footer .links' => [
+                            'title_color' => $dayColors["link_color_2"],
+                            'title_color_night' => $darkColors['link_color_2'],
+                            'background_color' => $dayColors["link_bg_color_2"],
+                            'background_color_night' => $darkColors['link_bg_color'],
+                        ],
+                        '.section-decrees .card-with-links .footer .links:hover' => [
+                            'title_color' => $dayColors["link_color_hover"],
+                            'title_color_night' => $darkColors['link_color_hover'],
+                            'background_color' => $dayColors["link_bg_color_hover"],
+                            'background_color_night' => $darkColors['link_bg_color_hover'],
+                        ],
+                    ]
+                ]
+            ],
+        ]
+    ],
     [
         'page' => 'Diárias',
         'route' => 'diarias.show',

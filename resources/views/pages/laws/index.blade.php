@@ -67,6 +67,7 @@
                 </div>
             </div>
         </div>
+
         @include('partials.cardByDecreeOrLaw', ['data' => $laws, 'type' => 'Lei'])
 
     </div>

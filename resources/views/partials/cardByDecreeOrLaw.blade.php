@@ -18,7 +18,9 @@
                     <span class="d-inline-block" data-toggle="tooltip" title="Ver {{ $type }}">
                         <a href="#" class="links" data-toggle="modal" data-target="#showDecree-{{ $item->id }}"><i class="fa fa-eye"></i></a>
                     </span>
-                    <a href="{{ asset('storage/'.$item->files[0]->file->url) }}" target="_blank" class="links" data-toggle="tooltip" title="Ver documento"><i class="fa-solid fa-file-pdf"></i></a>
+                    @if(!empty($item->files[0]))
+                        <a href="{{ asset('storage/'.$item->files[0]->file->url) }}" target="_blank" class="links" data-toggle="tooltip" title="Ver documento"><i class="fa-solid fa-file-pdf"></i></a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -42,7 +44,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="{{ asset('storage/'.$item->files[0]->file->url) }}" target="_blank" class="link" data-toggle="tooltip" title="Ver documento"><i class="fa-solid fa-file-pdf"></i></a>
+                    @if(!empty($item->files[0]))
+                        <a href="{{ asset('storage/'.$item->files[0]->file->url) }}" target="_blank" class="link" data-toggle="tooltip" title="Ver documento"><i class="fa-solid fa-file-pdf"></i></a>
+                    @endif
                     <button type="button" class="link" data-dismiss="modal" data-toggle="tooltip" title="Fechar"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </div>
