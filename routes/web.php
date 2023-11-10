@@ -19,6 +19,7 @@ use App\Http\Controllers\ConstructionController;
 use App\Http\Controllers\ConstructionFileController;
 use App\Http\Controllers\ConstructionMeasurementsController;
 use App\Http\Controllers\ConstructionProgressController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\CouncilorComissionController;
 use App\Http\Controllers\CouncilorController;
@@ -539,6 +540,8 @@ Route::get('/comissoes/{commission}', [CommissionController::class, 'show'])->na
 
 Route::match(['get', 'post'], 'dicionario', [DictionaryController::class, 'allDictionary'])->name('dicionario');
 Route::match(['get', 'post'], 'glossario', [GlossaryController::class, 'allGlossary'])->name('glossario.show');
+
+Route::get('/fale-conosco', [ContactUsController::class, 'index'])->name('fale-conosco.index');
 
 //Transparency Routes
 Route::get('/transparencia', [App\Http\Controllers\TransparencyPortalController::class, 'show'])->name('transparency.show');
