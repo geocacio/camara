@@ -92,8 +92,6 @@ class LawController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'number' => 'required',
-            'exercicy_id' => 'required',
             'competency_id' => 'required',
             'date' => 'nullable',
             'file' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
@@ -168,8 +166,6 @@ class LawController extends Controller
     public function update(Request $request, Law $law)
     {
         $validatedData = $request->validate([
-            'number' => 'required',
-            'exercicy_id' => 'required',
             'competency_id' => 'required',
             'date' => 'nullable',
             'file' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",

@@ -10,8 +10,6 @@ class Law extends Model
     use HasFactory;
 
     protected $fillable = [
-        'number',
-        'exercicy_id',
         'competency_id',
         'date',
         'description',

@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('laws', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('exercicy_id');
             $table->unsignedBigInteger('competency_id');
-            $table->integer('number');
             $table->date('date')->nullable();
             $table->text('description')->nullable();
             $table->string('slug');
