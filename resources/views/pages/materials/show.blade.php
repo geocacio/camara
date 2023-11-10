@@ -186,7 +186,7 @@
                                                     <td>{{ $material->session->exercicy->name }}</td>
                                                     <td>{{ Str::limit($material->session->description, '50', '...') }}</td>
                                                     <td class="actions">
-                                                        <a href="{{ route('sessoes.single', $material->session->id) }}" data-toggle="tooltip" title="Ver mais" class="link-view">
+                                                        <a href="{{ route('sessoes.single', $material->session->slug) }}" data-toggle="tooltip" title="Ver mais" class="link-view">
                                                             <i class="fa-solid fa-eye"></i>
                                                         </a>
                                                     </td>
