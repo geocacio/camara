@@ -2978,3 +2978,74 @@ section{
         background-color: #bc25c3;
     }
 }
+
+.box-contactUs{
+    text-align: center;
+    background: #e1e5e7;
+    padding: 20px 15px;
+    border-radius: 10px;
+
+    h1{
+        font-family: $font-primary;
+        font-size: 18px;
+    }
+
+    p{
+        font-family: $font-secondary;
+        font-size: 12px;
+
+        a{
+            color: var(--black);
+        }
+    }
+}
+
+.min-height-screen{
+    min-height: 100vh;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.card{
+    &.card-login{
+        border: 0;
+        border-radius: 10px;
+        .card-header{
+            border: 0;
+            text-align: center;
+        }
+        figure{
+            display: block;
+            margin: auto;
+            text-align: center;
+            img{
+                max-width: 200px;
+                max-height: 200px;
+            }
+        }
+        .card-body{
+            .align-items-inline{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .form-check{
+                    label{
+                        font-family: $font-secondary;
+                        font-size: 13px;
+                        margin: 0;
+                    }
+                }
+
+                .btn.btn-link{
+                    font-family: $font-secondary;
+                    font-size: 13px;
+                    text-decoration: none;
+                    padding-top: 0;
+                    padding-bottom: 0;
+                    padding-right: 0;
+                }
+            }
+        }
+    }
+}
