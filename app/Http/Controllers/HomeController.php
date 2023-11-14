@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Legislature;
 use App\Models\Page;
 use App\Models\Post;
 use App\Models\Service;
@@ -39,9 +40,13 @@ class HomeController extends Controller
             }
         }
 
+        $legislature = new Legislature;
+        $currentLegislature = $legislature->getCurrentLegislature();
+        // dd($currentLegislature->legislatureRelations[0]->legislatureable);
+        
         $posts = Post::with('categories', 'files')->get();
         $videos = Video::with('categories', 'files')->get();
 
-        return view('pages.home.index', compact('services', 'sections', 'posts', 'videos'));
+        return view('pages.home.index', compact('services', 'sections', 'posts', 'videos', 'currentLegislature'));
     }
 }
