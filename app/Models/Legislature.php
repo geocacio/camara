@@ -29,6 +29,24 @@ class Legislature extends Model
             ->first();
     }
 
+    public function getCurrentPresident()
+    {
+        $currentLegislature = $this->getCurrentLegislature();
+
+        if ($currentLegislature) {
+            $currentPresident = Councilor::whereHas('legislatureRelations', function ($query) use ($currentLegislature) {
+                $query->where('legislature_id', $currentLegislature->id)
+                    ->where('bond_id', 19);
+            })->whereHas('legislatureRelations.office', function ($query) {
+                $query->where('office', 'PRESIDENTE');
+            })->first();
+
+            return $currentPresident;
+        }
+
+        return null;
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';

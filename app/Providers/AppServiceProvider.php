@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Councilor;
+use App\Models\Legislature;
 use App\Models\Menu;
+use App\Models\Setting;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
@@ -72,6 +75,32 @@ class AppServiceProvider extends ServiceProvider
 
 
         try {
+
+            $settings = Setting::first();
+            view::share('settings', $settings);
+
+            // $legislature = new Legislature();
+            // $currentLegislature = $legislature->getCurrentLegislature();
+
+            // $currentPresident = Councilor::whereHas('legislatureRelations', function ($query) use ($currentLegislature) {
+            //     $query->where('legislature_id', $currentLegislature->id)
+            //         ->where('bond_id', 19);
+            // })->whereHas('legislatureRelations.office', function ($query) {
+            //     $query->where('office', 'PRESIDENTE');
+            // })->first();
+            
+            // // Verifique se há um vereador presidente
+            // if ($currentPresident) {
+            //     dd($currentPresident->legislatureRelations[0]->office->office);
+            // } else {
+            //     dd("Nenhum presidente encontrado para a legislatura atual.");
+            // }
+
+            // view::share('currentPresident', $currentPresident);
+            $legislature = new Legislature();
+            $currentPresident = $legislature->getCurrentPresident();
+            view::share('currentPresident', $currentPresident);
+
 
             $getMenus = Menu::with(['styles', 'links' => function ($query) {
                 $query->orderBy('position')->with('group');
