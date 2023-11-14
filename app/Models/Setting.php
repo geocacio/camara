@@ -22,7 +22,6 @@ class Setting extends Model
         'city',
         'opening_hours',
         'state',
-        'logo_footer',
     ];
 
     public function files()

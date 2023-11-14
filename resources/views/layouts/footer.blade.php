@@ -2,10 +2,10 @@
 
 <footer class="footer">
     <div class="container">
-        @if(!empty($settings->logo_footer))
+        @if(!empty($logo_footer))
         <div class="row mb-3">
             <div class="col-12 text-center">
-                <img src="{{ asset('storage/'.$settings->logo_footer) }}" class="footer-logo">
+                <img src="{{ asset('storage/'.$logo_footer) }}" class="footer-logo">
             </div>
         </div>
         @endif

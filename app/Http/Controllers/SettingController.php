@@ -59,6 +59,8 @@ class SettingController extends Controller
         if ($settings) {
             $logo = '';
             $favicon = '';
+            $logo_footer = '';
+            
             if ($settings->files->count() > 0) {
                 foreach ($settings->files as $files) {
                     if ($files->file->name == 'Logo') {
@@ -67,9 +69,12 @@ class SettingController extends Controller
                     if ($files->file->name == 'Favicon') {
                         $favicon = $files->file;
                     }
+                    if ($files->file->name == 'Logo Footer') {
+                        $logo_footer = $files->file;
+                    }
                 }
             }
-            return view('panel.settings.edit', compact('settings', 'logo', 'favicon'));
+            return view('panel.settings.edit', compact('settings', 'logo', 'favicon', 'logo_footer'));
         }
 
         return view('panel.settings.create');
@@ -102,6 +107,7 @@ class SettingController extends Controller
             'opening_hours' => 'nullable',
             'state' => 'required',
             'logo' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
+            'logo_footer' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
             'favicon' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
         ],[
             'system_name.required' => 'O campo Nome do sistema é obrigatório.',
@@ -125,6 +131,11 @@ class SettingController extends Controller
             if ($request->hasFile('favicon')) {
                 $url = $this->fileUploadService->upload($request->file('favicon'), 'settings');
                 $file = File::create(['name' => 'Favicon', 'url' => $url]);
+                $settings->files()->create(['file_id' => $file->id]);
+            }
+            if ($request->hasFile('logo_footer')) {
+                $url = $this->fileUploadService->upload($request->file('logo_footer'), 'settings');
+                $file = File::create(['name' => 'Logo Footer', 'url' => $url]);
                 $settings->files()->create(['file_id' => $file->id]);
             }
             return redirect()->route('settings.index')->with('success', 'Configurações cadastradas com sucesso!');
@@ -165,6 +176,7 @@ class SettingController extends Controller
             'city' => 'required',
             'state' => 'required',
             'logo' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
+            'logo_footer' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
             'favicon' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
         ],[
             'system_name.required' => 'O campo Nome do sistema é obrigatório.',
@@ -201,6 +213,17 @@ class SettingController extends Controller
                 }
                 $url = $this->fileUploadService->upload($request->file('favicon'), 'settings');
                 $file = File::create(['name' => 'Favicon', 'url' => $url]);
+                $setting->files()->create(['file_id' => $file->id]);
+            }
+            if ($request->hasFile('logo_footer')) {
+                foreach ($setting->files as $fileRelation) {
+                    if ($fileRelation->file->name === 'logo_footer') {
+                        $this->fileUploadService->deleteFile($fileRelation->file->id);
+                        break;
+                    }
+                }
+                $url = $this->fileUploadService->upload($request->file('logo_footer'), 'settings');
+                $file = File::create(['name' => 'Logo Footer', 'url' => $url]);
                 $setting->files()->create(['file_id' => $file->id]);
             }
             return redirect()->route('settings.index')->with('success', 'Configurações atualizadas com sucesso!');
