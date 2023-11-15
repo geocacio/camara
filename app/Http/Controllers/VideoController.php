@@ -28,6 +28,10 @@ class VideoController extends Controller
         return view('panel.videos.index', compact('videos'));
     }
 
+    public function allVideos(){
+        return 'Agora sim';
+    }
+
     /**
      * Show the form for creating a new resource.
      */

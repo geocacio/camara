@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-12">
                 <h3 class="title text-center mb-5">Vereadores Vigentes</h3>
-                <div class="ombudsman-carousel">
+                <div class="ombudsman-carousel owl-carousel carousel-councilors">
                     @foreach($currentLegislature->legislatureRelations as $legislature)
                     
                     <a href="{{ route('vereador.single', $legislature->legislatureable->slug) }}" class="item">

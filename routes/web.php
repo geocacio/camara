@@ -543,6 +543,9 @@ Route::get('/comissoes/{commission}', [CommissionController::class, 'show'])->na
 Route::match(['get', 'post'], 'dicionario', [DictionaryController::class, 'allDictionary'])->name('dicionario');
 Route::match(['get', 'post'], 'glossario', [GlossaryController::class, 'allGlossary'])->name('glossario.show');
 
+Route::match(['get', 'post'], 'meus-videos', [VideoController::class, 'allVideos'])->name('videos-all');
+Route::get('/meus-videos/{video}', [VideoController::class, 'show'])->name('video.single');
+
 Route::get('/fale-conosco', [ContactUsController::class, 'index'])->name('fale-conosco.index');
 
 //Transparency Routes
