@@ -71,6 +71,7 @@ class AppServiceProvider extends ServiceProvider
             'Councilor' => 'App\Models\Councilor',
             'Commission' => 'App\Models\Commission',
             'Material' => 'App\Models\Material',
+            'Banner' => 'App\Models\Banner',
         ]);
 
 

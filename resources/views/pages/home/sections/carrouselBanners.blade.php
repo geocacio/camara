@@ -1,5 +1,7 @@
+@if($banners && $banners->count() > 0 && $section->visibility === 'enabled')
 <div class="owl-carousel carousel-header colorful">
-    <a class="link" href="#" style="background-color:#993399;"><img src="{{ asset('images/header/carrousel/link113.png') }}"></a>
-    <a class="link" href="#" style="background-color:#009e43;"><img src="{{ asset('images/header/carrousel/link119.png') }}"></a>
-    <a class="link" href="#" style="background-color:#ffb200;"><img src="{{ asset('images/header/carrousel/link140.png') }}"></a>
+    @foreach($banners as $banner)
+        <a class="link" href="{{ $banner->links ? ($banner->links->route ? route($banner->links->route) : $banner->links->url) : '#' }}" style="background-color: {{ $banner->color }};"><img src="{{ asset('storage/'.$banner->files[0]->file->url) }}"></a>
+    @endforeach
 </div>
+@endif
