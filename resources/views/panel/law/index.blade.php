@@ -39,7 +39,7 @@
                     @foreach($laws as $law)
                     <tr>
                         <td>{{ $law->id }}</td>
-                        <td>{{ $law->number }} / {{ $law->exercicy->name }}</td>
+                        <td>{{ $law->id }} / {{ date('Y', strtotime($law->date)) }}</td>
                         <td>{{ date("d/m/Y", strtotime($law->date)) }}</td>
                         <td class="actions text-center">
                             <a href="{{ route('laws.edit', $law->slug) }}" class="link edit"><i class="fas fa-edit"></i></a>

@@ -10,7 +10,7 @@
             </div>
             <div class="second-part">
                 <div class="body">
-                    <h3 class="title">{{ $type }} {{ $item->number }}/{{ $item->exercicy->name }}</h3>
+                    <h3 class="title">{{ $type }} {{ $item->id }}/{{ date('Y', strtotime($item->date)) }}</h3>
                     <p class="description">{{ Str::limit($item->description, '75', '...') }}</p>
                 </div>
 
@@ -31,7 +31,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">{{ $type }} {{ $item->number }}/{{ $item->exercicy->name }}</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">{{ $type }} {{ $item->id }}/{{ date('Y', strtotime($item->date)) }}</h5>
                 </div>
                 <div class="modal-body">
                     <div class="view-date">
