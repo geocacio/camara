@@ -24,13 +24,13 @@
             </ul>
         </div>
     </li>
-    <li class="menu-item {{ request()->routeIs('home.index') ? 'active' : '' }}">
-        <a href="{{ route('home.index') }}" class="menu-link">
+    <li class="menu-item {{ request()->routeIs('banners.index') ? 'active' : '' }}">
+        <a href="{{ route('banners.index') }}" class="menu-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                 <polyline points="9 22 9 12 15 12 15 22"></polyline>
             </svg>
-            <span>Home</span>
+            <span>Banners</span>
         </a>
     </li>
     <li class="menu-item {{ request()->routeIs('settings.page') || request()->routeIs('pcs.index') || request()->routeIs('pcg.index') || request()->routeIs('constructions.index') || request()->routeIs('construnctions.index') || request()->routeIs('agreements.index') || request()->routeIs('serviceLetter.indexPage') || request()->routeIs('serviceLetter.index') || Str::contains(url()->current(), 'categories/cartas-de-servicos') || request()->routeIs('proccess.selective.page') || request()->routeIs('selective-process.index') || request()->routeIs('publications.page') || request()->routeIs('all-publications.index') || Str::contains(url()->current(), 'types/publications') || request()->routeIs('ordinances.page') || request()->routeIs('ordinances.index') || Str::contains(url()->current(), 'types/ordinances') || request()->routeIs('decrees.index') || request()->routeIs('decrees.page') || Str::contains(url()->current(), 'types/decrees') || request()->routeIs('laws.page') || request()->routeIs('laws.index') || Str::contains(url()->current(), 'types/law') || request()->routeIs('symbols.index') || request()->routeIs('payrolls.index') || request()->routeIs('managers.index') || request()->routeIs('sic.faq.index') || request()->routeIs('solicitations.index') || request()->routeIs('esic.index') || request()->routeIs('ombudsman-survey.index') || request()->routeIs('dailies.index') || request()->routeIs('dailies.page') || request()->routeIs('ombudsman-feedback.index') || request()->routeIs('ombudsman-faq.index') || request()->routeIs('ombudsman-institutional.index') || request()->routeIs('ombudsman-feedback.index') || request()->routeIs('ombudsman.index') || request()->routeIs('external-links.index') || request()->routeIs('transparency.groups.index') || request()->routeIs('transparency.index') || request()->routeIs('ombudsman-faq.index') || request()->routeIs('ombudsman-institutional.index') || request()->routeIs('ombudsman-feedback.index') || request()->routeIs('all-publications.index') || request()->routeIs('all-publications.create') || request()->routeIs('all-publications.edit') || request()->routeIs('dailies.index') || request()->routeIs('ordinances.index') || Str::contains(url()->current(), 'types/ordinances') || request()->routeIs('lrfs.index') || Str::contains(url()->current(), 'types/lrfs') ? 'active' : '' }}">
