@@ -206,7 +206,7 @@
 
 </section>
 
-@include('pages.partials.satisfactionSurvey', ['page_name' => 'Material'])
+@include('pages.partials.satisfactionSurvey', ['page_name' => 'Legislatura'])
 
 @include('layouts.footer')
 

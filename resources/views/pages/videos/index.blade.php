@@ -124,7 +124,7 @@
     </div>
 </section>
 
-@include('pages.partials.satisfactionSurvey', ['page_name' => 'Sessões'])
+@include('pages.partials.satisfactionSurvey', ['page_name' => 'Vídeos'])
 
 @include('layouts.footer')
 

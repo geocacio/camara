@@ -89,7 +89,7 @@
     </div>
 </section>
 
-@include('pages.partials.satisfactionSurvey', ['page_name' => 'Legislaturas'])
+@include('pages.partials.satisfactionSurvey', ['page_name' => 'Glossário'])
 
 @include('layouts.footer')
 
