@@ -3119,3 +3119,34 @@ section{
         color: #3f3e50;
     }
 }
+
+.card-publications{
+    .card-body{
+        .link-publication{
+            background: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            .top{
+                .title{
+                    font-family: $font-secondary;
+                    font-size: 12px;
+                    white-space: nowrap;
+                    margin-bottom: 0;
+                    text-align: left;
+                }
+                .description{
+                    font-family: Poppins, Arial, sans-serif;
+                    font-size: 13px;
+                    text-align: justify;
+                    margin-bottom: 0;
+                    height: 20px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+            .bottom{
+                text-align: right;
+            }
+        }
+    }
+}
