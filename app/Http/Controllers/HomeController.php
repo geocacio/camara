@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\Law;
 use App\Models\Legislature;
 use App\Models\Page;
 use App\Models\Post;
@@ -48,7 +49,8 @@ class HomeController extends Controller
         $posts = Post::with('categories', 'files')->get();
         $videos = Video::with('categories', 'files')->get();
         $banners = Banner::all();
+        $leis = Law::all();
 
-        return view('pages.home.index', compact('services', 'sections', 'posts', 'videos', 'currentLegislature', 'banners'));
+        return view('pages.home.index', compact('services', 'sections', 'posts', 'videos', 'currentLegislature', 'banners', 'leis'));
     }
 }
