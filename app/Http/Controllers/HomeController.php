@@ -46,10 +46,10 @@ class HomeController extends Controller
         $currentLegislature = $legislature->getCurrentLegislature();
         // dd($currentLegislature->legislatureRelations[0]->legislatureable);
         
-        $posts = Post::with('categories', 'files')->get();
-        $videos = Video::with('categories', 'files')->get();
+        $posts = Post::with('categories', 'files')->limit('3')->get();
+        $videos = Video::with('categories', 'files')->limit('2')->get();
         $banners = Banner::all();
-        $leis = Law::all();
+        $leis = Law::limit('3')->get();
 
         return view('pages.home.index', compact('services', 'sections', 'posts', 'videos', 'currentLegislature', 'banners', 'leis'));
     }
