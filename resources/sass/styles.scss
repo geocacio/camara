@@ -3380,6 +3380,8 @@ section{
 }
 
 .card-publications{
+
+    margin-bottom: 10px;
     
     .card-header{
         padding: 10px;
@@ -3454,5 +3456,19 @@ section{
                 }
             }
         }
+    }
+}
+
+.btn-link-page{
+    font-family: $font-secondary;
+    font-size: 13px;
+    background: #30358c;
+    color: #fff;
+    display: block;
+    width: fit-content;
+    margin: auto;
+
+    &:hover{
+        background-color: #004080;
     }
 }

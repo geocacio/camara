@@ -28,6 +28,7 @@
                         @endforeach
                     </div>
                 </div>
+                <a href="#" class="btn btn-link-page">Ler mais</a>
             </div>
             @endif
 
@@ -87,6 +88,7 @@
 
                     </div>
                 </div>
+                <a href="#" class="btn btn-link-page">Ler mais</a>
             </div>
             @endif
 
