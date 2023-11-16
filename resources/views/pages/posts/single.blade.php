@@ -6,6 +6,7 @@
         <a href="{{ route('home') }}" class="link">Início</a>
     </li>
     <li class="item">
+        <span>{{ $post->title }}</span>
     </li>
 </ul>
 <h3 class="title text-center"></h3>
@@ -18,6 +19,7 @@
 @section('content')
 
 <section>
+    {{-- {{ dd($post) }} --}}
 <div class="container">
     <div class="row">
         <div class="col-md-8">
@@ -25,7 +27,7 @@
                 <div class="card-header">
                     <h3 class="mb-3 text-center">{{ $post->title }}</h3>
                     <figure class="img-post">
-                        <img src="{{ asset('/img/img_post.jpg')}}" class="mb-5" style="max-height: 300px; width: 100%; object-fit: cover">
+                        <img src="{{ asset('storage/'.$image->url)}}" class="mb-5" style="max-height: 300px; width: 100%; object-fit: cover">
 
                         <ul class="social-media-post">
                             <li>
@@ -48,21 +50,18 @@
                         <ul class="list-info-post">
                             <li>
                                 <i class="fa-solid fa-tag fa-fw"></i>
-                                #Desenvolvimento
+                                #{{ $post->categories[0]->category->name }}
                             </li>
                             <li>
                                 <i class="fa-solid fa-calendar-days fa-fw"></i>
-                                01 De Novembro De 2023
+                                {{ date('d \d\e F \d\e Y', strtotime($post->created_at)) }}
                             </li>
                             <li>
                                 <i class="fa-solid fa-eye fa-fw"></i>
-                                85
+                                {{ isset($post->views) ? $post->views : '0' }}
                              </li>
                         </ul>
                     </figure>
-                    {{-- @if($image)
-                        <img src="{{ asset('storage/'.$image->url)}}" class="mb-5" style="max-height: 300px; width: 100%; object-fit: cover">
-                    @endif --}}
                 </div>
                 <div class="card-body">
                     {!! $post->content !!}
@@ -77,132 +76,71 @@
         <div class="col-md-4">
             <div class="card card-list-sidebar">
                 <div class="card-body">
+                    @if(count($generalPosts['mostViewedPosts']))
                     <ul class="list-post">
                         <h3>Notícias mais vistas</h3>
+                        @foreach($generalPosts['mostViewedPosts'] as $post)
                         <li>
-                            <a href="#">
+                            <a href="{{ route('posts.show', $post->slug) }}">
                                 <figure>
-                                    <img src="{{ asset('img/Img_post.jpg') }}" />
+                                    <img src="{{ asset('storage/'.$post->files[0]->file->url) }}" />
                                 </figure>
                                 <div class="info-post-list">
                                     <span class="tags">
                                         <i class="fa-solid fa-tag fa-fw"></i>
-                                        #desenvolvimento
+                                        #{{ $post->categories[0]->category->name}}
                                     </span>
-                                    <h3>É assinada Ordem de Serviço de construção do prédio da nova Sede do Poder Legislativo Municipal.</h3>
-                                    <span class="hours"><i class="fa-solid fa-clock fa-fw"></i> Há 2 horas</span>
+                                    <h3>{{ $post->title }}</h3>
+                                    <span class="hours"><i class="fa-solid fa-clock fa-fw"></i> {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</span>
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <figure>
-                                    <img src="{{ asset('img/Img_post.jpg') }}" />
-                                </figure>
-                                <div class="info-post-list">
-                                    <span class="tags">
-                                        <i class="fa-solid fa-tag fa-fw"></i>
-                                        #desenvolvimento
-                                    </span>
-                                    <h3>É assinada Ordem de Serviço de construção do prédio da nova Sede do Poder Legislativo Municipal.</h3>
-                                    <span class="hours"><i class="fa-solid fa-clock fa-fw"></i> Há 2 horas</span>
-                                </div>
-                            </a>
-                        </li>
+                        @endforeach
                     </ul>
+                    @endif
 
+                    @if(count($generalPosts['recentsPosts']))
                     <ul class="list-post">
-                        <h3>Notícias mais vistas</h3>
+                        <h3>Notícias mais recentes</h3>
+                        @foreach($generalPosts['recentsPosts'] as $post)
                         <li>
-                            <a href="#">
+                            <a href="{{ route('posts.show', $post->slug) }}">
                                 <figure>
-                                    <img src="{{ asset('img/Img_post.jpg') }}" />
+                                    <img src="{{ asset('storage/'.$post->files[0]->file->url) }}" />
                                 </figure>
                                 <div class="info-post-list">
                                     <span class="tags">
                                         <i class="fa-solid fa-tag fa-fw"></i>
-                                        #desenvolvimento
+                                        #{{ $post->categories[0]->category->name}}
                                     </span>
-                                    <h3>É assinada Ordem de Serviço de construção do prédio da nova Sede do Poder Legislativo Municipal.</h3>
-                                    <span class="hours"><i class="fa-solid fa-clock fa-fw"></i> Há 2 horas</span>
+                                    <h3>{{ $post->title }}</h3>
+                                    <span class="hours"><i class="fa-solid fa-clock fa-fw"></i> {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</span>
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <figure>
-                                    <img src="{{ asset('img/Img_post.jpg') }}" />
-                                </figure>
-                                <div class="info-post-list">
-                                    <span class="tags">
-                                        <i class="fa-solid fa-tag fa-fw"></i>
-                                        #desenvolvimento
-                                    </span>
-                                    <h3>É assinada Ordem de Serviço de construção do prédio da nova Sede do Poder Legislativo Municipal.</h3>
-                                    <span class="hours"><i class="fa-solid fa-clock fa-fw"></i> Há 2 horas</span>
-                                </div>
-                            </a>
-                        </li>
+                        @endforeach
                     </ul>
+                    @endif
 
+                    @if(count($generalPosts['categories']))
                     <ul class="list-category">
                         <h3>Categorias</h3>
+                        @foreach($generalPosts['categories'] as $category)
                         <li>
                             <a href="#">
                                 <span class="item-category">
                                     <i class="fa-solid fa-tag fa-fw"></i>
-                                    Administração
+                                    {{ $category->name }}
                                 </span>
                                 <span class="count-category">
-                                    12
+                                    {{ $category->post_count }}
                                 </span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <span class="item-category">
-                                    <i class="fa-solid fa-tag fa-fw"></i>
-                                    Administração
-                                </span>
-                                <span class="count-category">
-                                    12
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="item-category">
-                                    <i class="fa-solid fa-tag fa-fw"></i>
-                                    Administração
-                                </span>
-                                <span class="count-category">
-                                    12
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="item-category">
-                                    <i class="fa-solid fa-tag fa-fw"></i>
-                                    Administração
-                                </span>
-                                <span class="count-category">
-                                    12
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="item-category">
-                                    <i class="fa-solid fa-tag fa-fw"></i>
-                                    Administração
-                                </span>
-                                <span class="count-category">
-                                    12
-                                </span>
-                            </a>
-                        </li>
+                        @endforeach
                     </ul>
+                    @endif
+
                 </div>
             </div>
         </div>

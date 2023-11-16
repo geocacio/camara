@@ -121,8 +121,21 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+
+        $post->update(['views' => ($post->views + 1)]);
         $image = !$post->files->isEmpty() ? $post->files[0]->file : [];
-        return view('pages.posts.single', compact('post', 'image'));
+        $generalPosts['mostViewedPosts'] = Post::orderByDesc('views')->take(4)->get();
+        $generalPosts['recentsPosts'] = Post::orderByDesc('created_at')->take(4)->get();
+        $generalPosts['categories'] = Category::where('slug', 'posts')
+        ->with(['children' => function ($query) {
+            $query->withCount(['categoryContents as post_count' => function ($q) {
+                $q->where('categoryable_type', 'post');
+            }]);
+        }])
+        ->first()
+        ->children;
+
+        return view('pages.posts.single', compact('post', 'image', 'generalPosts'));
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Councilor;
 use App\Models\Legislature;
 use App\Models\Menu;
+use App\Models\Post;
 use App\Models\Setting;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
@@ -115,6 +116,7 @@ class AppServiceProvider extends ServiceProvider
             }
             
             View::share('menus', $menus);
+
         } catch (\Illuminate\Database\QueryException  $e) {
             error_log('* Waiting for the database to have contacts and about tables');
         }

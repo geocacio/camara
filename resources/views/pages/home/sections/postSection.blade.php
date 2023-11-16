@@ -6,7 +6,7 @@
                 <div class="owl-carousel carousel-posts carousel-default">
                     @foreach($posts as $post)
                     @if(!$post->files->isEmpty())
-                    <a href="#"><img src="{{ asset('storage/'.$post->files[0]->file->url) }}"></a>
+                    <a href="{{ route('posts.show', $post->slug) }}"><img src="{{ asset('storage/'.$post->files[0]->file->url) }}"></a>
                     @endif
                     @endforeach
                 </div>
