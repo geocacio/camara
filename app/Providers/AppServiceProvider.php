@@ -81,12 +81,16 @@ class AppServiceProvider extends ServiceProvider
             view::share('currentPresident', $currentPresident);
             
             $settings = Setting::first();
-            $logoFooterImage = $settings->files()->whereHas('file', function ($query) {
-                $query->where('name', 'Logo Footer');
-            })->first();
-            view::share('settings', $settings);
+            $logoFooterImage = null;
             
-            $logo_footer = $logoFooterImage->file->url;
+            if($settings){
+                $logoFooterImage = $settings->files()->whereHas('file', function ($query) {
+                    $query->where('name', 'Logo Footer');
+                })->first();
+                view::share('settings', $settings);
+            }
+            
+            $logo_footer = $logoFooterImage ? $logoFooterImage->file->url : null;
             view::share('logo_footer', $logo_footer);
             
             $getMenus = Menu::with(['styles', 'links' => function ($query) {

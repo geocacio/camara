@@ -41,7 +41,7 @@
                         </li>
                         <li class="item">
                             <i class="fa fa-credit-card"></i>
-                            <span>CNPJ: {{ $settings->cnpj }}</span>
+                            <span>CNPJ: {{ !empty($settings->cnpj) ? $settings->cnpj : '' }}</span>
                         </li>
                     </ul>
                 </div>
@@ -51,15 +51,15 @@
                     <h3 class="title">CONTATOS</h3>
                     <ul class="list">
                         <li class="item">
-                            <a href="tel:{{ $settings->phone }}" class="item-link">
+                            <a href="tel:{{ !empty($settings->phone) ? $settings->phone : '' }}" class="item-link">
                                 <i class="fa fa-phone"></i>
-                                <span>{{ $settings->phone }}</span>
+                                <span>{{ !empty($settings->phone) ? $settings->phone : '' }}</span>
                             </a>
                         </li>
                         <li class="item">
-                            <a href="mailto:{{ $settings->email }}" class="item-link">
+                            <a href="mailto:{{ !empty($settings->email) ? $settings->email : null }}" class="item-link">
                                 <i class="fa fa-envelope"></i>
-                                <span>{{ $settings->email }}</span>
+                                <span>{{ !empty($settings->email) ? $settings->email : null }}</span>
                             </a>
                         </li>
                     </ul>
@@ -71,11 +71,11 @@
                     <ul class="list">
                         <li class="item">
                             <i class="fa fa-map-marker"></i>
-                            <span>{{ $settings->address }}, Nº {{ $settings->number }} {{ $settings->neighborhood }}, CEP: {{ $settings->cep }}</span>
+                            <span>{{ !empty($settings->address) ? $settings->address : null }}, Nº {{ !empty($settings->number) ? $settings->number : null }} {{ !empty($settings->neighborhood) ? $settings->neighborhood : null }}, CEP: {{ !empty($settings->cep) ? $settings->cep : null }}</span>
                         </li>
                         <li class="item">
                             <i class="fa fa-clock-o"></i>
-                            <span>{{ $settings->opening_hours }}</span>
+                            <span>{{ !empty($settings->opening_hours) ? $settings->opening_hours : null }}</span>
                         </li>
                     </ul>
                 </div>

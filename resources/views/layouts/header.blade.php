@@ -80,6 +80,7 @@
             </div>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
+                    {{-- {{dd($menus['menuPrincipal']->links)}} --}}
                     @foreach($menus['menuPrincipal']->links as $link)
                     
                         @if($link->visibility == 'enabled')
