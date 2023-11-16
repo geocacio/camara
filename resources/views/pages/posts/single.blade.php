@@ -31,21 +31,22 @@
 
                         <ul class="social-media-post">
                             <li>
-                                <a href="#" class="email">
+                                <a href="mailto:?subject=Assunto do Email&body={{ url()->current() }}" class="email">
                                     <i class="fa-brands fa-google fa-fw"></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="facebook">
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ url()->current() }}" class="facebook" target="_blank">
                                     <i class="fa-brands fa-facebook fa-fw"></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="instagram">
+                                <a href="https://www.instagram.com/share?url={{ url()->current() }}" class="instagram" target="_blank">
                                     <i class="fa-brands fa-instagram fa-fw"></i>
                                 </a>
                             </li>
                         </ul>
+                        
 
                         <ul class="list-info-post">
                             <li>
