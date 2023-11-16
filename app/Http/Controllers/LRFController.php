@@ -29,6 +29,10 @@ class LRFController extends Controller
         return view('panel.transparency.lrf.index', compact('lrfs'));
     }
 
+    public function allLrf(){
+        return view('pages.lrf.index');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -98,9 +102,9 @@ class LRFController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(LRF $lRF)
+    public function show(LRF $lrf)
     {
-        //
+        return view('pages.lrf.single', compact('lrf'));
     }
 
     /**
