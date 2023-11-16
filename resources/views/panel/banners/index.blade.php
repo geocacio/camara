@@ -1,51 +1,40 @@
 @extends('panel.index')
-@section('pageTitle', 'Leis')
+@section('pageTitle', 'Banners')
 
 @section('content')
 <div class="card">
     <div class="card-body">
         
         <div class="card-header text-right header-with-search">
-            @include(
-            'panel.partials.searchDefault',
-            ['routerSearch' => 'laws.index',
-            'clearRouterSearch' => ['route' => 'laws.index', 'params' => ['search' => '', 'perPage' => $perPage]],
-            'routerNew' => 'laws.create'])
-
-            <div class="btn-group dropleft">
-                <button type="button" class="btn-dropdown-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ route('laws.page') }}">Página</a>
-                    <a class="dropdown-item" href="{{ route('laws.create') }}">Novo</a>
-                    <a class="dropdown-item" href="{{ route('subtypes.index', 'laws') }}">Tipos</a>
-                </div>
-            </div>
-        
+            <a href="{{ route('banners.create') }}" class="btn-default">Novo</a>        
         </div>
 
 
-        @if($laws && $laws->count() > 0)
+        @if($banners && $banners->count() > 0)
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Lei</th>
-                        <th>Data</th>
+                        <th>Imagem</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($laws as $law)
+                    @foreach($banners as $banner)
                     <tr>
-                        <td>{{ $law->id }}</td>
-                        <td>{{ $law->id }} / {{ date('Y', strtotime($law->date)) }}</td>
-                        <td>{{ date("d/m/Y", strtotime($law->date)) }}</td>
+                        <td>{{ $banner->id }}</td>
+                        <td>
+                            @if($banner->files->count() > 0)
+                            <img class="image-table" src="{{ asset('storage/'.$banner->files[0]->file->url) }}" style="background-color: {{ $banner->color }}"/>
+                            @endif
+                        </td>
                         <td class="actions text-center">
-                            <a href="{{ route('laws.edit', $law->slug) }}" class="link edit"><i class="fas fa-edit"></i></a>
-                            <a data-toggle="modal" data-target="#myModal{{$law->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a>
-
-                            <div id="myModal{{$law->id}}" class="modal fade modal-warning" role="dialog">
+                            <a href="{{ route('banners.edit', $banner->id) }}" class="link edit"><i class="fas fa-edit"></i></a>
+                        
+                            <a data-toggle="modal" data-target="#myModal-{{ $banner->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a>
+                        
+                            <div id="myModal-{{$banner->id}}" class="modal fade modal-warning" role="dialog">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <!-- Modal content-->
                                     <div class="modal-content">
@@ -61,13 +50,11 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-cancel" data-dismiss="modal">Cancelar</button>
                                             <a href="#" class="btn btn-default" onclick="event.preventDefault();
-                                                document.getElementById('delete-form-{{ $law->id }}').submit();">
+                                                document.getElementById('delete-form-{{ $banner->id }}').submit();">
                                                 Deletar
                                             </a>
 
-
-
-                                            <form id="delete-form-{{ $law->id }}" action="{{ route('laws.destroy', $law->slug) }}" method="post" style="display: none;">
+                                            <form id="delete-form-{{ $banner->id }}" action="{{ route('banners.destroy', $banner->id) }}" method="post" style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
@@ -84,13 +71,11 @@
         </div>
         @else
         <div class="no-data">
-            <span>Ainda não existem leis cadastradas.</span>
+            <span>Ainda não existem Banners cadastrados.</span>
         </div>
         @endif
 
     </div>
-    
-    @include('panel.partials.footerCardWithPagination', ['routePerPage' => 'laws.index', 'paginate' => $laws])
     
 </div>
 @endsection

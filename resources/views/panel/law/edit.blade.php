@@ -22,27 +22,10 @@
             @csrf
             @method('put')
             <div class="row">
-                <div class="col-md-5">
-                    <div class="form-group">
-                        <label>Número</label>
-                        <input type="number" name="number" class="form-control" value="{{ old('number', $law->number) }}" />
-                    </div>
-                </div>
                 <div class="col-md-2">
                     <div class="form-group">
                         <label>Data</label>
                         <input type="date" name="date" class="form-control" value="{{ old('date', $law->date) }}" />
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="form-group">
-                        <label for="title1">Selecione o Exercício</label>
-                        <select name="exercicy_id" class="form-control">
-                            <option value="">Selecione</option>
-                            @foreach($exercicies[0]->children as $exercicy)
-                            <option value="{{ $exercicy->id}}" {{ $law->exercicy_id == $exercicy->id ? 'selected' : '' }}>{{ $exercicy->name }}</option>
-                            @endforeach
-                        </select>
                     </div>
                 </div>
             </div>

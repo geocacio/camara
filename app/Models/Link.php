@@ -51,4 +51,9 @@ class Link extends Model
 
         return array_merge($linksDoGrupo, $linksDisponiveis);
     }
+
+    public function banners()
+    {
+        return $this->hasMany(Banner::class);
+    }
 }

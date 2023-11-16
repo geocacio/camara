@@ -28,6 +28,23 @@ class VideoController extends Controller
         return view('panel.videos.index', compact('videos'));
     }
 
+    public function allVideos(Request $request){
+
+        // $page_commission = Page::where('name', 'Comissões')->first();
+        $query = Video::query();
+
+        if($request->filled('title')){
+            $query->where('title', 'LIKE', '%' . $request->input('title') . '%');
+        }
+        
+        $videos = $query->paginate(10);
+        $searchData = $request->only(['title']);
+        return view('pages.videos.index', compact('videos', 'searchData'));
+
+        // $videos = Video::all();
+        // return view('pages.videos.index', compact('videos'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

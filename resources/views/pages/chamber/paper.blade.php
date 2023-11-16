@@ -30,7 +30,7 @@
     </div>
 </section>
 
-@include('pages.partials.satisfactionSurvey', ['page_name' => 'Institucional'])
+@include('pages.partials.satisfactionSurvey', ['page_name' => 'Papel da câmara'])
 
 @include('layouts.footer')
 

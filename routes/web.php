@@ -7,6 +7,7 @@ use App\Http\Controllers\AgreementFileController;
 use App\Http\Controllers\AgreementTransferController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\AvailableFilesController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BiddingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChamberController;
@@ -490,6 +491,7 @@ Route::middleware('auth')->group(function () {
         });
         
         Route::resource('/acessibility', AcessibilityController::class);
+        Route::resource('/banners', BannerController::class);
     });
 });
 
@@ -540,6 +542,9 @@ Route::get('/comissoes/{commission}', [CommissionController::class, 'show'])->na
 
 Route::match(['get', 'post'], 'dicionario', [DictionaryController::class, 'allDictionary'])->name('dicionario');
 Route::match(['get', 'post'], 'glossario', [GlossaryController::class, 'allGlossary'])->name('glossario.show');
+
+Route::match(['get', 'post'], 'meus-videos', [VideoController::class, 'allVideos'])->name('videos-all');
+Route::get('/meus-videos/{video}', [VideoController::class, 'show'])->name('video.single');
 
 Route::get('/fale-conosco', [ContactUsController::class, 'index'])->name('fale-conosco.index');
 

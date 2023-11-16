@@ -72,27 +72,27 @@ $styles = $isStyles;
                 }
             }
         });
-    });
 
-    $('.carousel-header').owlCarousel({
-        loop: true,
-        margin: 10,
-        nav: true,
-        dots: false,
-        autoplay: true,
-        autoplayTimeout: 3000,
-        navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 1
-            },
-            1000: {
-                items: 1
+        $('.carousel-councilors').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            dots: false,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
+            responsive: {
+                0: {
+                    items: 2
+                },
+                768: {
+                    items: 4
+                },
+                1300: {
+                    items: 7
+                }
             }
-        }
+        });
     });
 </script>
 @endsection

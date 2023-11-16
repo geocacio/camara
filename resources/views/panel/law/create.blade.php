@@ -27,27 +27,10 @@
     <form action="{{ route('laws.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">
-            <div class="col-md-5">
-                <div class="form-group">
-                    <label>Número</label>
-                    <input type="number" name="number" class="form-control" value="{{ old('number') }}" {{ $types->count() <= 0 ? 'disabled' : ''}}/>
-                </div>
-            </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Data</label>
                     <input type="date" name="date" class="form-control" value="{{ old('date') }}" {{ $types->count() <= 0 ? 'disabled' : ''}} />
-                </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
-                    <label for="title1">Selecione o Exercício</label>
-                    <select name="exercicy_id" class="form-control" {{ $types->count() <= 0 ? 'disabled' : ''}}>
-                        <option value="">Selecione</option>
-                        @foreach($exercicies[0]->children as $exercicy)
-                        <option value="{{ $exercicy->id}}">{{ $exercicy->name }}</option>
-                        @endforeach
-                    </select>
                 </div>
             </div>
         </div>
