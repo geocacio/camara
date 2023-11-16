@@ -29,8 +29,20 @@ class LRFController extends Controller
         return view('panel.transparency.lrf.index', compact('lrfs'));
     }
 
-    public function allLrf(){
-        return view('pages.lrf.index');
+    public function allLrf(Request $request){
+        $search = $request->query('search');
+        $perPage = $request->query('perPage', 10);
+        
+        $query = LRF::query(); //select * from `laws`
+
+        if($request->filled('details')){
+            $query->where('details', 'LIKE', '%' . $request->input('details') . '%');
+        }
+        
+        $lrfs = $query->paginate(10);
+        $searchData = $request->only(['details']);
+
+        return view('pages.lrf.index', compact('lrfs', 'searchData'));
     }
 
     /**
