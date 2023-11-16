@@ -548,6 +548,9 @@ Route::get('/meus-videos/{video}', [VideoController::class, 'show'])->name('vide
 
 Route::get('/fale-conosco', [ContactUsController::class, 'index'])->name('fale-conosco.index');
 
+Route::get('/meus-lrf', [LRFController::class, 'allLrf'])->name('all-lrf');
+Route::get('/meus-lrf/{lrf:slug}', [LRFController::class, 'show'])->name('all-lrf.show');
+
 //Transparency Routes
 Route::get('/transparencia', [App\Http\Controllers\TransparencyPortalController::class, 'show'])->name('transparency.show');
 Route::prefix('/transparencia')->group(function () {

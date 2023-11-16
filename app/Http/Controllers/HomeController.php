@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\Law;
 use App\Models\Legislature;
+use App\Models\LRF;
 use App\Models\Page;
 use App\Models\Post;
 use App\Models\Service;
@@ -50,7 +51,8 @@ class HomeController extends Controller
         $videos = Video::with('categories', 'files')->limit('2')->get();
         $banners = Banner::all();
         $leis = Law::limit('3')->get();
+        $lrfs = LRF::limit('3')->get();
 
-        return view('pages.home.index', compact('services', 'sections', 'posts', 'videos', 'currentLegislature', 'banners', 'leis'));
+        return view('pages.home.index', compact('services', 'sections', 'posts', 'videos', 'currentLegislature', 'banners', 'leis', 'lrfs'));
     }
 }

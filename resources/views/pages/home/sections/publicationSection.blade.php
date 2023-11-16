@@ -6,15 +6,30 @@
             <div class="col-12">
                 <h3 class="title text-center mb-5">Publicações</h3>
             </div>
-
+            @if($lrfs && $lrfs->count() > 0)
             <div class="col-md-6">
                 <div class="card-publications">
                     <div class="card-header">
                         <h4 class="title">LEI DE RESPONSABILIDADE FISCAL</h4>
                     </div>
-                    <div class="card-body"></div>
+                    <div class="card-body">
+                        @foreach($lrfs as $lrf)
+                            <div class="link-publication">
+                                <div class="top">
+                                    <h5 class="title">{{ $lrf->id }}/{{ date('Y', strtotime($lrf->date)) }}</h5>
+                                    <p class="description">{{ $lrf->details }}</p>
+                                </div>
+                                <div class="bottom justify-content-end">
+                                    <span class="d-inline-block" data-toggle="tooltip" title="Ver">
+                                        <a href="{{ route('all-lrf.show', $lrf->slug) }}" class="links"><i class="fa fa-eye"></i></a>
+                                    </span>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
+            @endif
 
             @if($leis && $leis->count() > 0)
             <div class="col-md-6">
