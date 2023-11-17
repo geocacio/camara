@@ -73,7 +73,7 @@
             </div>
             @endif
             @endforeach
-            <div class="col-12 text-center mt-3"><a href="{{ route('videos-all')}}" class="btn-site">Clique aqui para visualizar todos os vídeos do nosso site</a></div>
+            <div class="col-12 text-center mt-3"><a href="{{ route('videos-all')}}" class="btn-site btn-link-page">Clique aqui para visualizar todos os vídeos do nosso site</a></div>
         </div>
     </div>
 </section>
