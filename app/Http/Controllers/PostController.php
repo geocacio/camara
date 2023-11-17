@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\File;
 use App\Models\Image;
 use App\Models\Link;
+use App\Models\Page;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,10 +46,25 @@ class PostController extends Controller
         return view('panel.posts.index', compact('posts', 'perPage', 'search'));
     }
 
-    public function getPosts()
+    public function getPosts(Request $request)
     {
-        $posts = Post::with('users')->get();
-        return view('pages.posts.index', ['posts' => $posts]);
+        $page_post = Page::where('name', 'Posts')->first();
+        $query = Post::query();
+
+        if ($request->filled('category_id')) {
+            $query->whereHas('categories', function ($categoryQuery) use ($request) {
+                $categoryQuery->where('category_id', $request->input('category_id'));
+            });
+        }
+
+        if($request->filled('title')){
+            $query->where('title', 'LIKE', '%' . $request->input('title') . '%');
+        }
+        
+        $posts = $query->paginate(10);
+        $categories = Category::where('slug', 'posts')->first()->children;
+        $searchData = $request->only(['title', 'category_id']);
+        return view('pages.posts.index', compact( 'posts', 'page_post', 'searchData', 'categories'));
     }
 
     /**

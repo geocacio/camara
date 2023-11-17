@@ -128,7 +128,8 @@
                         <h3>Categorias</h3>
                         @foreach($generalPosts['categories'] as $category)
                         <li>
-                            <a href="#">
+                            <a href="#" onclick="event.preventDefault();
+                            document.getElementById('gotoPost-{{ $category->id }}').submit();">
                                 <span class="item-category">
                                     <i class="fa-solid fa-tag fa-fw"></i>
                                     {{ $category->name }}
@@ -138,6 +139,13 @@
                                 </span>
                             </a>
                         </li>
+
+                        <form id="gotoPost-{{ $category->id }}" action="{{ route('posts.getPosts') }}" method="post" style="display: none;">
+                            @csrf
+                            <input type="hidden" name="title" value="">
+                            <input type="hidden" name="category_id" value="{{ $category->id}}">
+                        </form>
+
                         @endforeach
                     </ul>
                     @endif
