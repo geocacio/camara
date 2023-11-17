@@ -114,7 +114,8 @@ class VideoController extends Controller
      */
     public function show(Video $video)
     {
-        return view('pages.videos.single', compact('video'));
+        $recentVideos = Video::orderByDesc('created_at')->take(4)->get();
+        return view('pages.videos.single', compact('video', 'recentVideos'));
     }
 
     /**

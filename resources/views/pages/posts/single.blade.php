@@ -6,6 +6,9 @@
         <a href="{{ route('home') }}" class="link">Início</a>
     </li>
     <li class="item">
+        <a href="{{ route('posts.getPosts') }}" class="link">Notícias</a>
+    </li>
+    <li class="item">
         <span>{{ $post->title }}</span>
     </li>
 </ul>

@@ -6,11 +6,11 @@
         <a href="{{ route('home') }}" class="link">Início</a>
     </li>
     <li class="item">
-        <span>Posts</span>
+        <span>Notícias</span>
     </li>
 </ul>
 
-<h3 class="title-sub-page main">Posts</h3>
+<h3 class="title-sub-page main">Notícias</h3>
 @endsection
 
 @section('content')
@@ -28,13 +28,13 @@
                     <form action="{{ route('posts.getPosts') }}" method="post">
                         @csrf
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <div class="form-group mb-0">
                                     <label>Título</label>
                                     <input type="text" name="title" class="form-control input-sm" value="{{ old('title', $searchData ? $searchData['title'] : '') }}" />
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group mb-0">
                                     <label>Categoria</label>
                                     <select name="category_id" class="form-control input-sm">
@@ -92,6 +92,9 @@
                     </div>
                 </div>
                 @endforeach
+
+                {{ $posts->render() }}
+
             </div>
             </div>
         </div>
