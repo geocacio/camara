@@ -44,6 +44,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="{{ route('attendances.create', $session->slug) }}">Fazer chamada</a>
+                                    <a class="dropdown-item" href="{{ route('proceedings.index', $session->slug) }}">Expedientes</a>
                                     <a class="dropdown-item" href="{{ route('sessions.edit', $session->slug) }}">Editar</a>
                                     <a class="dropdown-item" data-toggle="modal" data-target="#myModal-{{ $session->id }}" href="#">Excluir</a>
                                 </div>

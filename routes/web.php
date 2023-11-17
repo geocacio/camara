@@ -66,6 +66,7 @@ use App\Http\Controllers\PcgController;
 use App\Http\Controllers\PcsController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProceedingController;
 use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\PublicationFormController;
@@ -206,6 +207,7 @@ Route::middleware('auth')->group(function () {
         Route::put('sessions-page', [SessionController::class, 'pageUpdate'])->name('sessions.page.update');
         Route::resource('/sessions', SessionController::class);
         Route::resource('/sessions/{session:slug}/attendances', SessionAttendanceController::class);
+        Route::resource('/sessions/{session:slug}/proceedings', ProceedingController::class);
 
         Route::resource('/secretaries', SecretaryController::class);
         //creating reponsible of secretary

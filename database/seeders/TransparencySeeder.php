@@ -119,6 +119,19 @@ class TransparencySeeder extends Seeder
             'slug' => Str::slug('Atendimento')
         ]);
 
+        $expedients = Category::create([
+            'name' => 'Expedientes',
+            'slug' => Str::slug('Expedientes')
+        ]);
+        $expedientes = ['Ordem do dia', 'Pequeno expediente', 'Grande expediente'];
+        foreach ($expedientes as $item) {
+            Category::create([
+                'name' => $item,
+                'parent_id' => $expedients->id,
+                'slug' => Str::slug($item)
+            ]);
+        }
+
         $vinculo = Category::create([
             'name' => 'Vínculo',
             'slug' => Str::slug('Vínculo')

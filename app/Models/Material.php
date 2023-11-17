@@ -12,7 +12,7 @@ class Material extends Model
 
     protected $fillable = [
         'councilor_id',
-        'session_id',
+        'proceeding_id',
         'status_id',
         'type_id',
         'date',
