@@ -13,4 +13,13 @@ class Proceeding extends Model
         'session_id',
         'type_id',
     ];
+
+    public function sessions(){
+        return $this->belongsTo(Session::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'type_id');
+    }
 }

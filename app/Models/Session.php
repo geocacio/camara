@@ -46,6 +46,10 @@ class Session extends Model
     public function sessionAttendance(){
         return $this->hasMany(SessionAttendance::class);
     }
+
+    public function proceedings(){
+        return $this->hasMany(Proceeding::class);
+    }
     
     public static function uniqSlug()
     {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Proceeding;
+use App\Models\Session;
 use Illuminate\Http\Request;
 
 class ProceedingController extends Controller
@@ -10,9 +11,10 @@ class ProceedingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Session $session)
     {
-        //
+        $proceedings = Proceeding::all();
+        return view('panel.proceeding.index', compact('proceedings', 'session'));
     }
 
     /**

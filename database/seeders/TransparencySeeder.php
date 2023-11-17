@@ -131,12 +131,6 @@ class TransparencySeeder extends Seeder
                 'slug' => Str::slug($item)
             ]);
         }
-        
-        Category::create([
-            'name' => '2023',
-            'parent_id' => $expedients->id,
-            'slug' => Str::slug('2023')
-        ]);
 
         $vinculo = Category::create([
             'name' => 'Vínculo',
