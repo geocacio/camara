@@ -8,9 +8,13 @@
             @foreach($videos as $video)
             @if($video->video_source == 'internal')
             <div class="col-md-6">
-                <video class="videos video-interno" width="640" height="360" controls>
-                    <source src="{{ asset('storage/'.$video->files[0]->file->url) }}" type="video/mp4">
-                </video>
+                <div class="card">
+                    <div class="card-body">
+                        <video class="videos video-interno" width="640" height="360" controls>
+                            <source src="{{ asset('storage/'.$video->files[0]->file->url) }}" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
             </div>
             @else
             <div class="col-md-6">
@@ -30,7 +34,12 @@
                 $videoID = basename(parse_url($video->url, PHP_URL_PATH));
                 }
                 @endphp
-                <iframe class="videos video-incorporado" width="560" height="315" src="https://www.youtube.com/embed/{{$videoID}}" frameborder="0" allowfullscreen></iframe>
+
+                <div class="card">
+                    <div class="card-body">
+                        <iframe class="videos video-incorporado" width="560" height="315" src="https://www.youtube.com/embed/{{$videoID}}" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
                 @elseif ($video->video_source == 'facebook')
                 @php
                 // Obter o ID do vídeo do Facebook a partir do URL
@@ -38,7 +47,12 @@
                 $videoPath = trim($videoURLComponents['path'], '/');
                 $videoID = basename($videoPath);
                 @endphp
-                <iframe class="videos video-incorporado" width="560" height="315" src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F{{$videoID}}&show_text=0&width=560" frameborder="0" allowfullscreen></iframe>
+
+                <div class="card">
+                    <div class="card-body">
+                        <iframe class="videos video-incorporado" width="560" height="315" src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F{{$videoID}}&show_text=0&width=560" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
                 @elseif ($video->video_source == 'instagram')
                 @php
                 // Obter o ID do vídeo do Instagram a partir do URL
@@ -46,10 +60,15 @@
                 $videoPath = trim($videoURLComponents['path'], '/');
                 $videoID = basename($videoPath);
                 @endphp
-                <blockquote class="instagram-media" data-instgrm-permalink="{{ $video->url }}" data-instgrm-version="13">
-                    <a href="{{ $video->url }}" target="_blank" rel="noopener noreferrer">View this post on Instagram</a>
-                </blockquote>
-                <script async src="//www.instagram.com/embed.js"></script>
+
+                <div class="card">
+                    <div class="card-body">
+                        <blockquote class="instagram-media" data-instgrm-permalink="{{ $video->url }}" data-instgrm-version="13">
+                            <a href="{{ $video->url }}" target="_blank" rel="noopener noreferrer">View this post on Instagram</a>
+                        </blockquote>
+                        <script async src="//www.instagram.com/embed.js"></script>
+                    </div>
+                </div>
                 @endif
             </div>
             @endif
