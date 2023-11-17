@@ -114,7 +114,7 @@ class VideoController extends Controller
      */
     public function show(Video $video)
     {
-        //
+        return view('pages.videos.single', compact('video'));
     }
 
     /**
