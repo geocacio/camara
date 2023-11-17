@@ -22,7 +22,6 @@
                         </a>
                         <div class="content">
                             <div>
-                                <!-- {{-- <span class="category">#{{ $post->categories[0]->category->name}}</span> --}} -->
                                 <span class="date">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans(\Carbon\Carbon::now()) }}</span>
                             </div>
                             <a href="{{ route('posts.show', ['post' => $post->slug]) }}" class="title">{{ $post->title }}</a>
@@ -34,9 +33,9 @@
                     @endforeach
                 </div>
             </div>
-            {{-- <div class="col">
-                <a href="{{ route('posts.getPosts')}}">Todos os posts</a>
-            </div> --}}
+            <div class="col-12 mt-4">
+                <a href="{{ route('posts.getPosts')}}" class="btn btn-link-page">Todos os posts</a>
+            </div>
         </div>
     </div>
 </section>

@@ -209,6 +209,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('/sessions/{session:slug}/attendances', SessionAttendanceController::class);
         Route::resource('/sessions/{session:slug}/proceedings', ProceedingController::class);
 
+
         Route::resource('/secretaries', SecretaryController::class);
         //creating reponsible of secretary
         Route::post('/secretaries/responsible/create', [SecretaryController::class, 'createResponsible'])->name('secretaries.responsible.store');
@@ -517,7 +518,7 @@ Route::get('/agendas', [App\Http\Controllers\ScheduleController::class, 'show'])
 Route::post('pesquisa-satisfacao', [SatisfactionSurveyController::class, 'store'])->name('pesquisa-satisfacao.store');
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/posts', [App\Http\Controllers\PostController::class, 'getPosts'])->name('posts.getPosts');
+Route::match(['get', 'post'], '/posts', [App\Http\Controllers\PostController::class, 'getPosts'])->name('posts.getPosts');
 Route::get('/posts/{post:slug}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
 
 //Services Routes
