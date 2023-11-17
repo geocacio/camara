@@ -6,18 +6,17 @@
     <div class="card-body">
         
         <div class="card-header text-right header-with-search">
-            <a href="#" class="btn-default">Novo</a>        
+            <a href="{{ route('proceedings.create', $session->slug) }}" class="btn-default">Novo</a>        
         </div>
 
 
         @if($proceedings && $proceedings->count() > 0)
         <div class="table-responsive">
-            <table class="table table-striped table-with-dropdown">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Tipo</th>
-                        <th>Status</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
@@ -27,7 +26,7 @@
                         <td>{{ $proceeding->id }}</td>
                         <td>{{ $proceeding->category->name }}</td>
                         <td class="actions text-center">
-                            <a href="#" class="link edit"><i class="fas fa-edit"></i></a>
+                            <a href="{{ route('proceedings.edit', ['session' => $session->slug, 'proceedings' => $proceeding]) }}" class="link edit"><i class="fas fa-edit"></i></a>
                             <a data-toggle="modal" data-target="#myModal-{{ $proceeding->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a>
 
                             <div id="myModal-{{ $proceeding->id}}" class="modal fade modal-warning" role="dialog">
@@ -52,7 +51,7 @@
 
 
 
-                                            <form id="delete-form-{{ $proceeding->id }}" action="#" method="post" style="display: none;">
+                                            <form id="delete-form-{{ $proceeding->id }}" action="{{ route('proceedings.destroy', ['session' => $session->slug, 'proceedings' => $proceeding]) }}" method="post" style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
@@ -69,7 +68,7 @@
         </div>
         @else
         <div class="no-data">
-            <span>Ainda não existem sessões cadastradas.</span>
+            <span>Ainda não existem expedientes cadastrados.</span>
         </div>
         @endif
 

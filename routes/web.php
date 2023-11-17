@@ -209,6 +209,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('/sessions/{session:slug}/attendances', SessionAttendanceController::class);
         Route::resource('/sessions/{session:slug}/proceedings', ProceedingController::class);
 
+
         Route::resource('/secretaries', SecretaryController::class);
         //creating reponsible of secretary
         Route::post('/secretaries/responsible/create', [SecretaryController::class, 'createResponsible'])->name('secretaries.responsible.store');

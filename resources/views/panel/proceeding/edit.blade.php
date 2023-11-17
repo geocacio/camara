@@ -1,10 +1,10 @@
 @extends('panel.index')
-@section('pageTitle', 'Novo Expediente')
+@section('pageTitle', 'Atualizar Expediente')
 
 @section('breadcrumb')
 <li><a href="{{ route('sessions.index') }}">Sessões</a></li>
 <li><a href="{{ route('proceedings.index', $session->slug) }}">Expedientes</a></li>
-<li><span>Novo</span></li>
+<li><span>Atualizar</span></li>
 @endsection
 
 @section('content')
@@ -19,8 +19,9 @@
     @endif
 
     <div class="card-body">
-        <form action="{{ route('proceedings.store', $session->slug) }}" method="post">
+        <form action="{{ route('proceedings.update', ['session' => $session->slug, 'proceedings' => $proceeding->id]) }}" method="post">
             @csrf
+            @method('PUT')
 
             <div class="row">
                 <div class="col-md-6">
@@ -30,7 +31,7 @@
                             <option value="">Selecione</option>
                             @if($types)
                             @foreach($types->children as $type)
-                            <option value="{{ $type->id }}">{{ $type->name }}</option>
+                            <option value="{{ $type->id }}" {{ $type->id == $proceeding->type_id ? 'selected' : '' }}>{{ $type->name }}</option>
                             @endforeach
                             @endif
                         </select>
