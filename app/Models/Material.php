@@ -12,7 +12,6 @@ class Material extends Model
 
     protected $fillable = [
         'councilor_id',
-        'proceeding_id',
         'status_id',
         'type_id',
         'date',
@@ -75,6 +74,11 @@ class Material extends Model
     public function files()
     {
         return $this->morphMany(FileContent::class, 'fileable');
+    }
+
+    public function progress()
+    {
+        return $this->hasMany(MaterialsProgress::class, 'material_id');
     }
 
     public static function uniqSlug($name)

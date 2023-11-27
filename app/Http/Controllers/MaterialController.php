@@ -131,7 +131,6 @@ class MaterialController extends Controller
             "type_id" => "required",
             "status_id" => "required",
             "councilor_id" => "required",
-            "proceeding_id" => "required",
             "description" => "nullable",
             'file' => "required|max:{$this->fileUploadService->getMaxSize()}",
         ]);
@@ -195,7 +194,6 @@ class MaterialController extends Controller
             "type_id" => "required",
             "status_id" => "required",
             "councilor_id" => "required",
-            "proceeding_id" => "required",
             "description" => "nullable",
             'file' => "required|max:{$this->fileUploadService->getMaxSize()}",
         ]);

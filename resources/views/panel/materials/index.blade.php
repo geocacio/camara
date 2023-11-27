@@ -52,6 +52,7 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="{{ route('authors.index', $material->slug) }}">Subescritores</a>
                                     <a class="dropdown-item" href="{{ route('recipients.index', $material->slug) }}">Destinatários</a>
+                                    <a class="dropdown-item" href="{{ route('material-proceedings.index', $material->slug) }}">Expedientes</a>
                                     <a class="dropdown-item" href="{{ route('votes.create', $material->slug) }}">Votações</a>
                                     <a class="dropdown-item" href="{{ route('materials.edit', $material->slug) }}">Editar</a>
                                     <a class="dropdown-item" data-toggle="modal" data-target="#myModal-{{ $material->id }}" href="#">Excluir</a>

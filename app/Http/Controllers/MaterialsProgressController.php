@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Material;
 use App\Models\MaterialsProgress;
+use App\Models\Session;
 use Illuminate\Http\Request;
 
 class MaterialsProgressController extends Controller
@@ -10,17 +12,18 @@ class MaterialsProgressController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Material $material)
     {
-        //
+        return view('panel.materials.proceedings.index', compact('material'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Material $material)
     {
-        //
+        $sessions = Session::with('proceedings', 'proceedings.category')->get();
+        return view('panel.materials.proceedings.create', compact('material', 'sessions'));
     }
 
     /**

@@ -15,10 +15,6 @@ return new class extends Migration
             // Remover a coluna session_id
             $table->dropForeign(['session_id']);
             $table->dropColumn('session_id');
-
-            // Adicionar a coluna proceeding_id
-            $table->unsignedBigInteger('proceeding_id')->after('councilor_id');
-            $table->foreign('proceeding_id')->references('id')->on('proceedings');
         });
     }
 
@@ -31,9 +27,6 @@ return new class extends Migration
             // Reverter as alterações
             $table->unsignedBigInteger('session_id');
             $table->foreign('session_id')->references('id')->on('sessions');
-
-            $table->dropForeign(['proceeding_id']);
-            $table->dropColumn('proceeding_id');
         });
     }
 };
