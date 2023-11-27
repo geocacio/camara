@@ -21,9 +21,8 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Nome</th>
-                        <th>Posição</th>
-                        <th>Organização</th>
+                        <th>Expediente</th>
+                        <th>Fase</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -31,11 +30,10 @@
                     @foreach($material->progress as $progress)
                     <tr>
                         <td>{{ $progress->id}}</td>
-                        <td>{{ $progress->name}}</td>
-                        <td>{{ $progress->position}}</td>
-                        <td>{{ $progress->organization}}</td>
+                        <td>{{ $progress->proceeding->category->name}}</td>
+                        <td>{{ $progress->phase}}</td>
                         <td class="actions">
-                            <a href="{{ route('material-proceedings.edit', ['material' => $material->slug,'recipient' => $progress->id]) }}" class="link edit"><i class="fas fa-edit"></i></a>
+                            <a href="{{ route('material-proceedings.edit', ['material' => $material->slug,'material_proceeding' => $progress->id]) }}" class="link edit"><i class="fas fa-edit"></i></a>
                             <a data-toggle="modal" data-target="#myModal-{{$progress->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a>
 
                             <div id="myModal-{{$progress->id}}" class="modal fade modal-warning" role="dialog">
@@ -60,7 +58,7 @@
 
 
 
-                                            <form id="delete-form-{{$progress->id}}" action="{{ route('material-proceedings.destroy', ['material' => $material->slug,'recipient' => $progress->id]) }}" method="post" style="display: none;">
+                                            <form id="delete-form-{{$progress->id}}" action="{{ route('material-proceedings.destroy', ['material' => $material->slug,'material_proceeding' => $progress->id]) }}" method="post" style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>

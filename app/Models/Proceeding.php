@@ -15,7 +15,7 @@ class Proceeding extends Model
     ];
 
     public function sessions(){
-        return $this->belongsTo(Session::class);
+        return $this->belongsTo(Session::class, 'session_id');
     }
 
     public function category()

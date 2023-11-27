@@ -1,9 +1,9 @@
 @extends('panel.index')
-@section('pageTitle', 'Novo expediente')
+@section('pageTitle', 'Atualizar expediente')
 
 @section('breadcrumb')
     <li><a href="{{ route('material-proceedings.index', $material->slug) }}">Expedientes</a></li>
-    <li><span>Novo</span></li>
+    <li><span>Atualizar</span></li>
 @endsection
 
 @section('content')
@@ -18,8 +18,9 @@
         @endif
 
         <div class="card-body">
-            <form action="{{ route('material-proceedings.store', $material->slug) }}" method="post">
+            <form action="{{ route('material-proceedings.update', ['material' => $material->slug,'material_proceeding' => $material_proceeding->id]) }}" method="post">
                 @csrf
+                @method('PUT')
 
                 <div class="row">
                     <div class="col-md-6">
@@ -29,8 +30,7 @@
                                 <option value="">Selecione</option>
                                 @if ($sessions->count() > 0)
                                     @foreach ($sessions as $session)
-                                        <option value="{{ $session->id }}"
-                                            data-expediente="{{ json_encode($session->proceedings) }}">
+                                        <option value="{{ $session->id }}" data-expediente="{{ json_encode($session->proceedings) }}" {{ $session->id == $material_proceeding->proceeding->sessions->id ? 'selected' : ''}}>
                                             {{ $session->date }}</option>
                                     @endforeach
                                 @endif
@@ -38,10 +38,14 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6" id="expediente-container" style="display: none;">
+                    <div class="col-md-6" id="expediente-container">
                         <div class="form-group">
                             <label for="proceeding_id">Expediente</label>
-                            <select id="lista-expediente" name="proceeding_id" class="form-control"></select>
+                            <select id="lista-expediente" name="proceeding_id" class="form-control">
+                                @foreach($material_proceeding->proceeding->sessions->proceedings as $proceeding)
+                                <option value="{{ $proceeding->id }}" {{ $proceeding->id == $material_proceeding->proceeding_id ? 'selected' : ''}}>{{ $proceeding->category->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -50,17 +54,16 @@
                     <label>Fase</label>
                     <select name="phase" class="form-control">
                         <option value="">Selecione</option>
-                        <option value="leitura">Leitura</option>
-                        <option value="votacao">Votação</option>
+                        <option value="leitura" {{ $material_proceeding->phase == 'leitura' ? 'selected' : ''}}>Leitura</option>
+                        <option value="votacao" {{ $material_proceeding->phase == 'votacao' ? 'selected' : ''}}>Votação</option>
                     </select>
-                    {{-- <input type="text" name="phase" class="form-control" value="{{ old('phase') }}" /> --}}
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Observações</label>
-                            <textarea name="observations" class="form-control">{{ old('observations') }}</textarea>
+                            <textarea name="observations" class="form-control">{{ old('observations', $material_proceeding->observations) }}</textarea>
                         </div>
                     </div>
                 </div>

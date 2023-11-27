@@ -15,9 +15,9 @@ class MaterialsProgress extends Model
         'phase',
         'observations',
     ];
-    
-    public function progress()
+
+    public function proceeding()
     {
-        return $this->hasMany(MaterialProgress::class, 'proceeding_id');
+        return $this->belongsTo(Proceeding::class, 'proceeding_id');
     }
 }
