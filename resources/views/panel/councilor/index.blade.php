@@ -35,7 +35,7 @@
                 <tbody>
                     @foreach($councilors as $councilor)
                     <tr>
-                        <td>01</td>
+                        <td>{{ $councilor->id }}</td>
                         <td>
                             @if($councilor->files->count() > 0)
                             <img class="image-table" src="{{ asset('storage/'.$councilor->files[0]->file->url) }}" />
