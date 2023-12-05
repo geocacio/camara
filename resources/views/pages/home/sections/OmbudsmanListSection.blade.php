@@ -8,7 +8,9 @@
                     @foreach($currentLegislature->legislatureRelations as $legislature)
                     
                     <a href="{{ route('vereador.single', $legislature->legislatureable->slug) }}" class="item">
+                        @if($legislature->legislatureable->files->count() > 0)
                         <img class="image" src="{{ asset('storage/'.$legislature->legislatureable->files[0]->file->url) }}" alt="">
+                        @endif
                         <div class="info">
                             <h3 class="name">{{ $legislature->legislatureable->surname }}</h3>
                             <p class="office">{{ $legislature->office->office }}</p>

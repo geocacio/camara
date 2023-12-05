@@ -27,11 +27,12 @@ class SessionController extends Controller
             'main_title' => 'required',
             'title' => 'required',
             'icon' => 'nullable',
-            'description' => 'nullable',
+            'description' => 'required',
         ], [
             'main_title.required' => 'O campo título principal é obrigatório',
             'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
-            'title.required' => 'O campo título é obrigatório'
+            'title.required' => 'O campo título é obrigatório',
+            'description.required' => 'O campo descrição é obrigatório'
         ]);
         $validateData['visibility'] = $request->visibility ? $request->visibility : 'disabled';
 
@@ -108,12 +109,13 @@ class SessionController extends Controller
             'status_id' => 'required',
             'type_id' => 'required',
             'exercicy_id' => 'required',
-            'description' => 'nullable',
+            'description' => 'required',
         ],[
             'date.required' => 'O campo data é obrigatório',
             'type_id.required' => 'O campo tipo é obrigatório',
             'status_id.required' => 'O campo status é obrigatório',
             'exercicy_id.required' => 'O campo exercício é obrigatório',
+            'description.required' => 'O campo descrição é obrigatório'
         ]);
         $validateData['slug'] = Session::uniqSlug();
 
@@ -161,12 +163,13 @@ class SessionController extends Controller
             'status_id' => 'required',
             'type_id' => 'required',
             'exercicy_id' => 'required',
-            'description' => 'nullable',
+            'description' => 'required',
         ],[
             'date.required' => 'O campo data é obrigatório',
             'type_id.required' => 'O campo tipo é obrigatório',
             'status_id.required' => 'O campo status é obrigatório',
             'exercicy_id.required' => 'O campo exercício é obrigatório',
+            'description.required' => 'O campo descrição é obrigatório'
         ]);
 
         if ($session->update($validateData)){

@@ -35,8 +35,8 @@ class Legislature extends Model
 
         if ($currentLegislature) {
             $currentPresident = Councilor::whereHas('legislatureRelations', function ($query) use ($currentLegislature) {
-                $query->where('legislature_id', $currentLegislature->id)
-                    ->where('bond_id', 19);
+                $query->where('legislature_id', $currentLegislature->id);
+                    // ->where('bond_id', 19);
             })->whereHas('legislatureRelations.office', function ($query) {
                 $query->where('office', 'PRESIDENTE');
             })->first();
