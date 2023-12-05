@@ -2380,14 +2380,14 @@ $data = [
     ],
     [
         'page' => 'Lei de responsabilidade fiscal',
-        'route' => 'contas-gocerno',        
+        'route' => 'lei-responsabilidade-fical',        
         'sections' => [
             [
                 'component' => 'lrfComponent',
                 'name' => 'Lei de responsabilidade fiscal',
                 'styles' => [
                     'classes' => [
-                        '.section-faq-general' => [
+                        '.section-lrf' => [
                             'background_color' => $dayColors["bg_section"],
                             'background_color_night' => $darkColors['bg_section'],
                         ],
@@ -2395,7 +2395,45 @@ $data = [
                 ]
             ]
         ]
-                
+
+    ],
+    [
+        'page' => 'Prestação de contas de gestão',
+        'route' => 'prestacao-conta-gestao',        
+        'sections' => [
+            [
+                'component' => 'pcsComponent',
+                'name' => 'Prestação de contas de gestão',
+                'styles' => [
+                    'classes' => [
+                        '.section-pcs' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                    ]
+                ]
+            ]
+        ]
+
+    ],
+    [
+        'page' => 'Prestação de contas de governo',
+        'route' => 'prestacao-conta-governo',        
+        'sections' => [
+            [
+                'component' => 'pcgComponent',
+                'name' => 'Prestação de contas de governo',
+                'styles' => [
+                    'classes' => [
+                        '.section-pcg' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                        ],
+                    ]
+                ]
+            ]
+        ]
+
     ],
     [
         'page' => 'Glossário',
