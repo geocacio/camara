@@ -72,6 +72,7 @@ use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\PublicationFormController;
 use App\Http\Controllers\PublicationPageController;
+use App\Http\Controllers\RecipesController;
 use App\Http\Controllers\RecipientController;
 use App\Http\Controllers\ResponsibilityController;
 use App\Http\Controllers\RoleChamberController;
@@ -102,6 +103,7 @@ use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\VoteController;
+use App\Models\Recipes;
 use App\Models\ServiceLetter;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
@@ -497,6 +499,7 @@ Route::middleware('auth')->group(function () {
         
         Route::resource('/acessibility', AcessibilityController::class);
         Route::resource('/banners', BannerController::class);
+        Route::resource('/recipes', RecipesController::class);
     });
 });
 
