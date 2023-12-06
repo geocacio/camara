@@ -33,6 +33,7 @@ use App\Http\Controllers\DecreesController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DictionaryController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\ExternalLinkController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\GlossaryController;
@@ -500,6 +501,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('/acessibility', AcessibilityController::class);
         Route::resource('/banners', BannerController::class);
         Route::resource('/recipes', RecipesController::class);
+        Route::resource('/expenses', ExpensesController::class);
     });
 });
 
