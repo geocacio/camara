@@ -77,8 +77,12 @@ class CouncilorController extends Controller
             $legislature = $query->first();
         }
 
+        // Encontrar a posição da legislatura atual
+        $currentLegislaturePosition = $legislature ? $legislature->fresh()->getOriginal('created_at') : null;
+        $currentLegislaturePosition = $currentLegislaturePosition ? Legislature::where('created_at', '<=', $currentLegislaturePosition)->count() : null;
+
         $searchData = $request->only(['legislature_id']);
-        return view('pages.councilors.index', compact('legislature', 'allLegislatures', 'searchData'));
+        return view('pages.councilors.index', compact('legislature', 'allLegislatures', 'searchData', 'currentLegislaturePosition'));
     }
 
     /**

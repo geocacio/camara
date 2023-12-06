@@ -74,22 +74,17 @@
                             </div>
                             <div class="second-part">
                                 <div class="body">
-                                    <h3 class="title">Legislatura: ({{ date('Y', strtotime($legislature->start_date)) }} - {{ date('Y', strtotime($legislature->end_date)) }})</h3>
+                                    <h3 class="title"># {{ ($legislatures->currentPage() - 1) * $legislatures->perPage() + $loop->index + 1 }} Legislatura: ({{ date('Y', strtotime($legislature->start_date)) }} - {{ date('Y', strtotime($legislature->end_date)) }})</h3>
                                     <ul>
-                                        <li class="description">Início:
-                                            {{ date('d/m/Y', strtotime($legislature->start_date)) }}
-                                        </li>
-                                        <li class="description">
-                                            Fim:
-                                            {{ date('d/m/Y', strtotime($legislature->end_date)) }}
-                                        </li>
+                                        <li class="description">Início: {{ date('d/m/Y', strtotime($legislature->start_date)) }}</li>
+                                        <li class="description">Fim: {{ date('d/m/Y', strtotime($legislature->end_date)) }}</li>
                                     </ul>
                                 </div>
                             </div>
                         </a>
                     </div>
-
                 </div>
+                
 
                 @endforeach
 

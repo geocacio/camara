@@ -13,7 +13,7 @@
     </li>
 </ul>
 
-<h3 class="title-sub-page main">Legislatura: ({{ date('d/m/Y', strtotime($legislature->start_date)) }} - {{ date('d/m/Y', strtotime($legislature->end_date)) }})</h3>
+<h3 class="title-sub-page main"># {{ $currentLegislaturePosition }}  Legislatura: ({{ date('d/m/Y', strtotime($legislature->start_date)) }} - {{ date('d/m/Y', strtotime($legislature->end_date)) }})</h3>
 @endsection
 
 @section('content')
