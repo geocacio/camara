@@ -56,8 +56,8 @@ class BiddingController extends Controller
     {
         // dd($request);
         $validatedData = $request->validate([
-            'secretary_id' => 'required',
-            'organ_id' => 'nullable',
+            // 'secretary_id' => 'required',
+            // 'organ_id' => 'nullable',
             'number' => 'required',
             'opening_date' => 'nullable',
             'status' => 'nullable',
@@ -209,8 +209,6 @@ class BiddingController extends Controller
     {
         // dd($request);
         $validatedData = $request->validate([
-            'secretary_id' => 'required',
-            'organ_id' => 'nullable',
             'number' => 'required',
             'object' => 'nullable',
             'opening_date' => 'nullable',
