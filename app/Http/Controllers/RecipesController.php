@@ -12,7 +12,9 @@ class RecipesController extends Controller
      */
     public function index()
     {
-        //
+        $recipes = Recipes::all();
+
+        return view('panel.recipes.index', compact('recipes'));
     }
 
     /**
@@ -46,9 +48,9 @@ class RecipesController extends Controller
         $newRecipe->fill($validatedData);
 
         if ($newRecipe->save()) {
-            return redirect()->route('recipe.index')->with('success', 'Registro criado com sucesso!');
+            return redirect()->route('recipes.index')->with('success', 'Registro criado com sucesso!');
         } else {
-            return redirect()->route('recipe.index')->with('error', 'Por favor, tente novamente!');
+            return redirect()->route('recipes.index')->with('error', 'Por favor, tente novamente!');
         }
     }
 
@@ -101,15 +103,15 @@ class RecipesController extends Controller
     public function destroy(Recipes $recipe)
     {
         if (!$recipe) {
-            return redirect()->route('recipe.index')->with('error', 'Registro não encontrado!');
+            return redirect()->route('recipes.index')->with('error', 'Registro não encontrado!');
         }
     
         $deleted = $recipe->delete();
     
         if ($deleted) {
-            return redirect()->route('recipe.index')->with('success', 'Registro excluído com sucesso!');
+            return redirect()->route('recipes.index')->with('success', 'Registro excluído com sucesso!');
         } else {
-            return redirect()->route('recipe.index')->with('error', 'Erro ao excluir o registro. Por favor, tente novamente.');
+            return redirect()->route('recipes.index')->with('error', 'Erro ao excluir o registro. Por favor, tente novamente.');
         }
     }
     
