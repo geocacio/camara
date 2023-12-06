@@ -19,22 +19,21 @@
 
     <div class="card-body">
 
-        <form action="{{ route('pageServiceLetter.update', $pageServiceLetter->slug) }}" method="post">
+        <form action="{{ route('pageServiceLetter.store') }}" method="post">
             @csrf
-            @method('PUT')
 
             <div class="row">
                 <div class="col-md">
                     <div class="form-group">
                         <label>Título</label>
-                        <input type="text" name="title" class="form-control" autocomplete="off" value="{{ old('title', $pageServiceLetter->title) }}">
+                        <input type="text" name="title" class="form-control" autocomplete="off" value="{{ old('title') }}">
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
                 <label>Descrição</label>
-                <textarea name="description" class="form-control">{{ old('description', $pageServiceLetter->description) }}</textarea>
+                <textarea name="description" class="form-control">{{ old('description') }}</textarea>
             </div>
 
             <div class="form-footer text-right">
