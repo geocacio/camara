@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('pcgs', function (Blueprint $table) {
-            $table->enum('link_type', ['internal', 'external']);
-            $table->string('link_external');
+        Schema::table('pages', function (Blueprint $table) {
+            $table->enum('link_type', ['internal', 'external'])->nullable()->default(null)->after('icon');
+            $table->string('url')->after('link_type');
         });
     }
 
@@ -22,9 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('pcgs', function (Blueprint $table) {
+        Schema::table('pages', function (Blueprint $table) {
             $table->dropColumn('link_type');
-            $table->dropColumn('link_external');
+            $table->dropColumn('url');
         });
     }
 };
