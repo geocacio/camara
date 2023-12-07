@@ -70,6 +70,8 @@ class SicController extends Controller
             'main_title' => 'required',
             'title' => 'required',
             'icon' => 'nullable',
+            'link_type' => 'nullable',
+            'url' => 'nullable',
             'description' => 'nullable',
             'visibility' => 'nullable',
         ], [

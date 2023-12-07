@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Page;
 use App\Models\Recipes;
+use App\Models\TransparencyGroup;
 use Illuminate\Http\Request;
 
 class RecipesController extends Controller
@@ -15,6 +17,41 @@ class RecipesController extends Controller
         $recipes = Recipes::all();
 
         return view('panel.recipes.index', compact('recipes'));
+    }
+
+    public function page()
+    {
+        $recipePage = Page::where('name', 'Receitas')->first();
+        $groups = TransparencyGroup::all();
+
+        return view('panel.recipes.page.edit', compact('recipePage', 'groups'));
+    }
+
+    public function pageUpdate(Request $request)
+    {
+        $validateData = $request->validate([
+            'transparency_group_id' => 'required',
+            'main_title' => 'required',
+            'title' => 'required',
+            'icon' => 'nullable',
+            'description' => 'nullable',
+            'link_type' => 'nullable',
+            'url' => 'nullable',
+        ], [
+            'main_title.required' => 'O campo título principal é obrigatório',
+            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
+            'title.required' => 'O campo título é obrigatório'
+        ]);
+        $validateData['visibility'] = $request->visibility ? $request->visibility : 'disabled';
+
+        $recipesPage = Page::where('name', 'Receitas')->first();
+
+        if ($recipesPage->update($validateData)) {
+            $recipesPage->groupContents()->delete();
+            $recipesPage->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+            return redirect()->route('recipes.page')->with('success', 'Informações atualizadas com sucesso!');
+        }
+        return redirect()->route('recipes.page')->with('error', 'Por favor tente novamente!');
     }
 
     /**

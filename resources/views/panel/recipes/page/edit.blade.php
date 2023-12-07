@@ -1,5 +1,10 @@
 @extends('panel.index')
-@section('pageTitle', 'Página de Diárias')
+@section('pageTitle', 'Página de Receitas')
+
+@section('breadcrumb')
+<li><a href="{{ route('recipes.index') }}">Receitas</a></li>
+<li><span>Página</span></li>
+@endsection
 
 @section('content')
 
@@ -12,40 +17,41 @@
 @endif
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('dailies.page.store') }}" method="post">
+        <form action="{{ route('recipes.page.update', $recipePage->id) }}" method="post" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="row">
                 <div class="col-md-2">
                     <div class="form-group">
                         <label>Ícone</label>
-                        <input type="text" name="icon" class="form-control icon" autocomplete="off" value="{{ old('icon') }}" onfocus="getIconInputValues(event)">
+                        <input type="text" name="icon" class="form-control icon" autocomplete="off" value="{{ old('icon', $recipePage->icon) }}" onfocus="getIconInputValues(event)">
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">
                         <label>Título Principal</label>
-                        <input type="text" name="main_title" class="form-control" autocomplete="off" value="{{ old('main_title') }}">
+                        <input type="text" name="main_title" class="form-control" autocomplete="off" value="{{ old('main_title', $recipePage->main_title) }}">
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">
                         <label>Título</label>
-                        <input type="text" name="title" class="form-control" autocomplete="off" value="{{ old('title') }}">
+                        <input type="text" name="title" class="form-control" autocomplete="off" value="{{ old('title', $recipePage->title) }}">
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
                 <label>Text</label>
-                <input type="text" name="text" class="form-control text" autocomplete="off" value="{{ old('text') }}">
+                <input type="text" name="description" class="form-control" autocomplete="off" value="{{ old('description', $recipePage->description) }}">
             </div>
-            
+
             <div class="form-group">
                 <label>Grupo (onde será exibido no portal da transparência)</label>
                 <select name="transparency_group_id" class="form-control">
                     <option value="">Selecione o grupo</option>
                     @foreach($groups as $group)
-                    <option value="{{ $group->id }}">{{ $group->title }} - {{ $group->description }}</option>
+                    <option value="{{ $group->id }}" {{ $recipePage->groupContents && $recipePage->groupContents->transparency_group_id && $group->id == $recipePage->groupContents->transparency_group_id ? 'selected' : '' }}>{{ $group->title }} - {{ $group->description }}</option>
                     @endforeach
                 </select>
             </div>
@@ -56,15 +62,15 @@
                         <label>Tipo de link</label>
                         <select name="link_type" id="link_type" class="form-control">
                             <option value="">Selecione se o link é Interno ou Externo</option>
-                            <option value="internal">Interno</option>
-                            <option value="external">Externo</option>
+                            <option value="internal" {{ old('link_type', $recipePage->link_type) == 'internal' ? 'selected' : '' }}>Interno</option>
+                            <option value="external" {{ old('link_type', $recipePage->link_type) == 'external' ? 'selected' : '' }}>Externo</option>
                         </select>
                     </div>
                 </div>
-                <div class="col-md" id="external_link_div" style="display: none;">
+                <div class="col-md" id="external_link_div" @if($recipePage == '') style="display: none;"@endif>
                     <div class="form-group">
                         <label>Link</label>
-                        <input type="text" name="url" class="form-control" autocomplete="off" value="{{ old('link') }}">
+                        <input type="text" name="url" class="form-control" autocomplete="off" value="{{ old('link', $recipePage->url) }}">
                     </div>
                 </div>
             </div>
@@ -73,7 +79,7 @@
                 <label>Ativado/Desativado</label>
                 <div class="d-flex align-items-center justify-content-center w-fit-content actions">
                     <div class="toggle-switch cmt-4">
-                        <input type="checkbox" id="checklist" name="visibility" value="enabled" class="toggle-input" checked>
+                        <input type="checkbox" id="checklist" name="visibility" value="enabled" class="toggle-input" {{ $recipePage->visibility == 'enabled' ? 'checked' : ''}}>
                         <label for="checklist" class="toggle-label no-margin"></label>
                     </div>
                 </div>

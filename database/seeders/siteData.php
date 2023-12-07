@@ -2820,6 +2820,26 @@ $data = [
             ]
         ]
     ],
+    [
+        'page' => 'Receitas',
+        'route' => 'receitas.page',
+        'sections' => [
+            [
+                'component' => 'acessibility',
+                'name' => 'Acessibilidade',
+                'styles' => [
+                    'classes' => [
+                        '.section-acessibility' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                    ]
+                ]
+            ]
+        ]
+    ],
 ];
 
 return $data;

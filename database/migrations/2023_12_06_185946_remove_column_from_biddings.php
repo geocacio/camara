@@ -26,11 +26,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('biddings', function (Blueprint $table) {
-            $table->unsignedBigInteger('post_id');
-            $table->foreign('post_id')->references('id')->on('posts');
-
-            $table->unsignedBigInteger('organ_id');
-            $table->foreign('organ_id')->references('id')->on('posts');
+            //
         });
     }
 };

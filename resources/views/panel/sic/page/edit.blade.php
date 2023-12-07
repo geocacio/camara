@@ -40,6 +40,25 @@
                 <label>Text</label>
                 <input type="text" name="description" class="form-control" autocomplete="off" value="{{ old('description', $esicPage->description) }}">
             </div>
+            
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-group">
+                        <label>Tipo de link</label>
+                        <select name="link_type" id="link_type" class="form-control">
+                            <option value="">Selecione se o link é Interno ou Externo</option>
+                            <option value="internal" {{ old('link_type', $esicPage->link_type) == 'internal' ? 'selected' : '' }}>Interno</option>
+                            <option value="external" {{ old('link_type', $esicPage->link_type) == 'external' ? 'selected' : '' }}>Externo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md" id="external_link_div" @if($esicPage == '') style="display: none;"@endif>
+                    <div class="form-group">
+                        <label>Link</label>
+                        <input type="text" name="url" class="form-control" autocomplete="off" value="{{ old('url', $esicPage->url) }}">
+                    </div>
+                </div>
+            </div>
 
             <div class="form-group">
                 <label>Ativado/Desativado</label>
