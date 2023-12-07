@@ -82,6 +82,7 @@ $dayColors = [
     "Pale Silver" => "#e1e5e7",
     "Steel Gray" => "#303030",
     "Slate Gray" => "#6c757d",
+    "input_search" => "#e7e7e7",
 ];
 
 $darkColors = [
@@ -202,7 +203,7 @@ $data = [
                         ],
                         '.section-header .form-search-default .form-control' => [
                             'name' => 'Busca',
-                            'background_color' => $dayColors["bg_input"],
+                            'background_color' => $dayColors["input_search"],
                             'background_color_night' => $darkColors["bg_input"],
                             'title_color' => $dayColors["input_text_color"],
                             'title_color_night' => $darkColors["input_text_color"],
