@@ -121,19 +121,24 @@
                                                 <thead>
                                                     <tr>
                                                         <th>Nome</th>
-                                                        <th>Cargo</th>
+                                                        <!-- <th>Cargo</th> -->
                                                         <th>Partido</th>
                                                         <th>Autoria</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                <tr>
+                                                        <td>{{ $material->councilor->name }}</td>
+                                                        <td>{{ $material->councilor->partyAffiliation->acronym }}</td>
+                                                        <td>Autor</td>
+                                                    </tr>
                                 
                                                     @foreach($material->authors as $author)
                                                     <tr>
-                                                        <td>{{ $author->name }}</td>
-                                                        <td>{{ $author->position }}</td>
-                                                        <td>{{ $author->party }}</td>
-                                                        <td>{{ $author->authorship }}</td>
+                                                        <td>{{ $author->councilor->name }}</td>
+                                                        <!-- <td>{{ $author->position }}</td> -->
+                                                        <td>{{ $author->councilor->partyAffiliation->acronym }}</td>
+                                                        <td>Subescritor</td>
                                                     </tr>
                                                     @endforeach
                                 

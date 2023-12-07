@@ -155,7 +155,7 @@ class MaterialController extends Controller
      */
     public function show(Material $material)
     {
-        // dd($material->votes);
+        // dd($material->authors[0]->councilor);
         $material->update(['views' => ($material->views + 1)]);
         return view('pages.materials.show', compact('material'));
     }
@@ -176,7 +176,7 @@ class MaterialController extends Controller
         if($currentLegislature){
             $councilors = Councilor::whereHas('legislatureRelations', function ($query) use ($currentLegislature) {
                 $query->where('legislature_id', $currentLegislature->id);
-            })->where('bond_id', 19)->get();
+            })->get();
         }else{
             $councilors = [];
         }
