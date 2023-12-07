@@ -101,4 +101,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         return result;
     }
+
+    $(document).ready(function () {
+       $('#link_type').change(function () {
+            var selectedOption = $(this).val();
+            if (selectedOption === 'external') {
+               $('#external_link_div').show();
+            } else {
+               $('#external_link_div').hide();
+            }
+        });
+    });
+
 });

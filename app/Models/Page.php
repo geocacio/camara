@@ -9,7 +9,17 @@ class Page extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'route', 'main_title', 'title', 'icon', 'description', 'featured_title', 'featured_description', 'slug', 'visibility'];
+    protected $fillable = ['name', 
+        'route', 
+        'main_title', 
+        'title', 'icon', 
+        'description', 
+        'featured_title', 
+        'featured_description', 
+        'slug', 'visibility', 
+        'link_type', 
+        'url'
+    ];
 
     public function links()
     {

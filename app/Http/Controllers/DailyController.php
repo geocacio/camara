@@ -39,6 +39,8 @@ class DailyController extends Controller
             'title' => 'required',
             'icon' => 'nullable',
             'description' => 'nullable',
+            'link_type' => 'nullable',
+            'url' => 'nullable',
         ], [
             'main_title.required' => 'O campo título principal é obrigatório',
             'transparency_group_id.required' => 'O campo Grupo é obrigatório!',

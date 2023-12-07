@@ -50,6 +50,25 @@
                 </select>
             </div>
 
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-group">
+                        <label>Tipo de link</label>
+                        <select name="link_type" id="link_type" class="form-control">
+                            <option value="">Selecione se o link é Interno ou Externo</option>
+                            <option value="internal">Interno</option>
+                            <option value="external">Externo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md" id="external_link_div" style="display: none;">
+                    <div class="form-group">
+                        <label>Link</label>
+                        <input type="text" name="url" class="form-control" autocomplete="off" value="{{ old('link') }}">
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label>Ativado/Desativado</label>
                 <div class="d-flex align-items-center justify-content-center w-fit-content actions">
