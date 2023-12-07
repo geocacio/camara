@@ -155,7 +155,7 @@ class MaterialController extends Controller
      */
     public function show(Material $material)
     {
-        // dd($material->authors[0]->councilor);
+        // dd($material->recipients);
         $material->update(['views' => ($material->views + 1)]);
         return view('pages.materials.show', compact('material'));
     }
