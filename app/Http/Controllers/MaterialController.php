@@ -63,7 +63,13 @@ class MaterialController extends Controller
     public function index()
     {
         $materials = Material::all();
-        // dd($materials[0]->category);
+        // Itera sobre cada material para verificar o progresso da fase de votação
+        foreach ($materials as $material) {
+            $votacaoProgress = $material->progress->where('phase', 'votacao')->first();
+
+            // Adiciona um campo 'votation' ao material indicando se há progresso na fase de votação
+            $material->votation = $votacaoProgress ? true : false;
+        }
         return view('panel.materials.index', compact('materials'));
     }
 
@@ -155,7 +161,6 @@ class MaterialController extends Controller
      */
     public function show(Material $material)
     {
-        // dd($material->recipients);
         $material->update(['views' => ($material->views + 1)]);
         return view('pages.materials.show', compact('material'));
     }
