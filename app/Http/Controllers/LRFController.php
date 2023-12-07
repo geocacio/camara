@@ -128,7 +128,7 @@ class LRFController extends Controller
 
         $files = $lrf->files;
         
-        $types = Type::where('slug', 'lrf')->first()->children;
+        $types = Type::where('slug', 'lrfs')->first()->children;
         $competencies = Category::where('slug', 'competencias')->with('children')->get();
         $exercicies = Category::where('slug', 'exercicios')->with('children')->get();
 
