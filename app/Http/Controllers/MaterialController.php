@@ -162,6 +162,9 @@ class MaterialController extends Controller
     public function show(Material $material)
     {
         $material->update(['views' => ($material->views + 1)]);
+        $votacaoProgress = $material->progress->where('phase', 'votacao')->first();
+        $material->votation = $votacaoProgress ? true : false;
+
         return view('pages.materials.show', compact('material'));
     }
 

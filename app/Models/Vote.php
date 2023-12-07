@@ -17,7 +17,7 @@ class Vote extends Model
     ];
 
     public function councilors(){
-        return $this->belongsTo(Councilor::class);
+        return $this->belongsTo(Councilor::class, 'councilor_id');
     }
 
     public function voteable()

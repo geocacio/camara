@@ -56,7 +56,7 @@
                         </li>
                         @endif
 
-                        @if($material->session)
+                        @if($material->votation)
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="votes-tab" data-bs-toggle="tab" data-bs-target="#votes" type="button" role="tab">
                                 <i class="fa-solid fa-microphone"></i>
@@ -152,11 +152,31 @@
                         </div>
                         @endif
 
-                        @if($material->session)
+                        @if($material->votation)
 
                         <div class="tab-pane fadeshow" id="votes" role="tabpanel" aria-labelledby="votes-tab">
 
-                            Aqui é a votação da sessão
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-data-default">
+                                        <thead>
+                                            <tr>
+                                                <th>Vereador</th>
+                                                <th>Voto</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($material->votes as $vote)
+                                            <tr>
+                                                <td>{{ $vote->councilors->surname }}</td>
+                                                <td><span class="vote-status {{ $vote->vote == 'Não' ? 'nao' : strtolower($vote->vote) }}"></span>{{ $vote->vote }}</td>
+                                            </tr>
+                                            @endforeach
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
 
                         </div>
                         @endif
