@@ -508,6 +508,8 @@ Route::middleware('auth')->group(function () {
         Route::put('/expenses-page', [ExpensesController::class, 'pageUpdate'])->name('expenses.page.update');
         Route::get('/construction-page', [ConstructionController::class, 'page'])->name('constructions.page');
         Route::put('/construction-page', [ConstructionController::class, 'pageUpdate'])->name('constructions.page.update');
+        Route::get('/pcs-page', [PcsController::class, 'page'])->name('prestacao-conta-gestao');
+        Route::put('/pcs-page', [PcsController::class, 'pageUpdate'])->name('pcs.page.update');
     });
 });
 
