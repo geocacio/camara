@@ -501,6 +501,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('/acessibility', AcessibilityController::class);
         Route::resource('/banners', BannerController::class);
         Route::resource('/recipes', RecipesController::class);
+        Route::get('/recipes-page', [RecipesController::class, 'page'])->name('recipes.page');
+        Route::put('/recipes-page', [RecipesController::class, 'pageUpdate'])->name('recipes.page.update');
         Route::resource('/expenses', ExpensesController::class);
     });
 });

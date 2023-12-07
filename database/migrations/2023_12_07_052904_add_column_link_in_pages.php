@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('pages', function (Blueprint $table) {
             $table->enum('link_type', ['internal', 'external'])->nullable()->default(null)->after('icon');
-            $table->string('url')->after('link_type');
+            $table->string('url')->nullable()->default(null)->after('link_type');
         });
     }
 
