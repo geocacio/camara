@@ -16,7 +16,7 @@ $dayColors = [
     "main_menu_link_color_hover" => "#ffffff",
     "main_menu_link_bg_color" => "transparent",
     "main_menu_link_bg_color_hover" => "#033464",
-    'bg_main_banner' => '#00668b',
+    'bg_main_banner' => '#ffffff',
     'secondary_menu' => '#30358c',
     "secondary_menu_link_color" => "#ffffff",
     "secondary_menu_link_color_hover" => "#ffffff",
@@ -381,6 +381,15 @@ $data = [
                 ]
             ],
             [
+                'component' => 'map',
+                'name' => 'Mapa do site',
+                'styles' => [
+                    'classes' => [
+                        '.section-map' => [],
+                    ]
+                ]
+            ],
+            [
                 'component' => 'Footer',
                 'name' => 'Rodapé',
                 'styles' => [
@@ -516,8 +525,8 @@ $data = [
                         ],
                         '.section-legislature .main-card .councilor-items .info .title' => [
                             'name' => 'Título do card do vereador',
-                                'title_color' => $dayColors["title_color"],
-                                'title_color_night' => $darkColors['title_color'],
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
                         ],
                     ]
                 ]
@@ -1219,8 +1228,8 @@ $data = [
                         ],
                         '.section-legislature .main-card .councilor-items .info .title' => [
                             'name' => 'Título do card do vereador',
-                                'title_color' => $dayColors["title_color"],
-                                'title_color_night' => $darkColors['title_color'],
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
                         ],
                     ]
                 ]
@@ -1253,8 +1262,8 @@ $data = [
                         ],
                         '.section-legislature .main-card .councilor-items .info .title' => [
                             'name' => 'Título do card do vereador',
-                                'title_color' => $dayColors["title_color"],
-                                'title_color_night' => $darkColors['title_color'],
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
                         ],
                     ]
                 ]
@@ -1287,8 +1296,8 @@ $data = [
                         ],
                         '.section-legislature .main-card .councilor-items .info .title' => [
                             'name' => 'Título do card do vereador',
-                                'title_color' => $dayColors["title_color"],
-                                'title_color_night' => $darkColors['title_color'],
+                            'title_color' => $dayColors["title_color"],
+                            'title_color_night' => $darkColors['title_color'],
                         ],
                     ]
                 ]
@@ -2319,11 +2328,11 @@ $data = [
                 ]
             ]
         ]
-                
+
     ],
     [
         'page' => 'Faq',
-        'route' => 'faq.show',        
+        'route' => 'faq.show',
         'sections' => [
             [
                 'component' => 'faq',
@@ -2338,11 +2347,11 @@ $data = [
                 ]
             ]
         ]
-                
+
     ],
     [
         'page' => 'Contas de governo',
-        'route' => 'contas-gocerno',        
+        'route' => 'contas-governo',
         'sections' => [
             [
                 'component' => 'GovernementAccounts',
@@ -2357,11 +2366,11 @@ $data = [
                 ]
             ]
         ]
-                
+
     ],
     [
         'page' => 'Contas de gestão',
-        'route' => 'contas-gocerno',        
+        'route' => 'contas-gestao',
         'sections' => [
             [
                 'component' => 'ManagementAccount',
@@ -2376,11 +2385,11 @@ $data = [
                 ]
             ]
         ]
-                
+
     ],
     [
         'page' => 'Lei de responsabilidade fiscal',
-        'route' => 'lei-responsabilidade-fical',        
+        'route' => 'lei-responsabilidade-fical',
         'sections' => [
             [
                 'component' => 'lrfComponent',
@@ -2399,7 +2408,7 @@ $data = [
     ],
     [
         'page' => 'Prestação de contas de gestão',
-        'route' => 'prestacao-conta-gestao',        
+        'route' => 'prestacao-conta-gestao',
         'sections' => [
             [
                 'component' => 'pcsComponent',
@@ -2418,7 +2427,7 @@ $data = [
     ],
     [
         'page' => 'Prestação de contas de governo',
-        'route' => 'prestacao-conta-governo',        
+        'route' => 'prestacao-conta-governo',
         'sections' => [
             [
                 'component' => 'pcgComponent',
@@ -2437,7 +2446,7 @@ $data = [
     ],
     [
         'page' => 'Glossário',
-        'route' => 'glossario.show',        
+        'route' => 'glossario.show',
         'sections' => [
             [
                 'component' => 'glossario',
@@ -2452,11 +2461,11 @@ $data = [
                 ]
             ]
         ]
-                
+
     ],
     [
         'page' => 'Dados abertos',
-        'route' => 'dados.show',        
+        'route' => 'dados.show',
         'sections' => [
             [
                 'component' => 'dados',
@@ -2471,7 +2480,7 @@ $data = [
                 ]
             ]
         ]
-                
+
     ],
     // [
     //     'page' => 'Prefeito e vice',

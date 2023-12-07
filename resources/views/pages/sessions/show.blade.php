@@ -44,13 +44,15 @@
                         </li>
                         @endif
 
-                        @if($session->materials)
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="materials-tab" data-bs-toggle="tab" data-bs-target="#materials" type="button" role="tab">
-                                <i class="fa-solid fa-copy"></i>
-                                Materiais
-                            </button>
-                        </li>
+                        @if($session->proceedings)
+                            @foreach($session->proceedings as $proceeding)
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#proceeding-{{ $proceeding->id }}" type="button" role="tab">
+                                        <i class="fa-solid fa-copy"></i>
+                                        {{ $proceeding->category->name }}
+                                    </button>
+                                </li>
+                        @endforeach
                         @endif
                         
                     </ul>
@@ -117,31 +119,31 @@
                             </div>
                         @endif
 
-                        @if($session->materials)
+                        @if($session->proceedings)
                         
-                            <div class="tab-pane fadeshow" id="materials" role="tabpanel" aria-labelledby="materials-tab">
-
-                                @foreach($session->materials as $material)
-
+                            @foreach($session->proceedings as $proceeding)
+                        
+                                <div class="tab-pane fadeshow" id="proceeding-{{ $proceeding->id }}" role="tabpanel" aria-labelledby="materials-tab">
+                                    @foreach($proceeding->progress as $progress)
                                     <div class="col-md-12">
                                         <div class="card-with-links">
-                                            <a href="{{ route('materiais.single', $material->slug) }}">
+                                            <a href="#">
                                                 <div class="header">
                                                     <i class="fa-solid fa-copy"></i>
                                                 </div>
                                                 <div class="second-part">
                                                     <div class="body">
-                                                        <h3 class="title">{{ $material->type->name }}</h3>
-                                                        <p class="description">{{ Str::limit($material->description, '75', '...') }}</p>
+                                                        <h3 class="title">{{ $progress->material->type->name }}: {{ $progress->material->id }}/{{ date('Y', strtotime($progress->material->date)) }}</h3>
+                                                        <p class="description">{{ Str::limit($progress->material->description, '75', '...') }}</p>
                                                     </div>
                                                 </div>
                                             </a>
                                         </div>
                                     </div>
-
-                                @endforeach
-
-                            </div>
+                                    @endforeach
+                                </div>
+                                    
+                            @endforeach
                         @endif
 
                     </div>
