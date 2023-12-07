@@ -277,6 +277,8 @@ section{
         padding-bottom: 0;
         .navbar-nav{
             .nav-item{
+                display: flex;
+                align-items: center;
                 .nav-link{
                     color: $white;
                     font-size: 13px;
@@ -3604,5 +3606,11 @@ section{
             line-height: 26px;
             color: #333;
         }
+    }
+}
+
+.section-single-post{
+    img{
+        width: 100%;
     }
 }

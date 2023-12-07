@@ -21,7 +21,7 @@
 
 @section('content')
 
-<section>
+<section class="section-single-post">
     {{-- {{ dd($post) }} --}}
 <div class="container">
     <div class="row">
