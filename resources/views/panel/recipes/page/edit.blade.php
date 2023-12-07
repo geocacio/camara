@@ -67,7 +67,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md" id="external_link_div" @if($recipePage == '') style="display: none;"@endif>
+                <div class="col-md" id="external_link_div" @if($recipePage->link_type == ''  || $recipePage->link_type == 'internal') style="display: none;"@endif>
                     <div class="form-group">
                         <label>Link</label>
                         <input type="text" name="url" class="form-control" autocomplete="off" value="{{ old('link', $recipePage->url) }}">
