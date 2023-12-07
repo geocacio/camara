@@ -52,7 +52,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md" id="external_link_div" @if($esicPage == '') style="display: none;"@endif>
+                <div class="col-md" id="external_link_div" @if($esicPage->esicPage == ''  || $esicPage->link_type == 'internal') style="display: none;"@endif>
                     <div class="form-group">
                         <label>Link</label>
                         <input type="text" name="url" class="form-control" autocomplete="off" value="{{ old('url', $esicPage->url) }}">

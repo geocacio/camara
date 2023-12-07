@@ -1,5 +1,10 @@
 @extends('panel.index')
-@section('pageTitle', 'Página de Diárias')
+@section('pageTitle', 'Página de Despesas')
+
+@section('breadcrumb')
+<li><a href="{{ route('expenses.index') }}">Despesas</a></li>
+<li><span>Página</span></li>
+@endsection
 
 @section('content')
 
@@ -12,33 +17,33 @@
 @endif
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('dailies.page.update', $page_daily->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('expenses.page.update', $expensesPage->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="row">
                 <div class="col-md-2">
                     <div class="form-group">
                         <label>Ícone</label>
-                        <input type="text" name="icon" class="form-control icon" autocomplete="off" value="{{ old('icon', $page_daily->icon) }}" onfocus="getIconInputValues(event)">
+                        <input type="text" name="icon" class="form-control icon" autocomplete="off" value="{{ old('icon', $expensesPage->icon) }}" onfocus="getIconInputValues(event)">
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">
                         <label>Título Principal</label>
-                        <input type="text" name="main_title" class="form-control" autocomplete="off" value="{{ old('main_title', $page_daily->main_title) }}">
+                        <input type="text" name="main_title" class="form-control" autocomplete="off" value="{{ old('main_title', $expensesPage->main_title) }}">
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">
                         <label>Título</label>
-                        <input type="text" name="title" class="form-control" autocomplete="off" value="{{ old('title', $page_daily->title) }}">
+                        <input type="text" name="title" class="form-control" autocomplete="off" value="{{ old('title', $expensesPage->title) }}">
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
                 <label>Text</label>
-                <input type="text" name="description" class="form-control" autocomplete="off" value="{{ old('description', $page_daily->description) }}">
+                <input type="text" name="description" class="form-control" autocomplete="off" value="{{ old('description', $expensesPage->description) }}">
             </div>
 
             <div class="form-group">
@@ -46,26 +51,26 @@
                 <select name="transparency_group_id" class="form-control">
                     <option value="">Selecione o grupo</option>
                     @foreach($groups as $group)
-                    <option value="{{ $group->id }}" {{ $page_daily->groupContents && $page_daily->groupContents->transparency_group_id && $group->id == $page_daily->groupContents->transparency_group_id ? 'selected' : '' }}>{{ $group->title }} - {{ $group->description }}</option>
+                    <option value="{{ $group->id }}" {{ $expensesPage->groupContents && $expensesPage->groupContents->transparency_group_id && $group->id == $expensesPage->groupContents->transparency_group_id ? 'selected' : '' }}>{{ $group->title }} - {{ $group->description }}</option>
                     @endforeach
                 </select>
             </div>
-                 
+
             <div class="row">
                 <div class="col-md">
                     <div class="form-group">
                         <label>Tipo de link</label>
                         <select name="link_type" id="link_type" class="form-control">
                             <option value="">Selecione se o link é Interno ou Externo</option>
-                            <option value="internal" {{ old('link_type', $page_daily->link_type) == 'internal' ? 'selected' : '' }}>Interno</option>
-                            <option value="external" {{ old('link_type', $page_daily->link_type) == 'external' ? 'selected' : '' }}>Externo</option>
+                            <option value="internal" {{ old('link_type', $expensesPage->link_type) == 'internal' ? 'selected' : '' }}>Interno</option>
+                            <option value="external" {{ old('link_type', $expensesPage->link_type) == 'external' ? 'selected' : '' }}>Externo</option>
                         </select>
                     </div>
                 </div>
-                <div class="col-md" id="external_link_div" @if($page_daily->link_type == ''  || $page_daily->link_type == 'internal') style="display: none;"@endif>
+                <div class="col-md" id="external_link_div" @if($expensesPage->link_type == '' || $expensesPage->link_type == 'internal') style="display: none;"@endif>
                     <div class="form-group">
                         <label>Link</label>
-                        <input type="text" name="url" class="form-control" autocomplete="off" value="{{ old('link', $page_daily->url) }}">
+                        <input type="text" name="url" class="form-control" autocomplete="off" value="{{ old('link', $expensesPage->url) }}">
                     </div>
                 </div>
             </div>
@@ -74,7 +79,7 @@
                 <label>Ativado/Desativado</label>
                 <div class="d-flex align-items-center justify-content-center w-fit-content actions">
                     <div class="toggle-switch cmt-4">
-                        <input type="checkbox" id="checklist" name="visibility" value="enabled" class="toggle-input" {{ $page_daily->visibility == 'enabled' ? 'checked' : ''}}>
+                        <input type="checkbox" id="checklist" name="visibility" value="enabled" class="toggle-input" {{ $expensesPage->visibility == 'enabled' ? 'checked' : ''}}>
                         <label for="checklist" class="toggle-label no-margin"></label>
                     </div>
                 </div>

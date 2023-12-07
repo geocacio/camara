@@ -504,6 +504,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/recipes-page', [RecipesController::class, 'page'])->name('recipes.page');
         Route::put('/recipes-page', [RecipesController::class, 'pageUpdate'])->name('recipes.page.update');
         Route::resource('/expenses', ExpensesController::class);
+        Route::get('/expenses-page', [ExpensesController::class, 'page'])->name('expenses.page');
+        Route::put('/expenses-page', [ExpensesController::class, 'pageUpdate'])->name('expenses.page.update');
     });
 });
 
