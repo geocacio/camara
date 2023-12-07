@@ -506,13 +506,17 @@ Route::middleware('auth')->group(function () {
         Route::resource('/expenses', ExpensesController::class);
         Route::get('/expenses-page', [ExpensesController::class, 'page'])->name('expenses.page');
         Route::put('/expenses-page', [ExpensesController::class, 'pageUpdate'])->name('expenses.page.update');
+        Route::get('/construction-page', [ConstructionController::class, 'page'])->name('constructions.page');
+        Route::put('/construction-page', [ConstructionController::class, 'pageUpdate'])->name('constructions.page.update');
     });
 });
 
 
 Route::get('/acessibilidade', [AcessibilityController::class, 'page'])->name('acessibilidade.page');
 Route::get('/mapa-site', [SiteMapController::class, 'page'])->name('mapa-site.page');
-Route::get('/gestores', [ManagerController::class, 'page'])->name('gestores.page');
+Route::get('/expenses', [ExpensesController::class, 'show'])->name('despesas.page');
+Route::get('/recipes', [RecipesController::class, 'show'])->name('receitas.page');
+Route::get('/construction', [ConstructionController::class, 'show'])->name('obras.page');
 Route::get('/simbolos', [SymbolsController::class, 'page'])->name('simbolos.page');
 Route::get('/gestores/lista', [App\Http\Controllers\SecretaryController::class, 'show'])->name('gestores.lista.show');
 

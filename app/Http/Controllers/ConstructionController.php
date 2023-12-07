@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Construction;
+use App\Models\Page;
 use App\Models\Secretary;
+use App\Models\TransparencyGroup;
 use App\Models\Type;
 use App\Models\TypeContent;
 use Illuminate\Http\Request;
@@ -18,6 +20,43 @@ class ConstructionController extends Controller
         $constructions = Construction::all();
         return view('panel.construction.index', compact('constructions'));
     }
+
+    
+    public function page()
+    {
+        $constructionPage = Page::where('name', 'Obras')->first();
+        $groups = TransparencyGroup::all();
+
+        return view('panel.construction.page.edit', compact('constructionPage', 'groups'));
+    }
+
+    public function pageUpdate(Request $request)
+    {
+        $validateData = $request->validate([
+            'transparency_group_id' => 'required',
+            'main_title' => 'required',
+            'title' => 'required',
+            'icon' => 'nullable',
+            'description' => 'nullable',
+            'link_type' => 'nullable',
+            'url' => 'nullable',
+        ], [
+            'main_title.required' => 'O campo título principal é obrigatório',
+            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
+            'title.required' => 'O campo título é obrigatório'
+        ]);
+        $validateData['visibility'] = $request->visibility ? $request->visibility : 'disabled';
+
+        $constructionPage = Page::where('name', 'Obras')->first();
+
+        if ($constructionPage->update($validateData)) {
+            $constructionPage->groupContents()->delete();
+            $constructionPage->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+            return redirect()->route('constructions.page')->with('success', 'Informações atualizadas com sucesso!');
+        }
+        return redirect()->route('constructions.page')->with('error', 'Por favor tente novamente!');
+    }
+
 
     /**
      * Show the form for creating a new resource.
