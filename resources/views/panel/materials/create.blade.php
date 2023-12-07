@@ -69,19 +69,6 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="session_id">Sessão</label>
-                        <select name="session_id" class="form-control">
-                            <option value="">Selecione</option>
-                            @if($sessions->count() > 0)
-                            @foreach($sessions as $session)
-                            <option value="{{ $session->id }}">{{ $session->date }}</option>
-                            @endforeach
-                            @endif
-                        </select>
-                    </div>
-                </div>
             </div>
 
             <div class="row">

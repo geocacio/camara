@@ -1,4 +1,6 @@
-@include('partials.mapsSection')
+@if($showMap && $showMap->visibility == 'enabled')
+    @include('partials.mapsSection')
+@endif
 
 <footer class="footer">
     <div class="container">

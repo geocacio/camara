@@ -22,4 +22,8 @@ class Proceeding extends Model
     {
         return $this->belongsTo(Category::class, 'type_id');
     }
+
+    public function progress(){
+        return $this->hasMany(MaterialsProgress::class, 'proceeding_id');
+    }
 }

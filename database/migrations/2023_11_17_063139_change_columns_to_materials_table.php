@@ -23,9 +23,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        if(Schema::hasColumn('material', 'session_id')) return;
         Schema::table('materials', function (Blueprint $table) {
             // Reverter as alterações
-            $table->unsignedBigInteger('session_id');
+            $table->unsignedBigInteger('session_id')->nullable();
             $table->foreign('session_id')->references('id')->on('sessions');
         });
     }

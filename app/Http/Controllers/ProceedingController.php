@@ -14,7 +14,7 @@ class ProceedingController extends Controller
      */
     public function index(Session $session)
     {
-        $proceedings = Proceeding::all();
+        $proceedings = $session->proceedings;
         return view('panel.proceeding.index', compact('proceedings', 'session'));
     }
 

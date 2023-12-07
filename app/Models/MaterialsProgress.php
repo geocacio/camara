@@ -20,4 +20,9 @@ class MaterialsProgress extends Model
     {
         return $this->belongsTo(Proceeding::class, 'proceeding_id');
     }
+
+    public function material()
+    {
+        return $this->belongsTo(Material::class, 'material_id');
+    }
 }

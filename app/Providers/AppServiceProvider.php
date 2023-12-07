@@ -2,10 +2,9 @@
 
 namespace App\Providers;
 
-use App\Models\Councilor;
 use App\Models\Legislature;
 use App\Models\Menu;
-use App\Models\Post;
+use App\Models\Section;
 use App\Models\Setting;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
@@ -77,6 +76,10 @@ class AppServiceProvider extends ServiceProvider
 
 
         try {
+
+            //exibir o map com base nesta busca
+            $showMap = Section::where('name', 'Mapa do site')->select('visibility')->first();
+            view::share('showMap', $showMap);
             
             $legislature = new Legislature();
             $currentPresident = $legislature->getCurrentPresident();
