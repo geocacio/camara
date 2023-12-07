@@ -508,12 +508,18 @@ Route::middleware('auth')->group(function () {
         Route::put('/expenses-page', [ExpensesController::class, 'pageUpdate'])->name('expenses.page.update');
         Route::get('/construction-page', [ConstructionController::class, 'page'])->name('constructions.page');
         Route::put('/construction-page', [ConstructionController::class, 'pageUpdate'])->name('constructions.page.update');
-        Route::get('/pcs-page', [PcsController::class, 'page'])->name('prestacao-conta-gestao');
+
+        Route::get('/pcs-page', [PcsController::class, 'page'])->name('pcs.page');
         Route::put('/pcs-page', [PcsController::class, 'pageUpdate'])->name('pcs.page.update');
+        Route::get('/pcg-page', [PcgController::class, 'page'])->name('pcg.page');
+        Route::put('/pcg-page', [PcgController::class, 'pageUpdate'])->name('pcg.page.update');
     });
 });
 
 
+Route::get('/pcs', [PcsController::class, 'show'])->name('prestacao-conta-gestao');
+Route::get('/pcg', [PcgController::class, 'show'])->name('prestacao-conta-governo');
+Route::get('/acessibilidade', [AcessibilityController::class, 'page'])->name('acessibilidade.page');
 Route::get('/acessibilidade', [AcessibilityController::class, 'page'])->name('acessibilidade.page');
 Route::get('/mapa-site', [SiteMapController::class, 'page'])->name('mapa-site.page');
 Route::get('/expenses', [ExpensesController::class, 'show'])->name('despesas.page');

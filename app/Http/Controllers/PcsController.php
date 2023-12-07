@@ -62,9 +62,9 @@ class PcsController extends Controller
         if ($pcsPage->update($validateData)) {
             $pcsPage->groupContents()->delete();
             $pcsPage->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
-            return redirect()->route('prestacao-conta-gestao')->with('success', 'Informações atualizadas com sucesso!');
+            return redirect()->route('pcs.page')->with('success', 'Informações atualizadas com sucesso!');
         }
-        return redirect()->route('prestacao-conta-gestao')->with('error', 'Por favor tente novamente!');
+        return redirect()->route('pcs.page')->with('error', 'Por favor tente novamente!');
     }
 
     /**
