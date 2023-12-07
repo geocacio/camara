@@ -33,7 +33,7 @@ class OmbudsmanInstitutionalController extends Controller
         ],[
             'main_title.required' => 'O campo título principal é obrigatório',
             'title.required' => 'O campo título é obrigatório',
-            'descriptions.required' => 'Insira pelomenos uma descrição',
+            'descriptions.required' => 'Insira pelo menos uma descrição',
         ]);
         $validatedData['slug'] = Str::slug($request->main_title);
 
@@ -66,7 +66,7 @@ class OmbudsmanInstitutionalController extends Controller
         ],[
             'main_title.required' => 'O campo título principal é obrigatório',
             'title.required' => 'O campo título é obrigatório',
-            'descriptions.required' => 'Insira pelomenos uma descrição',
+            'descriptions.required' => 'Insira pelo menos uma descrição',
         ]);
 
         if($ombudsman_institutional->update($validatedData)){

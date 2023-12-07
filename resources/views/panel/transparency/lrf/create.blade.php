@@ -12,7 +12,7 @@
     @if($types->count() <= 0)
     <div class="alert alert-danger">
         <ul>
-            <li>É preciso ter pelomenos um tipo cadastrado! <a href="{{ route('subtypes.create', 'lrf') }}" class="link-alert alert-danger">Criar</a></li>
+            <li>É preciso ter pelo menos um tipo cadastrado! <a href="{{ route('subtypes.create', 'lrfs') }}" class="link-alert alert-danger">Criar</a></li>
         </ul>
     </div>
     @endif

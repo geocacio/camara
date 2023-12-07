@@ -128,7 +128,7 @@
         </form>
         @else
         <div class="no-data">
-            <span>Você precisa ter pelomenos uma secretaria cadastrada!</span>
+            <span>Você precisa ter pelo menos uma secretaria cadastrada!</span>
             <a href="{{ route('secretaries.create') }}" class="link">Criar</a>
         </div>
         @endif
