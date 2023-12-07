@@ -179,6 +179,8 @@ class MaterialController extends Controller
         $situations = $category[0]->children;
         $sessions = Session::all();
 
+        $files = $material->files;
+
         $legislature = new Legislature;
         $currentLegislature = $legislature->getCurrentLegislature();
         if($currentLegislature){
@@ -189,7 +191,7 @@ class MaterialController extends Controller
             $councilors = [];
         }
         
-        return view('panel.materials.edit', compact('material', 'types', 'situations', 'sessions', 'councilors'));
+        return view('panel.materials.edit', compact('material', 'types', 'situations', 'sessions', 'councilors', 'files'));
     }
 
     /**
@@ -197,13 +199,15 @@ class MaterialController extends Controller
      */
     public function update(Request $request, Material $material)
     {
+        $existingFile = $material->files;
+
         $validateData = $request->validate([
             "date" => "required",
             "type_id" => "required",
             "status_id" => "required",
             "councilor_id" => "required",
             "description" => "nullable",
-            'file' => "required|max:{$this->fileUploadService->getMaxSize()}",
+            'file' => $existingFile ? 'nullable|max:' . $this->fileUploadService->getMaxSize() : 'required|max:' . $this->fileUploadService->getMaxSize(),
         ]);
 
         if($material->update($validateData)){

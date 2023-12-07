@@ -57,7 +57,7 @@
             <div class="form-group row">
                 <div class="col-6">
                     <label for="logo">Arquivo</label>
-                    <input type="file" name="files[]" accept="application/pdf" class="form-control" multiple>
+                    <input type="file" name="file" accept="application/pdf" class="form-control" multiple>
                 </div>
                 <div class="col-6 pt-30 container-all-files">
                     @if ($files->count() > 0)
