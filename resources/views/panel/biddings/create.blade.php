@@ -58,31 +58,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="title1">Selecione a Secretaria</label>
-                                <select name="secretary_id" class="form-control" onchange="showOrgans(event, {{ $secretaries }})">
-                                    <option value="">Selecione</option>
-                                    @if($secretaries)
-                                    @foreach($secretaries as $secretary)
-                                    <option value="{{$secretary->id}}">{{$secretary->name}}</option>
-                                    @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6" style="display: none;">
-                            <div class="form-group">
-                                <label for="title1">Selecione o orgão</label>
-                                <select name="organ_id" class="form-control"></select>
-                            </div>
-                        </div>
-
-                    </div>
-
+                    
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">

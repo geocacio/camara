@@ -639,6 +639,18 @@
             <span>Lai</span>
         </a>
     </li>
+    <li class="menu-item {{ request()->routeIs('recipes.index') ? 'active' : '' }}">
+        <a href="{{ route('recipes.index') }}" class="menu-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-smile"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+            <span>Receitas</span>
+        </a>
+    </li>
+    <li class="menu-item {{ request()->routeIs('expenses.index') ? 'active' : '' }}">
+        <a href="{{ route('expenses.index') }}" class="menu-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-smile"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+            <span>Gastos</span>
+        </a>
+    </li>
     <li class="menu-item {{ request()->routeIs('pages.index') || request()->routeIs('links.index') || request()->routeIs('menus.index') || request()->routeIs('settings.index') ? 'active' : '' }}">
         <button class="menu-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">

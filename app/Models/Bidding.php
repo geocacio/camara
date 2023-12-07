@@ -10,8 +10,6 @@ class Bidding extends Model
     use HasFactory;
 
     protected $fillable = [
-        'secretary_id',
-        'organ_id',
         'number',
         'modality',
         'opening_date',
