@@ -277,6 +277,8 @@ section{
         padding-bottom: 0;
         .navbar-nav{
             .nav-item{
+                display: flex;
+                align-items: center;
                 .nav-link{
                     color: $white;
                     font-size: 13px;
@@ -2978,6 +2980,19 @@ section{
     }
 }
 
+.vote-status{
+    width: 13px;
+    height: 13px;
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 5px;
+    &.sim{
+        background-color: #008000;
+    }&.nao{
+        background-color: #e42323;
+    }
+}
+
 .box-contactUs{
     text-align: center;
     background: #e1e5e7;
@@ -3591,5 +3606,11 @@ section{
             line-height: 26px;
             color: #333;
         }
+    }
+}
+
+.section-single-post{
+    img{
+        width: 100%;
     }
 }
