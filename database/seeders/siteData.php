@@ -2890,7 +2890,27 @@ $data = [
                 'name' => 'Prefeito e vice',
                 'styles' => [
                     'classes' => [
-                        '.section-construction' => [
+                        '.section-managers' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                    ]
+                ]
+            ]
+        ]
+    ],
+    [
+        'page' => 'Símbolos',
+        'route' => 'simbolos.page',
+        'sections' => [
+            [
+                'component' => 'managers',
+                'name' => 'Símbolos',
+                'styles' => [
+                    'classes' => [
+                        '.section-symbols' => [
                             'background_color' => $dayColors["bg_section"],
                             'background_color_night' => $darkColors['bg_section'],
                             'title_color' => $dayColors["text_color"],
