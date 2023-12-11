@@ -170,7 +170,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('companies', CompanyController::class);
         Route::resource('contracts', ContractController::class);
 
-        Route::get('types/{type:slug}/subtypes', [TypeController::class, 'index'])->name('subtypes.index');
+        Route::get('types/{itemType:slug}/subtypes', [TypeController::class, 'index'])->name('subtypes.index');
         Route::get('types/{type:slug}/subtypes/create', [TypeController::class, 'create'])->name('subtypes.create');
 
         Route::get('legislatures-page', [LegislatureController::class, 'page'])->name('legislatures.page');
