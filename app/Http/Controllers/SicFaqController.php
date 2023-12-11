@@ -43,9 +43,9 @@ class SicFaqController extends Controller
         $faq = SicFaq::create($validatedData);
 
         if($faq){
-            return redirect()->route('sic-faq.index')->with('success', 'Pergunta cadastrada com sucesso!');
+            return redirect()->route('sic.faq.index')->with('success', 'Pergunta cadastrada com sucesso!');
         }
-        return redirect()->route('sic-faq.index')->with('error', 'Por favor tente novamente!');
+        return redirect()->route('sic.faq.index')->with('error', 'Por favor tente novamente!');
     }
 
     /**
