@@ -45,7 +45,7 @@ class ScheduleController extends Controller
         if ($schedule) {
             return redirect()->route('schedules.index')->with('success', 'Agenda cadastrada com Sucesso!');
         }
-        return redirect()->route('schedules.index')->with('error', 'Por faovor tente novamente!');
+        return redirect()->route('schedules.index')->with('error', 'Por favor tente novamente!');
     }
 
     /**
