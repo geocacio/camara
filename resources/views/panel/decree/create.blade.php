@@ -8,11 +8,12 @@
 
 @section('content')
 <div class="card">
-    @if($types->count() <= 0) <div class="alert alert-danger">
+    @if(is_array($types) && count($types) <= 0)
+    <div class="alert alert-danger">
         <ul>
             <li>É preciso ter pelo menos um tipo cadastrado! <a href="{{ route('subtypes.create', 'decrees') }}" class="link-alert alert-danger">Criar</a></li>
         </ul>
-</div>
+    </div>
 @endif
 
 @if ($errors->any())
@@ -30,19 +31,19 @@
             <div class="col-md-5">
                 <div class="form-group">
                     <label>Número</label>
-                    <input type="number" name="number" class="form-control" value="{{ old('number') }}" {{ $types->count() <= 0 ? 'disabled' : ''}}/>
+                    <input type="number" name="number" class="form-control" value="{{ old('number') }}" {{ is_array($types) && count($types) <= 0 ? 'disabled' : '' }}/>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Data</label>
-                    <input type="date" name="date" class="form-control" value="{{ old('date') }}" {{ $types->count() <= 0 ? 'disabled' : ''}} />
+                    <input type="date" name="date" class="form-control" value="{{ old('date') }}" {{ is_array($types) && count($types) <= 0 ? 'disabled' : '' }} />
                 </div>
             </div>
             <div class="col-md-5">
                 <div class="form-group">
                     <label for="title1">Selecione o Exercício</label>
-                    <select name="exercicy_id" class="form-control" {{ $types->count() <= 0 ? 'disabled' : ''}}>
+                    <select name="exercicy_id" class="form-control" {{ is_array($types) && count($types) <= 0 ? 'disabled' : '' }}>
                         <option value="">Selecione</option>
                         @foreach($exercicies[0]->children as $exercicy)
                         <option value="{{ $exercicy->id}}">{{ $exercicy->name }}</option>
@@ -55,7 +56,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="title1">Selecione o tipo</label>
-                    <select name="type" class="form-control" {{ $types->count() <= 0 ? 'disabled' : ''}}>
+                    <select name="type" class="form-control" {{ is_array($types) && count($types) <= 0 ? 'disabled' : '' }}>
                         <option value="">Selecione</option>
                         @foreach($types as $type)
                         <option value="{{ $type->id}}">{{ $type->name }}</option>
@@ -66,7 +67,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="title1">Selecione o Grupo</label>
-                    <select name="group_id" class="form-control" {{ $types->count() <= 0 ? 'disabled' : ''}}>
+                    <select name="group_id" class="form-control" {{ is_array($types) && count($types) <= 0 ? 'disabled' : '' }}>
                         <option value="">Selecione</option>
                         @foreach($groups[0]->children as $group)
                         <option value="{{ $group->id}}">{{ $group->name }}</option>
@@ -97,11 +98,11 @@
 
         <div class="form-group">
             <label for="logo">Arquivo</label>
-            <input type="file" name="files[]" accept="application/pdf" class="form-control" multiple {{ $types->count() <= 0 ? 'disabled' : ''}}>
+            <input type="file" name="files[]" accept="application/pdf" class="form-control" multiple {{ is_array($types) && count($types) <= 0 ? 'disabled' : '' }}>
         </div>
         <div class="form-group">
             <label>Descrição</label>
-            <textarea name="description" class="form-control" {{ $types->count() <= 0 ? 'disabled' : ''}}>{{ old('description') }}</textarea>
+            <textarea name="description" class="form-control" {{ is_array($types) && count($types) <= 0 ? 'disabled' : '' }}>{{ old('description') }}</textarea>
         </div>
 
         <div class="form-footer text-right">
