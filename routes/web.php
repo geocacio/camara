@@ -350,6 +350,7 @@ Route::middleware('auth')->group(function () {
 
             Route::resource('managers', ManagerController::class);
             Route::get('managers-page', [ManagerController::class, 'indexPage'])->name('managers.indexPage');
+            Route::get('page-managers', [ManagerController::class, 'page'])->name('gestores.page');
             Route::post('managers-page', [ManagerController::class, 'pageStore'])->name('managers.page.store');
             Route::put('managers-page', [ManagerController::class, 'pageUpdate'])->name('managers.page.update');
 
