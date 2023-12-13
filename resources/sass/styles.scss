@@ -3614,3 +3614,54 @@ section{
         width: 100%;
     }
 }
+
+.custom-backdrop:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #000000b3;
+}
+
+.modal-maintenance{
+    border-radius: 10px;
+    .modal-content{
+        border-radius: 10px;
+        border: 0;
+        .container-maintenance{
+            color: #ffffff;
+            .header{
+                display: flex;
+                gap: 20px;
+                background-color: #004080;
+                border-radius: 10px 10px 0 0;
+                padding: 30px;
+                i{
+                    font-size: 60px;
+                }
+                .title{
+                    font-size: 3.75rem;
+                    text-align: center;
+                }
+                .text{
+                    font-size: 2rem;
+                    margin-bottom: 0;
+                    text-align: center;
+                }
+            }
+            .body{
+                background-color: #00668b;
+                padding: 15px;
+                border-radius: 0 0 10px 10px;
+                padding: 30px;
+                text-align: center;
+                .description{
+                    font-size: 1.7rem;
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}

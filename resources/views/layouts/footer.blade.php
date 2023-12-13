@@ -2,6 +2,8 @@
     @include('partials.mapsSection')
 @endif
 
+@include('partials.maintenance')
+
 <footer class="footer">
     <div class="container">
         @if(!empty($logo_footer))
