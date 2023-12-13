@@ -170,7 +170,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('companies', CompanyController::class);
         Route::resource('contracts', ContractController::class);
 
-        Route::get('types/{type:slug}/subtypes', [TypeController::class, 'index'])->name('subtypes.index');
+        Route::get('types/{itemType:slug}/subtypes', [TypeController::class, 'index'])->name('subtypes.index');
         Route::get('types/{type:slug}/subtypes/create', [TypeController::class, 'create'])->name('subtypes.create');
 
         Route::get('legislatures-page', [LegislatureController::class, 'page'])->name('legislatures.page');
@@ -350,6 +350,7 @@ Route::middleware('auth')->group(function () {
 
             Route::resource('managers', ManagerController::class);
             Route::get('managers-page', [ManagerController::class, 'indexPage'])->name('managers.indexPage');
+            Route::get('page-managers', [ManagerController::class, 'page'])->name('gestores.page');
             Route::post('managers-page', [ManagerController::class, 'pageStore'])->name('managers.page.store');
             Route::put('managers-page', [ManagerController::class, 'pageUpdate'])->name('managers.page.update');
 
@@ -506,13 +507,25 @@ Route::middleware('auth')->group(function () {
         Route::resource('/expenses', ExpensesController::class);
         Route::get('/expenses-page', [ExpensesController::class, 'page'])->name('expenses.page');
         Route::put('/expenses-page', [ExpensesController::class, 'pageUpdate'])->name('expenses.page.update');
+        Route::get('/construction-page', [ConstructionController::class, 'page'])->name('constructions.page');
+        Route::put('/construction-page', [ConstructionController::class, 'pageUpdate'])->name('constructions.page.update');
+
+        Route::get('/pcs-page', [PcsController::class, 'page'])->name('pcs.page');
+        Route::put('/pcs-page', [PcsController::class, 'pageUpdate'])->name('pcs.page.update');
+        Route::get('/pcg-page', [PcgController::class, 'page'])->name('pcg.page');
+        Route::put('/pcg-page', [PcgController::class, 'pageUpdate'])->name('pcg.page.update');
     });
 });
 
 
+Route::get('/pcs', [PcsController::class, 'show'])->name('prestacao-conta-gestao');
+Route::get('/pcg', [PcgController::class, 'show'])->name('prestacao-conta-governo');
+Route::get('/acessibilidade', [AcessibilityController::class, 'page'])->name('acessibilidade.page');
 Route::get('/acessibilidade', [AcessibilityController::class, 'page'])->name('acessibilidade.page');
 Route::get('/mapa-site', [SiteMapController::class, 'page'])->name('mapa-site.page');
-Route::get('/gestores', [ManagerController::class, 'page'])->name('gestores.page');
+Route::get('/expenses', [ExpensesController::class, 'show'])->name('despesas.page');
+Route::get('/recipes', [RecipesController::class, 'show'])->name('receitas.page');
+Route::get('/construction', [ConstructionController::class, 'show'])->name('obras.page');
 Route::get('/simbolos', [SymbolsController::class, 'page'])->name('simbolos.page');
 Route::get('/gestores/lista', [App\Http\Controllers\SecretaryController::class, 'show'])->name('gestores.lista.show');
 

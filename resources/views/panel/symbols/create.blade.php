@@ -48,16 +48,21 @@
                 <select name="transparency_group_id" class="form-control">
                     <option value="">Selecione o grupo</option>
                     @foreach($groups as $group)
-                    <option value="{{ $group->id }}" {{ $pageSymbol->groupContents && $pageSymbol->groupContents->transparency_group_id && $group->id == $pageSymbol->groupContents->transparency_group_id ? 'selected' : '' }}>{{ $group->title }} - {{ $group->description }}</option>
+                        <option value="{{ $group->id }}" 
+                            {{ $pageSymbol && $pageSymbol->groupContents && $pageSymbol->groupContents->transparency_group_id && $group->id == $pageSymbol->groupContents->transparency_group_id ? 'selected' : '' }}>
+                            {{ $group->title }} - {{ $group->description }}
+                        </option>
                     @endforeach
                 </select>
             </div>
+            
 
             <div class="form-group">
                 <label>Ativado/Desativado</label>
                 <div class="d-flex align-items-center justify-content-center w-fit-content actions">
                     <div class="toggle-switch cmt-4">
-                        <input type="checkbox" id="checklist" name="visibility" value="enabled" class="toggle-input" {{ $pageSymbol->visibility == 'enabled' ? 'checked' : ''}}>
+                        <input type="checkbox" id="checklist" name="visibility" value="enabled" class="toggle-input" 
+                            {{ $pageSymbol && $pageSymbol->visibility == 'enabled' ? 'checked' : '' }}>
                         <label for="checklist" class="toggle-label no-margin"></label>
                     </div>
                 </div>

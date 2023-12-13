@@ -1,5 +1,10 @@
 @extends('panel.index')
-@section('pageTitle', 'Página Ouvidoria')
+@section('pageTitle', 'Página de Obras')
+
+@section('breadcrumb')
+<li><a href="{{ route('constructions.index') }}">Obras</a></li>
+<li><span>Página</span></li>
+@endsection
 
 @section('content')
 
@@ -12,33 +17,33 @@
 @endif
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('ombudsman.update', $ombudsman->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('constructions.page.update', $constructionPage->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="row">
                 <div class="col-md-2">
                     <div class="form-group">
                         <label>Ícone</label>
-                        <input type="text" name="icon" class="form-control icon" autocomplete="off" value="{{ old('icon', $ombudsman->icon) }}" onfocus="getIconInputValues(event)">
+                        <input type="text" name="icon" class="form-control icon" autocomplete="off" value="{{ old('icon', $constructionPage->icon) }}" onfocus="getIconInputValues(event)">
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">
                         <label>Título Principal</label>
-                        <input type="text" name="main_title" class="form-control" autocomplete="off" value="{{ old('main_title', $ombudsman->main_title) }}">
+                        <input type="text" name="main_title" class="form-control" autocomplete="off" value="{{ old('main_title', $constructionPage->main_title) }}">
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">
                         <label>Título</label>
-                        <input type="text" name="title" class="form-control" autocomplete="off" value="{{ old('title', $ombudsman->title) }}">
+                        <input type="text" name="title" class="form-control" autocomplete="off" value="{{ old('title', $constructionPage->title) }}">
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
                 <label>Text</label>
-                <input type="text" name="description" class="form-control" autocomplete="off" value="{{ old('description', $ombudsman->description) }}">
+                <input type="text" name="description" class="form-control" autocomplete="off" value="{{ old('description', $constructionPage->description) }}">
             </div>
 
             <div class="form-group">
@@ -46,7 +51,7 @@
                 <select name="transparency_group_id" class="form-control">
                     <option value="">Selecione o grupo</option>
                     @foreach($groups as $group)
-                    <option value="{{ $group->id }}" {{ $ombudsman->groupContents && $ombudsman->groupContents->transparency_group_id && $group->id == $ombudsman->groupContents->transparency_group_id ? 'selected' : '' }}>{{ $group->title }} - {{ $group->description }}</option>
+                    <option value="{{ $group->id }}" {{ $constructionPage->groupContents && $constructionPage->groupContents->transparency_group_id && $group->id == $constructionPage->groupContents->transparency_group_id ? 'selected' : '' }}>{{ $group->title }} - {{ $group->description }}</option>
                     @endforeach
                 </select>
             </div>
@@ -57,15 +62,15 @@
                         <label>Tipo de link</label>
                         <select name="link_type" id="link_type" class="form-control">
                             <option value="">Selecione se o link é Interno ou Externo</option>
-                            <option value="internal" {{ old('link_type', $ombudsman->link_type) == 'internal' ? 'selected' : '' }}>Interno</option>
-                            <option value="external" {{ old('link_type', $ombudsman->link_type) == 'external' ? 'selected' : '' }}>Externo</option>
+                            <option value="internal" {{ old('link_type', $constructionPage->link_type) == 'internal' ? 'selected' : '' }}>Interno</option>
+                            <option value="external" {{ old('link_type', $constructionPage->link_type) == 'external' ? 'selected' : '' }}>Externo</option>
                         </select>
                     </div>
                 </div>
-                <div class="col-md" id="external_link_div" @if($ombudsman->link_type == ''  || $ombudsman->link_type == 'internal') style="display: none;"@endif>
+                <div class="col-md" id="external_link_div" @if($constructionPage->link_type == ''  || $constructionPage->link_type == 'internal') style="display: none;"@endif>
                     <div class="form-group">
                         <label>Link</label>
-                        <input type="text" name="url" class="form-control" autocomplete="off" value="{{ old('link', $ombudsman->url) }}">
+                        <input type="text" name="url" class="form-control" autocomplete="off" value="{{ old('link', $constructionPage->url) }}">
                     </div>
                 </div>
             </div>
@@ -74,7 +79,7 @@
                 <label>Ativado/Desativado</label>
                 <div class="d-flex align-items-center justify-content-center w-fit-content actions">
                     <div class="toggle-switch cmt-4">
-                        <input type="checkbox" id="checklist" name="visibility" value="enabled" class="toggle-input" {{ $ombudsman->visibility == 'enabled' ? 'checked' : ''}}>
+                        <input type="checkbox" id="checklist" name="visibility" value="enabled" class="toggle-input" {{ $constructionPage->visibility == 'enabled' ? 'checked' : ''}}>
                         <label for="checklist" class="toggle-label no-margin"></label>
                     </div>
                 </div>

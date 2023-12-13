@@ -111,7 +111,9 @@ class OmbudsmanPageController extends Controller
             'title' => 'required',
             'icon' => 'nullable',
             'description' => 'nullable',
-            'visibility' => 'nullable',
+            'link_type' => 'nullable',
+            'url' => 'nullable',
+
         ], [
             'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
             'main_title.required' => 'O campo Título principal é obrigatório!',

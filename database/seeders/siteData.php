@@ -2826,11 +2826,91 @@ $data = [
         'route' => 'receitas.page',
         'sections' => [
             [
-                'component' => 'acessibility',
-                'name' => 'Acessibilidade',
+                'component' => 'recipesComponent',
+                'name' => 'Receitas',
                 'styles' => [
                     'classes' => [
-                        '.section-acessibility' => [
+                        '.section-recipes' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                    ]
+                ]
+            ]
+        ]
+    ],
+    [
+        'page' => 'Despesas',
+        'route' => 'despesas.page',
+        'sections' => [
+            [
+                'component' => 'expensesComponent',
+                'name' => 'Despesas',
+                'styles' => [
+                    'classes' => [
+                        '.section-expenses' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                    ]
+                ]
+            ]
+        ]
+    ],
+    [
+        'page' => 'Obras',
+        'route' => 'obras.page',
+        'sections' => [
+            [
+                'component' => 'constructionComponent',
+                'name' => 'Obras',
+                'styles' => [
+                    'classes' => [
+                        '.section-construction' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                    ]
+                ]
+            ]
+        ]
+    ],
+    [
+        'page' => 'Prefeito e vice',
+        'route' => 'gestores.page',
+        'sections' => [
+            [
+                'component' => 'managers',
+                'name' => 'Prefeito e vice',
+                'styles' => [
+                    'classes' => [
+                        '.section-managers' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                    ]
+                ]
+            ]
+        ]
+    ],
+    [
+        'page' => 'Símbolos',
+        'route' => 'simbolos.page',
+        'sections' => [
+            [
+                'component' => 'managers',
+                'name' => 'Símbolos',
+                'styles' => [
+                    'classes' => [
+                        '.section-symbols' => [
                             'background_color' => $dayColors["bg_section"],
                             'background_color_night' => $darkColors['bg_section'],
                             'title_color' => $dayColors["text_color"],

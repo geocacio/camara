@@ -69,7 +69,8 @@ class DecreesController extends Controller
      */
     public function create()
     {
-        $types = Type::where('slug', 'decrees')->first()->children;
+        $decreesType = Type::where('slug', 'decrees')->first();
+        $types = $decreesType ? $decreesType->children : [];
         $groups = Category::where('slug', 'grupos')->with('children')->get();
         $exercicies = Category::where('slug', 'exercicios')->with('children')->get();
         return view('panel.decree.create', compact('groups', 'types', 'exercicies'));

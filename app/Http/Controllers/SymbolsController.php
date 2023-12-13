@@ -82,17 +82,19 @@ class SymbolsController extends Controller
      */
     public function store(Request $request)
     {
-        if(!$this->pageUpdate($request)){
-            return redirect()->route('symbols.index')->with('errer', 'Por favor tente novamente!');
-        }
+        $page = $this->pageUpdate($request);
 
+        if (!$page) {
+            return redirect()->route('symbols.index')->with('errer', 'Por favor, tente novamente!');
+        }
+    
         $validateData = $request->validate([
             'himn' => 'nullable',
             'himn_url' => 'nullable',
             'coat_of_arms' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
             'flag' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
         ]);
-
+    
         $symbol = Symbols::create($validateData);
 
         if($symbol){

@@ -19,12 +19,24 @@
 
     <div class="card-body">
 
-        <form action="{{ route('pageServiceLetter.update', $pageServiceLetter->slug) }}" method="post">
+        <form action="{{ route('serviceLetter.page.update', $pageServiceLetter->slug) }}" method="post">
             @csrf
             @method('PUT')
 
             <div class="row">
-                <div class="col-md">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Ícone</label>
+                        <input type="text" name="icon" class="form-control icon" autocomplete="off" value="{{ old('icon', $pageServiceLetter->icon) }}" onfocus="getIconInputValues(event)">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Título Principal</label>
+                        <input type="text" name="main_title" class="form-control" autocomplete="off" value="{{ old('main_title', $pageServiceLetter->main_title) }}">
+                    </div>
+                </div>
+                <div class="col-md-5">
                     <div class="form-group">
                         <label>Título</label>
                         <input type="text" name="title" class="form-control" autocomplete="off" value="{{ old('title', $pageServiceLetter->title) }}">
@@ -36,6 +48,28 @@
                 <label>Descrição</label>
                 <textarea name="description" class="form-control">{{ old('description', $pageServiceLetter->description) }}</textarea>
             </div>
+
+            <div class="form-group">
+                <label>Grupo (onde será exibido no portal da transparência)</label>
+                <select name="transparency_group_id" class="form-control">
+                    <option value="teste">Selecione o grupo</option>
+                    @foreach($groups as $group)
+                        <option value="{{ $group->id }}" {{ $pageServiceLetter->groupContents && $pageServiceLetter->groupContents->transparency_group_id && $group->id == $pageServiceLetter->groupContents->transparency_group_id ? 'selected' : '' }}>{{ $group->title }} - {{ $group->description }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            
+            <div class="form-group">
+                <label>Ativado/Desativado</label>
+                <div class="d-flex align-items-center justify-content-center w-fit-content actions">
+                    <div class="toggle-switch cmt-4">
+                        <input type="checkbox" id="checklist" name="visibility" value="enabled" class="toggle-input" {{ $pageServiceLetter->visibility == 'enabled' ? 'checked' : ''}}>
+                        <label for="checklist" class="toggle-label no-margin"></label>
+                    </div>
+                </div>
+            </div>
+
 
             <div class="form-footer text-right">
                 <button type="submit" class="btn-submit-default">Guardar</button>

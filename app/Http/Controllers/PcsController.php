@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\File;
+use App\Models\Page;
 use App\Models\Pcs;
+use App\Models\TransparencyGroup;
 use App\Models\Type;
 use App\Models\TypeContent;
 use App\Services\FileUploadService;
@@ -27,6 +29,42 @@ class PcsController extends Controller
     {
         $pcss = Pcs::all();
         return view('panel.pcs.index', compact('pcss'));
+    }
+
+    
+    public function page()
+    {
+        $pcsPage = Page::where('name', 'Prestação de contas de gestão')->first();
+        $groups = TransparencyGroup::all();
+
+        return view('panel.pcs.page.edit', compact('pcsPage', 'groups'));
+    }
+
+    public function pageUpdate(Request $request)
+    {
+        $validateData = $request->validate([
+            'transparency_group_id' => 'required',
+            'main_title' => 'required',
+            'title' => 'required',
+            'icon' => 'nullable',
+            'description' => 'nullable',
+            'link_type' => 'nullable',
+            'url' => 'nullable',
+        ], [
+            'main_title.required' => 'O campo título principal é obrigatório',
+            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
+            'title.required' => 'O campo título é obrigatório'
+        ]);
+        $validateData['visibility'] = $request->visibility ? $request->visibility : 'disabled';
+
+        $pcsPage = Page::where('name', 'Prestação de contas de gestão')->first();
+
+        if ($pcsPage->update($validateData)) {
+            $pcsPage->groupContents()->delete();
+            $pcsPage->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+            return redirect()->route('pcs.page')->with('success', 'Informações atualizadas com sucesso!');
+        }
+        return redirect()->route('pcs.page')->with('error', 'Por favor tente novamente!');
     }
 
     /**

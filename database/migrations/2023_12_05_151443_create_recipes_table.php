@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('recipe_type');
             $table->string('slip_number');
             $table->string('object');
-            $table->string('history_information')->default(null);
+            $table->string('history_information')->nullable();
             $table->timestamps();
 
             $table->foreign('origin_id')->references('id')->on('categories');
