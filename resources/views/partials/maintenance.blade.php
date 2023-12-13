@@ -15,7 +15,9 @@
 
                     <div class="body">
 
-                        <div class="container-date-info"></div>
+                        <div class="container-date-info">
+                            <span class="date"> 15 de Dezembro de 2023</span> - <span class="date"> 25 de Dezembro de 2023</span>
+                        </div>
                         <p class="description">Informação a mais</p>
                     </div>
                 </div>

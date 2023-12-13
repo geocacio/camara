@@ -3638,6 +3638,7 @@ section{
                 background-color: #004080;
                 border-radius: 10px 10px 0 0;
                 padding: 30px;
+                padding-bottom: 100px;
                 i{
                     font-size: 60px;
                 }
@@ -3653,13 +3654,23 @@ section{
             }
             .body{
                 background-color: #00668b;
-                padding: 15px;
                 border-radius: 0 0 10px 10px;
                 padding: 30px;
                 text-align: center;
+                padding-top: 30px;
+                .container-date-info {
+                    background: #004080;
+                    padding: 30px 15px;
+                    border-radius: 20px;
+                    border: 1px solid #ffffff;
+                    max-width: 500px;
+                    margin: auto;
+                    margin-top: -70px;
+                }
                 .description{
                     font-size: 1.7rem;
                     margin-bottom: 0;
+                    margin-top: 40px;
                 }
             }
         }
