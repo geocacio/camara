@@ -68,17 +68,17 @@ class RecipesController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'recipe_data' => 'required|date',
-            'exercise' => 'required|string',
-            'value' => 'required|string',
-            'classification' => 'required',
+            'recipe_data' => 'nullable|date',
+            'exercise' => 'nullable|string',
+            'value' => 'nullable|string',
+            'classification' => 'nullable',
             // 'origin_id' => 'nullable|exists:your_origin_table,id',
-            'organ' => 'required|string',
-            'recipe_type' => 'required|string',
-            'slip_number' => 'required|string',
-            'object' => 'required|string',
-        ], [
-            'recipe_data.required' => 'O campo data da receita é obrigatório',
+            'organ' => 'nullable|string',
+            'recipe_type' => 'nullable|string',
+            'slip_number' => 'nullable|string',
+            'object' => 'nullable|string',
+            'text_button' => 'nullable|string',
+            'url' => 'nullable|string',
         ]);
 
         $newRecipe = new Recipes();
@@ -113,17 +113,17 @@ class RecipesController extends Controller
     public function update(Request $request, Recipes $recipe)
     {
         $validatedData = $request->validate([
-            'recipe_data' => 'required|date',
-            'exercise' => 'required|string',
-            'value' => 'required|string',
-            'classification' => 'required',
+            'recipe_data' => 'nullable|date',
+            'exercise' => 'nullable|string',
+            'value' => 'nullable|string',
+            'classification' => 'nullable',
             // 'origin_id' => 'nullable|exists:your_origin_table,id',
-            'organ' => 'required|string',
-            'recipe_type' => 'required|string',
-            'slip_number' => 'required|string',
-            'object' => 'required|string',
-        ], [
-            'recipe_data.required' => 'O campo data da receita é obrigatório',
+            'organ' => 'nullable|string',
+            'recipe_type' => 'nullable|string',
+            'slip_number' => 'nullable|string',
+            'object' => 'nullable|string',
+            'text_button' => 'nullable|string',
+            'url' => 'nullable|string',
         ]);
 
         if ($recipe->update($validatedData)) {

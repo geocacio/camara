@@ -13,16 +13,18 @@ return new class extends Migration
     {
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
-            $table->string('value');
-            $table->date('recipe_data');
-            $table->string('exercise');
-            $table->string('classification');
+            $table->string('value')->nullable();
+            $table->date('recipe_data')->nullable();
+            $table->string('exercise')->nullable();
+            $table->string('classification')->nullable();
             $table->unsignedBigInteger('origin_id')->nullable();
-            $table->string('organ');
-            $table->string('recipe_type');
-            $table->string('slip_number');
-            $table->string('object');
+            $table->string('organ')->nullable();
+            $table->string('recipe_type')->nullable();
+            $table->string('slip_number')->nullable();
+            $table->string('object')->nullable();
             $table->string('history_information')->nullable();
+            $table->string('text_button')->nullable();
+            $table->string('url')->nullable();
             $table->timestamps();
 
             $table->foreign('origin_id')->references('id')->on('categories');

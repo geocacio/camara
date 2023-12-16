@@ -70,14 +70,14 @@ class ExpensesController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'creditor_number' => 'required',
-            'date' => 'required|date',
-            'exercise' => 'required|string',
-            'organ' => 'required|string',
-            'valor' => 'required',
-            'fase' => 'required'
-        ], [
-            'recipe_data.required' => 'O campo data da receita é obrigatório',
+            'creditor_number' => 'nullable',
+            'date' => 'nullable|date',
+            'exercise' => 'nullable|string',
+            'organ' => 'nullable|string',
+            'valor' => 'nullable',
+            'fase' => 'nullable',
+            'text_button' => 'nullable',
+            'url' => 'nullable',
         ]);
 
         $newExpenses = new Expenses();
@@ -112,14 +112,14 @@ class ExpensesController extends Controller
     public function update(Request $request, Expenses $expense)
     {
         $validatedData = $request->validate([
-            'creditor_number' => 'required',
-            'date' => 'required|date',
-            'exercise' => 'required|string',
-            'organ' => 'required|string',
-            'valor' => 'required',
-            'fase' => 'required'
-        ], [
-            'recipe_data.required' => 'O campo data da receita é obrigatório',
+            'creditor_number' => 'nullable',
+            'date' => 'date',
+            'exercise' => 'string',
+            'organ' => 'string',
+            'valor' => 'nullable',
+            'fase' => 'nullable',
+            'text_button' => 'nullable',
+            'url' => 'nullable',
         ]);
 
         if ($expense->update($validatedData)) {

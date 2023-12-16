@@ -20,5 +20,7 @@ class Recipes extends Model
         'object',
         'history_information',
         'value',
+        'text_button',
+        'url',
     ];
 }
