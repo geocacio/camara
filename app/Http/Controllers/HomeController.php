@@ -57,8 +57,6 @@ class HomeController extends Controller
         $lrfs = LRF::limit('3')->get();
         $today = Carbon::today();
 
-        $alert = Maintenance::where('status', 1)->first();
-
-        return view('pages.home.index', compact('services', 'sections', 'posts', 'videos', 'currentLegislature', 'banners', 'leis', 'lrfs', 'alert'));
+        return view('pages.home.index', compact('services', 'sections', 'posts', 'videos', 'currentLegislature', 'banners', 'leis', 'lrfs'));
     }
 }

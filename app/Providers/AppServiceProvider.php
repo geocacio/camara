@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Legislature;
+use App\Models\Maintenance;
 use App\Models\Menu;
 use App\Models\Section;
 use App\Models\Setting;
@@ -11,6 +12,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Pagination\Paginator;
 use App\ViewComposers\GlobalDataComposer;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -73,35 +75,40 @@ class AppServiceProvider extends ServiceProvider
             'Material' => 'App\Models\Material',
             'Banner' => 'App\Models\Banner',
         ]);
-
-
+        
+        //Verificar se existe a tabela maintenance
+        if (Schema::hasTable('maintenances')) {
+            $alert = Maintenance::where('status', 1)->first();
+            view::share('alert', $alert);
+        }
+        
         try {
 
             //exibir o map com base nesta busca
             $showMap = Section::where('name', 'Mapa do site')->select('visibility')->first();
             view::share('showMap', $showMap);
-            
+
             $legislature = new Legislature();
             $currentPresident = $legislature->getCurrentPresident();
             view::share('currentPresident', $currentPresident);
-            
+
             $settings = Setting::first();
             $logoFooterImage = null;
-            
-            if($settings){
+
+            if ($settings) {
                 $logoFooterImage = $settings->files()->whereHas('file', function ($query) {
                     $query->where('name', 'Logo Footer');
                 })->first();
                 view::share('settings', $settings);
             }
-            
+
             $logo_footer = $logoFooterImage ? $logoFooterImage->file->url : null;
             view::share('logo_footer', $logo_footer);
-            
+
             $getMenus = Menu::with(['styles', 'links' => function ($query) {
                 $query->orderBy('position')->with('group');
             }])->get();
-            
+
             $menus = [];
             foreach ($getMenus as $menu) {
                 if ($menu->name == 'Menu Principal') {
@@ -117,13 +124,12 @@ class AppServiceProvider extends ServiceProvider
                     $menus['menuRedeSocial'] = $menu;
                 }
             }
-            
-            View::share('menus', $menus);
 
+            View::share('menus', $menus);
         } catch (\Illuminate\Database\QueryException  $e) {
             error_log('* Waiting for the database to have contacts and about tables');
         }
-        
+
         view()->composer('*', GlobalDataComposer::class);
     }
 }
