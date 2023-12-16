@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('ombudsman_feedback', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('secretary_id');
             $table->string('protocol')->uniqid();
             $table->enum('anonymous', ['sim', 'não']);
             $table->string('name')->nullable();
@@ -33,7 +32,6 @@ return new class extends Migration
             $table->enum('status', ['Aguardando resposta', 'Finalizado'])->default('Aguardando resposta');
 
             $table->timestamps();
-            $table->foreign('secretary_id')->references('id')->on('secretaries');
         });
     }
 

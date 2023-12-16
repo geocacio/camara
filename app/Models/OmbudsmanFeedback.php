@@ -10,7 +10,6 @@ class OmbudsmanFeedback extends Model
     use HasFactory;
 
     protected $fillable = [
-        'secretary_id',
         'protocol',
         'anonymous',
         'name',

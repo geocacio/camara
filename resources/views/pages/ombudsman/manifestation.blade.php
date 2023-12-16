@@ -139,18 +139,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label>Secretaria</label>
-                                <select name="secretary_id" class="form-control">
-                                    <option value="">Selecione</option>
-                                    @if($secretaries && $secretaries->count() > 0)
-                                    @foreach($secretaries as $secretary)
-                                    <option value="{{ $secretary->id }}" {{ old('secretary_id') == $secretary->id ? 'selected' : '' }}>{{ $secretary->name }}</option>
-                                    @endforeach
-                                    @endif
-                                </select>
-                            </div>
-
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">

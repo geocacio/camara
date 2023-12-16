@@ -37,7 +37,6 @@ class OmbudsmanFeedbackController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'secretary_id' => 'required',
             'name' => $request->anonymous == "on" ? 'nullable' : 'required',
             'cpf' => $request->anonymous == "on" ? 'nullable' : 'required',
             'date_of_birth' => $request->anonymous == "on" ? 'nullable' : 'required',
