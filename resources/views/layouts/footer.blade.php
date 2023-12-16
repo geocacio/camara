@@ -2,7 +2,9 @@
     @include('partials.mapsSection')
 @endif
 
-@include('partials.maintenance')
+@if($alert)
+    @include('partials.maintenance')
+@endif
 
 <footer class="footer">
     <div class="container">
