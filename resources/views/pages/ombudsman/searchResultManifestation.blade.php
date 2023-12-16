@@ -66,10 +66,6 @@
                                                         </div>
                                                         @endif
                                                         <div class="item">
-                                                            <span class="label">Secretaria: </span>
-                                                            <span class="value">{{ $item->secretary->name }}</span>
-                                                        </div>
-                                                        <div class="item">
                                                             <span class="label">Prazo: </span>
                                                             <span class="value">{{ $item->new_deadline ? $item->new_deadline : $item->deadline }} {{ $item->status == 'Finalizado' ? ' - '.$item->updated_at : ''}}</span>
                                                         </div>

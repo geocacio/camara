@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('sic_solicitations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('secretary_id');
             $table->string('receive_in');
             $table->string('title');
             $table->longText('solicitation');

@@ -36,12 +36,10 @@ class SicSolicitationController extends Controller
     public function store(Request $request)
     {
         $dataValidated = $request->validate([
-            'secretary_id' => 'required',
             'receive_in' => 'required',
             'title' => 'required',
             'solicitation' => 'required',
         ], [
-            'secretary_id.required' => 'O campo secretaria é obrigatório',
             'receive_in.required' => 'O campo método de recebimento de informações é obrigatório',
             'title.required' => 'O campo título é obrigatório',
             'solicitation.required' => 'O campo solicitação é obrigatório',

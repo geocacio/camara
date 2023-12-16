@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Storage;
 
 class PdfServices
 {
-    public function officialDiaryGenerate($official_diary){
+    public function officialDiaryGenerate($official_diary)
+    {
         // dd($official_diary);
         $summaryGroup = Category::where('slug', 'sumario')->with('children')->first();
         $summaryGroup = $summaryGroup->children->toArray();
@@ -21,26 +22,45 @@ class PdfServices
                 $pdf->file->delete();
             }
         }
-        
+
         // Cria um novo objeto PDF usando a classe personalizada PDFGenerator
         $pdf = new PDFGenerator(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        
+
         $configurations = ConfigureOfficialDiary::first();
-        // dd($configurations->files[0]->file);
-        $headerData = array(
-            'logoPath' => !$configurations->files->isEmpty() ? storage_path('app/public/'.$configurations->files[0]->file->url) : '',
-            'title' => $configurations->title,
-            'subtitle' => $configurations->subtitle,
-            'infoRight' => $configurations->text_one,
-            'infoCenter' => $configurations->text_two,
-            'textThree' => $configurations->text_three,
-        );
+        
+            if (isset($configurations)) {
+            $headerData = array(
+                'logoPath' => !$configurations->files->isEmpty() ? storage_path('app/public/' . $configurations->files[0]->file->url) : '',
+                'title' => $configurations->title,
+                'subtitle' => $configurations->subtitle,
+                'infoRight' => $configurations->text_one,
+                'infoCenter' => $configurations->text_two,
+                'textThree' => $configurations->text_three,
+            );
 
-        $footerData = array(
-            'title' => $configurations->footer_title,
-            'description' => $configurations->footer_text
-        );
+            $footerData = array(
+                'title' => $configurations->footer_title,
+                'description' => $configurations->footer_text
+            );
+            
+        } else {
+            
+            $headerData = array(
+                'logoPath' => '',
+                'title' => '',
+                'subtitle' => '',
+                'infoRight' => '',
+                'infoCenter' => '',
+                'textThree' => '',
+            );
 
+            $footerData = array(
+                'title' => '',
+                'description' => ''
+            );
+            
+        }
+        
         $result = $pdf->generate($official_diary, $headerData, $footerData, $summaryGroup);
 
         $official_diary->files()->create(['file_id' => $result->id]);
