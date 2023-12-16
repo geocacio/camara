@@ -65,11 +65,6 @@ class Material extends Model
     {
         return $this->morphMany(Vote::class, 'voteable');
     }
-
-    public function commissionLinks()
-    {
-        return $this->morphMany(CommissionLink::class, 'linkable');
-    }
     
     public function files()
     {
@@ -79,6 +74,11 @@ class Material extends Model
     public function progress()
     {
         return $this->hasMany(MaterialsProgress::class, 'material_id');
+    }
+
+    public function commission()
+    {
+        return $this->belongsToMany(Commission::class, 'commission_materials')->withPivot('id');
     }
 
     public static function uniqSlug($name)

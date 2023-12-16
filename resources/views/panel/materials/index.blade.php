@@ -53,6 +53,7 @@
                                     <a class="dropdown-item" href="{{ route('authors.index', $material->slug) }}">Subescritores</a>
                                     <a class="dropdown-item" href="{{ route('recipients.index', $material->slug) }}">Destinatários</a>
                                     <a class="dropdown-item" href="{{ route('material-proceedings.index', $material->slug) }}">Expedientes</a>
+                                    <a class="dropdown-item" href="{{ route('material-commissions.index', $material->slug) }}">Comissões</a>
                                     @if($material->votation)
                                     <a class="dropdown-item" href="{{ route('votes.create', $material->slug) }}">Votações</a>
                                     @endif

@@ -12,6 +12,7 @@ use App\Http\Controllers\BiddingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChamberController;
 use App\Http\Controllers\CommissionController;
+use App\Http\Controllers\CommissionMaterialController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ConfigureOfficialDiaryController;
 use App\Http\Controllers\ConstructionArtController;
@@ -191,6 +192,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('/materials/{material}/recipients', RecipientController::class);
         Route::resource('/materials/{material}/material-proceedings', MaterialsProgressController::class);
         Route::resource('/materials/{material}/votes', MaterialVoteController::class);
+
+        Route::resource('/materials/{material}/material-commissions', CommissionMaterialController::class);
 
         Route::get('councilors-page', [CouncilorController::class, 'page'])->name('councilors.page');
         Route::put('councilors-page', [CouncilorController::class, 'pageUpdate'])->name('councilors.page.update');
