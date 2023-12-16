@@ -25,7 +25,7 @@
                     <tr>
                         <th>#</th>
                         <th>Título</th>
-                        <th>Exibe em:</th>
+                        <th>De:</th>
                         <th>Até</th>
                         <th class="text-center">Ativado/Desativado</th>
                         <th class="text-center">Actions</th>

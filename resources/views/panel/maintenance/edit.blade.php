@@ -43,14 +43,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Começar a exibir em:</label>
+                        <label>De:</label>
                         <input type="date" name="start_date" class="form-control" value="{{ old('start_date', $maintenance->start_date) }}" />
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <div class="form-group">
-                            <label>Deixar de exibir em:</label>
+                            <label>Até:</label>
                             <input type="date" name="end_date" class="form-control" value="{{ old('end_date', $maintenance->end_date) }}" />
                         </div>
                     </div>
