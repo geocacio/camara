@@ -74,6 +74,7 @@ class AppServiceProvider extends ServiceProvider
             'Commission' => 'App\Models\Commission',
             'Material' => 'App\Models\Material',
             'Banner' => 'App\Models\Banner',
+            'chambers-finance' => 'App\Models\ChamberFinancial',
         ]);
         
         //Verificar se existe a tabela maintenance

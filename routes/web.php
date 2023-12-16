@@ -11,6 +11,7 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BiddingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChamberController;
+use App\Http\Controllers\ChamberFinancialController;
 use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\CommissionMaterialController;
 use App\Http\Controllers\CompanyController;
@@ -106,6 +107,7 @@ use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\VoteController;
+use App\Models\ChamberFinancial;
 use App\Models\Recipes;
 use App\Models\ServiceLetter;
 use App\Models\Setting;
@@ -256,6 +258,8 @@ Route::middleware('auth')->group(function () {
         Route::get('role-chambers-page', [RoleChamberController::class, 'page'])->name('chamber.page');
         Route::put('role-chambers-page', [RoleChamberController::class, 'pageUpdate'])->name('chamber.page.update');
         Route::resource('/role-chambers', RoleChamberController::class);
+
+        Route::resource('/chambers-financials', ChamberFinancialController::class);
 
         //Routes linked to biddings
         Route::resource('/progress', ProgressController::class);
