@@ -62,15 +62,6 @@
                             @csrf
 
                             <div class="form-group">
-                                <label>Orgão competente</label>
-                                <select class="form-control" name="secretary_id">
-                                    @foreach($secretaries as $secretary)
-                                        <option value="{{ $secretary->id }}">{{ $secretary->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group">
                                 <label>Métodos de Recebimento de Informações</label>
                                 <select class="form-control" name="receive_in">
                                     <option value="e-mail">Pelo sistema (aviso via E-mail)</option>

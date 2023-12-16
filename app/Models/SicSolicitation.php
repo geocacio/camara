@@ -11,7 +11,6 @@ class SicSolicitation extends Model
 
     protected $fillable = [
         'user_id',
-        'secretary_id',
         'receive_in',
         'title',
         'solicitation',
