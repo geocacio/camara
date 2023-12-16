@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('commission_links', function (Blueprint $table) {
+        Schema::create('commission_materials', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('commission_id');
-            $table->morphs('linkable');
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
-            $table->timestamps();
+            $table->unsignedBigInteger('material_id');
             $table->foreign('commission_id')->references('id')->on('commissions');
+            $table->foreign('material_id')->references('id')->on('materials');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('commission_links');
+        Schema::dropIfExists('commission_materials');
     }
 };

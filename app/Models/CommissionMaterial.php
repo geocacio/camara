@@ -5,19 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CommissionLink extends Model
+class CommissionMaterial extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['commission_id', 'linkable_id', 'linkable_type', 'start_date', 'end_date'];
+    protected $fillable = [
+        'commission_id',
+        'material_id',
+    ];
 
     public function commission()
     {
         return $this->belongsTo(Commission::class);
     }
 
-    public function linkable()
+    public function material()
     {
-        return $this->morphTo();
+        return $this->belongsTo(Material::class);
     }
 }
