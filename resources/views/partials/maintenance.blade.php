@@ -8,17 +8,18 @@
                         <i class="fa-solid fa-triangle-exclamation"></i>
 
                         <div class="info">
-                            <h3 class="title">título de manutenção</h3>
-                            <p class="text">Descrição da manutenção</p>
+                            <h3 class="title">{{ $alert->title }}</h3>
+                            <p class="text">{{ $alert->text }}</p>
                         </div>
                     </div>
 
                     <div class="body">
 
                         <div class="container-date-info">
-                            <span class="date"> 15 de Dezembro de 2023</span> - <span class="date"> 25 de Dezembro de 2023</span>
+                            <span class="date">{{ \Carbon\Carbon::parse($alert->start_date)->translatedFormat('j \de F \de Y') }}</span> - <span class="date">{{ \Carbon\Carbon::parse($alert->end_date)->translatedFormat('j \de F \de Y') }}</span>
+
                         </div>
-                        <p class="description">Informação a mais</p>
+                        <p class="description">{{ $alert->more_info }}</p>
                     </div>
                 </div>
             </div>

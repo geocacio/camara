@@ -6,10 +6,13 @@ use App\Models\Banner;
 use App\Models\Law;
 use App\Models\Legislature;
 use App\Models\LRF;
+use App\Models\Maintenance;
 use App\Models\Page;
 use App\Models\Post;
 use App\Models\Service;
 use App\Models\Video;
+use Carbon\Carbon;
+use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -52,7 +55,10 @@ class HomeController extends Controller
         $banners = Banner::all();
         $leis = Law::limit('3')->get();
         $lrfs = LRF::limit('3')->get();
+        $today = Carbon::today();
 
-        return view('pages.home.index', compact('services', 'sections', 'posts', 'videos', 'currentLegislature', 'banners', 'leis', 'lrfs'));
+        $alert = Maintenance::where('status', 1)->first();
+
+        return view('pages.home.index', compact('services', 'sections', 'posts', 'videos', 'currentLegislature', 'banners', 'leis', 'lrfs', 'alert'));
     }
 }

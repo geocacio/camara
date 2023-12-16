@@ -12,16 +12,16 @@ class MaintenanceController extends Controller
      */
     public function index()
     {
-        $maintenance = Maintenance::first();
-        return view('panel.maintenance.index', compact('maintenance'));
+        $maintenances = Maintenance::all();
+        return view('panel.maintenance.index', compact('maintenances'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('panel.maintenance.create');
     }
 
     /**
@@ -59,7 +59,7 @@ class MaintenanceController extends Controller
      */
     public function edit(Maintenance $maintenance)
     {
-        //
+        return view('panel.maintenance.edit', compact('maintenance'));
     }
 
     /**
@@ -88,8 +88,28 @@ class MaintenanceController extends Controller
     public function destroy(Maintenance $maintenance)
     {
         if($maintenance->delete()){
-            return redirect()->back()->with('success', 'Manutenção removida com sucesso!');
+            return redirect()->back()->with('success', 'Alerta removida com sucesso!');
         }
-        return redirect()->back()->with('error', 'Erro ao remover manutenção!');
+        return redirect()->back()->with('error', 'Erro ao remover Alerta!');
     }
+    
+    public function visibility(Request $request)
+    {
+        $maintenance = Maintenance::find($request->id);
+    
+        if (!$maintenance) {
+            return response()->json(['error' => true, 'message' => 'Alerta não encontrada']);
+        }
+    
+        $status = ($request->visibility == 'disabled') ? 0 : 1;
+    
+        if (!$maintenance->update(['status' => $status])) {
+            return response()->json(['error' => true, 'message' => 'Erro, Por favor, tente novamente!']);
+        }
+    
+        $message = $status == 1 ? 'Alerta ativado com sucesso' : 'Alerta desativado com sucesso';
+        return response()->json(['success' => true, 'message' => $message]);
+    }
+    
+    
 }
