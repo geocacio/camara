@@ -26,8 +26,8 @@
                     <tr>
                         <th>Nome</th>
                         <th>Data</th>
-                        <th>Status</th>
-                        <th>Ações</th>
+                        {{-- <th>Status</th> --}}
+                        <th class="text-center">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,7 +35,7 @@
                     <tr>
                         <td>{{ $chamberFinancial->name }}</td>
                         <td>{{ $chamberFinancial->date }}</td>
-                        <td>{{ $chamberFinancial->status }}</td>
+                        {{-- <td>{{ $chamberFinancial->status }}</td> --}}
                         <td class="actions text-center">
                             <a href="{{ route('chambers-financials.edit', $chamberFinancial->slug) }}" class="link edit"><i class="fas fa-edit"></i></a>
                         
