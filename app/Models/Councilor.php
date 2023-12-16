@@ -36,10 +36,6 @@ class Councilor extends Model
         return $this->hasMany(Mandate::class);
     }
 
-    public function commissions(){
-        return $this->hasMany(Commission::class);
-    }
-
     public function partyAffiliation()
     {
         return $this->belongsTo(PartyAffiliation::class, 'party_affiliation_id');
@@ -64,12 +60,12 @@ class Councilor extends Model
     {
         return $this->morphMany(FileContent::class, 'fileable');
     }
-
-    public function commissionLinks()
+    
+    public function commissions()
     {
-        return $this->morphMany(CommissionLink::class, 'linkable');
+        return $this->belongsToMany(ComissionCouncilor::class, 'comission_councilors', 'councilor_id', 'comission_id');
     }
-
+    
     public function authors()
     {
         return $this->hasMany(Author::class);
