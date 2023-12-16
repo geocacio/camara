@@ -43,6 +43,7 @@ use App\Http\Controllers\LawController;
 use App\Http\Controllers\LegislatureController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\LRFController;
+use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\MandateController;
 use App\Http\Controllers\MaterialController;
@@ -311,6 +312,8 @@ Route::middleware('auth')->group(function () {
             Route::resource('/links', LinkController::class);
             Route::post('/links/visibility', [LinkController::class, 'visibility']);
             Route::resource('/menus', MenuController::class);
+            Route::resource('/maintenance', MaintenanceController::class);
+            Route::post('/maintenance/visibility', [MaintenanceController::class, 'visibility']);
         });
 
         Route::prefix('transparency')->group(function () {
