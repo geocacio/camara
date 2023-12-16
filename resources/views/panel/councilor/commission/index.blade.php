@@ -23,7 +23,7 @@
         </div>
 
 
-        @if($councilor->commissionLinks && $councilor->commissionLinks->count() > 0)
+        @if($councilor->commissions && $councilor->commissions->count() > 0)
         <div class="table-responsive">
             <table class="table table-striped table-with-dropdown">
                 <thead>
@@ -36,12 +36,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($councilor->commissionLinks as $commission)
+                    @foreach($councilor->commissions as $commission)
                     <tr>
                         <td>01</td>
-                        <td>{{ $commission->commission->description }}</td>
-                        <td>{{ date('d/m/Y', strtotime($commission->start_date)) }}</td>
-                        <td>{{ date('d/m/Y', strtotime($commission->end_date)) }}</td>
+                        <td>{{ $commission->description ? $commission->description : '' }}</td>
+                        <td>{{ date('d/m/Y', strtotime($commission->pivot->start_date)) }}</td>
+                        <td>{{ $commission->pivot->end_date ? date('d/m/Y', strtotime($commission->pivot->end_date)) : 'Não informado' }}</td>
                         <td class="actions text-center">
                             <a href="{{ route('councilor-commissions.edit', ['councilor' => $councilor->slug, 'councilor_commission' => $commission->id]) }}" class="link edit"><i class="fas fa-edit"></i></a>
                         

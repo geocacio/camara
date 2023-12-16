@@ -22,16 +22,34 @@
         <form action="{{ route('councilor-commissions.store', $councilor->slug) }}" method="post">
             @csrf
             
-            <div class="form-group">
-                <label for="commission_id">Comissão</label>
-                <select name="commission_id" class="form-control">
-                    <option value="">Selecione</option>
-                    @if($commissions->count() > 0)
-                    @foreach($commissions as $commission)
-                    <option value="{{ $commission->id }}">{{ $commission->description }}</option>
-                    @endforeach
-                    @endif
-                </select>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="commission_id">Comissão</label>
+                        <select name="commission_id" class="form-control">
+                            <option value="">Selecione</option>
+                            @if($commissions->count() > 0)
+                            @foreach($commissions as $commission)
+                            <option value="{{ $commission->id }}">{{ $commission->description }}</option>
+                            @endforeach
+                            @endif
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="legislature_id">Legislatura</label>
+                        <select name="legislature_id" class="form-control">
+                            <option value="">Selecione</option>
+                            @if($legislatures->count() > 0)
+                            @foreach($legislatures as $legislature)
+                            <option value="{{ $legislature->id }}">{{ date('d/m/Y', strtotime($legislature->start_date)) }} - {{ date('d/m/Y', strtotime($legislature->end_date)) }}</option>
+                            @endforeach
+                            @endif
+                        </select>
+                    </div>
+                </div>
             </div>
 
             <div class="row">

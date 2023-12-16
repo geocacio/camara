@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('commission_councilors', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('commission_id');
+            $table->unsignedBigInteger('councilor_id');
+            $table->unsignedBigInteger('legislature_id');
+            $table->date('start_date');
+            $table->date('end_date')->nullable();
+            $table->foreign('commission_id')->references('id')->on('commissions');
+            $table->foreign('councilor_id')->references('id')->on('councilors');
+            $table->foreign('legislature_id')->references('id')->on('legislatures');
             $table->timestamps();
         });
     }

@@ -32,7 +32,8 @@ class Councilor extends Model
         return $this->legislatureRelations()->orderBy('final_period', 'desc')->first();
     }
 
-    public function mandates(){
+    public function mandates()
+    {
         return $this->hasMany(Mandate::class);
     }
 
@@ -42,7 +43,8 @@ class Councilor extends Model
     }
 
 
-    public function materials(){
+    public function materials()
+    {
         return $this->hasMany(Material::class);
     }
 
@@ -55,26 +57,30 @@ class Councilor extends Model
     {
         return $this->belongsTo(Office::class, 'office_id');
     }
-    
+
     public function files()
     {
         return $this->morphMany(FileContent::class, 'fileable');
     }
-    
+
     public function commissions()
     {
-        return $this->belongsToMany(ComissionCouncilor::class, 'comission_councilors', 'councilor_id', 'comission_id');
+        return $this->belongsToMany(Commission::class, 'commission_councilors', 'councilor_id', 'commission_id')
+            ->withPivot('legislature_id', 'start_date', 'end_date')
+            ->withTimestamps();
     }
-    
+
     public function authors()
     {
         return $this->hasMany(Author::class);
     }
-    
-    public function sessionAttendance(){
+
+    public function sessionAttendance()
+    {
         return $this->hasMany(SessionAttendance::class);
     }
-    public function votes(){
+    public function votes()
+    {
         return $this->hasMany(Vote::class);
     }
 
@@ -82,17 +88,17 @@ class Councilor extends Model
     {
         // Obtém a legislatura atual
         $legislature = (new Legislature)->getCurrentLegislature();
-    
+
         if ($legislature) {
             return $this->whereHas('legislatureRelations', function ($query) use ($legislature) {
                 $query->where('legislature_id', $legislature->id);
-                    //   ->where('bond_id', 19); // Verifique se a relação correta é usada
+                //   ->where('bond_id', 19); // Verifique se a relação correta é usada
             })->get();
         }
-    
+
         return collect([]);
     }
-    
+
     public static function uniqSlug($name)
     {
         $slug = Str::slug($name);

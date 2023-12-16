@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('commission_materials', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('commission_id');
+            $table->unsignedBigInteger('material_id');
+            $table->foreign('commission_id')->references('id')->on('commissions');
+            $table->foreign('material_id')->references('id')->on('materials');
             $table->timestamps();
         });
     }
