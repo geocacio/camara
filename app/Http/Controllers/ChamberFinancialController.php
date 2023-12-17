@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ChamberFinancial;
 use App\Models\File;
+use App\Models\Page;
 use App\Services\FileUploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -29,6 +30,45 @@ class ChamberFinancialController extends Controller
         return view('panel.chamber-financials.index', compact('chambersFinancial'));
     }
 
+    public function page(){
+        $chamberFinancial = ChamberFinancial::all();
+        $pagechamberFinancial = Page::where('name', 'Balancetes Financeiros')->first();
+        return view('pages.chamber-financials.index', compact('chamberFinancial', 'pagechamberFinancial'));
+    }
+
+    public function allMaintence(Request $request){
+        $allMaintence = ChamberFinancial::all();
+        
+        $pagechamberFinancial = Page::where('name', 'Balancetes Financeiros')->first();
+        $query = ChamberFinancial::query();
+
+        if ($request->filled('mes')) {
+            $mes = $request->input('mes');
+            $query->whereMonth('date', '=', $mes);
+        }
+        
+        if ($request->filled('ano')) {
+            $ano = $request->input('ano');
+            $query->whereYear('date', '=', $ano);
+        }    
+        
+        if ($request->filled('number_name_desc')) {
+            $value = $request->input('number_name_desc');
+            $query->where(function ($query) use ($value) {
+                $query->where('name', 'LIKE', '%' . $value . '%')
+                ->orWhere('description', 'LIKE', '%' . $value . '%');
+                // ->orWhere('number', 'LIKE', '%' . $value . '%');
+            });
+        }
+    
+
+    
+        $chamberFinancial = $query->paginate(10);
+        $searchData = $request->only(['legislature_id']);
+        
+        return view('pages.chamber-financials.index', compact('allMaintence', 'pagechamberFinancial', 'searchData', 'chamberFinancial'));
+    }
+    
     /**
      * Show the form for creating a new resource.
      */

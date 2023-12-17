@@ -2921,6 +2921,26 @@ $data = [
             ]
         ]
     ],
+    [
+        'page' => 'Balancetes Financeiros',
+        'route' => 'balancetes.page',
+        'sections' => [
+            [
+                'component' => 'balancetes',
+                'name' => 'Balancetes Financeiros',
+                'styles' => [
+                    'classes' => [
+                        '.section-chambers' => [
+                            'background_color' => $dayColors["bg_section"],
+                            'background_color_night' => $darkColors['bg_section'],
+                            'title_color' => $dayColors["text_color"],
+                            'title_color_night' => $darkColors['text_color'],
+                        ],
+                    ]
+                ]
+            ]
+        ]
+    ],
 ];
 
 return $data;
