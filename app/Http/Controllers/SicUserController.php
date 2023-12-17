@@ -108,7 +108,7 @@ class SicUserController extends Controller
      */
     public function update(Request $request, SicUser $sicUser)
     {
-        //
+        dd($sicUser);
     }
 
     /**

@@ -90,7 +90,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Telefone</label>
-                        <input type="text" name="phone" class="form-control" autocomplete="off" value="{{ old('phone', $sic ? $sic->phone : '') }}">
+                        <input type="text" name="phone" class="form-control mask-phone" autocomplete="off" value="{{ old('phone', $sic ? $sic->phone : '') }}">
                     </div>
                 </div>
             </div>

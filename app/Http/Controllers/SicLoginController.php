@@ -18,7 +18,7 @@ class SicLoginController extends Controller
 
         if (Auth::guard('sic')->attempt($credentials)) {
             session(['user_id' => Auth::guard('sic')->user()->id]);
-            return redirect()->route('sic.show');
+            return redirect()->route('sic.panel');
         }
 
         // Autenticação falhou

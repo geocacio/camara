@@ -120,6 +120,12 @@ class SicController extends Controller
         return view('pages.sic.panel.register');
     }
 
+    public function profile()
+    {
+        $user = Auth::guard('sic')->user();
+        return view('pages.sic.panel.profile', compact('user'));
+    }
+
     public function panel()
     {
         return view('pages.sic.panel.panel');

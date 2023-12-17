@@ -68,7 +68,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <a href="{{ route('sic.solicitation.edit') }}" class="box-first-layout third">
+                                <a href="{{ route('sic.profile') }}" class="box-first-layout third">
                                     <i class="fa-solid fa-user"></i>
                                     <span class="title">Dados cadastrados.</span>
                                     <span class="text">Visualizar suas informações cadastradas.</span>

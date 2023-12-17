@@ -621,6 +621,8 @@ Route::prefix('/transparencia')->group(function () {
 
     Route::prefix('/sic')->group(function () {
 
+        Route::get('/', [App\Http\Controllers\SicController::class, 'show'])->name('sic.show');
+
         Route::post('/login', [App\Http\Controllers\SicLoginController::class, 'login'])->name('sic.login');
         Route::get('/login', [App\Http\Controllers\SicLoginController::class, 'showForm'])->name('sic.showForm');
 
@@ -628,15 +630,15 @@ Route::prefix('/transparencia')->group(function () {
         Route::get('/register', [App\Http\Controllers\SicController::class, 'register'])->name('sic.register');
 
         Route::middleware(['auth.sic'])->group(function () {
-        Route::post('/logout', [App\Http\Controllers\SicLoginController::class, 'logout'])->name('sic.logout');
-
-        Route::get('/', [App\Http\Controllers\SicController::class, 'show'])->name('sic.show');
-        Route::get('painel', [App\Http\Controllers\SicController::class, 'panel'])->name('sic.panel');
-        Route::resource('solicitacoes', App\Http\Controllers\SicSolicitationController::class);
-        // Route::get('solicitacoes', [App\Http\Controllers\sicSol::class, 'solicitations'])->name('sic.solicitations');
-        // Route::post('solicitacoes', [App\Http\Controllers\SicSolicitationController::class, 'store'])->name('sic.solicitations.store');
-        // Route::get('solicitacoes/create', [App\Http\Controllers\SicController::class, 'solicitationCreate'])->name('sic.solicitation.create');
-        Route::get('solicitacoes/edit', [App\Http\Controllers\SicController::class, 'solicitationEdit'])->name('sic.solicitation.edit');
+            Route::post('/logout', [App\Http\Controllers\SicLoginController::class, 'logout'])->name('sic.logout');
+            Route::get('painel', [App\Http\Controllers\SicController::class, 'panel'])->name('sic.panel');
+            Route::get('perfil', [App\Http\Controllers\SicController::class, 'profile'])->name('sic.profile');
+            Route::put('perfil/{sicUser}', [App\Http\Controllers\SicUserController::class, 'update'])->name('sic.updateProfile');
+            Route::resource('solicitacoes', App\Http\Controllers\SicSolicitationController::class);
+            // Route::get('solicitacoes', [App\Http\Controllers\sicSol::class, 'solicitations'])->name('sic.solicitations');
+            // Route::post('solicitacoes', [App\Http\Controllers\SicSolicitationController::class, 'store'])->name('sic.solicitations.store');
+            // Route::get('solicitacoes/create', [App\Http\Controllers\SicController::class, 'solicitationCreate'])->name('sic.solicitation.create');
+            Route::get('solicitacoes/edit', [App\Http\Controllers\SicController::class, 'solicitationEdit'])->name('sic.solicitation.edit');
         });
     });
 });
