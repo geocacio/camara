@@ -30,7 +30,7 @@ class SicSolicitation extends Model
 
     public function latestResponseTime()
     {
-        return $this->hasOne(SicResponseTime::class)->latest('response_deadline');
+        return $this->hasOne(SicResponseTime::class)->latest();
     }
 
     public function getRouteKeyName()
