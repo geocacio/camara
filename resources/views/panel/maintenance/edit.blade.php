@@ -1,8 +1,8 @@
 @extends('panel.index')
-@section('pageTitle', 'Editando alerta')
+@section('pageTitle', 'Editando Manutenção')
 
 @section('breadcrumb')
-<li><a href="{{ route('maintenance.index') }}">Alertas</a></li>
+<li><a href="{{ route('maintenance.index') }}">Manutenções</a></li>
 <li><span>{{ $maintenance->title }}</span></li>
 @endsection
 

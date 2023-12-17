@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('more_info')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->boolean('status')->default(false);
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }
