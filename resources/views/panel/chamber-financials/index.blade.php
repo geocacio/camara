@@ -2,6 +2,9 @@
 @section('pageTitle', 'Balancete Financeiro')
 
 @section('content')
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <div class="card">
     <div class="card-body">
         
@@ -11,7 +14,6 @@
             <div class="btn-group dropleft">
                 <button type="button" class="btn-dropdown-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
                 <div class="dropdown-menu">
-                    {{-- <a class="dropdown-item" href="{{ route('commissions.page') }}">Página</a> --}}
                     <a class="dropdown-item" href="{{ route('chambers-financials.create') }}">Novo</a>
                 </div>
             </div>
@@ -26,7 +28,7 @@
                     <tr>
                         <th>Nome</th>
                         <th>Data</th>
-                        {{-- <th>Status</th> --}}
+                        <th class="text-center">Status</th>
                         <th class="text-center">Ações</th>
                     </tr>
                 </thead>
@@ -35,7 +37,12 @@
                     <tr>
                         <td>{{ $chamberFinancial->name }}</td>
                         <td>{{ $chamberFinancial->date }}</td>
-                        {{-- <td>{{ $chamberFinancial->status }}</td> --}}
+                        <td>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="toggle-{{$chamberFinancial->id}}" onclick="toggleVisibility(event, '{{ $chamberFinancial->id }}', '/panel/chamber-financial/status')" name="status" value="{{ $chamberFinancial->status }}" class="toggle-input" {{ $chamberFinancial->status == 1 ? 'checked' : '' }}>
+                                <label for="toggle-{{$chamberFinancial->id}}" class="toggle-label"></label>
+                            </div>
+                        </td>
                         <td class="actions text-center">
                             <a href="{{ route('chambers-financials.edit', $chamberFinancial->slug) }}" class="link edit"><i class="fas fa-edit"></i></a>
                         
@@ -88,4 +95,5 @@
 @endsection
 
 @section('js')
+@include('panel.configurations.pages.visibilityJS')
 @endsection

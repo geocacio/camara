@@ -103,7 +103,7 @@ class MaintenanceController extends Controller
             return response()->json(['error' => true, 'message' => 'Erro, Por favor, tente novamente!']);
         }
     
-        $message = $status == 1 ? 'Manutenção ativado com sucesso' : 'Manutenção desativado com sucesso';
+        $message = $status == 1 ? 'Manutenção ativada com sucesso' : 'Manutenção desativada com sucesso';
         return response()->json(['success' => true, 'message' => $message]);
     }
     

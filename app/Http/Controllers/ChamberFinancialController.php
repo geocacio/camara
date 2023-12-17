@@ -155,4 +155,19 @@ class ChamberFinancialController extends Controller
 
         return redirect()->back()->with('error', 'Erro ao tentar excluir balancete!');
     }
+
+    public function status(Request $request)
+    {
+        $financial = ChamberFinancial::find($request->id);
+
+        $status = ($request->visibility == 'disabled') ? 0 : 1;
+    
+        if (!$financial->update(['status' => $status])) {
+            return response()->json(['error' => true, 'message' => 'Erro, Por favor, tente novamente!']);
+        }
+    
+        $message = $status == 1 ? 'Balancete ativado com sucesso' : 'Balancete desativado com sucesso';
+        return response()->json(['success' => true, 'message' => $message]);
+    }
+    
 }
