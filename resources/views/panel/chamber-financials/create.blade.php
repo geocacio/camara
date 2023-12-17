@@ -1,5 +1,5 @@
 @extends('panel.index')
-@section('pageTitle', 'Nova Comissão')
+@section('pageTitle', 'Novo Balancete Financeiro')
 
 @section('breadcrumb')
 <li><a href="{{ route('chambers-financials.index') }}">Balancetes Financeiros</a></li>
