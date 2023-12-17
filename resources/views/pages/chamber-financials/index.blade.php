@@ -116,7 +116,7 @@
 
                 @endforeach
 
-                {{-- {{ $chamberFinancial->render() }} --}}
+                {{ $chamberFinancial->render() }}
 
             </div>
 
