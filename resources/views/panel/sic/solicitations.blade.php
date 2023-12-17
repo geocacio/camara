@@ -59,9 +59,36 @@
                         </td>
                         <td class="actions text-right">
                             @if($solicitation->status != 'Finalizado')
-                            <a href="{{ route('solicitations.edit', $solicitation->id) }}" class="link reply"><i class="fa-solid fa-reply"></i></a>
+                            <a data-toggle="modal" data-target="#Response{{$solicitation->id}}" class="link reply"><i class="fa-solid fa-reply"></i></a>
                             @endif
                             <a data-toggle="modal" data-target="#showSolicitation{{$solicitation->id}}" class="link see"><i class="fa-solid fa-eye"></i></a>
+
+                            <div id="Response{{$solicitation->id}}" class="modal fade modal-warning" role="dialog">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                        <form id="formDeadline-{{ $solicitation->id }}" action="{{ route('sic.solicitation.deadline', $solicitation->slug) }}" method="post">
+                                            @csrf
+                                            @method('PUT')
+
+                                            <div class="form-group">
+                                                <label>Resposta</label>
+                                                <input type="text" name="response_deadline" class="form-control" value="{{ old('response') }}">
+                                            </div>
+                                        </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-cancel" data-dismiss="modal">Cancelar</button>
+                                            <a href="#" class="btn btn-default" onclick="event.preventDefault();
+                                                document.getElementById('formDeadline-{{ $solicitation->id }}').submit();">
+                                                Enviar
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- Permitir somente o admin apagar a manifestação -->
                             @if($user->id == 1)
                             <a data-toggle="modal" data-target="#myModal{{$solicitation->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a>

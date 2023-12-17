@@ -490,6 +490,7 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('esic')->group(function () {
             Route::resource('/solicitations', SicSolicitationPanelController::class);
+            Route::put('/solicitations/{solicitation}', [SicSolicitationPanelController::class, 'update'])->name('sic.solicitation.update');
             Route::resource('/faqs', SicFaqController::class)->names([
                 'index' => 'sic.faq.index',
                 'create' => 'sic.faq.create',

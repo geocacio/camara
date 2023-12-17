@@ -64,7 +64,7 @@ class SicSolicitationPanelController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        dd('passou aqui');
     }
 
     /**
