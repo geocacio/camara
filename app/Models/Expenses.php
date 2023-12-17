@@ -16,5 +16,7 @@ class Expenses extends Model
         'fase',
         'valor',
         'organ',
+        'text_button',
+        'url',
     ];
 }

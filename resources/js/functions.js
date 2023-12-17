@@ -113,4 +113,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    $(document).ready(function () {
+       $('#type_item').change(function () {
+            var selectedOption = $(this).val();
+            if (selectedOption == 'internal') {
+               $('#internal_link').show();
+               $('#external_link').hide();
+            } else {
+                $('#external_link').show();
+                $('#internal_link').hide();
+            }
+        });
+    });
+
 });
