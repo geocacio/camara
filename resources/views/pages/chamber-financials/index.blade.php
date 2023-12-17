@@ -119,7 +119,7 @@
             </div>
 
         @else
-            <div class="empty-data">Nenhuma legislatura encontrada.</div>
+            <div class="empty-data">Nenhum balancete encontrado.</div>
         @endif
 
     </div>
