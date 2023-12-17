@@ -89,7 +89,6 @@
                     <div class="card-with-links">
                         <a href="{{ route('vereadores-all', $chamber->slug) }}">
                             <div class="header">
-                                <i class="fa-solid fa-microphone-lines"></i>
                             </div>
                             <div class="second-part">
                                 <div class="body">
