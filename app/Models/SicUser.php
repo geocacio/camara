@@ -10,6 +10,8 @@ class SicUser extends Model implements Authenticatable
 {
     use HasFactory;
 
+    protected $guard = 'sic';
+
     protected $table = 'sic_users';
 
     protected $fillable = [

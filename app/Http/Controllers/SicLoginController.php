@@ -17,6 +17,7 @@ class SicLoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::guard('sic')->attempt($credentials)) {
+            session(['user_id' => Auth::guard('sic')->user()->id]);
             return redirect()->route('sic.show');
         }
 

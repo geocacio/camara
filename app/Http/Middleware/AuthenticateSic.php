@@ -16,12 +16,23 @@ class AuthenticateSic
      */
     public function handle(Request $request, Closure $next, $guard = null)
     {
+        $guard = 'sic';
         if (!Auth::guard($guard)->check()) {
             return redirect()->route('sic.login'); // Redireciona para a rota de login do sistema "Sic"
-        }else{
-            dd('ta caindo no else');
         }
-
         return $next($request);
+    }
+
+    /**
+     * Get the path the user should be redirected to when they are not authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return string|null
+     */
+    protected function redirectTo($request)
+    {
+        if (! $request->expectsJson()) {
+            return route('sic.login');
+        }
     }
 }

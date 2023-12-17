@@ -11,8 +11,8 @@ class SicUserProvider extends ServiceProvider
 {
     public function boot()
     {
-        Auth::provider('sic', function ($app, array $config) {
-            return new SicUserProvider($app['hash'], $config['model']);
+        Auth::provider('sic_users', function ($app, array $config) {
+            return new \Illuminate\Auth\EloquentUserProvider($app['hash'], $config['model']);
         });
     }
 

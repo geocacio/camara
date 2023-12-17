@@ -619,7 +619,7 @@ Route::prefix('/transparencia')->group(function () {
         Route::post('/register', [App\Http\Controllers\SicUserController::class, 'register'])->name('sicUser.register');
         Route::get('/register', [App\Http\Controllers\SicController::class, 'register'])->name('sic.register');
 
-        // Route::middleware(['auth.sic'])->group(function () {
+        Route::middleware(['auth.sic'])->group(function () {
         Route::post('/logout', [App\Http\Controllers\SicLoginController::class, 'logout'])->name('sic.logout');
 
         Route::get('/', [App\Http\Controllers\SicController::class, 'show'])->name('sic.show');
@@ -629,6 +629,6 @@ Route::prefix('/transparencia')->group(function () {
         // Route::post('solicitacoes', [App\Http\Controllers\SicSolicitationController::class, 'store'])->name('sic.solicitations.store');
         // Route::get('solicitacoes/create', [App\Http\Controllers\SicController::class, 'solicitationCreate'])->name('sic.solicitation.create');
         Route::get('solicitacoes/edit', [App\Http\Controllers\SicController::class, 'solicitationEdit'])->name('sic.solicitation.edit');
-        // });
+        });
     });
 });
