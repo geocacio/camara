@@ -15,7 +15,6 @@ class SicSolicitationPanelController extends Controller
     {
         $user = Auth::user();
         $solicitations = SicSolicitation::all();
-        
         return view('panel.sic.solicitations', compact('solicitations', 'user'));
     }
 

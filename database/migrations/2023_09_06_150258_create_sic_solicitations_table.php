@@ -19,6 +19,7 @@ return new class extends Migration
             $table->longText('solicitation');
             $table->string('protocol')->uniqid();
             $table->string('slug')->unique();
+            $table->foreign('user_id')->references('id')->on('sic_users');
             $table->timestamps();
         });
     }

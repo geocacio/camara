@@ -45,7 +45,7 @@ class SicSolicitationController extends Controller
             'solicitation.required' => 'O campo solicitação é obrigatório',
         ]);
         
-        $dataValidated['user_id'] = 2;
+        $dataValidated['user_id'] = Auth()->user()->id;
         $dataValidated['protocol'] = SicSolicitation::count() > 0 ? date('Ymd') . str_pad(SicSolicitation::count() + 1, 4, '0', STR_PAD_LEFT): date('Ymd') . str_pad(1, 4, '0', STR_PAD_LEFT);
         $dataValidated['slug'] = Str::slug($request->title);
         
