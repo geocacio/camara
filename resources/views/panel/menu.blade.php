@@ -677,7 +677,7 @@
                     <a href="{{ route('menus.index') }}" class="sub-link">Menus</a>
                 </li>
                 <li class="sub-item {{ request()->routeIs('maintenance.index') ? 'active' : '' }}">
-                    <a href="{{ route('maintenance.index') }}" class="sub-link">Alertas</a>
+                    <a href="{{ route('maintenance.index') }}" class="sub-link">Manutenções</a>
                 </li>
             </ul>
         </div>

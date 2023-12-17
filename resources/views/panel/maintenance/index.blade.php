@@ -1,5 +1,5 @@
 @extends('panel.index')
-@section('pageTitle', 'Alertas')
+@section('pageTitle', 'Manutenções')
 
 @section('content')
 
@@ -85,13 +85,11 @@
         </div>
         @else
         <div class="no-data">
-            <span>Ainda não existem alertas cadastrados.</span>
+            <span>Ainda não existem manutenções cadastradas.</span>
         </div>
         @endif
 
     </div>
-    
-    {{-- @include('panel.partials.footerCardWithPagination', ['routePerPage' => 'maintenance.index', 'paginate' => $maintenances]) --}}
     
 </div>
 @endsection

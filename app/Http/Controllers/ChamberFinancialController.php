@@ -49,7 +49,7 @@ class ChamberFinancialController extends Controller
             'date' => 'required|date',
         ]);
 
-        $validated['slug'] = Str::slug($validated['name']);
+        $validated['slug'] = ChamberFinancial::uniqSlug($validated['name']);
 
         if ($chamberFinancial = ChamberFinancial::create($validated)) {
             if ($request->hasfile('files')) {

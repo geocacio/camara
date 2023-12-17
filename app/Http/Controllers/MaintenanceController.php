@@ -41,7 +41,7 @@ class MaintenanceController extends Controller
         $maintenance = Maintenance::create($validatedData);
         
         if($maintenance){
-            return redirect()->back()->with('success', 'Manutenção criada com sucesso!');
+            return redirect()->route('maintenance.index')->with('success', 'Manutenção criada com sucesso!');
         }
         return redirect()->back()->with('error', 'Erro ao criar manutenção!');
     }
@@ -77,7 +77,7 @@ class MaintenanceController extends Controller
         ]);
         
         if($maintenance->update($validatedData)){
-            return redirect()->back()->with('success', 'Manutenção atualizada com sucesso!');
+            return redirect()->route('maintenance.index')->with('success', 'Manutenção atualizada com sucesso!');
         }
         return redirect()->back()->with('error', 'Erro ao atualizar manutenção!');
     }
@@ -88,26 +88,22 @@ class MaintenanceController extends Controller
     public function destroy(Maintenance $maintenance)
     {
         if($maintenance->delete()){
-            return redirect()->back()->with('success', 'Alerta removida com sucesso!');
+            return redirect()->back()->with('success', 'Manutenção removida com sucesso!');
         }
-        return redirect()->back()->with('error', 'Erro ao remover Alerta!');
+        return redirect()->back()->with('error', 'Erro ao remover Manutenção!');
     }
     
     public function visibility(Request $request)
     {
         $maintenance = Maintenance::find($request->id);
-    
-        if (!$maintenance) {
-            return response()->json(['error' => true, 'message' => 'Alerta não encontrada']);
-        }
-    
+
         $status = ($request->visibility == 'disabled') ? 0 : 1;
     
         if (!$maintenance->update(['status' => $status])) {
             return response()->json(['error' => true, 'message' => 'Erro, Por favor, tente novamente!']);
         }
     
-        $message = $status == 1 ? 'Alerta ativado com sucesso' : 'Alerta desativado com sucesso';
+        $message = $status == 1 ? 'Manutenção ativado com sucesso' : 'Manutenção desativado com sucesso';
         return response()->json(['success' => true, 'message' => $message]);
     }
     
