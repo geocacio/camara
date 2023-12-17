@@ -539,8 +539,7 @@ Route::get('/recipes', [RecipesController::class, 'show'])->name('receitas.page'
 Route::get('/construction', [ConstructionController::class, 'show'])->name('obras.page');
 Route::get('/simbolos', [SymbolsController::class, 'page'])->name('simbolos.page');
 
-Route::get('/balancetes-financeiros', [ChamberFinancialController::class, 'page'])->name('balancetes.page');
-Route::match(['get', 'post'], 'balancetes-financeiros', [ChamberFinancialController::class, 'allMaintence'])->name('legislaturas-all');
+Route::match(['get', 'post'], 'balancetes-financeiros', [ChamberFinancialController::class, 'page'])->name('balancetes-all');
 
 Route::get('/gestores/lista', [App\Http\Controllers\SecretaryController::class, 'show'])->name('gestores.lista.show');
 

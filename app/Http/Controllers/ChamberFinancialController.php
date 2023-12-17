@@ -30,13 +30,7 @@ class ChamberFinancialController extends Controller
         return view('panel.chamber-financials.index', compact('chambersFinancial'));
     }
 
-    public function page(){
-        $chamberFinancial = ChamberFinancial::all();
-        $pagechamberFinancial = Page::where('name', 'Balancetes Financeiros')->first();
-        return view('pages.chamber-financials.index', compact('chamberFinancial', 'pagechamberFinancial'));
-    }
-
-    public function allMaintence(Request $request){
+    public function page(Request $request){
         $allMaintence = ChamberFinancial::all();
         
         $pagechamberFinancial = Page::where('name', 'Balancetes Financeiros')->first();
@@ -50,21 +44,18 @@ class ChamberFinancialController extends Controller
         if ($request->filled('ano')) {
             $ano = $request->input('ano');
             $query->whereYear('date', '=', $ano);
-        }    
+        }  
         
         if ($request->filled('number_name_desc')) {
             $value = $request->input('number_name_desc');
             $query->where(function ($query) use ($value) {
                 $query->where('name', 'LIKE', '%' . $value . '%')
                 ->orWhere('description', 'LIKE', '%' . $value . '%');
-                // ->orWhere('number', 'LIKE', '%' . $value . '%');
             });
         }
     
-
-    
         $chamberFinancial = $query->paginate(10);
-        $searchData = $request->only(['legislature_id']);
+        $searchData = $request->only(['mes', 'ano', 'number_name_desc']);
         
         return view('pages.chamber-financials.index', compact('allMaintence', 'pagechamberFinancial', 'searchData', 'chamberFinancial'));
     }

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('chamber_financials', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('status')->nullable();
+            $table->boolean('status')->default(1);
             $table->text('description')->nullable();
             $table->date('date');
             $table->string('slug');

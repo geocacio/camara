@@ -37,29 +37,29 @@
                                     <label>Mês</label>
                                     <select name="mes" class="form-control">
                                         <option value="">Selecione</option>
-                                        <option value="1">Janeiro</option>
-                                        <option value="2">Fevereiro</option>
-                                        <option value="3">Março</option>
-                                        <option value="4">Abril</option>
-                                        <option value="5">Maio</option>
-                                        <option value="6">Junho</option>
-                                        <option value="7">Julho</option>
-                                        <option value="8">Agosto</option>
-                                        <option value="9">Setembro</option>
-                                        <option value="10">Outubro</option>
-                                        <option value="11">Novembro</option>
-                                        <option value="12">Dezembro</option>
+                                        <option value="1" {{ isset($searchData['mes']) && $searchData['mes'] == 1 ? 'selected' : '' }}>Janeiro</option>
+                                        <option value="2" {{ isset($searchData['mes']) && $searchData['mes'] == 2 ? 'selected' : '' }}>Fevereiro</option>
+                                        <option value="3" {{ isset($searchData['mes']) && $searchData['mes'] == 3 ? 'selected' : '' }}>Março</option>
+                                        <option value="4" {{ isset($searchData['mes']) && $searchData['mes'] == 4 ? 'selected' : '' }}>Abril</option>
+                                        <option value="5" {{ isset($searchData['mes']) && $searchData['mes'] == 5 ? 'selected' : '' }}>Maio</option>
+                                        <option value="6" {{ isset($searchData['mes']) && $searchData['mes'] == 6 ? 'selected' : '' }}>Junho</option>
+                                        <option value="7" {{ isset($searchData['mes']) && $searchData['mes'] == 7 ? 'selected' : '' }}>Julho</option>
+                                        <option value="8" {{ isset($searchData['mes']) && $searchData['mes'] == 8 ? 'selected' : '' }}>Agosto</option>
+                                        <option value="9" {{ isset($searchData['mes']) && $searchData['mes'] == 9 ? 'selected' : '' }}>Setembro</option>
+                                        <option value="10" {{ isset($searchData['mes']) && $searchData['mes'] == 10 ? 'selected' : '' }}>Outubro</option>
+                                        <option value="11" {{ isset($searchData['mes']) && $searchData['mes'] == 11 ? 'selected' : '' }}>Novembro</option>
+                                        <option value="12" {{ isset($searchData['mes']) && $searchData['mes'] == 12 ? 'selected' : '' }}>Dezembro</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group mb-0 col-md-3">
                                     <label>Ano</label>
-                                    <input type="number" name="ano" class="form-control" placeholder="Ano">
+                                    <input type="text" name="ano" value="{{ old('ano', $searchData ? $searchData['ano'] : '') }}" class="form-control mask-year" placeholder="Ano">
                                 </div>
 
                                 <div class="form-group mb-0 col-md-6">
                                     <label>Nome, Número ou Descrição</label>
-                                    <input type="text" name="number_name_desc" class="form-control" placeholder="Nome, Número ou Descrição">
+                                    <input type="text" name="number_name_desc" value="{{ old('number_name_desc', $searchData ? $searchData['number_name_desc'] : '') }}" class="form-control" placeholder="Nome, Número ou Descrição">
                                 </div>
                             </div>
 
@@ -68,7 +68,7 @@
                                     <div class="h-100 form-group mb-0">
                                         <div class="btn-groups">
                                             <button type="submit" class="btn btn-search btn-sm" data-toggle="tooltip" title="Pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button>
-                                            <a href="{{ route('legislaturas-all') }}" class="btn btn-search close btn-sm" data-toggle="tooltip" title="Limpar pesquisa"><i class="fa-solid fa-xmark"></i></a>
+                                            <a href="{{ route('balancetes-all') }}" class="btn btn-search close btn-sm" data-toggle="tooltip" title="Limpar pesquisa"><i class="fa-solid fa-xmark"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -83,31 +83,34 @@
 
             <div class="row">
                 
-                @foreach($chamberFinancial as $chamber)
+                @foreach($chamberFinancial as $finance)
                 
                 <div class="col-md-12">
                     <div class="card-with-links">
-                        <a href="{{ route('vereadores-all', $chamber->slug) }}">
-                            <div class="header">
-                            </div>
-                            <div class="second-part">
-                                <div class="body">
-                                    <h3 class="title">{{ $chamber->name }}</h3>
-                                    <ul>
-                                        @php
-                                            setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'portuguese');
-                                            $formattedDate = strftime('%B %Y', strtotime($chamber->date));
-                                        @endphp
+                        <div class="second-part">
+                            <div class="body">
+                                <h3 class="title">{{ $finance->name }}</h3>
+                                <ul>
+                                    @php
+                                        setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'portuguese');
+                                        $formattedDate = strftime('%B %Y', strtotime($finance->date));
+                                    @endphp
 
-                                        <li class="description">Mês: {{ $formattedDate }}</li>
+                                    <li class="description">Mês: {{ $formattedDate }}</li>
 
-                                        <li class="description">Data: {{ date('d/m/Y', strtotime($chamber->date)) }}</li>
-                                        <li class="description">Status: {{ $chamber->status }}</li>
-                                    </ul>
-                                </div>
+                                    <li class="description">Data: {{ date('d/m/Y', strtotime($finance->date)) }}</li>
+                                    <li class="description">Status: {{ $finance->status ? 'Ativo' : 'Inativo'}}</li>
+                                </ul>
                             </div>
-                        </a>
+            
+                            <div class="footer">
+                                @if(!empty($finance->files[0]))
+                                    <a href="{{ asset('storage/'.$finance->files[0]->file->url) }}" target="_blank" class="links" data-toggle="tooltip" title="Ver documento"><i class="fa-solid fa-file-pdf"></i></a>
+                                @endif
+                            </div>
+                        </div>
                     </div>
+                    
                 </div>
                 
 
@@ -136,6 +139,7 @@
 
 <script>
     $('.mask-date').mask('00-00-0000');
+    $('.mask-year').mask('0000');
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
     })
