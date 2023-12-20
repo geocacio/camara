@@ -106,7 +106,15 @@ class CommissionController extends Controller
      */
     public function show(Commission $commission)
     {
-        return view('pages.commissions.show', compact('commission'));
+        $materials = [];
+        $progress = [];
+
+        foreach ($commission->commissionMaterials as $commissionMaterial) {
+            $material = $commissionMaterial->material;
+            $materials[] = $material;
+            $progress = $material->progress;
+        }
+        return view('pages.commissions.show', compact('commission', 'materials', 'progress'));
     }
 
     /**

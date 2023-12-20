@@ -38,6 +38,11 @@ class Commission extends Model
             ->where('linkable_type', Material::class);
     }
 
+    public function commissionMaterials()
+    {
+        return $this->hasMany(CommissionMaterial::class, 'commission_id');
+    }
+
     public static function uniqSlug($name)
     {
         $slug = Str::slug($name);

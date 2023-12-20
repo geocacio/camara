@@ -3113,6 +3113,23 @@ section{
             }
         }
     }
+    .owl-nav{
+        button{
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            i{
+                font-size: 30px;
+                color: #fff;
+                text-shadow: 0px 0px 6px #000;
+            }
+        }
+    }
 }
 
 .card-post{

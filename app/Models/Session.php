@@ -38,11 +38,6 @@ class Session extends Model
         return $this->morphToMany(Type::class, 'typeable', 'type_contents');
     }
 
-    public function commissionLinks()
-    {
-        return $this->morphMany(CommissionLink::class, 'linkable');
-    }
-
     public function sessionAttendance(){
         return $this->hasMany(SessionAttendance::class);
     }

@@ -38,38 +38,20 @@
                             </button>
                         </li>
 
-                        @if($commission->session)
+                        @if($progress && count($progress))
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="tramite-tab" data-bs-toggle="tab" data-bs-target="#tramite" type="button" role="tab">
                                 <i class="fa-solid fa-suitcase"></i>
-                                Sessão
+                                Trâmite
                             </button>
                         </li>
                         @endif
 
-                        @if($commission->authors)
+                        @if($materials && count($materials))
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="authors-tab" data-bs-toggle="tab" data-bs-target="#authors" type="button" role="tab">
+                            <button class="nav-link" id="material-tab" data-bs-toggle="tab" data-bs-target="#material" type="button" role="tab">
                                 <i class="fa-solid fa-copy"></i>
-                                Autores e subescritores
-                            </button>
-                        </li>
-                        @endif
-
-                        @if($commission->session)
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="votes-tab" data-bs-toggle="tab" data-bs-target="#votes" type="button" role="tab">
-                                <i class="fa-solid fa-microphone"></i>
-                                Votações
-                            </button>
-                        </li>
-                        @endif
-
-                        @if($commission->recipients)
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="destinations-tab" data-bs-toggle="tab" data-bs-target="#destinations" type="button" role="tab">
-                                <i class="fa-solid fa-users"></i>
-                                Destinatários
+                                Pautas
                             </button>
                         </li>
                         @endif
@@ -87,10 +69,10 @@
                                 <h3 class="name-managers">{{ $commission->description }}</h3>
 
                                 <div class="row container-descriptions">
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <p class="title">Autor</p>
-                                        {{-- <p class="description">{{ $commission->councilor->name}}</p> --}}
-                                    </div>
+                                        <p class="description">{{ $commission->councilor->name}}</p>
+                                    </div> --}}
                                     <div class="col-md-6">
                                         <p class="title">Data</p>
                                         <p class="description">{{ date('d/m/Y', strtotime($commission->date)) }}</p>
@@ -110,62 +92,44 @@
                             </div>
                         @endif
 
-                        @if($commission->authors)
-                            <div class="tab-pane fadeshow" id="authors" role="tabpanel" aria-labelledby="authors-tab">
+                        @if($materials && count($materials))
+                            <div class="tab-pane fadeshow" id="material" role="tabpanel" aria-labelledby="material-tab">
 
-                                @foreach($commission->authors as $author)
-
-                                    <div class="col-12">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped table-data-default">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Nome</th>
-                                                        <th>Cargo</th>
-                                                        <th>Partido</th>
-                                                        <th>Autoria</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                
-                                                    @foreach($commission->authors as $author)
-                                                    <tr>
-                                                        <td>{{ $author->name }}</td>
-                                                        <td>{{ $author->position }}</td>
-                                                        <td>{{ $author->party }}</td>
-                                                        <td>{{ $author->authorship }}</td>
-                                                    </tr>
-                                                    @endforeach
-                                
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-data-default">
+                                            <thead>
+                                                <tr>
+                                                    <th>Matéria</th>
+                                                    <th>Ementa</th>
+                                                    <th>Data</th>
+                                                    <th>Ação</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                            
+                                                @foreach($materials as $material)
+                                                <tr>
+                                                    <td>{{ $material->type->name }}: {{ $material->id }}/{{ date('Y', strtotime($material->date)) }}</td>
+                                                    <td>{{ $material->description }}</td>
+                                                    <td>{{ date('d/m/Y', strtotime($material->date)) }}</td>
+                                                    <td class="actions">
+                                                        <a href="{{ route('materiais.single', $material->slug) }}" data-toggle="tooltip" title="Ver mais" class="link-view">
+                                                            <i class="fa-solid fa-eye"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                            
+                                            </tbody>
+                                        </table>
                                     </div>
-
-                                @endforeach
-
-                            </div>
-                        @endif
-
-                        @if($commission->session)
-                        
-                            <div class="tab-pane fadeshow" id="votes" role="tabpanel" aria-labelledby="votes-tab">
-
-                                Aqui é a votação da sessão
+                                </div>
 
                             </div>
                         @endif
 
-                        @if($commission->recipients)
-                        
-                            <div class="tab-pane fadeshow" id="destinations" role="tabpanel" aria-labelledby="destinations-tab">
-
-                                Lista de destinatários
-
-                            </div>
-                        @endif
-
-                        @if($commission->session)
+                        @if($progress && count($progress))
                             <div class="tab-pane fadeshow" id="tramite" role="tabpanel" aria-labelledby="tramite-tab">
                                 <div class="col-12">
                                     <div class="table-responsive">
@@ -173,24 +137,22 @@
                                             <thead>
                                                 <tr>
                                                     <th>Data</th>
-                                                    <th>Status</th>
-                                                    <th>Exercício</th>
-                                                    <th>Descrição</th>
-                                                    <th>Ação</th>
+                                                    <th>Sessão</th>
+                                                    <th>Expediente</th>
+                                                    <th>Fase</th>
+                                                    <th>Observação</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach($progress as $item)
                                                 <tr>
-                                                    <td>{{ date('d/m/Y', strtotime($commission->session->date)) }}</td>
-                                                    <td>{{ $commission->session->status->name }}</td>
-                                                    <td>{{ $commission->session->exercicy->name }}</td>
-                                                    <td>{{ Str::limit($commission->session->description, '50', '...') }}</td>
-                                                    <td class="actions">
-                                                        <a href="{{ route('sessoes.single', $commission->session->id) }}" data-toggle="tooltip" title="Ver mais" class="link-view">
-                                                            <i class="fa-solid fa-eye"></i>
-                                                        </a>
-                                                    </td>
+                                                    <td>{{ date('d/m/Y', strtotime($item->proceeding->sessions->date)) }}</td>
+                                                    <td>{{ $item->proceeding->sessions->id }}/{{ date('Y', strtotime($item->proceeding->sessions->date)) }}</td>
+                                                    <td>{{ $item->proceeding->category->name }}</td>
+                                                    <td>{{ $item->phase }}</td>
+                                                    <td>{{ $item->observation }}</td>
                                                 </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
