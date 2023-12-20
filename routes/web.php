@@ -260,6 +260,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('/role-chambers', RoleChamberController::class);
 
         Route::resource('/chambers-financials', ChamberFinancialController::class);
+        Route::post('/chamber-financial/status', [ChamberFinancialController::class, 'status']);
+
 
         //Routes linked to biddings
         Route::resource('/progress', ProgressController::class);
