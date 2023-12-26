@@ -483,6 +483,7 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::resource('/official-diary', OfficialJournalController::class);
+
         Route::get('/official-diary/{official_diary:id}/finish', [OfficialJournalController::class, 'createOfficialDiary'])->name('official.diary.finish');
         Route::resource('/official-diary/{official_diary:id}/publications', SecretaryPublicationController::class)->middleware('can:secretary-access');
         Route::resource('/schedules', ScheduleController::class)->middleware('can:secretary-access');
@@ -530,6 +531,7 @@ Route::middleware('auth')->group(function () {
     });
 });
 
+Route::get('/official-diary/reading/{id?}', [OfficialJournalController::class, 'page'])->name('official.diary.page');
 
 Route::get('/pcs', [PcsController::class, 'show'])->name('prestacao-conta-gestao');
 Route::get('/pcg', [PcgController::class, 'show'])->name('prestacao-conta-governo');
