@@ -526,7 +526,6 @@ Route::middleware('auth')->group(function () {
         Route::put('/expenses-page', [ExpensesController::class, 'pageUpdate'])->name('expenses.page.update');
         Route::get('/construction-page', [ConstructionController::class, 'page'])->name('constructions.page');
         Route::put('/construction-page', [ConstructionController::class, 'pageUpdate'])->name('constructions.page.update');
-
         Route::get('/pcs-page', [PcsController::class, 'page'])->name('pcs.page');
         Route::put('/pcs-page', [PcsController::class, 'pageUpdate'])->name('pcs.page.update');
         Route::get('/pcg-page', [PcgController::class, 'page'])->name('pcg.page');
@@ -544,7 +543,7 @@ Route::get('/acessibilidade', [AcessibilityController::class, 'page'])->name('ac
 Route::get('/mapa-site', [SiteMapController::class, 'page'])->name('mapa-site.page');
 Route::get('/expenses', [ExpensesController::class, 'show'])->name('despesas.page');
 Route::get('/recipes', [RecipesController::class, 'show'])->name('receitas.page');
-Route::get('/construction', [ConstructionController::class, 'show'])->name('obras.page');
+Route::match(['get', 'post'], '/construction', [ConstructionController::class, 'show'])->name('obras.page');
 Route::get('/simbolos', [SymbolsController::class, 'page'])->name('simbolos.page');
 
 Route::match(['get', 'post'], 'balancetes-financeiros', [ChamberFinancialController::class, 'page'])->name('balancetes-all');
