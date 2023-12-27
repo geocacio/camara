@@ -342,6 +342,9 @@ Route::middleware('auth')->group(function () {
 
             Route::resource('external-links', ExternalLinkController::class);
             Route::resource('lrfs', LRFController::class);
+            Route::put('page-lrfs', [LRFController::class, 'pageUpdate'])->name('lrfs-page.update');
+            Route::get('page-lrfs', [LRFController::class, 'pageEdit'])->name('lrf-edit.page');
+            // Route::get('lrfs-page', [LRFController::class, 'page'])->name('lrf.page');
             Route::resource('ombudsman', OmbudsmanPageController::class);
             Route::resource('ombudsman-feedback', App\Http\Controllers\OmbudsmanFeedbackController::class);
             Route::put('ombudsman-feedback/{ombudsman_feedback}/deadline', [App\Http\Controllers\OmbudsmanFeedbackController::class, 'deadline'])->name('ombudsman-feedback.deadline');
@@ -483,6 +486,7 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::resource('/official-diary', OfficialJournalController::class);
+
         Route::get('/official-diary/{official_diary:id}/finish', [OfficialJournalController::class, 'createOfficialDiary'])->name('official.diary.finish');
         Route::resource('/official-diary/{official_diary:id}/publications', SecretaryPublicationController::class)->middleware('can:secretary-access');
         Route::resource('/schedules', ScheduleController::class)->middleware('can:secretary-access');
@@ -522,7 +526,6 @@ Route::middleware('auth')->group(function () {
         Route::put('/expenses-page', [ExpensesController::class, 'pageUpdate'])->name('expenses.page.update');
         Route::get('/construction-page', [ConstructionController::class, 'page'])->name('constructions.page');
         Route::put('/construction-page', [ConstructionController::class, 'pageUpdate'])->name('constructions.page.update');
-
         Route::get('/pcs-page', [PcsController::class, 'page'])->name('pcs.page');
         Route::put('/pcs-page', [PcsController::class, 'pageUpdate'])->name('pcs.page.update');
         Route::get('/pcg-page', [PcgController::class, 'page'])->name('pcg.page');
@@ -530,6 +533,8 @@ Route::middleware('auth')->group(function () {
     });
 });
 
+Route::get('/diario-oficial/reading/{id?}', [OfficialJournalController::class, 'page'])->name('official.diary.page');
+Route::get('/diario-oficial/edicoes', [OfficialJournalController::class, 'allEditions'])->name('official.diary.all');
 
 Route::get('/pcs', [PcsController::class, 'show'])->name('prestacao-conta-gestao');
 Route::get('/pcg', [PcgController::class, 'show'])->name('prestacao-conta-governo');
@@ -538,7 +543,7 @@ Route::get('/acessibilidade', [AcessibilityController::class, 'page'])->name('ac
 Route::get('/mapa-site', [SiteMapController::class, 'page'])->name('mapa-site.page');
 Route::get('/expenses', [ExpensesController::class, 'show'])->name('despesas.page');
 Route::get('/recipes', [RecipesController::class, 'show'])->name('receitas.page');
-Route::get('/construction', [ConstructionController::class, 'show'])->name('obras.page');
+Route::match(['get', 'post'], '/construcoes', [ConstructionController::class, 'show'])->name('obras.page');
 Route::get('/simbolos', [SymbolsController::class, 'page'])->name('simbolos.page');
 
 Route::match(['get', 'post'], 'balancetes-financeiros', [ChamberFinancialController::class, 'page'])->name('balancetes-all');
@@ -591,7 +596,7 @@ Route::get('/meus-videos/{video}', [VideoController::class, 'show'])->name('vide
 
 Route::get('/fale-conosco', [ContactUsController::class, 'index'])->name('fale-conosco.index');
 
-Route::get('/meus-lrf', [LRFController::class, 'allLrf'])->name('all-lrf');
+Route::get('/meus-lrf', [LRFController::class, 'allLrf'])->name('lrf.page');
 Route::get('/meus-lrf/{lrf:slug}', [LRFController::class, 'show'])->name('all-lrf.show');
 
 //Transparency Routes

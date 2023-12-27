@@ -40,6 +40,22 @@ class OfficialJournalController extends Controller
         return view('panel.official-diary.index', compact('diaries', 'officialJournal', 'timeLimit', 'currentTime', 'currentDate'));
     }
 
+    public function page($id = null)
+    {
+        if ($id == null) {
+            $dayle = OfficialJournal::latest()->first();
+        } else {
+            $dayle = OfficialJournal::where('id', $id)->first();
+        }
+
+        return view('pages.official-diary.index', compact('dayle'));
+    }
+
+    public function allEditions()
+    {
+        $dayles = OfficialJournal::all();
+        return view('pages.official-diary.show', compact('dayles'));
+    }
     /**
      * Show the form for creating a new resource.
      */

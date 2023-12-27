@@ -118,6 +118,9 @@
 
                     <div id="collapseLRF" class="collapse" aria-labelledby="headingOne" data-parent="#collapseTwo">
                         <ul class="sub-menu">
+                            <li class="sub-item {{ request()->routeIs('lrf-edit.page') ? 'active' : '' }}">
+                                <a href="{{ route('lrf-edit.page') }}" class="sub-link">Página</a>
+                            </li>
                             <li class="sub-item {{ request()->routeIs('lrfs.index') ? 'active' : '' }}">
                                 <a href="{{ route('lrfs.index') }}" class="sub-link">Todas</a>
                             </li>
