@@ -27,49 +27,26 @@
         <div class="row">
 
             @include('pages.official-diary.sidebar')
+            @foreach ($dayles as $dayle)
+                <div class="col-md-3">
+                    <div class="box-dowload card main-card">
+                        <h6>DIÁRIO OFICIAL ELETRÔNICO</h6>
+                        <div class="circle">
+                            <i class="fa fa-file-contract"></i>
+                        </div>
+                        <span>{{ $dayle->created_at->format('d/m/Y H:i:s') }}</span>
 
-            <div class="col-md-5">
-                {{-- <h3 class="secondary-title text-center mb-20">{{ $esicPage->title }}</h3> --}}
-
-                @if (session('feedback-success'))
-                <div class="alert alert-success">
-                    {!! session('feedback-success') !!}
-                </div>
-                @endif
-
-                <p class="title-journal">Diário Oficial Eletrônico</p>
-
-                <p class="desc-journal">
-                    O Artigo 37 da Constituição da República Brasileira define os princípios da publicidade e da eficiência como norteadores da Administração Pública.
-                </p>
-                <p class="desc-journal">
-                    Todos os Poderes, entes federados e órgãos da Administração Pública direta e indireta brasileira submetem-se ao princípio constitucional da publicidade, resultante do princípio democrático, o qual determina sejam publicados seus atos administrativos.
-                </p>
-
-            </div>
-            
-            <div class="col-md-3">
-                <span class="last-edition">
-                    <div class="line-blue"></div>
-                    Última edição
-                </span>
-                <div class="box-dowload card main-card">
-                    <h6>DIÁRIO OFICIAL ELETRÔNICO</h6>
-                    <div class="circle">
-                        <i class="fa fa-file-contract"></i>
+                        <button class="dowload-journal">
+                            @if($dayle->files->count() > 0)
+                                <a href="{{ asset('storage/'.$dayle->files[0]->file->url) }}" target="_blank">
+                                    <i class="fa fa-download"></i>                        
+                                    Baixar
+                                </a>
+                            @endif
+                        </button>
                     </div>
-                    <span>{{ $dayle->created_at->format('d/m/Y H:i:s') }}</span>
-
-                    <button class="dowload-journal">
-                        @if($dayle->files->count() > 0)
-                            <a href="{{ asset('storage/'.$dayle->files[0]->file->url) }}" target="_blank">
-                                <i class="fa fa-download"></i>                        
-                                Baixar
-                            </a>
-                        @endif
-                    </button>
                 </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>

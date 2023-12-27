@@ -531,7 +531,8 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-Route::get('/official-diary/reading/{id?}', [OfficialJournalController::class, 'page'])->name('official.diary.page');
+Route::get('/diario-oficial/reading/{id?}', [OfficialJournalController::class, 'page'])->name('official.diary.page');
+Route::get('/diario-oficial/edicoes', [OfficialJournalController::class, 'allEditions'])->name('official.diary.all');
 
 Route::get('/pcs', [PcsController::class, 'show'])->name('prestacao-conta-gestao');
 Route::get('/pcg', [PcgController::class, 'show'])->name('prestacao-conta-governo');
