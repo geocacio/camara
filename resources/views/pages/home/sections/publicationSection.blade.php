@@ -28,7 +28,7 @@
                         @endforeach
                     </div>
                 </div>
-                <a href="{{ route('all-lrf') }}" class="btn btn-link-page">Ver mais</a>
+                <a href="{{ route('lrf.page') }}" class="btn btn-link-page">Ver mais</a>
             </div>
             @endif
 
