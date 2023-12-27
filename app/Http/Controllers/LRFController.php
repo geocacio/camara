@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\File;
 use App\Models\LRF;
+use App\Models\Page;
+use App\Models\TransparencyGroup;
 use App\Models\Type;
 use App\Services\FileUploadService;
 use Illuminate\Http\Request;
@@ -43,6 +45,37 @@ class LRFController extends Controller
         $searchData = $request->only(['details']);
 
         return view('pages.lrf.index', compact('lrfs', 'searchData'));
+    }
+
+    public function page(){
+        //
+    }
+    
+    public function pageEdit()
+    {
+        $lrf = Page::where('name', 'Lrfs')->first();
+        $groups = TransparencyGroup::all();
+        return view('panel.transparency.lrf.page.edit', compact('lrf', 'groups'));
+    }
+
+
+    public function pageUpdate(Request $request)
+    {
+        $validateData = $request->validate([
+            'main_title' => 'required',
+            'title' => 'required',
+            'description' => 'nullable',
+        ], [
+            'main_title.required' => 'O campo título principal é obrigatório',
+            'title.required' => 'O campo título é obrigatório'
+        ]);
+
+        $lrf = Page::where('name', 'Lrfs')->first();
+
+        if ($lrf->update($validateData)) {
+            return redirect()->route('lrfs-page.update')->with('success', 'Informações atualizadas com sucesso!');
+        }
+        return redirect()->route('lrfs-page.update')->with('error', 'Por favor tente novamente!');
     }
 
     /**

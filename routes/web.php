@@ -342,6 +342,9 @@ Route::middleware('auth')->group(function () {
 
             Route::resource('external-links', ExternalLinkController::class);
             Route::resource('lrfs', LRFController::class);
+            Route::put('page-lrfs', [LRFController::class, 'pageUpdate'])->name('lrfs-page.update');
+            Route::get('page-lrfs', [LRFController::class, 'pageEdit'])->name('lrf-edit.page');
+            Route::get('lrfs-page', [LRFController::class, 'page'])->name('lrf.page');
             Route::resource('ombudsman', OmbudsmanPageController::class);
             Route::resource('ombudsman-feedback', App\Http\Controllers\OmbudsmanFeedbackController::class);
             Route::put('ombudsman-feedback/{ombudsman_feedback}/deadline', [App\Http\Controllers\OmbudsmanFeedbackController::class, 'deadline'])->name('ombudsman-feedback.deadline');

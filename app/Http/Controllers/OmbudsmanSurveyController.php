@@ -30,7 +30,7 @@ class OmbudsmanSurveyController extends Controller
     public function page()
     {
         $ombudsman_survey = Page::where('name', 'Pesquisa de Satisfação')->first();
-        // dd($ombudsman_survey);
+
         return view('panel.transparency.ombudsman.survey.page.edit', compact('ombudsman_survey'));
     }
 
