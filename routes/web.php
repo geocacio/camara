@@ -344,7 +344,7 @@ Route::middleware('auth')->group(function () {
             Route::resource('lrfs', LRFController::class);
             Route::put('page-lrfs', [LRFController::class, 'pageUpdate'])->name('lrfs-page.update');
             Route::get('page-lrfs', [LRFController::class, 'pageEdit'])->name('lrf-edit.page');
-            Route::get('lrfs-page', [LRFController::class, 'page'])->name('lrf.page');
+            // Route::get('lrfs-page', [LRFController::class, 'page'])->name('lrf.page');
             Route::resource('ombudsman', OmbudsmanPageController::class);
             Route::resource('ombudsman-feedback', App\Http\Controllers\OmbudsmanFeedbackController::class);
             Route::put('ombudsman-feedback/{ombudsman_feedback}/deadline', [App\Http\Controllers\OmbudsmanFeedbackController::class, 'deadline'])->name('ombudsman-feedback.deadline');
@@ -597,7 +597,7 @@ Route::get('/meus-videos/{video}', [VideoController::class, 'show'])->name('vide
 
 Route::get('/fale-conosco', [ContactUsController::class, 'index'])->name('fale-conosco.index');
 
-Route::get('/meus-lrf', [LRFController::class, 'allLrf'])->name('all-lrf');
+Route::get('/meus-lrf', [LRFController::class, 'allLrf'])->name('lrf.page');
 Route::get('/meus-lrf/{lrf:slug}', [LRFController::class, 'show'])->name('all-lrf.show');
 
 //Transparency Routes
