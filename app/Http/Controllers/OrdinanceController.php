@@ -6,7 +6,6 @@ use App\Models\Category;
 use App\Models\File;
 use App\Models\Office;
 use App\Models\Ordinance;
-use App\Models\OrdinancePage;
 use App\Models\Page;
 use App\Models\Secretary;
 use App\Models\TransparencyGroup;
@@ -84,7 +83,6 @@ class OrdinanceController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'secretary_id' => 'required',
             'office_id' => 'nullable',
             'type' => 'required',
             'number' => 'required',
@@ -93,15 +91,11 @@ class OrdinanceController extends Controller
             'date' => 'nullable',
             'agent' => 'nullable',
         ], [
-            'secretary_id.required' => 'O campo secretaria é obrigatório',
             'type.required' => 'O campo tipo é obrigatório',
             'number.required' => 'O campo número é obrigatório',
             'file.max' => 'Este arquivo é muito grande. O tamanho máximo permitido é :max kilobytes.',
         ]);
         $validatedData['slug'] = Str::slug('ordinance-' . $request->number);
-
-        $ordinancePage = OrdinancePage::first();
-        $validatedData['page_id'] = $ordinancePage->id;
 
         $ordinance = Ordinance::create($validatedData);
         if ($ordinance) {
@@ -176,7 +170,6 @@ class OrdinanceController extends Controller
     {
 
         $validatedData = $request->validate([
-            'secretary_id' => 'required',
             'office_id' => 'nullable',
             'type' => 'required',
             'number' => 'required',
@@ -185,9 +178,6 @@ class OrdinanceController extends Controller
             'date' => 'nullable',
             'agent' => 'nullable',
         ], [
-            'secretary_id.required' => 'O campo secretaria é obrigatório',
-            'secretary_id.required' => 'O campo tipo é obrigatório',
-            'secretary_id.required' => 'O campo número é obrigatório',
             'file.max' => 'Este arquivo é muito grande. O tamanho máximo permitido é :max kilobytes.',
         ]);
 

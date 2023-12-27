@@ -9,8 +9,7 @@ class Ordinance extends Model
 {
     use HasFactory;
 
-    protected $fillable = [        
-        'secretary_id',
+    protected $fillable = [
         'office_id',
         'page_id',
         'number',
@@ -38,11 +37,6 @@ class Ordinance extends Model
     public function secretaries()
     {
         return $this->morphToMany(Secretary::class, 'secretaryable', 'secretary_contents');
-    }
-
-    public function ordinancePage()
-    {
-        return $this->belongsTo(OrdinancePage::class);
     }
 
     public function getRouteKeyName()
