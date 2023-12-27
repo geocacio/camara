@@ -543,7 +543,7 @@ Route::get('/acessibilidade', [AcessibilityController::class, 'page'])->name('ac
 Route::get('/mapa-site', [SiteMapController::class, 'page'])->name('mapa-site.page');
 Route::get('/expenses', [ExpensesController::class, 'show'])->name('despesas.page');
 Route::get('/recipes', [RecipesController::class, 'show'])->name('receitas.page');
-Route::match(['get', 'post'], '/construction', [ConstructionController::class, 'show'])->name('obras.page');
+Route::match(['get', 'post'], '/construcoes', [ConstructionController::class, 'show'])->name('obras.page');
 Route::get('/simbolos', [SymbolsController::class, 'page'])->name('simbolos.page');
 
 Route::match(['get', 'post'], 'balancetes-financeiros', [ChamberFinancialController::class, 'page'])->name('balancetes-all');

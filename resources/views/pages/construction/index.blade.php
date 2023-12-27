@@ -86,7 +86,6 @@
                                     @endif
                                     <ul>
                                         <li class="description">
-                                            <i class="fa-solid fa-calendar-days"></i>
                                             <span>Data Inicio: </span> 
                                             {{ date('d/m/Y', strtotime($obra->date)) }}
                                         </li>
