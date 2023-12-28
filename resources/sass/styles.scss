@@ -3696,3 +3696,27 @@ section{
         }
     }
 }
+
+.owl-carousel {
+    position: relative;
+}
+
+.owl-prev,
+.owl-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+}
+
+.owl-prev {
+    left: -40px;
+}
+
+.owl-next {
+    right: -30px;
+}
