@@ -487,6 +487,9 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('/official-diary', OfficialJournalController::class);
 
+        Route::get('/official-diary/page/{type}', [OfficialJournalController::class, 'normativePage'])->name('diary.normative.page');
+        Route::put('/official-diary/page/{type}', [OfficialJournalController::class, 'normativePresentationStore'])->name('normative.presentation.store');
+
         Route::get('/official-diary/{official_diary:id}/finish', [OfficialJournalController::class, 'createOfficialDiary'])->name('official.diary.finish');
         Route::resource('/official-diary/{official_diary:id}/publications', SecretaryPublicationController::class)->middleware('can:secretary-access');
         Route::resource('/schedules', ScheduleController::class)->middleware('can:secretary-access');
@@ -536,6 +539,8 @@ Route::middleware('auth')->group(function () {
 Route::get('/diario-oficial/reading/{id?}', [OfficialJournalController::class, 'page'])->name('official.diary.page');
 Route::match(['get', 'post'], '/diario-oficial/publicacoes', [OfficialJournalController::class, 'search'])->name('official.diary.search');
 Route::get('/diario-oficial/edicoes', [OfficialJournalController::class, 'allEditions'])->name('official.diary.all');
+Route::get('/diario-oficial/normativas', [OfficialJournalController::class, 'normative'])->name('official.diary.normative');
+Route::get('/diario-oficial/apresentacao', [OfficialJournalController::class, 'presentation'])->name('official.diary.presentation');
 
 Route::get('/pcs', [PcsController::class, 'show'])->name('prestacao-conta-gestao');
 Route::get('/pcg', [PcgController::class, 'show'])->name('prestacao-conta-governo');
@@ -597,7 +602,7 @@ Route::get('/meus-videos/{video}', [VideoController::class, 'show'])->name('vide
 
 Route::get('/fale-conosco', [ContactUsController::class, 'index'])->name('fale-conosco.index');
 
-Route::get('/meus-lrf', [LRFController::class, 'allLrf'])->name('lrf.page');
+Route::match(['get', 'post'], '/meus-lrf', [LRFController::class, 'allLrf'])->name('lrf.page');
 Route::get('/meus-lrf/{lrf:slug}', [LRFController::class, 'show'])->name('all-lrf.show');
 
 //Transparency Routes

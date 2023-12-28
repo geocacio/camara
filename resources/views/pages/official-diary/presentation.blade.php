@@ -1,21 +1,15 @@
 @extends('layouts.app')
 
 @section('breadcrumb')
-{{-- <ul class="breadcrumb">
+<ul class="breadcrumb">
     <li class="item">
-        <a href="{{ route('home') }}" class="link">Início</a>
+        <a href="{{ route('official.diary.page') }}" class="link">Início</a>
     </li>
     <li class="item">
-        <a href="{{ route('transparency.show') }}" class="link">Diário oficial</a>
+        <a href="{{ route('official.diary.presentation') }}" class="link">{{ $presentation->name }}</a>
     </li>
-    <li class="item">
-        <a href="{{ route('ouvidoria.show') }}" class="link">Ouvidoria</a>
-    </li>
-    <li class="item">
-        <span>eSIC</span>
-    </li>
-</ul> --}}
-{{-- <h3 class="title text-center">{{ $esicPage->main_title }}</h3> --}}
+</ul>
+<h3 class="title text-center">{{ $presentation->name }}</h3>
 @endsection
 
 @section('content')
@@ -28,7 +22,7 @@
 
             @include('pages.official-diary.sidebar')
 
-            <div class="col-md-5">
+            <div class="col-md-6">
                 {{-- <h3 class="secondary-title text-center mb-20">{{ $esicPage->title }}</h3> --}}
 
                 @if (session('feedback-success'))
@@ -38,17 +32,18 @@
                 @endif
 
                 <p class="title-journal">Diário Oficial Eletrônico</p>
+                <span class="last-edition">
+                    <div class="line-blue"></div>
+                    {{ $presentation->name   }}
+                </span>
 
                 <p class="desc-journal">
-                    O Artigo 37 da Constituição da República Brasileira define os princípios da publicidade e da eficiência como norteadores da Administração Pública.
-                </p>
-                <p class="desc-journal">
-                    Todos os Poderes, entes federados e órgãos da Administração Pública direta e indireta brasileira submetem-se ao princípio constitucional da publicidade, resultante do princípio democrático, o qual determina sejam publicados seus atos administrativos.
+                    {{ $law->description   }}
                 </p>
 
             </div>
             
-            <div class="col-md-3">
+            {{-- <div class="col-md-3">
                 <span class="last-edition">
                     <div class="line-blue"></div>
                     Última edição
@@ -69,16 +64,17 @@
                         @endif
                     </button>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>
 
-{{-- @include('pages.partials.satisfactionSurvey', ['page_name' => 'eSIC']) --}}
+{{-- @include('pages.partials.satisfactionSurvey', ['page_name' => 'Normativas']) --}}
 
 @include('layouts.footer')
 
 @endsection
+
 
 <style>
     

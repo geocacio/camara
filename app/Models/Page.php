@@ -44,4 +44,9 @@ class Page extends Model
     {
         return 'slug';
     }
+
+    public function laws()
+    {
+        return $this->hasMany(law::class);
+    }
 }

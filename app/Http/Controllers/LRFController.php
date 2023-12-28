@@ -37,12 +37,12 @@ class LRFController extends Controller
         
         $query = LRF::query(); //select * from `laws`
 
-        if($request->filled('details')){
-            $query->where('details', 'LIKE', '%' . $request->input('details') . '%');
+        if($request->filled('description')){
+            $query->where('details', 'LIKE', '%' . $request->input('description') . '%');
         }
         
         $lrfs = $query->paginate(10);
-        $searchData = $request->only(['details']);
+        $searchData = $request->only(['details', 'number', 'date']);
 
         return view('pages.lrf.index', compact('lrfs', 'searchData'));
     }

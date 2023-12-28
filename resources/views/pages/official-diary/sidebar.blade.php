@@ -21,6 +21,18 @@
                     Publicações
                 </a>
             </div>
+            <div class="group-links">
+                <a href="{{ route('diary.normative.page') }}" class="link {{ request()->routeIs('diary.normative.page') ? 'active' : '' }}">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                    Normativas
+                </a>
+            </div>
+            <div class="group-links">
+                <a href="{{ route('official.diary.presentation') }}" class="link {{ request()->routeIs('official.diary.presentation') ? 'active' : '' }}">
+                    <i class="fa-solid fa-bookmark"></i>
+                    Apresentação
+                </a>
+            </div>
         </div>
     </div>
 </div>

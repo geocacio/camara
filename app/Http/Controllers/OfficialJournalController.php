@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
+use App\Models\Law;
 use App\Models\OfficialJournal;
+use App\Models\Page;
 use App\Models\SecretaryPublication;
 use App\Services\FileUploadService;
 use Carbon\Carbon;
@@ -49,6 +51,61 @@ class OfficialJournalController extends Controller
         }
 
         return view('pages.official-diary.index', compact('dayle'));
+    }
+
+    public function normative()
+    {
+        $normative = Page::where('name', 'Normativas')->first();
+        $law = Law::where('id', $normative->law_id)->first();
+        return view('pages.official-diary.normative', compact('normative', 'law'));
+    }
+
+    
+    public function presentation()
+    {
+        $presentation = Page::where('name', 'Apresentação')->first();
+        $law = Law::where('id', $presentation->law_id)->first();
+        return view('pages.official-diary.presentation', compact('presentation', 'law'));
+    }
+
+    public function normativePage($type)
+    {
+        $normative = null;
+
+        if($type == 'normative')
+            $normative = Page::where('name', 'Normativas')->first();
+        else if($type == 'presentation') {
+            $normative = Page::where('name', 'Apresentação')->first();
+        }else {
+            return redirect()->route('official-diary.index');
+        }
+
+        $laws = Law::all();
+        return view('panel.official-diary.page.normative', compact('normative', 'laws'));
+    }
+
+    public function normativePresentationStore(Request $request, $slug){
+        $validatedData = $request->validate([
+            'main_title' => 'required',
+            'title' => 'required',
+            'icon' => 'nullable',
+            'law_id' => 'required'
+        ], [
+            'main_title.required' => 'O campo Título principal é obrigatório!',
+            'title.required' => 'O campo Título é obrigatório!',
+            'law_id.required' => 'O campo Lei é obrigatório!',
+        ]);
+        $validatedData['visibility'] = 'enabled';
+
+        $updatePage = Page::where('name', $slug)->first();
+
+        if ($updatePage->update($validatedData)) {
+            $updatePage->groupContents()->delete();
+
+            return redirect()->back()->with('success', 'Página atualizada com sucesso!');
+        }
+
+        return redirect()->back()->with('error', 'Por favor tente novamente!');
     }
 
     public function allEditions()

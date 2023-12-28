@@ -45,4 +45,9 @@ class Law extends Model
     {
         return $this->morphMany(FileContent::class, 'fileable');
     }
+    
+    public function page()
+    {
+        return $this->belongsTo(Page::class, 'law_id');
+    }
 }

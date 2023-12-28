@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         $this->call(TransparencySeeder::class);
         $this->call(OfficialDiarySeeder::class);
+        $this->call(PageNormativeSeeder::class);
         
     }
 }
