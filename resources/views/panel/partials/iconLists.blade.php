@@ -356,4 +356,16 @@
     <li><i class="fas fa-watermelon"></i>fa-watermelon</li>
     <li><i class="fas fa-whale"></i>fa-whale</li>
     <li><i class="fas fa-wind"></i>fa-wind</li>
+    <li><i class="fas fa-solid fa-phone-volume"></i>fa-phone-volume</li>
+    <li><i class="fas fa-solid fa-headset"></i>fa-headset</li>
+    <li><i class="fas fa-regular fa-comment-dots"></i>fa-comment-dots</li>
+    <li><i class="fas fa-solid fa-square-plus"></i>fa-square-plus</li>
+    <li><i class="fas fa-solid fa-square-minus"></i>fa-square-minus</li>
+    <li><i class="fas fa-regular fa-copy"></i>fa-copy</li>
+    <li><i class="fas fa-solid fa-landmark"></i>fa-landmark</li>
+    <li><i class="fas fa-solid fa-code"></i>fa-code</li>
+    <li><i class="fas fa-brands fa-slideshare"></i>fa-slideshare</li>
+    <li><i class="fas fa-solid fa-sitemap"></i>fa-sitemap</li>
+    <li><i class="fas fa-solid fa-table"></i>fa-table</li>
+    <li><i class="fas fa-solid fa-circle-check"></i>fa-circle-check</li>
 </ul>
