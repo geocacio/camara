@@ -486,6 +486,8 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::resource('/official-diary', OfficialJournalController::class);
+        Route::get('/official-diary/expediente/page',[ OfficialJournalController::class, 'expedient'])->name('diary.expedient');
+        Route::match(['post', 'put'], '/official-diary/expediente', [OfficialJournalController::class, 'expedienteStore'])->name('diary.expedient.store');
 
         Route::get('/official-diary/page/{type}', [OfficialJournalController::class, 'normativePage'])->name('diary.normative.page');
         Route::put('/official-diary/page/{type}', [OfficialJournalController::class, 'normativePresentationStore'])->name('normative.presentation.store');
@@ -541,6 +543,7 @@ Route::match(['get', 'post'], '/diario-oficial/publicacoes', [OfficialJournalCon
 Route::get('/diario-oficial/edicoes', [OfficialJournalController::class, 'allEditions'])->name('official.diary.all');
 Route::get('/diario-oficial/normativas', [OfficialJournalController::class, 'normative'])->name('official.diary.normative');
 Route::get('/diario-oficial/apresentacao', [OfficialJournalController::class, 'presentation'])->name('official.diary.presentation');
+Route::get('/diario-oficial/expediente', [OfficialJournalController::class, 'expedientShow'])->name('expediente.show');
 
 Route::get('/pcs', [PcsController::class, 'show'])->name('prestacao-conta-gestao');
 Route::get('/pcg', [PcgController::class, 'show'])->name('prestacao-conta-governo');

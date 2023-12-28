@@ -75,10 +75,6 @@
         background-color: white;
         color: #30358c;
     }
-/* 
-    .box-dowload:hover .dowload-journal {
-        display: unset;
-    } */
 
     .box-dowload h6 {
         color: #30358c;

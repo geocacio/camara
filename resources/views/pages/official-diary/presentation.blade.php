@@ -22,7 +22,7 @@
 
             @include('pages.official-diary.sidebar')
 
-            <div class="col-md-6">
+            <div class="col-md-5">
                 {{-- <h3 class="secondary-title text-center mb-20">{{ $esicPage->title }}</h3> --}}
 
                 @if (session('feedback-success'))
@@ -43,7 +43,8 @@
 
             </div>
             
-            {{-- <div class="col-md-3">
+            @if($dayle->files->count() > 0)
+            <div class="col-md-3">
                 <span class="last-edition">
                     <div class="line-blue"></div>
                     Última edição
@@ -56,15 +57,15 @@
                     <span>{{ $dayle->created_at->format('d/m/Y H:i:s') }}</span>
 
                     <button class="dowload-journal">
-                        @if($dayle->files->count() > 0)
                             <a href="{{ asset('storage/'.$dayle->files[0]->file->url) }}" target="_blank">
                                 <i class="fa fa-download"></i>                        
                                 Baixar
                             </a>
-                        @endif
-                    </button>
+                        </button>
+                    </div>
                 </div>
-            </div> --}}
+            </div>
+            @endif
         </div>
     </div>
 </section>

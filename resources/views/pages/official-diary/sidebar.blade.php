@@ -33,6 +33,12 @@
                     Apresentação
                 </a>
             </div>
+            <div class="group-links">
+                <a href="{{ route('expediente.show') }}" class="link {{ request()->routeIs('expediente.show') ? 'active' : '' }}">
+                    <i class="fa-solid fa-circle-info"></i>
+                    Expediente
+                </a>
+            </div>
         </div>
     </div>
 </div>

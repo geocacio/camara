@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use App\Models\Law;
+use App\Models\officehour as OfficeHour;
 use App\Models\OfficialJournal;
 use App\Models\Page;
 use App\Models\SecretaryPublication;
@@ -65,7 +66,8 @@ class OfficialJournalController extends Controller
     {
         $presentation = Page::where('name', 'Apresentação')->first();
         $law = Law::where('id', $presentation->law_id)->first();
-        return view('pages.official-diary.presentation', compact('presentation', 'law'));
+        $dayle = OfficialJournal::first();
+        return view('pages.official-diary.presentation', compact('presentation', 'law', 'dayle'));
     }
 
     public function normativePage($type)
@@ -322,4 +324,66 @@ class OfficialJournalController extends Controller
         $officialJournal->delete();
         return redirect()->route('official-diary.index')->with('success', 'Diário oficial excluído com sucesso!');
     }
+
+    public function expedient()
+    {       
+        $officeHour = OfficeHour::first();
+    
+        if (!$officeHour) {
+            return view('panel.official-diary.page.officehours.create');
+        }else {
+            return view('panel.official-diary.page.officehours.edit', compact('officeHour'));
+        }
+    }
+
+    public function expedientShow(){
+        $officeHour = OfficeHour::first();
+        $dayle = OfficialJournal::latest()->first();
+        return view('pages.official-diary.expedient', compact('officeHour', 'dayle'));
+    }
+
+    public function expedienteStore()
+    {
+        $validatedData = request()->validate([
+            'information' => 'required',
+            'frequency' => 'required',
+            'responsible_name' => 'required',
+            'responsible_position' => 'required',
+            'entity_name' => 'required',
+            'entity_address' => 'required',
+            'entity_zip_code' => 'required',
+            'entity_cnpj' => 'required',
+            'entity_email' => 'required',
+            'entity_phone' => 'required',
+        ], [
+            'information.required' => 'O campo Informações é obrigatório!',
+            'frequency.required' => 'O campo Frequência é obrigatório!',
+            'responsible_name.required' => 'O campo Nome do responsável é obrigatório!',
+            'responsible_position.required' => 'O campo Cargo do responsável é obrigatório!',
+            'entity_name.required' => 'O campo Nome da entidade é obrigatório!',
+            'entity_address.required' => 'O campo Endereço da entidade é obrigatório!',
+            'entity_zip_code.required' => 'O campo CEP da entidade é obrigatório!',
+            'entity_cnpj.required' => 'O campo CNPJ da entidade é obrigatório!',
+            'entity_email.required' => 'O campo E-mail da entidade é obrigatório!',
+            'entity_phone.required' => 'O campo Telefone da entidade é obrigatório!',
+        ]);
+    
+        $officeHour = OfficeHour::first();
+    
+        if (!$officeHour) {
+            $officeHour = new OfficeHour;
+            $message = "Expediente cadastrado com sucesso!";
+        }
+
+        $message = "Expediente atualizado com sucesso!";
+    
+        $officeHour->fill($validatedData);
+    
+        if ($officeHour->save()) {
+            return redirect()->back()->with('success', $message);
+        }
+    
+        return redirect()->back()->with('error', 'Por favor, tente novamente!');
+    }
+    
 }

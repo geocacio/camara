@@ -1,21 +1,15 @@
 @extends('layouts.app')
 
 @section('breadcrumb')
-{{-- <ul class="breadcrumb">
+<ul class="breadcrumb">
     <li class="item">
-        <a href="{{ route('home') }}" class="link">Início</a>
+        <a href="{{ route('official.diary.page') }}" class="link">Início</a>
     </li>
     <li class="item">
-        <a href="{{ route('transparency.show') }}" class="link">Diário oficial</a>
+        <a href="{{ route('expediente.show') }}" class="link">expediente</a>
     </li>
-    <li class="item">
-        <a href="{{ route('ouvidoria.show') }}" class="link">Ouvidoria</a>
-    </li>
-    <li class="item">
-        <span>eSIC</span>
-    </li>
-</ul> --}}
-{{-- <h3 class="title text-center">{{ $esicPage->main_title }}</h3> --}}
+</ul>
+<h3 class="title text-center">Expediente</h3>
 @endsection
 
 @section('content')
@@ -31,23 +25,42 @@
             <div class="col-md-5">
                 {{-- <h3 class="secondary-title text-center mb-20">{{ $esicPage->title }}</h3> --}}
 
+                <span class="last-edition">
+                    <div class="line-blue"></div>
+                    Expediente
+                </span>
+                <div class="box-expedient">
+                    <div class="container-expedient">
+                        <h6 class="title-expedient">ACERVO</h6>
+                        <span class="content-expedient">{{ $officeHour->information }}</span>
+                    </div>
+
+                    <div class="container-expedient">
+                        <h6 class="title-expedient">PERIODICIDADE</h6>
+                        <span class="content-expedient">{{ $officeHour->frequency }}</span>
+                    </div>
+
+                    <div class="container-expedient">
+                        <h6 class="title-expedient">RESPONSÁVEL</h6>
+                        <span class="content-expedient">{{ $officeHour->responsible_name }}</span>
+                        <span class="content-expedient">{{ $officeHour->responsible_position }}</span>
+                    </div>
+
+                    <div class="container-expedient">
+                        <h6 class="title-expedient">ENTIDADE</h6>
+                        <span class="content-expedient">{{ $officeHour->entity_name }}</span>
+                        <span class="content-expedient">{{ $officeHour->entity_address }}</span>
+                        <span class="content-expedient">CEP:{{ $officeHour->entity_zip_code }} CNPJ:{{ $officeHour->entity_cnpj }}</span>
+                        <span class="content-expedient">Email:{{ $officeHour->entity_email }} Telefone: {{ $officeHour->entity_phone }}</span>
+                    </div>
+                </div>
+
                 @if (session('feedback-success'))
                 <div class="alert alert-success">
                     {!! session('feedback-success') !!}
                 </div>
-                @endif
-
-                <p class="title-journal">Diário Oficial Eletrônico</p>
-
-                <p class="desc-journal">
-                    O Artigo 37 da Constituição da República Brasileira define os princípios da publicidade e da eficiência como norteadores da Administração Pública.
-                </p>
-                <p class="desc-journal">
-                    Todos os Poderes, entes federados e órgãos da Administração Pública direta e indireta brasileira submetem-se ao princípio constitucional da publicidade, resultante do princípio democrático, o qual determina sejam publicados seus atos administrativos.
-                </p>
-
+                @endif                
             </div>
-            
             @if($dayle->files->count() > 0)
             <div class="col-md-3">
                 <span class="last-edition">
@@ -71,16 +84,14 @@
                 </div>
             </div>
             @endif
-        </div>
     </div>
 </section>
 
-{{-- @include('pages.partials.satisfactionSurvey', ['page_name' => 'eSIC']) --}}
+{{-- @include('pages.partials.satisfactionSurvey', ['page_name' => 'Normativas']) --}}
 
 @include('layouts.footer')
 
 @endsection
-
 <style>
     
     .box-dowload {
@@ -148,7 +159,7 @@
     }
 
     .dowload-journal a {
-        color: #fff!important;
+        color: #fff;
     }
 
 
@@ -164,5 +175,19 @@
         align-items: center;
         gap: 13px;
         margin-bottom: 20px;
+    }
+
+    .box-expedient {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .title-expedient {
+        color: #004080;
+    }
+
+    .content-expedient {
+        font-size: 13px
     }
 </style>
