@@ -13,6 +13,7 @@ class LRF extends Model
 
     protected $fillable = [
         'date',
+        'title',
         'details',
         'slug',
     ];

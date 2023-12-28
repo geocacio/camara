@@ -122,6 +122,12 @@
 
             </div>
 
+            
+            <div class="form-group">
+                <label for="logo">Título</label>
+                <input type="text" name="title" class="form-control" value="{{ old('title', $lrf->title) }}">
+            </div>
+
             <div class="form-group">
                 <label>Detalhes</label>
                 <textarea name="details" class="form-control">{{ old('details', $lrf->details) }}</textarea>

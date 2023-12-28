@@ -15,6 +15,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>Título</th>
                         <th>Data</th>
                         <th>Tipo</th>
                         <th>Actions</th>
@@ -24,6 +25,7 @@
                     @foreach($lrfs as $lrf)
                     <tr>
                         <td>{{ $lrf->id }}</td>
+                        <td>{{ $lrf->title }}</td>
                         <td>{{ $lrf->date }}</td>
                         <td>{{ $lrf->types[0]->name }}</td>
                         <td class="actions">

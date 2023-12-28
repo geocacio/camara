@@ -101,6 +101,7 @@ class LRFController extends Controller
     {
         $validatedData = $request->validate([
             'type' => 'required',
+            'title' => 'required',
             'date' => 'nullable',
             'competence' => 'nullable',
             'exercicy' => 'nullable',
@@ -180,6 +181,7 @@ class LRFController extends Controller
     {
         $validatedData = $request->validate([
             'type' => 'required',
+            'title' => 'required',
             'date' => 'nullable',
             'competence' => 'nullable',
             'exercicy' => 'nullable',

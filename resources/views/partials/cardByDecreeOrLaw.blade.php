@@ -10,8 +10,8 @@
             </div>
             <div class="second-part">
                 <div class="body">
-                    <h3 class="title">{{ $type }} {{ $item->id }}/{{ date('Y', strtotime($item->date)) }}</h3>
-                    <p class="description">{{ Str::limit($item->description, '75', '...') }}</p>
+                    <h3 class="title">{{ $item->title }}</h3>
+                    <p class="description">{{ Str::limit($item->details, '75', '...') }}</p>
                 </div>
 
                 <div class="footer">
@@ -31,7 +31,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">{{ $type }} {{ $item->id }}/{{ date('Y', strtotime($item->date)) }}</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">{{ $item->title }}</h5>
                 </div>
                 <div class="modal-body">
                     <div class="view-date">
@@ -40,7 +40,7 @@
                         </span>
                     </div>
                     <div class="description">
-                        <p>{{ $item->description }}</p>
+                        <p style="word-wrap: break-word;">{{ $item->details }}</p>
                     </div>
                 </div>
                 <div class="modal-footer">

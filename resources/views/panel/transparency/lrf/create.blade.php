@@ -80,6 +80,11 @@
         </div>
 
         <div class="form-group">
+            <label for="logo">Título</label>
+            <input type="text" name="title" class="form-control" value="{{ old('title') }}">
+        </div>
+        
+        <div class="form-group">
             <label>Detalhes</label>
             <textarea name="details" class="form-control" {{ $types->count() <= 0 ? 'disabled' : ''}}>{{ old('details') }}</textarea>
         </div>
