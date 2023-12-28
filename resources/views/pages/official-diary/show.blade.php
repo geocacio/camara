@@ -1,21 +1,15 @@
 @extends('layouts.app')
 
 @section('breadcrumb')
-{{-- <ul class="breadcrumb">
+<ul class="breadcrumb">
     <li class="item">
-        <a href="{{ route('home') }}" class="link">Início</a>
+        <a href="{{ route('official.diary.page') }}" class="link">Início</a>
     </li>
     <li class="item">
-        <a href="{{ route('transparency.show') }}" class="link">Diário oficial</a>
+        <a href="{{ route('transparency.show') }}" class="link">Edições</a>
     </li>
-    <li class="item">
-        <a href="{{ route('ouvidoria.show') }}" class="link">Ouvidoria</a>
-    </li>
-    <li class="item">
-        <span>eSIC</span>
-    </li>
-</ul> --}}
-{{-- <h3 class="title text-center">{{ $esicPage->main_title }}</h3> --}}
+</ul>
+<h3 class="title text-center">Edições</h3>
 @endsection
 
 @section('content')

@@ -80,6 +80,31 @@ class OfficialJournalController extends Controller
         //
     }
 
+    public function search(Request $request)
+    {
+        $query = OfficialJournal::query();
+
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $start_date = date("Y-m-d", strtotime($request->input('start_date')));
+            $end_date = date("Y-m-d", strtotime($request->input('end_date')));
+        
+            $query->whereBetween('created_at', [$start_date, $end_date]);
+        } elseif ($request->filled('start_date')) {
+            // Se apenas a data inicial estiver definida
+            $start_date = date("Y-m-d", strtotime($request->input('start_date')));
+            $query->where('created_at', '>=', $start_date);
+        } else if ($request->filled('end_date')) {
+            // Se apenas a data final estiver definida
+            $end_date = date("Y-m-d", strtotime($request->input('end_date')));
+            $query->where('created_at', '<=', $end_date);
+        }       
+
+        $dayles = $query->paginate(10);
+        $searchData = $request->only(['start_date', 'end_date', 'description']);
+
+        return view('pages.official-diary.search', compact('dayles', 'searchData'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

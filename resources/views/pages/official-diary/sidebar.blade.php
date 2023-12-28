@@ -12,7 +12,13 @@
             <div class="group-links">
                 <a href="{{ route('official.diary.all') }}" class="link {{ request()->routeIs('official.diary.all') ? 'active' : '' }}">
                     <i class="fa-regular fa-calendar-days"></i>
-                    Todos os diários
+                    Edições
+                </a>
+            </div>
+            <div class="group-links">
+                <a href="{{ route('official.diary.search') }}" class="link {{ request()->routeIs('official.diary.search') ? 'active' : '' }}">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    Publicações
                 </a>
             </div>
         </div>

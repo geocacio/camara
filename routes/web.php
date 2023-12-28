@@ -534,6 +534,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/diario-oficial/reading/{id?}', [OfficialJournalController::class, 'page'])->name('official.diary.page');
+Route::match(['get', 'post'], '/diario-oficial/publicacoes', [OfficialJournalController::class, 'search'])->name('official.diary.search');
 Route::get('/diario-oficial/edicoes', [OfficialJournalController::class, 'allEditions'])->name('official.diary.all');
 
 Route::get('/pcs', [PcsController::class, 'show'])->name('prestacao-conta-gestao');
