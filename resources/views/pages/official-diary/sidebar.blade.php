@@ -22,7 +22,7 @@
                 </a>
             </div>
             <div class="group-links">
-                <a href="{{ route('diary.normative.page') }}" class="link {{ request()->routeIs('diary.normative.page') ? 'active' : '' }}">
+                <a href="{{ route('official.diary.normative') }}" class="link {{ request()->routeIs('official.diary.normative') ? 'active' : '' }}">
                     <i class="fa-solid fa-scale-balanced"></i>
                     Normativas
                 </a>

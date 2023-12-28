@@ -1,10 +1,5 @@
 @extends('panel.index')
-@section('pageTitle', 'Página de Receitas')
-
-@section('breadcrumb')
-<li><a href="{{ route('recipes.index') }}">Receitas</a></li>
-<li><span>Página</span></li>
-@endsection
+@section('pageTitle', 'Página de ' . $normative->name)
 
 @section('content')
 
@@ -50,16 +45,6 @@
                     @endforeach
                 </select>
             </div>
-
-            {{-- <div class="form-group">
-                <label>Ativado/Desativado</label>
-                <div class="d-flex align-items-center justify-content-center w-fit-content actions">
-                    <div class="toggle-switch cmt-4">
-                        <input type="checkbox" id="checklist" name="visibility" value="enabled" class="toggle-input" {{ $normative->visibility == 'enabled' ? 'checked' : ''}}>
-                        <label for="checklist" class="toggle-label no-margin"></label>
-                    </div>
-                </div>
-            </div> --}}
 
             <div class="form-footer text-right">
                 <button type="submit" class="btn-submit-default">Guardar</button>
