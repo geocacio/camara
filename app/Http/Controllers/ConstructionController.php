@@ -186,6 +186,16 @@ class ConstructionController extends Controller
      */
     public function destroy(Construction $construction)
     {
-        //
+        $typeContent = TypeContent::where('typeable_id', $construction->id)->where('typeable_type', 'Construction')->first();
+        if ($typeContent) {
+            $typeContent->delete();
+        }
+
+        if($construction->delete()){
+            return redirect()->route('constructions.index')->with('success', 'Obra excluída com sucesso.');
+        }
+
+        
+        return redirect()->back()->with('error', 'Erro, por favor tente novamente!');
     }
 }
