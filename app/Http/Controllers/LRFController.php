@@ -65,16 +65,21 @@ class LRFController extends Controller
             'main_title' => 'required',
             'title' => 'required',
             'description' => 'nullable',
+            'transparency_group_id' => 'required',
         ], [
             'main_title.required' => 'O campo título principal é obrigatório',
+            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
             'title.required' => 'O campo título é obrigatório'
         ]);
 
         $lrf = Page::where('name', 'Lrfs')->first();
-
+        
         if ($lrf->update($validateData)) {
+            $lrf->groupContents()->delete();
+            $lrf->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
             return redirect()->route('lrfs-page.update')->with('success', 'Informações atualizadas com sucesso!');
         }
+
         return redirect()->route('lrfs-page.update')->with('error', 'Por favor tente novamente!');
     }
 

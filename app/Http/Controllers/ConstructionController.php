@@ -98,7 +98,7 @@ class ConstructionController extends Controller
                 'typeable_id' => $construction->id,
                 'typeable_type' => 'Construction',
             ]);
-            return redirect()->route('events.index')->with('success', 'Obra cadastrada com sucesso.');
+            return redirect()->route('constructions.index')->with('success', 'Obra cadastrada com sucesso.');
         }
         return redirect()->back()->with('error', 'Erro, por favor tente novamente!');
     }
