@@ -61,7 +61,6 @@
                         <div class="form-group">
                             <label>Origem</label>
                             <select name="origin" class="form-control">
-                                <option value="">Selecione</option>
                                 <option value="">Orgão</option>
                                 <option value="orcamentaria">Camara municipal</option>
                             </select>

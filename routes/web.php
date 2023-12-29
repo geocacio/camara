@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AcessibilityController;
+use App\Http\Controllers\AdvancedSearchController;
 use App\Http\Controllers\AgreementContractController;
 use App\Http\Controllers\AgreementController;
 use App\Http\Controllers\AgreementFileController;
@@ -175,7 +176,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('contracts', ContractController::class);
 
         Route::get('types/{itemType:slug}/subtypes', [TypeController::class, 'index'])->name('subtypes.index');
-        Route::get('types/{type:slug}/subtypes/create', [TypeController::class, 'create'])->name('subtypes.create');
+        Route::get('types/{buceta:slug}/subtypes/create', [TypeController::class, 'create'])->name('subtypes.create');
 
         Route::get('legislatures-page', [LegislatureController::class, 'page'])->name('legislatures.page');
         Route::put('legislatures-page', [LegislatureController::class, 'pageUpdate'])->name('legislatures.page.update');
@@ -544,7 +545,8 @@ Route::get('/diario-oficial/edicoes', [OfficialJournalController::class, 'allEdi
 Route::get('/diario-oficial/normativas', [OfficialJournalController::class, 'normative'])->name('official.diary.normative');
 Route::get('/diario-oficial/apresentacao', [OfficialJournalController::class, 'presentation'])->name('official.diary.presentation');
 Route::get('/diario-oficial/expediente', [OfficialJournalController::class, 'expedientShow'])->name('expediente.show');
-
+Route::post('/advanced-search', [AdvancedSearchController::class, 'search'])->name('advanced.search');
+Route::get('/advanced-search/result', [AdvancedSearchController::class, 'result'])->name('advanced-search.result');
 Route::get('/pcs', [PcsController::class, 'show'])->name('prestacao-conta-gestao');
 Route::get('/pcg', [PcgController::class, 'show'])->name('prestacao-conta-governo');
 Route::get('/acessibilidade', [AcessibilityController::class, 'page'])->name('acessibilidade.page');
