@@ -25,8 +25,8 @@ class ChamberController extends Controller
         $chamber['institutional']['icon'] = 'fa-solid fa-building-columns';
         if ($currentLegislature) {
             $chamber['boards']['councilors'] = Councilor::whereHas('legislatureRelations', function ($query) use ($currentLegislature) {
-                $query->where('legislature_id', $currentLegislature->id);
-                    //   ->where('bond_id', 19); // Substitua 'office_id' pelo nome da nova coluna, se necessário.
+                $query->where('legislature_id', $currentLegislature->id)->whereIn('office_id', [2, 3, 4, 5]);
+
             })->get();
         } else {
             $chamber['boards']['councilors'] = [];
