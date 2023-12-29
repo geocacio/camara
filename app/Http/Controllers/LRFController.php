@@ -63,13 +63,15 @@ class LRFController extends Controller
     {
         $validateData = $request->validate([
             'main_title' => 'required',
+            'icon' => 'required',
             'title' => 'required',
             'description' => 'nullable',
             'transparency_group_id' => 'required',
         ], [
             'main_title.required' => 'O campo título principal é obrigatório',
             'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
-            'title.required' => 'O campo título é obrigatório'
+            'title.required' => 'O campo título é obrigatório',
+            'icon.required' => 'O campo icon é obrigatório',
         ]);
 
         $lrf = Page::where('name', 'Lrfs')->first();
