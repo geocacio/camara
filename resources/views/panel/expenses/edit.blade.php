@@ -75,7 +75,7 @@
                             <label>Órgão</label>
                             <select name="organ" class="form-control">
                                 <option value="">Orgão</option>
-                                <option value="camara_municipal" {{ old('organ', $expense->organ) == 'camara_municipal' ? 'selected' : '' }} >Camara municipal</option>
+                                <option value="Câmara Municipal" {{ old('organ', $expense->organ) == 'Câmara Municipal' ? 'selected' : '' }} >Camara municipal</option>
                             </select>
                         </div>
                     </div>

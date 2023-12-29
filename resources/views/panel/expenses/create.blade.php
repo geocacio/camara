@@ -74,7 +74,7 @@
                             <label>Órgão</label>
                             <select name="organ" class="form-control">
                                 <option value="">Orgão</option>
-                                <option value="camara_municipal">Camara municipal</option>
+                                <option value="Câmara Municipal">Câmara Municipal</option>
                             </select>
                         </div>
                     </div>
