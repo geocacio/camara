@@ -546,7 +546,7 @@ Route::get('/diario-oficial/normativas', [OfficialJournalController::class, 'nor
 Route::get('/diario-oficial/apresentacao', [OfficialJournalController::class, 'presentation'])->name('official.diary.presentation');
 Route::get('/diario-oficial/expediente', [OfficialJournalController::class, 'expedientShow'])->name('expediente.show');
 Route::post('/advanced-search', [AdvancedSearchController::class, 'search'])->name('advanced.search');
-Route::get('/advanced-search/result', [AdvancedSearchController::class, 'result'])->name('advanced-search.result');
+Route::get('/busca', [AdvancedSearchController::class, 'result'])->name('advanced-search.result');
 Route::get('/pcs', [PcsController::class, 'show'])->name('prestacao-conta-gestao');
 Route::get('/pcg', [PcgController::class, 'show'])->name('prestacao-conta-governo');
 Route::get('/acessibilidade', [AcessibilityController::class, 'page'])->name('acessibilidade.page');

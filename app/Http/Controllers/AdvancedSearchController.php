@@ -8,6 +8,7 @@ use App\Models\Expenses;
 use App\Models\Law;
 use App\Models\LRF;
 use App\Models\OfficialJournal;
+use App\Models\Publication;
 use App\Models\Recipes;
 use App\Models\ServiceLetter;
 use App\Models\Type;
@@ -25,6 +26,7 @@ class AdvancedSearchController extends Controller
     
         $laws = Law::where('description', 'like', '%'.$search.'%')->get();
         $lrfs = LRF::where('title', 'like', '%'.$search.'%')->get();
+        $publications = Publication::where('visibility', 'enabled')->orWhere('title', 'like', '%'.$search.'%')->orWhere('description', 'like', '%'.$search.'%')->get();
     
         $construction = Construction::where('title', 'like', '%'.$search.'%')->
             orWhere('local', 'like', '%'.$search.'%')
@@ -65,6 +67,7 @@ class AdvancedSearchController extends Controller
             'expenses' => $expenses,
             'recipes' => $recipes,
             'service_letters' => $service_letters,
+            'publications' => $publications,
             'query' => $search,
         ];
     

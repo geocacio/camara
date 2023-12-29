@@ -45,7 +45,7 @@
                     <form method="post" action="{{ route('advanced.search') }}" class="form-search-default form-inline">
                         @csrf
                         <div class="form-group form-search">
-                            <input type="text" name="search" value="{{ old('search', isset($data['query']) ? $data['query'] : '') }}" class="form-control" placeholder="Busca avançada">
+                            <input required type="text" name="search" value="{{ old('search', isset($data['query']) ? $data['query'] : '') }}" class="form-control" placeholder="Busca avançada">
                             <button type="submit" class="btn btn-submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                     </form>
