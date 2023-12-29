@@ -51,6 +51,29 @@
                                         <input type="text" name="description" class="form-control input-sm" value="{{ old('description', $searchData ? $searchData['description'] : '') }}" />
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-0">
+                                        <label>Categoria</label>
+                                        <select name="competencie" class="form-control input-sm">
+                                            <option value="">Selecione uma categoria</option>
+                                            @foreach ($competencies as $competencie)
+                                                <option value="{{ $competencie->id }}">{{ $competencie->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-0">
+                                        <label>Tipo</label>
+                                        <select name="type" class="form-control input-sm">
+                                            <option value="">Selecione um tipo</option>
+                                            @foreach ($types as $type)
+                                                <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                
                             </div>
                             <div class="row">
                                 <div class="mt-2 col-md-12">
