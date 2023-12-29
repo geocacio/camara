@@ -103,7 +103,7 @@
         </div>
 
         @else
-            <div class="empty-data">Nenhum comissão encontrada.</div>
+            <div class="empty-data">Nenhuma obra encontrada.</div>
         @endif
 
     </div>
