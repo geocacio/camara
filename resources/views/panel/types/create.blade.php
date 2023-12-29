@@ -2,7 +2,7 @@
 @section('pageTitle', 'Novo Tipo')
 @section('breadcrumb')
 <li><a href="{{in_array($type->slug, $directoryBreadcrumb) ? '/panel/transparency/'.$type->slug : '/panel/'.$type->slug }}">{{ ucfirst($type->slug) }}</a></li>
-<li><a href="{{ route('subtypes.index', $type->slug) }}">Tipos</a></li>
+{{-- <li><a href="{{ route('subtypes.index', $type->slug) }}">Tipos</a></li> --}}
 <li><span>Novo Tipo</span></li>
 @endsection
 @section('content')

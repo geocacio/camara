@@ -20,6 +20,7 @@
 <section class="section-transparency adjust-min-height no-padding-top pv-60">
     <div class="container all-results">
         @include('pages.advanced-search.results')
+
     </div>
 </section>
 

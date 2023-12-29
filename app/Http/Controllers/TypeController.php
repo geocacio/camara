@@ -16,6 +16,7 @@ class TypeController extends Controller
      */
     public function index($item)
     {
+
         $type = Type::where('slug', $item)->first();
 
         $types = $type->children;
@@ -37,16 +38,19 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
+        
         $validatedData = $request->validate([
             'name' => 'required|string',
             'description' => 'nullable',
             'parent_id' => 'nullable|exists:types,id',
         ]);
         $validatedData['slug'] = Str::slug($request->name);
-    
+
         Type::create($validatedData);
         $type = Type::find($request->parent_id);
-    
+
+        // dd($type);
+        
         return redirect()->route('subtypes.index', $type['slug'])->with('type', $type)->with('success', 'Tipo criado com sucesso!');
     }
     

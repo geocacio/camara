@@ -176,7 +176,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('contracts', ContractController::class);
 
         Route::get('types/{itemType:slug}/subtypes', [TypeController::class, 'index'])->name('subtypes.index');
-        Route::get('types/{buceta:slug}/subtypes/create', [TypeController::class, 'create'])->name('subtypes.create');
+        Route::get('types/{type:slug}/subtypes/create', [TypeController::class, 'create'])->name('subtypes.create');
 
         Route::get('legislatures-page', [LegislatureController::class, 'page'])->name('legislatures.page');
         Route::put('legislatures-page', [LegislatureController::class, 'pageUpdate'])->name('legislatures.page.update');
