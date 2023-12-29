@@ -107,6 +107,35 @@
         </div>
     </div>
 @endif
+
+{{-- card --}}
+@if(isset($data['ordinances']) && count($data['ordinances']) > 0)
+    <div class="row">
+        <div style="padding-top: 10px;" class="col-12 card">
+            <h6 style="color:#30358c;">Encontrados {{ count($data['ordinances']) }} registros relacionados a Portarias</h6>
+            @foreach($data['ordinances'] as $ordinance)
+                <div class="col-md-12">
+                    <div class="card-with-links">
+                        <a href="#">
+                            <div class="second-part">
+                                <div class="body">
+                                    <h3 class="title">{{ $ordinance->number }}/{{ date('Y', strtotime($ordinance->date)) }}</h3>
+                                    <p class="description">{{ $ordinance->detail }}</p>
+                                    <p class="description">{{ $ordinance->number }}</p>
+                                    <p class="description">
+                                        <span>Data</span> 
+                                        {{ date('d/m/Y', strtotime($ordinance->date)) }}
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+@endif
+
 {{-- end card --}}
 
 {{-- leis --}}

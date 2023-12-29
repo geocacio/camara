@@ -7,7 +7,9 @@ use App\Models\Construction;
 use App\Models\Expenses;
 use App\Models\Law;
 use App\Models\LRF;
+use App\Models\Office;
 use App\Models\OfficialJournal;
+use App\Models\Ordinance;
 use App\Models\Publication;
 use App\Models\Recipes;
 use App\Models\ServiceLetter;
@@ -23,9 +25,13 @@ class AdvancedSearchController extends Controller
     
         $types = Type::where('name', 'like', '%'.$search.'%')->pluck('id');
         $type_contents = TypeContent::whereIn('type_id', $types)->pluck('typeable_id');
+        $officies = Office::where('office', 'like', '%'.$search.'%')->pluck('id');
     
         $laws = Law::where('description', 'like', '%'.$search.'%')->get();
         $lrfs = LRF::where('title', 'like', '%'.$search.'%')->get();
+        $ordinances = Ordinance::where('number', 'like', '%'.$search.'%')->orWhere('date', 'like', '%'.$search.'%')
+            ->orWhere('agent', 'like', '%'.$search.'%')->orWhere('detail', 'like', '%'.$search.'%')->orWhereIn('office_id', $officies)
+            ->get();
         $publications = Publication::where('visibility', 'enabled')->orWhere('title', 'like', '%'.$search.'%')->orWhere('description', 'like', '%'.$search.'%')->get();
     
         $construction = Construction::where('title', 'like', '%'.$search.'%')->
@@ -69,6 +75,7 @@ class AdvancedSearchController extends Controller
             'service_letters' => $service_letters,
             'publications' => $publications,
             'query' => $search,
+            'ordinances' => $ordinances,
         ];
     
         session(['search_results' => $data]);
