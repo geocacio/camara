@@ -143,9 +143,38 @@ class OrdinanceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Ordinance $ordinance)
+    public function show(Request $request)
     {
-        //
+        $query = Ordinance::query();
+        $types = Type::where('slug', 'portaria')->get();
+        $cargos = Office::all();
+        
+        $searchData = $request->only(['number', 'start_date', 'agent', 'details', 'cargo', 'office_id', 'end_date']);
+
+        if($request->filled('number')){
+            $query->where('number', 'LIKE', '%' . $request->input('number') . '%');
+        }
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $start_date = date("Y-m-d", strtotime($request->input('start_date')));
+            $end_date = date("Y-m-d", strtotime($request->input('end_date')));
+        
+            $query->whereBetween('date', [$start_date, $end_date]);
+        } elseif ($request->filled('start_date')) {
+            $query->whereDate('date', '=', date("Y-m-d", strtotime($request->input('start_date'))));
+        }        
+        if($request->filled('agent')){
+            $query->where('agent', 'LIKE', '%' . $request->input('agent') . '%');
+        }
+        if($request->filled('details')){
+            $query->where('detail', 'LIKE', '%' . $request->input('details') . '%');
+        }
+        if($request->filled('cargo')){
+            $query->where('office_id', 'LIKE', '%' . $request->input('cargo') . '%');
+        }
+
+        $ordinances = $query->select()->orderBy('id', 'desc')->paginate(10);
+
+        return view('pages.ordinance.index', compact('ordinances', 'types', 'cargos', 'searchData'));
     }
 
     /**

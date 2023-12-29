@@ -618,7 +618,7 @@ Route::prefix('/transparencia')->group(function () {
     Route::get('/diarias/{daily:id}', [App\Http\Controllers\DailyController::class, 'single'])->name('diarias.single');
     Route::match(['get', 'post'], '/diarias', [App\Http\Controllers\DailyController::class, 'show'])->name('diarias.show');
     Route::get('/decreto/{decree:slug}', [App\Http\Controllers\DecreesController::class, 'showDecree'])->name('decreto.show');
-    Route::get('/portarias', [App\Http\Controllers\OrdinanceController::class, 'show'])->name('portarias.show');
+    Route::match(['get', 'post'], '/portarias', [App\Http\Controllers\OrdinanceController::class, 'show'])->name('portarias.show');
     Route::get('/publicacoes', [App\Http\Controllers\PublicationController::class, 'show'])->name('publicacoes.show');
     Route::match(['get', 'post'], '/processo-seletivo', [App\Http\Controllers\SelectiveProcessController::class, 'show'])->name('processo-seletivo.show');
     Route::get('/ouvidoria', [App\Http\Controllers\OmbudsmanPageController::class, 'show'])->name('ouvidoria.show');
