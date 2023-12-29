@@ -129,10 +129,45 @@ class PublicationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Publication $all_publication)
+    public function show(Request $request)
     {
-        //
+        $query = Publication::query();
+        $typesId = Type::where('slug', 'publications')->pluck('id');
+        $groups = Category::where('parent_id', 14)->get();
+        $exercicy = Category::where('parent_id', 10)->get();
+        $categories = Category::all();
+
+        $subTypes = Type::where('parent_id', $typesId)->get();
+        
+        $searchData = $request->only(['start_date', 'end_date', 'type_id', 'group_id', 'number', 'exercicy_id']);
+
+        if($request->filled('number')){
+            $query->where('number', 'LIKE', '%' . $request->input('number') . '%')->orWhere('description', 'LIKE', '%' . $request->input('number') . '%');
+        }
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $start_date = date("Y-m-d", strtotime($request->input('start_date')));
+            $end_date = date("Y-m-d", strtotime($request->input('end_date')));
+        
+            $query->whereBetween('created_at', [$start_date, $end_date]);
+        } elseif ($request->filled('start_date')) {
+            $query->whereDate('created_at', '=', date("Y-m-d", strtotime($request->input('start_date'))));
+        }        
+
+        if($request->filled('group_id')){
+            $query->where('group_id', 'LIKE', '%' . $request->input('group_id') . '%');
+        }
+        if($request->filled('type_id')){
+            $query->where('type_id', 'LIKE', '%' . $request->input('type_id') . '%');
+        }
+        if($request->filled('exercicy_id')){
+            $query->where('exercicy_id', 'LIKE', '%' . $request->input('exercicy_id') . '%');
+        }
+
+        $publications = $query->select()->orderBy('id', 'desc')->paginate(10);
+
+        return view('pages.publications.index', compact('publications', 'subTypes', 'searchData', 'categories', 'groups', 'exercicy'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
