@@ -10,8 +10,7 @@
     </li>
 </ul>
 <h3 class="title text-center">Resultados da busca</h3>
-{{-- <br/> --}}
-{{-- <h5 class="text-center">({{ count($data) }}) Resultados encontrados</h5> --}}
+
 @endsection
 
 @section('content')

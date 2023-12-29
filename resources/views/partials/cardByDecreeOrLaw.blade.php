@@ -56,9 +56,11 @@
 
     @endforeach
 
-    <div class="col-12 mt-20">
-        {{ $data->render() }}
-    </div>
+    @if($type != 'lrf')
+        <div class="col-12 mt-20">
+            {{ $data->render() }}
+        </div>
+    @endif
 </div>
 @else
 <div class="empty-data">Nenhuma informação encontrada.</div>
