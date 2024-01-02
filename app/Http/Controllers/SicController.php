@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Page;
 use App\Models\Secretary;
 use App\Models\Sic;
+use App\Models\SicSituation;
+use App\Models\SicSolicitation;
 use App\Models\TransparencyGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SicController extends Controller
 {
@@ -145,5 +148,101 @@ class SicController extends Controller
     public function solicitationEdit()
     {
         return view('pages.sic.panel.solicitations.edit');
+    }
+
+    public function reportsByYear()
+    {
+        // Alteração na consulta para agrupar por ano
+        $chartSicSolicitationByYear = SicSituation::select(DB::raw('YEAR(created_at) as year'), DB::raw('count(*) as count'))
+            ->groupBy(DB::raw('YEAR(created_at)'))
+            ->get();
+
+        $reportSicSolicitation = [];
+        $yearData = [];
+
+        $chartYears = [];
+        $labels = [];
+        $counts = [];
+
+        // Cria o relatório para tabela
+        $totalRecords = 0; // Inicializa o total de registros
+        foreach ($chartSicSolicitationByYear as $item) {
+            $totalRecords += $item->count;
+            $yearData[] = [
+                'year' => $item->year,
+                'count' => $item->count,
+                'percentage' => 0,
+            ];
+
+            $labels[] = $item->year;
+            $counts[] = $item->count;
+        }
+
+        $chartYears['labels'] = $labels;
+        $chartYears['data'] = $counts;
+
+        // Calcula as porcentagens e atualiza o array $yearData
+        foreach ($yearData as &$item) {
+            $percentage = ($item['count'] / $totalRecords) * 100;
+            $item['percentage'] = round($percentage, 2); // Arredonda para duas casas decimais
+        }
+
+        $reportSicSolicitation['data'] = $yearData;
+        $reportSicSolicitation['total'] = $totalRecords;
+
+        $result['graphic'] = $chartYears;
+        $result['table'] = $reportSicSolicitation;
+
+        $sicYears = $result['graphic'];
+        // dd($sicYears);
+        return $result;
+    }
+
+
+    public function reports()
+    {
+
+        $chartSicSolicitationBySituation = SicSituation::select('situation', DB::raw('count(*) as count'))->groupBy('situation')->get();
+        $reportSicSolicitation = [];
+        $situationData = [];
+    
+        $chartSituation = [];
+        $labels = [];
+        $counts = [];
+    
+        // Cria o relatório para tabela
+        $totalRecords = 0; // Inicializa o total de registros
+        foreach ($chartSicSolicitationBySituation as $item) {
+            $totalRecords += $item->count;
+            $situationData[] = [
+                'situation' => ucfirst($item->situation),
+                'count' => $item->count,
+                'percentage' => 0,
+            ];
+    
+            $labels[] = ucfirst($item->situation);
+            $counts[] = $item->count;
+        }
+    
+        $chartSituation['labels'] = $labels;
+        $chartSituation['data'] = $counts;
+    
+        // Calcula as porcentagens e atualiza o array $situationData
+        foreach ($situationData as &$item) {
+            $percentage = ($item['count'] / $totalRecords) * 100;
+            $item['percentage'] = round($percentage, 2); // Arredonda para duas casas decimais
+        }
+    
+        $reportSicSolicitation['data'] = $situationData;
+        $reportSicSolicitation['total'] = $totalRecords;
+    
+        $result['graphic'] = $chartSituation;
+        $result['table'] = $reportSicSolicitation;
+    
+        $sicSituation = $result['graphic'];
+        $dataReport = $this->reportsByYear()['graphic'];
+        // dd($dataReport);
+        // dd($sicSituation);
+        return view('pages.sic.panel.statistics', compact('sicSituation', 'dataReport'));
     }
 }

@@ -22,7 +22,7 @@
                 </a>
             </div>
             <div class="group-links">
-                <a href="{{ route('estatisticas.reports') }}" class="link {{ request()->routeIs('estatisticas.reports') ? 'active' : '' }}">
+                <a href="{{ route('sic.reports') }}" class="link {{ request()->routeIs('sic.reports') ? 'active' : '' }}">
                     <i class="fa-solid fa-chart-pie"></i>
                     Estatísticas
                 </a>
