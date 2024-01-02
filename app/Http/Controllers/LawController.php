@@ -175,6 +175,7 @@ class LawController extends Controller
     {
         $validatedData = $request->validate([
             'competency_id' => 'required',
+            'type_id' => 'required',
             'date' => 'nullable',
             'file' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
             'description' => 'nullable',

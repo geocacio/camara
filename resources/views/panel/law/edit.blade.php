@@ -33,7 +33,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="title1">Selecione o tipo</label>
-                        <select name="type" class="form-control">
+                        <select name="type_id" class="form-control">
                             <option value="">Selecione</option>
                             @foreach($types as $type)
                             <option value="{{ $type->id}}" {{$type->id == $law->types[0]->id ? 'selected' : ''}}>{{ $type->name }}</option>
