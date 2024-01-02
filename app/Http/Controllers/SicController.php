@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Page;
 use App\Models\Secretary;
 use App\Models\Sic;
+use App\Models\SicFaq;
 use App\Models\SicSituation;
 use App\Models\SicSolicitation;
 use App\Models\TransparencyGroup;
@@ -261,5 +262,11 @@ class SicController extends Controller
         $sicSituationTable = $sicSituation['table'];
 
         return view('pages.sic.statisticsReports', compact('reportData', 'graphicReport', 'tableReport', 'sicSituation', 'sicSituationGraphic', 'sicSituationTable'));
+    }
+
+    public function faq()
+    {
+        $faqs = SicFaq::all();
+        return view('pages.sic.faq', compact('faqs'));
     }
 }
