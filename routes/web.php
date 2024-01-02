@@ -660,6 +660,7 @@ Route::prefix('/transparencia')->group(function () {
             Route::get('estatisticas', [App\Http\Controllers\SicController::class, 'reports'])->name('sic.reports');
             Route::get('/relatorios-estatisticos', [App\Http\Controllers\SicController::class, 'statisticalReports'])->name('sic.relatorios.estatisticos');
             Route::get('/faq', [App\Http\Controllers\SicController::class, 'faq'])->name('sic.faq');
+            Route::match(['get', 'post'], '/relatorios', [SicController::class, 'search'])->name('sic.search');
         });
     });
 });

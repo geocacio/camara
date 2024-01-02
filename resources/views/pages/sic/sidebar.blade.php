@@ -15,12 +15,12 @@
                     Acessar o SIC
                 </a>
             </div>
-            <div class="group-links">
+            {{-- <div class="group-links">
                 <a href="{{ route('manifestacao.show') }}" class="link {{ request()->routeIs('manifestacao.show') ? 'active' : '' }}">
                     <i class="fa-solid fa-arrow-pointer"></i>
                     Manifestações
                 </a>
-            </div>
+            </div> --}}
             <div class="group-links">
                 <a href="{{ route('sic.reports') }}" class="link {{ request()->routeIs('sic.reports') ? 'active' : '' }}">
                     <i class="fa-solid fa-chart-pie"></i>
@@ -34,13 +34,13 @@
                 </a>
             </div>
             <div class="group-links">
-                <a href="{{ route('ombudsman.faqs.show') }}" class="link {{ request()->routeIs('ombudsman.faqs.show') ? 'active' : '' }}">
+                <a href="{{ route('sic.faq') }}" class="link {{ request()->routeIs('sic.faq') ? 'active' : '' }}">
                     <i class="fa-solid fa-question"></i>
                     Faq
                 </a>
             </div>
             <div class="group-links">
-                <a href="{{ route('seekManifestation.show') }}" class="link {{ request()->routeIs('manifestacao.search') || request()->routeIs('seekManifestation.show') ? 'active' : '' }}">
+                <a href="{{ route('sic.search') }}" class="link {{ request()->routeIs('manifestacao.search') || request()->routeIs('sic.search') ? 'active' : '' }}">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     Acompanhar manifestação
                 </a>

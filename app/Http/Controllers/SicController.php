@@ -269,4 +269,25 @@ class SicController extends Controller
         $faqs = SicFaq::all();
         return view('pages.sic.faq', compact('faqs'));
     }
+
+    public function search(Request $request)
+    {
+        $query = SicSolicitation::query();
+
+        $search = $request->get('search');
+
+        if($request->filled('protocol')){
+            $query->where('protocol', 'LIKE', '%' . $request->input('protocol') . '%')
+            ->orWhere('solicitation', 'LIKE', '%' . $request->input('protocol') . '%');
+        }
+
+        if($request->filled('solicitation')){
+            $query->where('solicitation', 'LIKE', '%' . $request->input('solicitation') . '%');
+        }
+
+        $solicitations = $query->with('situations')->paginate(10);
+        $searchData = $request->only(['protocol', 'exercicy']);
+
+        return view('pages.sic.search', compact('solicitations', 'searchData'));
+    }
 }

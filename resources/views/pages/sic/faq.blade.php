@@ -3,10 +3,7 @@
 @section('breadcrumb')
 <ul class="breadcrumb">
     <li class="item">
-        <a href="{{ route('home') }}" class="link">Início</a>
-    </li>
-    <li class="item">
-        <a href="{{ route('transparency.show') }}" class="link">Portal da transparência</a>
+        <a href="{{ route('sic.panel') }}" class="link">Início</a>
     </li>
     <li class="item">
         <a href="{{ route('ouvidoria.show') }}" class="link">Ouvidoria</a>
