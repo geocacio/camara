@@ -18,8 +18,6 @@
 <h3 class="title text-center">Estatísticas</h3>
 
 <input type="hidden" name="chartNature" value="{{ json_encode($sicSituation) }}">
-{{-- <input type="hidden" name="chartSecretary" value=""> --}}
-{{-- <input type="hidden" name="chartMonths" value=""> --}}
 <input type="hidden" name="chartYear" value="{{ json_encode($dataReport) }}">
 
 @endsection
@@ -32,7 +30,7 @@
     <div class="container">
         <div class="row">
 
-            @include('pages.ombudsman.sidebar')
+            @include('pages.sic.sidebar')
 
             <div class="col-md-8">
                 @if($sicSituation && !empty($sicSituation['labels']))

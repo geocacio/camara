@@ -199,7 +199,7 @@ class SicController extends Controller
     }
 
 
-    public function reports()
+    public function situationGraphic()
     {
 
         $chartSicSolicitationBySituation = SicSituation::select('situation', DB::raw('count(*) as count'))->groupBy('situation')->get();
@@ -239,10 +239,27 @@ class SicController extends Controller
         $result['graphic'] = $chartSituation;
         $result['table'] = $reportSicSolicitation;
     
-        $sicSituation = $result['graphic'];
+        return $result;
+        
+    }
+    
+    public function reports(){
         $dataReport = $this->reportsByYear()['graphic'];
-        // dd($dataReport);
-        // dd($sicSituation);
+        $sicSituation = $this->situationGraphic()['graphic'];
         return view('pages.sic.panel.statistics', compact('sicSituation', 'dataReport'));
+
+    }
+
+    public function statisticalReports()
+    {
+        $reportData = $this->reportsByYear();
+        $graphicReport = $reportData['graphic'];
+        $tableReport = $reportData['table'];
+
+        $sicSituation = $this->situationGraphic();
+        $sicSituationGraphic = $sicSituation['graphic'];
+        $sicSituationTable = $sicSituation['table'];
+
+        return view('pages.sic.statisticsReports', compact('reportData', 'graphicReport', 'tableReport', 'sicSituation', 'sicSituationGraphic', 'sicSituationTable'));
     }
 }

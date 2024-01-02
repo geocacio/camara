@@ -28,7 +28,7 @@
                 </a>
             </div>
             <div class="group-links">
-                <a href="{{ route('relatorios.estatisticos.reports') }}" class="link {{ request()->routeIs('relatorios.estatisticos.reports') ? 'active' : '' }}">
+                <a href="{{ route('sic.relatorios.estatisticos') }}" class="link {{ request()->routeIs('sic.relatorios.estatisticos') ? 'active' : '' }}">
                     <i class="fa-solid fa-chart-simple"></i>
                     Relatório estatísticos
                 </a>
