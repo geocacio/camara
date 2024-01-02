@@ -38,7 +38,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="title1">Selecione o tipo</label>
-                    <select name="type" class="form-control" {{ $types->count() <= 0 ? 'disabled' : ''}}>
+                    <select name="type_id" class="form-control" {{ $types->count() <= 0 ? 'disabled' : ''}}>
                         <option value="">Selecione</option>
                         @foreach($types as $type)
                         <option value="{{ $type->id}}">{{ $type->name }}</option>
