@@ -2390,7 +2390,7 @@ $data = [
     ],
     [
         'page' => 'Lei de responsabilidade fiscal',
-        'route' => 'lei-responsabilidade-fical',
+        'route' => 'lrf.page',
         'sections' => [
             [
                 'component' => 'lrfComponent',
