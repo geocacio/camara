@@ -98,7 +98,7 @@ class LawController extends Controller
             'file' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
             'description' => 'nullable',
         ]);
-        $validatedData['slug'] = Str::slug($request->number);
+        $validatedData['slug'] = Str::slug($request->date);
         
         unset($validatedData['file']);
 
