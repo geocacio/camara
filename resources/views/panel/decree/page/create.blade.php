@@ -24,7 +24,7 @@
                 <div class="col-md-5">
                     <div class="form-group">
                         <label>Título Principal</label>
-                        <input type="text" name="main_title" class="form-control" autocomplete="off" value="{{ old('main_title' }}">
+                        <input type="text" name="main_title" class="form-control" autocomplete="off" value="{{ old('main_title')}}">
                     </div>
                 </div>
                 <div class="col-md-5">
@@ -34,22 +34,13 @@
                     </div>
                 </div>
             </div>
+            
 
             <!-- <div class="form-group">
                 <label>Text</label>
                 <input type="text" name="text" class="form-control text" autocomplete="off" value="{{ old('text') }}">
             </div> -->
-            
-            <div class="form-group">
-                <label>Grupo (onde será exibido no portal da transparência)</label>
-                <select name="transparency_group_id" class="form-control">
-                    <option value="">Selecione o grupo</option>
-                    @foreach($groups as $group)
-                    <option value="{{ $group->id }}">{{ $group->title }} - {{ $group->description }}</option>
-                    @endforeach
-                </select>
-            </div>
-
+    
             <div class="form-group">
                 <label>Ativado/Desativado</label>
                 <div class="d-flex align-items-center justify-content-center w-fit-content actions">

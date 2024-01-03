@@ -37,10 +37,10 @@
                 </div>
             </div>
 
-            <!-- <div class="form-group">
-                <label>Text</label>
-                <input type="text" name="description" class="form-control" autocomplete="off" value="{{ old('description', $page_decree->description) }}">
-            </div> -->
+            <div class="form-group">
+                <label>Descrição</label>
+                <textarea type="text" name="description" class="form-control" autocomplete="off">{{ old('description', $page_decree->description) }}</textarea>
+            </div>
 
             <div class="form-group">
                 <label>Grupo (onde será exibido no portal da transparência)</label>
