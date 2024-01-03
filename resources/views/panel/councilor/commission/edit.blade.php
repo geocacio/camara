@@ -67,6 +67,24 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="office_id">Cargo</label>
+                        <select name="office_id" class="form-control">
+                            <option value="">Selecione</option>
+                            @if($offices->count() > 0)
+                                @foreach($offices as $office)
+                                    <option value="{{ $office->id }}" {{ $office->id == $councilor_commission->office_id ? 'selected' : ''}}>{{ $office->office }}</option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+
             <div class="form-footer text-right">
                 <button type="submit" class="btn-submit-default">Guardar</button>
             </div>

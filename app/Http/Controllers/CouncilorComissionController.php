@@ -6,6 +6,7 @@ use App\Models\CommissionCouncilor;
 use App\Models\Commission;
 use App\Models\Councilor;
 use App\Models\Legislature;
+use App\Models\Office;
 use Illuminate\Http\Request;
 
 class CouncilorComissionController extends Controller
@@ -25,7 +26,8 @@ class CouncilorComissionController extends Controller
     {
         $commissions = Commission::all();
         $legislatures = Legislature::all();
-        return view('panel.councilor.commission.create', compact('councilor', 'commissions', 'legislatures'));
+        $offices = Office::all();
+        return view('panel.councilor.commission.create', compact('councilor', 'commissions', 'legislatures', 'offices'));
     }
 
     /**
@@ -36,11 +38,13 @@ class CouncilorComissionController extends Controller
         $validatedData = $request->validate([
             'commission_id' => 'required',
             'legislature_id' => 'required',
+            'office_id' => 'required',
             'start_date' => 'required|date',
             'end_date' => 'nullable|date',
         ],[
             'commission_id.required' => 'O campo comissão é obrigatório',
             'start_date.required' => 'O campo data de início é obrigatório',
+            'office_id.required' => 'O campo cargo é obrigatório',
         ]);
         $validatedData['councilor_id'] = $councilor->id;
         
@@ -72,8 +76,9 @@ class CouncilorComissionController extends Controller
     {
         $commissions = Commission::all();
         $legislatures = Legislature::all();
+        $offices = Office::all();
 
-        return view('panel.councilor.commission.edit', compact('councilor', 'commissions', 'councilor_commission', 'legislatures'));
+        return view('panel.councilor.commission.edit', compact('councilor', 'commissions', 'councilor_commission', 'legislatures', 'offices'));
     }
 
     /**
@@ -84,11 +89,13 @@ class CouncilorComissionController extends Controller
         $validatedData = $request->validate([
             'commission_id' => 'required',
             'legislature_id' => 'required',
+            'office_id' => 'required',
             'start_date' => 'required|date',
             'end_date' => 'nullable|date',
         ],[
             'commission_id.required' => 'O campo comissão é obrigatório',
             'start_date.required' => 'O campo data de início é obrigatório',
+            'office_id.required' => 'O campo cargo é obrigatório',
         ]);
         $commission = Commission::find($validatedData['commission_id']);
         if(!$commission){

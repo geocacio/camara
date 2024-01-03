@@ -13,6 +13,7 @@ class CommissionCouncilor extends Model
         'commission_id',
         'councilor_id',
         'legislature_id',
+        'office_id',
         'start_date',
         'end_date',
     ];
