@@ -124,7 +124,7 @@
         </div>
 
         @else
-            <div class="empty-data">Nenhuma obra encontrada.</div>
+            <div class="empty-data">Nenhuma portaria encontrada.</div>
         @endif
 
     </div>
