@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasColumn('laws', 'type_id')) return;
         Schema::table('laws', function (Blueprint $table) {
             $table->unsignedBigInteger('type_id')->nullable()->after('id');
 
