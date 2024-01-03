@@ -6,6 +6,8 @@ use App\Models\ContactUsPage;
 use App\Models\Link;
 use App\Models\Page;
 use App\Models\Style;
+use App\Models\TransparencyGroup;
+use App\Models\TransparencyGroupContent;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -192,6 +194,10 @@ class ContactUsSeeder extends Seeder
         foreach ($data as $pageData) {
             $page = Page::firstOrCreate([
                 'name' => $pageData['page'],
+                'main_title' => 'Fale Conosco',
+                'title' => 'Fale Conosco',
+                'icon' => 'fa-solid fa-headset',
+                'visibility' => 'disabled',
             ], [
                 'route' => $pageData['route'],
                 'slug' => Str::slug($pageData['page'])
@@ -232,6 +238,12 @@ class ContactUsSeeder extends Seeder
                     }
                 }
             }
+
+            TransparencyGroupContent::create([
+                'transparency_group_id' => 1,
+                'pageable_type' => 'page',
+                'pageable_id' => $page->id,
+            ]);
         }
     }
 }

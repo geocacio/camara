@@ -13,6 +13,5 @@ class ContactUsPage extends Model
         'telefone',
         'opening_hours',
         'email',
-        'status',
     ];
 }

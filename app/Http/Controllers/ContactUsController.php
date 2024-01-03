@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ContactUs;
 use App\Models\ContactUsPage;
+use App\Models\Page;
 use Illuminate\Http\Request;
 
 class ContactUsController extends Controller
@@ -56,11 +57,12 @@ class ContactUsController extends Controller
     public function contactUsPage()
     {
         $contactUsPage = ContactUsPage::first();
+        $page = Page::where('name', 'Fale Conosco')->first();
 
         if($contactUsPage) {
-            return view('panel.contact-us.edit', compact('contactUsPage'));
+            return view('panel.contact-us.edit', compact('contactUsPage', 'page'));
         }else {
-            return view('panel.contact-us.index');
+            return view('panel.contact-us.index', compact('page'));
         }
     }
 
@@ -70,11 +72,18 @@ class ContactUsController extends Controller
             'telefone' => 'required|string|max:255',
             'opening_hours' => 'nullable|string|max:255',
             'email' => 'required|email|max:100',
+            'icon' => 'required',
+            'main_title' => 'required',
+            'title' => 'required',
+            'visibility' => 'nullable',
         ],
         [
             'telefone.required' => 'Por favor, insira o telefone.',
             'email.required' => 'Por favor, insira o email',
             'email.email' => 'E-mail inválido',
+            'icon.required' => 'Por favor, insira o ícone.',
+            'main_title.required' => 'Por favor, insira o título principal.',
+            'title.required' => 'Por favor, insira o título.',
         ]);
     
         ContactUsPage::updateOrCreate(
@@ -82,12 +91,23 @@ class ContactUsController extends Controller
             [
                 'telefone' => $request->telefone,
                 'opening_hours' => $request->opening_hours,
-                'status' => $request->status ? 1 : 0,
             ]
         );
-
+    
+        $page = Page::where('name', 'Fale Conosco')->first();
+    
+        if ($page) {
+            $page->update([
+                'icon' => $request->icon,
+                'main_title' => $request->main_title,
+                'title' => $request->title,
+                'visibility' => $request->visibility ? $request->visibility : 'disabled',
+            ]);
+        }
+    
         return redirect()->back()->with('success', 'Informações atualizadas com sucesso!');
     }
+    
     
 
     /**

@@ -16,8 +16,6 @@ return new class extends Migration
             $table->string('telefone');
             $table->text('opening_hours')->nullable();
             $table->string('email', 100);
-            // status: 0 - disabled, 1 - enabled
-            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }
