@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if(Schema::hasColumn('pages', 'law_id')) return;
         Schema::table('pages', function (Blueprint $table) {
             $table->unsignedBigInteger('law_id')->after('url')->nullable();
             $table->foreign('law_id')->references('id')->on('laws');
