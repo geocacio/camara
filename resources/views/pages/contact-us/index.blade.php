@@ -38,7 +38,7 @@
                     @endif
 
                     <div class="card-body">
-                        <form class="form-default mb-5" method="post" action="">
+                        <form class="form-default mb-5" method="post" action="{{ route('faleconosco.store') }}">
                             @csrf
                             <div class="personal-information">
                                 <div class="row">
@@ -51,7 +51,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Endereço</label>
-                                            <input type="email" name="endereco" class="form-control" value="{{ old('endereco') }}" />
+                                            <input type="text" name="endereco" class="form-control" value="{{ old('endereco') }}" />
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@
                                             <label>Orgão</label>
                                             <select name="orgao" class="form-control">
                                                 <option value="">Selecione</option>
-                                                <option value="orgao"  {{ old('sex') == 'male' ? 'selected' : '' }}>Camara</option>
+                                                <option value="orgao"  {{ old('orgao') }}>Camara</option>
                                             </select>
                                         </div>
                                     </div>
@@ -125,41 +125,43 @@
                             </div>
 
                         </form>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="box-contactUs">
-                                    <h1>
-                                        <i class="fas fa-phone"></i>
-                                        Telefone
-                                    </h1>
-                                    <p>
-                                        (88) 3664-1951
-                                    </p>
+                        @if($contactUsData)
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="box-contactUs">
+                                        <h1>
+                                            <i class="fas fa-phone"></i>
+                                            Telefone
+                                        </h1>
+                                        <p>
+                                            {{ $contactUsData->telefone }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="box-contactUs">
+                                        <h1>
+                                            <i class="fa-solid fa-clock fa-fw"></i>
+                                            Horário de atendimento
+                                        </h1>
+                                        <p>
+                                            {{ $contactUsData->opening_hours }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="box-contactUs">
+                                        <h1>
+                                            <i class="fa-solid fa-envelope fa-fw"></i>
+                                            E-mail
+                                        </h1>
+                                        <p>
+                                            <a href="#">{{ $contactUsData->email }}</a>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="box-contactUs">
-                                    <h1>
-                                        <i class="fa-solid fa-clock fa-fw"></i>
-                                        Horário de atendimento
-                                    </h1>
-                                    <p>
-                                        Seg. à Qui. 8h às 12h e 14h às 17h, e Sex. 8h às 14h
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="box-contactUs">
-                                    <h1>
-                                        <i class="fa-solid fa-envelope fa-fw"></i>
-                                        E-mail
-                                    </h1>
-                                    <p>
-                                        <a href="#">contato@camaramunicipaldemarco.ce.gov.br</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        @endif  
                     </div>
                 </div>
             </div>

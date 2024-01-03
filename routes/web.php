@@ -159,6 +159,9 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('/files', FileController::class);
 
+        Route::get('contact-us-page', [ContactUsController::class, 'contactUsPage'])->name('contact-us.page');
+        Route::post('contact-us-page', [ContactUsController::class, 'contactUsPageStore'])->name('contact-us.page.store');
+
         Route::get('generate-pdf-diary/{official_diary:id}', [PdfController::class, 'generateOfficialDiary'])->name('generate.pdf.diary');
 
         Route::resource('/home', HomePageController::class);
@@ -556,6 +559,8 @@ Route::get('/expenses', [ExpensesController::class, 'show'])->name('despesas.pag
 Route::get('/recipes', [RecipesController::class, 'show'])->name('receitas.page');
 Route::match(['get', 'post'], '/construcoes', [ConstructionController::class, 'show'])->name('obras.page');
 Route::get('/simbolos', [SymbolsController::class, 'page'])->name('simbolos.page');
+
+Route::resource('/faleconosco', ContactUsController::class);
 
 Route::match(['get', 'post'], 'balancetes-financeiros', [ChamberFinancialController::class, 'page'])->name('balancetes-all');
 
