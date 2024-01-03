@@ -10,7 +10,7 @@
     </li>
 </ul>
 
-<h3 class="title-sub-page main">Portarias</h3>
+<h3 class="title-sub-page main">Publicações</h3>
 @endsection
 
 @section('content')
@@ -121,7 +121,7 @@
         </div>
 
         @else
-            <div class="empty-data">Nenhuma obra encontrada.</div>
+            <div class="empty-data">Nenhuma publicação encontrada.</div>
         @endif
 
     </div>
