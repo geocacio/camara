@@ -272,7 +272,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>{{ $councilor->affiliation_date }}</td>
+                                                    <td>{{ date('d/m/Y', strtotime($councilor->affiliation_date)) }}</td>
                                                     <td>{{ $councilor->partyAffiliation->acronym }}</td>
                                                     <td>{{ $councilor->partyAffiliation->name }}</td>
                                                 </tr>
