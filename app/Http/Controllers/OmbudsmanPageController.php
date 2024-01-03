@@ -176,10 +176,7 @@ class OmbudsmanPageController extends Controller
 
     public function getDataSecretariesReport()
     {
-        $chartOmbudsmanBySecretaries = OmbudsmanFeedback::select('secretary_id', DB::raw('count(*) as count'))
-            ->with('secretary') // Carrega a relação secretary
-            ->groupBy('secretary_id')
-            ->get();
+        $chartOmbudsmanBySecretaries = OmbudsmanFeedback::get();
 
         $reportSecretaries = [];
         $secretaryData = [];
@@ -189,16 +186,16 @@ class OmbudsmanPageController extends Controller
         $counts = [];
 
         $totalRecords = 0;
-        foreach ($chartOmbudsmanBySecretaries as $item) {
-            $totalRecords += $item->count;
-            $secretaryData[] = [
-                'secretary' => ucfirst($item->secretary->name),
-                'count' => $item->count,
-                'percentage' => 0,
-            ];
-            $labels[] = $item->secretary->name;
-            $counts[] = $item->count;
-        }
+        // foreach ($chartOmbudsmanBySecretaries as $item) {
+        //     $totalRecords += $item->count;
+        //     $secretaryData[] = [
+        //         'secretary' => ucfirst($item->secretary->name),
+        //         'count' => $item->count,
+        //         'percentage' => 0,
+        //     ];
+        //     $labels[] = $item->secretary->name;
+        //     $counts[] = $item->count;
+        // }
 
         $chartSecretaries['labels'] = $labels;
         $chartSecretaries['data'] = $counts;
