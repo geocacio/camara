@@ -45,16 +45,16 @@
                                         <input type="text" name="number" class="form-control input-sm" value="{{ old('number', $searchData['number'] ?? '') }}" />
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-4">
+                                <div class="col-md-4">
                                     <div class="form-group mb-0">
-                                        <label>Selecione uma opção</label>
+                                        <label>Tipo portaria</label>
                                         <select name="type" class="form-control input-sm">
                                             @foreach ($types as $type)
                                                 <option value="{{ $type->id }}" {{ old('type', $searchData['type'] ?? '') == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                </div> --}}
+                                </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-0">
                                         <label>Descrição</label>

@@ -10,6 +10,7 @@ use App\Models\Page;
 use App\Models\Secretary;
 use App\Models\TransparencyGroup;
 use App\Models\Type;
+use App\Models\TypeContent;
 use App\Services\FileUploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -146,10 +147,11 @@ class OrdinanceController extends Controller
     public function show(Request $request)
     {
         $query = Ordinance::query();
-        $types = Type::where('slug', 'portaria')->get();
+        $types = Type::where('parent_id', 55)->get();
+        $typesOrdinance = TypeContent::where('type_id', $request->type)->pluck('typeable_id');
         $cargos = Office::all();
         
-        $searchData = $request->only(['number', 'start_date', 'agent', 'details', 'cargo', 'office_id', 'end_date']);
+        $searchData = $request->only(['number', 'start_date', 'agent', 'details', 'cargo', 'office_id', 'end_date', 'type']);
 
         if($request->filled('number')){
             $query->where('number', 'LIKE', '%' . $request->input('number') . '%');
@@ -170,6 +172,9 @@ class OrdinanceController extends Controller
         }
         if($request->filled('cargo')){
             $query->where('office_id', 'LIKE', '%' . $request->input('cargo') . '%');
+        }
+        if($request->filled('type')){
+            $query->whereIn('id', $typesOrdinance);
         }
 
         $ordinances = $query->select()->orderBy('id', 'desc')->paginate(10);
