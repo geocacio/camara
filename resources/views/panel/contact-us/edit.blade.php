@@ -34,7 +34,7 @@
                 <input type="text" name="email" class="form-control" autocomplete="off" value="{{ old('email', $contactUsPage->email) }}">
             </div>
 
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label>Ativado/Desativado</label>
                 <div class="d-flex align-items-center justify-content-center w-fit-content actions">
                     <div class="toggle-switch cmt-4">
@@ -42,7 +42,7 @@
                         <label for="checklist" class="toggle-label no-margin"></label>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="form-footer text-right">
                 <button type="submit" class="btn-submit-default">Guardar</button>
