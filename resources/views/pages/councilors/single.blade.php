@@ -131,15 +131,15 @@
                                     </div>
                                     <div class="col-md-6">
                                         <p class="title">Desde</p>
-                                        <p class="description">01/01/2023</p>
+                                        <p class="description">{{ \Carbon\Carbon::parse($councilor->affiliation_date)->format('d/m/Y') }}</p>
                                     </div>
                                     <div class="col-md-6">
                                         <p class="title">Nascimento</p>
-                                        <p class="description">25/04/1978</p>
+                                        <p class="description">{{ \Carbon\Carbon::parse($councilor->birth_date)->format('d/m/Y') }}</p>
                                     </div>
                                     <div class="col-md-6">
                                         <p class="title">Naturalidade</p>
-                                        <p class="description">MARCO</p>
+                                        <p class="description">{{ $councilor->naturalness }}</p>
                                     </div>
                                 </div>
 

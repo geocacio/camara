@@ -18,6 +18,7 @@ class Councilor extends Model
         'party_affiliation_id',
         'affiliation_date',
         'birth_date',
+        'naturalness',
         'biography',
         'slug',
     ];

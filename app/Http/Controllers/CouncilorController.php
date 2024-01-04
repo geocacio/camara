@@ -110,6 +110,7 @@ class CouncilorController extends Controller
             'affiliation_date' => 'required',
             'birth_date' => 'required|date',
             'biography' => 'nullable',
+            'naturalness' => 'required',
             'file' => "nullable|image|mimes:jpeg,png,jpg,gif|max:{$this->fileUploadService->getMaxSize()}",
         ], [
             'name.required' => 'O campo nome é obrigatório.',
@@ -120,6 +121,7 @@ class CouncilorController extends Controller
             'party_affiliation_id.required' => 'O campo filiação partidária é obrigatório.',
             'affiliation_date.required' => 'O campo data da filiação é obrigatório.',
             'birth_date.required' => 'O campo data de nascimento é obrigatório.',
+            'naturalness.required' => 'O campo naturalidade é obrigatório.',
             'file.mimes' => "O campo imagem do perfil deve ser um dos tipos: jpeg, png, jpg, gif.",
             'file.max' => "O campo imagem do perfil não pode ter mais de {$this->fileUploadService->getMaxSize()} bytes.",
 
@@ -174,6 +176,7 @@ class CouncilorController extends Controller
             'party_affiliation_id' => 'required',
             'affiliation_date' => 'required',
             'birth_date' => 'required|date',
+            'naturalness' => 'required',
             'biography' => 'nullable',
             'file' => "nullable|image|mimes:jpeg,png,jpg,gif|max:{$this->fileUploadService->getMaxSize()}",
         ], [
@@ -185,6 +188,7 @@ class CouncilorController extends Controller
             'party_affiliation_id.required' => 'O campo filiação partidária é obrigatório.',
             'affiliation_date.required' => 'O campo data da filiação é obrigatório.',
             'birth_date.required' => 'O campo data de nascimento é obrigatório.',
+            'naturalness.required' => 'O campo naturalidade é obrigatório.',
             'file.mimes' => "O campo imagem do perfil deve ser um dos tipos: jpeg, png, jpg, gif.",
             'file.max' => "O campo imagem do perfil não pode ter mais de {$this->fileUploadService->getMaxSize()} bytes.",
 
