@@ -20,7 +20,7 @@
     <div class="container">
         <div class="row">
             
-            @include('pages.ombudsman.sidebar')
+            @include('pages.sic.sidebar')
 
             @if($faqs && $faqs->count() > 0)
             <div class="col-md-8">

@@ -23,7 +23,7 @@
     <div class="container">
         <div class="row">
 
-            @include('pages.ombudsman.sidebar')
+            @include('pages.sic.sidebar')
 
             <div class="col-md-8">
                 @if($sicSituationTable && !empty($sicSituationTable['data']))
