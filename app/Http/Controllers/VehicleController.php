@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Secretary;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 
@@ -54,9 +55,52 @@ class VehicleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Vehicle $vehicle)
+    public function show(Request $request)
     {
-        return view('page.vehicles.index', compact('vehicle'));
+        $perPage = $request->query('perPage', 10);
+        
+        $query = Vehicle::query();  
+
+        $secretarys = Secretary::all();
+
+        if($request->filled('secretary_id')){
+            $query->where('secretary_id', 'LIKE', '%' . $request->input('secretary_id') . '%');
+        }
+
+        if($request->filled('situation')){
+            $query->where('situation', 'LIKE', '%' . $request->input('situation') . '%');
+        }
+
+        if($request->filled('model')){
+            $query->where('model', 'LIKE', '%' . $request->input('model') . '%');
+        }
+
+        if($request->filled('brand')){
+            $query->where('brand', 'LIKE', '%' . $request->input('brand') . '%');
+        }
+        
+        if($request->filled('plate')){
+            $query->where('plate', 'LIKE', '%' . $request->input('plate') . '%');
+        }
+
+        if($request->filled('type')){
+            $query->where('type', 'LIKE', '%' . $request->input('type') . '%');
+        }
+        
+        $vehicles = $query->paginate(10);
+        $searchData = $request->only(['secretary_id', 'situation', 'model', 'brand', 'plate', 'type']);
+
+        $searchData['situation'] = $request->input('situation', '');
+        $searchData['type'] = $request->input('type', '');
+
+
+        return view('pages.vehicles.index', compact('vehicles', 'searchData', 'secretarys'));
+    }
+
+    public function single($vehicle)
+    {
+        $vehicle = Vehicle::where('slug', $vehicle)->first();
+        return view('pages.vehicles.single', compact('vehicle'));
     }
 
     /**

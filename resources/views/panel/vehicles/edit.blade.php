@@ -2,7 +2,7 @@
 @section('pageTitle', 'Veiculos')
 @section('breadcrumb')
 <li><a href="{{ route('veiculos.index') }}">Veiculos</a></li>
-<li><span>Editar Veiculo</span></li>
+<li><span>Editar Veiculos</span></li>
 @endsection
 @section('content')
 <div class="card">

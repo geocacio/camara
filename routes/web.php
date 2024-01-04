@@ -620,6 +620,8 @@ Route::get('/meus-lrf/{lrf:slug}', [LRFController::class, 'show'])->name('all-lr
 //Transparency Routes
 Route::get('/transparencia', [App\Http\Controllers\TransparencyPortalController::class, 'show'])->name('transparency.show');
 Route::prefix('/transparencia')->group(function () {
+    Route::match(['get', 'post'], 'veiculos', [App\Http\Controllers\VehicleController::class, 'show'])->name('veiculos.show');
+    Route::get('veiculo/{modelo?}', [App\Http\Controllers\VehicleController::class, 'single'])->name('veiculos.single');
     Route::match(['get', 'post'], '/leis', [App\Http\Controllers\LawController::class, 'show'])->name('leis.show');
     Route::match(['get', 'post'], '/decretos', [App\Http\Controllers\DecreesController::class, 'show'])->name('decretos.show');
     Route::get('/diarias/{daily:id}', [App\Http\Controllers\DailyController::class, 'single'])->name('diarias.single');
