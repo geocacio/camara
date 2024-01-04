@@ -106,6 +106,7 @@ use App\Http\Controllers\TransparencyGroupController;
 use App\Http\Controllers\TransparencyPortalController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\VoteController;
 use App\Models\ChamberFinancial;
@@ -345,6 +346,7 @@ Route::middleware('auth')->group(function () {
             ]);
 
             Route::resource('external-links', ExternalLinkController::class);
+            Route::resource('veiculos', VehicleController::class);
             Route::resource('lrfs', LRFController::class);
             Route::put('page-lrfs', [LRFController::class, 'pageUpdate'])->name('lrfs-page.update');
             Route::get('page-lrfs', [LRFController::class, 'pageEdit'])->name('lrf-edit.page');

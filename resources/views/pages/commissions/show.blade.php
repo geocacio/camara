@@ -87,8 +87,6 @@
                                         <p class="description">{{ $commission->description }}</p>
                                     </div>
                                 </div>
-
-
                             </div>
                         @endif
 

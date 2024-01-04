@@ -234,6 +234,9 @@
                 <li class="sub-item {{ request()->routeIs('constructions.index') ? 'active' : '' }}">
                     <a href="{{ route('constructions.index') }}" class="sub-link">Obras</a>
                 </li>
+                <li class="sub-item {{ request()->routeIs('veiculos.index') ? 'active' : '' }}">
+                    <a href="{{ route('veiculos.index') }}" class="sub-link">Veículos</a>
+                </li>
 
             </ul>
         </div>
