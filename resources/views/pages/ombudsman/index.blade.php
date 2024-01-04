@@ -44,8 +44,8 @@
                     </a>
                     <a href="{{ route('serviceLetter.page') }}" class="link-box">
                         <i class="fa-solid fa-phone"></i>
-                        <h5 class="title">Bora la galera</h5>
-                        <p class="description">bora ver como que vai ficar esse visual aqui na tela...</p>
+                        <h5 class="title">Contato</h5>
+                        <p class="description">Página de Contato</p>
                         <button class="fake-link">Acessar</button>
                     </a>
 

@@ -9,9 +9,6 @@
         <a href="{{ route('transparency.show') }}" class="link">Portal da transparência</a>
     </li>
     <li class="item">
-        <a href="{{ route('ouvidoria.show') }}" class="link">Ouvidoria</a>
-    </li>
-    <li class="item">
         <span>eSIC</span>
     </li>
 </ul>
