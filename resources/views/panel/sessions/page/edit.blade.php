@@ -42,7 +42,7 @@
             </div>
 
             <div class="form-group">
-                <label>Text</label>
+                <label>Descrição</label>
                 <input type="text" name="description" class="form-control" autocomplete="off" value="{{ old('description', $page_session->description) }}">
             </div>
 
