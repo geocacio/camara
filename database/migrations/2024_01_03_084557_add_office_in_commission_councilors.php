@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasColumn('commission_councilors', 'office_id')) return;
         Schema::table('commission_councilors', function (Blueprint $table) {
-            $table->unsignedBigInteger('office_id')->after('councilor_id');
+            $table->unsignedBigInteger('office_id')->nullable()->after('councilor_id');
             $table->foreign('office_id')->references('id')->on('offices');
         });
     }
