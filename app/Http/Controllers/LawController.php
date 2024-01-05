@@ -98,6 +98,16 @@ class LawController extends Controller
             'date' => 'nullable',
             'file' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
             'description' => 'nullable',
+        ],
+        [
+            'competency_id.required' => 'O campo competência é obrigatório!',
+            'title.required' => 'O campo título é obrigatório!',
+            'type_id.required' => 'O campo tipo é obrigatório!',
+            'date.required' => 'O campo data é obrigatório!',
+            'file.required' => 'O campo arquivo é obrigatório!',
+            'file.max' => 'O arquivo não pode ser maior que 1GB!',
+            'file.file' => 'O arquivo deve ser um arquivo!',
+            'description.required' => 'O campo descrição é obrigatório!',
         ]);
         $validatedData['slug'] = Str::slug($request->date);
         
@@ -181,6 +191,16 @@ class LawController extends Controller
             'date' => 'nullable',
             'file' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
             'description' => 'nullable',
+        ],
+        [
+            'competency_id.required' => 'O campo competência é obrigatório!',
+            'title.required' => 'O campo título é obrigatório!',
+            'type_id.required' => 'O campo tipo é obrigatório!',
+            'date.required' => 'O campo data é obrigatório!',
+            'file.required' => 'O campo arquivo é obrigatório!',
+            'file.max' => 'O arquivo não pode ser maior que 1GB!',
+            'file.file' => 'O arquivo deve ser um arquivo!',
+            'description.required' => 'O campo descrição é obrigatório!',
         ]);
         unset($validatedData['file']);
 
