@@ -152,6 +152,7 @@
                     </div>
                     <div class="second-part">
                         <div class="body">
+                            <h3 class="title">{{ $law->title }}</h3>
                             <h3 class="title">{{ date('d/m/Y', strtotime($law->date)) }}</h3>
                             <p class="description">{{ Str::limit($law->description, '75', '...') }}</p>
                         </div>

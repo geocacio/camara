@@ -11,7 +11,12 @@
             <div class="second-part">
                 <div class="body">
                     <h3 class="title">{{ $item->title }}</h3>
-                    <p class="description">{{ Str::limit($item->details, '75', '...') }}</p>
+                    @if($type ==  'lrfs')
+                        <p class="description">{{ Str::limit($item->details, '75', '...') }}</p>
+                    @endif
+                    @if($type == 'Lei')
+                        <p class="description">{{ Str::limit($item->description, '75', '...') }}</p>
+                    @endif
                 </div>
 
                 <div class="footer">
@@ -40,7 +45,12 @@
                         </span>
                     </div>
                     <div class="description">
-                        <p style="word-wrap: break-word;">{{ $item->details }}</p>
+                        @if($type ==  'lrfs')
+                            <p style="word-wrap: break-word;">{{ $item->details }}</p>
+                        @endif
+                        @if($type == 'Lei')
+                            <p style="word-wrap: break-word;">{{ $item->description }}</p>
+                        @endif
                     </div>
                 </div>
                 <div class="modal-footer">
