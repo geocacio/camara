@@ -33,6 +33,12 @@
                     <input type="date" name="date" class="form-control" value="{{ old('date') }}" {{ $types->count() <= 0 ? 'disabled' : ''}} />
                 </div>
             </div>
+            <div class="col-md-10">
+                <div class="form-group">
+                    <label>Título</label>
+                    <input type="text" name="title" class="form-control" value="{{ old('title') }}" {{ $types->count() <= 0 ? 'disabled' : ''}} />
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-6">

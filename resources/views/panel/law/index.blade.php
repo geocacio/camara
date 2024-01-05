@@ -31,6 +31,7 @@
                     <tr>
                         <th>#</th>
                         <th>Lei</th>
+                        <th>Título</th>
                         <th>Data</th>
                         <th class="text-center">Actions</th>
                     </tr>
@@ -40,6 +41,7 @@
                     <tr>
                         <td>{{ $law->id }}</td>
                         <td>{{ $law->id }} / {{ date('Y', strtotime($law->date)) }}</td>
+                        <td>{{ $law->title }}</td>
                         <td>{{ date("d/m/Y", strtotime($law->date)) }}</td>
                         <td class="actions text-center">
                             <a href="{{ route('laws.edit', $law->slug) }}" class="link edit"><i class="fas fa-edit"></i></a>
