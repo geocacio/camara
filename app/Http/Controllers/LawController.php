@@ -118,12 +118,10 @@ class LawController extends Controller
 
             $law->types()->attach($request->type);
 
-            if ($request->hasFile('files')) {
-                foreach ($request->file('files') as $file) {
-                    $url = $this->fileUploadService->upload($file, 'laws');
-                    $newFile = File::create(['url' => $url]);
-                    $law->files()->create(['file_id' => $newFile->id]);
-                }
+            if ($request->hasFile('file')) {
+                $url = $this->fileUploadService->upload($request->file('file'), 'laws');
+                $newFile = File::create(['url' => $url]);
+                $law->files()->create(['file_id' => $newFile->id]);
             }
 
             return redirect()->route('laws.index')->with('success', 'Lei cadastrada com sucesso!');
@@ -207,12 +205,10 @@ class LawController extends Controller
         $law->types()->detach();
         $law->types()->attach($request->type);
 
-        if ($request->hasFile('files')) {
-            foreach ($request->file('files') as $file) {
-                $url = $this->fileUploadService->upload($file, 'laws');
-                $newFile = File::create(['url' => $url]);
-                $law->files()->create(['file_id' => $newFile->id]);
-            }
+        if ($request->hasFile('file')) {
+            $url = $this->fileUploadService->upload($request->file('file'), 'laws');
+            $newFile = File::create(['url' => $url]);
+            $law->files()->create(['file_id' => $newFile->id]);
         }
 
         if ($law->update($validatedData)) {
