@@ -133,13 +133,13 @@
             </div>
 
         @else
-            <div class="empty-data">Nenhum veículo encontrada.</div>
+            <div class="empty-data">Nenhum veículo encontrado.</div>
         @endif
 
     </div>
 </section>
 
-@include('pages.partials.satisfactionSurvey', ['page_name' => 'Sessões'])
+@include('pages.partials.satisfactionSurvey', ['page_name' => 'veiculos'])
 
 @include('layouts.footer')
 

@@ -234,10 +234,24 @@
                 <li class="sub-item {{ request()->routeIs('constructions.index') ? 'active' : '' }}">
                     <a href="{{ route('constructions.index') }}" class="sub-link">Obras</a>
                 </li>
-                <li class="sub-item {{ request()->routeIs('veiculos.index') ? 'active' : '' }}">
-                    <a href="{{ route('veiculos.index') }}" class="sub-link">Veículos</a>
-                </li>
+                <li class="sub-item-menu {{ request()->routeIs('veiculos.index') || Str::contains(url()->current(), 'types/veiculos') ? 'active' : '' }}">
 
+                    <button class="menu-link no-padding" data-toggle="collapse" href="#collapseVeiculos">
+                        <span>Veiculos</span>
+                    </button>
+
+                    <div id="collapseVeiculos" class="collapse" aria-labelledby="headingOne" data-parent="#collapseTwo">
+                        <ul class="sub-menu">
+                            <li class="sub-item {{ request()->routeIs('veiculos.page') ? 'active' : '' }}">
+                                <a href="{{ route('veiculos.page') }}" class="sub-link">Página</a>
+                            </li>
+                            <li class="sub-item {{ request()->routeIs('veiculos.index') ? 'active' : '' }}">
+                                <a href="{{ route('veiculos.index') }}" class="sub-link">Todas</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </li>
             </ul>
         </div>
     </li>

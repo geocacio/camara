@@ -72,7 +72,7 @@
         </div>
         @else
         <div class="no-data">
-            <span>Ainda não veículos tipos cadastrados.</span>
+            <span>Ainda não veículos cadastrados.</span>
         </div>
         @endif
 

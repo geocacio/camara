@@ -621,6 +621,8 @@ Route::get('/meus-lrf/{lrf:slug}', [LRFController::class, 'show'])->name('all-lr
 Route::get('/transparencia', [App\Http\Controllers\TransparencyPortalController::class, 'show'])->name('transparency.show');
 Route::prefix('/transparencia')->group(function () {
     Route::match(['get', 'post'], 'veiculos', [App\Http\Controllers\VehicleController::class, 'show'])->name('veiculos.show');
+    Route::get('veiculos-page', [App\Http\Controllers\VehicleController::class, 'page'])->name('veiculos.page');
+    Route::put('veiculos-page', [App\Http\Controllers\VehicleController::class, 'pageUpdate'])->name('veiculos.update');
     Route::get('veiculo/{modelo?}', [App\Http\Controllers\VehicleController::class, 'single'])->name('veiculos.single');
     Route::match(['get', 'post'], '/leis', [App\Http\Controllers\LawController::class, 'show'])->name('leis.show');
     Route::match(['get', 'post'], '/decretos', [App\Http\Controllers\DecreesController::class, 'show'])->name('decretos.show');
@@ -644,6 +646,8 @@ Route::prefix('/transparencia')->group(function () {
         Route::get('pesquisa-de-satisfacao', [App\Http\Controllers\OmbudsmanQuestionController::class, 'show'])->name('survey.show');
         Route::post('pesquisa-de-satisfacao', [App\Http\Controllers\OmbudsmanSurveyController::class, 'store'])->name('survey.store');
     });
+
+    Route::get('funcionarios/{type}', [App\Http\Controllers\EmployeeController::class, 'estagiOrTerceiro'])->name('estagio.terceiro.show');
 
 
     Route::prefix('/sic')->group(function () {

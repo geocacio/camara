@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Page;
 use App\Models\Secretary;
+use App\Models\TransparencyGroup;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 
@@ -15,6 +17,39 @@ class VehicleController extends Controller
     {
         $vehicles = Vehicle::all();
         return view('panel.vehicles.index', compact('vehicles'));
+    }
+
+    public function page()
+    {
+        $page = Page::where('name', 'Veículos')->first();
+        $groups = TransparencyGroup::all();
+        return view('panel.vehicles.page.create', compact('page', 'groups'));
+    }
+
+    public function pageUpdate(Request $request){
+        $validateData = $request->validate([
+            'transparency_group_id' => 'required',
+            'main_title' => 'required',
+            'title' => 'required',
+            'icon' => 'nullable',
+            'description' => 'nullable',
+        ], [
+            'main_title.required' => 'O campo título principal é obrigatório',
+            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
+            'title.required' => 'O campo título é obrigatório'
+        ]);
+
+        $validateData['visibility'] = $request->visibility ? $request->visibility : 'disabled';
+
+        $pageSymbol = Page::where('name', 'Veículos')->first();
+
+        if ($pageSymbol->update($validateData)) {
+            $pageSymbol->groupContents()->delete();
+            $pageSymbol->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+            return redirect()->route('veiculos.page')->with('success', 'Página atualizada com sucesso!');
+        }
+
+        return redirect()->back()->with('error', 'Falha ao atualizar página!');
     }
 
     /**
