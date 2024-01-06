@@ -91,7 +91,7 @@ class LawController extends Controller
      */
     public function store(Request $request)
     {
-        dd('chega até aqui no inicio');
+        
         $validatedData = $request->validate([
             'competency_id' => 'required',
             'title' => 'required',
@@ -112,8 +112,8 @@ class LawController extends Controller
         ]);
         $validatedData['slug'] = Str::slug($request->date);
         
-        unset($validatedData['file']);
         dd('chega até aqui');
+        unset($validatedData['file']);
         $law = Law::create($validatedData);
         if ($law) {
 
