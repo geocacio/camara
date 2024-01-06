@@ -22,17 +22,11 @@ class FileUploadService
 
     public function upload($file, $destination)
     {
-        try {
         $fileName = time() . '_' . $file->getClientOriginalName();
         $filePath = $destination . '/' . $fileName;
         Storage::disk('public')->put($filePath, file_get_contents($file));
 
         return $filePath;
-    } catch (\Exception $e) {
-        // Log ou imprima mensagens de erro para depuração
-        dd($e->getMessage());
-        return null;
-    }
     }
 
     public function deleteFile($id)
