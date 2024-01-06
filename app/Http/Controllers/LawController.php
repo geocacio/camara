@@ -112,7 +112,7 @@ class LawController extends Controller
         $validatedData['slug'] = Str::slug($request->date);
         
         unset($validatedData['file']);
-
+        dd('chega até aqui');
         $law = Law::create($validatedData);
         if ($law) {
 
