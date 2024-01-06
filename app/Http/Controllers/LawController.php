@@ -91,6 +91,7 @@ class LawController extends Controller
      */
     public function store(Request $request)
     {
+        dd('chega até aqui no inicio');
         $validatedData = $request->validate([
             'competency_id' => 'required',
             'title' => 'required',
