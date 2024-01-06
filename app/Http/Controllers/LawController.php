@@ -97,7 +97,6 @@ class LawController extends Controller
             'title' => 'required',
             'type_id' => 'required',
             'date' => 'nullable',
-            'file' => "nullable|file",
             'description' => 'nullable',
         ],
         [
@@ -105,9 +104,6 @@ class LawController extends Controller
             'title.required' => 'O campo título é obrigatório!',
             'type_id.required' => 'O campo tipo é obrigatório!',
             'date.required' => 'O campo data é obrigatório!',
-            'file.required' => 'O campo arquivo é obrigatório!',
-            'file.max' => 'O arquivo não pode ser maior que 1GB!',
-            'file.file' => 'O arquivo deve ser um arquivo!',
             'description.required' => 'O campo descrição é obrigatório!',
         ]);
         $validatedData['slug'] = Str::slug($request->date);
