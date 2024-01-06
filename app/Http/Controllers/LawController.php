@@ -97,7 +97,7 @@ class LawController extends Controller
             'title' => 'required',
             'type_id' => 'required',
             'date' => 'nullable',
-            'file' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
+            'file' => "nullable|file",
             'description' => 'nullable',
         ],
         [
