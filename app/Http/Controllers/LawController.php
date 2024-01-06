@@ -108,12 +108,11 @@ class LawController extends Controller
         ]);
         $validatedData['slug'] = Str::slug($request->date);
         
-        unset($validatedData['file']);
         $law = Law::create($validatedData);
         if ($law) {
 
             $law->types()->attach($request->type);
-
+            dd('aqui antes do file');
             if ($request->hasFile('file')) {
                 dd('aqui');
                 $url = $this->fileUploadService->upload($request->file('file'), 'laws');
@@ -184,7 +183,6 @@ class LawController extends Controller
             'title' => 'required',
             'type_id' => 'required',
             'date' => 'nullable',
-            'file' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
             'description' => 'nullable',
         ],
         [
@@ -192,12 +190,8 @@ class LawController extends Controller
             'title.required' => 'O campo título é obrigatório!',
             'type_id.required' => 'O campo tipo é obrigatório!',
             'date.required' => 'O campo data é obrigatório!',
-            'file.required' => 'O campo arquivo é obrigatório!',
-            'file.max' => 'O arquivo não pode ser maior que 1GB!',
-            'file.file' => 'O arquivo deve ser um arquivo!',
             'description.required' => 'O campo descrição é obrigatório!',
         ]);
-        unset($validatedData['file']);
 
         $law->types()->detach();
         $law->types()->attach($request->type);
