@@ -115,6 +115,7 @@ class LawController extends Controller
             $law->types()->attach($request->type);
 
             if ($request->hasFile('file')) {
+                dd('aqui');
                 $url = $this->fileUploadService->upload($request->file('file'), 'laws');
                 $newFile = File::create(['url' => $url]);
                 $law->files()->create(['file_id' => $newFile->id]);
