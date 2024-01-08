@@ -111,6 +111,17 @@
                         </select>
                     </div>
                 </div>
+                {{-- <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="secretary">Secretária</label>
+                        <select name="secretary_id" class="form-control">
+                            <option value="Active">Selecione</option>
+                            @foreach($secretaries as $secretary)
+                                <option value="{{ $secretary->id }}">{{ $secretary->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div> --}}
             </div>
 
             <div class="form-group">

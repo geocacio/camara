@@ -20,6 +20,9 @@ class Employee extends Model
         'employment_type',
         'status',
         'slug',
+        'secretary_id',
+        'contact_number',
+        'credor',
     ];
 
     public function office()

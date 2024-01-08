@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\Office;
+use App\Models\Secretary;
 use App\Services\FileUploadService;
 use App\Services\GeneralCrudService;
 use Illuminate\Http\Request;
@@ -29,13 +30,37 @@ class EmployeeController extends Controller
         return view('panel.employees.index', compact('employees'));
     }
 
+    public function estagiOrTerceiro(Request $request, $type){
+
+        if($type == 'estagiarios'){
+            $type = 'Intern';
+        }
+
+        if($request->filled('secretary_id')){
+            $query->where('secretary_id', 'LIKE', '%' . $request->input('secretary_id') . '%');
+        }
+
+        if($request->filled('situation')){
+            $query->where('situation', 'LIKE', '%' . $request->input('situation') . '%');
+        }
+
+        if($request->filled('model')){
+            $query->where('model', 'LIKE', '%' . $request->input('model') . '%');
+        }
+
+        $employees = Employee::where('employment_type', $type)->orWhere('employment_type', $type)->get();
+        $searchData = $request->only(['secretary_id', 'situation', 'model', 'brand', 'plate', 'type']);
+        return view('pages.employees.estagi.index', compact('employees', 'searchData'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
         $offices = Office::all();
-        return view('panel.employees.create', compact('offices'));
+        $secretaries = Secretary::all();
+        return view('panel.employees.create', compact('offices', 'secretaries'));
     }
 
     /**
@@ -53,8 +78,12 @@ class EmployeeController extends Controller
             'admission_date' => 'nullable',
             'employment_type' => 'nullable',
             'status' => 'nullable',
+            'secretary_id' => 'nullable',
+            'contact_number' => 'nullable',
+            'credor' => 'nullable',
             'file' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
         ]);
+
         $validatedData['slug'] = Str::slug($request->name);
         unset($validatedData['file']);
 
