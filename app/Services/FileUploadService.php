@@ -12,7 +12,7 @@ class FileUploadService
 
     public function __construct()
     {
-        $this->maxSize = 51200;
+        $this->maxSize = 1073741824;
     }
     
     public function getMaxSize()

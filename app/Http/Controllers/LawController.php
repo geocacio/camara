@@ -91,6 +91,7 @@ class LawController extends Controller
      */
     public function store(Request $request)
     {
+        
         $validatedData = $request->validate([
             'competency_id' => 'required',
             'title' => 'required',
@@ -98,22 +99,28 @@ class LawController extends Controller
             'date' => 'nullable',
             'file' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
             'description' => 'nullable',
+        ],
+        [
+            'competency_id.required' => 'O campo competência é obrigatório!',
+            'title.required' => 'O campo título é obrigatório!',
+            'type_id.required' => 'O campo tipo é obrigatório!',
+            'date.required' => 'O campo data é obrigatório!',
+            'file.required' => 'O campo arquivo é obrigatório!',
+            'file.max' => 'O arquivo não pode ser maior que 1GB!',
+            'file.file' => 'O arquivo deve ser um arquivo!',
+            'description.required' => 'O campo descrição é obrigatório!',
         ]);
         $validatedData['slug'] = Str::slug($request->date);
         
-        unset($validatedData['file']);
-
         $law = Law::create($validatedData);
         if ($law) {
 
             $law->types()->attach($request->type);
 
-            if ($request->hasFile('files')) {
-                foreach ($request->file('files') as $file) {
-                    $url = $this->fileUploadService->upload($file, 'laws');
-                    $newFile = File::create(['url' => $url]);
-                    $law->files()->create(['file_id' => $newFile->id]);
-                }
+            if ($request->hasFile('file')) {
+                $url = $this->fileUploadService->upload($request->file('file'), 'laws');
+                $newFile = File::create(['url' => $url]);
+                $law->files()->create(['file_id' => $newFile->id]);
             }
 
             return redirect()->route('laws.index')->with('success', 'Lei cadastrada com sucesso!');
@@ -181,18 +188,25 @@ class LawController extends Controller
             'date' => 'nullable',
             'file' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
             'description' => 'nullable',
+        ],
+        [
+            'competency_id.required' => 'O campo competência é obrigatório!',
+            'title.required' => 'O campo título é obrigatório!',
+            'type_id.required' => 'O campo tipo é obrigatório!',
+            'date.required' => 'O campo data é obrigatório!',
+            'file.required' => 'O campo arquivo é obrigatório!',
+            'file.max' => 'O arquivo não pode ser maior que 1GB!',
+            'file.file' => 'O arquivo deve ser um arquivo!',
+            'description.required' => 'O campo descrição é obrigatório!',
         ]);
-        unset($validatedData['file']);
-
+        
         $law->types()->detach();
         $law->types()->attach($request->type);
 
-        if ($request->hasFile('files')) {
-            foreach ($request->file('files') as $file) {
-                $url = $this->fileUploadService->upload($file, 'laws');
-                $newFile = File::create(['url' => $url]);
-                $law->files()->create(['file_id' => $newFile->id]);
-            }
+        if ($request->hasFile('file')) {
+            $url = $this->fileUploadService->upload($request->file('file'), 'laws');
+            $newFile = File::create(['url' => $url]);
+            $law->files()->create(['file_id' => $newFile->id]);
         }
 
         if ($law->update($validatedData)) {

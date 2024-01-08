@@ -86,7 +86,7 @@
 
         <div class="form-group">
             <label for="logo">Arquivo</label>
-            <input type="file" name="files[]" accept="application/pdf" class="form-control" multiple {{ $types->count() <= 0 ? 'disabled' : ''}}>
+            <input type="file" name="file" accept="application/pdf" class="form-control" {{ $types->count() <= 0 ? 'disabled' : ''}}>
         </div>
         <div class="form-group">
             <label>Descrição</label>
