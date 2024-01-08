@@ -15,6 +15,7 @@ use App\Models\Recipes;
 use App\Models\ServiceLetter;
 use App\Models\Type;
 use App\Models\TypeContent;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 
@@ -22,16 +23,27 @@ class AdvancedSearchController extends Controller
 {
     public function search(Request $request){
         $search = $request->get('search');
+
+        // Verificar se $search é uma data no formato 'd/m/Y'
+        if (preg_match('/^\d{2}\/\d{2}\/\d{4}$/', $search)) {
+            // Converter para o formato 'Y-m-d'
+            $searchDate = Carbon::createFromFormat('d/m/Y', $search)->format('Y-m-d');
+        } else {
+            // Se não for uma data, usar o valor original
+            $searchDate = $search;
+        }
     
         $types = Type::where('name', 'like', '%'.$search.'%')->pluck('id');
         $type_contents = TypeContent::whereIn('type_id', $types)->pluck('typeable_id');
         $officies = Office::where('office', 'like', '%'.$search.'%')->pluck('id');
     
-        $laws = Law::where('description', 'like', '%'.$search.'%')->orWhere('title', 'like', '%'.$search.'%')->get();
+        $laws = Law::where('description', 'like', '%'.$search.'%')->orWhere('title', 'like', '%'.$search.'%')->orWhere('date', 'like', '%'.$searchDate.'%')->get();
         $lrfs = LRF::where('title', 'like', '%'.$search.'%')->get();
+
         $ordinances = Ordinance::where('number', 'like', '%'.$search.'%')->orWhere('date', 'like', '%'.$search.'%')
             ->orWhere('agent', 'like', '%'.$search.'%')->orWhere('detail', 'like', '%'.$search.'%')->orWhereIn('office_id', $officies)
             ->get();
+
         $publications = Publication::where('visibility', 'enabled')->where('title', 'like', '%'.$search.'%')->orWhere('description', 'like', '%'.$search.'%')->get();
     
         $construction = Construction::where('title', 'like', '%'.$search.'%')->
