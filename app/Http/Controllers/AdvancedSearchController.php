@@ -27,12 +27,12 @@ class AdvancedSearchController extends Controller
         $type_contents = TypeContent::whereIn('type_id', $types)->pluck('typeable_id');
         $officies = Office::where('office', 'like', '%'.$search.'%')->pluck('id');
     
-        $laws = Law::where('description', 'like', '%'.$search.'%')->get();
+        $laws = Law::where('description', 'like', '%'.$search.'%')->orWhere('title', 'like', '%'.$search.'%')->get();
         $lrfs = LRF::where('title', 'like', '%'.$search.'%')->get();
         $ordinances = Ordinance::where('number', 'like', '%'.$search.'%')->orWhere('date', 'like', '%'.$search.'%')
             ->orWhere('agent', 'like', '%'.$search.'%')->orWhere('detail', 'like', '%'.$search.'%')->orWhereIn('office_id', $officies)
             ->get();
-        $publications = Publication::where('visibility', 'enabled')->orWhere('title', 'like', '%'.$search.'%')->orWhere('description', 'like', '%'.$search.'%')->get();
+        $publications = Publication::where('visibility', 'enabled')->where('title', 'like', '%'.$search.'%')->orWhere('description', 'like', '%'.$search.'%')->get();
     
         $construction = Construction::where('title', 'like', '%'.$search.'%')->
             orWhere('local', 'like', '%'.$search.'%')
