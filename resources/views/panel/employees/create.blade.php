@@ -111,7 +111,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12" style="display: none" id="terceirizado-secretary">
                     <div class="form-group">
                         <label for="secretary">Secretária</label>
                         <select name="secretary_id" class="form-control">

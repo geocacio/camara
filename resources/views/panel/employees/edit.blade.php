@@ -116,6 +116,18 @@
                 </div>
             </div>
 
+            <div class="col-md-12" @if($employee->employment_type != 'Contractor' && $employee->employment_type != 'Intern') style="display: none" @endif id="terceirizado-secretary">
+                <div class="form-group">
+                    <label for="secretary">Secretária</label>
+                    <select name="secretary_id" class="form-control">
+                        <option value="Active">Selecione</option>
+                        @foreach($secretaries as $secretary)
+                            <option value="{{ $secretary->id }}" {{ $employee->secretary_id == $secretary->id ? 'selected' : '' }}>{{ $secretary->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
 
             <div class="form-group">
                 <div class="custom-input-file">

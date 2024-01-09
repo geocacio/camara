@@ -118,7 +118,8 @@ class EmployeeController extends Controller
     public function edit(Employee $employee)
     {
         $offices = Office::all();
-        return view('panel.employees.edit', compact('employee', 'offices'));
+        $secretaries = Secretary::all();
+        return view('panel.employees.edit', compact('employee', 'offices', 'secretaries'));
     }
 
     /**

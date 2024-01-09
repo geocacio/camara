@@ -131,8 +131,16 @@ document.addEventListener("DOMContentLoaded", () => {
             var selectedOption = $(this).val();
             if (selectedOption == 'Contractor') {
                 $('#terceirizado').show();
+                $('#terceirizado-secretary').show();
             }else {
                 $('#terceirizado').hide();
+                $('#terceirizado-secretary').hide();
+            }
+
+            if(selectedOption == 'Intern' || selectedOption == 'Contractor'  ){
+                $('#terceirizado-secretary').show();
+            }else {
+                $('#terceirizado-secretary').hide();
             }
         });
     });
