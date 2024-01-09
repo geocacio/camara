@@ -78,21 +78,9 @@
                                 <h3 class="name-managers">{{ $commission->description }}</h3>
 
                                 <div class="row container-descriptions">
-                                    {{-- <div class="col-md-6">
-                                        <p class="title">Autor</p>
-                                        <p class="description">{{ $commission->councilor->name}}</p>
-                                    </div> --}}
-                                    {{-- <div class="col-md-6">
-                                        <p class="title">Data</p>
-                                        <p class="description">{{ date('d/m/Y', strtotime($commission->date)) }}</p>
-                                    </div> --}}
                                     <div class="col-md-6">
                                         <p class="title">Tipo</p>
                                         <p class="description">{{ $commission->types[0]->name }}</p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p class="title">Visualizações</p>
-                                        <p class="description">{{ $commission->views }}</p>
                                     </div>
 
                                     <div class="col-md-12">
