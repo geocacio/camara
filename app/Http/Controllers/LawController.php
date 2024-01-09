@@ -160,6 +160,35 @@ class LawController extends Controller
         return view('pages.laws.index', compact('page_law', 'laws', 'searchData', 'competencies', 'types'));
     }
 
+    public function byCategory(Request $request, Category $category){
+        $page_law = Page::where('name', 'Leis')->first();
+        $query = Law::query();
+        $competencies = Category::where('parent_id', 8)->get();
+        $types = Type::where('parent_id', 9)->get();
+
+        $query->whereHas('categories', function ($query) use ($category) {
+            $query->where('id', $category->id);
+        });
+        
+        if($request->filled('date')){
+            $query->whereDate('date', '=', date("Y-m-d", strtotime($request->input('date'))));
+        }
+        if($request->filled('description')){
+            $query->where('description', 'LIKE', '%' . $request->input('description') . '%');
+        }
+        if($request->filled('competencie')){
+            $query->where('competency_id', $request->input('competencie'));
+        }
+        if($request->filled('type')){
+            $query->where('type_id', $request->input('type'));
+        }
+
+        $laws = $query->paginate(10);
+        $searchData = $request->only(['number', 'date', 'description', 'competencie', 'type']);
+
+        return view('pages.laws.index', compact('page_law', 'laws', 'searchData', 'competencies', 'types'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

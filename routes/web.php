@@ -625,6 +625,7 @@ Route::prefix('/transparencia')->group(function () {
     Route::put('veiculos-page', [App\Http\Controllers\VehicleController::class, 'pageUpdate'])->name('veiculos.update');
     Route::get('veiculo/{modelo?}', [App\Http\Controllers\VehicleController::class, 'single'])->name('veiculos.single');
     Route::match(['get', 'post'], '/leis', [App\Http\Controllers\LawController::class, 'show'])->name('leis.show');
+    Route::get('leis/{category?}', [App\Http\Controllers\LawController::class, 'byCategory'])->name('leis.category');
     Route::match(['get', 'post'], '/decretos', [App\Http\Controllers\DecreesController::class, 'show'])->name('decretos.show');
     Route::get('/diarias/{daily:id}', [App\Http\Controllers\DailyController::class, 'single'])->name('diarias.single');
     Route::match(['get', 'post'], '/diarias', [App\Http\Controllers\DailyController::class, 'show'])->name('diarias.show');

@@ -20,7 +20,7 @@ class AddingLawsLinkCategoriesSeeder extends Seeder
             foreach ($categories->children as $category) {
                 Link::firstOrCreate([
                     'name' => $category->name,
-                    'route' => 'leis.category' . $category->slug,
+                    'route' => 'leis.category',
                     'slug' => Str::slug($category->name)
                 ]);
             }

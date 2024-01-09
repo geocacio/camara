@@ -101,17 +101,29 @@
                                 </li>
                                 
                             @elseif($link->type == 'link')
-                                
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="{{ $link->target_id ? route($link->target->route) : $link->url }}">
-                                        @if($link->icon)
-                                            <i class="{{ $link->icon }}"></i>
-                                        @endif
-                                        @if($link->name)
-                                            <span class="label">{{ $link->name }}</span>
-                                        @endif
-                                    </a>
-                                </li>
+                                @if(isset($link->route) && $link->route == 'leis.category')
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="{{ route($link->route, $link->slug) }}">
+                                            @if($link->icon)
+                                                <i class="{{ $link->icon }}"></i>
+                                            @endif
+                                            @if($link->name)
+                                                <span class="label">{{ $link->name }}</span>
+                                            @endif
+                                        </a>
+                                    </li>
+                                @else
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="{{ $link->target_id ? route($link->target->route) : $link->url }}">
+                                            @if($link->icon)
+                                                <i class="{{ $link->icon }}"></i>
+                                            @endif
+                                            @if($link->name)
+                                                <span class="label">{{ $link->name }}</span>
+                                            @endif
+                                        </a>
+                                    </li>
+                                @endif
                             @endif
 
                         @endif
