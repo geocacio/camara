@@ -95,7 +95,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4" id="external_links">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="title1">Status</label>
                         <select name="status" class="form-control">
