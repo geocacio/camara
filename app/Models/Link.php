@@ -9,7 +9,7 @@ class Link extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'icon', 'target_id', 'target_type', 'slug', 'visibility', 'parent_id', 'type', 'url'];
+    protected $fillable = ['name', 'icon', 'target_id', 'target_type', 'route', 'slug', 'visibility', 'parent_id', 'type', 'url'];
 
     public function target()
     {
