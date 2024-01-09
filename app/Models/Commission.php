@@ -14,6 +14,7 @@ class Commission extends Model
         'description',
         'information',
         'slug',
+        'more_info',
     ];
     
     public function types()

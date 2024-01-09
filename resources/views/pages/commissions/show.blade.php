@@ -73,9 +73,13 @@
                                         <p class="title">Autor</p>
                                         <p class="description">{{ $commission->councilor->name}}</p>
                                     </div> --}}
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <p class="title">Data</p>
                                         <p class="description">{{ date('d/m/Y', strtotime($commission->date)) }}</p>
+                                    </div> --}}
+                                    <div class="col-md-6">
+                                        <p class="title">Tipo</p>
+                                        <p class="description">{{ $commission->types[0]->name }}</p>
                                     </div>
                                     <div class="col-md-6">
                                         <p class="title">Visualizações</p>
@@ -85,6 +89,11 @@
                                     <div class="col-md-12">
                                         <p class="title">Resumo</p>
                                         <p class="description">{{ $commission->description }}</p>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <p class="title">Mais informações</p>
+                                        <p class="description">{{ $commission->more_info }}</p>
                                     </div>
                                 </div>
                             </div>
