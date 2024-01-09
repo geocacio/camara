@@ -44,6 +44,7 @@ class BannerController extends Controller
         $validateData = $request->validate([
             'link_id' => 'nullable',
             'type' => 'nullable',
+            'external_url' => 'nullable',
             'color' => 'nullable',
             'image' => "nullable|image|mimes:jpeg,png,jpg,gif|max:{$this->fileUploadService->getMaxSize()}",
         ],
@@ -51,6 +52,8 @@ class BannerController extends Controller
             'image.max' => "O campo imagem do perfil não pode ter mais de {$this->fileUploadService->getMaxSize()} bytes.",
         ]);
         $validateData['color'] = $request->with_color == 'sim' ? $validateData['color'] : 'none';
+        //Esta linha aqui é por que eu não posso trocar os campo
+        $validateData['type'] = $validateData['type'] == 'externo' ? 'link' : $validateData['type'];
 
         $banner = Banner::create($validateData);
 
@@ -90,6 +93,7 @@ class BannerController extends Controller
     {
         $validateData = $request->validate([
             'link_id' => 'nullable',
+            'external_url' => 'nullable',
             'type' => 'nullable',
             'color' => 'nullable',
             'image' => "nullable|image|mimes:jpeg,png,jpg,gif|max:{$this->fileUploadService->getMaxSize()}",
@@ -98,6 +102,8 @@ class BannerController extends Controller
             'image.max' => "O campo imagem do perfil não pode ter mais de {$this->fileUploadService->getMaxSize()} bytes.",
         ]);
         $validateData['color'] = $request->with_color == 'sim' ? $validateData['color'] : 'none';
+        //Esta linha aqui é por que eu não posso trocar os campo
+        $validateData['type'] = $validateData['type'] == 'externo' ? 'link' : $validateData['type'];
 
         if($banner->update($validateData)){
             if ($request->hasFile('image')) {

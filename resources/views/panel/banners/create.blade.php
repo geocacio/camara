@@ -25,6 +25,7 @@
                 <label for="type_id">Tipo</label>
                 <select id="select_type" name="type" class="form-control">
                     <option value="link">Link</option>
+                    <option value="externo">Link externo</option>
                     <option value="simples">Apenas a imagem</option>
                 </select>
             </div>
@@ -36,6 +37,11 @@
                     <option value="{{ $link->id }}">{{ $link['name'] ? $link['name'] : $link['icon'] }}</option>
                     @endforeach
                 </select>
+            </div>
+
+            <div class="form-group form-group-external-link">
+                <label for="external_url">Link Externo</label>
+                <input type="text" id="external_url" name="external_url" class="form-control">
             </div>
 
             <div class="row">
@@ -88,7 +94,20 @@
 <script>
     const type = document.querySelector('#select_type');
     const fromGroupLinks = document.querySelector('.form-group-links');
-    type.addEventListener('change', e => e.target.value == 'simples' ? fromGroupLinks.style.display = 'none' : fromGroupLinks.style.display = 'block');
+    const formGroupExternalLink = document.querySelector('.form-group-external-link');
+
+    type.addEventListener('change', e => {
+        if (e.target.value == 'simples') {
+            fromGroupLinks.style.display = 'none';
+            formGroupExternalLink.style.display = 'none';
+        } else if (e.target.value == 'link') {
+            fromGroupLinks.style.display = 'block';
+            formGroupExternalLink.style.display = 'none';
+        } else if (e.target.value == 'externo') {
+            fromGroupLinks.style.display = 'none';
+            formGroupExternalLink.style.display = 'block';
+        }
+    });
 
     const withColor = document.querySelector('#with_color');
     const colBG = document.querySelector('.col-background-color');

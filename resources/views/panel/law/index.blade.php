@@ -18,6 +18,7 @@
                     <a class="dropdown-item" href="{{ route('laws.page') }}">Página</a>
                     <a class="dropdown-item" href="{{ route('laws.create') }}">Novo</a>
                     <a class="dropdown-item" href="{{ route('subtypes.index', 'laws') }}">Tipos</a>
+                    {{-- <a class="dropdown-item" href="{{ route('subcategories.index', 'leis') }}">Categorias</a> --}}
                 </div>
             </div>
         

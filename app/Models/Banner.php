@@ -9,7 +9,7 @@ class Banner extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['link_id', 'type', 'color'];
+    protected $fillable = ['link_id', 'type', 'color', 'external_url'];
     
     public function files()
     {
