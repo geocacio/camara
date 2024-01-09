@@ -33,7 +33,7 @@
 
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="index-tab" data-bs-toggle="tab" data-bs-target="#index" type="button" role="tab">
-                                <i class="fa-solid fa-user-tie"></i>
+                                <i class="fa-regular fa-file-lines"></i>
                                 Sobre
                             </button>
                         </li>
@@ -52,6 +52,15 @@
                             <button class="nav-link" id="material-tab" data-bs-toggle="tab" data-bs-target="#material" type="button" role="tab">
                                 <i class="fa-solid fa-copy"></i>
                                 Pautas
+                            </button>
+                        </li>
+                        @endif
+
+                        @if($members && count($members))
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="membros-tab" data-bs-toggle="tab" data-bs-target="#membros" type="button" role="tab">
+                                <i class="fa-solid fa-user-tie"></i>
+                                Membros anteriores
                             </button>
                         </li>
                         @endif
@@ -158,6 +167,33 @@
                                                     <td>{{ $item->proceeding->category->name }}</td>
                                                     <td>{{ $item->phase }}</td>
                                                     <td>{{ $item->observation }}</td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if($members && count($members))
+                            <div class="tab-pane fadeshow" id="membros" role="tabpanel" aria-labelledby="membros-tab">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-data-default">
+                                            <thead>
+                                                <tr>
+                                                    <th>Período</th>
+                                                    <th>Cargo</th>
+                                                    <th>Membro</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($members as $item)
+                                                <tr>
+                                                    <td>{{ date('d/m/Y', strtotime($item->start_date)) . ' - ' . date('d/m/Y', strtotime($item->end_date)) }}</td>
+                                                    <td>{{ $item->office->office }}</td>
+                                                    <td>{{ $item->councilor->name }}</td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>

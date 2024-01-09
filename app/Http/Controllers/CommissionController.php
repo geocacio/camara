@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Commission;
+use App\Models\CommissionCouncilor;
 use App\Models\Page;
 use App\Models\TransparencyGroup;
 use App\Models\Type;
@@ -116,7 +117,10 @@ class CommissionController extends Controller
             $materials[] = $material;
             $progress = $material->progress;
         }
-        return view('pages.commissions.show', compact('commission', 'materials', 'progress'));
+
+        $members = CommissionCouncilor::where('commission_id', $commission->id)->whereDate('end_date', '<', now())->get();
+
+        return view('pages.commissions.show', compact('commission', 'materials', 'progress', 'members'));
     }
 
     /**

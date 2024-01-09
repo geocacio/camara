@@ -27,4 +27,9 @@ class CommissionCouncilor extends Model
     {
         return $this->belongsTo(Councilor::class);
     }
+
+    public function office()
+    {
+        return $this->belongsTo(Office::class);
+    }
 }
