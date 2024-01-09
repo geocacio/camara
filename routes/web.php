@@ -647,7 +647,8 @@ Route::prefix('/transparencia')->group(function () {
         Route::post('pesquisa-de-satisfacao', [App\Http\Controllers\OmbudsmanSurveyController::class, 'store'])->name('survey.store');
     });
 
-    Route::match(['get', 'post'] ,'funcionarios/{type}', [App\Http\Controllers\EmployeeController::class, 'estagiOrTerceiro'])->name('estagio.terceiro.show');
+    Route::match(['get', 'post'] ,'funcionarios/estagiarios', [App\Http\Controllers\EmployeeController::class, 'Trainee'])->name('trainee.show');
+    Route::match(['get', 'post'] ,'funcionarios/terceirizados', [App\Http\Controllers\EmployeeController::class, 'Outsourced'])->name('terceirizados.show');
 
 
     Route::prefix('/sic')->group(function () {

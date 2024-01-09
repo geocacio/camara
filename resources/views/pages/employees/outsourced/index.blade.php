@@ -9,19 +9,11 @@
         <a href="{{ route('transparency.show') }}" class="link">Portal da transparência</a>
     </li>
     <li class="item">
-        @if($type == 'terceirizados')
         <span>Terceirizados</span>
-        @elseif($type == 'estagiarios')
-            <span>Estágiarios</span>
-        @endif
     </li>
 </ul>
 
-@if($type == 'terceirizados')
-    <h3 class="title-sub-page main">Terceirizados</h3>
-@elseif($type == 'estagiarios')
-    <h3 class="title-sub-page main">Estágiarios</h3>
-@endif
+<h3 class="title-sub-page main">Terceirizados</h3>
 @endsection
 
 @section('content')
@@ -37,9 +29,9 @@
                 <div class="card main-card container-search-advanced">
                     <div class="search-advanced mb-0">
                         <h3 class="title">Campos para pesquisa</h3>
-                        <form action="{{ route('estagio.terceiro.show', $type) }}" method="post">
+                        <form action="{{ route('terceirizados.show') }}" method="post">
                             @csrf
-                            <span>{{ $type }}</span>
+                            <span>Terceirizados</span>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group mb-0">
@@ -59,7 +51,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group mb-0">
                                         <label>Nome</label>
-                                        <input type="text" name="name" value="{{ old('start_date', $searchData['start_date'] ?? '') }}" class="form-control input-sm" />
+                                        <input type="text" name="name" value="{{ old('name', $searchData['name'] ?? '') }}" class="form-control input-sm" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -70,29 +62,29 @@
                                 </div>
                             </div>
 
-                            @if($type == 'terceirizados')
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-0">
-                                            <label>Credor</label>
-                                            <input type="text" name="credor" value="{{ old('credor', $searchData['credor'] ?? '') }}" class="form-control input-sm" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-0">
-                                            <label>Número do contrato</label>
-                                            <input type="text" name="contact_number" value="{{ old('contact_number', $searchData['contact_number'] ?? '') }}" class="form-control input-sm" />
-                                        </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-0">
+                                        <label>Credor</label>
+                                        <input type="text" name="credor" value="{{ old('credor', $searchData['credor'] ?? '') }}" class="form-control input-sm" />
                                     </div>
                                 </div>
-                            @endif
+                                <div class="col-md-6">
+                                    <div class="form-group mb-0">
+                                        <label>Número do contrato</label>
+                                        <input type="text" name="contact_number" value="{{ old('contact_number', $searchData['contact_number'] ?? '') }}" class="form-control input-sm" />
+                                    </div>
+                                </div>
+                            </div>
+                            
 
                             <div class="row">
                                 <div class="mt-2 col-md-12">
                                     <div class="h-100 form-group mb-0">
                                         <div class="btn-groups">
                                             <button type="submit" class="btn btn-search btn-sm" data-toggle="tooltip" title="Pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button>
-                                            <a href="{{ route('glossario.show') }}" class="btn btn-search close btn-sm" data-toggle="tooltip" title="Limpar pesquisa"><i class="fa-solid fa-xmark"></i></a>
+                                            <a href="{{ route('terceirizados.show') }}" class="btn btn-search close btn-sm" data-toggle="tooltip" title="Limpar pesquisa"><i class="fa-solid fa-xmark"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -135,7 +127,7 @@
     </div>
 </section>
 
-@include('pages.partials.satisfactionSurvey', ['page_name' => 'Glossário'])
+@include('pages.partials.satisfactionSurvey', ['page_name' => 'Terceirizados'])
 
 @include('layouts.footer')
 

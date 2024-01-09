@@ -30,15 +30,31 @@ class EmployeeController extends Controller
         return view('panel.employees.index', compact('employees'));
     }
 
-    public function estagiOrTerceiro(Request $request, $type){
+    public function Trainee(Request $request){
 
-        if($type == 'estagiarios'){
-            $getType = 'Intern';
-        } else if ($type == 'terceirizados'){
-            $getType = 'Contractor';
+        $query = Employee::where('employment_type', 'Intern');
+    
+        $cargos = Office::all();
+        $secretarias = Secretary::all();
+        
+        if($request->filled('name')){
+            $query->where('name', 'LIKE', '%' . $request->input('name') . '%');
         }
     
-        $query = Employee::where('employment_type', $getType);
+        if($request->filled('secretary')){
+            $query->where('secretary', 'LIKE', '%' . $request->input('secretary') . '%');
+        }
+    
+        $employees = $query->get();
+    
+        $searchData = $request->only(['name' ,'secretary', 'credor', 'contact_number']);
+    
+        return view('pages.employees.trainee.index', compact('employees', 'cargos', 'secretarias', 'searchData'));
+    }
+
+    public function Outsourced(Request $request){
+    
+        $query = Employee::where('employment_type', 'Contractor');
     
         $cargos = Office::all();
         $secretarias = Secretary::all();
@@ -63,7 +79,7 @@ class EmployeeController extends Controller
     
         $searchData = $request->only(['name' ,'secretary', 'credor', 'contact_number']);
     
-        return view('pages.employees.estagi.index', compact('employees', 'type', 'cargos', 'secretarias', 'searchData'));
+        return view('pages.employees.outsourced.index', compact('employees', 'cargos', 'secretarias', 'searchData'));
     }
     
     /**
