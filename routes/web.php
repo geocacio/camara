@@ -267,6 +267,13 @@ Route::middleware('auth')->group(function () {
         Route::resource('/chambers-financials', ChamberFinancialController::class);
         Route::post('/chamber-financial/status', [ChamberFinancialController::class, 'status']);
 
+        Route::get('funcionarios/terceirizados-page', [App\Http\Controllers\EmployeeController::class, 'outsourcedPage'])->name('terceirizados.page');
+        Route::get('funcionarios/estagiarios-page', [App\Http\Controllers\EmployeeController::class, 'traineePage'])->name('treinee.page');
+
+        Route::put('funcionarios/terceirizados-page', [App\Http\Controllers\EmployeeController::class, 'outsourcedPageUpdate'])->name('terceirizados.page.update');
+        Route::put('funcionarios/estagiarios-page', [App\Http\Controllers\EmployeeController::class, 'traineePageUpdate'])->name('treinee.page.update');
+
+
 
         //Routes linked to biddings
         Route::resource('/progress', ProgressController::class);

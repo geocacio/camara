@@ -511,6 +511,12 @@
                 <li class="sub-item {{ request()->routeIs('offices.index') ? 'active' : '' }}">
                     <a href="{{ route('offices.index') }}" class="sub-link">Cargos</a>
                 </li>
+                <li class="sub-item {{ request()->routeIs('terceirizados.page') ? 'active' : '' }}">
+                    <a href="{{ route('terceirizados.page') }}" class="sub-link">Página de Terceirizados</a>
+                </li>
+                <li class="sub-item {{ request()->routeIs('treinee.page') ? 'active' : '' }}">
+                    <a href="{{ route('treinee.page') }}" class="sub-link">Página de Estagiários</a>
+                </li>
             </ul>
         </div>
     </li>

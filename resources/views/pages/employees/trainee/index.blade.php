@@ -9,11 +9,11 @@
         <a href="{{ route('transparency.show') }}" class="link">Portal da transparência</a>
     </li>
     <li class="item">
-        <span>Estágiarios</span>
+        <span>{{ $page->title != '' ? $page->title : 'Estagiários' }}</span>
     </li>
 </ul>
 
-<h3 class="title-sub-page main">Estágiarios</h3>
+<h3 class="title-sub-page main"><span>{{ $page->title != '' ? $page->title : 'Estagiários' }}</span></h3>
 @endsection
 
 @section('content')
@@ -36,13 +36,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group mb-0">
                                         <label>De:</label>
-                                        <input type="date" name="start_date" value="{{ old('start_date', $searchData['start_date'] ?? '') }}" class="form-control input-sm" />
+                                        <input type="date" name="start_date" value="{{ old('start_date', $searchData['start_date'] ?? '') }}" class="form-control  input-sm" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group mb-0">
                                         <label>Até:</label>
-                                        <input type="date" name="end_date" value="{{ old('end_date', $searchData['end_date'] ?? '') }}" class="form-control input-sm" />
+                                        <input type="date" name="end_date" value="{{ old('end_date', $searchData['end_date'] ?? '') }}" class="form-control  input-sm" />
                                     </div>
                                 </div>
                             </div>
@@ -51,13 +51,20 @@
                                 <div class="col-md-6">
                                     <div class="form-group mb-0">
                                         <label>Nome</label>
-                                        <input type="text" name="name" value="{{ old('name', $searchData['name'] ?? '') }}" class="form-control input-sm" />
+                                        <input type="text" name="name" value="{{ old('name', $searchData['name'] ?? '') }}" class="form-control  input-sm" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group mb-0">
                                         <label>Secretaria</label>
-                                        <input type="date" name="secretary" value="{{ old('secretary', $searchData['secretary'] ?? '') }}" class="form-control input-sm" />
+                                        <select name="secretary" class="form-control  input-sm">
+                                            <option value="">Selecione a secretária</option>
+                                            @foreach($secretarias as $secretaria)
+                                            <option value="{{ $secretaria->id }}" {{ $searchData['secretary'] ?? null == $secretaria->id ? 'selected' : '' }}>
+                                                {{ $secretaria->name }}
+                                            </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +117,7 @@
     </div>
 </section>
 
-@include('pages.partials.satisfactionSurvey', ['page_name' => 'Glossário'])
+@include('pages.partials.satisfactionSurvey', ['page_name' => 'Estágiarios'])
 
 @include('layouts.footer')
 

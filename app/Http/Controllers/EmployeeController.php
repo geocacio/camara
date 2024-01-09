@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\Office;
+use App\Models\Page;
 use App\Models\Secretary;
+use App\Models\TransparencyGroup;
 use App\Services\FileUploadService;
 use App\Services\GeneralCrudService;
 use Illuminate\Http\Request;
@@ -36,20 +38,32 @@ class EmployeeController extends Controller
     
         $cargos = Office::all();
         $secretarias = Secretary::all();
+        $page = Page::where('name', 'Estágiarios')->first();
+
+        if ($request->filled('start_date') || $request->filled('end_date')) {
+            $query->where(function ($q) use ($request) {
+                if ($request->filled('start_date')) {
+                    $q->where('admission_date', '>=', $request->input('start_date'));
+                }
+                if ($request->filled('end_date')) {
+                    $q->where('admission_date', '<=', $request->input('end_date'));
+                }
+            });
+        } 
         
         if($request->filled('name')){
             $query->where('name', 'LIKE', '%' . $request->input('name') . '%');
         }
-    
+        
         if($request->filled('secretary')){
-            $query->where('secretary', 'LIKE', '%' . $request->input('secretary') . '%');
+            $query->where('secretary_id', 'LIKE', '%' . $request->input('secretary') . '%');
         }
     
         $employees = $query->get();
     
-        $searchData = $request->only(['name' ,'secretary', 'credor', 'contact_number']);
+        $searchData = $request->only(['name' ,'secretary', 'credor', 'contact_number', 'start_date', 'end_date']);
     
-        return view('pages.employees.trainee.index', compact('employees', 'cargos', 'secretarias', 'searchData'));
+        return view('pages.employees.trainee.index', compact('employees', 'cargos', 'secretarias', 'searchData', 'page'));
     }
 
     public function Outsourced(Request $request){
@@ -58,13 +72,27 @@ class EmployeeController extends Controller
     
         $cargos = Office::all();
         $secretarias = Secretary::all();
+        $page = Page::where('name', 'Terceirizados')->first();
+
+        
+        if ($request->filled('start_date') || $request->filled('end_date')) {
+            $query->where(function ($q) use ($request) {
+                if ($request->filled('start_date')) {
+                    $q->where('admission_date', '>=', $request->input('start_date'));
+                }
+                if ($request->filled('end_date')) {
+                    $q->where('admission_date', '<=', $request->input('end_date'));
+                }
+            });
+        } 
+        
         
         if($request->filled('name')){
             $query->where('name', 'LIKE', '%' . $request->input('name') . '%');
         }
-    
+        
         if($request->filled('secretary')){
-            $query->where('secretary', 'LIKE', '%' . $request->input('secretary') . '%');
+            $query->where('secretary_id', 'LIKE', '%' . $request->input('secretary') . '%');
         }
     
         if($request->filled('credor')){
@@ -77,9 +105,9 @@ class EmployeeController extends Controller
     
         $employees = $query->get();
     
-        $searchData = $request->only(['name' ,'secretary', 'credor', 'contact_number']);
+        $searchData = $request->only(['name' ,'secretary', 'credor', 'contact_number', 'start_date', 'end_date']);
     
-        return view('pages.employees.outsourced.index', compact('employees', 'cargos', 'secretarias', 'searchData'));
+        return view('pages.employees.outsourced.index', compact('employees', 'cargos', 'secretarias', 'searchData','page'));
     }
     
     /**
@@ -171,5 +199,72 @@ class EmployeeController extends Controller
     {
         $employee->delete();
         return redirect()->route('employees.index')->with('success', 'Funcionário excluído com sucesso!');
+    }
+
+    public function outsourcedPage(){
+        $outsource = Page::where('name', 'Terceirizados')->first();
+        $groups = TransparencyGroup::all();
+        return view('panel.employees.outsource.index', compact('outsource', 'groups'));
+    }
+
+    public function outsourcedPageUpdate (Request $request){
+
+        $validateData = $request->validate([
+            'transparency_group_id' => 'required',
+            'main_title' => 'required',
+            'title' => 'required',
+            'icon' => 'nullable',
+            'description' => 'nullable',
+            'link_type' => 'nullable',
+            'url' => 'nullable',
+        ], [
+            'main_title.required' => 'O campo título principal é obrigatório',
+            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
+            'title.required' => 'O campo título é obrigatório'
+        ]);
+        $validateData['visibility'] = $request->visibility ? $request->visibility : 'disabled';
+
+        $page_daily = Page::where('name', 'Terceirizados')->first();
+
+        if ($page_daily->update($validateData)) {
+            $page_daily->groupContents()->delete();
+            $page_daily->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+            return redirect()->route('terceirizados.page')->with('success', 'Informações atualizadas com sucesso!');
+        }
+        return redirect()->route('terceirizados.page')->with('error', 'Por favor tente novamente!');
+    }
+
+
+    
+    public function traineePage(){
+        $trainee = Page::where('name', 'Estágiarios')->first();
+        $groups = TransparencyGroup::all();
+        return view('panel.employees.trainee.index', compact('trainee', 'groups'));
+    }
+
+    public function traineePageUpdate (Request $request){
+        $validateData = $request->validate([
+            'transparency_group_id' => 'required',
+            'main_title' => 'required',
+            'title' => 'required',
+            'icon' => 'nullable',
+            'description' => 'nullable',
+            'link_type' => 'nullable',
+            'url' => 'nullable',
+        ], [
+            'main_title.required' => 'O campo título principal é obrigatório',
+            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
+            'title.required' => 'O campo título é obrigatório'
+        ]);
+        $validateData['visibility'] = $request->visibility ? $request->visibility : 'disabled';
+
+        $page_daily = Page::where('name', 'Estágiarios')->first();
+
+        if ($page_daily->update($validateData)) {
+            $page_daily->groupContents()->delete();
+            $page_daily->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+            return redirect()->route('treinee.page')->with('success', 'Informações atualizadas com sucesso!');
+        }
+        return redirect()->route('treinee.page')->with('error', 'Por favor tente novamente!');
     }
 }

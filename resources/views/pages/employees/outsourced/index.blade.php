@@ -9,11 +9,11 @@
         <a href="{{ route('transparency.show') }}" class="link">Portal da transparência</a>
     </li>
     <li class="item">
-        <span>Terceirizados</span>
+        <span>{{ $page->title != '' ? $page->title : 'Terceirizados' }}</span>
     </li>
 </ul>
 
-<h3 class="title-sub-page main">Terceirizados</h3>
+<h3 class="title-sub-page main">{{ $page->title != '' ? $page->title : 'Terceirizados' }}</h3>
 @endsection
 
 @section('content')
@@ -36,7 +36,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group mb-0">
                                         <label>De:</label>
-                                        <input type="date" name="start_date" value="{{ old('start_date', $searchData['start_date'] ?? '') }}" class="form-control input-sm" />
+                                        <input type="date" name="start_date" value="{{ old('start_date', $searchData['start_date'] ?? '') }}" class="form-control  input-sm" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -51,13 +51,20 @@
                                 <div class="col-md-6">
                                     <div class="form-group mb-0">
                                         <label>Nome</label>
-                                        <input type="text" name="name" value="{{ old('name', $searchData['name'] ?? '') }}" class="form-control input-sm" />
+                                        <input type="text" name="name" value="{{ old('name', $searchData['name'] ?? '') }}" class="form-control  input-sm" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group mb-0">
                                         <label>Secretaria</label>
-                                        <input type="date" name="secretary" value="{{ old('secretary', $searchData['secretary'] ?? '') }}" class="form-control input-sm" />
+                                        <select name="secretary" class="form-control input-sm">
+                                            <option value="">Selecione a secretária</option>
+                                            @foreach($secretarias as $secretaria)
+                                                <option value="{{ $secretaria->id }}" {{ $searchData['secretary'] ?? null == $secretaria->id ? 'selected' : '' }}>
+                                                    {{ $secretaria->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -67,13 +74,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group mb-0">
                                         <label>Credor</label>
-                                        <input type="text" name="credor" value="{{ old('credor', $searchData['credor'] ?? '') }}" class="form-control input-sm" />
+                                        <input type="text" name="credor" value="{{ old('credor', $searchData['credor'] ?? '') }}" class="form-control  input-sm" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group mb-0">
                                         <label>Número do contrato</label>
-                                        <input type="text" name="contact_number" value="{{ old('contact_number', $searchData['contact_number'] ?? '') }}" class="form-control input-sm" />
+                                        <input type="text" name="contact_number" value="{{ old('contact_number', $searchData['contact_number'] ?? '') }}" class="form-control  input-sm" />
                                     </div>
                                 </div>
                             </div>
