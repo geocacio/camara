@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if(Schema::hasColumn('banners', 'external_url')) return;
         Schema::table('banners', function (Blueprint $table) {
-            $table->enum('type', ['simples', 'link', 'externo'])->default('link');
+            $table->string('external_url')->nullable();
         });
     }
 
@@ -22,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('banners', function (Blueprint $table) {
-            $table->enum('type', ['simples', 'link'])->default('link');
+            $table->dropColumn('external_url');
         });
     }
 };
