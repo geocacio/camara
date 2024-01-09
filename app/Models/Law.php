@@ -11,6 +11,7 @@ class Law extends Model
 
     protected $fillable = [
         'competency_id',
+        'category_id',
         'title',
         'type_id',
         'date',

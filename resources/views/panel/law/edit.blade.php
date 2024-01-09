@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="title1">Selecione o tipo</label>
                         <select name="type_id" class="form-control">
@@ -47,13 +47,24 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="title1">Selecione a Competência</label>
                         <select name="competency_id" class="form-control">
                             <option value="">Selecione</option>
                             @foreach($competencies[0]->children as $competency)
                             <option value="{{ $competency->id}}" {{ $law->competency_id == $competency->id ? 'selected' : '' }}>{{ $competency->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="title1">Categoria (opcional)</label>
+                        <select name="category_id" class="form-control">
+                            <option value="">Selecione</option>
+                            @foreach($categories->children as $category)
+                            <option value="{{ $category->id}}" {{ $law->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                             @endforeach
                         </select>
                     </div>
