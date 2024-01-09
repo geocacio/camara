@@ -27,6 +27,5 @@ class DatabaseSeeder extends Seeder
         $this->call(OfficialDiarySeeder::class);
         $this->call(PageNormativeSeeder::class);
         $this->call(PublicationsSeeders::class);
-        
     }
 }
