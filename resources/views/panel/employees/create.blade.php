@@ -95,7 +95,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4" id="external_links">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="title1">Status</label>
                         <select name="status" class="form-control">
@@ -111,7 +111,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12" style="display: none" id="terceirizado-secretary">
                     <div class="form-group">
                         <label for="secretary">Secretária</label>
                         <select name="secretary_id" class="form-control">

@@ -73,7 +73,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="title1">Tipo de emprego</label>
-                        <select name="employment_type" class="form-control">
+                        <select name="employment_type" id="employment_type" class="form-control">
                             <option value="Permanent" {{ $employee->employment_type == 'Permanent' ? 'selected' : '' }}>Efetivo</option>
                             <option value="Temporary" {{ $employee->employment_type == 'Temporary' ? 'selected' : '' }}>Temporario</option>
                             <option value="Contractor" {{ $employee->employment_type == 'Contractor' ? 'selected' : '' }}>Terceirizado</option>
@@ -101,18 +101,30 @@
             </div>
 
             
-            <div style="display: none" class="row" id="terceirizado">
+            <div @if($employee->employment_type != 'Contractor') style="display: none" @endif class="row" id="terceirizado">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Credor</label>
-                        <input type="text" name="credor" class="form-control" value="{{ old('credor') }}" />
+                        <input type="text" name="credor" class="form-control" value="{{ old('credor', $employee->credor) }}" />
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Número do contrato</label>
-                        <input type="number" name="contact_number" class="form-control" value="{{ old('contact_number') }}" />
+                        <input type="number" name="contact_number" class="form-control" value="{{ old('contact_number', $employee->contact_number) }}" />
                     </div>
+                </div>
+            </div>
+
+            <div class="col-md-12" @if($employee->employment_type != 'Contractor' && $employee->employment_type != 'Intern') style="display: none" @endif id="terceirizado-secretary">
+                <div class="form-group">
+                    <label for="secretary">Secretária</label>
+                    <select name="secretary_id" class="form-control">
+                        <option value="Active">Selecione</option>
+                        @foreach($secretaries as $secretary)
+                            <option value="{{ $secretary->id }}" {{ $employee->secretary_id == $secretary->id ? 'selected' : '' }}>{{ $secretary->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
 
