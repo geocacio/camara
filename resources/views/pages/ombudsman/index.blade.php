@@ -42,10 +42,10 @@
                         <p class="description">{{ $esicPage->description }}</p>
                         <button class="fake-link">Acessar</button>
                     </a>
-                    <a href="{{ route('serviceLetter.page') }}" class="link-box">
+                    <a href="{{ route('faleconosco.index') }}" class="link-box">
                         <i class="fa-solid fa-phone"></i>
                         <h5 class="title">Contato</h5>
-                        <p class="description">Página de Contato</p>
+                        <p class="description">Fale Conosco</p>
                         <button class="fake-link">Acessar</button>
                     </a>
 
