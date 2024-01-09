@@ -269,9 +269,13 @@ Route::middleware('auth')->group(function () {
 
         Route::get('funcionarios/terceirizados-page', [App\Http\Controllers\EmployeeController::class, 'outsourcedPage'])->name('terceirizados.page');
         Route::get('funcionarios/estagiarios-page', [App\Http\Controllers\EmployeeController::class, 'traineePage'])->name('treinee.page');
-
+        
         Route::put('funcionarios/terceirizados-page', [App\Http\Controllers\EmployeeController::class, 'outsourcedPageUpdate'])->name('terceirizados.page.update');
         Route::put('funcionarios/estagiarios-page', [App\Http\Controllers\EmployeeController::class, 'traineePageUpdate'])->name('treinee.page.update');
+        
+
+        Route::get('official-diary/page', [App\Http\Controllers\OfficialJournalController::class, 'journalPage'])->name('journal.page');
+        Route::put('official-diary/page', [App\Http\Controllers\OfficialJournalController::class, 'journalPageUpdate'])->name('journal.page.update');
 
 
 
