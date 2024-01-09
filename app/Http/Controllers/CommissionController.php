@@ -81,10 +81,12 @@ class CommissionController extends Controller
             'description' => 'required',
             'type_id' => 'required',
             'information' => 'nullable',
+            'more_info' => 'nullable',
         ],[
             'description.required' => 'O campo descrição é obrigatório',
             'type_id.required' => 'O campo tipo é obrigatório',
         ]);
+
         $validateData['slug'] = Commission::uniqSlug($validateData['description']);
 
         $commission = Commission::create($validateData);
@@ -136,6 +138,7 @@ class CommissionController extends Controller
             'description' => 'required',
             'type_id' => 'required',
             'information' => 'nullable',
+            'more_info' => 'nullable',
         ],[
             'description.required' => 'O campo descrição é obrigatório',
             'type_id.required' => 'O campo tipo é obrigatório',

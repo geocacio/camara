@@ -52,6 +52,15 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Mais Informação</label>
+                        <textarea name="more_info" class="form-control">{{ old('more_info') }}</textarea>
+                    </div>
+                </div>
+            </div>
+
             <div class="form-footer text-right">
                 <button type="submit" class="btn-submit-default">Guardar</button>
             </div>
