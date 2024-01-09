@@ -126,4 +126,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    $(document).ready(function () {
+        $('#employment_type').change(function () {
+            var selectedOption = $(this).val();
+            if (selectedOption == 'Contractor') {
+                $('#terceirizado').show();
+            }else {
+                $('#terceirizado').hide();
+            }
+        });
+    });
+
 });

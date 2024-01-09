@@ -86,7 +86,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="title1">Tipo de emprego</label>
-                        <select name="employment_type" class="form-control">
+                        <select name="employment_type" id="employment_type" class="form-control">
                             <option value="Permanent">Efetivo</option>
                             <option value="Temporary">Temporario</option>
                             <option value="Contractor">Terceirizado</option>
@@ -95,7 +95,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4" id="external_links">
                     <div class="form-group">
                         <label for="title1">Status</label>
                         <select name="status" class="form-control">
@@ -109,6 +109,32 @@
                             <option value="In Training">Em treinamento</option>
                             <option value="Hiring Process">Em processo de contratação</option>
                         </select>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="secretary">Secretária</label>
+                        <select name="secretary_id" class="form-control">
+                            <option value="Active">Selecione</option>
+                            @foreach($secretaries as $secretary)
+                                <option value="{{ $secretary->id }}">{{ $secretary->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: none" class="row" id="terceirizado">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Credor</label>
+                        <input type="text" name="credor" class="form-control" value="{{ old('credor') }}" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Número do contrato</label>
+                        <input type="number" name="contact_number" class="form-control" value="{{ old('contact_number') }}" />
                     </div>
                 </div>
             </div>

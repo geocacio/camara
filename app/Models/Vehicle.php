@@ -21,6 +21,9 @@ class Vehicle extends Model
         'type',
         'purpose_vehicle',
         'slug',
+        'description',
+        'period',
+        'file',
     ];
 
     public function secretary()

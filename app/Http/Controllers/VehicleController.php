@@ -75,6 +75,19 @@ class VehicleController extends Controller
             'donation' => 'required',
             'type' => 'required',
             'purpose_vehicle' => 'required',
+            'description' => 'nullable',
+            'period' => 'nullable',
+            'file' => 'nullable',
+        ],[
+            'secretary_id.required' => 'O campo Secretaria é obrigatório!',
+            'situation.required' => 'O campo Situação é obrigatório!',
+            'model.required' => 'O campo Modelo é obrigatório!',
+            'brand.required' => 'O campo Marca é obrigatório!',
+            'plate.required' => 'O campo Placa é obrigatório!',
+            'year.required' => 'O campo Ano é obrigatório!',
+            'donation.required' => 'O campo Doação é obrigatório!',
+            'type.required' => 'O campo Tipo é obrigatório!',
+            'purpose_vehicle.required' => 'O campo Finalidade é obrigatório!',
         ]);
 
         $validateData['slug'] = Vehicle::uniqSlug($validateData['model'], $validateData['brand'], $validateData['year']);
@@ -121,6 +134,10 @@ class VehicleController extends Controller
         if($request->filled('type')){
             $query->where('type', 'LIKE', '%' . $request->input('type') . '%');
         }
+
+        if($request->filled('period')){
+            $query->where('type', 'LIKE', '%' . $request->input('type') . '%');
+        }
         
         $vehicles = $query->paginate(10);
         $searchData = $request->only(['secretary_id', 'situation', 'model', 'brand', 'plate', 'type']);
@@ -163,6 +180,20 @@ class VehicleController extends Controller
             'donation' => 'required',
             'type' => 'required',
             'purpose_vehicle' => 'required',
+            'description' => 'nullable',
+            'period' => 'nullable',
+            'file' => 'nullable',
+        ],
+        [
+            'secretary_id.required' => 'O campo Secretaria é obrigatório!',
+            'situation.required' => 'O campo Situação é obrigatório!',
+            'model.required' => 'O campo Modelo é obrigatório!',
+            'brand.required' => 'O campo Marca é obrigatório!',
+            'plate.required' => 'O campo Placa é obrigatório!',
+            'year.required' => 'O campo Ano é obrigatório!',
+            'donation.required' => 'O campo Doação é obrigatório!',
+            'type.required' => 'O campo Tipo é obrigatório!',
+            'purpose_vehicle.required' => 'O campo Finalidade é obrigatório!'
         ]);
 
         if($vehicle->update($validateData)){
