@@ -638,6 +638,9 @@
                 <li class="sub-item {{ Str::contains(url()->current(), 'categories/responsabilidades') ? 'active' : '' }}">
                     <a href="{{ route('subcategories.index', 'responsabilidades') }}" class="sub-link">Responsabilidades</a>
                 </li>
+                <li class="sub-item {{ Str::contains(url()->current(), 'categories/concorrencia') ? 'active' : '' }}">
+                    <a href="{{ route('subcategories.index', 'concorrencia') }}" class="sub-link">Concorrências</a>
+                </li>
                 <li class="sub-item {{ Str::contains(url()->current(), 'types/biddings') ? 'active' : '' }}">
                     <a href="{{ route('subtypes.index', 'biddings') }}" class="sub-link">Tipos</a>
                 </li>
