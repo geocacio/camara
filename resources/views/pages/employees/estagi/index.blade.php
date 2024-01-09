@@ -9,11 +9,19 @@
         <a href="{{ route('transparency.show') }}" class="link">Portal da transparência</a>
     </li>
     <li class="item">
-        <span>Estágiarios</span>
+        @if($type == 'terceirizados')
+        <span>Terceirizados</span>
+        @elseif($type == 'estagiarios')
+            <span>Estágiarios</span>
+        @endif
     </li>
 </ul>
 
-<h3 class="title-sub-page main">Estágiarios</h3>
+@if($type == 'terceirizados')
+    <h3 class="title-sub-page main">Terceirizados</h3>
+@elseif($type == 'estagiarios')
+    <h3 class="title-sub-page main">Estágiarios</h3>
+@endif
 @endsection
 
 @section('content')
@@ -29,9 +37,9 @@
                 <div class="card main-card container-search-advanced">
                     <div class="search-advanced mb-0">
                         <h3 class="title">Campos para pesquisa</h3>
-                        <form action="#" method="post">
+                        <form action="{{ route('estagio.terceiro.show', $type) }}" method="post">
                             @csrf
-
+                            <span>{{ $type }}</span>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group mb-0">
@@ -57,10 +65,27 @@
                                 <div class="col-md-6">
                                     <div class="form-group mb-0">
                                         <label>Secretaria</label>
-                                        <input type="date" name="secretary" value="{{ old('end_date', $searchData['end_date'] ?? '') }}" class="form-control input-sm" />
+                                        <input type="date" name="secretary" value="{{ old('secretary', $searchData['secretary'] ?? '') }}" class="form-control input-sm" />
                                     </div>
                                 </div>
                             </div>
+
+                            @if($type == 'terceirizados')
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-0">
+                                            <label>Credor</label>
+                                            <input type="text" name="credor" value="{{ old('credor', $searchData['credor'] ?? '') }}" class="form-control input-sm" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-0">
+                                            <label>Número do contrato</label>
+                                            <input type="text" name="contact_number" value="{{ old('contact_number', $searchData['contact_number'] ?? '') }}" class="form-control input-sm" />
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
 
                             <div class="row">
                                 <div class="mt-2 col-md-12">
@@ -86,16 +111,15 @@
                 
                 <div class="col-md-12">
                     <div class="card-with-links">
-                            <div class="second-part">
-                                <div class="body">
-                                    <h3 class="title">{{ $item->name }}</h3>
-                                    <ul>
-                                        <li class="description">{{ $item->office->office }}</li>
-                                    </ul>
-                                </div>
+                        <div class="second-part">
+                            <div class="body">
+                                <h3 class="title">{{ $item->name }}</h3>
+                                <ul>
+                                    <li class="description">{{ $item->office->office }}</li>
+                                </ul>
                             </div>
+                        </div>
                     </div>
-
                 </div>
 
                 @endforeach
@@ -126,5 +150,6 @@
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
     })
+
 </script>
 @endsection

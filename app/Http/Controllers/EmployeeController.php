@@ -33,26 +33,39 @@ class EmployeeController extends Controller
     public function estagiOrTerceiro(Request $request, $type){
 
         if($type == 'estagiarios'){
-            $type = 'Intern';
+            $getType = 'Intern';
+        } else if ($type == 'terceirizados'){
+            $getType = 'Contractor';
         }
-
-        if($request->filled('secretary_id')){
-            $query->where('secretary_id', 'LIKE', '%' . $request->input('secretary_id') . '%');
+    
+        $query = Employee::where('employment_type', $getType);
+    
+        $cargos = Office::all();
+        $secretarias = Secretary::all();
+        
+        if($request->filled('name')){
+            $query->where('name', 'LIKE', '%' . $request->input('name') . '%');
         }
-
-        if($request->filled('situation')){
-            $query->where('situation', 'LIKE', '%' . $request->input('situation') . '%');
+    
+        if($request->filled('secretary')){
+            $query->where('secretary', 'LIKE', '%' . $request->input('secretary') . '%');
         }
-
-        if($request->filled('model')){
-            $query->where('model', 'LIKE', '%' . $request->input('model') . '%');
+    
+        if($request->filled('credor')){
+            $query->where('credor', 'LIKE', '%' . $request->input('credor') . '%');
         }
-
-        $employees = Employee::where('employment_type', $type)->orWhere('employment_type', $type)->get();
-        $searchData = $request->only(['secretary_id', 'situation', 'model', 'brand', 'plate', 'type']);
-        return view('pages.employees.estagi.index', compact('employees', 'searchData'));
+    
+        if($request->filled('contact_number')){
+            $query->where('contact_number', 'LIKE', '%' . $request->input('contact_number') . '%');
+        }
+    
+        $employees = $query->get();
+    
+        $searchData = $request->only(['name' ,'secretary', 'credor', 'contact_number']);
+    
+        return view('pages.employees.estagi.index', compact('employees', 'type', 'cargos', 'secretarias', 'searchData'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */
@@ -122,6 +135,9 @@ class EmployeeController extends Controller
             'dependents' => 'nullable',
             'admission_date' => 'nullable',
             'employment_type' => 'nullable',
+            'secretary_id' => 'nullable',
+            'contact_number' => 'nullable',
+            'credor' => 'nullable',
             'status' => 'nullable',
             'file' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
         ]);

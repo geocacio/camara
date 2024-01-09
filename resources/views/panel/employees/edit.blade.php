@@ -100,6 +100,23 @@
                 </div>
             </div>
 
+            
+            <div style="display: none" class="row" id="terceirizado">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Credor</label>
+                        <input type="text" name="credor" class="form-control" value="{{ old('credor') }}" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Número do contrato</label>
+                        <input type="number" name="contact_number" class="form-control" value="{{ old('contact_number') }}" />
+                    </div>
+                </div>
+            </div>
+
+
             <div class="form-group">
                 <div class="custom-input-file">
                     <label for="logo">Imagem do Funcionário</label>
