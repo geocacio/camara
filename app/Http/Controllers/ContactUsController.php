@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ContactUs;
 use App\Models\ContactUsPage;
 use App\Models\Page;
+use App\Models\TransparencyGroup;
 use Illuminate\Http\Request;
 
 class ContactUsController extends Controller
@@ -58,34 +59,39 @@ class ContactUsController extends Controller
     {
         $contactUsPage = ContactUsPage::first();
         $page = Page::where('name', 'Fale Conosco')->first();
-
+        $groups = TransparencyGroup::all();
+    
         if($contactUsPage) {
-            return view('panel.contact-us.edit', compact('contactUsPage', 'page'));
+            return view('panel.contact-us.edit', compact('contactUsPage', 'page', 'groups'));
         }else {
-            return view('panel.contact-us.index', compact('page'));
+            return view('panel.contact-us.index', compact('page', 'groups'));
         }
     }
 
     public function contactUsPageStore(Request $request)
     {
-        $request->validate([
+        $validateData = $request->validate([
+            'main_title' => 'required',
+            'icon' => 'required',
+            'title' => 'required',
+            'description' => 'nullable',
+            'transparency_group_id' => 'required',
+
             'telefone' => 'required|string|max:255',
             'opening_hours' => 'nullable|string|max:255',
             'email' => 'required|email|max:100',
-            'icon' => 'required',
-            'main_title' => 'required',
-            'title' => 'required',
-            'visibility' => 'nullable',
-        ],
-        [
+        ], [
             'telefone.required' => 'Por favor, insira o telefone.',
             'email.required' => 'Por favor, insira o email',
             'email.email' => 'E-mail inválido',
             'icon.required' => 'Por favor, insira o ícone.',
             'main_title.required' => 'Por favor, insira o título principal.',
             'title.required' => 'Por favor, insira o título.',
+            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
         ]);
-    
+
+        $page = Page::where('name', 'Fale Conosco')->first();
+
         ContactUsPage::updateOrCreate(
             ['email' => $request->email],
             [
@@ -93,19 +99,14 @@ class ContactUsController extends Controller
                 'opening_hours' => $request->opening_hours,
             ]
         );
-    
-        $page = Page::where('name', 'Fale Conosco')->first();
-    
-        if ($page) {
-            $page->update([
-                'icon' => $request->icon,
-                'main_title' => $request->main_title,
-                'title' => $request->title,
-                'visibility' => $request->visibility ? $request->visibility : 'disabled',
-            ]);
+        
+        if ($page->update($validateData)) {
+            $page->groupContents()->delete();
+            $page->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+            return redirect()->route('contact-us.page')->with('success', 'Informações atualizadas com sucesso!');
         }
-    
-        return redirect()->back()->with('success', 'Informações atualizadas com sucesso!');
+
+        return redirect()->route('contact-us.page')->with('error', 'Por favor tente novamente!');
     }
     
     
