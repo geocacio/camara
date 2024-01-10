@@ -663,6 +663,8 @@ Route::prefix('/transparencia')->group(function () {
     Route::match(['get', 'post'] ,'funcionarios/terceirizados', [App\Http\Controllers\EmployeeController::class, 'Outsourced'])->name('terceirizados.show');
     Route::get('/mapa-site', [SiteMapController::class, 'pageShow'])->name('mapa.page.show');
     Route::put('/mapa-site', [SiteMapController::class, 'pageUpdate'])->name('mapa-site.page.update');
+    
+    Route::match(['get', 'post'] ,'licitacoes/dispensa-e-inexigibilidade', [App\Http\Controllers\BiddingController::class, 'DispensaInexigibilidade'])->name('dispensa.inexigibilidade');
 
 
     Route::prefix('/sic')->group(function () {
