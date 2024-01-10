@@ -65,6 +65,7 @@ class VehicleController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
        $validateData = $request->validate([
             'secretary_id' => 'required',
             'situation' => 'required',

@@ -97,9 +97,25 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Finalidade do veículo</label>
+                        <input type="text" name="purpose_vehicle" class="form-control" value="{{ old('purpose_vehicle') }}" />
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Período</label>
+                        <input type="text" name="period" class="form-control" value="{{ old('period') }}" />
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group">
-                <label>Finalidade do veículo</label>
-                <input type="text" name="purpose_vehicle" class="form-control" value="{{ old('purpose_vehicle') }}" />
+                <label>Descrição</label>
+                <textarea name="description" class="form-control">{{ old('description') }}</textarea>
             </div>
             
             <div class="form-footer text-right">
