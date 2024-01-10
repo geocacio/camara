@@ -267,6 +267,17 @@ Route::middleware('auth')->group(function () {
         Route::resource('/chambers-financials', ChamberFinancialController::class);
         Route::post('/chamber-financial/status', [ChamberFinancialController::class, 'status']);
 
+        Route::get('funcionarios/terceirizados-page', [App\Http\Controllers\EmployeeController::class, 'outsourcedPage'])->name('terceirizados.page');
+        Route::get('funcionarios/estagiarios-page', [App\Http\Controllers\EmployeeController::class, 'traineePage'])->name('treinee.page');
+        
+        Route::put('funcionarios/terceirizados-page', [App\Http\Controllers\EmployeeController::class, 'outsourcedPageUpdate'])->name('terceirizados.page.update');
+        Route::put('funcionarios/estagiarios-page', [App\Http\Controllers\EmployeeController::class, 'traineePageUpdate'])->name('treinee.page.update');
+        
+
+        Route::get('official-diary/page', [App\Http\Controllers\OfficialJournalController::class, 'journalPage'])->name('journal.page');
+        Route::put('official-diary/page', [App\Http\Controllers\OfficialJournalController::class, 'journalPageUpdate'])->name('journal.page.update');
+
+
 
         //Routes linked to biddings
         Route::resource('/progress', ProgressController::class);
@@ -648,7 +659,8 @@ Route::prefix('/transparencia')->group(function () {
         Route::post('pesquisa-de-satisfacao', [App\Http\Controllers\OmbudsmanSurveyController::class, 'store'])->name('survey.store');
     });
 
-    Route::match(['get', 'post'] ,'funcionarios/{type}', [App\Http\Controllers\EmployeeController::class, 'estagiOrTerceiro'])->name('estagio.terceiro.show');
+    Route::match(['get', 'post'] ,'funcionarios/estagiarios', [App\Http\Controllers\EmployeeController::class, 'Trainee'])->name('trainee.show');
+    Route::match(['get', 'post'] ,'funcionarios/terceirizados', [App\Http\Controllers\EmployeeController::class, 'Outsourced'])->name('terceirizados.show');
 
 
     Route::prefix('/sic')->group(function () {

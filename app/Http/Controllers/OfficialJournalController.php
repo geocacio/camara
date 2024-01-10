@@ -8,6 +8,7 @@ use App\Models\officehour as OfficeHour;
 use App\Models\OfficialJournal;
 use App\Models\Page;
 use App\Models\SecretaryPublication;
+use App\Models\TransparencyGroup;
 use App\Services\FileUploadService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -52,6 +53,41 @@ class OfficialJournalController extends Controller
         }
 
         return view('pages.official-diary.index', compact('dayle'));
+    }
+
+    
+    
+    public function journalPage(){
+        $outsource = Page::where('name', 'Díario Oficial')->first();
+        $groups = TransparencyGroup::all();
+        return view('panel.official-diary.page.edit', compact('outsource', 'groups'));
+    }
+
+    public function journalPageUpdate (Request $request){
+        $validateData = $request->validate([
+            'transparency_group_id' => 'required',
+            'main_title' => 'required',
+            'title' => 'required',
+            'icon' => 'nullable',
+            'description' => 'nullable',
+            'link_type' => 'nullable',
+            'url' => 'nullable',
+        ], [
+            'main_title.required' => 'O campo título principal é obrigatório',
+            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
+            'title.required' => 'O campo título é obrigatório'
+        ]);
+
+        $validateData['visibility'] = $request->visibility ? $request->visibility : 'disabled';
+
+        $page_daily = Page::where('name', 'Díario Oficial')->first();
+
+        if ($page_daily->update($validateData)) {
+            $page_daily->groupContents()->delete();
+            $page_daily->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+            return redirect()->route('journal.page')->with('success', 'Informações atualizadas com sucesso!');
+        }
+        return redirect()->route('journal.page')->with('error', 'Por favor tente novamente!');
     }
 
     public function normative()

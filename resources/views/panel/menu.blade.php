@@ -511,6 +511,12 @@
                 <li class="sub-item {{ request()->routeIs('offices.index') ? 'active' : '' }}">
                     <a href="{{ route('offices.index') }}" class="sub-link">Cargos</a>
                 </li>
+                <li class="sub-item {{ request()->routeIs('terceirizados.page') ? 'active' : '' }}">
+                    <a href="{{ route('terceirizados.page') }}" class="sub-link">Página de Terceirizados</a>
+                </li>
+                <li class="sub-item {{ request()->routeIs('treinee.page') ? 'active' : '' }}">
+                    <a href="{{ route('treinee.page') }}" class="sub-link">Página de Estagiários</a>
+                </li>
             </ul>
         </div>
     </li>
@@ -563,6 +569,9 @@
                 </li>
                 <li class="sub-item {{ request()->routeIs('diary.expedient') ? 'active' : '' }}">
                     <a href="{{ route('diary.expedient') }}" class="sub-link">Expediente</a>
+                </li>
+                <li class="sub-item {{ request()->routeIs('journal.page') ? 'active' : '' }}">
+                    <a href="{{ route('journal.page') }}" class="sub-link">Página</a>
                 </li>
             </ul>
         </div>
