@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 class SiteMapController extends Controller
 {
     public function page(){
-        return view('pages.site-map.index');
+        $pageMapa = Page::where('name', 'Mapa do site')->first();
+
+        return view('pages.site-map.index', compact('pageMapa'));
     }
 
     public function pageShow()

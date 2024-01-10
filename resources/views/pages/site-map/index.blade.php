@@ -6,11 +6,11 @@
         <a href="{{ route('home') }}" class="link">Início</a>
     </li>
     <li class="item">
-        <span>Mapa do site</span>
+        <span>{{ $pageMapa->title != '' ? $pageMapa->title : 'Mapa do Site' }}</span>
     </li>
 </ul>
 
-<h3 class="title text-center mb-30">Mapa do site</h3>
+<h3 class="title text-center mb-30">{{ $pageMapa->title != '' ? $pageMapa->title : 'Mapa do Site' }}</h3>
 
 @endsection
 
