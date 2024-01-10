@@ -234,6 +234,9 @@
                 <li class="sub-item {{ request()->routeIs('constructions.index') ? 'active' : '' }}">
                     <a href="{{ route('constructions.index') }}" class="sub-link">Obras</a>
                 </li>
+                <li class="sub-item {{ request()->routeIs('constructions.index') ? 'active' : '' }}">
+                    <a href="{{ route('constructions.index') }}" class="sub-link">Obras</a>
+                </li>
                 <li class="sub-item-menu {{ request()->routeIs('veiculos.index') || Str::contains(url()->current(), 'types/veiculos') ? 'active' : '' }}">
 
                     <button class="menu-link no-padding" data-toggle="collapse" href="#collapseVeiculos">
@@ -251,6 +254,9 @@
                         </ul>
                     </div>
 
+                </li>
+                <li class="sub-item {{ request()->routeIs('mapa.page.show') ? 'active' : '' }}">
+                    <a href="{{ route('mapa.page.show') }}" class="sub-link">Mapa do Site</a>
                 </li>
             </ul>
         </div>
