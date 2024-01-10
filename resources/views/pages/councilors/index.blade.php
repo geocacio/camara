@@ -63,20 +63,22 @@
             <div class="row gd-councilor-container">
                 <div class="col-12">
                     <div class="card main-card">
-                        @foreach($legislature->legislatureRelations as $councilor)
-                            <div class="col-lg-6">
-                                <a href="{{ route('vereador.single', $councilor->legislatureable->slug) }}" class="councilor-items">
-                                    @if($councilor->legislatureable->files && count($councilor->legislatureable->files) > 0)
-                                    <figure class="figure">
-                                        <img class="image" src="{{ asset('storage/'.$councilor->legislatureable->files[0]->file->url) }}" alt="">
-                                    </figure>
-                                    @endif
-                                    <div class="info">
-                                        <span class="title">{{  $councilor->legislatureable->surname }}</span>
-                                    </div>
-                                </a>
-                            </div>
-                        @endforeach
+                        <div class="row row-gap-20">
+                            @foreach($legislature->legislatureRelations as $councilor)
+                                <div class="col-md-6">
+                                    <a href="{{ route('vereador.single', $councilor->legislatureable->slug) }}" class="councilor-items">
+                                        @if($councilor->legislatureable->files && count($councilor->legislatureable->files) > 0)
+                                        <figure class="figure">
+                                            <img class="image" src="{{ asset('storage/'.$councilor->legislatureable->files[0]->file->url) }}" alt="">
+                                        </figure>
+                                        @endif
+                                        <div class="info">
+                                            <span class="title">{{  $councilor->legislatureable->surname }}</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
