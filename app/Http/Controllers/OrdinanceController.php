@@ -150,7 +150,8 @@ class OrdinanceController extends Controller
         $types = Type::where('parent_id', 55)->get();
         $typesOrdinance = TypeContent::where('type_id', $request->type)->pluck('typeable_id');
         $cargos = Office::all();
-        
+
+
         $searchData = $request->only(['number', 'start_date', 'agent', 'details', 'cargo', 'office_id', 'end_date', 'type']);
 
         if($request->filled('number')){

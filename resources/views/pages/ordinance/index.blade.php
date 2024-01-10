@@ -93,36 +93,6 @@
                 </div>
             </div>
         </div>
-
-        {{-- @if($ordinances->count() > 0) --}}
-
-        {{-- <div class="row"> --}}
-            
-            {{-- @foreach($ordinances as $ordinance)
-                <div class="col-md-12">
-                    <div class="card-with-links">
-                        <a href="#">
-                            <div class="second-part">
-                                <div class="body">
-                                    <h3 class="title">{{ $ordinance->number }}/{{ date('Y', strtotime($ordinance->date)) }}</h3>
-                                    <p class="description">{{ $ordinance->detail }}</p>
-                                    <p class="description">{{ $ordinance->number }}</p>
-                                    <p class="description">
-                                        <span>Data</span> 
-                                        {{ date('d/m/Y', strtotime($ordinance->date)) }}
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            @endforeach --}}
-
-
-            {{-- {{ $construction->render() }} --}}
-
-        {{-- </div> --}}
-        
         
         @if($ordinances && $ordinances->count() > 0)
         <div class="row">
@@ -130,14 +100,16 @@
             <div class="col-md-12">
                 <div class="card-with-links">
 
-                    <div class="header">
+                    <div style="height: 127.3px;" class="header">
                         <i class="fa-regular fa-file-lines"></i>
                     </div>
                     <div class="second-part">
                         <div class="body">
                             <h3 class="title">{{ $item->number }}/{{ date('Y', strtotime($item->date)) }}</h3>
+                            <p class="description">Tipo: <b>{{ $item->types[0]->name }}</b></p>
+                            <p class="description">Agente: <b>{{ $item->agent }}</b></p>
                             <p class="description">{{ Str::limit($item->detail, '75', '...') }}</p>
-                            {{-- <p class="description">{{ $item->number }}</p> --}}
+                            <p class="description">{{ date('d/m/Y', strtotime($item->date)) }}</p>
                         </div>
 
                         <div class="footer">
@@ -157,21 +129,26 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">{{ $item->title }}</h5>
+                            <h5 class="modal-title" id="exampleModalLongTitle">{{ $item->number }}/{{ date('Y', strtotime($item->date)) }}</h5>
                         </div>
-                        <div class="modal-body">
+                        <div class="gap-5 modal-body">
                             <div class="view-date">
                                 <span>
                                     <i class="fa-solid fa-calendar-days"></i> <span>{{ date('d/m/Y', strtotime($item->date)) }}</span>
                                 </span>
                             </div>
+                            <div class="view-date">
+                                <span>
+                                    <i class="fa-solid fa-circle-info"></i>Tipo: <span>{{ $item->types[0]->name }}</span>
+                                </span>
+                            </div>
+                            <div class="view-date">
+                                <span>
+                                    <i class="fa-solid fa-circle-info"></i>Agente: <span>{{ $item->agent }}</span>
+                                </span>
+                            </div>
                             <div class="description">
-                                @if($type ==  'lrfs')
-                                    <p style="word-wrap: break-word;">{{ $item->details }}</p>
-                                @endif
-                                @if($type == 'Lei')
-                                    <p style="word-wrap: break-word;">{{ $item->description }}</p>
-                                @endif
+                                <p style="word-wrap: break-word;">{{ $item->detail }}</p>
                             </div>
                         </div>
                         <div class="modal-footer">
