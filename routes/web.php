@@ -41,6 +41,7 @@ use App\Http\Controllers\ExternalLinkController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\GlossaryController;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\InspectorController;
 use App\Http\Controllers\LaiController;
 use App\Http\Controllers\LawController;
 use App\Http\Controllers\LegislatureController;
@@ -110,6 +111,7 @@ use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\VoteController;
 use App\Models\ChamberFinancial;
+use App\Models\Inspector;
 use App\Models\Recipes;
 use App\Models\ServiceLetter;
 use App\Models\Setting;
@@ -276,6 +278,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get('official-diary/page', [App\Http\Controllers\OfficialJournalController::class, 'journalPage'])->name('journal.page');
         Route::put('official-diary/page', [App\Http\Controllers\OfficialJournalController::class, 'journalPageUpdate'])->name('journal.page.update');
+        Route::resource('/fiscais', InspectorController::class);
 
 
 
@@ -665,7 +668,6 @@ Route::prefix('/transparencia')->group(function () {
     Route::put('/mapa-site', [SiteMapController::class, 'pageUpdate'])->name('mapa-site.page.update');
     
     Route::match(['get', 'post'] ,'licitacoes/dispensa-e-inexigibilidade', [App\Http\Controllers\BiddingController::class, 'DispensaInexigibilidade'])->name('dispensa.inexigibilidade');
-
 
     Route::prefix('/sic')->group(function () {
 
