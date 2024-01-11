@@ -1,5 +1,5 @@
 @extends('panel.index')
-@section('pageTitle', 'Novo Usuário')
+@section('pageTitle', 'Novo Veiculo')
 @section('breadcrumb')
 <li><a href="{{ route('veiculos.index') }}">Veiculos</a></li>
 <li><span>Novo Veiculo</span></li>
