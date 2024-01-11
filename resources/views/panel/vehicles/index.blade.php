@@ -32,7 +32,7 @@
                         <td>{{ $vehicle->situation }}</td>
                         {{-- <td>{{ $vehicle->roles[0]->name }}</td> --}}
                         <td class="actions">
-                            <a href="{{ route('veiculos.edit', $vehicle->id) }}" class="link edit"><i class="fas fa-edit"></i></a>
+                            <a href="{{ route('veiculos.edit', $vehicle->slug) }}" class="link edit"><i class="fas fa-edit"></i></a>
                             <a data-toggle="modal" data-target="#myModal{{$vehicle->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a>
 
                             <div id="myModal{{$vehicle->id}}" class="modal fade modal-warning" role="dialog">
@@ -72,8 +72,8 @@
         </div>
         @else
         <div class="no-data">
-            <span>Ainda não veículos cadastrados.</span>
-        </div>
+            <span>Ainda não existem veículos cadastrados.</span>
+        </div> 
         @endif
 
     </div>

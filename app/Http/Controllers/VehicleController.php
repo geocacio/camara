@@ -65,9 +65,7 @@ class VehicleController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
        $validateData = $request->validate([
-            'secretary_id' => 'required',
             'situation' => 'required',
             'model' => 'required',
             'brand' => 'required',
@@ -80,7 +78,6 @@ class VehicleController extends Controller
             'period' => 'nullable',
             'file' => 'nullable',
         ],[
-            'secretary_id.required' => 'O campo Secretaria é obrigatório!',
             'situation.required' => 'O campo Situação é obrigatório!',
             'model.required' => 'O campo Modelo é obrigatório!',
             'brand.required' => 'O campo Marca é obrigatório!',
@@ -108,7 +105,7 @@ class VehicleController extends Controller
     {
         $perPage = $request->query('perPage', 10);
         
-        $query = Vehicle::query();  
+        $query = Vehicle::query();
 
         $secretarys = Secretary::all();
 
@@ -172,7 +169,6 @@ class VehicleController extends Controller
     public function update(Request $request, Vehicle $vehicle)
     {
         $validateData = $request->validate([
-            'secretary_id' => 'required',
             'situation' => 'required',
             'model' => 'required',
             'brand' => 'required',
@@ -186,7 +182,6 @@ class VehicleController extends Controller
             'file' => 'nullable',
         ],
         [
-            'secretary_id.required' => 'O campo Secretaria é obrigatório!',
             'situation.required' => 'O campo Situação é obrigatório!',
             'model.required' => 'O campo Modelo é obrigatório!',
             'brand.required' => 'O campo Marca é obrigatório!',

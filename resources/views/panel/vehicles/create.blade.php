@@ -1,8 +1,8 @@
 @extends('panel.index')
 @section('pageTitle', 'Novo Usuário')
 @section('breadcrumb')
-<li><a href="{{ route('veiculos.index') }}">Usuários</a></li>
-<li><span>Novo Usuário</span></li>
+<li><a href="{{ route('veiculos.index') }}">Veiculos</a></li>
+<li><span>Novo Veiculo</span></li>
 @endsection
 @section('content')
 <div class="card">
@@ -26,13 +26,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Secretária</label>
-                        <input type="text" name="secretary_id" class="form-control" value="{{ old('secretary_id') }}" />
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Tipo do veículo</label>
+                        <label>Situação</label>
                         <select name="situation" class="form-control">
                             <option value="Ativo" {{ old('situation') == 1 ? 'selected' : '' }}>Ativo</option>
                             <option value="Inativo" {{ old('situation') == 0 ? 'selected' : '' }}>Inativo</option>

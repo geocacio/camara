@@ -26,13 +26,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Secretária</label>
-                        <input type="text" name="secretary_id" class="form-control" value="{{ old('secretary_id', $vehicle->secretary_id) }}" />
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Tipo do veículo</label>
+                        <label>Situação</label>
                         <select name="situation" class="form-control">
                             <option value="Ativo" {{ $vehicle->situation == 'Ativo' ? 'selected' : '' }}>Ativo</option>
                             <option value="Inativo" {{ $vehicle->situation == 'Inativo' ? 'selected' : '' }}>Inativo</option>
@@ -46,7 +40,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Modelo</label>
-                        <input type="text" name="model" class="form-control" value="{{ old('model', $vehicle->situation) }}" />
+                        <input type="text" name="model" class="form-control" value="{{ old('model', $vehicle->model) }}" />
                     </div>
                 </div>
 
