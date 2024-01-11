@@ -11,6 +11,7 @@ use App\Models\Organ;
 use App\Models\Role;
 use App\Models\Secretary;
 use App\Models\Type;
+use App\Models\TypeContent;
 use App\Models\User;
 use App\Services\FileUploadService;
 use Illuminate\Http\Request;
@@ -417,5 +418,125 @@ class BiddingController extends Controller
         $searchData = $request->only(['start_date', 'end_date', 'status', 'exercice', 'modalidade', 'register_price', 'number', 'object', 'process']);
 
         return view('pages.biddings.dispensa-inexigibilidade', compact('bidding', 'categories', 'searchData', 'exercicies'));
+    }
+
+    public function publicCall(Request $request)
+    {
+        $getBy = [
+            'CONCORRÊNCIA',
+            'TOMADA DE PREÇOS',
+            'CONVITE',
+            'CONCURSO',
+            'LEILÃO',
+            'PREGÃO',
+            'CHAMADA PÚBLICA',
+        ];
+
+        $categories = Category::whereIn('name', $getBy)->get();
+        $categorieType = CategoryContent::whereIn('category_id', $categories->pluck('id'))->get();
+
+        $exercicies = Category::where('slug', 'exercicios')->with('children')->get();
+
+        $biddingIds = $categorieType->pluck('categoryable_id')->toArray();
+
+        $query = Bidding::query()->whereIn('id', $biddingIds);
+
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $start_date = date("Y-m-d", strtotime($request->input('start_date')));
+            $end_date = date("Y-m-d", strtotime($request->input('end_date')));
+
+            $query->whereBetween('opening_date', [$start_date, $end_date]);
+        } elseif ($request->filled('start_date')) {
+            // Se apenas a data inicial estiver definida
+            $start_date = date("Y-m-d", strtotime($request->input('start_date')));
+            $query->where('opening_date', '>=', $start_date);
+        } else if ($request->filled('end_date')) {
+            // Se apenas a data final estiver definida
+            $end_date = date("Y-m-d", strtotime($request->input('end_date')));
+            $query->where('opening_date', '<=', $end_date);
+        }  
+
+        if ($request->filled('modalidade')) {
+            $searchExercice = CategoryContent::where('categoryable_type', 'bidding')->where('category_id', $request->input('modalidade'))->get();
+            $query->whereIn('id', $searchExercice->pluck('categoryable_id'));
+        }
+
+        if ($request->filled('status')) {
+            $query->where('status', 'LIKE', '%' . $request->input('status') . '%');
+        }
+
+        if ($request->filled('exercice')) {
+            $searchExercice = CategoryContent::where('categoryable_type', 'bidding')->where('category_id', $request->input('exercice'))->get();
+            $query->whereIn('id', $searchExercice->pluck('categoryable_id'));
+        }
+
+        if ($request->filled('register_price')) {
+            $query->where('estimated_value', 'LIKE', '%' . $request->input('register_price') . '%');
+        }
+
+        if ($request->filled('number')) {
+            $query->where('number', 'LIKE', '%' . $request->input('number') . '%');
+        }
+
+        if ($request->filled('object')) {
+            $query->where('description', 'LIKE', '%' . $request->input('object') . '%');
+        }
+
+        if ($request->filled('process')) {
+            $query->where('process', 'LIKE', '%' . $request->input('process') . '%');
+        }
+
+        $bidding = $query->paginate(10);
+
+        $searchData = $request->only(['start_date', 'end_date', 'status', 'exercice', 'modalidade', 'register_price', 'number', 'object', 'process']);
+
+        return view('pages.biddings.inspectors.public-call.index', compact('bidding', 'categories', 'searchData', 'exercicies'));
+    }
+
+    public function suspended(Request $request)
+    {
+        $getBy = [
+            'INIDONEIDADE',
+            'SUSPENSÃO',
+        ];
+
+        $categories = Type::whereIn('name', $getBy)->get();
+        $categorieType = TypeContent::whereIn('type_id', $categories->pluck('id'))->get();
+
+        $exercicies = Category::where('slug', 'exercicios')->with('children')->get();
+
+        $biddingIds = $categorieType->pluck('typeable_id')->toArray();
+
+        $query = Bidding::query()->whereIn('id', $biddingIds);
+
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $start_date = date("Y-m-d", strtotime($request->input('start_date')));
+            $end_date = date("Y-m-d", strtotime($request->input('end_date')));
+
+            $query->whereBetween('opening_date', [$start_date, $end_date]);
+        } elseif ($request->filled('start_date')) {
+            // Se apenas a data inicial estiver definida
+            $start_date = date("Y-m-d", strtotime($request->input('start_date')));
+            $query->where('opening_date', '>=', $start_date);
+        } else if ($request->filled('end_date')) {
+            // Se apenas a data final estiver definida
+            $end_date = date("Y-m-d", strtotime($request->input('end_date')));
+            $query->where('opening_date', '<=', $end_date);
+        }  
+
+        if ($request->filled('type')) {
+            $searchExercice = TypeContent::where('typeable_type', 'bidding')->where('type_id', $request->input('type'))->get();
+            $query->whereIn('id', $searchExercice->pluck('typeable_id'));
+        }
+
+        if ($request->filled('description')) {
+            $query->where('description', 'LIKE', '%' . $request->input('description') . '%');
+        }
+
+        $bidding = $query->paginate(10);
+
+        $searchData = $request->only(['start_date', 'end_date', 'status', 'exercice', 'modalidade', 'register_price', 'number', 'object', 'process']);
+
+        return view('pages.biddings.suspended.index', compact('bidding', 'categories', 'searchData', 'exercicies'));
     }
 }
