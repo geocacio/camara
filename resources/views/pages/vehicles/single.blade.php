@@ -44,10 +44,6 @@
                                         <p class="description">{{ $vehicle->plate }}</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p class="title">Secretaria do veículo</p>
-                                        <p class="description">{{ $vehicle->secretary->name }}</p>
-                                    </div>
-                                    <div class="col-md-6">
                                         <p class="title">Ano do veículo</p>
                                         <p class="description">{{ $vehicle->year }}</p>
                                     </div>
