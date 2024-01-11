@@ -81,6 +81,18 @@
         </div>
 
         <div class="form-group">
+            <label>Selecione um fiscal de contrato</label>
+            <select name="inspector_id" class="form-control" {{ $types->count() <= 0 ? 'disabled' : ''}}>
+                <option value="">Selecione</option>
+                @foreach ($inspectors as $inspector)
+                    <option value="{{ $inspector->id }}">{{ $inspector->name }}</option>
+                @endforeach
+
+            </select>
+        </div>
+        
+
+        <div class="form-group">
             <label>Descrição</label>
             <textarea name="description" class="form-control" {{ $types->count() <= 0 ? 'disabled' : ''}}>{{ old('description') }}</textarea>
         </div>

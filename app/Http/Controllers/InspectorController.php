@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contract;
 use App\Models\Inspector;
+use App\Models\InspectorContract;
 use Illuminate\Http\Request;
 
 class InspectorController extends Controller
@@ -53,9 +55,15 @@ class InspectorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Inspector $inspector)
+    public function show($inspector)
     {
-        //
+        $inspector = Inspector::where('slug', $inspector)->firstOrFail();
+
+        $contractsInspectors = InspectorContract::where('inspector_id', $inspector->id)->get();
+        
+        $contracts = Contract::whereIn('id', $contractsInspectors->pluck('contract_id'))->get();
+
+        return view('pages.biddings.inspectors.single', compact('inspector', 'contracts'));
     }
 
     public function showAll(Request $request){
@@ -69,7 +77,7 @@ class InspectorController extends Controller
 
         $searchData = $request->only(['name']);
 
-        return view('pages.biddings.inspectos', compact('inspectors', 'searchData'));
+        return view('pages.biddings.inspectors.inspectos', compact('inspectors', 'searchData'));
     }
 
     /**

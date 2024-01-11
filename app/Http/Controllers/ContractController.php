@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Bidding;
 use App\Models\Company;
 use App\Models\Contract;
+use App\Models\Inspector;
+use App\Models\InspectorContract;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -26,8 +28,9 @@ class ContractController extends Controller
     public function create(Contract $contract, Bidding $bidding)
     {
         $companies = Company::all();
+        $inspectors = Inspector::all();
         $types = Type::where('slug', 'contracts')->first()->children;
-        return view('panel.contracts.create', compact('companies', 'bidding', 'contract', 'types'));
+        return view('panel.contracts.create', compact('companies', 'bidding', 'contract', 'types', 'inspectors'));
     }
 
 
@@ -46,10 +49,18 @@ class ContractController extends Controller
             'total_value' => 'nullable',
             'description' => 'nullable',
         ]);
+
         $validatedData['slug'] = Str::slug($request->number);
         unset($validatedData['type']);
         $validatedData['total_value'] = $request->total_value ? str_replace(['R$', '.', ','], ['', '', '.'], $request->total_value) : null;
         $contract = $bidding->company->contracts()->create($validatedData);
+
+        if($contract){
+            InspectorContract::create([
+                'inspector_id' => $request->inspector_id,
+                'contract_id' => $contract->id,
+            ]);
+        }
 
         if ($contract) {
             $contract->types()->attach($request->type);

@@ -59,24 +59,21 @@
                 @foreach($inspectors as $item)
                 
                 <div class="col-md-12">
-                    <div class="card-with-links">
-                            {{-- <div class="header">
-                                <i class="fa-solid fa-microphone-lines"></i>
-                            </div> --}}
-                            <div class="second-part">
-                                <div class="body">
-                                    <h3 class="title">{{ $item->name }}</h3>
+                    <a href="{{ route('fiscais.show', $item->slug) }}" class="card-with-links">
+                        <div class="second-part">
+                            <div class="body">
+                                <h3 class="title">{{ $item->name }}</h3>
+                                <ul>
+                                    <li class="description">Data início: @if($item->start_date != '') {{ \Carbon\Carbon::parse($item->start_date)->format('d/m/Y') }} @endif</li>
+                                </ul>
+                                @if($item->end_date != 'null')
                                     <ul>
-                                        <li class="description">Data início: {{ \Carbon\Carbon::parse($item->start_date)->format('d/m/Y') }}</li>
+                                        <li class="description">Data Fim:{{ \Carbon\Carbon::parse($item->end_date)->format('d/m/Y') }}</li>
                                     </ul>
-                                    @if($item->end_date != null)
-                                        <ul>
-                                            <li class="description">Data Fim: {{ \Carbon\Carbon::parse($item->end_date)->format('d/m/Y') }}</li>
-                                        </ul>
-                                    @endif
-                                </div>
+                                @endif
                             </div>
-                    </div>
+                        </div>
+                    </a>
 
                 </div>
 
@@ -94,7 +91,7 @@
     </div>
 </section>
 
-@include('pages.partials.satisfactionSurvey', ['page_name' => 'Licitacoes - Dispensa e Inexigibilidade'])
+@include('pages.partials.satisfactionSurvey', ['page_name' => 'Licitacoes - Fiscais de Contrato'])
 
 @include('layouts.footer')
 
