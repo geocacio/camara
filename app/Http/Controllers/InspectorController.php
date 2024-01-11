@@ -58,6 +58,20 @@ class InspectorController extends Controller
         //
     }
 
+    public function showAll(Request $request){
+        $query = Inspector::query()->where('type', 'Fiscal não vigente');
+
+        if ($request->filled('name')) {
+            $query->where('name', 'LIKE', '%' . $request->input('name') . '%');
+        }
+
+        $inspectors = $query->get();
+
+        $searchData = $request->only(['name']);
+
+        return view('pages.biddings.inspectos', compact('inspectors', 'searchData'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

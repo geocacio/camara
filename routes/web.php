@@ -668,6 +668,7 @@ Route::prefix('/transparencia')->group(function () {
     Route::put('/mapa-site', [SiteMapController::class, 'pageUpdate'])->name('mapa-site.page.update');
     
     Route::match(['get', 'post'] ,'licitacoes/dispensa-e-inexigibilidade', [App\Http\Controllers\BiddingController::class, 'DispensaInexigibilidade'])->name('dispensa.inexigibilidade');
+    Route::match(['get', 'post'] ,'licitacoes/fiscais-contrato', [App\Http\Controllers\InspectorController::class, 'showAll'])->name('fiscais.contrato');
 
     Route::prefix('/sic')->group(function () {
 
