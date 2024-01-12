@@ -8,8 +8,10 @@ use App\Models\CategoryContent;
 use App\Models\Employee;
 use App\Models\File;
 use App\Models\Organ;
+use App\Models\Page;
 use App\Models\Role;
 use App\Models\Secretary;
+use App\Models\TransparencyGroup;
 use App\Models\Type;
 use App\Models\TypeContent;
 use App\Models\User;
@@ -241,6 +243,39 @@ class BiddingController extends Controller
         $searchData = $request->only(['start_date', 'end_date', 'status', 'exercice', 'modalidade', 'register_price', 'number', 'object', 'process']);
 
         return view('pages.biddings.adhesion.search', compact('bidding', 'modalidades', 'searchData', 'exercicies'));
+    }
+
+    public function pageEdit()
+    {
+        $page = Page::where('name', 'Licitações')->first();
+        $groups = TransparencyGroup::all();
+        return view('panel.biddings.page.edit', compact('page', 'groups'));
+    }
+    
+    public function pageUpdate(Request $request)
+    {
+        $validateData = $request->validate([
+            'main_title' => 'required',
+            'icon' => 'required',
+            'title' => 'required',
+            'description' => 'nullable',
+            'transparency_group_id' => 'required',
+        ], [
+            'main_title.required' => 'O campo título principal é obrigatório',
+            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
+            'title.required' => 'O campo título é obrigatório',
+            'icon.required' => 'O campo icon é obrigatório',
+        ]);
+
+        $lrf = Page::where('name', 'Licitações')->first();
+        
+        if ($lrf->update($validateData)) {
+            $lrf->groupContents()->delete();
+            $lrf->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+            return redirect()->route('bidding.page.create')->with('success', 'Informações atualizadas com sucesso!');
+        }
+
+        return redirect()->route('bidding.page.create')->with('error', 'Por favor tente novamente!');
     }
 
 

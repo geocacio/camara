@@ -180,7 +180,9 @@ Route::middleware('auth')->group(function () {
         Route::resource('biddings', BiddingController::class);
         Route::resource('companies', CompanyController::class);
         Route::resource('contracts', ContractController::class);
-
+        Route::get('bidding-page', [BiddingController::class, 'pageEdit'])->name('bidding.page.create');
+        Route::put('bidding-page', [BiddingController::class, 'pageUpdate'])->name('bidding.page.update');
+        
         Route::get('types/{itemType:slug}/subtypes', [TypeController::class, 'index'])->name('subtypes.index');
         Route::get('types/{type:slug}/subtypes/create', [TypeController::class, 'create'])->name('subtypes.create');
 
