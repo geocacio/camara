@@ -79,22 +79,34 @@
 
             <div class="row">
 
-                @foreach($bidding as $item)
-                
-                <div class="col-md-12">
-                    <div class="card-with-links">
-                        <div class="second-part">
-                            <div class="body">
-                                <h3 class="title">{{ $item->number }}</h3>
-                                <ul>
-                                    <li class="description">{{ $item->description }}</li>
-                                </ul>
-                            </div>
-                        </div>
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-data-default">
+                            <thead>
+                                <tr>
+                                    <th>Número Processo</th>
+                                    <th>Objeto</th>
+                                    <th>Data abertura</th>
+                                    <th>Mais</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($bidding as $item)
+                                    <tr>
+                                        <td>{{ $item->number }}</td>
+                                        <td>{{ $item->description }}</td>
+                                        <td>{{ date('d/m/Y', strtotime($item->opening_date)) }}</td>
+                                        <td style="cursor: pointer"> 
+                                            <a href="{{ route('bidding.show', $item->slug) }}">
+                                                <i class="fa-regular fa-eye"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
-                @endforeach
 
                 {{-- {{ $bidding->render() }} --}}
 
