@@ -39,23 +39,23 @@ class BiddingModalitiesSeeder extends Seeder
         //     'slug' => 'tomada-de-precos',
         // ]);
 
-        Category::create([
-            'name' => 'CONVITE',
-            'parent_id' => 3,
-            'slug' => 'convite',
-        ]);
+        // Category::create([
+        //     'name' => 'CONVITE',
+        //     'parent_id' => 3,
+        //     'slug' => 'convite',
+        // ]);
 
-        Category::create([
-            'name' => 'CONCURSO',
-            'parent_id' => 3,
-            'slug' => 'concurso',
-        ]);
+        // Category::create([
+        //     'name' => 'CONCURSO',
+        //     'parent_id' => 3,
+        //     'slug' => 'concurso',
+        // ]);
 
-        Category::create([
-            'name' => 'LEILÃO',
-            'parent_id' => 3,
-            'slug' => 'leilao',
-        ]);
+        // Category::create([
+        //     'name' => 'LEILÃO',
+        //     'parent_id' => 3,
+        //     'slug' => 'leilao',
+        // ]);
 
         // Category::create([
         //     'name' => 'PREGÃO',
