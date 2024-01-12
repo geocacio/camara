@@ -57,11 +57,11 @@ class BiddingModalitiesSeeder extends Seeder
             'slug' => 'leilao',
         ]);
 
-        Category::create([
-            'name' => 'PREGÃO',
-            'parent_id' => 3,
-            'slug' => 'pregao',
-        ]);
+        // Category::create([
+        //     'name' => 'PREGÃO',
+        //     'parent_id' => 3,
+        //     'slug' => 'pregao',
+        // ]);
 
         Category::create([
             'name' => 'CHAMADA PÚBLICA',
