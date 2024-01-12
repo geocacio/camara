@@ -15,17 +15,17 @@ class BiddingModalitiesSeeder extends Seeder
 
     public function run(): void
     {
-        Category::create([
-            'name' => 'DISPENSA',
-            'parent_id' => 3,
-            'slug' => 'dispensa',
-        ]);
+        // Category::create([
+        //     'name' => 'DISPENSA',
+        //     'parent_id' => 3,
+        //     'slug' => 'dispensa',
+        // ]);
 
-        Category::create([
-            'name' => 'INEXIGIBILIDADE',
-            'parent_id' => 3,
-            'slug' => 'inexigibilidade',
-        ]);
+        // Category::create([
+        //     'name' => 'INEXIGIBILIDADE',
+        //     'parent_id' => 3,
+        //     'slug' => 'inexigibilidade',
+        // ]);
 
         // Category::create([
         //     'name' => 'CONCORRÊNCIA',
