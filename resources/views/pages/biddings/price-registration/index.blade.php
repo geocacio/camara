@@ -12,11 +12,11 @@
         <a href="{{ route('bidding.page') }}" class="link">Licitações</a>
     </li>
     <li class="item">
-        <span>SUSPENSAS/INIDÔNEAS</span>
+        <span>ATAS DE REGISTRO DE PREÇO</span>
     </li>
 </ul>
 
-<h3 class="title-sub-page main">SUSPENSAS/INIDÔNEAS</h3>
+<h3 class="title-sub-page main">ATAS DE REGISTRO DE PREÇO</h3>
 @endsection
 
 @section('content')
@@ -30,7 +30,7 @@
                 <div class="card main-card container-search-advanced">
                     <div class="search-advanced mb-0">
                         <h3 class="title">Campos para pesquisa</h3>
-                        <form action="{{ route('suspended.index') }}" method="post">
+                        <form action="{{ route('price.registration.index') }}" method="post">
                             @csrf
                             <div class="row">
                                 <div class="col-md-2">
@@ -48,21 +48,14 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group mb-0">
-                                        <label>Tipo</label>
-                                        <select name="type" class="form-control">
-                                            <option value="">Tipo</option>
-                                            @foreach($categories as $item)
-                                                <option value="{{ $item->id }}" {{ isset($searchData['modalidade']) ?? is_array($searchData) && count($searchData) > 0 ? ($item->id == $searchData['modalidade'] ? 'selected' : '') : '' }}>
-                                                    {{ $item->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                        <label>Número</label>
+                                        <input type="text" name="number" class="form-control" value="{{ old('number', isset($searchData['number']) ? old('number', $searchData['number']) : '') }}" />
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group mb-0">
-                                        <label>Descrição</label>
+                                        <label>Objeto</label>
                                         <input type="text" name="description" class="form-control" value="{{ old('description', isset($searchData['description']) ? old('description', $searchData['description']) : '') }}" />
                                     </div>
                                 </div>
@@ -72,7 +65,7 @@
                                     <div class="h-100 form-group mb-0">
                                         <div class="btn-groups">
                                             <button type="submit" class="btn btn-search btn-sm" data-toggle="tooltip" title="Pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button>
-                                            <a href="{{ route('suspended.index') }}" class="btn btn-search close btn-sm" data-toggle="tooltip" title="Limpar pesquisa"><i class="fa-solid fa-xmark"></i></a>
+                                            <a href="{{ route('price.registration.index') }}" class="btn btn-search close btn-sm" data-toggle="tooltip" title="Limpar pesquisa"><i class="fa-solid fa-xmark"></i></a>
                                         </div>
                                     </div>
                                 </div>

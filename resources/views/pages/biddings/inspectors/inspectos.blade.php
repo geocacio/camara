@@ -9,7 +9,10 @@
         <a href="{{ route('transparency.show') }}" class="link">Portal da transparência</a>
     </li>
     <li class="item">
-        <span>Legislatura</span>
+        <a href="{{ route('bidding.page') }}" class="link">Licitações</a>
+    </li>
+    <li class="item">
+        <span>Fiscais de contrato</span>
     </li>
 </ul>
 

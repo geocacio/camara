@@ -9,11 +9,14 @@
         <a href="{{ route('transparency.show') }}" class="link">Portal da transparência</a>
     </li>
     <li class="item">
-        <span>Legislatura</span>
+        <a href="{{ route('bidding.page') }}" class="link">Licitações</a>
+    </li>
+    <li class="item">
+        <span>Dispensa e Inexigibilidade</span>
     </li>
 </ul>
 
-{{-- <h3 class="title-sub-page main"># {{ $currentLegislaturePosition }}  Legislatura: ({{ date('d/m/Y', strtotime($legislature->start_date)) }} - {{ date('d/m/Y', strtotime($legislature->end_date)) }})</h3> --}}
+<h3 class="title-sub-page main">Dispensa e Inexigibilidade</h3>
 @endsection
 
 @section('content')

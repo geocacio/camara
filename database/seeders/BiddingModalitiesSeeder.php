@@ -69,6 +69,12 @@ class BiddingModalitiesSeeder extends Seeder
             'slug' => 'chamada-publica',
         ]);
 
+        Category::create([
+            'name' => 'ADESÃO A ATA DE REGISTRO DE PREÇOS',
+            'parent_id' => 3,
+            'slug' => 'adesao-a-ata-de-registro-de-precos',
+        ]);
+
         # Tipos de licitação
 
         Type::create([

@@ -667,11 +667,15 @@ Route::prefix('/transparencia')->group(function () {
     Route::get('/mapa-site', [SiteMapController::class, 'pageShow'])->name('mapa.page.show');
     Route::put('/mapa-site', [SiteMapController::class, 'pageUpdate'])->name('mapa-site.page.update');
     
-    Route::match(['get', 'post'] ,'licitacoes/dispensa-e-inexigibilidade', [App\Http\Controllers\BiddingController::class, 'DispensaInexigibilidade'])->name('dispensa.inexigibilidade');
-    Route::match(['get', 'post'] ,'licitacoes/fiscais-contrato', [App\Http\Controllers\InspectorController::class, 'showAll'])->name('fiscais.contrato');
-    Route::match(['get', 'post'] ,'licitacoes/chamamento-publico', [App\Http\Controllers\BiddingController::class, 'publicCall'])->name('public.call');
-    Route::match(['get', 'post'] ,'licitacoes/suspensas-inidoneas', [App\Http\Controllers\BiddingController::class, 'suspended'])->name('suspended.index');
-    Route::get('licitacoes/fiscais-contrato/{slug}', [App\Http\Controllers\InspectorController::class, 'show'])->name('fiscais.show');
+    Route::prefix('licitacoes')->group(function () {
+        Route::get('/', [BiddingController::class, 'BiddingPage'])->name('bidding.page');
+        Route::match(['get', 'post'], 'dispensa-e-inexigibilidade', [BiddingController::class, 'DispensaInexigibilidade'])->name('dispensa.inexigibilidade');
+        Route::match(['get', 'post'], 'fiscais-contrato', [InspectorController::class, 'showAll'])->name('fiscais.contrato');
+        Route::match(['get', 'post'], 'chamamento-publico', [BiddingController::class, 'publicCall'])->name('public.call');
+        Route::match(['get', 'post'], 'suspensas-inidoneas', [BiddingController::class, 'suspended'])->name('suspended.index');
+        Route::match(['get', 'post'], 'registro-preco', [BiddingController::class, 'PriceRegistration'])->name('price.registration.index');
+        Route::get('fiscais-contrato/{slug}', [InspectorController::class, 'show'])->name('fiscais.show');
+    });
 
     Route::prefix('/sic')->group(function () {
 
