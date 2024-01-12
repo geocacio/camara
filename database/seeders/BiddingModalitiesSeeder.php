@@ -27,11 +27,11 @@ class BiddingModalitiesSeeder extends Seeder
             'slug' => 'inexigibilidade',
         ]);
 
-        Category::create([
-            'name' => 'CONCORRÊNCIA',
-            'parent_id' => 3,
-            'slug' => 'concorrencia',
-        ]);
+        // Category::create([
+        //     'name' => 'CONCORRÊNCIA',
+        //     'parent_id' => 3,
+        //     'slug' => 'concorrencia',
+        // ]);
 
         Category::create([
             'name' => 'TOMADA DE PREÇOS',
