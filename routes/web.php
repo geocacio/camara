@@ -670,8 +670,8 @@ Route::prefix('/transparencia')->group(function () {
     Route::put('/mapa-site', [SiteMapController::class, 'pageUpdate'])->name('mapa-site.page.update');
     
     Route::prefix('licitacoes')->group(function () {
-        Route::get('/', [BiddingController::class, 'BiddingPage'])->name('bidding.page');
-        Route::get('portal-compras', [BiddingController::class, 'ShoppingPortal'])->name('shopping.portal.page');
+        Route::get('/', [BiddingController::class, 'BiddingPage'])->name('shopping.portal.page');//
+        Route::get('portal-compras', [BiddingController::class, 'ShoppingPortal'])->name('bidding.page'); //
         Route::get('/show/{slug?}', [BiddingController::class, 'show'])->name('bidding.show');
         Route::match(['get', 'post'], 'dispensa-e-inexigibilidade', [BiddingController::class, 'DispensaInexigibilidade'])->name('dispensa.inexigibilidade');
         Route::match(['get', 'post'], 'fiscais-contrato', [InspectorController::class, 'showAll'])->name('fiscais.contrato');

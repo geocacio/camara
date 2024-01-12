@@ -9,7 +9,7 @@
         <a href="{{ route('transparency.show') }}" class="link">Portal da transparência</a>
     </li>
     <li class="item">
-        <a href="{{ route('shopping.portal.page') }}" class="link">Licitações</a>
+        <a href="{{ route('bidding.page') }}" class="link">Licitações</a>
     </li>
     <li class="item">
         <span>ATO DE ADESÃO</span>

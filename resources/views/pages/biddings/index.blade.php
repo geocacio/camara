@@ -9,7 +9,7 @@
         <a href="{{ route('transparency.show') }}" class="link">Portal da transparência</a>
     </li>
     <li class="item">
-        <a href="{{ route('shopping.portal.page') }}" class="link">Licitações</a>
+        <a href="{{ route('bidding.page') }}" class="link">Licitações</a>
     </li>
 </ul>
 
@@ -23,7 +23,7 @@
 <section class="section-legislature adjust-min-height no-padding-top">
     <div class="container">
         <div class="biddings">
-            <a href="{{ route('bidding.page') }}" class="item-bidding">
+            <a href="{{ route('shopping.portal.page') }}" class="item-bidding">
                 <i class="fa-solid fa-file-contract"></i>
                 <span>Licitações</span>
             </a>
