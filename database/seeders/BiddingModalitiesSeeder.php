@@ -33,11 +33,11 @@ class BiddingModalitiesSeeder extends Seeder
         //     'slug' => 'concorrencia',
         // ]);
 
-        Category::create([
-            'name' => 'TOMADA DE PREÇOS',
-            'parent_id' => 3,
-            'slug' => 'tomada-de-precos',
-        ]);
+        // Category::create([
+        //     'name' => 'TOMADA DE PREÇOS',
+        //     'parent_id' => 3,
+        //     'slug' => 'tomada-de-precos',
+        // ]);
 
         Category::create([
             'name' => 'CONVITE',
