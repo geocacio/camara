@@ -89,6 +89,5 @@ class BiddingModalitiesSeeder extends Seeder
             'slug' => 'suspensao',
         ]);
 
-        
     }
 }

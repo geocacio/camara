@@ -669,11 +669,14 @@ Route::prefix('/transparencia')->group(function () {
     
     Route::prefix('licitacoes')->group(function () {
         Route::get('/', [BiddingController::class, 'BiddingPage'])->name('bidding.page');
+        Route::get('portal-compras', [BiddingController::class, 'ShoppingPortal'])->name('shopping.portal.page');
+        Route::get('/show/{slug?}', [BiddingController::class, 'show'])->name('bidding.show');
         Route::match(['get', 'post'], 'dispensa-e-inexigibilidade', [BiddingController::class, 'DispensaInexigibilidade'])->name('dispensa.inexigibilidade');
         Route::match(['get', 'post'], 'fiscais-contrato', [InspectorController::class, 'showAll'])->name('fiscais.contrato');
         Route::match(['get', 'post'], 'chamamento-publico', [BiddingController::class, 'publicCall'])->name('public.call');
         Route::match(['get', 'post'], 'suspensas-inidoneas', [BiddingController::class, 'suspended'])->name('suspended.index');
         Route::match(['get', 'post'], 'registro-preco', [BiddingController::class, 'PriceRegistration'])->name('price.registration.index');
+        Route::match(['get', 'post'], 'atodeadesao', [BiddingController::class, 'AtoAdesao'])->name('atodeadesao.index');
         Route::get('fiscais-contrato/{slug}', [InspectorController::class, 'show'])->name('fiscais.show');
     });
 

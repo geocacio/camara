@@ -12,11 +12,11 @@
         <a href="{{ route('shopping.portal.page') }}" class="link">Licitações</a>
     </li>
     <li class="item">
-        <span>Dispensa e Inexigibilidade</span>
+        <span>ATO DE ADESÃO</span>
     </li>
 </ul>
 
-<h3 class="title-sub-page main">Dispensa e Inexigibilidade</h3>
+<h3 class="title-sub-page main">ATO DE ADESÃO</h3>
 @endsection
 
 @section('content')

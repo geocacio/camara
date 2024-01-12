@@ -9,7 +9,7 @@
         <a href="{{ route('transparency.show') }}" class="link">Portal da transparência</a>
     </li>
     <li class="item">
-        <a href="{{ route('bidding.page') }}" class="link">Licitações</a>
+        <a href="{{ route('shopping.portal.page') }}" class="link">Licitações</a>
     </li>
     <li class="item">
         <span>ATAS DE REGISTRO DE PREÇO</span>
@@ -78,24 +78,20 @@
         @if($bidding->count() > 0)
 
             <div class="row">
-                
+
                 @foreach($bidding as $item)
                 
                 <div class="col-md-12">
                     <div class="card-with-links">
-                            {{-- <div class="header">
-                                <i class="fa-solid fa-microphone-lines"></i>
-                            </div> --}}
-                            <div class="second-part">
-                                <div class="body">
-                                    <h3 class="title">{{ $item->number }}</h3>
-                                    <ul>
-                                        <li class="description">{{ $item->description }}</li>
-                                    </ul>
-                                </div>
+                        <div class="second-part">
+                            <div class="body">
+                                <h3 class="title">{{ $item->number }}</h3>
+                                <ul>
+                                    <li class="description">{{ $item->description }}</li>
+                                </ul>
                             </div>
+                        </div>
                     </div>
-
                 </div>
 
                 @endforeach
@@ -112,7 +108,7 @@
     </div>
 </section>
 
-@include('pages.partials.satisfactionSurvey', ['page_name' => 'Licitacoes - Dispensa e Inexigibilidade'])
+@include('pages.partials.satisfactionSurvey', ['page_name' => 'Licitacoes - Registro de Preço'])
 
 @include('layouts.footer')
 

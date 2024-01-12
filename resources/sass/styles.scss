@@ -3724,3 +3724,29 @@ section{
 .row-gap-20{
     row-gap: 20px;
 }
+
+.biddings {
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 25px;
+    gap: 15px;
+
+    .item-bidding {
+        background-color: #30358c;
+        color: #fff;
+        padding: 10px;
+        width: 360px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        text-transform: uppercase;
+    
+        &:hover{
+            background-color: #004080;
+        }
+    }
+}
