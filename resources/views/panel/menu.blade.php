@@ -659,6 +659,9 @@
                 <li class="sub-item {{ Str::contains(url()->current(), 'types/biddings') ? 'active' : '' }}">
                     <a href="{{ route('subtypes.index', 'biddings') }}" class="sub-link">Tipos</a>
                 </li>
+                <li class="sub-item {{ Str::contains(url()->current(), 'types/biddings') ? 'active' : '' }}">
+                    <a href="{{ route('bidding.page.create', 'biddings') }}" class="sub-link">Página</a>
+                </li>
             </ul>
         </div>
     </li>
