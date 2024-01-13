@@ -33,35 +33,35 @@ class BiddingModalitiesSeeder extends Seeder
         //     'slug' => 'concorrencia',
         // ]);
 
-        Category::create([
-            'name' => 'TOMADA DE PREÇOS',
-            'parent_id' => 3,
-            'slug' => 'tomada-de-precos',
-        ]);
+        // Category::create([
+        //     'name' => 'TOMADA DE PREÇOS',
+        //     'parent_id' => 3,
+        //     'slug' => 'tomada-de-precos',
+        // ]);
 
-        Category::create([
-            'name' => 'CONVITE',
-            'parent_id' => 3,
-            'slug' => 'convite',
-        ]);
+        // Category::create([
+        //     'name' => 'CONVITE',
+        //     'parent_id' => 3,
+        //     'slug' => 'convite',
+        // ]);
 
-        Category::create([
-            'name' => 'CONCURSO',
-            'parent_id' => 3,
-            'slug' => 'concurso',
-        ]);
+        // Category::create([
+        //     'name' => 'CONCURSO',
+        //     'parent_id' => 3,
+        //     'slug' => 'concurso',
+        // ]);
 
-        Category::create([
-            'name' => 'LEILÃO',
-            'parent_id' => 3,
-            'slug' => 'leilao',
-        ]);
+        // Category::create([
+        //     'name' => 'LEILÃO',
+        //     'parent_id' => 3,
+        //     'slug' => 'leilao',
+        // ]);
 
-        Category::create([
-            'name' => 'PREGÃO',
-            'parent_id' => 3,
-            'slug' => 'pregao',
-        ]);
+        // Category::create([
+        //     'name' => 'PREGÃO',
+        //     'parent_id' => 3,
+        //     'slug' => 'pregao',
+        // ]);
 
         Category::create([
             'name' => 'CHAMADA PÚBLICA',
