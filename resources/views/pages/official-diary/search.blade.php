@@ -61,29 +61,25 @@
         <div class="row">
             
             @foreach($dayles as $dayle)
-                <div class="col-md-12">
-                    <div class="card-with-links">
+                @if($dayle->files->count() > 0)
+                    <div class="col-md-12">
+                        <div class="card-with-links">
 
-                        @if($dayle->files->count() > 0)
                             <a style="width: 62px;" href="{{ asset('storage/'.$dayle->files[0]->file->url) }}" target="_blank" class="header">
                                 <div>
                                     <i class="fa-regular fa-file-lines"></i>
                                 </div>
                             </a>
-                        @else
-                            <div class="header">
-                                <i class="fa-regular fa-file-lines"></i>
-                            </div>
-                        @endif
-
-
-                        <div class="second-part">
-                            <div class="body">
-                                <p class="description">Edição: {{ $dayle->created_at->format('d/m/Y H:i:s') }}</p>
+                            
+                            
+                            <div class="second-part">
+                                <div class="body">
+                                    <p class="description">Edição: {{ $dayle->created_at->format('d/m/Y H:i:s') }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
             @endforeach
 
         </div>
