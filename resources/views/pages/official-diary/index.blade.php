@@ -49,27 +49,7 @@
             </div>
             
             @if($dayle->files->count() > 0)
-            <div class="col-md-3">
-                <span class="last-edition">
-                    <div class="line-blue"></div>
-                    Última edição
-                </span>
-                <div class="box-dowload card main-card">
-                    <h6>DIÁRIO OFICIAL ELETRÔNICO</h6>
-                    <div class="circle">
-                        <i class="fa fa-file-contract"></i>
-                    </div>
-                    <span>{{ $dayle->created_at->format('d/m/Y H:i:s') }}</span>
-
-                    <button class="dowload-journal">
-                            <a href="{{ asset('storage/'.$dayle->files[0]->file->url) }}" target="_blank">
-                                <i class="fa fa-download"></i>                        
-                                Baixar
-                            </a>
-                        </button>
-                    </div>
-                </div>
-            </div>
+                @include('pages.official-diary.diary-component', ['single' => true])
             @endif
         </div>
     </div>

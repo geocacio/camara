@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
+use App\Models\FileContent;
 use App\Models\Law;
 use App\Models\officehour as OfficeHour;
 use App\Models\OfficialJournal;
@@ -46,16 +47,24 @@ class OfficialJournalController extends Controller
 
     public function page($id = null)
     {
+        $getJournalID = FileContent::where('fileable_type', 'official_journals')->get();
+
         if ($id == null) {
-            $dayle = OfficialJournal::latest()->first();
+            $dayle = OfficialJournal::whereIn('id', $getJournalID->pluck('fileable_id'))->latest()->first();
         } else {
             $dayle = OfficialJournal::where('id', $id)->first();
         }
-
-        return view('pages.official-diary.index', compact('dayle'));
-    }
-
     
+        $dayles = OfficialJournal::whereIn('id', $getJournalID->pluck('fileable_id'))->get();
+    
+        $position = $dayles->search(function ($item) use ($dayle) {
+            return $item->id == $dayle->id;
+        });
+    
+        $adjustedPosition = $position !== false ? $position + 1 : null;
+    
+        return view('pages.official-diary.index', compact('dayle', 'adjustedPosition'));
+    }
     
     public function journalPage(){
         $outsource = Page::where('name', 'Díario Oficial')->first();
@@ -148,7 +157,9 @@ class OfficialJournalController extends Controller
 
     public function allEditions()
     {
-        $dayles = OfficialJournal::all();
+        $getJournalID = FileContent::where('fileable_type', 'official_journals')->get();
+        $dayles = OfficialJournal::whereIn('id', $getJournalID->pluck('fileable_id'))->get();
+
         return view('pages.official-diary.show', compact('dayles'));
     }
     /**
@@ -177,7 +188,8 @@ class OfficialJournalController extends Controller
 
     public function search(Request $request)
     {
-        $query = OfficialJournal::query();
+        $getJournalID = FileContent::where('fileable_type', 'official_journals')->get();
+        $query = OfficialJournal::query()->whereIn('id', $getJournalID->pluck('fileable_id'));
 
         if ($request->filled('start_date') && $request->filled('end_date')) {
             $start_date = date("Y-m-d", strtotime($request->input('start_date')));
