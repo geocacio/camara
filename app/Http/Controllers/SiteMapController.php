@@ -37,11 +37,11 @@ class SiteMapController extends Controller
         ]);
         $validateData['visibility'] = $request->visibility ? $request->visibility : 'disabled';
 
-        $page_law = Page::where('name', 'Mapa do site')->first();
+        $pageMap = Page::where('name', 'Mapa do site')->first();
 
-        if ($page_law->update($validateData)) {
-            $page_law->groupContents()->delete();
-            $page_law->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+        if ($pageMap->update($validateData)) {
+            $pageMap->groupContents()->delete();
+            $pageMap->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
             return redirect()->route('mapa.page.show')->with('success', 'Informações atualizadas com sucesso!');
         }
         return redirect()->route('mapa.page.show')->with('error', 'Por favor tente novamente!');
