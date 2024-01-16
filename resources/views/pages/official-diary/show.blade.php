@@ -30,14 +30,14 @@
                         </div>
                         <span>{{ $dayle->created_at->format('d/m/Y H:i:s') }}</span>
 
-                        <button class="dowload-journal">
+                        {{-- <button class="dowload-journal"> --}}
                             @if($dayle->files->count() > 0)
                                 <a href="{{ asset('storage/'.$dayle->files[0]->file->url) }}" target="_blank">
                                     <i class="fa fa-download"></i>                        
                                     Baixar
                                 </a>
                             @endif
-                        </button>
+                        {{-- </button> --}}
                     </div>
                 </div>
             @endforeach
