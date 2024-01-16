@@ -6,10 +6,10 @@
         <a href="{{ route('official.diary.page') }}" class="link">Início</a>
     </li>
     <li class="item">
-        <a href="{{ route('official.diary.presentation') }}" class="link">{{ $presentation->name }}</a>
+        <a href="{{ route('official.diary.presentation') }}" class="link">{{ $presentation->name ?? '' }}</a>
     </li>
 </ul>
-<h3 class="title text-center">{{ $presentation->name }}</h3>
+<h3 class="title text-center">{{ $presentation->name ?? '' }}</h3>
 @endsection
 
 @section('content')
@@ -34,11 +34,11 @@
                 <p class="title-journal">Diário Oficial Eletrônico</p>
                 <span class="last-edition">
                     <div class="line-blue"></div>
-                    {{ $presentation->name   }}
+                    {{ $presentation->name ?? '' }}
                 </span>
 
                 <p class="desc-journal">
-                    {{ $law->description   }}
+                    {{ $law->description ?? '' }}
                 </p>
 
             </div>
