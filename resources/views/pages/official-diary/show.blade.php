@@ -22,24 +22,22 @@
 
             @include('pages.official-diary.sidebar')
             @foreach ($dayles as $dayle)
-                <div class="col-md-3">
-                    <div class="box-dowload card main-card">
-                        <h6>DIÁRIO OFICIAL ELETRÔNICO</h6>
-                        <div class="circle">
-                            <i class="fa fa-file-contract"></i>
-                        </div>
-                        <span>{{ $dayle->created_at->format('d/m/Y H:i:s') }}</span>
+                @if($dayle->files->count() > 0)
+                    <div class="col-md-3">
+                        <div class="box-dowload card main-card">
+                            <h6>DIÁRIO OFICIAL ELETRÔNICO</h6>
+                            <div class="circle">
+                                <i class="fa fa-file-contract"></i>
+                            </div>
+                            <span>{{ $dayle->created_at->format('d/m/Y H:i:s') }}</span>
 
-                        {{-- <button class="dowload-journal"> --}}
-                            @if($dayle->files->count() > 0)
-                                <a href="{{ asset('storage/'.$dayle->files[0]->file->url) }}" target="_blank">
-                                    <i class="fa fa-download"></i>                        
-                                    Baixar
-                                </a>
-                            @endif
-                        {{-- </button> --}}
+                            <a href="{{ asset('storage/'.$dayle->files[0]->file->url) }}" target="_blank">
+                                <i class="fa fa-download"></i>                        
+                                Baixar
+                            </a>
+                        </div>
                     </div>
-                </div>
+                @endif
             @endforeach
         </div>
     </div>
