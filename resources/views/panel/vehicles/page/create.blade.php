@@ -21,26 +21,26 @@
                 <div class="col-md-2">
                     <div class="form-group">
                         <label>Ícone</label>
-                        <input type="text" name="icon" class="form-control icon" autocomplete="off" value="{{ old('icon', $page->icon) }}" onfocus="getIconInputValues(event)">
+                        <input type="text" name="icon" class="form-control icon" autocomplete="off" value="{{ old('icon', $page->icon ?? '') }}" onfocus="getIconInputValues(event)">
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">
                         <label>Título Principal</label>
-                        <input type="text" name="main_title" class="form-control" autocomplete="off" value="{{ old('main_title', $page->main_title) }}">
+                        <input type="text" name="main_title" class="form-control" autocomplete="off" value="{{ old('main_title', $page->main_title ?? '') }}">
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">
                         <label>Título</label>
-                        <input type="text" name="title" class="form-control" autocomplete="off" value="{{ old('title', $page->title) }}">
+                        <input type="text" name="title" class="form-control" autocomplete="off" value="{{ old('title', $page->title ?? '') }}">
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
                 <label>Descrição</label>
-                <input type="text" name="description" class="form-control" autocomplete="off" value="{{ old('description', $page->description) }}">
+                <input type="text" name="description" class="form-control" autocomplete="off" value="{{ old('description', $page->description?? '') }}">
             </div>
 
             <div class="form-group">
