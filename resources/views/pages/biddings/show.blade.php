@@ -78,7 +78,7 @@
                         @if($files && count($files) > 0)
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="files-tab" data-bs-toggle="tab" data-bs-target="#files" type="button" role="tab">
-                                <i class="fa-solid fa-bars-progress"></i>
+                                <i class="fa-regular fa-file"></i>
                                 Arquivos disponíveis
                             </button>
                         </li>
