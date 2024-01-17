@@ -48,7 +48,7 @@
 
             </div>
             
-            @if($dayle->files->count() > 0)
+            @if($dayle && $dayle->files->count() > 0)
                 @include('pages.official-diary.diary-component', ['single' => true])
             @endif
         </div>
