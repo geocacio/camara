@@ -55,9 +55,10 @@ class EmployeeController extends Controller
             $query->where('name', 'LIKE', '%' . $request->input('name') . '%');
         }
         
-        if($request->filled('secretary')){
-            $query->where('secretary_id', 'LIKE', '%' . $request->input('secretary') . '%');
-        }
+        //Não existe secretaria em Câmara!
+        // if($request->filled('secretary')){
+        //     $query->where('secretary_id', 'LIKE', '%' . $request->input('secretary') . '%');
+        // }
     
         $employees = $query->get();
     
@@ -91,9 +92,10 @@ class EmployeeController extends Controller
             $query->where('name', 'LIKE', '%' . $request->input('name') . '%');
         }
         
-        if($request->filled('secretary')){
-            $query->where('secretary_id', 'LIKE', '%' . $request->input('secretary') . '%');
-        }
+        //Não existe secretaria em Câmara!
+        // if($request->filled('secretary')){
+        //     $query->where('secretary_id', 'LIKE', '%' . $request->input('secretary') . '%');
+        // }
     
         if($request->filled('credor')){
             $query->where('credor', 'LIKE', '%' . $request->input('credor') . '%');
@@ -135,7 +137,7 @@ class EmployeeController extends Controller
             'admission_date' => 'nullable',
             'employment_type' => 'nullable',
             'status' => 'nullable',
-            'secretary_id' => 'nullable',
+            // 'secretary_id' => 'nullable',
             'contact_number' => 'nullable',
             'credor' => 'nullable',
             'file' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
@@ -180,7 +182,7 @@ class EmployeeController extends Controller
             'dependents' => 'nullable',
             'admission_date' => 'nullable',
             'employment_type' => 'nullable',
-            'secretary_id' => 'nullable',
+            // 'secretary_id' => 'nullable',
             'contact_number' => 'nullable',
             'credor' => 'nullable',
             'status' => 'nullable',

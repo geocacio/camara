@@ -20,7 +20,7 @@ class Employee extends Model
         'employment_type',
         'status',
         'slug',
-        'secretary_id',
+        // 'secretary_id',
         'contact_number',
         'credor',
     ];

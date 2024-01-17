@@ -32,7 +32,7 @@
                         @if($groups->contents && !empty($groups->contents))
                         @foreach($groups->contents as $content)
                         
-                        @if($content->pageable->visibility == 'enabled')
+                        @if($content->pageable && $content->pageable->visibility == 'enabled')
                         <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2">
                             <a href="{{ !$content->pageable->route ? ($content->pageable->url ? $content->pageable->url : '#') : route($content->pageable->route) }}" target="{{ $content->pageable->url ? '_blank' : '_self'}}" class="container-service">
                                 <i class="{{ $content->pageable->icon }}"></i>
