@@ -285,7 +285,8 @@ class BiddingController extends Controller
     public function show($bidding)
     {
         $bidding = Bidding::where('slug', $bidding)->first();
-        return view('pages.biddings.show', compact('bidding'));
+        $files = File::whereIn('id', $bidding->files->pluck('file_id'))->get();
+        return view('pages.biddings.show', compact('bidding', 'files'));
     }
 
     /**

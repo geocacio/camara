@@ -5,14 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Bidding;
 use App\Models\Company;
 use App\Models\Contract;
+use App\Models\File;
 use App\Models\Inspector;
 use App\Models\InspectorContract;
 use App\Models\Type;
+use App\Services\FileUploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class ContractController extends Controller
 {
+    private $fileUploadService;
+
+    public function __construct(FileUploadService $fileUploadService)
+    {
+        $this->fileUploadService = $fileUploadService;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -48,6 +57,7 @@ class ContractController extends Controller
             'end_date' => 'nullable',
             'total_value' => 'nullable',
             'description' => 'nullable',
+            'file' => 'required',
         ]);
 
         $validatedData['slug'] = Str::slug($request->number);
@@ -60,6 +70,12 @@ class ContractController extends Controller
                 'inspector_id' => $request->inspector_id,
                 'contract_id' => $contract->id,
             ]);
+
+            if ($request->hasFile('file')) {
+                $url = $this->fileUploadService->upload($request->file('file'), 'contracts');
+                $file = File::create(['url' => $url]);
+                $contract->files()->create(['file_id' => $file->id]);
+            }
         }
 
         if ($contract) {
@@ -87,7 +103,8 @@ class ContractController extends Controller
         $companies = Company::all();
         $types = Type::where('slug', 'contracts')->first()->children;
         $contract = Contract::find($id);
-        return view('panel.contracts.edit', compact('contract', 'companies', 'types', 'bidding'));
+        $files = $contract->files;
+        return view('panel.contracts.edit', compact('contract', 'companies', 'types', 'bidding', 'files'));
     }
 
     /**

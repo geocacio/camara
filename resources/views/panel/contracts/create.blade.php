@@ -97,6 +97,11 @@
             <textarea name="description" class="form-control" {{ $types->count() <= 0 ? 'disabled' : ''}}>{{ old('description') }}</textarea>
         </div>
 
+        <div class="form-group">
+            <label for="logo">Arquivo</label>
+            <input type="file" name="file" accept="application/pdf" class="form-control">
+        </div>
+
         <div class="form-footer text-right">
             <button type="submit" class="btn-submit-default">Guardar</button>
         </div>

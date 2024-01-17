@@ -39,6 +39,11 @@ class Contract extends Model
         return $this->hasMany(Contract::class, 'parent_id');
     }
 
+    public function files()
+    {
+        return $this->morphMany(FileContent::class, 'fileable');
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';

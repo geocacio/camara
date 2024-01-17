@@ -74,6 +74,15 @@
                             </button>
                         </li>
                         @endif
+
+                        @if($files && count($files) > 0)
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="files-tab" data-bs-toggle="tab" data-bs-target="#files" type="button" role="tab">
+                                <i class="fa-solid fa-bars-progress"></i>
+                                Arquivos disponíveis
+                            </button>
+                        </li>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -224,6 +233,38 @@
                                         </table>
                                     </div>
                                 </div>
+                            </div>
+                        @endif
+
+                        @if($files && count($files) > 0)
+                            <div class="tab-pane fadeshow" id="files" role="tabpanel" aria-labelledby="files">
+
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-data-default">
+                                            <thead>
+                                                <tr>
+                                                    <th>Arquivo</th>
+                                                    <th>Ver</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                            
+                                                @foreach($files as $item)
+                                                <tr>
+                                                    <td>{{ $item->name }}</td>
+                                                    <td>
+                                                        <a href="{{ asset('storage/'.$item->url) }}" target="_blank">
+                                                        <i class="fa-regular fa-eye"></i>
+                                                    </a>
+                                                </tr>
+                                                @endforeach
+                            
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
                             </div>
                         @endif
 
