@@ -63,17 +63,17 @@ class BiddingModalitiesSeeder extends Seeder
         //     'slug' => 'pregao',
         // ]);
 
-        Category::create([
-            'name' => 'CHAMADA PÚBLICA',
-            'parent_id' => 3,
-            'slug' => 'chamada-publica',
-        ]);
+        // Category::create([
+        //     'name' => 'CHAMADA PÚBLICA',
+        //     'parent_id' => 3,
+        //     'slug' => 'chamada-publica',
+        // ]);
 
-        Category::create([
-            'name' => 'ADESÃO A ATA DE REGISTRO DE PREÇOS',
-            'parent_id' => 3,
-            'slug' => 'adesao-a-ata-de-registro-de-precos',
-        ]);
+        // Category::create([
+        //     'name' => 'ADESÃO A ATA DE REGISTRO DE PREÇOS',
+        //     'parent_id' => 3,
+        //     'slug' => 'adesao-a-ata-de-registro-de-precos',
+        // ]);
 
         # Tipos de licitação
 

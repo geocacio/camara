@@ -238,7 +238,7 @@ class BiddingController extends Controller
             $query->where('process', 'LIKE', '%' . $request->input('process') . '%');
         }
 
-        $bidding = $query->paginate(10);
+        $bidding = $query->get();
 
         $searchData = $request->only(['start_date', 'end_date', 'status', 'exercice', 'modalidade', 'register_price', 'number', 'object', 'process']);
 
@@ -310,7 +310,9 @@ class BiddingController extends Controller
             }
         }
 
-        return view('panel.biddings.edit', compact('bidding', 'biddingCategories', 'modalities', 'exercicies', 'types', 'competings', 'secretaries', 'responsibilities', 'employees', 'availableFiles'));
+        $otherFiles = File::whereIn('id', $bidding->files->pluck('file_id'))->where('name', '!=', 'File Authorization')->where('name', '!=', 'File Market Research')->get();
+
+        return view('panel.biddings.edit', compact('bidding', 'biddingCategories', 'modalities', 'exercicies', 'types', 'competings', 'secretaries', 'responsibilities', 'employees', 'availableFiles', 'otherFiles'));
     }
 
     /**

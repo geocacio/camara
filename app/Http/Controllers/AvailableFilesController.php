@@ -48,7 +48,7 @@ class AvailableFilesController extends Controller
         ]);
         
         $url = $this->fileUploadService->upload($request->file('file'), 'biddings');
-        $file = File::create(['name' => $request->name, 'description' => $request->description, 'url' => $url]);                
+        $file = File::create(['name' => $request->name, 'description' => $request->description, 'url' => $url]);
         $bidding->files()->create(['file_id' => $file->id]);
         return redirect()->route('biddings.available.files.index', $bidding->slug)->with('success', 'Arquivo cadastrado com sucesso!');
     }

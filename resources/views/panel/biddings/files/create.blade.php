@@ -121,8 +121,10 @@
                     console.log(response, response.data);
 
                     const newOption = document.createElement('option');
-                    newOption.value = response.data.category.id;
+                    newOption.value = response.data.category.name;
                     newOption.text = response.data.category.name;
+                    select[0].appendChild(newOption);
+
 
                     select[0].appendChild(newOption);
 

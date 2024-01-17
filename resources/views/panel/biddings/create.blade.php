@@ -234,7 +234,10 @@
                             <button class="nav-link" id="market-research-tab" data-bs-toggle="tab" data-bs-target="#market-research" type="button" role="tab" aria-controls="market-research" aria-selected="false">Pesquisa de mercado</button>
                         </li>
                     </ul>
-                    <div class="tab-content" id="myTabContent">
+                    <span>
+                        <button class="btn-plus-file" onclick="addNewTab()">+</button>
+                    </span>
+                    <div class="tab-content tabFileNew" id="myTabContent">
                         <div class="tab-pane fade text-center show active" id="authorization" role="tabpanel" aria-labelledby="authorization-tab">
                             <input type="file" name="authorization" id="file-authorization" style="display: none;" accept=".pdf" onchange="sendFile(event, 'file-authorization', 'authorization-tab', 'file-preview-authorization')">
                             <button class="btn btn-primary btn-new-file text-white" onclick="document.getElementById('file-authorization').click();"><i class="fa-solid fa-upload"></i></button>
@@ -413,6 +416,23 @@
 @section('js')
 
 @include('panel.scripts')
+
+<style>
+    .btn-plus-file {
+        background-color: #47565d;
+        padding: 5px;
+        border: none;
+        color: #fff;
+        border-radius: 3px;
+    }
+
+    .btn-del-tab {
+        border: none;
+        background-color: transparent;
+        font-weight: 900;
+        color: tomato;
+    }
+</style>
 
 <script>
     let formArray = [];
@@ -598,7 +618,105 @@
         }
 
     }
-    
+
+    function addNewTab() {
+        // Crie um novo ID único para a nova guia
+        var newTabId = 'new-tab-' + Date.now();
+
+        // Crie um novo item de navegação (li) para a nova guia
+        var newNavItem = document.createElement('li');
+        newNavItem.className = 'nav-item';
+        newNavItem.setAttribute('role', 'presentation');
+
+        // Crie um novo botão dentro do item de navegação
+        var newTabButton = document.createElement('button');
+        newTabButton.className = 'nav-link';
+        newTabButton.setAttribute('type', 'button');
+        newTabButton.setAttribute('role', 'tab');
+        newTabButton.setAttribute('aria-selected', 'false');
+
+        // Crie um input de texto para o nome da guia
+        var tabNameInput = document.createElement('input');
+        tabNameInput.setAttribute('type', 'text');
+        tabNameInput.setAttribute('placeholder', 'Nome do arquivo');
+
+        // Adicione o input de texto ao botão
+        newTabButton.appendChild(tabNameInput);
+
+        var deleteButton = document.createElement('button');
+        deleteButton.innerText = 'Excluir';
+        deleteButton.classList.add('btn-del-tab'); // Adiciona a classe "btn-del-tab" ao botão
+
+        // Adicione um ouvinte de evento de clique ao botão de exclusão
+        deleteButton.addEventListener('click', function () {
+            // Remova a guia e seu conteúdo
+            var tabContentArea = document.querySelector('.tabFileNew');
+            var tabToRemove = document.getElementById(newTabId);
+
+            if (tabContentArea && tabToRemove) {
+                tabContentArea.removeChild(tabToRemove);
+
+                // Remova o item de navegação
+                var tabList = document.querySelector('.tab-vertical');
+                tabList.removeChild(newNavItem);
+            }
+        });
+
+        // Adicione o botão de exclusão ao item de navegação
+        newNavItem.appendChild(deleteButton);
+
+
+        // Adicione o botão de exclusão ao item de navegação
+        newNavItem.appendChild(deleteButton);
+
+        // Adicione o novo botão ao item de navegação
+        newNavItem.appendChild(newTabButton);
+
+        // Adicione o item de navegação à lista de guias
+        var tabList = document.querySelector('.tab-vertical');
+        tabList.appendChild(newNavItem);
+
+        // Adicione o evento de clique ao botão
+        newTabButton.addEventListener('click', function () {
+            // Formate o texto para torná-lo adequado como parte do ID
+            var formattedText = tabNameInput.value.trim().replace(/\s+/g, '-').toLowerCase();
+
+            // Verifique se o nome é fornecido
+            if (formattedText.length > 0) {
+                // Atualize o ID da guia
+                newTabId = formattedText;
+
+                // Atualize os atributos do botão
+                newTabButton.setAttribute('data-bs-toggle', 'tab');
+                newTabButton.setAttribute('data-bs-target', '#' + newTabId);
+                newTabButton.setAttribute('aria-controls', newTabId);
+
+                // Atualize o nome da guia
+                newTabButton.innerText = formattedText || 'Nova Guia';
+
+                // Crie uma nova guia na área de conteúdo
+                var newTabContent = document.createElement('div');
+                newTabContent.className = 'tab-pane fade text-center';
+                newTabContent.id = newTabId;
+                newTabContent.setAttribute('role', 'tabpanel');
+                newTabContent.innerHTML = `
+                    <div>
+                        <input type="file" name="new_tab_file" id="file-${newTabId}" style="display: none;" accept=".pdf" onchange="sendFile(event, 'file-${newTabId}', '${newTabId}', 'file-preview-${newTabId}')">
+                        <button class="btn btn-primary btn-new-file text-white" onclick="document.getElementById('file-${newTabId}').click();"><i class="fa-solid fa-upload"></i></button>
+                        <div id="file-preview-${newTabId}"></div>
+                    </div>
+                `;
+
+                // Adicione a nova guia à área de conteúdo
+                var tabContentArea = document.querySelector('.tabFileNew');
+                tabContentArea.appendChild(newTabContent);
+
+                // Ative a nova guia
+                newTabButton.click();
+            }
+        });
+    }
+
 </script>
 
 @endsection
