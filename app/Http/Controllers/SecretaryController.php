@@ -167,63 +167,79 @@ class SecretaryController extends Controller
      */
     public function destroy(Secretary $secretary)
     {
+        // Excluir arquivos da secretaria, se existirem
         if ($secretary->files->count() > 0) {
             $this->fileUploadService->deleteFile($secretary->files[0]->file->id);
         }
-
-        foreach ($secretary->organs as $organ) {
-            foreach ($organ->departments as $department) {
-                foreach ($department->sectors as $sector) {
-                    if ($sector->employee) {
-                        $sector->employee->delete();
+    
+        // Excluir órgãos, departamentos, licitações e funcionários associados à secretaria
+        if ($secretary->organs && is_iterable($secretary->organs)) {
+            foreach ($secretary->organs as $organ) {
+                // Excluir departamentos associados ao órgão
+                if ($organ->departments && is_iterable($organ->departments)) {
+                    foreach ($organ->departments as $department) {
+                        // Excluir setores associados ao departamento
+                        if ($department->sectors && is_iterable($department->sectors)) {
+                            foreach ($department->sectors as $sector) {
+                                if ($sector->employee) {
+                                    $sector->employee->delete();
+                                }
+                                $sector->delete();
+                            }
+                        }
+    
+                        // Excluir funcionário associado ao departamento
+                        if ($department->employee) {
+                            $department->employee->delete();
+                        }
+    
+                        // Excluir o próprio departamento
+                        $department->sectors()->delete();
+                        $department->delete();
                     }
                 }
-                $department->employee()->delete();
-                $department->sectors()->delete();
-            }
-
-            $organ->employee()->delete();
-            $organ->departments()->delete();
-            $organ->delete();
-        }
-
-        foreach ($secretary->departments as $department) {
-            foreach ($department->sectors as $sector) {
-                if ($sector->employee) {
-                    $sector->employee->delete();
+    
+                // Excluir funcionário associado ao órgão
+                if ($organ->employee) {
+                    $organ->employee->delete();
                 }
-                $sector->delete();
+    
+                // Excluir o próprio órgão
+                $organ->departments()->delete();
+                $organ->delete();
             }
-            if($department->employee){
-                $department->employee->delete();
-            }
-            $department->delete();
         }
-
-        foreach ($secretary->biddings as $bidding) {
-            if ($bidding->progress) {
-                $bidding->progress()->delete();
+    
+        // Excluir departamentos diretamente associados à secretaria
+        if ($secretary->departments && is_iterable($secretary->departments)) {
+            foreach ($secretary->departments as $department) {
+                // Excluir setores associados ao departamento
+                if ($department->sectors && is_iterable($department->sectors)) {
+                    foreach ($department->sectors as $sector) {
+                        if ($sector->employee) {
+                            $sector->employee->delete();
+                        }
+                        $sector->delete();
+                    }
+                }
+    
+                // Excluir funcionário associado ao departamento
+                if ($department->employee) {
+                    $department->employee->delete();
+                }
+    
+                // Excluir o próprio departamento
+                $department->delete();
             }
-
-            if ($bidding->categories) {
-                $bidding->categories()->delete();
-            }
-
-            if ($bidding->types) {
-                $bidding->types()->delete();
-            }
-
-            if ($bidding->files) {
-                $bidding->files()->delete();
-            }
-            $bidding->delete();
         }
-
+    
+        // Excluir funcionários e a própria secretaria
         $secretary->employee()->delete();
         $secretary->delete();
-
-        return redirect()->route('secretaries.index')->with('success', 'Secretaria excluído com sucesso!');
+    
+        return redirect()->route('secretaries.index')->with('success', 'Secretaria excluída com sucesso!');
     }
+    
 
     public function createResponsible(Request $request)
     {
