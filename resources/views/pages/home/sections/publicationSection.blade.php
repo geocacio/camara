@@ -16,8 +16,9 @@
                         @foreach($lrfs as $lrf)
                             <div class="link-publication">
                                 <div class="top">
-                                    <h5 class="title">{{ $lrf->title }}</h5>
-                                    <p class="description">{{ $lrf->details }}</p>
+                                    <h5 class="title"><b>{{ $lrf->title }}</b></h5>
+                                    <p class="">{{ Str::limit($lrf->details, '120', '...') }}</p>
+                                    <h5 class="title"><i class="fa-solid fa-calendar-days"></i> {{ date('d/m/Y', strtotime($lrf->date)) }}</h5>
                                 </div>
                                 <div class="bottom justify-content-end">
                                     <span class="d-inline-block" data-toggle="tooltip" title="Ver">
@@ -70,8 +71,9 @@
                         @foreach($leis as $lei)
                             <div class="link-publication">
                                 <div class="top">
-                                    <h5 class="title">{{ $lei->id }}/{{ date('Y', strtotime($lei->date)) }}</h5>
-                                    <p class="description">{{ $lei->description }}</p>
+                                    <h5 class="title"><b>{{ $lei->title }}</b></h5>
+                                    <p class="">{{ Str::limit($lei->description, '120', '...') }}</p>
+                                    <h5 class="title"><i class="fa-solid fa-calendar-days"></i> {{ date('d/m/Y', strtotime($lei->date)) }}</h5>
                                 </div>
                                 <div class="bottom">
                                     <span class="d-inline-block" data-toggle="tooltip" title="Ver">
