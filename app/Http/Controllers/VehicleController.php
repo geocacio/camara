@@ -2,14 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
+use App\Models\FileContent;
+use App\Models\NoVehicles;
 use App\Models\Page;
 use App\Models\Secretary;
 use App\Models\TransparencyGroup;
 use App\Models\Vehicle;
+use App\Services\FileUploadService;
 use Illuminate\Http\Request;
 
 class VehicleController extends Controller
 {
+    private $fileUploadService;
+
+    public function __construct(FileUploadService $fileUploadService)
+    {
+        $this->fileUploadService = $fileUploadService;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -97,6 +107,62 @@ class VehicleController extends Controller
         }
 
     }
+
+    public function noVehicle(){
+        $info = NoVehicles::first();
+
+        $currentFile = null;
+
+        if($info){
+            $fileContent = FileContent::where('fileable_type', 'no-vehicles')->where('fileable_id', $info->id)->first();
+    
+            $currentFile = File::where('id', $fileContent->file_id)->first();
+        }
+
+        return view('panel.vehicles.no-vehicle', compact('info', 'currentFile'));
+    }
+
+    public function noVehicleStore(Request $request){
+
+        $validateData = $request->validate([
+            'description' => 'required',
+        ]);
+        
+        $existingVehicle = NoVehicles::first();
+    
+        if ($existingVehicle) {
+            $existingVehicle->update($validateData);
+    
+            if ($request->hasFile('file')) {
+                $existingFile = $existingVehicle->files->first();
+                if ($existingFile) {
+                    $existingFile->delete();
+                }
+    
+                // Faz o upload do novo arquivo
+                $url = $this->fileUploadService->upload($request->file('file'), 'no-vehicles');
+                $file = File::create(['url' => $url]);
+    
+                // Associa o novo arquivo ao modelo existente
+                $existingVehicle->files()->create(['file_id' => $file->id]);
+            }
+    
+            return redirect()->route('veiculos.index')->with('success', 'Arquivo atualizado com sucesso!');
+        } else {
+            if($vehicle = NoVehicles::create($validateData)){
+                if ($request->hasFile('file')) {
+                    $url = $this->fileUploadService->upload($request->file('file'), 'no-vehicles');
+                    $file = File::create(['url' => $url]);
+                    $vehicle->files()->create(['file_id' => $file->id]);
+                }
+                return redirect()->route('veiculos.index')->with('success', 'Arquivo cadastrado com sucesso!');
+            } else {
+                return redirect()->back()->with('error', 'Falha ao cadastrar arquivo!');
+            }
+        }
+    }
+    
+    
 
     /**
      * Display the specified resource.

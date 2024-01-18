@@ -7,6 +7,7 @@
 
         <div class="card-header text-right">
             <a href="{{ route('veiculos.create') }}" class="btn-default">Novo</a>
+            <a href="{{ route('no-vehicle.create') }}" class="btn-default">Não há veiculos</a>
         </div>
 
         @if($vehicles && $vehicles->count() > 0)

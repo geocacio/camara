@@ -29,5 +29,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PublicationsSeeders::class);
         $this->call(VehicleSeeder::class);
         $this->call(TraineePageSeeder::class);
+        $this->call(AddingCategoryLawSeeder::class);
     }
 }
