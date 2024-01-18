@@ -792,7 +792,6 @@
         }
     });
 
-    
     function addNewTab() {
         // Crie um novo ID único para a nova guia
         var newTabId = 'new-tab-' + Date.now();
@@ -889,7 +888,25 @@
                 newTabButton.click();
             }
         });
+        
+        tabNameInput.addEventListener('keydown', function (event) {
+            if (event.keyCode === 32) {
+                // Adicione um espaço ao valor do input em vez de prevenir o comportamento padrão
+                var cursorPosition = tabNameInput.selectionStart;
+                var inputValue = tabNameInput.value;
+
+                // Insira um espaço na posição do cursor
+                tabNameInput.value = inputValue.substring(0, cursorPosition) + ' ' + inputValue.substring(cursorPosition);
+
+                // Mova o cursor para a posição após o espaço
+                tabNameInput.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
+
+                // Impedir o evento padrão para evitar a adição do espaço pelo navegador
+                event.preventDefault();
+            }
+        });
     }
+
 </script>
 
 @endsection
