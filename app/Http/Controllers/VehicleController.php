@@ -209,8 +209,12 @@ class VehicleController extends Controller
         $searchData['situation'] = $request->input('situation', '');
         $searchData['type'] = $request->input('type', '');
 
+        $noVehicle = NoVehicles::first();
 
-        return view('pages.vehicles.index', compact('vehicles', 'searchData', 'secretarys'));
+        $fileID = $noVehicle->files;
+        $fileWhenNoVehicle = File::where('id', $fileID->pluck('file_id'))->first();
+
+        return view('pages.vehicles.index', compact('vehicles', 'searchData', 'secretarys', 'noVehicle', 'fileWhenNoVehicle'));
     }
 
     public function single($vehicle)

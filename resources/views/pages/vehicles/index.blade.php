@@ -133,7 +133,25 @@
             </div>
 
         @else
-            <div class="empty-data">Nenhum veículo encontrado.</div>
+            <div class="col-md-12">
+                <div class="card-with-links">
+        
+                    {{-- <div class="header">
+                        <i class="fa-regular fa-file-lines"></i>
+                    </div> --}}
+                    <div class="second-part">
+                        <div class="body">
+                            <p class="no-vehicle">{{ $noVehicle->description }}</p>
+                        </div>
+        
+                        <div class="footer">
+                            @if(!empty($fileWhenNoVehicle))
+                                <a href="{{ asset('storage/'.$fileWhenNoVehicle->url) }}" target="_blank" class="links" data-toggle="tooltip" title="Ver documento"><i class="fa-solid fa-file-pdf"></i></a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
         @endif
 
     </div>
@@ -148,6 +166,16 @@
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+<style>
+    .no-vehicle {
+        font-size: 13px;
+        color: #0c0c0c;
+        text-align: justify;
+        margin-bottom: 0;
+        text-overflow: ellipsis;
+    }
+</style>
 
 <script>
     $('.mask-date').mask('00-00-0000');
