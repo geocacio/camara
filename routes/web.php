@@ -675,6 +675,7 @@ Route::prefix('/transparencia')->group(function () {
     Route::get('/mapa-site', [SiteMapController::class, 'pageShow'])->name('mapa.page.show');
     Route::put('/mapa-site', [SiteMapController::class, 'pageUpdate'])->name('mapa-site.page.update');
     
+    Route::get('/regulamentacao-lai', [LaiController::class, 'pageShow'])->name('regulamentacao-lai');
     Route::prefix('licitacoes')->group(function () {
         Route::get('/', [BiddingController::class, 'BiddingPage'])->name('shopping.portal.page');//
         Route::get('portal-compras', [BiddingController::class, 'ShoppingPortal'])->name('bidding.page'); //

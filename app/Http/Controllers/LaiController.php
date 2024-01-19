@@ -14,7 +14,7 @@ class LaiController extends Controller
      */
     public function index()
     {
-        $lai = Page::where('name', 'Lai')->first();
+        $lai = Page::where('name', 'Regulamentação da Lai')->first();
 
         $groups = TransparencyGroup::all();
 
@@ -28,13 +28,12 @@ class LaiController extends Controller
     {
         $validateData = $request->validate([
             'title' => 'required',
-            'description' => 'required',
+            'description' => 'nullable',
             'icon' => 'nullable',
             'transparency_group_id' => 'required',
             'main_title' => 'required',
         ], [
            'title.required' => 'O campo titulo é obrigatorio', 
-           'description.required' => 'O campo descrição é obrigatorio',
            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
            'main_title.required' => 'O campo titulo principal é obrigatório!',
         ]);
@@ -65,18 +64,17 @@ class LaiController extends Controller
     {
         $validateData = $request->validate([
             'title' => 'required',
-            'description' => 'required',
             'icon' => 'nullable',
             'transparency_group_id' => 'required',
             'main_title' => 'required',
+            'description' => 'nullable',
         ], [
            'title.required' => 'O campo titulo é obrigatorio', 
-           'description.required' => 'O campo descrição é obrigatorio',
            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
            'main_title.required' => 'O campo titulo principal é obrigatório!',
         ]);
 
-        $lai = Page::where('name', 'Lai')->first();
+        $lai = Page::where('name', 'Regulamentação da Lai')->first();
 
   
         if ($lai->update($validateData)) {

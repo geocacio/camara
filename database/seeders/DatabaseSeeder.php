@@ -30,6 +30,5 @@ class DatabaseSeeder extends Seeder
         $this->call(VehicleSeeder::class);
         $this->call(TraineePageSeeder::class);
         $this->call(AddingCategoryLawSeeder::class);
-        $this->call(LaiPageSeeder::class);
     }
 }
