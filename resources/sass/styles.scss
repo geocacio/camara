@@ -3462,11 +3462,22 @@ section{
             border: 1px solid #9f9f9f;
             margin-bottom: 2px;
             display: flex;
+            min-height: 140px;
 
             .top{
                 margin-bottom: 5px;
                 width: calc(100% - 83px);
                 padding-right: 14px;
+                justify-content: space-between;
+                flex-direction: column;
+                display: flex;
+
+                .title-card-pub {
+                    font-size: 15px;
+                    white-space: nowrap;
+                    margin-bottom: 0;
+                    text-align: left;
+                }
                 
                 .title{
                     font-family: $font-secondary;
@@ -3490,7 +3501,7 @@ section{
             .bottom{
                 text-align: right;
                 display: flex;
-                align-items: center;
+                // align-items: center;
                 justify-content: space-between;
                 width: 83px;
                 gap: 5px;

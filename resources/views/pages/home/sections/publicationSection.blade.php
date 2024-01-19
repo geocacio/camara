@@ -16,8 +16,10 @@
                         @foreach($lrfs as $lrf)
                             <div class="link-publication">
                                 <div class="top">
-                                    <h5 class="title"><b>{{ $lrf->title }}</b></h5>
-                                    <p class="">{{ Str::limit($lrf->details, '120', '...') }}</p>
+                                    <div>
+                                        <h5 class="title-card-pub"><b>{{ $lrf->title }}</b></h5>
+                                        <p class="">{{ Str::limit($lrf->details, '120', '...') }}</p>
+                                    </div>
                                     <h5 class="title"><i class="fa-solid fa-calendar-days"></i> {{ date('d/m/Y', strtotime($lrf->date)) }}</h5>
                                 </div>
                                 <div class="bottom justify-content-end">
@@ -71,8 +73,10 @@
                         @foreach($leis as $lei)
                             <div class="link-publication">
                                 <div class="top">
-                                    <h5 class="title"><b>{{ $lei->title }}</b></h5>
-                                    <p class="">{{ Str::limit($lei->description, '120', '...') }}</p>
+                                    <div>
+                                        <h5 class="title-card-pub"><b>{{ $lei->title }}</b></h5>
+                                        <p class="">{{ Str::limit($lei->description, '120', '...') }}</p>
+                                    </div>
                                     <h5 class="title"><i class="fa-solid fa-calendar-days"></i> {{ date('d/m/Y', strtotime($lei->date)) }}</h5>
                                 </div>
                                 <div class="bottom">
@@ -81,7 +85,9 @@
                                     </span>
 
                                     @if(!empty($lei->files[0]))
-                                        <a href="{{ asset('storage/'.$lei->files[0]->file->url) }}" target="_blank" class="links" data-toggle="tooltip" title="Ver documento"><i class="fa-solid fa-file-pdf"></i></a>
+                                        <span class="d-inline-block" data-toggle="tooltip" title="Ver">
+                                            <a href="{{ asset('storage/'.$lei->files[0]->file->url) }}" target="_blank" class="links" data-toggle="tooltip" title="Ver documento"><i class="fa-solid fa-file-pdf"></i></a>
+                                        </span>
                                     @endif
                                 </div>
                             </div>
