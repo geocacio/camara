@@ -97,8 +97,6 @@ class HomeController extends Controller
         $posts = $posts->take(3);
         }
 
-
-        // dd($postsPorCategoria);
         // old
         $videos = Video::with('categories', 'files')->limit('2')->get();
         $banners = Banner::all();

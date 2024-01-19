@@ -1,6 +1,6 @@
 @if(is_array($postsPorCategoria) && count($postsPorCategoria) > 0 && $section->visibility === 'enabled')
 <section id="sec-blog-section" class="blog-section">
-    @if($categories->count() > 1)
+    @if($categories->count() > 0)
         <div class="categories-content">
             <div class="categories-news" id="0">#todos</div>
             @foreach ($categories as $cat)
