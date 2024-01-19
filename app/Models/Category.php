@@ -46,6 +46,10 @@ class Category extends Model
     public function publications() {
         return $this->hasMany(SecretaryPublication::class, 'summary_id');
     }
+    
+    public function fav() {
+        return $this->hasOne(CategoriesPostsHighlighted::class, 'category_id');
+    }
 
     public function getRouteKeyName()
     {

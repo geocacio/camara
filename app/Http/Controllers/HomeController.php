@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\CategoriesPostsHighlighted;
+use App\Models\Category;
+use App\Models\CategoryContent;
 use App\Models\Law;
 use App\Models\Legislature;
 use App\Models\LRF;
@@ -48,15 +51,62 @@ class HomeController extends Controller
 
         $legislature = new Legislature;
         $currentLegislature = $legislature->getCurrentLegislature();
-        // dd($currentLegislature->legislatureRelations[0]->legislatureable);
-        
-        $posts = Post::with('categories', 'files')->limit('3')->get();
+
+        $getCategoryFilter = CategoriesPostsHighlighted::pluck('category_id');
+
+        $categories = Category::whereIn('id', $getCategoryFilter)->get();
+
+        $numberOfCategoryIDPerFilter = 3;
+
+        $selectedCategoryIDs = [];
+
+        foreach ($getCategoryFilter as $filter) {
+            $categoryIDs = CategoryContent::where('category_id', $filter)
+                ->limit($numberOfCategoryIDPerFilter)
+                ->pluck('category_id');
+
+            $selectedCategoryIDs = array_merge($selectedCategoryIDs, $categoryIDs->toArray());
+        }
+
+       // Obter os 3 posts mais recentes independentemente da categoria
+        $recentPostsGeral = Post::with('categories', 'files')
+        ->orderBy('created_at', 'desc')
+        ->take(3)
+        ->get();
+
+        // Inicializar o array $postsPorCategoria
+        $postsPorCategoria = [];
+
+        // Adicionar os 3 posts mais recentes no geral ao array
+        $postsPorCategoria[0] = $recentPostsGeral;
+
+        // Adicionar os 3 posts mais recentes para cada categoria
+        foreach ($selectedCategoryIDs as $categoriaID) {
+        // Obter os 3 posts mais recentes para cada categoria
+        $postsPorCategoria[$categoriaID] = Post::with('categories', 'files')
+            ->whereHas('categories', function ($query) use ($categoriaID) {
+                $query->where('category_id', $categoriaID);
+            })
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
+        }
+
+        // Certifique-se de limitar o array combinado para 3 elementos, se necessário
+        foreach ($postsPorCategoria as &$posts) {
+        $posts = $posts->take(3);
+        }
+
+
+        // dd($postsPorCategoria);
+        // old
         $videos = Video::with('categories', 'files')->limit('2')->get();
         $banners = Banner::all();
         $leis = Law::limit('3')->get();
         $lrfs = LRF::limit('3')->get();
         $today = Carbon::today();
 
-        return view('pages.home.index', compact('services', 'sections', 'posts', 'videos', 'currentLegislature', 'banners', 'leis', 'lrfs'));
+        return view('pages.home.index', compact('services', 'sections', 'videos', 'currentLegislature', 'banners', 'leis', 'lrfs', 'postsPorCategoria', 'getCategoryFilter', 'categories'));
     }
+    
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CategoriesPostsHighlighted;
 use App\Models\Category;
+use App\Models\CategoryContent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -118,6 +120,7 @@ class CategoryController extends Controller
     public function showSubcategories(Category $category)
     {
         $categories = $category->children;
+
         return view('panel.subcategories.index', compact('categories', 'category'));
     }
 
@@ -143,4 +146,35 @@ class CategoryController extends Controller
         $category = Category::find($request->parent_id);
         return redirect()->route('subcategories.index', ['category' => $category->slug])->with('success', 'Categoria criada com sucesso!');
     }
+
+    public function highlighted(Request $request)
+    {
+        $validatedData = $request->validate([
+            'category_id' => 'required',
+        ]);
+    
+        // Verifica se já existe um registro com o category_id
+        $existingCategory = CategoriesPostsHighlighted::where('category_id', $validatedData['category_id'])->first();
+        $existingCategories = CategoriesPostsHighlighted::all();
+
+        $category = CategoryContent::where('category_id', $validatedData['category_id'])->first();
+        
+        if ($existingCategory) {
+            // Se existir, deleta o registro existente
+            $existingCategory->delete();
+        } else {
+            // Se não existir, cria um novo registro com o category_id
+            if(count($existingCategories) >= 4){
+                return redirect()->back()->with('error', 'Limite de destaques atingido!');
+            }else {
+                if(!$category){
+                    return redirect()->back()->with('error', 'Não é possivel destacar categorias que não tem postagens relacionandas!');
+                }
+                CategoriesPostsHighlighted::create(['category_id' => $validatedData['category_id']]);
+            }
+        }
+    
+        return redirect()->back()->with('success', 'Destaque atualizado com sucesso!');
+    }
+    
 }

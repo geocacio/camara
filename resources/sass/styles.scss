@@ -3750,3 +3750,31 @@ section{
         }
     }
 }
+
+.categories-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    .categories-news {
+        border: 3px solid #004080;
+        padding: 10px;
+        // width: 120px;
+        cursor: pointer;
+        height: 45px;
+        border-radius: 5px;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+        user-select: none;
+        
+        &:hover {
+            background-color: #004080;
+            color: #fff;
+        }
+    }
+
+}

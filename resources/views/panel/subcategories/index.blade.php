@@ -20,15 +20,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($categories as $category)
+                    @foreach($categories as $subCategories)
                     <tr>
-                        <td>{{ $category->id }}</td>
-                        <td>{{ $category->name }}</td>
+                        <td>{{ $subCategories->id }}</td>
+                        <td>{{ $subCategories->name }}</td>
                         <td class="actions">
-                            <a href="{{ route('categories.edit', $category->slug) }}" class="link edit"><i class="fas fa-edit"></i></a>
-                            <a data-toggle="modal" data-target="#myModal{{$category->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a>
+                            <a href="{{ route('categories.edit', $subCategories->slug) }}" class="link edit"><i class="fas fa-edit"></i></a>
+                            <a data-toggle="modal" data-target="#myModal{{$subCategories->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a>
+                            @if($category->slug == 'posts')
+                                @if(!$subCategories->fav)
+                                    <a href="#" title="Adicionar ao destaque" class="link destaque" onclick="event.preventDefault();
+                                        document.getElementById('destaque-{{ $subCategories->id }}').submit();">
+                                        <i class="fa-regular fa-star"></i>
+                                    </a>
+                                @else
+                                    <a title="remover do destaque" href="#" class="link destaque" onclick="event.preventDefault();
+                                        document.getElementById('destaque-{{ $subCategories->id }}').submit();">
+                                        <i class="fa-solid fa-star"></i>
+                                    </a>
+                                @endif
+                                <form id="destaque-{{ $subCategories->id }}" action="{{ route('subcategories.highlighted') }}" method="post" style="display: none;">
+                                    @csrf
+                                    <input name="category_id" type="hidden" value="{{ $subCategories->id }}"/>
+                                </form>
+                            @endif
 
-                            <div id="myModal{{$category->id}}" class="modal fade modal-warning" role="dialog">
+                            <div id="myModal{{$subCategories->id}}" class="modal fade modal-warning" role="dialog">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <!-- Modal content-->
                                     <div class="modal-content">
@@ -44,19 +61,19 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-cancel" data-dismiss="modal">Cancelar</button>
                                             <a href="#" class="btn btn-default" onclick="event.preventDefault();
-                                                document.getElementById('delete-form-{{ $category->id }}').submit();">
+                                                document.getElementById('delete-form-{{ $subCategories->id }}').submit();">
                                                 Deletar
                                             </a>
 
-                                            <form id="delete-form-{{ $category->id }}" action="{{ route('categories.destroy', $category->slug) }}" method="post" style="display: none;">
+                                            <form id="delete-form-{{ $subCategories->id }}" action="{{ route('categories.destroy', $subCategories->slug) }}" method="post" style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </td>
                     </tr>
                     @endforeach
@@ -75,6 +92,21 @@
     </div>
 </div>
 @endsection
+
+<style>
+    .destaque {
+        border: none;
+        width: 22px;
+        height: 22px;
+        background-color: transparent;
+        border-radius: 5px;
+    }
+
+    .destaque:hover {
+        background-color: #2c373d;
+        color: #fff;
+    }
+</style>
 
 @section('js')
 @endsection

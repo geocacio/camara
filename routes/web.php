@@ -40,6 +40,7 @@ use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\ExternalLinkController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\GlossaryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\InspectorController;
 use App\Http\Controllers\LaiController;
@@ -175,6 +176,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/categories/{category:slug}/subcategories', [CategoryController::class, 'showSubcategories'])->name('subcategories.index');
         Route::get('/categories/{category:slug}/subcategories/create', [CategoryController::class, 'createSubcategories'])->name('subcategories.create');
         Route::post('/subcategories/create', [CategoryController::class, 'storeSubcategories'])->name('subcategories.store');
+
+        Route::post('/subcategories/highlighted', [CategoryController::class, 'highlighted'])->name('subcategories.highlighted');
+
         Route::resource('types', TypeController::class);
         Route::resource('videos', VideoController::class);
         Route::resource('biddings', BiddingController::class);
