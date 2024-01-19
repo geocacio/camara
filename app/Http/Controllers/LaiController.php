@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lai;
+use App\Models\Page;
+use App\Models\TransparencyGroup;
 use Illuminate\Http\Request;
 
 class LaiController extends Controller
@@ -12,9 +14,11 @@ class LaiController extends Controller
      */
     public function index()
     {
-        $lai = Lai::first();
+        $lai = Page::where('name', 'Lai')->first();
 
-        return isset($lai) ? view('panel.lai.edit', compact('lai')) : view('panel.lai.create');
+        $groups = TransparencyGroup::all();
+
+        return isset($lai) ? view('panel.lai.edit', compact('lai', 'groups')) : view('panel.lai.create', compact('groups'));
     }
 
     /**
@@ -26,18 +30,23 @@ class LaiController extends Controller
             'title' => 'required',
             'description' => 'required',
             'icon' => 'nullable',
+            'transparency_group_id' => 'required',
+            'main_title' => 'required',
         ], [
            'title.required' => 'O campo titulo é obrigatorio', 
-           'description.required' => 'O campo descrição é obrigatorio' 
+           'description.required' => 'O campo descrição é obrigatorio',
+           'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
+           'main_title.required' => 'O campo titulo principal é obrigatório!',
         ]);
 
-        $validateData['slug'] = Lai::uniqSlug($validateData['title']);
+        $lai = Page::create($validateData);
 
-        $lai = Lai::create($validateData);
-
-        if($lai){
+        if ($lai) {
+            $lai->groupContents()->delete();
+            $lai->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
             return redirect()->route('lai.index')->with('success', 'Lai cadastrada com sucesso!');
         }
+
         return redirect()->back()->with('error', 'Por favor tente novamente!');
     }
 
@@ -52,20 +61,30 @@ class LaiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Lai $lai)
+    public function update(Request $request)
     {
         $validateData = $request->validate([
             'title' => 'required',
             'description' => 'required',
             'icon' => 'nullable',
+            'transparency_group_id' => 'required',
+            'main_title' => 'required',
         ], [
            'title.required' => 'O campo titulo é obrigatorio', 
-           'description.required' => 'O campo descrição é obrigatorio' 
+           'description.required' => 'O campo descrição é obrigatorio',
+           'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
+           'main_title.required' => 'O campo titulo principal é obrigatório!',
         ]);
 
-        if($lai->update($validateData)){
-            return redirect()->route('lai.index')->with('success', 'Lai atualizada com sucesso!');
+        $lai = Page::where('name', 'Lai')->first();
+
+  
+        if ($lai->update($validateData)) {
+            $lai->groupContents()->delete();
+            $lai->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+            return redirect()->route('lai.index')->with('success', 'Informações atualizadas com sucesso!');
         }
+
         return redirect()->back()->with('error', 'Por favor tente novamente!');
     }
 

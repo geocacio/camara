@@ -24,13 +24,19 @@
             @method('PUT')
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-2">
                     <div class="form-group">
                         <label>Ícone</label>
                         <input type="text" name="icon" class="form-control icon" autocomplete="off" value="{{ old('icon', $lai->icon) }}" onfocus="getIconInputValues(event)">
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Título Principal</label>
+                        <input type="text" name="main_title" class="form-control" autocomplete="off" value="{{ old('main_title', $lai->main_title) }}">
+                    </div>
+                </div>
+                <div class="col-md-5">
                     <div class="form-group">
                         <label>Titulo</label>
                         <input type="text" name="title" class="form-control" value="{{ old('title', $lai->title) }}" />
@@ -45,6 +51,16 @@
                         <textarea name="description" class="form-control">{{ old('description', $lai->description) }}</textarea>
                     </div>
                 </div>
+            </div>
+
+            <div class="form-group">
+                <label>Grupo (onde será exibido no portal da transparência)</label>
+                <select name="transparency_group_id" class="form-control">
+                    <option value="">Selecione o grupo</option>
+                    @foreach($groups as $group)
+                    <option value="{{ $group->id }}" {{ $lai->groupContents && $lai->groupContents->transparency_group_id && $group->id == $lai->groupContents->transparency_group_id ? 'selected' : '' }}>{{ $group->title }} - {{ $group->description }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="form-footer text-right">

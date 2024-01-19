@@ -37,6 +37,11 @@ class Lai extends Model
         return $slug;
     }
 
+    public function page()
+    {
+        return $this->belongsTo(Page::class, 'law_id');
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';
