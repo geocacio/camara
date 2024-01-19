@@ -2,7 +2,7 @@
 <section id="sec-blog-section" class="blog-section">
     @if($categories->count() > 0)
         <div class="categories-content">
-            <div class="categories-news" id="0">#todos</div>
+            <div class="categories-news active-cat" id="0">#todos</div>
             @foreach ($categories as $cat)
                 <div class="categories-news" id="{{ $cat->id }}">#{{ $cat->name }}</div>
             @endforeach
@@ -43,9 +43,11 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="col-12 mt-4">
-                    <a href="{{ route('posts.getPosts')}}" class="btn btn-link-page">Todos os posts</a>
-                </div>
+                @if(count($posts) > 0 )
+                    <div class="col-12 mt-4">
+                        <a href="{{ route('posts.getPosts')}}" class="btn btn-link-page">Todos os posts</a>
+                    </div>
+                @endif
             </div>
         </div>
     @endforeach
@@ -54,8 +56,17 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     $(document).ready(function () {
+        // Adiciona a classe "active-cat" ao primeiro elemento
+        $(".categories-news:first").addClass("active-cat");
+
         // Manipula o clique nos elementos categories-news
         $(".categories-news").click(function () {
+            // Remove a classe "active-cat" de todos os elementos
+            $(".categories-news").removeClass("active-cat");
+
+            // Adiciona a classe "active-cat" ao elemento clicado
+            $(this).addClass("active-cat");
+
             // Obtém o ID clicado, que já inclui "category-"
             var clickedId = $(this).attr("id");
             console.log(clickedId);

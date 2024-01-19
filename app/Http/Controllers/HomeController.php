@@ -82,19 +82,19 @@ class HomeController extends Controller
 
         // Adicionar os 3 posts mais recentes para cada categoria
         foreach ($selectedCategoryIDs as $categoriaID) {
-        // Obter os 3 posts mais recentes para cada categoria
-        $postsPorCategoria[$categoriaID] = Post::with('categories', 'files')
-            ->whereHas('categories', function ($query) use ($categoriaID) {
-                $query->where('category_id', $categoriaID);
-            })
-            ->orderBy('created_at', 'desc')
-            ->take(3)
-            ->get();
+            // Obter os 3 posts mais recentes para cada categoria
+            $postsPorCategoria[$categoriaID] = Post::with('categories', 'files')
+                ->whereHas('categories', function ($query) use ($categoriaID) {
+                    $query->where('category_id', $categoriaID);
+                })
+                ->orderBy('created_at', 'desc')
+                ->take(3)
+                ->get();
         }
 
         // Certifique-se de limitar o array combinado para 3 elementos, se necessário
         foreach ($postsPorCategoria as &$posts) {
-        $posts = $posts->take(3);
+            $posts = $posts->take(3);
         }
 
         // old

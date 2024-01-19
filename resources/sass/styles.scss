@@ -3788,4 +3788,55 @@ section{
         }
     }
 
+    .active-cat {
+        background-color: #004080;
+        color: #fff;
+    }
+
+}
+
+.container-lais-links {
+    display: flex;
+    justify-content: space-between;
+
+    .buttons-links-lais {
+        width: 360px;
+        padding: 28px;
+        border-radius: 8px;
+        cursor: pointer;
+        color: #fff;
+        user-select: none;
+
+        a {
+            color: #fff;
+        }
+
+    }
+
+    .muni {
+        background-color: #30358c;
+
+        &:hover {
+            transition: 1s ease-in-out;
+            background: #2b2f79;
+        }
+    }
+
+    .state {
+        background-color: #2864AE;
+        
+        &:hover {
+            transition: 1s ease-in-out;
+            background: #234c7e;
+        }
+    }
+
+    .federal {
+        background-color: #078E46;
+           
+        &:hover {
+            transition: 1s ease-in-out;
+            background: #045c2d;
+        }
+    }
 }
