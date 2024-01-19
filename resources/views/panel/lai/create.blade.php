@@ -19,9 +19,9 @@
         </div>
         @endif
 
-        <form action="{{ route('lai.store') }}" method="post">
+        <form action="{{ route('lai.update', $lai->slug) }}" method="post" enctype="multipart/form-data">
             @csrf
-
+            @method('PUT')
             <div class="row">
                 <div class="col-md-2">
                     <div class="form-group">
@@ -60,6 +60,37 @@
                     <option value="{{ $group->id }}">{{ $group->title }} - {{ $group->description }}</option>
                     @endforeach
                 </select>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-6">
+                    <label for="logo">Arquivo</label>
+                    <input type="file" name="file" accept="application/pdf" class="form-control">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Regulamentação da lai estadual (url)</label>
+                        <input type="url" name="state_lai" class="form-control" value="{{ old('state_lai') }}">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Regulamentação da lai federal (url)</label>
+                        <input type="url" name="federal_lai" class="form-control" value="{{ old('federal_lai') }}" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Explicação da LAI</label>
+                        <textarea name="description_lai" class="form-control">{{ old('description_lai') }}</textarea>
+                    </div>
+                </div>
             </div>
 
             <div class="form-footer text-right">

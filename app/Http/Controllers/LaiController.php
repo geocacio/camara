@@ -30,13 +30,18 @@ class LaiController extends Controller
 
         $laiInfo = Lai::first();
         $fileID = FileContent::where('fileable_type', 'lai')->first();
-        $files = File::where('id', $fileID->file_id)->first();
 
-        return isset($lai) ? view('panel.lai.edit', compact('lai', 'groups', 'laiInfo', 'files')) : view('panel.lai.create', compact('groups'));
+        if($fileID){
+            $files = File::where('id', $fileID->file_id)->first();
+        }
+
+        return isset($laiInfo) ? view('panel.lai.edit', compact('lai', 'groups', 'laiInfo', 'files')) : view('panel.lai.create', compact('groups', 'lai'));
     }
 
     public function pageShow(){
-        
+        $lai_page = Page::where('name', 'Regulamentação da Lai')->first();
+        $laiInfo = Lai::first();
+        return view('pages.lai.index', compact('laiInfo', 'lai_page'));
     }
 
     /**
@@ -87,36 +92,53 @@ class LaiController extends Controller
             'main_title' => 'required',
             'description' => 'nullable',
         ], [
-           'title.required' => 'O campo titulo é obrigatorio', 
+           'title.required' => 'O campo título é obrigatório', 
            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
-           'main_title.required' => 'O campo titulo principal é obrigatório!',
+           'main_title.required' => 'O campo título principal é obrigatório!',
         ]);
-
+    
         $lai = Page::where('name', 'Regulamentação da Lai')->first();
-
+    
         $validateDataLai = $request->validate([
-            'file' => 'required',
             'state_lai' => 'required|url',
             'federal_lai' => 'required|url',
             'description_lai' => 'required',
         ], [
-            'file.required' => 'O campo file é obrigatório', 
             'state_lai.required' => 'O campo state_lai é obrigatório!',
             'federal_lai.required' => 'O campo federal_lai é obrigatório!',
         ]);
-        
+    
         $laiInfo = Lai::firstOrNew([
             'description' => $validateDataLai['description_lai'],
             'state_lai' => $validateDataLai['state_lai'],
             'federal_lai' => $validateDataLai['federal_lai'],
         ]);
-
+    
+        if (!$laiInfo->files->isEmpty()) {
+            // Se já existir um arquivo associado à LAI, o campo 'file' não é obrigatório
+            $request->validate([
+                'file' => 'nullable',
+            ]);
+        } else {
+            // Se não houver um arquivo associado à LAI, o campo 'file' é obrigatório
+            $request->validate([
+                'file' => 'required',
+            ]);
+        }
+    
         if ($request->hasFile('file')) {
             $url = $this->fileUploadService->upload($request->file('file'), 'lai');
+        
             $newFile = File::create(['url' => $url]);
-            $laiInfo->files()->create(['file_id' => $newFile->id]);
-        }        
-
+        
+            // Certifique-se de que $laiInfo esteja salvo no banco de dados antes de criar o relacionamento
+            $laiInfo->save();
+        
+            // Associe o arquivo a lai_info na tabela associativa
+            $laiInfo->files()->create(['file_id' => $newFile->id, 'fileable_id' => $laiInfo->id, 'fileable_type' => get_class($laiInfo)]);
+        }
+           
+    
         $laiInfo->save();
     
         if ($lai->update($validateData)) {
@@ -124,9 +146,10 @@ class LaiController extends Controller
             $lai->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
             return redirect()->route('lai.index')->with('success', 'Informações atualizadas com sucesso!');
         }
-
-        return redirect()->back()->with('error', 'Por favor tente novamente!');
+    
+        return redirect()->back()->with('error', 'Por favor, tente novamente!');
     }
+    
 
     /**
      * Remove the specified resource from storage.

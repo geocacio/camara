@@ -30,5 +30,9 @@ class DatabaseSeeder extends Seeder
         $this->call(VehicleSeeder::class);
         $this->call(TraineePageSeeder::class);
         $this->call(AddingCategoryLawSeeder::class);
+        $this->call(AddDecreeTypeSeeder::class);
+        $this->call(BiddingModalitiesSeeder::class);
+        $this->call(BiddingsPageSeeder::class);
+        $this->call(ContactUsSeeder::class);
     }
 }
