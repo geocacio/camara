@@ -11,10 +11,9 @@ class Lai extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 
         'description', 
-        'icon', 
-        'slug'
+        'state_lai',
+        'federal_lai',
     ];
 
     public static function uniqSlug($name)
@@ -40,6 +39,11 @@ class Lai extends Model
     public function page()
     {
         return $this->belongsTo(Page::class, 'law_id');
+    }
+
+    public function files()
+    {
+        return $this->morphMany(FileContent::class, 'fileable');
     }
 
     public function getRouteKeyName()

@@ -76,6 +76,7 @@ class AppServiceProvider extends ServiceProvider
             'Banner' => 'App\Models\Banner',
             'chambers-finance' => 'App\Models\ChamberFinancial',
             'no-vehicles' => 'App\Models\NoVehicles',
+            'lai' => 'App\Models\Lai',
         ]);
         
         //Verificar se existe a tabela maintenance
