@@ -1,11 +1,13 @@
 @if(is_array($postsPorCategoria) && count($postsPorCategoria) > 0 && $section->visibility === 'enabled')
 <section id="sec-blog-section" class="blog-section">
-    <div class="categories-content">
-        <div class="categories-news" id="0">#todos</div>
-        @foreach ($categories as $cat)
-            <div class="categories-news" id="{{ $cat->id }}">#{{ $cat->name }}</div>
-        @endforeach
-    </div>
+    @if($categories->count() > 1)
+        <div class="categories-content">
+            <div class="categories-news" id="0">#todos</div>
+            @foreach ($categories as $cat)
+                <div class="categories-news" id="{{ $cat->id }}">#{{ $cat->name }}</div>
+            @endforeach
+        </div>
+    @endif
 
     @foreach($postsPorCategoria as $categoriaKey => $posts)
         <div @if($categoriaKey != 0) style="display: none;" @endif class="container post-content" id="category-{{ $categoriaKey }}">
