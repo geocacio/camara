@@ -21,6 +21,7 @@ class Bidding extends Model
         'state',
         'country',
         'slug',
+        'bidding_type',
     ];
 
     public function secretary()

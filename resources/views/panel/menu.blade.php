@@ -659,7 +659,10 @@
                 <li class="sub-item {{ Str::contains(url()->current(), 'types/biddings') ? 'active' : '' }}">
                     <a href="{{ route('subtypes.index', 'biddings') }}" class="sub-link">Tipos</a>
                 </li>
-                <li class="sub-item {{ Str::contains(url()->current(), 'types/biddings') ? 'active' : '' }}">
+                <li class="sub-item {{ Str::contains(url()->current(), 'dispesas-inegibilidade/biddings') ? 'active' : '' }}">
+                    <a href="{{ route('dispensa.index', 'biddings') }}" class="sub-link">Dispensa e Inexigibilidade</a>
+                </li>
+                <li class="sub-item {{ Str::contains(url()->current(), 'bidding/dispesas-inegibilidade/create') ? 'active' : '' }}">
                     <a href="{{ route('bidding.page.create', 'biddings') }}" class="sub-link">Página</a>
                 </li>
             </ul>

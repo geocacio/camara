@@ -17,6 +17,7 @@ use App\Models\TypeContent;
 use App\Models\User;
 use App\Services\FileUploadService;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Str;
 
 class BiddingController extends Controller
@@ -33,13 +34,19 @@ class BiddingController extends Controller
      */
     public function index()
     {
-        $biddings = Bidding::all();
+        $biddings = Bidding::where('bidding_type', null)->get();
         return view('panel.biddings.index', compact('biddings'));
+    }
+
+    public function indexDispensa()
+    {
+        $biddings = Bidding::where('bidding_type', 'dispensa')->get();
+        return view('panel.biddings.dispensas.index', compact('biddings'));
     }
 
     public function ShoppingPortal()
     {
-        $biddings = Bidding::take(10)->get();
+        $biddings = Bidding::where('bidding_type', null)->take(10)->get();
         return view('pages.biddings.index', compact('biddings'));
     }
 
@@ -59,15 +66,24 @@ class BiddingController extends Controller
         return view('panel.biddings.create', compact('modalities', 'exercicies', 'types', 'competings', 'secretaries', 'responsibilities', 'employees'));
     }
 
+    public function dispensaCreate(){
+        $secretaries = Secretary::with('organs')->get();
+        $types = Type::where('slug', 'biddings')->first()->children;
+        $modalities = Category::where('slug', 'modalidades')->with('children')->get();
+        $competings = Category::where('slug', 'concorrencia')->with('children')->get();
+        $exercicies = Category::where('slug', 'exercicios')->with('children')->get();
+        $responsibilities = Category::where('slug', 'responsabilidades')->with('children')->get();
+        $employees = Employee::all();
+
+        return view('panel.biddings.dispensas.create', compact('modalities', 'exercicies', 'types', 'competings', 'secretaries', 'responsibilities', 'employees'));
+    }
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        // dd($request);
         $validatedData = $request->validate([
-            // 'secretary_id' => 'required',
-            // 'organ_id' => 'nullable',
             'number' => 'required',
             'opening_date' => 'nullable',
             'status' => 'nullable',
@@ -88,6 +104,10 @@ class BiddingController extends Controller
                 'company_state' => 'required',
                 'company_country' => 'required',
             ]);
+        }
+
+        if($request['type_bidding']){
+            $validatedData['bidding_type'] = $request['type_bidding'];
         }
 
         $validatedData['slug'] = Str::slug($request->number);
@@ -172,7 +192,6 @@ class BiddingController extends Controller
                 }
             }
 
-            // return redirect()->route('biddings.index')->with('success', 'Licitação cadastrada com sucesso!');
             session()->flash('success', 'Licitação cadastrada com Sucesso!');
             return response()->json(['success' => true, 'bidding' => $bidding]);
         }
@@ -190,7 +209,7 @@ class BiddingController extends Controller
 
         $biddingIds = $categorieType->pluck('categoryable_id')->toArray();
 
-        $query = Bidding::query();
+        $query = Bidding::query()->where('bidding_type', null);
 
         if ($request->filled('start_date') && $request->filled('end_date')) {
             $start_date = date("Y-m-d", strtotime($request->input('start_date')));
@@ -476,7 +495,7 @@ class BiddingController extends Controller
 
         $biddingIds = $categorieType->pluck('categoryable_id')->toArray();
 
-        $query = Bidding::query()->whereIn('id', $biddingIds);
+        $query = Bidding::query()->where('bidding_type', 'dispensa');
 
         if ($request->filled('start_date') && $request->filled('end_date')) {
             $start_date = date("Y-m-d", strtotime($request->input('start_date')));
