@@ -716,6 +716,12 @@
             <span>Gastos</span>
         </a>
     </li>
+    <li class="menu-item {{ request()->routeIs('board.page') ? 'active' : '' }}">
+        <a href="{{ route('board.page') }}" class="menu-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
+            <span>Mesa Diretora</span>
+        </a>
+    </li>
     <li class="menu-item {{ request()->routeIs('chambers-financials.index') ? 'active' : '' }}">
         <a href="{{ route('chambers-financials.index') }}" class="menu-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-smile"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>

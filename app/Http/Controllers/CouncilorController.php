@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Councilor;
 use App\Models\File;
 use App\Models\Legislature;
+use App\Models\LegislatureRelation;
 use App\Models\Office;
 use App\Models\Page;
 use App\Models\PartyAffiliation;
@@ -30,6 +31,13 @@ class CouncilorController extends Controller
         return view('panel.councilor.page.edit', compact('page_councilor', 'groups'));
     }
 
+    public function boardOfDirectors()
+    {
+        $page_councilor = Page::where('name', 'Mesa Diretora')->first();
+        $groups = TransparencyGroup::all();
+        return view('panel.councilor.page.board.edit', compact('page_councilor', 'groups'));
+    }
+
     public function pageUpdate(Request $request)
     {
         $validateData = $request->validate([
@@ -46,6 +54,31 @@ class CouncilorController extends Controller
         $validateData['visibility'] = $request->visibility ? $request->visibility : 'disabled';
 
         $page_councilor = Page::where('name', 'Vereadores')->first();
+
+        if ($page_councilor->update($validateData)) {
+            $page_councilor->groupContents()->delete();
+            $page_councilor->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+            return redirect()->route('councilors.page')->with('success', 'Informações atualizadas com sucesso!');
+        }
+        return redirect()->route('councilors.page')->with('error', 'Por favor tente novamente!');
+    }
+
+    public function boardOfDirectorsUpdate(Request $request)
+    {
+        $validateData = $request->validate([
+            'transparency_group_id' => 'required',
+            'main_title' => 'required',
+            'title' => 'required',
+            'icon' => 'nullable',
+            'description' => 'nullable',
+        ], [
+            'main_title.required' => 'O campo título principal é obrigatório',
+            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
+            'title.required' => 'O campo título é obrigatório'
+        ]);
+        $validateData['visibility'] = $request->visibility ? $request->visibility : 'disabled';
+
+        $page_councilor = Page::where('name', 'Mesa Diretora')->first();
 
         if ($page_councilor->update($validateData)) {
             $page_councilor->groupContents()->delete();
@@ -83,6 +116,30 @@ class CouncilorController extends Controller
 
         $searchData = $request->only(['legislature_id']);
         return view('pages.councilors.index', compact('legislature', 'allLegislatures', 'searchData', 'currentLegislaturePosition'));
+    }
+
+    public function showBoard(Request $request, Legislature $legislature = null){
+        $allLegislatures = Legislature::all();
+
+        $legislature = !$legislature ? (new Legislature)->getCurrentLegislature() : $legislature;
+
+        $page_councilor = Page::where('name', 'Mesa Diretora')->first();
+        $query = Legislature::query();
+
+        $cargo = [1, 2, 3, 4];
+        $getcouncilorID = LegislatureRelation::whereIn('office_id', $cargo)->get();
+        $councilors = Councilor::whereIn('id', $getcouncilorID->pluck('legislatureable_id'))->get();
+        if($request->filled('legislature_id')){
+            $query->where('id', $request->input('legislature_id'));
+            $legislature = $query->first();
+        }
+
+        // Encontrar a posição da legislatura atual
+        $currentLegislaturePosition = $legislature ? $legislature->fresh()->getOriginal('created_at') : null;
+        $currentLegislaturePosition = $currentLegislaturePosition ? Legislature::where('created_at', '<=', $currentLegislaturePosition)->count() : null;
+
+        $searchData = $request->only(['legislature_id']);
+        return view('pages.councilors.board.index', compact('legislature', 'allLegislatures', 'searchData', 'currentLegislaturePosition', 'councilors'));
     }
 
     /**

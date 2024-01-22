@@ -214,6 +214,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('/materials/{material}/material-commissions', CommissionMaterialController::class);
 
         Route::get('councilors-page', [CouncilorController::class, 'page'])->name('councilors.page');
+        Route::get('mesadiretora/page', [CouncilorController::class, 'boardOfDirectors'])->name('board.page');
+        Route::put('mesadiretora/page/update', [CouncilorController::class, 'boardOfDirectorsUpdate'])->name('board.page.update');
         Route::put('councilors-page', [CouncilorController::class, 'pageUpdate'])->name('councilors.page.update');
         Route::resource('/councilors', CouncilorController::class);
         Route::resource('/councilors/{councilor:slug}/legislatures', CouncilorLegislatureController::class)->names([
@@ -619,6 +621,8 @@ Route::get('/papel-camara', [RoleChamberController::class, 'show'])->name('papel
 
 Route::get('/vereadores/{councilor:slug}', [CouncilorController::class, 'show'])->name('vereador.single');
 Route::match(['get', 'post'], '/legislaturas/vereadores/{legislature:slug?}', [CouncilorController::class, 'allcouncilors'])->name('vereadores-all');
+
+Route::match(['get', 'post'], '/mesa-diretora', [CouncilorController::class, 'showBoard'])->name('mesa-diretora.page');
 
 Route::match(['get', 'post'], 'materiais', [MaterialController::class, 'allMaterials'])->name('materiais-all');
 Route::get('/materiais/{material}', [MaterialController::class, 'show'])->name('materiais.single');
