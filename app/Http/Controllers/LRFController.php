@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\CategoryContent;
 use App\Models\File;
 use App\Models\LRF;
 use App\Models\Page;
@@ -34,17 +35,32 @@ class LRFController extends Controller
     public function allLrf(Request $request){
         $search = $request->query('search');
         $perPage = $request->query('perPage', 10);
+
+        $competencies = Category::where('slug', 'competencias')->with('children')->get();
+        $exercicies = Category::where('slug', 'exercicios')->with('children')->get();
         
         $query = LRF::query(); //select * from `laws`
 
         if($request->filled('description')){
             $query->where('details', 'LIKE', '%' . $request->input('description') . '%');
         }
+
+        if($request->filled('date')){
+            $query->where('date', 'LIKE', '%' . $request->input('date') . '%');
+        }
+
+        if($request->filled('competence_id') || $request->filled('exercice_id')){
+            $getCategoryRelation = CategoryContent::whereIn('category_id', [$request->input('competence_id'), $request->input('exercice_id')])
+            ->where('categoryable_type', 'lrf')
+            ->get();
+        
+            $query->whereIn('id', $getCategoryRelation->pluck('categoryable_id'));
+        }
         
         $lrfs = $query->paginate(10);
         $searchData = $request->only(['details', 'number', 'date']);
 
-        return view('pages.lrf.index', compact('lrfs', 'searchData'));
+        return view('pages.lrf.index', compact('lrfs', 'searchData', 'competencies', 'exercicies'));
     }
 
     public function page(){

@@ -47,13 +47,35 @@
                                         <input type="text" name="description" class="form-control input-sm" value="" />
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group mb-0">
+                                        <label for="competenci">Competência</label>
+                                        <select class="form-control input-sm" name="competence_id" id="competenci">
+                                            <option value="">Competência</option>
+                                            @foreach ($competencies[0]->children as $comp)
+                                                <option value="{{ $comp->id }}">{{ $comp->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group mb-0">
+                                        <label for="exercice_id">Exercício</label>
+                                        <select class="form-control input-sm" name="exercice_id" id="exercice_id">
+                                            <option value="">Exercício</option>
+                                            @foreach ($exercicies[0]->children as $exercice)
+                                                <option value="{{ $exercice->id }}">{{ $exercice->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="mt-2 col-md-12">
                                     <div class="h-100 form-group mb-0">
                                         <div class="btn-groups">
                                             <button type="submit" class="btn btn-search btn-sm" data-toggle="tooltip" title="Pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button>
-                                            <a href="{{ route('decretos.show') }}" class="btn btn-search close btn-sm" data-toggle="tooltip" title="Limpar pesquisa"><i class="fa-solid fa-xmark"></i></a>
+                                            <a href="{{ route('lrf.page') }}" class="btn btn-search close btn-sm" data-toggle="tooltip" title="Limpar pesquisa"><i class="fa-solid fa-xmark"></i></a>
                                         </div>
                                     </div>
                                 </div>
