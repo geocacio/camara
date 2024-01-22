@@ -13,6 +13,7 @@
                     <a class="dropdown-item" href="{{ route('constructions.page') }}">Página</a>
                     <a class="dropdown-item" href="{{ route('constructions.create') }}">Novo</a>
                     <a class="dropdown-item" href="{{ route('subtypes.index', 'constructions') }}">Tipos</a>
+                    <a class="dropdown-item" href="{{ route('no-construction.create') }}">Não há obras</a>
                 </div>
             </div>
         

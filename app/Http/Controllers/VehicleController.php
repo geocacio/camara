@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use App\Models\FileContent;
+use App\Models\NoInfo;
 use App\Models\NoVehicles;
 use App\Models\Page;
 use App\Models\Secretary;
@@ -109,12 +110,13 @@ class VehicleController extends Controller
     }
 
     public function noVehicle(){
-        $info = NoVehicles::first();
+        $pageID = Page::where('name', 'Veículos')->first();
+        $info = NoInfo::where('page_id', $pageID->id)->first();
 
         $currentFile = null;
 
         if($info){
-            $fileContent = FileContent::where('fileable_type', 'no-vehicles')->where('fileable_id', $info->id)->first();
+            $fileContent = FileContent::where('fileable_type', 'no-info')->where('fileable_id', $info->id)->first();
     
             $currentFile = File::where('id', $fileContent->file_id)->first();
         }
@@ -124,11 +126,15 @@ class VehicleController extends Controller
 
     public function noVehicleStore(Request $request){
 
+        $pageID = Page::where('name', 'Veículos')->first();
+    
         $validateData = $request->validate([
             'description' => 'required',
         ]);
+
+        $validateData['page_id'] = $pageID->id;
         
-        $existingVehicle = NoVehicles::first();
+        $existingVehicle = NoInfo::where('page_id', $pageID->id)->first();
     
         if ($existingVehicle) {
             $existingVehicle->update($validateData);
@@ -142,14 +148,14 @@ class VehicleController extends Controller
                 // Faz o upload do novo arquivo
                 $url = $this->fileUploadService->upload($request->file('file'), 'no-vehicles');
                 $file = File::create(['url' => $url]);
-    
+
                 // Associa o novo arquivo ao modelo existente
                 $existingVehicle->files()->create(['file_id' => $file->id]);
             }
     
             return redirect()->route('veiculos.index')->with('success', 'Arquivo atualizado com sucesso!');
         } else {
-            if($vehicle = NoVehicles::create($validateData)){
+            if($vehicle = NoInfo::create($validateData)){
                 if ($request->hasFile('file')) {
                     $url = $this->fileUploadService->upload($request->file('file'), 'no-vehicles');
                     $file = File::create(['url' => $url]);
@@ -161,8 +167,6 @@ class VehicleController extends Controller
             }
         }
     }
-    
-    
 
     /**
      * Display the specified resource.

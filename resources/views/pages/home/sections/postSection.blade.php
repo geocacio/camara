@@ -69,7 +69,6 @@
 
             // Obtém o ID clicado, que já inclui "category-"
             var clickedId = $(this).attr("id");
-            console.log(clickedId);
 
             // Esconde todos os contêineres
             $(".post-content").hide();

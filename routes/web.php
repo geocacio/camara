@@ -507,6 +507,8 @@ Route::middleware('auth')->group(function () {
                 'show' => 'constructions.file.show',
                 'destroy' => 'constructions.file.destroy',
             ]);
+            Route::get('no-constructions', [ConstructionController::class, 'noInfo'])->name('no-construction.create');
+            Route::post('no-constructions', [ConstructionController::class, 'noInfostore'])->name('no-construction.store');
             Route::resource('pcg', PcgController::class);
             Route::resource('pcs', PcsController::class);
 
