@@ -1,5 +1,5 @@
 @extends('panel.index')
-@section('pageTitle', 'Dispensas e Inegibilidade')
+@section('pageTitle', 'Dispensas e inexigibilidade')
 
 @section('content')
 <div class="card">

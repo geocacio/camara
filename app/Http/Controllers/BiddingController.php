@@ -57,7 +57,12 @@ class BiddingController extends Controller
     {
         $secretaries = Secretary::with('organs')->get();
         $types = Type::where('slug', 'biddings')->first()->children;
-        $modalities = Category::where('slug', 'modalidades')->with('children')->get();
+        $modalities = Category::where('slug', 'modalidades')
+        ->with(['children' => function ($query) {
+            $query->whereNotIn('slug', ['dispensa', 'inexigibilidade']);
+        }])
+        ->get();
+    
         $competings = Category::where('slug', 'concorrencia')->with('children')->get();
         $exercicies = Category::where('slug', 'exercicios')->with('children')->get();
         $responsibilities = Category::where('slug', 'responsabilidades')->with('children')->get();
@@ -69,7 +74,9 @@ class BiddingController extends Controller
     public function dispensaCreate(){
         $secretaries = Secretary::with('organs')->get();
         $types = Type::where('slug', 'biddings')->first()->children;
-        $modalities = Category::where('slug', 'modalidades')->with('children')->get();
+        $modalities = Category::where('slug', 'modalidades')->with(['children' => function ($query) {
+            $query->whereIn('slug', ['dispensa', 'inexigibilidade']);
+        }])->get();
         $competings = Category::where('slug', 'concorrencia')->with('children')->get();
         $exercicies = Category::where('slug', 'exercicios')->with('children')->get();
         $responsibilities = Category::where('slug', 'responsabilidades')->with('children')->get();
