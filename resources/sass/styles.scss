@@ -3845,5 +3845,9 @@ section{
 .section-favorites-pages {
     .biddings {
         justify-content: center;
+
+        .item-bidding {
+            width: 266px;
+        }
     }
 }

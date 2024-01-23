@@ -43,7 +43,7 @@ class ShortcutTransparencyController extends Controller
             $existingPage->delete();
         } else {
             // Se não existir, cria um novo registro com o page_id
-            if(count($existingPages) >= 6){
+            if(count($existingPages) >= 8){
                 return redirect()->back()->with('error', 'Limite de destaques atingido!');
             }else {
                 ShortcutTransparency::create(['page_id' => $validatedData['page_id']]);
