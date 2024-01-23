@@ -753,6 +753,9 @@
                 <li class="sub-item {{ request()->routeIs('menus.index') ? 'active' : '' }}">
                     <a href="{{ route('menus.index') }}" class="sub-link">Menus</a>
                 </li>
+                <li class="sub-item {{ request()->routeIs('favorite.index') ? 'active' : '' }}">
+                    <a href="{{ route('favorite.index') }}" class="sub-link">Favoritos</a>
+                </li>
                 <li class="sub-item {{ request()->routeIs('maintenance.index') ? 'active' : '' }}">
                     <a href="{{ route('maintenance.index') }}" class="sub-link">Manutenções</a>
                 </li>

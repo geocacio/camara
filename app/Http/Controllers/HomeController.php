@@ -13,6 +13,7 @@ use App\Models\Maintenance;
 use App\Models\Page;
 use App\Models\Post;
 use App\Models\Service;
+use App\Models\ShortcutTransparency;
 use App\Models\Video;
 use Carbon\Carbon;
 use Illuminate\Console\View\Components\Alert;
@@ -97,14 +98,20 @@ class HomeController extends Controller
             $posts = $posts->take(3);
         }
 
-        // old
         $videos = Video::with('categories', 'files')->limit('2')->get();
         $banners = Banner::all();
         $leis = Law::limit('3')->get();
         $lrfs = LRF::limit('3')->get();
         $today = Carbon::today();
+        $pageIdfavorite = ShortcutTransparency::all();
 
-        return view('pages.home.index', compact('services', 'sections', 'videos', 'currentLegislature', 'banners', 'leis', 'lrfs', 'postsPorCategoria', 'getCategoryFilter', 'categories'));
+        $pageInFavorite = null;
+    
+        if($pageIdfavorite){
+            $pageInFavorite = Page::where('visibility', 'enabled')->whereIn('id', $pageIdfavorite->pluck('page_id'))->get();
+        }
+
+        return view('pages.home.index', compact('services', 'sections', 'videos', 'currentLegislature', 'banners', 'leis', 'lrfs', 'postsPorCategoria', 'getCategoryFilter', 'categories', 'pageInFavorite'));
     }
     
 }

@@ -49,4 +49,9 @@ class Page extends Model
     {
         return $this->hasMany(law::class);
     }
+
+    public function favs()
+    {
+        return $this->hasMany(ShortcutTransparency::class);
+    }
 }

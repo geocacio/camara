@@ -98,6 +98,7 @@ use App\Http\Controllers\ServiceLetterController;
 use App\Http\Controllers\SessionAttendanceController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\ShortcutTransparencyController;
 use App\Http\Controllers\SicController;
 use App\Http\Controllers\SicFaqController;
 use App\Http\Controllers\SicSolicitationController;
@@ -116,6 +117,7 @@ use App\Models\Inspector;
 use App\Models\Recipes;
 use App\Models\ServiceLetter;
 use App\Models\Setting;
+use App\Models\ShortcutTransparency;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -569,6 +571,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/pcs-page', [PcsController::class, 'pageUpdate'])->name('pcs.page.update');
         Route::get('/pcg-page', [PcgController::class, 'page'])->name('pcg.page');
         Route::put('/pcg-page', [PcgController::class, 'pageUpdate'])->name('pcg.page.update');
+        Route::resource('/transparency/favorite', ShortcutTransparencyController::class);
     });
 });
 
