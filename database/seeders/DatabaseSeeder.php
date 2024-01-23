@@ -35,5 +35,6 @@ class DatabaseSeeder extends Seeder
         $this->call(BiddingsPageSeeder::class);
         $this->call(ContactUsSeeder::class);
         $this->call(BoardDirectorsSeeder::class);
+        $this->call(SectionFavoritesSeeder::class);
     }
 }
