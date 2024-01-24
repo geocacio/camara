@@ -15,16 +15,6 @@ class SectionFavoritesSeeder extends Seeder
      */
     public function run(): void
     {
-        
-        $cores = [
-            'bgn' => '#050505', //menu e footer
-            'bgn1' => '#000000', //menu top
-            'bgn2' => '#111111', //fundo (section)
-            'bgn3' => '#1f1f1f', //cards
-            'btnn1' => '#1b1c1e',
-            'cn' => '#e8eaed',
-            'cn2' => '#979797',
-        ];
 
         $dayColors = [
             'main_menu' => '#004080',
@@ -214,3 +204,4 @@ class SectionFavoritesSeeder extends Seeder
         }
     }
 }
+
