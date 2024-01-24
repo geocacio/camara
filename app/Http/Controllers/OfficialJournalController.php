@@ -40,7 +40,6 @@ class OfficialJournalController extends Controller
         $currentTime = $currentDateTime->format('H:i');
         $currentDate = $currentDateTime->toDateString();
         $timeLimit = $this->timeLimit;
-
         $diaries = OfficialJournal::orderBy('id', 'desc')->get();
         return view('panel.official-diary.index', compact('diaries', 'officialJournal', 'timeLimit', 'currentTime', 'currentDate'));
     }
@@ -62,8 +61,10 @@ class OfficialJournalController extends Controller
         });
     
         $adjustedPosition = $position !== false ? $position + 1 : null;
+
+        $page = Page::where('name', 'Díario Oficial')->first();
     
-        return view('pages.official-diary.index', compact('dayle', 'adjustedPosition'));
+        return view('pages.official-diary.index', compact('dayle', 'adjustedPosition', 'page'));
     }
     
     public function journalPage(){
@@ -79,6 +80,7 @@ class OfficialJournalController extends Controller
             'title' => 'required',
             'icon' => 'nullable',
             'description' => 'nullable',
+            'featured_description' => 'nullable',
             'link_type' => 'nullable',
             'url' => 'nullable',
         ], [

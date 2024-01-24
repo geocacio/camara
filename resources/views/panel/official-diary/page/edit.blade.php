@@ -53,6 +53,11 @@
             </div>
 
             <div class="form-group">
+                <label>Conteúdo</label>
+                <textarea class="editor" name="featured_description">{{ old('featured_description', $outsource->featured_description) }}</textarea>
+            </div>
+
+            <div class="form-group">
                 <label>Ativado/Desativado</label>
                 <div class="d-flex align-items-center justify-content-center w-fit-content actions">
                     <div class="toggle-switch cmt-4">

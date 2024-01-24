@@ -27,13 +27,11 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="gd-managers tab-pane fadeshow active" id="index" role="tabpanel" aria-labelledby="index-tab">
                                 <p class="title-journal">Diário Oficial Eletrônico</p>
-
-                                <p class="desc-journal">
-                                    O Artigo 37 da Constituição da República Brasileira define os princípios da publicidade e da eficiência como norteadores da Administração Pública.
-                                </p>
-                                <p class="desc-journal">
-                                    Todos os Poderes, entes federados e órgãos da Administração Pública direta e indireta brasileira submetem-se ao princípio constitucional da publicidade, resultante do princípio democrático, o qual determina sejam publicados seus atos administrativos.
-                                </p>
+                                @if($page)
+                                    <div class="desc-journal">
+                                        {!! $page->featured_description !!}
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
