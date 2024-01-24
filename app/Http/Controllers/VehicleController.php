@@ -213,7 +213,10 @@ class VehicleController extends Controller
         $searchData['situation'] = $request->input('situation', '');
         $searchData['type'] = $request->input('type', '');
 
-        $noVehicle = NoVehicles::first();
+        $noVehicle = NoInfo::first();
+
+        $pageID = Page::where('name', 'Veículos')->first();
+        $noVehicle = NoInfo::where('page_id', $pageID->id)->first();
 
         $fileID = $noVehicle->files;
         $fileWhenNoVehicle = File::where('id', $fileID->pluck('file_id'))->first();
