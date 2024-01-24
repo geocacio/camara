@@ -22,36 +22,77 @@
 
             @include('pages.official-diary.sidebar')
             @if($officeHour)
-                <div class="col-md-5">
+                <div class="col-md-8">
                     {{-- <h3 class="secondary-title text-center mb-20">{{ $esicPage->title }}</h3> --}}
+                    <div class="card main-card card-manager">
+                        <div class="tab-content" id="myTabContent">
+                            <div class="gd-managers tab-pane fadeshow active" id="index" role="tabpanel" aria-labelledby="index-tab">
 
-                    <span class="last-edition">
-                        <div class="line-blue"></div>
-                        Expediente
-                    </span>
-                    <div class="box-expedient">
-                        <div class="container-expedient">
-                            <h6 class="title-expedient">ACERVO</h6>
-                            <span class="content-expedient">{{ $officeHour->information ?? '' }}</span>
-                        </div>
+                                {{-- <h3 class="name-managers">{{ $bidding->description }}</h3> --}}
 
-                        <div class="container-expedient">
-                            <h6 class="title-expedient">PERIODICIDADE</h6>
-                            <span class="content-expedient">{{ $officeHour->frequency  ?? ''  }}</span>
-                        </div>
+                                <div class="row container-descriptions">
+                                    <div class="col-md-12">
+                                        <h6>Acervo</h6>
+                                        <p class="description">{{ $officeHour->information ?? '' }}</p>
+                                    </div>
 
-                        <div class="container-expedient">
-                            <h6 class="title-expedient">RESPONSÁVEL</h6>
-                            <span class="content-expedient">{{ $officeHour->responsible_name  ?? ''  }}</span>
-                            <span class="content-expedient">{{ $officeHour->responsible_position  ?? ''  }}</span>
-                        </div>
+                                    <div class="col-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-data-default">
+                                                <thead>
+                                                    <tr>
+                                                        <th>PERIODICIDADE</th>
+                                                        <th>RESPONSÁVEL</th>
+                                                        <th>Cargo do responsável</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                
+                                                    <tr>
+                                                        <td>{{ $officeHour->frequency }}</td>
+                                                        <td>{{ $officeHour->responsible_name  ?? '' }}</td>
+                                                        <td>{{ $officeHour->responsible_position ?? '' }}</td>
+                                                    </tr>
+                                
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
 
-                        <div class="container-expedient">
-                            <h6 class="title-expedient">ENTIDADE</h6>
-                            <span class="content-expedient">{{ $officeHour->entity_name  ?? ''  }}</span>
-                            <span class="content-expedient">{{ $officeHour->entity_address  ?? ''  }}</span>
-                            <span class="content-expedient">CEP:{{ $officeHour->entity_zip_code  ?? ''  }} CNPJ:{{ $officeHour->entity_cnpj  ?? '' }}</span>
-                            <span class="content-expedient">Email:{{ $officeHour->entity_email  ?? ''  }} Telefone: {{ $officeHour->entity_phone  ?? ''  }}</span>
+                                    <p class="title">Sobre a câmara:</p>
+                                    <br/>
+                                    <br/>
+
+                                    <div class="col-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-data-default">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Entidade</th>
+                                                        <th>Endereço</th>
+                                                        <th>Cep</th>
+                                                        <th>CNPJ</th>
+                                                        <th>Telefone</th>
+                                                        <th>Email</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                
+                                                    <tr>
+                                                        <td>{{ $officeHour->entity_name }}</td>
+                                                        <td>{{ $officeHour->entity_address  ?? '' }}</td>
+                                                        <td>{{ $officeHour->entity_zip_code  ?? '' }}</td>
+                                                        <td>{{ $officeHour->entity_cnpj ?? '' }}</td>
+                                                        <td>{{ $officeHour->entity_phone ?? '' }}</td>
+                                                        <td>{{ $officeHour->entity_email ?? '' }}</td>
+                                                    </tr>
+                                
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -61,9 +102,9 @@
                     </div>
                     @endif                
                 </div>
-                @if($dayle && $dayle->files->count() > 0)
+                {{-- @if($dayle && $dayle->files->count() > 0)
                     @include('pages.official-diary.diary-component', ['single' => true])
-                @endif
+                @endif --}}
             @endif
     </div>
 </section>

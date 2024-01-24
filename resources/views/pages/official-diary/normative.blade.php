@@ -31,15 +31,20 @@
                 </div>
                 @endif
 
-                <p class="title-journal">Diário Oficial Eletrônico</p>
-                <span class="last-edition">
-                    <div class="line-blue"></div>
-                    {{ $normative->name ?? '' }}
-                </span>
+                <div class="card main-card card-manager">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="gd-managers tab-pane fadeshow active" id="index" role="tabpanel" aria-labelledby="index-tab">
+                            <p class="title-journal">Diário Oficial Eletrônico</p>
+                            
+                            <span class="last-edition">
+                                <div class="line-blue"></div>
+                                {{ $normative->name ?? '' }}
+                            </span>
 
-                <p class="desc-journal">
-                    {{ $law->description ?? '' }}
-                </p>
+                            {{ $law->description ?? '' }}
+                        </div>
+                    </div>
+                </div>
 
             </div>
             

@@ -112,7 +112,20 @@ class OfficialJournalController extends Controller
         $presentation = Page::where('name', 'Apresentação')->first();
         $law = Law::where('id', $presentation->law_id)->first();
         $dayle = OfficialJournal::first();
-        return view('pages.official-diary.presentation', compact('presentation', 'law', 'dayle'));
+
+        $getJournalID = FileContent::where('fileable_type', 'official_journals')->get();
+
+        $dayle = OfficialJournal::whereIn('id', $getJournalID->pluck('fileable_id'))->latest()->first();
+    
+        $dayles = OfficialJournal::whereIn('id', $getJournalID->pluck('fileable_id'))->get();
+
+        $position = $dayles->search(function ($item) use ($dayle) {
+            return $item->id == $dayle->id;
+        });
+    
+        $adjustedPosition = $position !== false ? $position + 1 : null;
+
+        return view('pages.official-diary.presentation', compact('presentation', 'law', 'dayle', 'adjustedPosition'));
     }
 
     public function normativePage($type)

@@ -1,21 +1,7 @@
 @extends('layouts.app')
 
 @section('breadcrumb')
-{{-- <ul class="breadcrumb">
-    <li class="item">
-        <a href="{{ route('home') }}" class="link">Início</a>
-    </li>
-    <li class="item">
-        <a href="{{ route('transparency.show') }}" class="link">Diário oficial</a>
-    </li>
-    <li class="item">
-        <a href="{{ route('ouvidoria.show') }}" class="link">Ouvidoria</a>
-    </li>
-    <li class="item">
-        <span>eSIC</span>
-    </li>
-</ul> --}}
-{{-- <h3 class="title text-center">{{ $esicPage->main_title }}</h3> --}}
+
 @endsection
 
 @section('content')
@@ -37,15 +23,20 @@
                 </div>
                 @endif
 
-                <p class="title-journal">Diário Oficial Eletrônico</p>
+                    <div class="card main-card card-manager">
+                        <div class="tab-content" id="myTabContent">
+                            <div class="gd-managers tab-pane fadeshow active" id="index" role="tabpanel" aria-labelledby="index-tab">
+                                <p class="title-journal">Diário Oficial Eletrônico</p>
 
-                <p class="desc-journal">
-                    O Artigo 37 da Constituição da República Brasileira define os princípios da publicidade e da eficiência como norteadores da Administração Pública.
-                </p>
-                <p class="desc-journal">
-                    Todos os Poderes, entes federados e órgãos da Administração Pública direta e indireta brasileira submetem-se ao princípio constitucional da publicidade, resultante do princípio democrático, o qual determina sejam publicados seus atos administrativos.
-                </p>
-
+                                <p class="desc-journal">
+                                    O Artigo 37 da Constituição da República Brasileira define os princípios da publicidade e da eficiência como norteadores da Administração Pública.
+                                </p>
+                                <p class="desc-journal">
+                                    Todos os Poderes, entes federados e órgãos da Administração Pública direta e indireta brasileira submetem-se ao princípio constitucional da publicidade, resultante do princípio democrático, o qual determina sejam publicados seus atos administrativos.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
             </div>
             
             @if($dayle && $dayle->files->count() > 0)

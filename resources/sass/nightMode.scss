@@ -102,6 +102,22 @@
     background-color: #111111;
 }
 
+.night-mode .section-diary {
+    background-color: #111111;
+}
+
+.night-mode .section-diary .main-card {
+    background-color: #1f1f1f;
+
+    .title-journal, .last-edition, .gd-managers span {
+        color: #fff;
+    }
+
+    .group-links .link {
+        color: #b4b6df;
+    }
+}
+
 .night-mode .title {
     color: #fff;
 }

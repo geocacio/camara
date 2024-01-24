@@ -18,7 +18,8 @@ class Page extends Model
         'featured_description', 
         'slug', 'visibility', 
         'link_type', 
-        'url'
+        'url',
+        'law_id',
     ];
 
     public function links()

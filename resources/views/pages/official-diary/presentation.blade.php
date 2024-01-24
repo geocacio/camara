@@ -23,7 +23,6 @@
             @include('pages.official-diary.sidebar')
 
             <div class="col-md-5">
-                {{-- <h3 class="secondary-title text-center mb-20">{{ $esicPage->title }}</h3> --}}
 
                 @if (session('feedback-success'))
                 <div class="alert alert-success">
@@ -31,15 +30,20 @@
                 </div>
                 @endif
 
-                <p class="title-journal">Diário Oficial Eletrônico</p>
-                <span class="last-edition">
-                    <div class="line-blue"></div>
-                    {{ $presentation->name ?? '' }}
-                </span>
+                <div class="card main-card card-manager">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="gd-managers tab-pane fadeshow active" id="index" role="tabpanel" aria-labelledby="index-tab">
+                            <p class="title-journal">Diário Oficial Eletrônico</p>
+                            
+                            <span class="last-edition">
+                                <div class="line-blue"></div>
+                                {{ $presentation->name ?? '' }}
+                            </span>
 
-                <p class="desc-journal">
-                    {{ $law->description ?? '' }}
-                </p>
+                            {{ $law->description ?? '' }}
+                        </div>
+                    </div>
+                </div>
 
             </div>
             
