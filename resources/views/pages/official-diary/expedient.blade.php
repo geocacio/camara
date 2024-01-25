@@ -38,20 +38,20 @@
 
                                     <div class="col-12">
                                         <div class="table-responsive">
-                                            <table class="table table-striped table-data-default">
+                                            <table class="table-simple">
                                                 <thead>
                                                     <tr>
-                                                        <th>PERIODICIDADE</th>
-                                                        <th>RESPONSÁVEL</th>
-                                                        <th>Cargo do responsável</th>
+                                                        <th class="simple-th">PERIODICIDADE</th>
+                                                        <th class="simple-th">RESPONSÁVEL</th>
+                                                        <th class="simple-th">Cargo do responsável</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                 
                                                     <tr>
-                                                        <td>{{ $officeHour->frequency }}</td>
-                                                        <td>{{ $officeHour->responsible_name  ?? '' }}</td>
-                                                        <td>{{ $officeHour->responsible_position ?? '' }}</td>
+                                                        <td class="simple-td">{{ $officeHour->frequency }}</td>
+                                                        <td class="simple-td">{{ $officeHour->responsible_name  ?? '' }}</td>
+                                                        <td class="simple-td">{{ $officeHour->responsible_position ?? '' }}</td>
                                                     </tr>
                                 
                                                 </tbody>
@@ -65,26 +65,26 @@
 
                                     <div class="col-12">
                                         <div class="table-responsive">
-                                            <table class="table table-striped table-data-default">
+                                            <table class="table-simple">
                                                 <thead>
                                                     <tr>
-                                                        <th>Entidade</th>
-                                                        <th>Endereço</th>
-                                                        <th>Cep</th>
-                                                        <th>CNPJ</th>
-                                                        <th>Telefone</th>
-                                                        <th>Email</th>
+                                                        <th class="simple-th">Entidade</th>
+                                                        <th class="simple-th">Endereço</th>
+                                                        <th class="simple-th">Cep</th>
+                                                        <th class="simple-th">CNPJ</th>
+                                                        <th class="simple-th">Telefone</th>
+                                                        <th class="simple-th">Email</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                 
                                                     <tr>
-                                                        <td>{{ $officeHour->entity_name }}</td>
-                                                        <td>{{ $officeHour->entity_address  ?? '' }}</td>
-                                                        <td>{{ $officeHour->entity_zip_code  ?? '' }}</td>
-                                                        <td>{{ $officeHour->entity_cnpj ?? '' }}</td>
-                                                        <td>{{ $officeHour->entity_phone ?? '' }}</td>
-                                                        <td>{{ $officeHour->entity_email ?? '' }}</td>
+                                                        <td class="simple-td">{{ $officeHour->entity_name }}</td>
+                                                        <td class="simple-td">{{ $officeHour->entity_address  ?? '' }}</td>
+                                                        <td class="simple-td">{{ $officeHour->entity_zip_code  ?? '' }}</td>
+                                                        <td class="simple-td">{{ $officeHour->entity_cnpj ?? '' }}</td>
+                                                        <td class="simple-td">{{ $officeHour->entity_phone ?? '' }}</td>
+                                                        <td class="simple-td">{{ $officeHour->entity_email ?? '' }}</td>
                                                     </tr>
                                 
                                                 </tbody>

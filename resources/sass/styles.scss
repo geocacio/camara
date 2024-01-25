@@ -3854,9 +3854,22 @@ section{
 
 .desc-journal {
 
-        img {
-            max-width: 100%;
-            height: auto;
-        }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
     
 } 
+
+.table-simple {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+.simple-th, .simple-td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 6px;
+}
+  
