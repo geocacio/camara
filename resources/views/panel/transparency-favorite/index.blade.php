@@ -1,5 +1,5 @@
 @extends('panel.index')
-@section('pageTitle', 'Leis')
+@section('pageTitle', 'Atalhos da Transparência na home')
 
 @section('content')
 <div class="card">
@@ -7,11 +7,6 @@
         <div class="card-header text-right header-with-search">
             <div class="btn-group dropleft">
                 <button type="button" class="btn-dropdown-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ route('laws.page') }}">Página</a>
-                    <a class="dropdown-item" href="{{ route('laws.create') }}">Novo</a>
-                    <a class="dropdown-item" href="{{ route('subtypes.index', 'laws') }}">Tipos</a>
-                </div>
             </div>
         </div>
 
