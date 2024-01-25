@@ -30,6 +30,11 @@
                     <input type="file" name="file" accept="application/pdf" class="form-control">
                 </div>
 
+                <div class="col-6">
+                    <label for="logo">Periodo</label>
+                    <input type="text" name="periodo" value="{{ $info ? $info->periodo : old('periodo') }}"  class="form-control mask-period">
+                </div>
+
                 <div class="col-6 pt-30 container-all-files">
                     @if ($currentFile != null)
                     @if (in_array(pathinfo($currentFile->url, PATHINFO_EXTENSION), ['pdf', 'doc', 'docx']))

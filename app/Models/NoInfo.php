@@ -12,6 +12,7 @@ class NoInfo extends Model
     protected $fillable = [
         'page_id',
         'description',
+        'periodo',
     ];
 
     public function files()

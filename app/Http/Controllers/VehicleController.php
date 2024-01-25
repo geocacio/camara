@@ -130,6 +130,7 @@ class VehicleController extends Controller
     
         $validateData = $request->validate([
             'description' => 'required',
+            'periodo' => 'required',
         ]);
 
         $validateData['page_id'] = $pageID->id;
