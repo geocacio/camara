@@ -11,6 +11,7 @@ use App\Models\Type;
 use Illuminate\Http\Request;
 use App\Models\File;
 use App\Models\Page;
+use App\Models\Recipient;
 use App\Models\TransparencyGroup;
 use App\Services\FileUploadService;
 use Illuminate\Support\Facades\Storage;
@@ -164,6 +165,8 @@ class MaterialController extends Controller
         $material->update(['views' => ($material->views + 1)]);
         $votacaoProgress = $material->progress->where('phase', 'votacao')->first();
         $material->votation = $votacaoProgress ? true : false;
+        // $recipentes = Recipient::where('material_id', $material->id)->get();
+        // // dd($recipente);
 
         return view('pages.materials.show', compact('material'));
     }

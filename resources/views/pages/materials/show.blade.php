@@ -56,7 +56,7 @@
                         </li>
                         @endif
 
-                        @if($material->votation)
+                        @if($material->votes)
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="votes-tab" data-bs-toggle="tab" data-bs-target="#votes" type="button" role="tab">
                                 <i class="fa-solid fa-microphone"></i>
@@ -72,6 +72,14 @@
                                 Destinatários
                             </button>
                         </li>
+                        @endif
+                        @if ($material->files[0]->file->url)
+                            <li class="nav-item" role="presentation">
+                                <a href="{{ asset('storage/'.$material->files[0]->file->url) }}" target="_blank" class="nav-link" id="destinations-tab">
+                                    <i class="fa fa-file"></i>                        
+                                    Documento
+                                </a>
+                            </li>
                         @endif
                     </ul>
                 </div>
@@ -152,7 +160,7 @@
                         </div>
                         @endif
 
-                        @if($material->votation)
+                        @if($material->votes)
 
                         <div class="tab-pane fadeshow" id="votes" role="tabpanel" aria-labelledby="votes-tab">
 
@@ -184,17 +192,13 @@
                         @if($material->recipients)
 
                         <div class="tab-pane fadeshow" id="destinations" role="tabpanel" aria-labelledby="destinations-tab">
-
-                            @foreach($material->authors as $author)
-
                             <div class="col-12">
                                 <div class="table-responsive">
                                     <table class="table table-striped table-data-default">
                                         <thead>
                                             <tr>
                                                 <th>Nome</th>
-                                                <!-- <th>Cargo</th> -->
-                                                <th>Cargo</th>
+                                                <th>Posição</th>
                                                 <th>Orgão</th>
                                             </tr>
                                         </thead>
@@ -211,8 +215,6 @@
                                     </table>
                                 </div>
                             </div>
-
-                            @endforeach
 
                         </div>
                         @endif
