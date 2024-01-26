@@ -572,6 +572,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/pcg-page', [PcgController::class, 'page'])->name('pcg.page');
         Route::put('/pcg-page', [PcgController::class, 'pageUpdate'])->name('pcg.page.update');
         Route::resource('/transparency/favorite', ShortcutTransparencyController::class);
+        Route::get('/transparency/atricon', [ShortcutTransparencyController::class, 'atricon'])->name('atricon.index');
     });
 });
 

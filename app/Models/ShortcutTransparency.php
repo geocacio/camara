@@ -10,6 +10,7 @@ class ShortcutTransparency extends Model
     use HasFactory;
 
     protected $fillable = [
-        'page_id'
+        'page_id',
+        'type',
     ];
 }

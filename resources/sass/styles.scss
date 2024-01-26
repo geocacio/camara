@@ -3873,3 +3873,26 @@ section{
     padding: 6px;
 }
   
+.atricon {
+    height: 130px;
+    padding: 10px;
+    width: 100%;
+    text-decoration: none;
+    transition: all 0.3s ease-out;
+    background-repeat: no-repeat, no-repeat;
+    background-position: right, left;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #004080;
+    color: #fff;
+
+    &:hover {
+        transform: scale(1.05);
+        background-color: #133a67;
+        color: #ffffff;
+    }
+}

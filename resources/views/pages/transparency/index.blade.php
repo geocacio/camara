@@ -50,9 +50,35 @@
             </div>
             @endif
             @endforeach
+                @if(!empty($pagefromAtricon) && $pagefromAtricon->count() > 0)
+                    <div class="col-12 card">
+                        <div class="card-header text-center">
+                            <h5 class="card-title">Atricon</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Radar Nacional da Transparência Pública</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row row-gap-1">
+                                @if(!empty($pagefromAtricon))
+                                    @foreach($pagefromAtricon as $page)
+                                        <div class="col-sm-6 col-md-4 col-lg-3">
+                                            <a href="{{ !$page->route ? ($page->url ? $page->url : '#') : route($page->route) }}" target="{{ $page->url ? '_blank' : '_self'}}" class="atricon">
+                                                <i class="{{ $page->icon }}"></i>
+                                                <span class="description">
+                                                    <p class="title">{{ $page->title }}</p>
+                                                    <p class="text">{{ $page->description }}</p>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                @endif
         </div>
     </div>
 </section>
+
 @endif
 
 @include('pages.partials.satisfactionSurvey', ['page_name' => 'Portal da transparência'])

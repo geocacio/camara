@@ -13,8 +13,26 @@ class ShortcutTransparencyController extends Controller
      */
     public function index()
     {
-        $pages = Page::where('visibility', 'enabled')->get();        
+        $pages = Page::where('visibility', 'enabled')->get();
+
+        $pages = Page::where('visibility', 'enabled')
+        ->withCount(['favs' => function ($query) {
+            $query->where('type', 'transparency');
+        }])
+        ->get(); 
+
         return view('panel.transparency-favorite.index', compact('pages'));
+    }
+
+    public function atricon()
+    {
+        $pages = Page::where('visibility', 'enabled')
+        ->withCount(['favs' => function ($query) {
+            $query->where('type', 'atricon');
+        }])
+        ->get(); 
+
+        return view('panel.transparency.atricon.index', compact('pages'));
     }
 
     /**
@@ -35,7 +53,7 @@ class ShortcutTransparencyController extends Controller
         ]);
     
         // Verifica se já existe um registro com o page_id
-        $existingPage = ShortcutTransparency::where('page_id', $validatedData['page_id'])->first();
+        $existingPage = ShortcutTransparency::where('page_id', $validatedData['page_id'])->where('type', $request->type)->first();
         $existingPages = ShortcutTransparency::all();
         
         if ($existingPage) {
@@ -46,7 +64,10 @@ class ShortcutTransparencyController extends Controller
             if(count($existingPages) >= 8){
                 return redirect()->back()->with('error', 'Limite de destaques atingido!');
             }else {
-                ShortcutTransparency::create(['page_id' => $validatedData['page_id']]);
+                ShortcutTransparency::create([
+                    'page_id' => $validatedData['page_id'], 
+                    'type' => $request->type,
+                ]);
             }
         }
     

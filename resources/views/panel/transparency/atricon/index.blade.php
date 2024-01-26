@@ -1,5 +1,5 @@
 @extends('panel.index')
-@section('pageTitle', 'Atalhos da Transparência na home')
+@section('pageTitle', 'Atricon')
 
 @section('content')
 <div class="card">
@@ -39,18 +39,19 @@
                                 @endif
                                 <form id="destaque-{{ $page->id }}" action="{{ route('favorite.store') }}" method="post" style="display: none;">
                                     @csrf
-                                    <input type="text" value="transparency" name="type">
+                                    <input type="text" value="atricon" name="type">
                                     <input name="page_id" type="hidden" value="{{ $page->id }}"/>
                                 </form>
                             </td>
                         </tr>
                     @endforeach
+
                 </tbody>
             </table>
         </div>
         @else
         <div class="no-data">
-            <span>Ainda não existem leis cadastradas.</span>
+            <span>Ainda não existem páginas cadastradas.</span>
         </div>
         @endif
 

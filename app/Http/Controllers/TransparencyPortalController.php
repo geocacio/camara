@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
+use App\Models\ShortcutTransparency;
 use App\Models\TransparencyGroup;
 use App\Models\TransparencyPortal;
 use Illuminate\Http\Request;
@@ -28,8 +29,10 @@ class TransparencyPortalController extends Controller
         $transparencyPortal = TransparencyPortal::first();
         $transparencyPage = Page::where('name', 'Transparência')->first();
         $transparencyGroups = TransparencyGroup::with('contents.pageable')->get();
-        // dd($transparencyPortal->transparencyGroups[0]->contents[0]->pageable);
-        return view('pages.transparency.index', compact('transparencyPortal', 'transparencyGroups'));
+        $atriconsId = ShortcutTransparency::where('type', 'atricon')->get();
+        $pagefromAtricon = Page::whereIn('id', $atriconsId->pluck('page_id'))->where('visibility', 'enabled')->get();
+
+        return view('pages.transparency.index', compact('transparencyPortal', 'transparencyGroups', 'pagefromAtricon'));
     }
 
     /**
