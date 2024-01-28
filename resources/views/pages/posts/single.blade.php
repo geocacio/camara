@@ -19,8 +19,6 @@
 
 @include('layouts.header')
 
-@section('content')
-
 <section class="section-single-post">
     {{-- {{ dd($post) }} --}}
 <div class="container">
