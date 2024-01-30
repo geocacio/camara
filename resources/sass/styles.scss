@@ -3896,3 +3896,108 @@ section{
         color: #ffffff;
     }
 }
+
+.night-mode .container-lrf-menu {
+    background-color: #1e1e1e;
+    color: #fff;
+
+    .search-by {
+        background-color: #1e1e1e;
+        color: #fff;
+    }
+}
+
+
+.container-lrf-menu {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    margin-bottom: 10px;
+    border-radius: 8px;
+
+    .search-by {
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        width: 100%;
+        border-radius: 8px;
+        .item-lrf-type {
+            width: 100%;
+            cursor: pointer;
+            padding: 10px;
+            // background: #d9d9d9;
+            border-bottom: 1px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:hover {
+                background-color: #00668b;
+                color: #fff;
+            }
+        }
+    }
+    .sub-item-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .sub-item {
+        width: 100%;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        padding: 11px;
+        cursor: pointer;
+        &:hover {
+            background-color: #004080;
+            color: #fff;
+        }
+    }
+
+    .active-lrf {
+        background-color: #00668b;
+        color: #fff;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .document-lrf-explain {
+        display: flex;
+        flex-direction: column;
+        .details-about { 
+            cursor: default;
+            .title {
+                border-top: 1px solid #cbcbb7;
+                font-weight: 600;
+                padding: 10px;
+            }
+
+            .content-about-document {
+                padding: 10px;
+                font-style: italic;
+            }
+
+            transition: ease 0.3s;
+            &:hover {
+                background-color: #e9e9e9;
+            }
+    
+        }
+    }
+
+}
+
+.night-mode .document-lrf-explain {
+    background-color: #1e1e1e;
+    color: #d1d1d1;
+
+    .details-about {
+        &:hover {
+            background-color: #373737;
+        }
+    }
+}

@@ -16,6 +16,11 @@ class CategoryContent extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function categoryTen()
+    {
+        return $this->belongsTo(Category::class, 'parent_id', 10);
+    }
+
     public function content()
     {
         return $this->morphTo();

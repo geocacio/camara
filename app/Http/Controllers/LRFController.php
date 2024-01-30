@@ -1,5 +1,5 @@
 <?php
-
+    
 namespace App\Http\Controllers;
 
 use App\Models\Category;
@@ -38,8 +38,8 @@ class LRFController extends Controller
 
         $competencies = Category::where('slug', 'competencias')->with('children')->get();
         $exercicies = Category::where('slug', 'exercicios')->with('children')->get();
-        
-        $query = LRF::query(); //select * from `laws`
+
+        $query = LRF::query(); //select * from `lrfs`
 
         if($request->filled('description')){
             $query->where('details', 'LIKE', '%' . $request->input('description') . '%');
@@ -53,14 +53,49 @@ class LRFController extends Controller
             $getCategoryRelation = CategoryContent::whereIn('category_id', [$request->input('competence_id'), $request->input('exercice_id')])
             ->where('categoryable_type', 'lrf')
             ->get();
-        
+
             $query->whereIn('id', $getCategoryRelation->pluck('categoryable_id'));
         }
-        
+
         $lrfs = $query->paginate(10);
+
+        $category = Category::where('slug', 'exercicios')->first();
+        $subCategories = Category::where('parent_id', $category->id)->get();
+
+        $resultArray = [];
+        $processedItemIds = collect(); // Usando uma coleção como um "Set"
+
+        foreach ($category->children as $subCategory) {
+            foreach ($subCategory->categoryContents as $content) {
+                $itemId = $content->categoryable_id;
+
+                // Verifique se o $itemId já foi processado
+                if (!$processedItemIds->contains($itemId)) {
+                    // Percorra manualmente os itens e compare os ids
+                    $matchingItem = null;
+                    foreach ($lrfs as $item) {
+                        if ($item->id == $itemId) {
+                            $matchingItem = $item;
+                            break;
+                        }
+                    }
+
+                    // Verifique se o item correspondente foi encontrado antes de adicionar ao array
+                    if ($matchingItem !== null) {
+                        $resultArray[$subCategory->name][] = $matchingItem;
+                    }
+
+                    // Adicione o $itemId ao conjunto de itens processados
+                    $processedItemIds->push($itemId);
+                }
+            }
+        }
+
+        $allTypes = Type::where('slug', 'lrfs')->first()->children;
+
         $searchData = $request->only(['details', 'number', 'date']);
 
-        return view('pages.lrf.index', compact('lrfs', 'searchData', 'competencies', 'exercicies'));
+        return view('pages.lrf.index', compact('lrfs', 'searchData', 'competencies', 'exercicies', 'resultArray', 'allTypes'));
     }
 
     public function page(){

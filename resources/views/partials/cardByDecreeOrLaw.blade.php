@@ -1,6 +1,6 @@
 
 @if($data && $data->count() > 0)
-<div class="row">
+<div class="row" id="law-lrf-content">
     @foreach($data as $item)
     <div class="col-md-12">
         <div class="card-with-links">
