@@ -188,7 +188,7 @@
                         title: 'Email'
                     },
                 ],
-                images_upload_url: '/upload.php',
+                images_upload_url: '{{ asset('/upload.php') }}',
             });
         });
     </script>
