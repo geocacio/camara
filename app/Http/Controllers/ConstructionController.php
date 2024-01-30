@@ -207,10 +207,28 @@ class ConstructionController extends Controller
             });
         }        
 
+        $pageID = Page::where('name', 'Obras')->first();
         $construction = $query->paginate(10);
         $searchData = $request->only(['start_date', 'end_date', 'description']);
 
-        return view('pages.construction.index', compact('construction', 'searchData'));
+        $fileWhenNoInfo = null;
+
+        $noInformatios = NoInfo::where('page_id', $pageID->id)->get();
+
+        // Verificar se $noInfo não é nulo antes de continuar
+        if ($noInformatios->isNotEmpty()) {
+            foreach ($noInformatios as $noInfo) {
+                $fileID = $noInfo->files;
+
+                if ($fileID) {
+                    $fileWhenNoInfo = File::whereIn('id', $fileID->pluck('file_id'))->first();
+                    // Adicionar a propriedade $fileWhenNoInfo ao objeto $noInfo
+                    $noInfo->fileWhenNoInfo = $fileWhenNoInfo;
+                }
+            }
+        }
+
+        return view('pages.construction.index', compact('construction', 'searchData', 'noInformatios'));
     }
     
 

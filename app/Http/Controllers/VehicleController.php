@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\File;
 use App\Models\FileContent;
 use App\Models\NoInfo;
-use App\Models\NoVehicles;
+use App\Models\noInformatios;
 use App\Models\Page;
 use App\Models\Secretary;
 use App\Models\TransparencyGroup;
@@ -109,7 +109,7 @@ class VehicleController extends Controller
 
     }
 
-    public function noVehicle(){
+    public function noInfo(){
         $pageID = Page::where('name', 'Veículos')->first();
         $info = NoInfo::where('page_id', $pageID->id)->first();
 
@@ -124,7 +124,7 @@ class VehicleController extends Controller
         return view('panel.vehicles.no-vehicle', compact('info', 'currentFile'));
     }
 
-    public function noVehicleStore(Request $request){
+    public function noInformatiostore(Request $request){
 
         $pageID = Page::where('name', 'Veículos')->first();
     
@@ -214,31 +214,25 @@ class VehicleController extends Controller
         $searchData['situation'] = $request->input('situation', '');
         $searchData['type'] = $request->input('type', '');
 
-        $noVehicle = NoInfo::first();
-
         $pageID = Page::where('name', 'Veículos')->first();
-        $fileWhenNoVehicle = null;
+        $fileWhenNoInfo = null;
 
-        $noVehicle = NoInfo::where('page_id', $pageID->id)->first();
+        $noInformatios = NoInfo::where('page_id', $pageID->id)->get();
 
-        // Verificar se $noVehicle não é nulo antes de continuar
-        if ($noVehicle) {
-            $fileID = $noVehicle->files;
+        // Verificar se $noInfo não é nulo antes de continuar
+        if ($noInformatios->isNotEmpty()) {
+            foreach ($noInformatios as $noInfo) {
+                $fileID = $noInfo->files;
 
-            // Verificar se $fileID não é nulo antes de continuar
-            if ($fileID) {
-                // O objeto $fileID também existe, agora podemos continuar com o restante do código
-                $fileWhenNoVehicle = File::where('id', $fileID->pluck('file_id'))->first();
-                
-                // Restante do código...
+                if ($fileID) {
+                    $fileWhenNoInfo = File::whereIn('id', $fileID->pluck('file_id'))->first();
+                    // Adicionar a propriedade $fileWhenNoInfo ao objeto $noInfo
+                    $noInfo->fileWhenNoInfo = $fileWhenNoInfo;
+                }
             }
-            // Não é necessário um bloco else aqui, pois você não quer fazer nada se $fileID for nulo
         }
 
-        // Se $noVehicle for nulo, nada será feito, pois você não tem um bloco else aqui
-
-
-        return view('pages.vehicles.index', compact('vehicles', 'searchData', 'secretarys', 'noVehicle', 'fileWhenNoVehicle'));
+        return view('pages.vehicles.index', compact('vehicles', 'searchData', 'secretarys', 'noInformatios'));
     }
 
     public function single($vehicle)

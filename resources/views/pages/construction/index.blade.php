@@ -96,15 +96,37 @@
                     </div>
                 </div>
             @endforeach
+        @endif
 
 
             {{-- {{ $construction->render() }} --}}
 
+        @if ($noInformatios->count() > 0)
+            <h4>Periodos sem obras</h4>
+            @foreach ($noInformatios as $obj)
+                <div class="col-md-12">
+                    <div class="card-with-links">
+                        <div class="second-part">
+                            <div class="body">
+                                <p class="no-vehicle">{{ $obj->description }}</p>
+                                <p class="no-vehicle">Periodo: {{ $obj->periodo }}</p>
+                            </div>
+                            <div class="footer">
+                                @if(!empty($obj->fileWhenNoInfo))
+                                    <a href="{{ asset('storage/'.$obj->fileWhenNoInfo->url) }}" target="_blank" class="links" data-toggle="tooltip" title="Ver documento"><i class="fa-solid fa-file-pdf"></i></a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        @endif
+
         </div>
 
-        @else
-            <div class="empty-data">Nenhuma obra encontrada.</div>
-        @endif
+        {{-- @else
+            <div class="empty-data">Nenhuma obra encontrada.</div> --}}
+        
 
     </div>
 </section>
