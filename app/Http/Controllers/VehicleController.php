@@ -217,10 +217,26 @@ class VehicleController extends Controller
         $noVehicle = NoInfo::first();
 
         $pageID = Page::where('name', 'Veículos')->first();
+        $fileWhenNoVehicle = null;
+
         $noVehicle = NoInfo::where('page_id', $pageID->id)->first();
 
-        $fileID = $noVehicle->files;
-        $fileWhenNoVehicle = File::where('id', $fileID->pluck('file_id'))->first();
+        // Verificar se $noVehicle não é nulo antes de continuar
+        if ($noVehicle) {
+            $fileID = $noVehicle->files;
+
+            // Verificar se $fileID não é nulo antes de continuar
+            if ($fileID) {
+                // O objeto $fileID também existe, agora podemos continuar com o restante do código
+                $fileWhenNoVehicle = File::where('id', $fileID->pluck('file_id'))->first();
+                
+                // Restante do código...
+            }
+            // Não é necessário um bloco else aqui, pois você não quer fazer nada se $fileID for nulo
+        }
+
+        // Se $noVehicle for nulo, nada será feito, pois você não tem um bloco else aqui
+
 
         return view('pages.vehicles.index', compact('vehicles', 'searchData', 'secretarys', 'noVehicle', 'fileWhenNoVehicle'));
     }

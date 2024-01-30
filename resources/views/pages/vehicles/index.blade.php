@@ -133,28 +133,31 @@
             </div>
 
         @endif
-        @if ($noVehicle->count() > 0)
-            <div class="col-md-12">
-                <div class="card-with-links">
-        
-                    {{-- <div class="header">
-                        <i class="fa-regular fa-file-lines"></i>
-                    </div> --}}
-                    <div class="second-part">
-                        <div class="body">
-                            <p class="no-vehicle">{{ $noVehicle->description }}</p>
-                            <p class="no-vehicle">Periodo: {{ $noVehicle->periodo }}</p>
-                        </div>
+        @if ($noVehicle != null)
+            @if ($noVehicle->count() > 0)
+                <div class="col-md-12">
+                    <div class="card-with-links">
+            
+                        {{-- <div class="header">
+                            <i class="fa-regular fa-file-lines"></i>
+                        </div> --}}
+                        <div class="second-part">
+                            <div class="body">
+                                <p class="no-vehicle">{{ $noVehicle->description }}</p>
+                                <p class="no-vehicle">Periodo: {{ $noVehicle->periodo }}</p>
+                            </div>
 
-                        <div class="footer">
-                            @if(!empty($fileWhenNoVehicle))
-                                <a href="{{ asset('storage/'.$fileWhenNoVehicle->url) }}" target="_blank" class="links" data-toggle="tooltip" title="Ver documento"><i class="fa-solid fa-file-pdf"></i></a>
-                            @endif
+                            <div class="footer">
+                                @if(!empty($fileWhenNoVehicle))
+                                    <a href="{{ asset('storage/'.$fileWhenNoVehicle->url) }}" target="_blank" class="links" data-toggle="tooltip" title="Ver documento"><i class="fa-solid fa-file-pdf"></i></a>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endif
         @endif
+
 
     </div>
 </section>
