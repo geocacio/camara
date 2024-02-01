@@ -3024,10 +3024,61 @@ section{
     padding-bottom: 20px;
 }
 
+.card-login {
+    background-color: #fff;
+
+    input[type="email"], input[type="password"]{
+        border-radius:8px;
+        border:1px solid #7d6c6c;
+        color:#7d6c6c !important;
+        background:transparent;
+    }
+    form{
+        width:100%;
+    }
+    input[type="email"]:focus, input[type="password"]:focus{
+        background:#00000040;
+        box-shadow:none;
+    
+        border:1px solid #7d6c6c;
+    }
+    input[type="email"]::placeholder, input[type="password"]::placeholder{
+        color:#7d6c6c;
+    }
+
+    .button-87 {
+        width: 100%;
+        margin: 10px;
+        padding: 10px 0px;
+        text-align: center;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        border-radius: 10px;
+        display: block;
+        border: 0px;
+        font-weight: 700;
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+
+    .button-87:hover {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .button-87:active {
+        transform: scale(0.95);
+    }
+}
+
 .card{
     &.card-login{
         border: 0;
         border-radius: 10px;
+        
         .card-header{
             border: 0;
             text-align: center;
@@ -3999,5 +4050,65 @@ section{
         &:hover {
             background-color: #373737;
         }
+    }
+}
+
+.swatch {
+    display: flex;
+    align-items: center;
+
+    .info {
+        padding: 10px;
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        background: #ccc;
+        height: 2rem;
+        box-shadow: 1em 1em 1em rgba(0, 0, 0, .1);
+
+        label {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        h2 {
+            font-weight: normal;
+            margin: 0;
+        }
+    }
+
+    input[type="color"] {
+        appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        background: none;
+        border: 0;
+        cursor: pointer;
+        height: 2rem;
+        padding: 0;
+        width: 2rem;
+    }
+
+    *:focus {
+        border-radius: 0;
+        outline: none;
+    }
+
+    &::-webkit-color-swatch-wrapper {
+        padding: 0;
+    }
+
+    &::-webkit-color-swatch {
+        border: 0;
+        border-radius: 0;
+    }
+
+    &::-moz-color-swatch,
+    &::-moz-focus-inner {
+        border: 0;
+    }
+
+    &::-moz-focus-inner {
+        padding: 0;
     }
 }

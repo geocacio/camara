@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row min-height-screen justify-content-center align-items-center">
-        <div class="col-md-6 justify-content-center">
-            <div class="card card-login">
+<div @if($login->modal == 0) style="width: 100%; height: 100%;" @else class="container" @endif>
+    <div class="row @if($login->modal == 1) min-height-screen @endif justify-content-{{ $login->card_position }} align-items-center" @if($login->modal == 0) style="height: 100%;" @endif> 
+        <div class="col-md-6 justify-content-center  @if($login->modal == 0) full-form @endif">
+            <div class="card card-login" @if($login->modal == 0) style="height: 100%; border-radius: 0; background-color: {{ $login->card_color }};" @endif>
                 <div class="card-header">
                     <figure>
-                        <img src="https://www.camaramunicipaldemarco.ce.gov.br/imagens/logo.png">
+                        <img src="https://trello.com/1/cards/6586d467e3a3d92e9cf8e02b/attachments/6587628bb56cbf2ee5778adf/previews/6587628db56cbf2ee5778b27/download/LH_Service_cart%C3%A3o.png">
                     </figure>
                 </div>
 
@@ -57,9 +57,9 @@
                             </div>
                         </div>
 
-                        <div class="row mb-0 justify-content-center">
-                            <div class="col-md-12 d-flex align-items-center justify-content-center">
-                                <button type="submit" class="btn btn-primary">
+                        <div class="row mb-3 justify-content-center">
+                            <div class="col-md-8 align-items-inline">
+                                <button  class="button-87" type="submit" role="button">
                                     {{ __('Entrar') }}
                                 </button>
                             </div>
@@ -71,3 +71,29 @@
     </div>
 </div>
 @endsection
+
+<style>
+    #app{
+        background-repeat: no-repeat;
+        overflow: hidden;
+        background-image: url("{{ asset('storage/'.$login->background) }}");
+    }
+
+    .button-87 {
+        background-color: {{ $login->button_color }};
+        &:hover {
+            background-color: {{ $login->button_hover }};
+        }
+    }
+
+    .full-form {
+        width: 35%!important;
+    }
+
+    @media screen and (max-width: 992px){
+        .full-form {
+            width: 100%!important;
+        }
+    }
+
+</style>

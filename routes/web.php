@@ -47,6 +47,7 @@ use App\Http\Controllers\LaiController;
 use App\Http\Controllers\LawController;
 use App\Http\Controllers\LegislatureController;
 use App\Http\Controllers\LinkController;
+use App\Http\Controllers\LoginScreenController;
 use App\Http\Controllers\LRFController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\ManagerController;
@@ -573,6 +574,8 @@ Route::middleware('auth')->group(function () {
         Route::put('/pcg-page', [PcgController::class, 'pageUpdate'])->name('pcg.page.update');
         Route::resource('/transparency/favorite', ShortcutTransparencyController::class);
         Route::get('/transparency/atricon', [ShortcutTransparencyController::class, 'atricon'])->name('atricon.index');
+        Route::get('login-screen', [LoginScreenController::class, 'index'])->name('login.page');
+        Route::put('login-screen/teste', [LoginScreenController::class, 'update'])->name('login.update');
     });
 });
 
