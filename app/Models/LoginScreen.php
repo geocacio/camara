@@ -11,10 +11,14 @@ class LoginScreen extends Model
 
     protected $fillable = [
         'background',
+        'logo',
         'card_color',
         'button_color',
         'button_hover',
         'card_position',
         'modal',
+        'style_background',
+        'style_modal',
+        'show_logo',
     ];
 }

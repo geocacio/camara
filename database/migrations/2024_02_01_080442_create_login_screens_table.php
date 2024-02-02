@@ -14,11 +14,15 @@ return new class extends Migration
         Schema::create('login_screens', function (Blueprint $table) {
             $table->id();
             $table->string('background')->nullable();
+            $table->string('logo')->nullable();
             $table->string('card_color')->nullable()->default('#fff');
+            $table->string('style_background')->default('solid');
             $table->string('button_color')->default('#0e6fc5');
             $table->string('button_hover')->default('#064c8b');
             $table->string('card_position')->default('center');
             $table->boolean('modal')->default(1);
+            $table->string('style_modal')->default('solid');
+            $table->boolean('show_logo')->default(0);
             $table->timestamps();
         });
     }

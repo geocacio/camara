@@ -762,6 +762,9 @@
                 <li class="sub-item {{ request()->routeIs('maintenance.index') ? 'active' : '' }}">
                     <a href="{{ route('maintenance.index') }}" class="sub-link">Manutenções</a>
                 </li>
+                <li class="sub-item {{ request()->routeIs('login.page') ? 'active' : '' }}">
+                    <a href="{{ route('login.page') }}" class="sub-link">Página de Login</a>
+                </li>
             </ul>
         </div>
     </li>

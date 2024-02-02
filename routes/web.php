@@ -575,7 +575,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('/transparency/favorite', ShortcutTransparencyController::class);
         Route::get('/transparency/atricon', [ShortcutTransparencyController::class, 'atricon'])->name('atricon.index');
         Route::get('login-screen', [LoginScreenController::class, 'index'])->name('login.page');
-        Route::put('login-screen/teste', [LoginScreenController::class, 'update'])->name('login.update');
+        Route::put('login-screen/update', [LoginScreenController::class, 'update'])->name('login.update');
     });
 });
 
