@@ -54,7 +54,7 @@
                         </div>
                         <div class="form-group" id="imageBackground" >
                             <div class="custom-input-file">
-                                <label for="background">Logo do rodapé</label>
+                                <label for="background">Imagem de fundo</label>
                                 <input type="file" name="background" accept="image/*" class="form-control" onchange="showTempFile(event, 'custom-input-file', 'container-temp-file')">
                                 <div class="container-temp-file">
                                     @if($login->background != '')
