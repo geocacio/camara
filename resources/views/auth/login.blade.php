@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="login-screen @if($login->style_background == "solid") solid @else img-back @endif">
-    <div @if($login && $login->modal == 0) style="width: 100%; height: 100%;" @else class="container" @endif>
-        <div class="row @if($login->modal == 1) min-height-screen @endif justify-content-{{ $login->card_position }} align-items-center" @if($login->modal == 0) style="height: 100%;" @endif> 
-            <div class="col-md-6 justify-content-center  @if($login->modal == 0) full-form @endif">
-                <div class="card card-login @if($login->style_modal == 'transparency') transparency @endif" @if($login->modal == 0) style="height: 100%; border-radius: 0; background-color: {{ $login->card_color }};" @else style="background-color: {{ $login->card_color }};" @endif>
+<div class="login-screen @if(isset($login) && $login->style_background == "image") img-back @else solid  @endif">
+    <div @if(isset($login) && $login->modal == 0) style="width: 100%; height: 100%;" @else class="container" @endif>
+        <div class="row @if(isset($login) && $login->modal == 1) min-height-screen @endif @if(isset($login)) justify-content-{{ $login->card_position }} @else justify-content-center @endif align-items-center" @if(isset($login) && $login->modal == 0) style="height: 100%;" @endif> 
+            <div class="col-md-6 justify-content-center  @if(isset($login) && $login->modal == 0) full-form @endif">
+                <div class="card card-login @if(isset($login) && $login->style_modal == 'transparency') transparency @endif" @if(isset($login) && $login->modal == 0) style="height: 100%; border-radius: 0; background-color: {{ $login->card_color }};" @elseif(isset($login) && $login->modal == 1) style="background-color: {{ $login->card_color }};" @else  @endif>
                     <div class="card-header">
-                        @if ($login->show_logo)
+                        @if (isset($login) && $login->show_logo)
                             <figure>
                                 <img src="{{ asset('storage/'.$login->logo) }}">
                             </figure>
@@ -81,7 +81,6 @@
     </div>
 </div>
 @endsection
-
 <style>
     .login-screen {
         width: 100%;
@@ -101,21 +100,21 @@
 
     .transparency {
         background-color: transparent!important;
-        backdrop-filter:blur(20px) brightness(90%);
+        backdrop-filter: blur(20px) brightness(90%);
     }
 
     .solid {
-        background-color: {{ $login->background }};
+        background-color: {{ isset($login) ? $login->background : '#d9d9d9' }};
     }
 
     .img-back {
-        background-image: url("{{ asset('storage/'.$login->background) }}");
+        background-image: url("{{ isset($login) ? asset('storage/'.$login->background) : asset('storage/default-background.jpg') }}");
     }
 
     .button-87 {
-        background-color: {{ $login->button_color }};
+        background-color: {{ isset($login) ? $login->button_color : '#1c3992' }};
         &:hover {
-            background-color: {{ $login->button_hover }};
+            background-color: {{ isset($login) ? $login->button_hover : '#0d256e' }};
         }
     }
 
@@ -150,5 +149,4 @@
         max-width: 124px!important;
         max-height: 85px!important;
     }
-
 </style>
