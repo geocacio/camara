@@ -158,7 +158,7 @@
         var showLogo = document.getElementById('sistemLogo');
         var showIcon = document.getElementById('showIcon');
 
-        if (loginData.show_logo) {
+        if (loginData.show_logo == 1) {
             showLogo.classList.remove('displayNone');
             var currentLogo = 'storage/' + loginData.logo;
             var imagem = document.getElementById('logoImage');
