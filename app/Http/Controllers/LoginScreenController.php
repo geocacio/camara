@@ -15,7 +15,6 @@ class LoginScreenController extends Controller
     {
         $login = LoginScreen::first();
 
-        // Verificar se $login existe e se os campos necessários estão definidos
         if (!$login) {
             $login = (object) [
                 'background' => '#d9d9d9',
@@ -36,6 +35,20 @@ class LoginScreenController extends Controller
     public function showLogin()
     {
         $login = LoginScreen::first();
+
+        if (!$login) {
+            $login = (object) [
+                'background' => '#d9d9d9',
+                'card_color' => '#ffffff',
+                'button_color' => '#1c3992',
+                'button_hover' => '#0d256e',
+                'card_position' => 'center',
+                'modal' => 1,
+                'style_modal' => 'solid',
+                'style_background' => 'solid',
+                'show_logo' => '0',
+            ];
+        }
         return response()->json($login);
     }
 
