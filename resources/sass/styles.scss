@@ -3019,9 +3019,10 @@ section{
 }
 
 .min-height-screen{
-    min-height: 100vh;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    // min-height: 100vh;
+    // padding-top: 20px;
+    // padding-bottom: 20px;
+    width: 90vh;
 }
 
 .card-login {
@@ -3088,8 +3089,8 @@ section{
             margin: auto;
             text-align: center;
             img{
-                max-width: 200px;
-                max-height: 200px;
+                max-width: 180px;
+                max-height: 180px;
             }
         }
         .card-body{

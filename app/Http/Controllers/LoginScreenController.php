@@ -33,6 +33,12 @@ class LoginScreenController extends Controller
         return view('panel.login.index', compact('login'));
     }
 
+    public function showLogin()
+    {
+        $login = LoginScreen::first();
+        return response()->json($login);
+    }
+
     /**
      * Update the specified resource in storage.
      */
