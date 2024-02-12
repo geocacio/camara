@@ -106,6 +106,7 @@ use App\Http\Controllers\SicSolicitationController;
 use App\Http\Controllers\SicSolicitationPanelController;
 use App\Http\Controllers\SiteMapController;
 use App\Http\Controllers\SymbolsController;
+use App\Http\Controllers\TermsOfUseController;
 use App\Http\Controllers\TransparencyGroupController;
 use App\Http\Controllers\TransparencyPortalController;
 use App\Http\Controllers\TypeController;
@@ -197,11 +198,10 @@ Route::middleware('auth')->group(function () {
 
         Route::get('legislatures-page', [LegislatureController::class, 'page'])->name('legislatures.page');
         Route::put('legislatures-page', [LegislatureController::class, 'pageUpdate'])->name('legislatures.page.update');
-
+        
         Route::resource('/legislatures', LegislatureController::class);
         Route::resource('/affiliations', PartyAffiliationController::class);
-
-
+        
         Route::get('commissions-page', [CommissionController::class, 'page'])->name('commissions.page');
         Route::put('commissions-page', [CommissionController::class, 'pageUpdate'])->name('commissions.page.update');
         Route::resource('/commissions', CommissionController::class);
@@ -355,6 +355,7 @@ Route::middleware('auth')->group(function () {
             Route::resource('/menus', MenuController::class);
             Route::resource('/maintenance', MaintenanceController::class);
             Route::post('/maintenance/visibility', [MaintenanceController::class, 'visibility']);
+            Route::resource('/terms-use', TermsOfUseController::class)->except(['index']);
         });
 
         Route::prefix('transparency')->group(function () {
@@ -596,6 +597,8 @@ Route::get('/expenses', [ExpensesController::class, 'show'])->name('despesas.pag
 Route::get('/recipes', [RecipesController::class, 'show'])->name('receitas.page');
 Route::match(['get', 'post'], '/construcoes', [ConstructionController::class, 'show'])->name('obras.page');
 Route::get('/simbolos', [SymbolsController::class, 'page'])->name('simbolos.page');
+Route::get('/termos-de-uso', [TermsOfUseController::class, 'index'])->name('term.index');
+
 
 Route::resource('/faleconosco', ContactUsController::class);
 

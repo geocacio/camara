@@ -79,13 +79,13 @@ class AppServiceProvider extends ServiceProvider
             'lai' => 'App\Models\Lai',
             'no-info' => 'App\Models\NoInfo',
         ]);
-        
+
         //Verificar se existe a tabela maintenance
         if (Schema::hasTable('maintenances')) {
             $alert = Maintenance::where('status', 1)->first();
             view::share('alert', $alert);
         }
-        
+
         try {
 
             //exibir o map com base nesta busca

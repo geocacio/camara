@@ -4113,3 +4113,74 @@ section{
         padding: 0;
     }
 }
+
+.night-mode .card-terms {
+    background-color: #1e1e1e;
+    color: #fff;
+
+    .btns {
+        button {
+            color: #fff;
+        }
+    }
+}
+
+.night-mode .text-term {
+    color: #c7c3c3;
+}
+
+.card-terms {
+    width: 560px;
+    height: 160px;
+    border-radius: 8px;
+    position: fixed;
+    z-index: 9;
+    margin-left: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-left: 4px solid #004080;
+
+    right: 0;
+    bottom: 20px;
+    left: 0;
+
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    
+    .terms-content {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .btns {
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+
+            button {
+                border: 1px solid #004080;
+                padding: 5px;
+                border-radius: 5px;
+                transition: 0.3s ease;
+                background-color: transparent;
+
+                &:hover {
+                    background-color: #004080;
+                    color: #fff;
+                }
+            }
+
+            .concordar {
+                background-color: #004080;
+                color: #fff;
+
+                &:hover {
+                    background-color: #03305c;
+                    color: #fff;
+                }
+            }
+        }
+
+    }
+}

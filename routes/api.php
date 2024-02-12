@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginScreenController;
+use App\Http\Controllers\TermsOfUseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('login/custom', [LoginScreenController::class, 'showLogin']);
 
+Route::group(['middleware' => ['web']], function () {
+    Route::post('/aceitar-termos', [TermsOfUseController::class, 'aceitar'])->name('termos.aceitar');
+});

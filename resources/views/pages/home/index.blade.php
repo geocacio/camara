@@ -23,6 +23,7 @@ $styles = $isStyles;
 
 @include('pages.partials.satisfactionSurvey', ['page_name' => 'Home'])
 
+
 @include('layouts.footer')
 
 @endsection

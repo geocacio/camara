@@ -765,6 +765,9 @@
                 <li class="sub-item {{ request()->routeIs('login.page') ? 'active' : '' }}">
                     <a href="{{ route('login.page') }}" class="sub-link">Página de Login</a>
                 </li>
+                <li class="sub-item {{ request()->routeIs('terms-use.create') ? 'active' : '' }}">
+                    <a href="{{ route('terms-use.create') }}" class="sub-link">Termos de Uso</a>
+                </li>
             </ul>
         </div>
     </li>
