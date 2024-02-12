@@ -11,5 +11,6 @@ class termsOfUse extends Model
 
     protected $fillable = [
         'content',
+        'show',
     ];
 }

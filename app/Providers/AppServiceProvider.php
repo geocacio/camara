@@ -7,6 +7,7 @@ use App\Models\Maintenance;
 use App\Models\Menu;
 use App\Models\Section;
 use App\Models\Setting;
+use App\Models\termsOfUse;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
@@ -84,6 +85,12 @@ class AppServiceProvider extends ServiceProvider
         if (Schema::hasTable('maintenances')) {
             $alert = Maintenance::where('status', 1)->first();
             view::share('alert', $alert);
+        }
+
+        //Verificar se existe a tabela terms_of_user
+        if (Schema::hasTable('maintenances')) {
+            $term = termsOfUse::where('show', 1)->first();
+            view::share('term', $term);
         }
 
         try {

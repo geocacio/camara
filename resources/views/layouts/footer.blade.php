@@ -1,12 +1,14 @@
-@include('partials.alertTerms')
 @if($showMap && $showMap->visibility == 'enabled')
-    @include('partials.mapsSection')
+@include('partials.mapsSection')
 @endif
 
 @if($alert)
-    @include('partials.maintenance')
+@include('partials.maintenance')
 @endif
 
+@if($term)
+@include('partials.alertTerms')
+@endif
 
 <footer class="footer">
     <div class="container">

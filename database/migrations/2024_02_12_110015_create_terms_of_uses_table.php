@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('terms_of_uses', function (Blueprint $table) {
             $table->id();
             $table->longText('content');
+            $table->boolean('show')->default(0);
             $table->timestamps();
         });
     }

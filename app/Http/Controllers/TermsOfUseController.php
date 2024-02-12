@@ -37,7 +37,13 @@ class TermsOfUseController extends Controller
             'content.string' => 'O campo de conteúdo deve ser uma string.',
         ]);
 
-        TermsOfUse::updateOrCreate([], ['content' => $request->input('content')]);
+        $visibility = $request->show ? $request->show : 0;
+
+        TermsOfUse::updateOrCreate([], 
+        [
+            'content' => $request->input('content'),
+            'show' => $visibility
+        ]);
 
         return redirect()->route('terms-use.create')->with('success', 'Termos atualizados com sucesso!');
     }
