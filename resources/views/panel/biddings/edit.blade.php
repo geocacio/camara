@@ -219,10 +219,10 @@
                                                                 Deletar
                                                             </a>
 
-                                                            <form id="delete-form-{{ $publication->id }}" action="{{ route('publications.destroy', $publication->slug) }}" method="post" style="display: none;">
+                                                            <form id="delete-form-{{ $publication->id }}" action="{{ route('biddings.publications.destroy', ['bidding' => $bidding->slug, 'publicationForm' => $publication->slug]) }}" method="post" style="display: none;">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                            </form>
+                                                            </form>                                                            
                                                         </div>
                                                     </div>
                                                 </div>
