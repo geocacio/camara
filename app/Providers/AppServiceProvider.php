@@ -88,7 +88,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         //Verificar se existe a tabela terms_of_user
-        if (Schema::hasTable('maintenances')) {
+        if (Schema::hasTable('terms_of_uses')) {
             $term = termsOfUse::where('show', 1)->first();
             view::share('term', $term);
         }
