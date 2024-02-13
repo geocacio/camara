@@ -13,11 +13,11 @@
         <a href="{{ route('comissoes-all') }}" class="link">Comissões</a>
     </li>
     <li class="item">
-        <span>{{ Str::limit($bidding->description, '30', '...') }}</span>
+        <span>{{ Str::limit($bidding->number, '30', '...') }}</span>
     </li>
 </ul>
 
-<h3 class="title text-center">{{ Str::limit($bidding->description, '30', '...') }}</h3>
+<h3 class="title text-center">{{ Str::limit($bidding->number, '30', '...') }}</h3>
 
 @endsection
 
@@ -103,9 +103,10 @@
                                     </div>
 
                                     <div class="col-md-12">
-                                        <p class="title">Data de inicio</p>
-                                        <p class="description">{{ $bidding->opening_date }}</p>
+                                        <p class="title">Data de início</p>
+                                        <p class="description">{{ date('d/m/Y', strtotime($bidding->opening_date)) }}</p>
                                     </div>
+                                    
 
                                     <div class="col-md-12">
                                         <p class="title">Status</p>
@@ -114,8 +115,9 @@
 
                                     <div class="col-md-12">
                                         <p class="title">Valor</p>
-                                        <p class="description">{{ $bidding->estimated_value }}</p>
+                                        <p class="description">R$ {{ number_format($bidding->estimated_value, 2, ',', '.') }}</p>
                                     </div>
+                                    
                                 </div>
                             </div>
                         @endif
