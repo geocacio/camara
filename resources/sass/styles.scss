@@ -3996,20 +3996,29 @@ section{
         flex-direction: row;
         align-items: center;
         justify-content: center;
-    }
 
-    .sub-item {
-        width: 100%;
-        align-items: center;
-        display: flex;
-        justify-content: center;
-        padding: 11px;
-        cursor: pointer;
-        &:hover {
-            background-color: #004080;
-            color: #fff;
+        .active-lrf {
+            background-color: transparent;
+            color: #004080;
+            font-weight: 600;
+            transition: font-weight 0.3s ease, color 0.3s ease;
+        }
+
+        .sub-item {
+            width: 100%;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            padding: 11px;
+            cursor: pointer;
+            &:hover {
+                background-color: transparent;
+                color: #004080;
+                font-weight: 600;
+            }
         }
     }
+
 
     .active-lrf {
         background-color: #00668b;
