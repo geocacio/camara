@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bidding;
 use App\Models\Category;
 use App\Models\CategoryContent;
+use App\Models\Contract;
 use App\Models\Employee;
 use App\Models\File;
 use App\Models\Organ;
@@ -793,5 +794,46 @@ class BiddingController extends Controller
         $searchData = $request->only(['start_date', 'end_date', 'status', 'exercice', 'modalidade', 'register_price', 'number', 'object', 'process']);
 
         return view('pages.biddings.adhesion.index', compact('bidding', 'categories', 'searchData', 'exercicies'));
+    }
+
+    public function contracts(Request $request){
+        $categories = Type::where('slug', 'contracts')->first()->children;
+
+        $exercicies = Category::where('slug', 'exercicios')->with('children')->get();
+
+        $query = Contract::query();
+
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $start_date = date("Y-m-d", strtotime($request->input('start_date')));
+            $end_date = date("Y-m-d", strtotime($request->input('end_date')));
+
+            $query->whereBetween('opening_date', [$start_date, $end_date]);
+        } elseif ($request->filled('start_date')) {
+            // Se apenas a data inicial estiver definida
+            $start_date = date("Y-m-d", strtotime($request->input('start_date')));
+            $query->where('opening_date', '>=', $start_date);
+        } else if ($request->filled('end_date')) {
+            // Se apenas a data final estiver definida
+            $end_date = date("Y-m-d", strtotime($request->input('end_date')));
+            $query->where('opening_date', '<=', $end_date);
+        }  
+
+        if ($request->filled('type')) {
+            $searchExercice = TypeContent::where('typeable_type', 'bidding')->where('type_id', $request->input('type'))->get();
+            $query->whereIn('id', $searchExercice->pluck('typeable_id'));
+        }
+
+        if ($request->filled('description')) {
+            $query->where('description', 'LIKE', '%' . $request->input('description') . '%');
+        }
+
+        if ($request->filled('number')) {
+            $query->where('number', 'LIKE', '%' . $request->input('number') . '%');
+        }
+
+        $contracts = $query->paginate(10);
+
+        $searchData = $request->only(['description', 'number']);
+        return view('pages.biddings.contracts.index', compact('contracts', 'categories', 'searchData'));
     }
 }
