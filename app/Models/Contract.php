@@ -41,7 +41,7 @@ class Contract extends Model
 
     public function files()
     {
-        return $this->morphMany(FileContent::class, 'fileable');
+        return $this->morphOne(FileContent::class, 'fileable');
     }
 
     public function getRouteKeyName()

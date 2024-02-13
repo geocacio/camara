@@ -1,5 +1,5 @@
 @extends('panel.index')
-@section('pageTitle', 'Legislaturas')
+@section('pageTitle', 'Fiscais')
 
 @section('content')
 <div class="card">
@@ -10,7 +10,6 @@
             <div class="btn-group dropleft">
                 <button type="button" class="btn-dropdown-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ route('legislatures.page') }}">Página</a>
                     <a class="dropdown-item" href="{{ route('fiscais.create') }}">Novo</a>
                 </div>
             </div>

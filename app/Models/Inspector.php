@@ -18,6 +18,10 @@ class Inspector extends Model
         'slug',
     ];
 
+    public function inspectorContracts(){
+        return $this->hasOne(InspectorContract::class);
+    }
+
     public static function uniqSlug($name)
     {
         $slug = Str::slug($name);

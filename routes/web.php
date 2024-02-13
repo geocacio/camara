@@ -704,6 +704,7 @@ Route::prefix('/transparencia')->group(function () {
         Route::match(['get', 'post'], 'suspensas-inidoneas', [BiddingController::class, 'suspended'])->name('suspended.index');
         Route::match(['get', 'post'], 'registro-preco', [BiddingController::class, 'PriceRegistration'])->name('price.registration.index');
         Route::match(['get', 'post'], 'atodeadesao', [BiddingController::class, 'AtoAdesao'])->name('atodeadesao.index');
+        Route::match(['get', 'post'], 'contratos', [BiddingController::class, 'contracts'])->name('contracts.biddings.index');
         Route::get('fiscais-contrato/{slug}', [InspectorController::class, 'show'])->name('fiscais.show');
     });
 

@@ -58,13 +58,13 @@ class ContractController extends Controller
             'total_value' => 'nullable',
             'description' => 'nullable',
             'file' => 'required',
+            'inspector_id' => 'required',
         ]);
 
         $validatedData['slug'] = Str::slug($request->number);
         unset($validatedData['type']);
         $validatedData['total_value'] = $request->total_value ? str_replace(['R$', '.', ','], ['', '', '.'], $request->total_value) : null;
         $contract = $bidding->company->contracts()->create($validatedData);
-
         if($contract){
             InspectorContract::create([
                 'inspector_id' => $request->inspector_id,
@@ -103,8 +103,9 @@ class ContractController extends Controller
         $companies = Company::all();
         $types = Type::where('slug', 'contracts')->first()->children;
         $contract = Contract::find($id);
+        $inspectors = Inspector::all();
         $files = $contract->files;
-        return view('panel.contracts.edit', compact('contract', 'companies', 'types', 'bidding', 'files'));
+        return view('panel.contracts.edit', compact('contract', 'companies', 'types', 'bidding', 'files', 'inspectors'));
     }
 
     /**
@@ -123,18 +124,31 @@ class ContractController extends Controller
             'description' => 'nullable',
         ]);
         $validatedData['total_value'] = $request->total_value ? str_replace(['R$', '.', ','], ['', '', '.'], $request->total_value) : null;
-
-        $contract->update($validatedData);
-
+    
         if ($contract) {
+            // Apagar o InspectorContract associado ao inspector_id e contract_id
+            InspectorContract::where('inspector_id', $request->inspector_id)
+                ->where('contract_id', $contract->id)
+                ->delete();
+    
+            // Atualizar os dados do contrato
+            $contract->update($validatedData);
+
+            InspectorContract::create([
+                'inspector_id' => $request->inspector_id,
+                'contract_id' => $contract->id,
+            ]);
+    
+            // Attach dos tipos de contrato
             $contract->types()->detach();
             $contract->types()->attach($request->type);
-
+    
             return redirect()->route('biddings.company.contracts.index', $bidding->slug)->with('success', 'Contrato atualizado com sucesso!');
         }
-
-        return redirect()->route('biddings.company.contracts.index', $bidding->slug)->with('error', 'Erro, por favor tente novamente!');
+    
+        return redirect()->route('biddings.company.contracts.index', $bidding->slug)->with('error', 'Erro, por favor, tente novamente!');
     }
+
 
     /**
      * Remove the specified resource from storage.

@@ -82,7 +82,7 @@
 
         <div class="form-group">
             <label>Selecione um fiscal de contrato</label>
-            <select name="inspector_id" class="form-control" {{ $types->count() <= 0 ? 'disabled' : ''}}>
+            <select required name="inspector_id" class="form-control" {{ $types->count() <= 0 ? 'disabled' : ''}}>
                 <option value="">Selecione</option>
                 @foreach ($inspectors as $inspector)
                     <option value="{{ $inspector->id }}">{{ $inspector->name }}</option>

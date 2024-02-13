@@ -36,12 +36,12 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="title1">Tipo de contrato</label>
-                        <select name="type" class="form-control">
+                        {{-- <select name="type" class="form-control">
                             <option value="">Selecione</option>
                             @foreach($types as $type)
                             <option value="{{ $type->id}}" {{$type->id == $contract->types[0]->id ? 'selected' : ''}}>{{ $type->name }}</option>
                             @endforeach
-                        </select>
+                        </select> --}}
                     </div>
                 </div>
             </div>
@@ -72,6 +72,20 @@
             </div>
 
             <div class="form-group">
+                <label>Selecione um fiscal de contrato</label>
+                <select required name="inspector_id" class="form-control" {{ $types->count() <= 0 ? 'disabled' : '' }}>
+                    <option value="">Selecione</option>
+                    @foreach ($inspectors as $inspector)
+                        <option value="{{ $inspector->id }}" {{ $inspector->inspectorContracts->contract_id == $contract->id ? 'selected' : '' }}>
+                            {{ $inspector->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            
+            
+
+            <div class="form-group">
                 <label>Descrição</label>
                 <textarea name="description" class="form-control">{{ old('description', $contract->description) }}</textarea>
             </div>
@@ -83,21 +97,21 @@
                     <input type="file" name="files[]" accept="application/pdf" class="form-control" multiple>
                 </div>
                 <div class="col-6 pt-30 container-all-files">
-                    @if ($files->count() > 0)
-                    @foreach($files as $currentFile)
-                    @if (in_array(pathinfo($currentFile->file->url, PATHINFO_EXTENSION), ['pdf', 'doc', 'docx']))
+                    @if ($contract->files->count() > 0)
+                    {{-- @foreach($contract->files as $contract->files) --}}
+                    @if (in_array(pathinfo($contract->files->file->url, PATHINFO_EXTENSION), ['pdf', 'doc', 'docx']))
                     <div class="container-file">
-                        <a href="#" class="btn btn-link" data-toggle="modal" data-target="#file-{{ $currentFile->file->id }}">{{ pathinfo($currentFile->file->url, PATHINFO_FILENAME) }}</a>
-                        <button class="btn-delete" onclick="deleteFile(event, 'container-file', '/panel/files/{{$currentFile->file->id}}')">
+                        <a href="#" class="btn btn-link" data-toggle="modal" data-target="#file-{{ $contract->files->file->id }}">{{ pathinfo($contract->files->file->url, PATHINFO_FILENAME) }}</a>
+                        <button class="btn-delete" onclick="deleteFile(event, 'container-file', '/panel/files/{{$contract->files->file->id}}')">
                             <svg viewBox="0 0 24 24" style="fill: white; width: 20px; height: 20px;">
                                 <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" style="stroke-width: 4px;"></path>
                             </svg>
                         </button>
                     </div>
-                    @elseif (in_array(pathinfo($currentFile->file->url, PATHINFO_EXTENSION), ['png', 'jpg', 'jpeg', 'gif', 'webp']))
-                    <div class="conatiner-temp-image mt-3 {{ $files->count() <= 0 ? 'hide' : ''}}">
-                        <img class="image" src="{{ asset('storage/'.$currentFile->file->url) }}" />
-                        <button class="btn-delete" onclick="deleteFile(event, 'conatiner-temp-image', '/panel/files/{{$currentFile->file->id}}')">
+                    @elseif (in_array(pathinfo($contract->files->file->url, PATHINFO_EXTENSION), ['png', 'jpg', 'jpeg', 'gif', 'webp']))
+                    <div class="conatiner-temp-image mt-3 {{ $contract->files->count() <= 0 ? 'hide' : ''}}">
+                        <img class="image" src="{{ asset('storage/'.$contract->files->file->url) }}" />
+                        <button class="btn-delete" onclick="deleteFile(event, 'conatiner-temp-image', '/panel/files/{{$contract->files->file->id}}')">
                             <svg viewBox="0 0 24 24" style="fill: white; width: 20px; height: 20px;">
                                 <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" style="stroke-width: 4px;"></path>
                             </svg>
@@ -105,7 +119,7 @@
                     </div>
                     @endif
 
-                    <div class="modal fade modal-preview-file" id="file-{{ $currentFile->file->id }}" tabindex="-1" role="dialog" aria-labelledby="fileModalLabel" aria-hidden="true">
+                    <div class="modal fade modal-preview-file" id="file-{{ $contract->files->file->id }}" tabindex="-1" role="dialog" aria-labelledby="fileModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -114,17 +128,17 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    @if (pathinfo($currentFile->file->url, PATHINFO_EXTENSION) === 'pdf')
-                                    <embed src="{{ asset('storage/'.$currentFile->file->url) }}" width="100%" height="500px" type="application/pdf">
-                                    @elseif (in_array(pathinfo($currentFile->file->url, PATHINFO_EXTENSION), ['doc', 'docx']))
-                                    <iframe src="https://view.officeapps.live.com/op/view.aspx?src={{ urlencode(asset('storage/' .$currentFile->file->url)) }}" width="100%" height="500px"></iframe>
+                                    @if (pathinfo($contract->files->file->url, PATHINFO_EXTENSION) === 'pdf')
+                                    <embed src="{{ asset('storage/'.$contract->files->file->url) }}" width="100%" height="500px" type="application/pdf">
+                                    @elseif (in_array(pathinfo($contract->files->file->url, PATHINFO_EXTENSION), ['doc', 'docx']))
+                                    <iframe src="https://view.officeapps.live.com/op/view.aspx?src={{ urlencode(asset('storage/' .$contract->files->file->url)) }}" width="100%" height="500px"></iframe>
                                     @endif
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    @endforeach
+                    {{-- @endforeach --}}
                     @else
                     <span class="no-file-info">Nenhum arquivo encontrado.</span>
                     @endif

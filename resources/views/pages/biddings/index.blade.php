@@ -43,6 +43,10 @@
                 <i class="fa-solid fa-file-contract"></i>
                 <span>SUSPENSAS/INIDÔNEAS</span>
             </a>
+            <a href="{{ route('contracts.biddings.index') }}" class="item-bidding">
+                <i class="fa-solid fa-file-contract"></i>
+                <span>Contratos</span>
+            </a>
             <a href="{{ route('price.registration.index') }}" class="item-bidding">
                 <i class="fa-solid fa-file-contract"></i>
                 <span>atas de registros de preço</span>
