@@ -44,7 +44,7 @@
 
             <div class="form-group">
                 <label>Conteúdo</label>
-                <textarea id="publication" name="content">{{ old('content', $publication->content) }}</textarea>
+                <textarea id="editor" name="content">{{ old('content', $publication->content) }}</textarea>
             </div>
 
             <div class="form-footer text-right">

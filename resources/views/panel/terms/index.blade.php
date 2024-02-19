@@ -21,7 +21,7 @@
 
                 <div class="form-group">
                     <label>Conteúdo</label>
-                    <textarea id="publication" name="content">{{ old('content', optional($term)->content) }}</textarea>
+                    <textarea id="editor" name="content">{{ old('content', optional($term)->content) }}</textarea>
                 </div>
 
                 <div class="form-footer text-right">
@@ -33,14 +33,17 @@
 @endsection
 @section('js')
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        tinymce.init({
-            selector: '#publication',
-            plugins: 'advcode casechange lists powerpaste table',
-            toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify',
-            menubar: false
-        });
-    });
+    // document.addEventListener("DOMContentLoaded", () => {
+    //     tinymce.init({
+    //         selector: '#publication',
+    //         // plugins: 'advcode casechange image lists powerpaste table',
+    //         // toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | link image table |',
+    //         plugins: 'anchor autolink charmap emoticons image link lists searchreplace table visualblocks wordcount checklist casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen advtable advcode editimage tableofcontents footnotes autocorrect inlinecss',
+    //         toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image table | spellcheckdialog a11ycheck | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    //         menubar: false
+    //     });
+    // });
+
 
     function displayTempImages(e, container) {
         var reader = new FileReader();

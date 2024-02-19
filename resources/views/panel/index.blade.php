@@ -13,6 +13,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
+    {{-- summernote --}}
+    {{-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"> --}}
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
+    
+
     <!-- @vite(['resources/sass/app.scss']) -->
     @vite(['resources/sass/panel.scss'])
 
@@ -92,12 +98,18 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="https://cdn.tiny.cloud/1/qckzr4aamqewpv02mv3c86w9mwu3k0q9wt45xrz5ug3dnuxn/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    {{-- :old --}}
+    {{-- <script src="https://cdn.tiny.cloud/1/qckzr4aamqewpv02mv3c86w9mwu3k0q9wt45xrz5ug3dnuxn/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+    <!-- include summernote css/js -->
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 
     <script>
@@ -172,24 +184,32 @@
                 }
             });
 
-            //Editor
-            tinymce.init({
-                selector: '.editor',
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
-                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-                tinycomments_mode: 'embedded',
-                tinycomments_author: 'Author name',
-                mergetags_list: [{
-                        value: 'First.Name',
-                        title: 'First Name'
-                    },
-                    {
-                        value: 'Email',
-                        title: 'Email'
-                    },
-                ],
-                images_upload_url: '/upload.php',
+            $(document).ready(function() {
+                $('#editor').summernote({
+                    placeholder: 'Hello Bootstrap 4',
+                    tabsize: 2,
+                    height: 100 
+                });
             });
+
+            //Editor
+            // tinymce.init({
+            //     selector: '.editor',
+            //     plugins: 'anchor autolink charmap emoticons image link lists searchreplace table visualblocks wordcount checklist casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen advtable advcode editimage tableofcontents footnotes autocorrect inlinecss',
+            //     toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image table | spellcheckdialog a11ycheck | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            //     tinycomments_mode: 'embedded',
+            //     tinycomments_author: 'Author name',
+            //     mergetags_list: [{
+            //             value: 'First.Name',
+            //             title: 'First Name'
+            //         },
+            //         {
+            //             value: 'Email',
+            //             title: 'Email'
+            //         },
+            //     ],
+            //     images_upload_url: '/upload.php',
+            // });
         });
     </script>
     @yield('js')

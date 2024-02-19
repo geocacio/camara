@@ -30,7 +30,7 @@
 
             <div class="form-group">
                 <label>Conteúdo</label>
-                <textarea class="editor" name="description">{{ old('description', $page->description) }}</textarea>
+                <textarea id="editor" class="editor" name="description">{{ old('description', $page->description) }}</textarea>
             </div>
 
             <div class="form-footer text-right">

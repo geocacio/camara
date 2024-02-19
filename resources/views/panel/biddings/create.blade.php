@@ -619,120 +619,227 @@
 
     }
 
-    function addNewTab() {
-        // Crie um novo ID único para a nova guia
-        var newTabId = 'new-tab-' + Date.now();
+    // function addNewTab() {
+    //     // Crie um novo ID único para a nova guia
+    //     var newTabId = 'new-tab-' + Date.now();
 
-        // Crie um novo item de navegação (li) para a nova guia
-        var newNavItem = document.createElement('li');
-        newNavItem.className = 'nav-item';
-        newNavItem.setAttribute('role', 'presentation');
+    //     // Crie um novo item de navegação (li) para a nova guia
+    //     var newNavItem = document.createElement('li');
+    //     newNavItem.className = 'nav-item';
+    //     newNavItem.setAttribute('role', 'presentation');
 
-        // Crie um novo botão dentro do item de navegação
-        var newTabButton = document.createElement('button');
-        newTabButton.className = 'nav-link';
-        newTabButton.setAttribute('type', 'button');
-        newTabButton.setAttribute('role', 'tab');
-        newTabButton.setAttribute('aria-selected', 'false');
+    //     // Crie um novo botão dentro do item de navegação
+    //     var newTabButton = document.createElement('button');
+    //     newTabButton.className = 'nav-link';
+    //     newTabButton.setAttribute('type', 'button');
+    //     newTabButton.setAttribute('role', 'tab');
+    //     newTabButton.setAttribute('aria-selected', 'false');
 
-        // Crie um input de texto para o nome da guia
-        var tabNameInput = document.createElement('input');
-        tabNameInput.setAttribute('type', 'text');
-        tabNameInput.setAttribute('placeholder', 'Nome do arquivo');
+    //     // Crie um input de texto para o nome da guia
+    //     var tabNameInput = document.createElement('input');
+    //     tabNameInput.setAttribute('type', 'text');
+    //     tabNameInput.setAttribute('placeholder', 'Nome do arquivo');
 
-        // Adicione o input de texto ao botão
-        newTabButton.appendChild(tabNameInput);
+    //     // Adicione o input de texto ao botão
+    //     newTabButton.appendChild(tabNameInput);
 
-        var deleteButton = document.createElement('button');
-        deleteButton.innerText = 'Excluir';
-        deleteButton.classList.add('btn-del-tab'); // Adiciona a classe "btn-del-tab" ao botão
+    //     var deleteButton = document.createElement('button');
+    //     deleteButton.innerText = 'Excluir';
+    //     deleteButton.classList.add('btn-del-tab'); // Adiciona a classe "btn-del-tab" ao botão
 
-        // Adicione um ouvinte de evento de clique ao botão de exclusão
-        deleteButton.addEventListener('click', function () {
-            // Remova a guia e seu conteúdo
-            var tabContentArea = document.querySelector('.tabFileNew');
-            var tabToRemove = document.getElementById(newTabId);
+    //     // Adicione um ouvinte de evento de clique ao botão de exclusão
+    //     deleteButton.addEventListener('click', function () {
+    //         // Remova a guia e seu conteúdo
+    //         var tabContentArea = document.querySelector('.tabFileNew');
+    //         var tabToRemove = document.getElementById(newTabId);
 
-            if (tabContentArea && tabToRemove) {
-                tabContentArea.removeChild(tabToRemove);
+    //         if (tabContentArea && tabToRemove) {
+    //             tabContentArea.removeChild(tabToRemove);
 
-                // Remova o item de navegação
-                var tabList = document.querySelector('.tab-vertical');
-                tabList.removeChild(newNavItem);
-            }
-        });
+    //             // Remova o item de navegação
+    //             var tabList = document.querySelector('.tab-vertical');
+    //             tabList.removeChild(newNavItem);
+    //         }
+    //     });
 
-        // Adicione o botão de exclusão ao item de navegação
-        newNavItem.appendChild(deleteButton);
+    //     // Adicione o botão de exclusão ao item de navegação
+    //     newNavItem.appendChild(deleteButton);
 
 
-        // Adicione o botão de exclusão ao item de navegação
-        newNavItem.appendChild(deleteButton);
+    //     // Adicione o botão de exclusão ao item de navegação
+    //     newNavItem.appendChild(deleteButton);
 
-        // Adicione o novo botão ao item de navegação
-        newNavItem.appendChild(newTabButton);
+    //     // Adicione o novo botão ao item de navegação
+    //     newNavItem.appendChild(newTabButton);
 
-        // Adicione o item de navegação à lista de guias
-        var tabList = document.querySelector('.tab-vertical');
-        tabList.appendChild(newNavItem);
+    //     // Adicione o item de navegação à lista de guias
+    //     var tabList = document.querySelector('.tab-vertical');
+    //     tabList.appendChild(newNavItem);
 
-        // Adicione o evento de clique ao botão
-        newTabButton.addEventListener('click', function () {
-            // Formate o texto para torná-lo adequado como parte do ID
-            var formattedText = tabNameInput.value.trim().replace(/\s+/g, '-').toLowerCase();
+    //     // Adicione o evento de clique ao botão
+    //     newTabButton.addEventListener('click', function () {
+    //         // Formate o texto para torná-lo adequado como parte do ID
+    //         var formattedText = tabNameInput.value.trim().replace(/\s+/g, '-').toLowerCase();
 
-            // Verifique se o nome é fornecido
-            if (formattedText.length > 0) {
-                // Atualize o ID da guia
-                newTabId = formattedText;
+    //         // Verifique se o nome é fornecido
+    //         if (formattedText.length > 0) {
+    //             // Atualize o ID da guia
+    //             newTabId = formattedText;
 
-                // Atualize os atributos do botão
-                newTabButton.setAttribute('data-bs-toggle', 'tab');
-                newTabButton.setAttribute('data-bs-target', '#' + newTabId);
-                newTabButton.setAttribute('aria-controls', newTabId);
+    //             // Atualize os atributos do botão
+    //             newTabButton.setAttribute('data-bs-toggle', 'tab');
+    //             newTabButton.setAttribute('data-bs-target', '#' + newTabId);
+    //             newTabButton.setAttribute('aria-controls', newTabId);
 
-                // Atualize o nome da guia
-                newTabButton.innerText = formattedText || 'Nova Guia';
+    //             // Atualize o nome da guia
+    //             newTabButton.innerText = formattedText || 'Nova Guia';
 
-                // Crie uma nova guia na área de conteúdo
-                var newTabContent = document.createElement('div');
-                newTabContent.className = 'tab-pane fade text-center';
-                newTabContent.id = newTabId;
-                newTabContent.setAttribute('role', 'tabpanel');
-                newTabContent.innerHTML = `
-                    <div>
-                        <input type="file" name="new_tab_file" id="file-${newTabId}" style="display: none;" accept=".pdf" onchange="sendFile(event, 'file-${newTabId}', '${newTabId}', 'file-preview-${newTabId}')">
-                        <button class="btn btn-primary btn-new-file text-white" onclick="document.getElementById('file-${newTabId}').click();"><i class="fa-solid fa-upload"></i></button>
-                        <div id="file-preview-${newTabId}"></div>
-                    </div>
-                `;
+    //             // Crie uma nova guia na área de conteúdo
+    //             var newTabContent = document.createElement('div');
+    //             newTabContent.className = 'tab-pane fade text-center';
+    //             newTabContent.id = newTabId;
+    //             newTabContent.setAttribute('role', 'tabpanel');
+    //             newTabContent.innerHTML = `
+    //                 <div>
+    //                     <input type="file" name="new_tab_file" id="file-${newTabId}" style="display: none;" accept=".pdf" onchange="sendFile(event, 'file-${newTabId}', '${newTabId}', 'file-preview-${newTabId}')">
+    //                     <button class="btn btn-primary btn-new-file text-white" onclick="document.getElementById('file-${newTabId}').click();"><i class="fa-solid fa-upload"></i></button>
+    //                     <div id="file-preview-${newTabId}"></div>
+    //                 </div>
+    //             `;
 
-                // Adicione a nova guia à área de conteúdo
-                var tabContentArea = document.querySelector('.tabFileNew');
-                tabContentArea.appendChild(newTabContent);
+    //             // Adicione a nova guia à área de conteúdo
+    //             var tabContentArea = document.querySelector('.tabFileNew');
+    //             tabContentArea.appendChild(newTabContent);
 
-                // Ative a nova guia
-                newTabButton.click();
-            }
-        });
+    //             // Ative a nova guia
+    //             newTabButton.click();
+    //         }
+    //     });
         
-        tabNameInput.addEventListener('keydown', function (event) {
-            if (event.keyCode === 32) {
-                // Adicione um espaço ao valor do input em vez de prevenir o comportamento padrão
-                var cursorPosition = tabNameInput.selectionStart;
-                var inputValue = tabNameInput.value;
+    //     tabNameInput.addEventListener('keydown', function (event) {
+    //         if (event.keyCode === 32) {
+    //             // Adicione um espaço ao valor do input em vez de prevenir o comportamento padrão
+    //             var cursorPosition = tabNameInput.selectionStart;
+    //             var inputValue = tabNameInput.value;
 
-                // Insira um espaço na posição do cursor
-                tabNameInput.value = inputValue.substring(0, cursorPosition) + ' ' + inputValue.substring(cursorPosition);
+    //             // Insira um espaço na posição do cursor
+    //             tabNameInput.value = inputValue.substring(0, cursorPosition) + ' ' + inputValue.substring(cursorPosition);
 
-                // Mova o cursor para a posição após o espaço
-                tabNameInput.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
+    //             // Mova o cursor para a posição após o espaço
+    //             tabNameInput.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
 
-                // Impedir o evento padrão para evitar a adição do espaço pelo navegador
-                event.preventDefault();
+    //             // Impedir o evento padrão para evitar a adição do espaço pelo navegador
+    //             event.preventDefault();
+    //         }
+    //     });
+    // }
+    function addNewTab() {
+    var tabList = document.querySelector('.tab-vertical');
+    var newTabId = 'new-tab-' + Date.now();
+    var isEditing = false;
+
+    var newNavItem = document.createElement('li');
+    newNavItem.className = 'nav-item';
+    newNavItem.setAttribute('role', 'presentation');
+
+    var newTabButton = document.createElement('button');
+    newTabButton.className = 'nav-link';
+    newTabButton.setAttribute('type', 'button');
+    newTabButton.setAttribute('role', 'tab');
+    newTabButton.setAttribute('aria-selected', 'false');
+
+    var tabNameInput = document.createElement('input');
+    tabNameInput.setAttribute('type', 'text');
+    tabNameInput.setAttribute('placeholder', 'Nome do arquivo');
+
+    var deleteButton = document.createElement('button');
+    deleteButton.innerText = 'Excluir';
+    deleteButton.classList.add('btn-del-tab');
+
+    deleteButton.addEventListener('click', function () {
+        var tabContentArea = document.querySelector('.tabFileNew');
+        var tabToRemove = document.getElementById(newTabId);
+
+        if (tabContentArea && tabToRemove) {
+            tabContentArea.removeChild(tabToRemove);
+            tabList.removeChild(newNavItem);
+        }
+    });
+
+    var editButton = document.createElement('button');
+    editButton.innerText = 'Editar';
+
+    newNavItem.appendChild(deleteButton);
+    newNavItem.appendChild(editButton);
+    newNavItem.appendChild(newTabButton);
+    tabList.appendChild(newNavItem);
+
+    newTabButton.appendChild(tabNameInput);
+
+    editButton.addEventListener('click', function () {
+        isEditing = true;
+        tabNameInput.removeAttribute('readonly');
+        tabNameInput.focus();
+    });
+
+    tabNameInput.addEventListener('blur', function () {
+        isEditing = false;
+        updateTabButton();
+    });
+
+    tabNameInput.addEventListener('keydown', function (event) {
+        if (event.keyCode === 32) {
+            var cursorPosition = tabNameInput.selectionStart;
+            var inputValue = tabNameInput.value;
+
+            tabNameInput.value = inputValue.substring(0, cursorPosition) + ' ' + inputValue.substring(cursorPosition);
+
+            tabNameInput.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
+
+            event.preventDefault();
+        }
+    });
+
+    newTabButton.addEventListener('click', function () {
+        updateTabButton();
+    });
+
+    function updateTabButton() {
+        var formattedText = tabNameInput.value.trim().replace(/\s+/g, '-').toLowerCase();
+
+        if (formattedText.length > 0) {
+            newTabId = 'new-tab-' + formattedText;
+
+            newTabButton.setAttribute('data-bs-toggle', 'tab');
+            newTabButton.setAttribute('data-bs-target', '#' + newTabId);
+            newTabButton.setAttribute('aria-controls', newTabId);
+
+            if (isEditing) {
+                newTabButton.innerHTML = `<input type="text" placeholder="Nome do arquivo" value="${formattedText}">`;
+            } else {
+                newTabButton.innerHTML = `<input type="text" placeholder="Nome do arquivo" value="${formattedText}">`;
             }
-        });
+
+            var newTabContent = document.createElement('div');
+            newTabContent.className = 'tab-pane fade text-center';
+            newTabContent.id = newTabId;
+            newTabContent.setAttribute('role', 'tabpanel');
+            newTabContent.innerHTML = `
+                <div>
+                    <input type="file" name="new_tab_file" id="file-${newTabId}" style="display: none;" accept=".pdf" onchange="sendFile(event, 'file-${newTabId}', '${newTabId}', 'file-preview-${newTabId}')">
+                    <button class="btn btn-primary btn-new-file text-white" onclick="document.getElementById('file-${newTabId}').click();"><i class="fa-solid fa-upload"></i></button>
+                    <div id="file-preview-${newTabId}"></div>
+                </div>
+            `;
+
+            var tabContentArea = document.querySelector('.tabFileNew');
+            tabContentArea.appendChild(newTabContent);
+
+            newTabButton.click();
+        }
     }
+}
+
 
 </script>
 
