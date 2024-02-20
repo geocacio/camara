@@ -65,7 +65,7 @@
                         </ul>
                     </figure>
                 </div>
-                <div class="card-body">
+                <div class="card-body content-post">
                     {!! $post->content !!}
                 </div>
                 <ul>
