@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bidding;
 use App\Models\Category;
+use App\Models\DisplayOrder;
 use App\Models\File;
 use App\Models\FileContent;
 use App\Services\FileUploadService;
@@ -24,10 +25,19 @@ class AvailableFilesController extends Controller
      */
     public function index(Bidding $bidding)
     {
-        $availableFiles = $bidding->files;
+        // Buscar os registros de DisplayOrder onde page é igual a 'available-files' e ordenar pela coluna display_order
+        $orderedFiles = DisplayOrder::where('page', 'available-files')
+            ->orderBy('display_order')
+            ->get();
+    
+        // Mapear os IDs ordenados para recuperar os arquivos correspondentes
+        $fileIds = $orderedFiles->pluck('item_id')->toArray(); // Converter a coleção para um array
+        $availableFiles = $bidding->files->whereIn('id', $fileIds)->sortBy(function($item) use ($fileIds) {
+            return array_search($item->id, $fileIds);
+        });
+    
         return view('panel.biddings.files.index', compact('bidding', 'availableFiles'));
     }
-
     /**
      * Show the form for creating a new resource.
      */

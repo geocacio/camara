@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DisplayOrderController;
 use App\Http\Controllers\LoginScreenController;
 use App\Http\Controllers\TermsOfUseController;
 use Illuminate\Http\Request;
@@ -25,4 +25,5 @@ Route::get('login/custom', [LoginScreenController::class, 'showLogin']);
 
 Route::group(['middleware' => ['web']], function () {
     Route::post('/aceitar-termos', [TermsOfUseController::class, 'aceitar'])->name('termos.aceitar');
+    Route::resource('/change-order', DisplayOrderController::class);
 });

@@ -4193,3 +4193,74 @@ section{
 
     }
 }
+
+.night-mode .avisos {
+    .alert-container {
+        .box-alert {
+            background-color: #1f1f1f;
+            color: #fff;
+
+            .caldendar-status {
+                font-size: 13px;
+                font-weight: 100;
+            }
+        }
+
+    }
+}
+
+.avisos {
+    min-width: 100%;
+    min-height: 300px;
+    background-color: #30358c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 70px;
+    margin-bottom: 70px;
+
+    .alert-container {
+        overflow: hidden;
+        width: 89%;
+        cursor: pointer;
+        .box-alert {
+            width: 345px;
+            min-height: 200px;
+            border-radius: 10px;
+            background-color: #fff;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .title-data {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                .date {
+                    background-color: #004080;
+                    border-radius: 8px;
+                    color: #fff;
+                    font-size: 10px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+
+            .caldendar-status {
+                display: flex;
+                justify-content: space-between;
+                font-size: 13px;
+                font-weight: 600;
+            }
+
+            .title {
+                font-weight: 600;
+            }
+        }
+    }
+
+}

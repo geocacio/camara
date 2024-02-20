@@ -25,9 +25,9 @@
                         <th class="text-right">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="sortable">
                     @foreach($availableFiles as $file)
-                    <tr>
+                    <tr data-id="{{ $file->id }}">
                         <td>{{ $file->id }}</td>
                         <td>{{ $file->file->name }}</td>
                         <td><a href="#" class="btn btn-link" data-toggle="modal" data-target="#showModal-{{ $file->file->id }}">{{ pathinfo($file->file->url, PATHINFO_FILENAME) }}</a></td>
@@ -102,4 +102,45 @@
 @endsection
 
 @section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    var sortable = new Sortable(document.querySelector('.sortable'), {
+        animation: 150,
+        onUpdate: function (evt) {
+            var orderedItems = sortable.toArray().map(function (itemId) {
+                return document.querySelector('[data-id="' + itemId + '"]');
+            });
+
+            var newOrder = orderedItems.map(function (item, index) {
+                return { id: parseInt(item.dataset.id), order: index + 1 };
+            });
+
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+            $.ajax({
+                url: '/api/change-order',
+                type: 'POST',
+                data: { 
+                    order: newOrder,
+                    page: 'available-files',
+                    _token: csrfToken, 
+                },
+                success: function (response) {
+                    console.log('Ordem salva no backend com sucesso.');
+                },
+                error: function (error) {
+                    console.error('Erro ao salvar a ordem no backend:', error);
+                }
+            });
+        },
+    });
+});
+
+</script>
+
+
+
 @endsection
