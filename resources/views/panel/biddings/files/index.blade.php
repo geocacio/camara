@@ -22,15 +22,19 @@
                         <th>#</th>
                         <th>Nome do arquivo</th>
                         <th>Arquivo</th>
+                        <th>Tamanho</th>
+                        <th>Extenção</th>
                         <th class="text-right">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="sortable">
                     @foreach($availableFiles as $file)
-                    <tr data-id="{{ $file->id }}">
+                    <tr title="Arraste para ordenar" data-id="{{ $file->id }}">
                         <td>{{ $file->id }}</td>
                         <td>{{ $file->file->name }}</td>
                         <td><a href="#" class="btn btn-link" data-toggle="modal" data-target="#showModal-{{ $file->file->id }}">{{ pathinfo($file->file->url, PATHINFO_FILENAME) }}</a></td>
+                        <td>{{ $file->file->size }}</td>
+                        <td>{{ $file->file->format }}</td>
                         <td class="actions text-right">
                             <a href="{{ route('biddings.available.files.edit', ['id' => $file->file->id, 'bidding' => $bidding->slug]) }}" class="link edit"><i class="fas fa-edit"></i></a>
                             <a data-toggle="modal" data-target="#myModal{{$file->file->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a>
@@ -119,13 +123,14 @@
             });
 
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            var biddingSlug = '{{ $bidding->slug }}';
 
             $.ajax({
                 url: '/api/change-order',
                 type: 'POST',
                 data: { 
                     order: newOrder,
-                    page: 'available-files',
+                    page: biddingSlug,
                     _token: csrfToken, 
                 },
                 success: function (response) {

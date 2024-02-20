@@ -25,16 +25,16 @@ class AvailableFilesController extends Controller
      */
     public function index(Bidding $bidding)
     {
-        // Buscar os registros de DisplayOrder onde page é igual a 'available-files' e ordenar pela coluna display_order
-        $orderedFiles = DisplayOrder::where('page', 'available-files')
-            ->orderBy('display_order')
-            ->get();
+        $orderedFiles = DisplayOrder::where('page', $bidding->slug)->orderBy('display_order')->get();
     
-        // Mapear os IDs ordenados para recuperar os arquivos correspondentes
-        $fileIds = $orderedFiles->pluck('item_id')->toArray(); // Converter a coleção para um array
-        $availableFiles = $bidding->files->whereIn('id', $fileIds)->sortBy(function($item) use ($fileIds) {
-            return array_search($item->id, $fileIds);
-        });
+        if ($orderedFiles->isEmpty()) {
+            $availableFiles = $bidding->files;
+        } else {
+            $fileIds = $orderedFiles->pluck('item_id')->toArray();
+            $availableFiles = $bidding->files->whereIn('id', $fileIds)->sortBy(function($item) use ($fileIds) {
+                return array_search($item->id, $fileIds);
+            });
+        }
     
         return view('panel.biddings.files.index', compact('bidding', 'availableFiles'));
     }

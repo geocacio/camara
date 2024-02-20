@@ -6,6 +6,7 @@ use App\Models\Bidding;
 use App\Models\Category;
 use App\Models\CategoryContent;
 use App\Models\Contract;
+use App\Models\DisplayOrder;
 use App\Models\Employee;
 use App\Models\File;
 use App\Models\Organ;
@@ -318,12 +319,29 @@ class BiddingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($bidding)
+    public function show($biddingSlug)
     {
-        $bidding = Bidding::where('slug', $bidding)->first();
-        $files = File::whereIn('id', $bidding->files->pluck('file_id'))->get();
+        // Obtenha a licitação com base no slug
+        $bidding = Bidding::where('slug', $biddingSlug)->first();
+
+        // Verifique se há uma ordem personalizada para os arquivos desta licitação
+        $orderedFiles = DisplayOrder::where('page', $biddingSlug)->orderBy('display_order')->get();
+
+        if ($orderedFiles->isEmpty()) {
+            // Se não houver ordem personalizada, obtenha os arquivos na ordem padrão
+            $files = $bidding->files;
+        } else {
+            // Se houver uma ordem personalizada, ordene os arquivos com base nela
+            $fileIds = $orderedFiles->pluck('item_id')->toArray();
+            $files = File::whereIn('id', $fileIds)->get()->sortBy(function ($item) use ($fileIds) {
+                return array_search($item->id, $fileIds);
+            });
+        }
+
         return view('pages.biddings.show', compact('bidding', 'files'));
     }
+
+    
 
     /**
      * Show the form for editing the specified resource.
