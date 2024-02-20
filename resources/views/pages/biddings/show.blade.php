@@ -10,14 +10,14 @@
         <a href="{{ route('transparency.show') }}" class="link">Portal da transparência</a>
     </li>
     <li class="item">
-        <a href="{{ route('comissoes-all') }}" class="link">Comissões</a>
+        <a href="{{ route('bidding.page') }}" class="link">Licitações</a>
     </li>
     <li class="item">
         <span>{{ Str::limit($bidding->number, '30', '...') }}</span>
     </li>
 </ul>
 
-<h3 class="title text-center">{{ Str::limit($bidding->number, '30', '...') }}</h3>
+<h4 class="title-biddings text-center">{{ $typeBidding->name }}: {{ Str::limit($bidding->number, '30', '...') }} - EXERCÍCIO:{{ $category->name }} - {{  $bidding->status }}</h4>
 
 @endsection
 

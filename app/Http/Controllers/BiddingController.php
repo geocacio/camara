@@ -44,7 +44,7 @@ class BiddingController extends Controller
      */
     public function index()
     {
-        $biddings = Bidding::where('bidding_type', null)->get();
+        $biddings = Bidding::get();
         return view('panel.biddings.index', compact('biddings'));
     }
 
@@ -56,7 +56,7 @@ class BiddingController extends Controller
 
     public function ShoppingPortal()
     {
-        $biddings = Bidding::where('bidding_type', null)->take(10)->get();
+        $biddings = Bidding::take(10)->get();
         return view('pages.biddings.index', compact('biddings'));
     }
 
@@ -204,7 +204,7 @@ class BiddingController extends Controller
             foreach ($availableFiles as $fileId => $file) {
                 $url = $this->fileUploadService->upload($file, 'biddings');
                 $name = ucwords(str_replace('-', ' ', $fileId));
-                $size = $this->formatSize($file->getSize()); // Formatando o tamanho aqui
+                $size = $this->formatSize($file->getSize());
                 $format = $file->getClientOriginalExtension();
                 $newFile = File::create(['name' => $name, 'url' => $url, 'size' => $size, 'format' => $format]);
                 $bidding->files()->create(['file_id' => $newFile->id]);
@@ -323,6 +323,10 @@ class BiddingController extends Controller
     {
         // Obtenha a licitação com base no slug
         $bidding = Bidding::where('slug', $biddingSlug)->first();
+        $typeBidding = Type::where('id', $bidding->bidding_type)->first();
+
+        $categorieContent = CategoryContent::where('categoryable_type', 'bidding')->where('categoryable_id', $bidding->id)->pluck('category_id');
+        $category = Category::whereIn('id', $categorieContent)->where('parent_id', 10)->first();
 
         // Verifique se há uma ordem personalizada para os arquivos desta licitação
         $orderedFiles = DisplayOrder::where('page', $biddingSlug)->orderBy('display_order')->get();
@@ -338,7 +342,7 @@ class BiddingController extends Controller
             });
         }
 
-        return view('pages.biddings.show', compact('bidding', 'files'));
+        return view('pages.biddings.show', compact('bidding', 'files', 'typeBidding', 'category'));
     }
 
     
@@ -468,13 +472,14 @@ class BiddingController extends Controller
             }
 
             $availableFiles = $request->allFiles();
-            if ($availableFiles && !empty($availableFiles)) {
-                foreach ($availableFiles as $fileId => $file) {
-                    $url = $this->fileUploadService->upload($file, 'biddings');
-                    $name = ucwords(str_replace('-', ' ', $fileId));
-                    $newFile = File::create(['name' => $name, 'url' => $url]);
-                    $bidding->files()->create(['file_id' => $newFile->id]);
-                }
+
+            foreach ($availableFiles as $fileId => $file) {
+                $url = $this->fileUploadService->upload($file, 'biddings');
+                $name = ucwords(str_replace('-', ' ', $fileId));
+                $size = $this->formatSize($file->getSize());
+                $format = $file->getClientOriginalExtension();
+                $newFile = File::create(['name' => $name, 'url' => $url, 'size' => $size, 'format' => $format]);
+                $bidding->files()->create(['file_id' => $newFile->id]);
             }
 
             $filesToRemove = json_decode($request->filesToRemove);
