@@ -247,6 +247,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>Arquivo</th>
+                                                    <th>Tamanho</th>
+                                                    <th>Extenção</th>
                                                     <th>Ver</th>
                                                 </tr>
                                             </thead>
@@ -255,10 +257,12 @@
                                                 @foreach($files as $item)
                                                 <tr>
                                                     <td>{{ $item->name }}</td>
+                                                    <td>{{ $item->size }}</td>
+                                                    <td>{{ $item->format }}</td>
                                                     <td>
                                                         <a href="{{ asset('storage/'.$item->url) }}" target="_blank">
-                                                        <i class="fa-regular fa-eye"></i>
-                                                    </a>
+                                                            <i class="fa-regular fa-eye"></i>
+                                                        </a>
                                                 </tr>
                                                 @endforeach
                             

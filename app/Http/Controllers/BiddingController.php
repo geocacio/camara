@@ -30,6 +30,14 @@ class BiddingController extends Controller
         $this->fileUploadService = $fileUploadService;
     }
 
+    
+    public function formatSize($bytes)
+    {
+        $sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
+        $i = intval(floor(log($bytes, 1024)));
+        return round($bytes / (1024 ** $i), 2) . ' ' . $sizes[$i];
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -191,13 +199,14 @@ class BiddingController extends Controller
             }
 
             $availableFiles = $request->allFiles();
-            if ($availableFiles && !empty($availableFiles)) {
-                foreach ($availableFiles as $fileId => $file) {
-                    $url = $this->fileUploadService->upload($file, 'biddings');
-                    $name = ucwords(str_replace('-', ' ', $fileId));
-                    $newFile = File::create(['name' => $name, 'url' => $url]);
-                    $bidding->files()->create(['file_id' => $newFile->id]);
-                }
+
+            foreach ($availableFiles as $fileId => $file) {
+                $url = $this->fileUploadService->upload($file, 'biddings');
+                $name = ucwords(str_replace('-', ' ', $fileId));
+                $size = $this->formatSize($file->getSize()); // Formatando o tamanho aqui
+                $format = $file->getClientOriginalExtension();
+                $newFile = File::create(['name' => $name, 'url' => $url, 'size' => $size, 'format' => $format]);
+                $bidding->files()->create(['file_id' => $newFile->id]);
             }
 
             session()->flash('success', 'Licitação cadastrada com Sucesso!');

@@ -9,7 +9,7 @@ class File extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'url'];
+    protected $fillable = ['name', 'description', 'url', 'format', 'size'];
 
     public function fileContents()
     {
