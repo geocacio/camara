@@ -30,13 +30,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Nome do arquivo <button type="button" class="btn btn-modal-create" data-toggle="modal" data-target="#titleFile">Criar</button></label>
-                        <select name="name" class="form-control">
+                        <label>Nome do arquivo</label>
+                        {{-- <select name="name" class="form-control">
                             <option value="">Selecione</option>
                             @foreach($category->children as $category)
                             <option value="{{ $category->name }}" {{ $file->name == $category->name ? 'selected' : '' }}>{{ $category->name }}</option>
                             @endforeach
-                        </select>
+                        </select> --}}
+                        <input type="text" class="form-control" name="name" value="{{ $file->name }}">
                     </div>
                 </div>
 

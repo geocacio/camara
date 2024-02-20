@@ -306,12 +306,15 @@
             <div class="tab-pane fade" id="tabFiles" role="tabpanel" aria-labelledby="files-tab">
                 <div class="container-tab-vertical">
                     <ul class="nav nav-tabs tab-vertical" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="authorization-tab" data-bs-toggle="tab" data-bs-target="#authorization" type="button" role="tab" aria-controls="authorization" aria-selected="true">Autorização</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="market-research-tab" data-bs-toggle="tab" data-bs-target="#market-research" type="button" role="tab" aria-controls="market-research" aria-selected="false">Pesquisa de mercado</button>
-                        </li>
+                        @if($otherFiles->count() == 0)
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="authorization-tab" data-bs-toggle="tab" data-bs-target="#authorization" type="button" role="tab" aria-controls="authorization" aria-selected="true">Autorização</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="market-research-tab" data-bs-toggle="tab" data-bs-target="#market-research" type="button" role="tab" aria-controls="market-research" aria-selected="false">Pesquisa de mercado</button>
+                            </li>
+                        @endif
+                    
                         @php
                             use Illuminate\Support\Str;
                         @endphp
