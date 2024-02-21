@@ -17,7 +17,23 @@
     </li>
 </ul>
 
-<h4 class="title-biddings text-center">{{ $typeBidding->name }}: {{ Str::limit($bidding->number, '30', '...') }} - EXERCÍCIO:{{ $category->name }} - {{  $bidding->status }}</h4>
+<h4 class="title-biddings text-center">
+    @if(isset($typeBidding))
+        {{ $typeBidding->name }}:
+    @endif
+
+    @if(isset($bidding) && !empty($bidding->number))
+        {{ Str::limit($bidding->number, '30', '...') }} - EXERCÍCIO:
+    @endif
+
+    @if(isset($category))
+        {{ $category->name }} -
+    @endif
+
+    @if(isset($bidding))
+        {{ $bidding->status }}
+    @endif
+</h4>
 
 @endsection
 
