@@ -73,6 +73,24 @@
                         </li>
                         @endif
 
+                        @if($bidding->company)
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="participantes-tab" data-bs-toggle="tab" data-bs-target="#participantes" type="button" role="tab">
+                                    <i class="fa-solid fa-users-gear"></i>
+                                    Participantes
+                                </button>
+                            </li>
+                        @endif
+
+                        @if($bidding->company)
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="contracts-tab" data-bs-toggle="tab" data-bs-target="#contracts" type="button" role="tab">
+                                    <i class="fa-solid fa-file-signature"></i>
+                                    Contratos
+                                </button>
+                            </li>
+                        @endif
+
                         {{-- @if($materials && count($materials))
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="material-tab" data-bs-toggle="tab" data-bs-target="#material" type="button" role="tab">
@@ -167,6 +185,68 @@
                                                 </tr>
                                                 @endforeach
                             
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        @endif
+
+                        @if($bidding->company)
+                            <div class="tab-pane fadeshow" id="participantes" role="tabpanel" aria-labelledby="participantes-tab">
+
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-data-default">
+                                            <thead>
+                                                <tr>
+                                                    <th>Participante</th>
+                                                    <th>Resultado</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{ $bidding->company->name }}</td>
+                                                    <td>Vencedor</td>
+                                                </tr>             
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        @endif
+
+                        @if($bidding->company)
+                            <div class="tab-pane fadeshow" id="contracts" role="tabpanel" aria-labelledby="contracts-tab">
+
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-data-default">
+                                            <thead>
+                                                <tr>
+                                                    <th>Número</th>
+                                                    <th>Credor/Vencedor</th>
+                                                    <th>Valor</th>
+                                                    <th>Periodo</th>
+                                                    <th>Mais</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($bidding->company->contracts as $contract)
+                                                    <tr>
+                                                        <td>{{ $contract->number }}</td>
+                                                        <td>{{ $bidding->company->name }}</td>
+                                                        <td>R$ {{ number_format($contract->total_value, 2, ',', '.') }}</td>
+                                                        <td>{{ date('d/m/Y', strtotime($contract->start_date)) . ' - ' . date('d/m/Y', strtotime($contract->end_date)) }}</td>
+                                                        <td style="cursor: pointer"> 
+                                                            <a href="{{ asset('storage/'.$contract->files->file->url) }}" target="_blank">
+                                                                <i class="fa-regular fa-eye"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>             
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
