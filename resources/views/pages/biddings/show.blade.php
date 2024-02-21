@@ -218,7 +218,7 @@
                             </div>
                         @endif
 
-                        @if($bidding->companyF)
+                        @if($bidding->company)
                             <div class="tab-pane fadeshow" id="contracts" role="tabpanel" aria-labelledby="contracts-tab">
 
                                 <div class="col-12">
@@ -334,7 +334,7 @@
                             </div>
                         @endif
 
-                        @if($files && count($files) > 0)
+                        @if($files[0]->file && count($files) > 0)
                             <div class="tab-pane fadeshow" id="files" role="tabpanel" aria-labelledby="files">
 
                                 <div class="col-12">
