@@ -334,9 +334,8 @@
                             </div>
                         @endif
 
-                        @if($files[0]->file && count($files) > 0)
+                        @if(count($files) > 0)
                             <div class="tab-pane fadeshow" id="files" role="tabpanel" aria-labelledby="files">
-
                                 <div class="col-12">
                                     <div class="table-responsive">
                                         <table class="table table-striped table-data-default">
@@ -349,39 +348,37 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                            
                                                 @foreach($files as $item)
-                                                <tr>
-                                                    <td>{{ $item->file->name }}</td>
-                                                    <td>
-                                                        @if(!empty($item->file->size))
-                                                            {{ $item->file->size }}
-                                                        @else
-                                                            -
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        @if(!empty($item->file->format))
-                                                            {{ $item->file->format }}
-                                                        @else
-                                                            -
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        <a href="{{ asset('storage/'.$item->file->url) }}" target="_blank">
-                                                            <i class="fa-regular fa-eye"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
+                                                    <tr>
+                                                        <td>{{ $item->name }}</td>
+                                                        <td>
+                                                            @if(!empty($item->size))
+                                                                {{ $item->size }}
+                                                            @else
+                                                                -
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if(!empty($item->format))
+                                                                {{ $item->format }}
+                                                            @else
+                                                                -
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ asset('storage/'.$item->url) }}" target="_blank">
+                                                                <i class="fa-regular fa-eye"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
                                                 @endforeach
-                            
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-
                             </div>
                         @endif
+
 
                     </div>
                 </div>
