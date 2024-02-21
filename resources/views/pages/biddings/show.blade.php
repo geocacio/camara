@@ -218,7 +218,7 @@
                             </div>
                         @endif
 
-                        @if($bidding->company)
+                        @if($bidding->companyF)
                             <div class="tab-pane fadeshow" id="contracts" role="tabpanel" aria-labelledby="contracts-tab">
 
                                 <div class="col-12">
@@ -352,13 +352,26 @@
                             
                                                 @foreach($files as $item)
                                                 <tr>
-                                                    <td>{{ $item->name }}</td>
-                                                    <td>{{ $item->size }}</td>
-                                                    <td>{{ $item->format }}</td>
+                                                    <td>{{ $item->file->name }}</td>
                                                     <td>
-                                                        <a href="{{ asset('storage/'.$item->url) }}" target="_blank">
+                                                        @if(!empty($item->file->size))
+                                                            {{ $item->file->size }}
+                                                        @else
+                                                            -
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if(!empty($item->file->format))
+                                                            {{ $item->file->format }}
+                                                        @else
+                                                            -
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ asset('storage/'.$item->file->url) }}" target="_blank">
                                                             <i class="fa-regular fa-eye"></i>
                                                         </a>
+                                                    </td>
                                                 </tr>
                                                 @endforeach
                             
