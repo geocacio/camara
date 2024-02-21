@@ -190,7 +190,7 @@
                                                 @foreach($bidding->responsibilities as $item)
                                                 <tr>
                                                     <td>{{ $item->name }}</td>
-                                                    <td>{{ $item->parent_id }}</td>
+                                                    <td>{{ $item->pivot->employee->name }}</td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>
