@@ -59,6 +59,8 @@ class BiddingController extends Controller
         // $biddings = Bidding::take(10)->get();
         // $categoryFather = Category::where('slug', 'modalidades')->first();
 
+        // avisos
+
         $biddings = Bidding::take(10)
         ->with(['categories.category.children' => function ($query) {
             $query->where('id', 57);
