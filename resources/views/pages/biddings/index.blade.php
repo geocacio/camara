@@ -56,6 +56,48 @@
                 <span>fiscais de contratos</span>
             </a>
         </div>
+    </div>
+
+        <div class="avisos">
+            <h3>Avisos de licitações</h3>
+            <div class="swiper-container biddings-carousel">
+                <div class="swiper-wrapper">
+                    @foreach($biddings as $item)
+                        <a href="pornhub.com" class="swiper-slide box-alert">
+                            <div class="title-data">
+                                <span class="title-biddings-alert">
+                                   {{ $item->categories[0]->category->name }}
+                                </span>
+                                <span class="date">
+                                    {{ $item->number }}
+                                </span>
+                            </div>
+
+                            <span class="desc-alert-biddin">{{ \Illuminate\Support\Str::limit($item->description, $limit = 100, $end = '...') }}</span>
+                            
+                            <div class="caldendar-status">
+                                <span>Data <i class="fa-regular fa-calendar"></i>: {{ date('d/m/Y', strtotime($item->opening_date)) }}</span>
+                                <span>{{ $item->status }}  <i class="fa-regular fa-circle-question"></i></span>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+
+            </div>
+            
+            <div class="btn-swipper">
+                <div class="btn-swipper-custom swiper--prev">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </div>
+
+                <div class="swiper-pagination"></div> {{-- dots --}}
+                
+                <div class="btn-swipper-custom swiper--next">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+        </div>
+    <div class="container">
         @if($biddings->count() > 0)
 
             <div class="row">
@@ -110,10 +152,32 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+
 <script>
     $('.mask-date').mask('00-00-0000');
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
     })
 </script>
+
+<script>
+    var swiper = new Swiper('.biddings-carousel', {
+        slidesPerView: 3,
+        spaceBetween: 10,
+        loop: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper--next',
+            prevEl: '.swiper--prev',
+        },
+    });
+</script>
+
+
 @endsection

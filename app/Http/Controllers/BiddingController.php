@@ -56,7 +56,14 @@ class BiddingController extends Controller
 
     public function ShoppingPortal()
     {
-        $biddings = Bidding::take(10)->get();
+        // $biddings = Bidding::take(10)->get();
+        // $categoryFather = Category::where('slug', 'modalidades')->first();
+
+        $biddings = Bidding::take(10)
+        ->with(['categories.category.children' => function ($query) {
+            $query->where('id', 57);
+        }])->get();
+
         return view('pages.biddings.index', compact('biddings'));
     }
 
