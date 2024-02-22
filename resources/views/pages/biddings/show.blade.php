@@ -18,16 +18,16 @@
 </ul>
 
 <h4 class="title-biddings text-center">
-    @if(isset($typeBidding))
-        {{ $typeBidding->name }}:
+    @if(isset($categorieModalidade))
+        {{ $categorieModalidade->name }}:
     @endif
 
     @if(isset($bidding) && !empty($bidding->number))
         {{ Str::limit($bidding->number, '30', '...') }} - EXERCÍCIO:
     @endif
 
-    @if(isset($category))
-        {{ $category->name }} -
+    @if(isset($exercice))
+        {{ $exercice->name }} -
     @endif
 
     @if(isset($bidding))
@@ -109,7 +109,7 @@
                         </li>
                         @endif
 
-                        @if($files && count($files) > 0)
+                        @if($filesBidding && count($filesBidding) > 0)
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="files-tab" data-bs-toggle="tab" data-bs-target="#files" type="button" role="tab">
                                 <i class="fa-regular fa-file"></i>
@@ -129,7 +129,6 @@
                             <div class="gd-managers tab-pane fadeshow active" id="index" role="tabpanel" aria-labelledby="index-tab">
 
                                 <h3 class="name-managers">{{ $bidding->description }}</h3>
-
                                 <div class="row container-descriptions">
                                     <div class="col-md-6">
                                         <p class="title">Licitação</p>
@@ -151,7 +150,6 @@
                                         <p class="title">Valor</p>
                                         <p class="description">R$ {{ number_format($bidding->estimated_value, 2, ',', '.') }}</p>
                                     </div>
-                                    
                                 </div>
                             </div>
                         @endif
@@ -334,7 +332,7 @@
                             </div>
                         @endif
 
-                        @if(count($files) > 0)
+                        @if(count($filesBidding) > 0)
                             <div class="tab-pane fadeshow" id="files" role="tabpanel" aria-labelledby="files">
                                 <div class="col-12">
                                     <div class="table-responsive">
@@ -348,25 +346,25 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($files as $item)
+                                                @foreach($filesBidding as $item)
                                                     <tr>
-                                                        <td>{{ $item->name }}</td>
+                                                        <td>{{ $item->file->name }}</td>
                                                         <td>
-                                                            @if(!empty($item->size))
-                                                                {{ $item->size }}
+                                                            @if(!empty($item->file->size))
+                                                                {{ $item->file->size }}
                                                             @else
                                                                 -
                                                             @endif
                                                         </td>
                                                         <td>
-                                                            @if(!empty($item->format))
-                                                                {{ $item->format }}
+                                                            @if(!empty($item->file->format))
+                                                                {{ $item->file->format }}
                                                             @else
                                                                 -
                                                             @endif
                                                         </td>
                                                         <td>
-                                                            <a href="{{ asset('storage/'.$item->url) }}" target="_blank">
+                                                            <a href="{{ asset('storage/'.$item->file->url) }}" target="_blank">
                                                                 <i class="fa-regular fa-eye"></i>
                                                             </a>
                                                         </td>
@@ -378,8 +376,6 @@
                                 </div>
                             </div>
                         @endif
-
-
                     </div>
                 </div>
             </div>

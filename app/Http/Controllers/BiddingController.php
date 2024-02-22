@@ -332,26 +332,32 @@ class BiddingController extends Controller
     {
         // Obtenha a licitação com base no slug
         $bidding = Bidding::where('slug', $biddingSlug)->first();
+        $categoryFather = Category::where('slug', 'modalidades')->first();
+
+        $categorieModalidade = $bidding->categories->pluck('category')->where('parent_id', $categoryFather->id)->first();
+
         $typeBidding = Type::where('id', $bidding->bidding_type)->first();
 
         $categorieContent = CategoryContent::where('categoryable_type', 'bidding')->where('categoryable_id', $bidding->id)->pluck('category_id');
-        $category = Category::whereIn('id', $categorieContent)->where('parent_id', 10)->first();
+        $exercice = Category::whereIn('id', $categorieContent)->where('parent_id', 10)->first();
+        
+        $exercice = Category::whereIn('id', $categorieContent)->where('parent_id', 10)->first();
 
         // Verifique se há uma ordem personalizada para os arquivos desta licitação
         $orderedFiles = DisplayOrder::where('page', $biddingSlug)->orderBy('display_order')->get();
 
         if ($orderedFiles->isEmpty()) {
             // Se não houver ordem personalizada, obtenha os arquivos na ordem padrão
-            $files = $bidding->files;
+            $filesBidding = $bidding->files;
         } else {
             // Se houver uma ordem personalizada, ordene os arquivos com base nela
             $fileIds = $orderedFiles->pluck('item_id')->toArray();
-            $files = File::whereIn('id', $fileIds)->get()->sortBy(function ($item) use ($fileIds) {
+            $filesBidding = File::whereIn('id', $fileIds)->get()->sortBy(function ($item) use ($fileIds) {
                 return array_search($item->id, $fileIds);
             });
         }
 
-        return view('pages.biddings.show', compact('bidding', 'files', 'typeBidding', 'category'));
+        return view('pages.biddings.show', compact('bidding', 'filesBidding', 'typeBidding', 'exercice', 'categorieModalidade'));
     }
 
     
