@@ -64,18 +64,10 @@ class ShortcutTransparencyController extends Controller
             if(count($existingPages) >= 8){
                 return redirect()->back()->with('error', 'Limite de destaques atingido!');
             }else {
-                try {
-                    ShortcutTransparency::create([
-                        'page_id' => $validatedData['page_id'], 
-                        'type' => $request->type,
-                    ]);
-
-                    return response()->json(['message' => 'Licitação adicionada aos avisos.']);
-                    
-                }
-                catch (\Exception $e) {
-                    return response()->json(['message' => 'Houve um erro ao tentar adicionar licitação.']);
-                }
+                ShortcutTransparency::create([
+                    'page_id' => $validatedData['page_id'], 
+                    'type' => $request->type,
+                ]);
             }
         }
     
