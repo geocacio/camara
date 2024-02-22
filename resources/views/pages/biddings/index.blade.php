@@ -63,7 +63,7 @@
             <div class="swiper-container biddings-carousel">
                 <div class="swiper-wrapper">
                     @foreach($biddings as $item)
-                        <a href="pornhub.com" class="swiper-slide box-alert">
+                        <a href="{{ route('bidding.show', $item->slug) }}" class="swiper-slide box-alert">
                             <div class="title-data">
                                 <span class="title-biddings-alert">
                                    {{ $item->categories[0]->category->name }}
