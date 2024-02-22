@@ -29,6 +29,11 @@ class Bidding extends Model
         return $this->belongsTo(Secretary::class, 'secretary_id');
     }
 
+    public function notice()
+    {
+        return $this->hasOne(ShortcutTransparency::class, 'page_id')->where('type', 'biddings-notice');
+    }
+
     public function categories()
     {
         return $this->morphMany(CategoryContent::class, 'categoryable');

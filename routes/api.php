@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BiddingController;
 use App\Http\Controllers\DisplayOrderController;
 use App\Http\Controllers\LoginScreenController;
 use App\Http\Controllers\TermsOfUseController;
@@ -25,5 +26,6 @@ Route::get('login/custom', [LoginScreenController::class, 'showLogin']);
 
 Route::group(['middleware' => ['web']], function () {
     Route::post('/aceitar-termos', [TermsOfUseController::class, 'aceitar'])->name('termos.aceitar');
+    Route::post('/bidding-notices', [BiddingController::class, 'addNotices']);
     Route::resource('/change-order', DisplayOrderController::class);
 });

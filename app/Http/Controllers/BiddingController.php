@@ -13,6 +13,7 @@ use App\Models\Organ;
 use App\Models\Page;
 use App\Models\Role;
 use App\Models\Secretary;
+use App\Models\ShortcutTransparency;
 use App\Models\TransparencyGroup;
 use App\Models\Type;
 use App\Models\TypeContent;
@@ -56,17 +57,16 @@ class BiddingController extends Controller
 
     public function ShoppingPortal()
     {
-        // $biddings = Bidding::take(10)->get();
-        // $categoryFather = Category::where('slug', 'modalidades')->first();
+        $biddings = Bidding::take(10)->get();
 
-        // avisos
+        $biddingNoticeID = ShortcutTransparency::where('type', 'biddings-notice')->pluck('page_id');
 
-        $biddings = Bidding::take(10)
+        $biddingNotices = Bidding::whereIn('id', $biddingNoticeID)
         ->with(['categories.category.children' => function ($query) {
             $query->where('id', 57);
         }])->get();
 
-        return view('pages.biddings.index', compact('biddings'));
+        return view('pages.biddings.index', compact('biddings', 'biddingNotices'));
     }
 
     /**
@@ -882,5 +882,25 @@ class BiddingController extends Controller
 
         $searchData = $request->only(['description', 'number']);
         return view('pages.biddings.contracts.index', compact('contracts', 'categories', 'searchData'));
+    }
+
+    public function addNotices(Request $request){
+
+        $validatedData = $request->validate([
+            'dataItem' => 'required',
+        ]);
+
+        // Verifica se já existe um registro com o dataItem
+        $existinNotice = ShortcutTransparency::where('page_id', $validatedData['dataItem'])->where('type', 'biddings-notice')->first();
+
+        if ($existinNotice) {
+            $existinNotice->delete();
+        } else {
+            ShortcutTransparency::create([
+                'page_id' => $validatedData['dataItem'], 
+                'type' => 'biddings-notice',
+            ]);
+        }
+
     }
 }

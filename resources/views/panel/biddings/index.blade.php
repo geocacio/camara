@@ -54,6 +54,11 @@
                                     <a class="dropdown-item" href="{{ route('biddings.publications.index', $bidding->slug) }}">Forma de Publicação</a>
                                     <a class="dropdown-item" href="{{ route('biddings.available.files.index', $bidding->slug) }}">Arquivos</a>
                                     <a class="dropdown-item" href="{{ route('biddings.edit', $bidding->slug) }}">Editar</a>
+                                    @if($bidding->notice == null)
+                                        <span style="cursor: pointer;" class="dropdown-item add-notice" data-item="{{ $bidding->id }}">Adicione a sessão de aviso</span>
+                                    @else
+                                        <span style="cursor: pointer;" class="dropdown-item add-notice" data-item="{{ $bidding->id }}">Remover da sessão de aviso</span>
+                                    @endif
                                     <a class="dropdown-item" data-toggle="modal" data-target="#myModal{{$bidding->id}}" href="#">Excluir</a>
                                 </div>
                             </div>
@@ -106,6 +111,9 @@
 @endsection
 
 @section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <script>
     const options = document.querySelectorAll('.btn-table-options');
     options.forEach(option => {
@@ -115,5 +123,26 @@
             // e.target.closest('.table-responsive').
         });
     });
+
+    document.querySelectorAll('.add-notice').forEach(function(element) {
+        element.addEventListener('click', function() {
+            var dataItemValue = this.getAttribute('data-item');
+            addNotice(dataItemValue);
+        });
+    });
+
+    function addNotice(idBidding) {
+        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: '/api/bidding-notices',
+            type: 'POST',
+            data: {
+                dataItem: idBidding,
+                _token: csrfToken, 
+
+            },
+        });
+    }
 </script>
 @endsection

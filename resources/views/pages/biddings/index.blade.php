@@ -58,15 +58,16 @@
         </div>
     </div>
 
+    @if($biddingNotices->count() > 0)
         <div class="avisos">
             <h3>Avisos de licitações</h3>
             <div class="swiper-container biddings-carousel">
                 <div class="swiper-wrapper">
-                    @foreach($biddings as $item)
+                    @foreach($biddingNotices as $item)
                         <a href="{{ route('bidding.show', $item->slug) }}" class="swiper-slide box-alert">
                             <div class="title-data">
                                 <span class="title-biddings-alert">
-                                   {{ $item->categories[0]->category->name }}
+                                    {{ $item->categories[0]->category->name }}
                                 </span>
                                 <span class="date">
                                     {{ $item->number }}
@@ -84,7 +85,7 @@
                 </div>
 
             </div>
-            
+
             <div class="btn-swipper">
                 <div class="btn-swipper-custom swiper--prev">
                     <i class="fa-solid fa-arrow-left"></i>
@@ -97,6 +98,7 @@
                 </div>
             </div>
         </div>
+    @endif
     <div class="container">
         @if($biddings->count() > 0)
 
