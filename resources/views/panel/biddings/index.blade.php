@@ -127,11 +127,12 @@
     document.querySelectorAll('.add-notice').forEach(function(element) {
         element.addEventListener('click', function() {
             var dataItemValue = this.getAttribute('data-item');
-            addNotice(dataItemValue);
+            var spanElement = this;
+            addNotice(dataItemValue, spanElement);
         });
     });
 
-    function addNotice(idBidding) {
+    function addNotice(idBidding, spanElement) {
         var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
@@ -140,8 +141,13 @@
             data: {
                 dataItem: idBidding,
                 _token: csrfToken, 
-
             },
+            success: function (response) {
+                $(spanElement).text(response.message);
+            },
+            error: function (error) {
+                $(spanElement).text(response.message);
+            }
         });
     }
 </script>

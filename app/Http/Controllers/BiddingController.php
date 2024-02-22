@@ -892,14 +892,26 @@ class BiddingController extends Controller
 
         // Verifica se já existe um registro com o dataItem
         $existinNotice = ShortcutTransparency::where('page_id', $validatedData['dataItem'])->where('type', 'biddings-notice')->first();
-
+        
         if ($existinNotice) {
-            $existinNotice->delete();
+            try {
+                $existinNotice->delete();
+                return response()->json(['message' => 'Licitação removida da sessão aviso.']);
+            } catch(\Exception $e){
+                return response()->json(['message' => 'Falha na operação.']);
+            }
         } else {
-            ShortcutTransparency::create([
-                'page_id' => $validatedData['dataItem'], 
-                'type' => 'biddings-notice',
-            ]);
+            try {
+                ShortcutTransparency::create([
+                    'page_id' => $validatedData['dataItem'], 
+                    'type' => 'biddings-notice',
+                ]);
+
+                return response()->json(['message' => 'Licitação adicionada a sessão aviso.']);
+            }
+            catch(\Exception $e){
+                return response()->json(['message' => 'Falha na operação.']);
+            }
         }
 
     }
