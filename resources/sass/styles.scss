@@ -4313,6 +4313,19 @@ section{
         color: #fff;
     }
 
+    .title-btn {
+        color: #fff;
+    }
+
+    .title-data {
+        color: #fff;
+        font-weight: 700;
+    }
+
+    .body-data {
+        color: #fff;
+    }
+
     .desc-alert-biddin {
         background-color: #242425;
     }
@@ -4320,4 +4333,62 @@ section{
 
 .title-biddings {
     color: #000;
+    font-weight: 700;
+
+}
+
+.title-data {
+    color: #000;
+    font-weight: 700;
+}
+
+
+.title-btn {
+    color: #000;
+}
+
+.body-data {
+    color: #000;
+}
+
+.square-data {
+    min-height: 240px;
+    border-radius: 8px;
+    border: 1px solid #878080;
+    
+    .header-data {
+        width: 100%;
+        border-bottom: 1px solid #878080;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        align-items: center;
+
+        .title-btn {
+            padding: 4px;
+            width: 90px;
+            border-radius: 8px;
+            transition: 0.3s ease;
+            display: inline-grid;
+            justify-content: center;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+
+        .json {
+            background-color: cornflowerblue;
+            border: 1px solid cornflowerblue;
+        }
+
+        .csv {
+            background-color: #008000;
+            border: 1px solid #008000;
+        }
+    }
+
+    .body-data {
+        padding: 10px;
+    }
 }

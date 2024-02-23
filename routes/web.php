@@ -62,6 +62,7 @@ use App\Http\Controllers\OfficialJournalController;
 use App\Http\Controllers\OmbudsmanPageController;
 use App\Http\Controllers\OmbudsmanQuestionController;
 use App\Http\Controllers\OmbudsmanSurveyController;
+use App\Http\Controllers\OpenDatesController;
 use App\Http\Controllers\OrdinanceController;
 use App\Http\Controllers\OrdinancePageController;
 use App\Http\Controllers\OrganController;
@@ -598,6 +599,10 @@ Route::get('/recipes', [RecipesController::class, 'show'])->name('receitas.page'
 Route::match(['get', 'post'], '/construcoes', [ConstructionController::class, 'show'])->name('obras.page');
 Route::get('/simbolos', [SymbolsController::class, 'page'])->name('simbolos.page');
 Route::get('/termos-de-uso', [TermsOfUseController::class, 'index'])->name('term.index');
+Route::get('/dados-abertos', [OpenDatesController::class, 'index']);
+Route::get('/dados-abertos/{type}', [OpenDatesController::class, 'getDatas']);
+
+
 
 
 Route::resource('/faleconosco', ContactUsController::class);
