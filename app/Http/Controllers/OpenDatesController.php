@@ -71,17 +71,20 @@ class OpenDatesController extends Controller
         }
 
         if ($type == 'decretos-municipais') {
-            $data = Decrees::select('number', 'date', 'description', 'exercicy_id')->with('exercicy_id')->get();
-            
-            if($data->count() > 0){
+            $data = Decrees::select('number', 'date', 'description', 'exercicy_id')
+                ->with(['exercicy:id,name'])
+                ->get();
+
+            if ($data->count() > 0) {
                 return response()->json($data, 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-            }else {
+            } else {
                 return response()->json('Sem dados');
             }
         }
 
         if ($type == 'publicacoes') {
-            $data = Publication::select('title', 'number', 'description', 'exercicy_id')->with('exercicy_id')->get();
+            $data = Publication::select('title', 'number', 'description', 'exercicy_id')->with(['exercicy:id,name'])
+            ->get();
             
             if($data->count() > 0){
                 return response()->json($data, 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
