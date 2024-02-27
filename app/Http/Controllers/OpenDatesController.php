@@ -12,7 +12,9 @@ use App\Models\Daily;
 use App\Models\Decrees;
 use App\Models\Employee;
 use App\Models\Ordinance;
+use App\Models\Page;
 use App\Models\Publication;
+use App\Models\TransparencyGroup;
 use App\Models\Vehicle;
 
 class OpenDatesController extends Controller
@@ -137,6 +139,38 @@ class OpenDatesController extends Controller
 
         return Excel::download(new DataExport($data, $type), $filename);
 
+    }
+
+    public function page(){
+        $page = Page::where('name', 'Dados abertos')->first();
+        $groups = TransparencyGroup::all();
+        return view('panel.open-dates.index', compact('page', 'groups'));
+    }
+
+    public function pageUpdate(Request $request)
+    {
+        $validateData = $request->validate([
+            'main_title' => 'required',
+            'icon' => 'required',
+            'title' => 'required',
+            'description' => 'nullable',
+            'transparency_group_id' => 'required',
+        ], [
+            'main_title.required' => 'O campo título principal é obrigatório',
+            'transparency_group_id.required' => 'O campo Grupo é obrigatório!',
+            'title.required' => 'O campo título é obrigatório',
+            'icon.required' => 'O campo icon é obrigatório',
+        ]);
+
+        $page = Page::where('name', 'Dados abertos')->first();
+        
+        if ($page->update($validateData)) {
+            $page->groupContents()->delete();
+            $page->groupContents()->create(['transparency_group_id' => $validateData['transparency_group_id']]);
+            return redirect()->route('dados-abertos.page')->with('success', 'Informações atualizadas com sucesso!');
+        }
+
+        return redirect()->route('dados-abertos.page')->with('error', 'Por favor tente novamente!');
     }
 
 }

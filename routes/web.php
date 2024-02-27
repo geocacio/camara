@@ -160,6 +160,8 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('panel')->group(function () {
         Route::resource('modelo', ModelController::class);
+        Route::get('open-dates', [OpenDatesController::class, 'page'])->name('dados-abertos.page');
+        Route::put('open-dates', [OpenDatesController::class, 'pageUpdate'])->name('dados-abertos.page.update');
 
         Route::get('settings-page', [SettingController::class, 'page'])->name('settings.page');
         Route::put('settings-page', [SettingController::class, 'pageUpdate'])->name('settings.page.update');
@@ -599,7 +601,7 @@ Route::get('/recipes', [RecipesController::class, 'show'])->name('receitas.page'
 Route::match(['get', 'post'], '/construcoes', [ConstructionController::class, 'show'])->name('obras.page');
 Route::get('/simbolos', [SymbolsController::class, 'page'])->name('simbolos.page');
 Route::get('/termos-de-uso', [TermsOfUseController::class, 'index'])->name('term.index');
-Route::get('/dados-abertos', [OpenDatesController::class, 'index']);
+Route::get('/dados-abertos', [OpenDatesController::class, 'index'])->name('dados.show');
 Route::get('/dados-abertos/{type}', [OpenDatesController::class, 'getDatas']);
 Route::get('/dados-abertos/csv/{type}', [OpenDatesController::class, 'csvGenerate']);
 
