@@ -55,7 +55,7 @@ class OpenDatesController extends Controller
         }
 
         if ($type == 'diarias') {
-            $data = Daily::select('name')->get();
+            $data = Daily::select('number', 'ordinance_date', 'agent', 'unit_price', 'quantity', 'amount', 'justification')->get();
 
             return response()->json($data, 200, ['Content-Type' => 'application/json; charset=UTF-8'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
         }
@@ -118,13 +118,16 @@ class OpenDatesController extends Controller
                 unset($contract['company']);
             }            
         } elseif ($type == 'veiculos') {
-            $data = Vehicle::select('situation', 'model', 'brand', 'plate', 'year', 'donation', 'type', 'purpose_vehicle', 'description', 'period')->get()->toArray();
+            $data = Vehicle::select('situation', 'model', 'brand', 'plate', 'renavam', 'year', 'donation', 'type', 'purpose_vehicle', 'description', 'period')->get()->toArray();
         } elseif ($type == 'decretos-municipais') {
             $data = Decrees::select('number', 'date', 'description', 'exercicy_id')->with('exercicy_id')->get()->toArray();
         } elseif ($type == 'publicacoes') {
             $data = Publication::select('title', 'number', 'description', 'exercicy_id')->with('exercicy_id')->get()->toArray();
         } elseif ($type == 'portarias') {
             $data = Ordinance::select('number', 'date', 'agent', 'detail')->with('exercicy_id')->get()->toArray();
+        }
+        elseif ($type == 'diarias') {
+            $data = Daily::select('ordinance_date', 'number', 'agent', 'unit_price', 'quantity', 'amount', 'justification')->get()->toArray();
         }
 
         $filename = $type . '_cidelandia.xlsx';

@@ -99,6 +99,17 @@ class DataExport implements FromCollection, WithHeadings
                     'Detalhes',
                 ];
                 break;
+            case 'diarias':
+                $this->columnMappings = [
+                    'Número',
+                    'Data',
+                    'Agente',
+                    'Preço unitário',
+                    'Quant',
+                    'Valor Total',
+                    'Justificativa',
+                ];
+                break;
         }
     }
 }
