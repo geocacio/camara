@@ -601,6 +601,7 @@ Route::get('/simbolos', [SymbolsController::class, 'page'])->name('simbolos.page
 Route::get('/termos-de-uso', [TermsOfUseController::class, 'index'])->name('term.index');
 Route::get('/dados-abertos', [OpenDatesController::class, 'index']);
 Route::get('/dados-abertos/{type}', [OpenDatesController::class, 'getDatas']);
+Route::get('/dados-abertos/csv/{type}', [OpenDatesController::class, 'csvGenerate']);
 
 
 

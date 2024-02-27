@@ -28,6 +28,11 @@ class Publication extends Model
         return 'slug';
     }
     
+    public function exercicy()
+    {
+        return $this->belongsTo(Category::class, 'exercicy_id');
+    }
+
     public function files()
     {
         return $this->morphMany(FileContent::class, 'fileable');
