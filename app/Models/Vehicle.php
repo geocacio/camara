@@ -15,6 +15,7 @@ class Vehicle extends Model
         'model',
         'brand',
         'plate',
+        'renavam',
         'year',
         'donation',
         'type',

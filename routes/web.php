@@ -668,7 +668,7 @@ Route::get('/transparencia', [App\Http\Controllers\TransparencyPortalController:
 Route::prefix('/transparencia')->group(function () {
     Route::match(['get', 'post'], 'veiculos', [App\Http\Controllers\VehicleController::class, 'show'])->name('veiculos.show');
     Route::get('veiculos-page', [App\Http\Controllers\VehicleController::class, 'page'])->name('veiculos.page');
-    Route::put('veiculos-page', [App\Http\Controllers\VehicleController::class, 'pageUpdate'])->name('veiculos.update');
+    Route::put('veiculos-page', [App\Http\Controllers\VehicleController::class, 'pageUpdate'])->name('veiculos.update.page');
     Route::get('veiculo/{modelo?}', [App\Http\Controllers\VehicleController::class, 'single'])->name('veiculos.single');
     Route::match(['get', 'post'], '/leis', [App\Http\Controllers\LawController::class, 'show'])->name('leis.show');
     Route::get('leis/{category?}', [App\Http\Controllers\LawController::class, 'byCategory'])->name('leis.category');

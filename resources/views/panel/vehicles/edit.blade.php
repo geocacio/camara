@@ -21,8 +21,8 @@
         </div>
         @endif
         
-        <form action="{{ route('veiculos.store') }}" method="post">
-            @csrf
+        <form action="{{ route('veiculos.update', $vehicle->slug) }}" method="post">
+            @csrf  @method('put') 
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -62,6 +62,13 @@
                 </div>
 
                 <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Renavam</label>
+                        <input type="text" name="renavam" class="form-control" value="{{ old('renavam', $vehicle->renavam) }}" />
+                    </div>
+                </div>
+
+                <div class="col-md-12">
                     <div class="form-group">
                         <label>Ano do veículo</label>
                         <input type="text" name="year" class="form-control" value="{{ old('year', $vehicle->year) }}" />

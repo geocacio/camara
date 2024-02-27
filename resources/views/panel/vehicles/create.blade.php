@@ -63,6 +63,13 @@
 
                 <div class="col-md-6">
                     <div class="form-group">
+                        <label>Renavam</label>
+                        <input type="text" name="renavam" class="form-control" value="{{ old('renavam') }}" />
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
                         <label>Ano do veículo</label>
                         <input type="text" name="year" class="form-control" value="{{ old('year') }}" />
                     </div>

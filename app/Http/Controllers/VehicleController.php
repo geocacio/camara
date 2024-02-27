@@ -81,6 +81,7 @@ class VehicleController extends Controller
             'model' => 'required',
             'brand' => 'required',
             'plate' => 'required',
+            'renavam' => 'required',
             'year' => 'required',
             'donation' => 'required',
             'type' => 'required',
@@ -93,6 +94,7 @@ class VehicleController extends Controller
             'model.required' => 'O campo Modelo é obrigatório!',
             'brand.required' => 'O campo Marca é obrigatório!',
             'plate.required' => 'O campo Placa é obrigatório!',
+            'renavam.required' => 'O campo Renavam é obrigatório!',
             'year.required' => 'O campo Ano é obrigatório!',
             'donation.required' => 'O campo Doação é obrigatório!',
             'type.required' => 'O campo Tipo é obrigatório!',
@@ -254,13 +256,14 @@ class VehicleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Vehicle $vehicle)
+    public function update(Request $request, Vehicle $veiculo)
     {
         $validateData = $request->validate([
             'situation' => 'required',
             'model' => 'required',
             'brand' => 'required',
             'plate' => 'required',
+            'renavam' => 'required',
             'year' => 'required',
             'donation' => 'required',
             'type' => 'required',
@@ -274,13 +277,14 @@ class VehicleController extends Controller
             'model.required' => 'O campo Modelo é obrigatório!',
             'brand.required' => 'O campo Marca é obrigatório!',
             'plate.required' => 'O campo Placa é obrigatório!',
+            'renavam.required' => 'O campo Renavam é obrigatório!',
             'year.required' => 'O campo Ano é obrigatório!',
             'donation.required' => 'O campo Doação é obrigatório!',
             'type.required' => 'O campo Tipo é obrigatório!',
             'purpose_vehicle.required' => 'O campo Finalidade é obrigatório!'
         ]);
 
-        if($vehicle->update($validateData)){
+        if($veiculo->update($validateData)){
             return redirect()->route('veiculos.index')->with('success', 'Veículo atualizado com sucesso!');
         }else {
             return redirect()->back()->with('error', 'Falha ao tentar atualizar veículo!');
