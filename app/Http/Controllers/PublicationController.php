@@ -69,12 +69,11 @@ class PublicationController extends Controller
      */
     public function create()
     {
-        $secretaries = Secretary::all();
         $exercicies = Category::where('slug', 'exercicios')->with('children')->first();
         $competencies = Category::where('slug', 'competencias')->with('children')->first();
         $groups = Category::where('slug', 'grupos')->with('children')->first();
         $types = Type::where('slug', 'publications')->first()->children;
-        return view('panel.transparency.publications.create', compact('secretaries', 'types', 'exercicies', 'competencies', 'groups'));
+        return view('panel.transparency.publications.create', compact('types', 'exercicies', 'competencies', 'groups'));
     }
 
     /**
@@ -85,7 +84,7 @@ class PublicationController extends Controller
         // dd('passou aqui');
         $validateData = $request->validate(
             [
-                'secretary_id' => 'required',
+                // 'secretary_id' => 'required',
                 'group_id' => 'required',
                 'type_id' => 'required',
                 'competency_id' => 'required',
@@ -97,7 +96,7 @@ class PublicationController extends Controller
                 'file' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}"
             ],
             [
-                'secretary_id.required' => 'O campo Secretaria é obrigatótio',
+                // 'secretary_id.required' => 'O campo Secretaria é obrigatótio',
                 'group_id.required' => 'O campo Grupo é obrigatótio',
                 'title.required' => 'O campo Título é obrigatótio',
                 'type_id.required' => 'O campo Tipo é obrigatótio',
@@ -176,12 +175,12 @@ class PublicationController extends Controller
     {
         $publication = $all_publication;
         
-        $secretaries = Secretary::all();
+        // $secretaries = Secretary::all();
         $exercicies = Category::where('slug', 'exercicios')->with('children')->first();
         $competencies = Category::where('slug', 'competencias')->with('children')->first();
         $groups = Category::where('slug', 'grupos')->with('children')->first();
         $types = Type::where('slug', 'publications')->first()->children;
-        return view('panel.transparency.publications.edit', compact('publication', 'secretaries', 'types', 'exercicies', 'competencies', 'groups'));
+        return view('panel.transparency.publications.edit', compact('publication', 'types', 'exercicies', 'competencies', 'groups'));
     }
 
     /**
@@ -191,7 +190,7 @@ class PublicationController extends Controller
     {
         $validateData = $request->validate(
             [
-                'secretary_id' => 'required',
+                // 'secretary_id' => 'required',
                 'group_id' => 'required',
                 'type_id' => 'required',
                 'competency_id' => 'required',
@@ -203,7 +202,7 @@ class PublicationController extends Controller
                 'file' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}"
             ],
             [
-                'secretary_id.required' => 'O campo Secretaria é obrigatótio',
+                // 'secretary_id.required' => 'O campo Secretaria é obrigatótio',
                 'group_id.required' => 'O campo Grupo é obrigatótio',
                 'title.required' => 'O campo Título é obrigatótio',
                 'type_id.required' => 'O campo Tipo é obrigatótio',

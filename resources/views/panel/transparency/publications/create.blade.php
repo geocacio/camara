@@ -19,7 +19,6 @@
     @endif
 
     <div class="card-body">
-        @if($secretaries->count() > 0)
         <form action="{{ route('all-publications.store') }}" method="post" enctype="multipart/form-data">
             @csrf
 
@@ -60,7 +59,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <div class="form-group">
                         <label for="title1">Selecione a Secretaria</label>
                         <select name="secretary_id" class="form-control">
@@ -70,7 +69,7 @@
                             @endforeach
                         </select>
                     </div>
-                </div>
+                </div> --}}
             </div>
 
             <div class="row">
@@ -126,12 +125,6 @@
                 <button type="submit" class="btn-submit-default">Guardar</button>
             </div>
         </form>
-        @else
-        <div class="no-data">
-            <span>Você precisa ter pelo menos uma secretaria cadastrada!</span>
-            <a href="{{ route('secretaries.create') }}" class="link">Criar</a>
-        </div>
-        @endif
     </div>
 </div>
 @endsection

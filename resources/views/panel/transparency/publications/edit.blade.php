@@ -60,7 +60,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <div class="form-group">
                         <label for="title1">Selecione a Secretaria</label>
                         <select name="secretary_id" class="form-control">
@@ -70,7 +70,7 @@
                             @endforeach
                         </select>
                     </div>
-                </div>
+                </div> --}}
             </div>
 
             <div class="row">
