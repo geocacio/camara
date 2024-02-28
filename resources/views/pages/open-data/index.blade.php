@@ -72,11 +72,11 @@
                             <div class="body-data">
                                 <ul>
                                     <li>Numero</li>
-                                    <li>DataContrato</li>
+                                    <li>Data Contrato</li>
                                     <li>Objeto</li>
                                     <li>Exercicio</li>
-                                    <li>ValorGlobal</li>
-                                    <li>NomeCredor</li>
+                                    <li>Valor Global</li>
+                                    <li>Nome Credor</li>
                                     <li>Tipo</li>
                                 </ul> 
                             </div>
@@ -96,10 +96,10 @@
                             <div class="body-data">
                                 <ul>
                                     <li>Exercicio</li>
-                                    <li>NomeDesc</li>
-                                    <li>ValorTot</li>
+                                    <li>Nome Desc</li>
+                                    <li>Valor Total</li>
                                     <li>Quant</li>
-                                    <li>ValorUnit</li>
+                                    <li>Valor Unit</li>
                                     <li>Nome</li>
                                     <li>Numero</li>
                                     <li>Data</li>
@@ -123,7 +123,7 @@
                                     <li>DescTipoArq</li>
                                     <li>Exercicio</li>
                                     <li>Data</li>
-                                    <li>DescLei</li>
+                                    <li>Desc Lei</li>
                                 </ul> 
                             </div>
                         </div>
@@ -145,7 +145,6 @@
                                     <li>DataMod</li>
                                     <li>Descricao</li>
                                     <li>Marca</li>
-                                    <li>Idveiculo</li>
                                     <li>Placa</li>
                                 </ul> 
                             </div>
@@ -231,14 +230,11 @@
                                     <li>Numero</li>
                                     <li>Exercicio</li>
                                     <li>Nome</li>
-                                    <li>Secretaria</li>
-                                    <li>DescCargo</li>
+                                    <li>Desc Cargo</li>
                                     <li>Matricula</li>
-                                    <li>Nome</li>
                                     <li>Cargo</li>
-                                    <li>Secretaria</li>
                                     <li>Vinculo</li>
-                                    <li>CargaHoraria</li>
+                                    <li>Carga Horaria</li>
                                     <li>Valor</li>
                                 </ul> 
                             </div>
