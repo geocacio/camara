@@ -8,9 +8,17 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('publications.update', ['official_diary' => $official_diary->id, 'publication' => $publication->slug]) }}" method="post">
+        <form action="{{ route('publications.update', ['official_diary' => $official_diary->id, 'publication' => $publication->slug]) }}" enctype="multipart/form-data" method="post">
             @csrf
             @method('PUT')
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="logo">Enviar diário assinado</label>
+                    <input type="file" name="signedDiary" accept="application/pdf" class="form-control">
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-md-6">
                     @if($summaries && $summaries->count() > 0)

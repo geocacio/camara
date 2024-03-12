@@ -8,6 +8,7 @@ use App\Models\OfficialJournal;
 use App\Models\Secretary;
 use App\Models\SecretaryPublication;
 use App\Models\User;
+use App\Services\FileUploadService;
 use App\Services\GeneralCrudService;
 use App\Services\PdfServices;
 use Carbon\Carbon;
@@ -20,11 +21,13 @@ class SecretaryPublicationController extends Controller
 {
     private $crud;
     private $officialDiaryPdf;
+    private $fileUploadService;
 
-    public function __construct(GeneralCrudService $crud, PdfServices $officialDiaryPdf)
+    public function __construct(GeneralCrudService $crud, PdfServices $officialDiaryPdf, FileUploadService $fileUploadService)
     {
         $this->crud = $crud;
         $this->officialDiaryPdf = $officialDiaryPdf;
+        $this->fileUploadService = $fileUploadService;
     }
 
     /**
@@ -101,11 +104,13 @@ class SecretaryPublicationController extends Controller
      */
     public function update(Request $request, OfficialJournal $official_diary, SecretaryPublication $publication)
     {
+        // dd($request->signedDiary);
         $validatedData = $request->validate([
             'summary_id' => 'required',
             'title' => 'required',
             'content' => 'required',
             'column' => 'nullable',
+            // 'signedDiary' => 'nullable|file|mimes:pdf',
         ]);
         $validatedData['secretary_id'] = Auth::user()->employee && Auth::user()->employee->responsible ? Auth::user()->employee->responsible->responsibleable->id : null;
 
@@ -116,11 +121,31 @@ class SecretaryPublicationController extends Controller
         }
         $validatedData['diary_id'] = $official_diary->id;
 
-        if ($publication->update($validatedData)) {
-            $this->officialDiaryPdf->officialDiaryGenerate($official_diary);
+        if ($request->signedDiary) {
+            if (!empty($official_diary->files)) {
+                foreach ($official_diary->files as $pdf) {
+                    Storage::disk('public')->delete($pdf->file->url);
+                    $pdf->delete();
+                    $pdf->file->delete();
+                }
+            }
+
+            $url = $this->fileUploadService->upload($request->file('signedDiary'), 'official_journals');
+            $newFile = File::create(['url' => $url]);
+            $official_diary->files()->create(['file_id' => $newFile->id]);
+
+            $publication->update($validatedData);
 
             return redirect()->route('publications.index', $official_diary->id)->with('success', 'Publicação atualizada com sucesso!');
+        } else {
+            // $this->officialDiaryPdf->officialDiaryGenerate($official_diary);
+            if ($publication->update($validatedData)) {
+                $this->officialDiaryPdf->officialDiaryGenerate($official_diary);
+    
+                return redirect()->route('publications.index', $official_diary->id)->with('success', 'Publicação atualizada com sucesso!');
+            }
         }
+
         return redirect()->back()->with('error', 'Por faovor tente novamente!');
     }
 
