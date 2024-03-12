@@ -33,6 +33,9 @@
                         <td class="actions text-right">
                             <a href="{{ route('publications.edit', ['official_diary' => $official_diary->id, 'publication' => $publication->slug]) }}" class="link edit"><i class="fas fa-edit"></i></a>
                             <a data-toggle="modal" data-target="#myModal{{$publication->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a>
+                            <a href="{{ asset('storage/'.$publication->diary->files[0]->file->url) }}" target="_blank">
+                                <i class="fa fa-download"></i>                        
+                            </a>
 
                             <div id="myModal{{$publication->id}}" class="modal fade modal-warning" role="dialog">
                                 <div class="modal-dialog modal-dialog-centered">
