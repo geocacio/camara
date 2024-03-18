@@ -377,53 +377,62 @@
             </div>
 
             <div class="tab-pane fade" id="tabCompany" role="tabpanel" aria-labelledby="company-tab">
-
-                <form id="formCompany">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Nome</label>
-                                <input type="text" name="company_name" class="form-control" value="{{ old('company_name', $bidding->name) }}" />
+               <div>
+                    @foreach ($bidding->companies as $company)
+                        <form id="formCompany" class="formCompany form-employer-{{ $company->id }}">
+                            <div class="remove-emplyer" onclick="removeCompany({{ rand() . $company->id }})">
+                                <span class="x"><i class="fa-regular fa-trash-can"></i></span> <span class="remove-btn">Remover empresa</span>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>CNPJ</label>
-                                <input type="text" name="company_cnpj" class="form-control mask-cnpj" value="{{ old('company_cnpj', $bidding->cnpj) }}" />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Nome</label>
+                                        <input type="text" name="company_name" class="form-control" value="{{ old('company_name', $company->name) }}" />
+                                        <input type="hidden" name="company_id" class="form-control" value="{{ old('company_id', $company->id) }}" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>CNPJ</label>
+                                        <input type="text" name="company_cnpj" class="form-control mask-cnpj" value="{{ old('company_cnpj', $company->cnpj) }}" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Endereço</label>
-                                <input type="text" name="company_address" class="form-control" value="{{ old('company_address', $bidding->address) }}" />
+        
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Endereço</label>
+                                        <input type="text" name="company_address" class="form-control" value="{{ old('company_address', $company->address) }}" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Cidade</label>
+                                        <input type="text" name="company_city" class="form-control" value="{{ old('company_city', $company->city) }}" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Cidade</label>
-                                <input type="text" name="company_city" class="form-control" value="{{ old('company_city', $bidding->city) }}" />
+        
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Estado</label>
+                                        <input type="text" name="company_state" class="form-control" value="{{ old('company_state', $company->state) }}" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>País</label>
+                                        <input type="text" name="company_country" class="form-control" value="{{ old('country', $company->country) }}" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Estado</label>
-                                <input type="text" name="company_state" class="form-control" value="{{ old('company_state', $bidding->state) }}" />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>País</label>
-                                <input type="text" name="company_country" class="form-control" value="{{ old('country', $bidding->country) }}" />
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                            <input type="hidden" name="company_data" id="companyDataInput" value="">
+                        </form>
+                    @endforeach
+                </div>
+                <button id="adicionarEmpresaButton"  class="btn-submit-default" onclick="adicionarEmpresa()">Adicionar outra empresa</button>
             </div>
         </div>
 
@@ -596,6 +605,7 @@
     });
 
     function submitBiddingForm() {
+        enviarFormulario();
         const biddingForm = document.getElementById('biddingSubmit');
         const biddingData = new FormData(biddingForm);
         const companyForm = document.getElementById('formCompany');
@@ -910,6 +920,94 @@
         });
     }
 
+    function adicionarEmpresa() {
+        var originalForm = document.getElementById('formCompany');
+        var cloneForm = originalForm.cloneNode(true);
+
+        var existingCompanyDataInput = cloneForm.querySelector('#companyDataInput');
+        if (existingCompanyDataInput) {
+            existingCompanyDataInput.remove();
+        }
+
+        var inputs = cloneForm.querySelectorAll('input');
+        inputs.forEach(function(input) {
+            input.value = '';
+        });
+
+        var button = document.getElementById('adicionarEmpresaButton');
+        document.getElementById('tabCompany').insertBefore(cloneForm, button);
+    }
+
+    function enviarFormulario() {
+        var forms = document.querySelectorAll('.formCompany');
+        var formDataArray = [];
+
+        forms.forEach(function(form) {
+            if (form instanceof HTMLFormElement) { // Verifica se é um formulário HTML
+                var formData = new FormData(form);
+                var dataObject = {};
+
+                formData.forEach(function(value, key) {
+                    if (dataObject[key] !== undefined) {
+                        if (!Array.isArray(dataObject[key])) {
+                            dataObject[key] = [dataObject[key]];
+                        }
+                        dataObject[key].push(value);
+                    } else {
+                        dataObject[key] = value;
+                    }
+                });
+
+                formDataArray.push(dataObject);
+            }
+        });
+
+        let companyDataInput = document.getElementById('companyDataInput').value = JSON.stringify(formDataArray);
+        console.log(companyDataInput)
+    }
+
+    function removeCompany(id) {
+        let form = document.querySelector('.form-employer-'+id);
+        if (form) {
+            form.remove();
+        }
+    }
 </script>
 
 @endsection
+
+<style>
+.remove-emplyer {
+    display: flex;
+    width: 40px;
+    background-color: tomato;
+    padding: 10px;
+    color: #fff;
+    cursor: pointer;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    height: 43.05;
+    border-radius: 5px;
+    transition: 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.remove-btn {
+    display: none;
+    white-space: nowrap;
+}
+
+.remove-emplyer:hover {
+    width: 135px;
+}
+
+.remove-emplyer:hover .x {
+    display: none;
+}
+
+.remove-emplyer:hover .remove-btn {
+    display: flex;
+}
+
+</style>

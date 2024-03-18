@@ -69,6 +69,10 @@ class Bidding extends Model
         return $this->hasOne(Company::class);
     }
 
+    public function companies(){
+        return $this->hasMany(Company::class);
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';

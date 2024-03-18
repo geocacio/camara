@@ -309,7 +309,10 @@
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" name="company_data" id="companyDataInput" value="">
                 </form>
+
+                <button id="adicionarEmpresaButton"  class="btn-submit-default" onclick="adicionarEmpresa()">Adicionar outra empresa</button>
             </div>
         </div>
 
@@ -432,6 +435,10 @@
         font-weight: 900;
         color: tomato;
     }
+
+    .formCompany {
+        margin-bottom: 30px;
+    }
 </style>
 
 <script>
@@ -440,6 +447,8 @@
     let files = [];
 
     function submitBiddingForm() {
+        enviarFormulario();
+    
         const biddingForm = document.getElementById('biddingSubmit');
         const biddingData = new FormData(biddingForm);
 
@@ -459,6 +468,7 @@
             const file = fileData[fileId].file;
             biddingData.append(fileId, file);
         });
+
 
         axios.post('/panel/biddings', biddingData, {
                 headers: {
@@ -840,7 +850,65 @@
     }
 }
 
-
 </script>
 
+<script>
+function adicionarEmpresa() {
+    var cloneForm = document.getElementById('formCompany').cloneNode(true);
+
+    // Remover o campo companyDataInput do formulário clonado, se existir
+    var existingCompanyDataInput = cloneForm.querySelector('#companyDataInput');
+    if (existingCompanyDataInput) {
+        existingCompanyDataInput.remove();
+    }
+
+    // Limpar os valores dos campos clonados
+    var inputs = cloneForm.querySelectorAll('input');
+    inputs.forEach(function(input) {
+        input.value = '';
+    });
+
+    // Adicionar o formulário clonado antes do botão
+    var button = document.getElementById('adicionarEmpresaButton');
+    document.getElementById('tabCompany').insertBefore(cloneForm, button);
+}
+
+
+function enviarFormulario() {
+    // Obter todos os formulários dentro da div com a classe "tab-pane"
+    var forms = document.querySelectorAll('#tabCompany form');
+
+    // Criar um array para armazenar os dados dos formulários
+    var formDataArray = [];
+
+    // Iterar sobre cada formulário e obter os dados
+    forms.forEach(function(form) {
+        var formData = new FormData(form);
+
+        // Converter FormData para objeto JavaScript
+        var dataObject = {};
+        formData.forEach(function(value, key) {
+            // Verificar se a chave já existe no objeto
+            if (dataObject[key] !== undefined) {
+                // Se já existir, converter para array e adicionar o valor
+                if (!Array.isArray(dataObject[key])) {
+                    dataObject[key] = [dataObject[key]];
+                }
+                dataObject[key].push(value);
+            } else {
+                // Se não existir, atribuir o valor diretamente
+                dataObject[key] = value;
+            }
+        });
+
+        // Adicionar o objeto de dados ao array
+        formDataArray.push(dataObject);
+    });
+
+    // Converter o array para JSON e definir como valor do input hidden
+    document.getElementById('companyDataInput').value = JSON.stringify(formDataArray);
+    console.log(formDataArray);
+}
+
+</script>
 @endsection

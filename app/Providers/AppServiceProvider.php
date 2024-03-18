@@ -79,6 +79,7 @@ class AppServiceProvider extends ServiceProvider
             'no-vehicles' => 'App\Models\NoVehicles',
             'lai' => 'App\Models\Lai',
             'no-info' => 'App\Models\NoInfo',
+            'atas' => 'App\Models\RegisterPrice',
         ]);
 
         //Verificar se existe a tabela maintenance

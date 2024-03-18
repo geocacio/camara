@@ -119,7 +119,7 @@
                             <tbody>
                                 @foreach($biddings as $item)
                                     <tr>
-                                        <td>{{ $item->categories[0]->category->name }} - {{ $item->number }}</td>
+                                        <td>{{ $item->number }}</td>
                                         <td>{{ \Illuminate\Support\Str::limit($item->description, $limit = 100, $end = '...') }}</td>
                                         <td>{{ date('d/m/Y', strtotime($item->opening_date)) }}</td>
                                         <td style="cursor: pointer"> 

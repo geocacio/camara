@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bidding;
 use App\Models\Category;
 use App\Models\CategoryContent;
+use App\Models\Company;
 use App\Models\Contract;
 use App\Models\DisplayOrder;
 use App\Models\Employee;
@@ -21,6 +22,7 @@ use App\Models\User;
 use App\Services\FileUploadService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class BiddingController extends Controller
@@ -121,16 +123,16 @@ class BiddingController extends Controller
             'country' => 'nullable',
         ]);
 
-        if ($request->company_name != '') {
-            $request->validate([
-                'company_name' => 'required',
-                'company_cnpj' => 'required',
-                'company_address' => 'required',
-                'company_city' => 'required',
-                'company_state' => 'required',
-                'company_country' => 'required',
-            ]);
-        }
+        // if ($request->company_name != '') {
+        //     $request->validate([
+        //         'company_name' => 'required',
+        //         'company_cnpj' => 'required',
+        //         'company_address' => 'required',
+        //         'company_city' => 'required',
+        //         'company_state' => 'required',
+        //         'company_country' => 'required',
+        //     ]);
+        // }
 
         if($request['type_bidding']){
             $validatedData['bidding_type'] = $request['type_bidding'];
@@ -144,16 +146,31 @@ class BiddingController extends Controller
 
         $bidding = Bidding::create($validatedData);
         if ($bidding) {
+            $companiesDataString = $request->company_data;
+            $companiesData = json_decode($companiesDataString, true);
 
-            if ($request->company_name != '') {
-                $bidding->company()->create([
-                    'name' => $request->company_name,
-                    'cnpj' => $request->company_cnpj,
-                    'address' => $request->company_address,
-                    'city' => $request->company_city,
-                    'state' => $request->company_state,
-                    'country' => $request->company_country,
-                    'slug' => Str::slug($request->company_name),
+             foreach ($companiesData as $companyData) {
+                $companyValidation = Validator::make($companyData, [
+                    'company_name' => 'required',
+                    'company_cnpj' => 'required',
+                    'company_address' => 'required',
+                    'company_city' => 'required',
+                    'company_state' => 'required',
+                    'company_country' => 'required',
+                ]);
+
+                if ($companyValidation->fails()) {
+                    return response()->json(['error' => $companyValidation->errors()], 400);
+                }
+
+                $company = $bidding->companies()->create([
+                    'name' => $companyData['company_name'],
+                    'cnpj' => $companyData['company_cnpj'],
+                    'address' => $companyData['company_address'],
+                    'city' => $companyData['company_city'],
+                    'state' => $companyData['company_state'],
+                    'country' => $companyData['company_country'],
+                    'slug' => Str::slug($companyData['company_name']),
                 ]);
             }
 
@@ -375,7 +392,7 @@ class BiddingController extends Controller
         $exercicies = Category::where('slug', 'exercicios')->with('children')->get();
         $responsibilities = Category::where('slug', 'responsabilidades')->with('children')->get();
         $employees = Employee::all();
-
+        
         $availableFiles = [];
         if ($bidding->files->count() > 0) {
             foreach ($bidding->files as $fileContent) {
@@ -393,7 +410,7 @@ class BiddingController extends Controller
      */
     public function update(Request $request, Bidding $bidding)
     {
-        // dd($request);
+        // dd($request->company_data);
         $validatedData = $request->validate([
             'number' => 'required',
             'object' => 'nullable',
@@ -423,18 +440,63 @@ class BiddingController extends Controller
         }
 
         if ($bidding->update($validatedData)) {
+            $companiesDataString = $request->company_data;
+            $companiesData = json_decode($companiesDataString, true);
 
-            if ($request->company_name != '') {
-
-                $bidding->company()->update([
-                    'name' => $request->company_name,
-                    'cnpj' => $request->company_cnpj,
-                    'address' => $request->company_address,
-                    'city' => $request->company_city,
-                    'state' => $request->company_state,
-                    'country' => $request->company_country,
+            foreach ($companiesData as $companyData) {
+                $companyValidation = Validator::make($companyData, [
+                    'company_name' => 'required',
+                    'company_cnpj' => 'required',
+                    'company_address' => 'required',
+                    'company_city' => 'required',
+                    'company_state' => 'required',
+                    'company_country' => 'required',
                 ]);
+
+                if ($companyValidation->fails()) {
+                    return response()->json(['error' => $companyValidation->errors()], 400);
+                }
+
+                if (!empty($companyData['company_id'])) {
+                    // Atualizar a empresa existente
+                    $existingCompany = $bidding->companies()->find($companyData['company_id']);
+        
+                    if ($existingCompany) {
+                        $existingCompany->update([
+                            'name' => $companyData['company_name'],
+                            'cnpj' => $companyData['company_cnpj'],
+                            'address' => $companyData['company_address'],
+                            'city' => $companyData['company_city'],
+                            'state' => $companyData['company_state'],
+                            'country' => $companyData['company_country'],
+                            'slug' => Str::slug($companyData['company_name']),
+                        ]);
+                    }
+                } else {
+                    // Criar uma nova empresa
+                    $company = $bidding->companies()->create([
+                        'name' => $companyData['company_name'],
+                        'cnpj' => $companyData['company_cnpj'],
+                        'address' => $companyData['company_address'],
+                        'city' => $companyData['company_city'],
+                        'state' => $companyData['company_state'],
+                        'country' => $companyData['company_country'],
+                        'slug' => Str::slug($companyData['company_name']),
+                    ]);
+                }
             }
+
+            // if ($request->company_name != '') {
+
+            //     $bidding->company()->update([
+            //         'name' => $request->company_name,
+            //         'cnpj' => $request->company_cnpj,
+            //         'address' => $request->company_address,
+            //         'city' => $request->company_city,
+            //         'state' => $request->company_state,
+            //         'country' => $request->company_country,
+            //     ]);
+            // }
 
             $bidding->categories()->delete();
             $transparency = Category::where('slug', 'transparencia')->first();
