@@ -380,7 +380,7 @@
                <div>
                     @foreach ($bidding->companies as $company)
                         <form id="formCompany" class="formCompany form-employer-{{ $company->id }}">
-                            <div class="remove-emplyer" onclick="removeCompany({{ $company->id }})">
+                            <div class="remove-emplyer" onclick="removeCompany(this)">
                                 <span class="x"><i class="fa-regular fa-trash-can"></i></span> <span class="remove-btn">Remover empresa</span>
                             </div>
                             <div class="row">
@@ -966,12 +966,20 @@
         console.log(companyDataInput)
     }
 
-    function removeCompany(id) {
-        let form = document.querySelector('.form-employer-'+id);
+    function removeCompany(button) {
+        var form = button.parentNode;
+        while (form && form.tagName !== 'FORM') {
+            form = form.parentNode;
+        }
+        
         if (form) {
             form.remove();
+        } else {
+            console.log("Formulário não encontrado.");
         }
     }
+
+
 </script>
 
 @endsection
