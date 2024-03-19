@@ -35,7 +35,7 @@
                             <div class="row">
                                 <div class="col-md-2">
                                     <div class="form-group mb-0">
-                                        <label>Período da licitação:</label>
+                                        <label>Período:</label>
                                         <input type="text" name="start_date" class="form-control mask-date" value="{{ isset($searchData['start_date']) ? old('start_date', $searchData['start_date']) : '' }}" />
                                     </div>
                                 </div>
@@ -93,11 +93,11 @@
                             <tbody>
                                 @foreach($bidding as $item)
                                     <tr>
-                                        <td>{{ $item->number }}</td>
-                                        <td>{{ $item->description }}</td>
+                                        <td>{{ $item->title }}</td>
+                                        <td>{{ $item->object }}</td>
                                         <td>{{ date('d/m/Y', strtotime($item->opening_date)) }}</td>
                                         <td style="cursor: pointer"> 
-                                            <a href="{{ route('bidding.show', $item->slug) }}">
+                                            <a href="{{ route('register-price.show', $item->slug) }}">
                                                 <i class="fa-regular fa-eye"></i>
                                             </a>
                                         </td>

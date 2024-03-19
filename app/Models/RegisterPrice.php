@@ -16,12 +16,18 @@ class RegisterPrice extends Model
         'bidding_process',
         'company_id',
         'exercicio_id',
+        'object',
         'slug',
     ];
 
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function bidding()
+    {
+        return $this->belongsTo(Bidding::class, 'bidding_process');
     }
 
     public function files()

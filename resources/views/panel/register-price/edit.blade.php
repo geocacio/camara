@@ -27,33 +27,19 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="title1">Processo Licitatório</label>
-                            <select name="bidding_process" class="form-control">
-                                <option value="">Selecione</option>
-                                @foreach($biddings as $bidding)
-                                    <option value="{{ $bidding->id }}" {{ $bidding->id == $register_price->bidding_process ? 'selected' : '' }}>
-                                        {{ $bidding->number }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
                             <label>Data de assinatura</label>
                             <input type="date" name="signature_date" class="form-control" value="{{ old('signature_date', $register_price->signature_date) }}" />
                         </div>
                     </div>
-                </div>
-
-                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Data de Validade</label>
                             <input type="date" name="expiry_date" class="form-control" value="{{ old('expiry_date', $register_price->expiry_date) }}" />
                         </div>
                     </div>
+                </div>
+
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Exercício</label>
@@ -67,15 +53,13 @@
                             </select>
                         </div>
                     </div>
-                </div>
 
-                {{-- <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="title1">Credor</label>
                             <select name="company_id" class="form-control">
                                 <option value="">Selecione</option>
-                                @foreach($biddings->company as $company)
+                                @foreach($bidding->companies as $company)
                                     <option value="{{ $company->id }}" {{ $company->id == $register_price->company_id ? 'selected' : '' }}>
                                         {{ $company->name }}
                                     </option>
@@ -83,7 +67,7 @@
                             </select>
                         </div>
                     </div>
-                </div> --}}
+                </div>
 
                 <div class="form-group">
                     <label for="file">Arquivo</label>

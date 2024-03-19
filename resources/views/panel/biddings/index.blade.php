@@ -50,6 +50,7 @@
                                     <a class="dropdown-item" href="{{ route('biddings.company.contracts.index', $bidding->slug) }}">Contratos</a>
                                     @endif
                                     <a class="dropdown-item" href="{{ route('biddings.progress.index', $bidding->slug) }}">Andamento</a>
+                                    <a class="dropdown-item" href="{{ route('register-price.create', $bidding->slug) }}">Ata de registro de preço</a>
                                     <a class="dropdown-item" href="{{ route('biddings.responsibilities.index', $bidding->slug) }}">Responsabilidades</a>
                                     <a class="dropdown-item" href="{{ route('biddings.publications.index', $bidding->slug) }}">Forma de Publicação</a>
                                     <a class="dropdown-item" href="{{ route('biddings.available.files.index', $bidding->slug) }}">Arquivos</a>

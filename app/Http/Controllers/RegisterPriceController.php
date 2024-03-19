@@ -40,23 +40,28 @@ class RegisterPriceController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($licitacao)
     {
-        $biddings = Bidding::with('company')->get();
+        $bidding = Bidding::where('slug', $licitacao)->first();
         $exercicies = Category::where('slug', 'exercicios')->with('children')->get();
 
-        return view('panel.register-price.create', compact('biddings', 'exercicies'));
+        return view('panel.register-price.create', compact('bidding', 'exercicies'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $biddings)
     {
+        $bidding = Bidding::where('slug', $biddings)->first();
+
+        if(!$bidding){
+            return redirect()->back()->with('error', 'Licitação não encontrada!');
+        }
+
         $validatedData = $request->validate([
             'signature_date' => 'required|string',
             'expiry_date' => 'required|string',
-            'bidding_process' => 'required|string',
             'company_id' => 'required|exists:companies,id',
             'exercicio_id' => 'required',
         ], [
@@ -64,20 +69,18 @@ class RegisterPriceController extends Controller
             'signature_date.date' => 'O campo data de assinatura deve ser uma data válida.',
             'expiry_date.required' => 'O campo data de expiração é obrigatório.',
             'expiry_date.date' => 'O campo data de expiração deve ser uma data válida.',
-            'bidding_process.required' => 'O campo processo de licitação é obrigatório.',
             'company_id.required' => 'O campo empresa é obrigatório.',
             'exercicio_id.required' => 'O campo exercicio é obrigatório.',
-            // 'company_id.exists' => 'A empresa selecionada não existe.',
         ]);
 
-        if($request->bidding_process != ''){
-            $bidding = Bidding::find($request->bidding_process);
+        $exercice = Category::where('id', $request->exercicio_id)->first();
 
-            $validatedData['title'] = $bidding->number . ' ARP/' . $request->exercice;
-            $validatedData['title'] = $bidding->number . ' ARP/' . $request->exercice;
+        if($bidding){
+            $validatedData['title'] = $bidding->number . ' ARP/' . $exercice->name;
+            $validatedData['bidding_process'] = $bidding->id;
         }
 
-        $validatedData['slug'] = Str::slug('ata' . $validatedData['title']);
+        $validatedData['slug'] = Str::slug('ata-' . $validatedData['title']);
 
         if($register_price = RegisterPrice::create($validatedData)){
 
@@ -101,9 +104,11 @@ class RegisterPriceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(RegisterPrice $register_price)
+    public function show($register_price)
     {
-        //
+        $registerPrice = RegisterPrice::where('slug', $register_price)->first();
+        // dd();
+        return view('pages.biddings.price-registration.show', compact('registerPrice'));
     }
 
     /**
@@ -111,10 +116,10 @@ class RegisterPriceController extends Controller
      */
     public function edit(RegisterPrice $register_price)
     {
-        $biddings = Bidding::all();
+        $bidding = Bidding::where('id', $register_price->bidding_process)->first();
         $exercicies = Category::where('slug', 'exercicios')->with('children')->get();
 
-        return view('panel.register-price.edit', compact('register_price', 'biddings', 'exercicies'));
+        return view('panel.register-price.edit', compact('register_price', 'bidding', 'exercicies'));
     }
 
     /**
@@ -122,28 +127,28 @@ class RegisterPriceController extends Controller
      */
     public function update(Request $request, RegisterPrice $register_price)
     {
+        $bidding = Bidding::where('id', $register_price->bidding_process)->first();
+
         $validatedData = $request->validate([
             'signature_date' => 'required',
             'expiry_date' => 'required',
-            'bidding_process' => 'required|string',
             'company_id' => 'required|exists:companies,id',
         ], [
             'signature_date.required' => 'O campo data de assinatura é obrigatório.',
             'signature_date.date' => 'O campo data de assinatura deve ser uma data válida.',
             'expiry_date.required' => 'O campo data de expiração é obrigatório.',
             'expiry_date.date' => 'O campo data de expiração deve ser uma data válida.',
-            'bidding_process.required' => 'O campo processo de licitação é obrigatório.',
             'company_id.required' => 'O campo ID da empresa é obrigatório.',
             'company_id.exists' => 'A empresa selecionada não existe.',
         ]);
 
-        if($request->bidding_process != ''){
-            $bidding = Bidding::find($request->bidding_process);
+        $exercice = Category::where('id', $request->exercicio_id)->first();
 
-            $validatedData['title'] = $bidding->number . ' ARP/' . $request->exercice;
+        if($bidding){
+            $validatedData['title'] = $bidding->number . ' ARP/' . $exercice->name;
+            $validatedData['bidding_process'] = $bidding->id;
         }
-
-        $validatedData['slug'] = Str::slug('ata' . $validatedData['title']);
+        $validatedData['slug'] = Str::slug('ata-' . $validatedData['title']);
 
         if($register_price->update($validatedData)){
 

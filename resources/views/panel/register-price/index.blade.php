@@ -5,9 +5,9 @@
 <div class="card">
     <div class="card-body">
 
-        <div class="card-header text-right">
+        {{-- <div class="card-header text-right">
             <a href="{{ route('register-price.create') }}" class="btn-default">Novo</a>
-        </div>
+        </div> --}}
 
         @if($atas && $atas->count() > 0)
         <div class="table-responsive">

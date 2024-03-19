@@ -12,6 +12,7 @@ use App\Models\Employee;
 use App\Models\File;
 use App\Models\Organ;
 use App\Models\Page;
+use App\Models\RegisterPrice;
 use App\Models\Role;
 use App\Models\Secretary;
 use App\Models\ShortcutTransparency;
@@ -772,9 +773,7 @@ class BiddingController extends Controller
 
         $exercicies = Category::where('slug', 'exercicios')->with('children')->get();
 
-        $biddingIds = $categorieType->pluck('categoryable_id')->toArray();
-
-        $query = Bidding::query()->whereIn('id', $biddingIds);
+        $query = RegisterPrice::query();
 
         if ($request->filled('start_date') && $request->filled('end_date')) {
             $start_date = date("Y-m-d", strtotime($request->input('start_date')));
@@ -797,7 +796,7 @@ class BiddingController extends Controller
         }
 
         if ($request->filled('description')) {
-            $query->where('description', 'LIKE', '%' . $request->input('description') . '%');
+            $query->where('object', 'LIKE', '%' . $request->input('description') . '%');
         }
 
         if ($request->filled('number')) {

@@ -191,7 +191,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('types', TypeController::class);
         Route::resource('videos', VideoController::class);
         Route::resource('biddings', BiddingController::class);
-        Route::resource('register-price', RegisterPriceController::class);
+        Route::resource('/{biddings}/register-price', RegisterPriceController::class)->except('index', 'edit', 'delete', 'show');
+        Route::resource('register-price', RegisterPriceController::class)->except('create', 'store', 'show');
         Route::resource('companies', CompanyController::class);
         Route::resource('contracts', ContractController::class);
         Route::get('bidding-page', [BiddingController::class, 'pageEdit'])->name('bidding.page.create');
@@ -714,6 +715,8 @@ Route::prefix('/transparencia')->group(function () {
         Route::match(['get', 'post'], 'atodeadesao', [BiddingController::class, 'AtoAdesao'])->name('atodeadesao.index');
         Route::match(['get', 'post'], 'contratos', [BiddingController::class, 'contracts'])->name('contracts.biddings.index');
         Route::get('fiscais-contrato/{slug}', [InspectorController::class, 'show'])->name('fiscais.show');
+        Route::get('register-price/{ata}', [RegisterPriceController::class, 'show'])->name('register-price.show');
+
     });
 
     Route::prefix('/sic')->group(function () {
