@@ -140,7 +140,6 @@
             <div class="empty-data">Nenhum item encontrado.</div>
         @endif
 
-
     </div>
 </section>
 

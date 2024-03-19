@@ -25,6 +25,11 @@ class Company extends Model
         return $this->hasMany(Contract::class);
     }
 
+    public function contratos()
+    {
+        return $this->hasMany(Contract::class);
+    }
+
     public function bidding()
     {
         return $this->belongsTo(Bidding::class);

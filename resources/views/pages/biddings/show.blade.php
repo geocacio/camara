@@ -204,10 +204,12 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>{{ $bidding->company->name }}</td>
-                                                    <td>Vencedor</td>
-                                                </tr>             
+                                                @foreach ($bidding->companies as $company)
+                                                    <tr>
+                                                        <td>{{ $company->name }}</td>
+                                                        <td>Vencedor</td>
+                                                    </tr>             
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -232,18 +234,21 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($bidding->company->contracts as $contract)
-                                                    <tr>
-                                                        <td>{{ $contract->number }}</td>
-                                                        <td>{{ $bidding->company->name }}</td>
-                                                        <td>R$ {{ number_format($contract->total_value, 2, ',', '.') }}</td>
-                                                        <td>{{ date('d/m/Y', strtotime($contract->start_date)) . ' - ' . date('d/m/Y', strtotime($contract->end_date)) }}</td>
-                                                        <td style="cursor: pointer"> 
-                                                            <a href="{{ asset('storage/'.$contract->files->file->url) }}" target="_blank">
-                                                                <i class="fa-regular fa-eye"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>             
+                                                @foreach ($bidding->companies as $company)
+                                                    @foreach ($company->contratos as $contract)
+                                                        <tr>
+                                                            <td>{{ $contract->number }}</td>
+                                                            <td>{{ $company->name }}</td>
+                                                            <td>R$ {{ number_format($contract->total_value, 2, ',', '.') }}</td>
+                                                            <td>{{ date('d/m/Y', strtotime($contract->start_date)) . ' - ' . date('d/m/Y', strtotime($contract->end_date)) }}</td>
+                                                            <td style="cursor: pointer"> 
+                                                                <a href="{{ asset('storage/'.$contract->files->file->url) }}" target="_blank">
+                                                                    <i class="fa-regular fa-eye"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    
+                                                    @endforeach
                                                 @endforeach
                                             </tbody>
                                         </table>

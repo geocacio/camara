@@ -161,7 +161,7 @@
 
 </section>
 
-@include('pages.partials.satisfactionSurvey', ['page_name' => 'Licitações - Show'])
+@include('pages.partials.satisfactionSurvey', ['page_name' => 'Atas de registro de preço - Show'])
 
 @include('layouts.footer')
 

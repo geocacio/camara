@@ -24,6 +24,10 @@ class Contract extends Model
         return $this->belongsTo(Company::class);
     }
 
+    public function companies(){
+        return $this->belongsTo(Company::class);
+    }
+
     public function types()
     {
         return $this->morphToMany(Type::class, 'typeable', 'type_contents');
