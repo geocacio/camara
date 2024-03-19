@@ -380,7 +380,7 @@
                <div>
                     @foreach ($bidding->companies as $company)
                         <form id="formCompany" class="formCompany form-employer-{{ $company->id }}">
-                            <div class="remove-emplyer" onclick="removeCompany({{ rand() . $company->id }})">
+                            <div class="remove-emplyer" onclick="removeCompany({{ $company->id }})">
                                 <span class="x"><i class="fa-regular fa-trash-can"></i></span> <span class="remove-btn">Remover empresa</span>
                             </div>
                             <div class="row">

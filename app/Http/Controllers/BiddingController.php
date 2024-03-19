@@ -443,60 +443,34 @@ class BiddingController extends Controller
             $companiesDataString = $request->company_data;
             $companiesData = json_decode($companiesDataString, true);
 
-            foreach ($companiesData as $companyData) {
-                $companyValidation = Validator::make($companyData, [
-                    'company_name' => 'required',
-                    'company_cnpj' => 'required',
-                    'company_address' => 'required',
-                    'company_city' => 'required',
-                    'company_state' => 'required',
-                    'company_country' => 'required',
-                ]);
-
-                if ($companyValidation->fails()) {
-                    return response()->json(['error' => $companyValidation->errors()], 400);
-                }
-
-                if (!empty($companyData['company_id'])) {
-                    // Atualizar a empresa existente
-                    $existingCompany = $bidding->companies()->find($companyData['company_id']);
-        
-                    if ($existingCompany) {
-                        $existingCompany->update([
-                            'name' => $companyData['company_name'],
-                            'cnpj' => $companyData['company_cnpj'],
-                            'address' => $companyData['company_address'],
-                            'city' => $companyData['company_city'],
-                            'state' => $companyData['company_state'],
-                            'country' => $companyData['company_country'],
-                            'slug' => Str::slug($companyData['company_name']),
-                        ]);
-                    }
-                } else {
-                    // Criar uma nova empresa
-                    $company = $bidding->companies()->create([
-                        'name' => $companyData['company_name'],
-                        'cnpj' => $companyData['company_cnpj'],
-                        'address' => $companyData['company_address'],
-                        'city' => $companyData['company_city'],
-                        'state' => $companyData['company_state'],
-                        'country' => $companyData['company_country'],
-                        'slug' => Str::slug($companyData['company_name']),
-                    ]);
-                }
+            $companyValidation = Validator::make($companiesData, [
+                '*.company_name' => 'required',
+                '*.company_cnpj' => 'required',
+                '*.company_address' => 'required',
+                '*.company_city' => 'required',
+                '*.company_state' => 'required',
+                '*.company_country' => 'required',
+            ]);
+            
+            if ($companyValidation->fails()) {
+                return response()->json(['error' => $companyValidation->errors()], 400);
             }
-
-            // if ($request->company_name != '') {
-
-            //     $bidding->company()->update([
-            //         'name' => $request->company_name,
-            //         'cnpj' => $request->company_cnpj,
-            //         'address' => $request->company_address,
-            //         'city' => $request->company_city,
-            //         'state' => $request->company_state,
-            //         'country' => $request->company_country,
-            //     ]);
-            // }
+            
+            // Excluir todas as empresas relacionadas à licitação (bidding)
+            $bidding->companies()->delete();
+            
+            foreach ($companiesData as $companyData) {
+                $bidding->companies()->create([
+                    'name' => $companyData['company_name'],
+                    'cnpj' => $companyData['company_cnpj'],
+                    'address' => $companyData['company_address'],
+                    'city' => $companyData['company_city'],
+                    'state' => $companyData['company_state'],
+                    'country' => $companyData['company_country'],
+                    'slug' => Str::slug($companyData['company_name']),
+                ]);
+            }
+            
 
             $bidding->categories()->delete();
             $transparency = Category::where('slug', 'transparencia')->first();
