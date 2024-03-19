@@ -64,6 +64,7 @@ class RegisterPriceController extends Controller
             'expiry_date' => 'required|string',
             'company_id' => 'required|exists:companies,id',
             'exercicio_id' => 'required',
+            'object' => 'required',
         ], [
             'signature_date.required' => 'O campo data de assinatura é obrigatório.',
             'signature_date.date' => 'O campo data de assinatura deve ser uma data válida.',
@@ -71,16 +72,17 @@ class RegisterPriceController extends Controller
             'expiry_date.date' => 'O campo data de expiração deve ser uma data válida.',
             'company_id.required' => 'O campo empresa é obrigatório.',
             'exercicio_id.required' => 'O campo exercicio é obrigatório.',
+            'object.required' => 'O campo objeto é obrigatório.',
         ]);
 
         $exercice = Category::where('id', $request->exercicio_id)->first();
 
         if($bidding){
             $validatedData['title'] = $bidding->number . ' ARP/' . $exercice->name;
+            $validatedData['slug'] = RegisterPrice::uniqSlug($validatedData['title']);
+
             $validatedData['bidding_process'] = $bidding->id;
         }
-
-        $validatedData['slug'] = Str::slug('ata-' . $validatedData['title']);
 
         if($register_price = RegisterPrice::create($validatedData)){
 
@@ -133,12 +135,14 @@ class RegisterPriceController extends Controller
             'signature_date' => 'required',
             'expiry_date' => 'required',
             'company_id' => 'required|exists:companies,id',
+            'object' => 'required',
         ], [
             'signature_date.required' => 'O campo data de assinatura é obrigatório.',
             'signature_date.date' => 'O campo data de assinatura deve ser uma data válida.',
             'expiry_date.required' => 'O campo data de expiração é obrigatório.',
             'expiry_date.date' => 'O campo data de expiração deve ser uma data válida.',
             'company_id.required' => 'O campo ID da empresa é obrigatório.',
+            'object.required' => 'O campo objeto é obrigatório.',
             'company_id.exists' => 'A empresa selecionada não existe.',
         ]);
 
@@ -146,9 +150,7 @@ class RegisterPriceController extends Controller
 
         if($bidding){
             $validatedData['title'] = $bidding->number . ' ARP/' . $exercice->name;
-            $validatedData['bidding_process'] = $bidding->id;
         }
-        $validatedData['slug'] = Str::slug('ata-' . $validatedData['title']);
 
         if($register_price->update($validatedData)){
 

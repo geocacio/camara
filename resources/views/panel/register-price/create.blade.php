@@ -68,6 +68,16 @@
                 <input type="file" name="file" class="form-control">
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Objeto</label>
+                    <textarea name="object" class="form-control">{{ old('object') }}</textarea>
+                </div>
+            </div>      
+        </div>
+
         <div class="form-footer text-right">
             <button type="submit" class="btn-submit-default">Guardar</button>
         </div>

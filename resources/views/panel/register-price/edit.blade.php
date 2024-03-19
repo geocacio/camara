@@ -69,6 +69,15 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Objeto</label>
+                            <textarea name="object" class="form-control">{{ old('object', $register_price->object) }}</textarea>
+                        </div>
+                    </div>      
+                </div>
+
                 <div class="form-group">
                     <label for="file">Arquivo</label>
                     <input type="file" id="file" name="file" class="form-control">

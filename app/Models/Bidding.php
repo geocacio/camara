@@ -73,6 +73,10 @@ class Bidding extends Model
         return $this->hasMany(Company::class);
     }
 
+    public function atas(){
+        return $this->hasMany(RegisterPrice::class, 'bidding_process');
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';

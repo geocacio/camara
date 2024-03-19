@@ -82,6 +82,15 @@
                             </li>
                         @endif
 
+                        @if($bidding->atas)
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="atas-tab" data-bs-toggle="tab" data-bs-target="#atas" type="button" role="tab">
+                                    <i class="fa-solid fa-file-contract"></i>
+                                    Lista de Atas
+                                </button>
+                            </li>
+                        @endif
+
                         @if($bidding->company)
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="contracts-tab" data-bs-toggle="tab" data-bs-target="#contracts" type="button" role="tab">
@@ -208,6 +217,37 @@
                                                     <tr>
                                                         <td>{{ $company->name }}</td>
                                                         <td>Vencedor</td>
+                                                    </tr>             
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        @endif
+
+                        @if($bidding->atas)
+                            <div class="tab-pane fadeshow" id="atas" role="tabpanel" aria-labelledby="atas-tab">
+
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-data-default">
+                                            <thead>
+                                                <tr>
+                                                    <th>Data</th>
+                                                    <th>Número</th>
+                                                    <th>Companhia</th>
+                                                    <th>Ver ata</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($bidding->atas as $ata)
+                                                    <tr>
+                                                        <td>{{ date('d/m/Y', strtotime($ata->signature_date)) }}</td>
+                                                        <td>{{ $ata->title }}</td>
+                                                        <td>{{ $ata->company->name }}</td>
+                                                        <td><a href="{{ route('register-price.show', $ata->slug) }}"><i class="fa-regular fa-eye"></i></a></td>
                                                     </tr>             
                                                 @endforeach
                                             </tbody>

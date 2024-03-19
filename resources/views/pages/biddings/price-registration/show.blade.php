@@ -90,13 +90,11 @@
                                     </div>
 
                                     <div class="col-12">
-                                        <p class="title">INFORMAÇÕES DO CREDOR:</p>
-
                                         <div class="table-responsive">
                                             <table class="table table-striped table-data-default">
                                                 <thead>
                                                     <tr>
-                                                        <th>Nome</th>
+                                                        <th>Credor/empresa</th>
                                                         <th>CNPJ</th>
                                                     </tr>
                                                 </thead>
