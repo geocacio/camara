@@ -665,6 +665,9 @@
                 <li class="sub-item {{ Str::contains(url()->current(), 'dispesas-inexigibilidade/biddings') ? 'active' : '' }}">
                     <a href="{{ route('dispensa.index', 'biddings') }}" class="sub-link">Dispensa e Inexigibilidade</a>
                 </li>
+                <li class="sub-item {{ Str::contains(url()->current(), 'register-price') ? 'active' : '' }}">
+                    <a href="{{ route('register-price.index') }}" class="sub-link">Atas de registro de preço</a>
+                </li>
                 <li class="sub-item {{ Str::contains(url()->current(), 'bidding/dispesas-inexigibilidade/create') ? 'active' : '' }}">
                     <a href="{{ route('bidding.page.create', 'biddings') }}" class="sub-link">Página</a>
                 </li>
