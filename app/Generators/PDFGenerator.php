@@ -54,7 +54,7 @@ class PDFGenerator extends TCPDF
 
         // Título
         $this->Ln(10);
-        $this->SetFont('times', 'B', 45);
+        $this->SetFont('times', 'B', 35);
         // Exibe o título do cabeçalho centralizado
         $this->Cell(0, 10, $this->headerData['title'], 0, false, 'C', 0, '', 0, false, 'M', 'M');
 

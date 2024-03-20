@@ -109,7 +109,6 @@ class RegisterPriceController extends Controller
     public function show($register_price)
     {
         $registerPrice = RegisterPrice::where('slug', $register_price)->first();
-        // dd();
         return view('pages.biddings.price-registration.show', compact('registerPrice'));
     }
 
