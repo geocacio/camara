@@ -82,7 +82,7 @@
 
                 @endforeach
 
-                {{-- {{ $bidding->render() }} --}}
+                {{ $inspectors->render() }}
 
             </div>
 

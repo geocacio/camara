@@ -254,7 +254,7 @@ class BiddingController extends Controller
 
         $biddingIds = $categorieType->pluck('categoryable_id')->toArray();
 
-        $query = Bidding::query()->where('bidding_type', null);
+        $query = Bidding::query();
 
         if ($request->filled('start_date') && $request->filled('end_date')) {
             $start_date = date("Y-m-d", strtotime($request->input('start_date')));
@@ -302,7 +302,7 @@ class BiddingController extends Controller
             $query->where('process', 'LIKE', '%' . $request->input('process') . '%');
         }
 
-        $bidding = $query->get();
+        $bidding = $query->paginate(10);
 
         $searchData = $request->only(['start_date', 'end_date', 'status', 'exercice', 'modalidade', 'register_price', 'number', 'object', 'process']);
 

@@ -192,6 +192,8 @@
                 </div>
             </div>
 
+            {{ $bidding->render() }}
+
         @else
             <div class="empty-data">Nenhum item encontrado.</div>
         @endif

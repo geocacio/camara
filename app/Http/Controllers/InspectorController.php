@@ -73,7 +73,7 @@ class InspectorController extends Controller
             $query->where('name', 'LIKE', '%' . $request->input('name') . '%');
         }
 
-        $inspectors = $query->get();
+        $inspectors = $query->paginate(10);
 
         $searchData = $request->only(['name']);
 

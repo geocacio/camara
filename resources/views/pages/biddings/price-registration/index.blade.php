@@ -108,7 +108,7 @@
                     </div>
                 </div>
 
-                {{-- {{ $bidding->render() }} --}}
+                {{ $bidding->render() }}
 
             </div>
 

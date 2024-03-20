@@ -125,7 +125,7 @@
                 </div>
 
 
-                {{-- {{ $bidding->render() }} --}}
+                {{ $contracts->render() }}
 
             </div>
 
