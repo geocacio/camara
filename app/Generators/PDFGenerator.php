@@ -209,20 +209,25 @@ class PDFGenerator extends TCPDF
 
         $columnHeight = 0; // Altura da coluna atual
         foreach ($summary as $item) {
-            $this->SetFont('times', 'B', 9);
-            // Calcule a quantidade de pontos necessários para preencher o espaço no sumário
-            $dots = str_repeat('.', $summaryColumnWidth - $this->GetStringWidth($item['title']) - 10);
-            // Escrever o título do Sumário com os pontinhos no sumário
-            $this->Cell($summaryColumnWidth - 20, 10, '          ' . $item['title'] . ' ' . $dots . ' ' . $item['page'], 0, 1, 'L', true, $item['url']);
+            $this->SetFont('times', 'B', 9); // Definir a fonte do título
+            // Calcular os pontos necessários para preencher o espaço no sumário para o título
+            $dotsTitle = str_repeat('.', $summaryColumnWidth - $this->GetStringWidth($item['title']) - 10);
+            // Escrever o título do Sumário no sumário
+            $this->Cell($summaryColumnWidth - 20, 10, '          ' . $item['title'] . ' ' . $dotsTitle . ' ' . $item['page'], 0, 1, 'L', true, $item['url']);
             
-            $columnHeight += 10; // Adiciona a altura do título
+            $columnHeight += 10; // Adicionar a altura do título
             foreach ($item['items'] as $subItem) {
-                $this->SetFont('times', '', 9);
-                $dots = str_repeat('.', $summaryColumnWidth - $this->GetStringWidth($item['title']) - 20);
-                $this->Cell($summaryColumnWidth - 30, 10, '                    ' . $subItem['title'] . ' ' . $dots . ' ' . $subItem['page'], 0, 1, 'L', true, $subItem['url']);
-                $columnHeight += 10; // Adiciona a altura do subitem
+                // Definir a fonte do subtítulo igual à fonte do título
+                $this->SetFont('times', 'B', 9); // Remover o negrito para o subtítulo
+                // Calcular os pontos necessários para preencher o espaço no sumário para o subtítulo
+                $dotsSubTitle = str_repeat('.', $summaryColumnWidth - $this->GetStringWidth($subItem['title']) - 10);
+                // Escrever o subtítulo no sumário
+                $this->Cell($summaryColumnWidth - 20, 10, '          ' . $subItem['title'] . ' ' . $dotsSubTitle . ' ' . $subItem['page'], 0, 1, 'L', true, $subItem['url']);
+                $columnHeight += 10; // Adicionar a altura do subtítulo
             }
         }
+        
+        
     
         // Ajusta a posição Y para centralizar verticalmente
         $this->SetY($summaryPosition + ($rectHeight - $columnHeight) / 2); 
