@@ -15,6 +15,8 @@ class PDFGenerator extends TCPDF
     protected $headerData;
     protected $footerData;
     protected $currentDate;
+    protected $showHeaderOnLastPage = true;
+
 
     // Construtor para a classe
     public function __construct($orientation = 'P', $unit = 'mm', $format = 'A4', $unicode = true, $encoding = 'UTF-8', $diskcache = false)
@@ -40,6 +42,11 @@ class PDFGenerator extends TCPDF
         if (empty($this->headerData)) {
             return;
         }
+
+        if ($this->getPage() == $this->getNumPages() && !$this->showHeaderOnLastPage) {
+            return; // Não renderizar o cabeçalho na última página
+        }
+    
 
         // Define a margem superior para o cabeçalho
         $this->SetMargins(PDF_MARGIN_LEFT, 60, PDF_MARGIN_RIGHT);
@@ -168,46 +175,204 @@ class PDFGenerator extends TCPDF
         $this->Cell(0, 10, $this->footerData['description'], 0, 0, 'C');
     }
 
-    protected function createSummary($summary)
+    protected $secondColumnX;
+    protected $summaryPosition;
+    protected $summaryColumnWidth;
+    protected $rectHeight;
+
+    protected function createSummary($summary, $officeHour)
     {
         // Defina a largura e altura da página
         $pageWidth = $this->GetPageWidth() - 20;
         $pageHeight = $this->GetPageHeight() - 10;
 
+        // Defina a largura da coluna do sumário (metade da largura da página)
+        $summaryColumnWidth = ($pageWidth - 20) / 2; // Subtraímos 20 para criar um espaço entre as colunas
+
+        // Variável para armazenar a posição inicial do sumário
+        $summaryPosition = $this->GetY();
+
         // Primeira coluna: Sumário
         $this->SetFont('times', 'B', 9);
         $this->SetFillColor(210, 221, 233); // Defina a cor de fundo para o sumário
 
-        // Variável para armazenar a posição do rodapé
-        $footerPosition = $pageHeight - $this->getFooterMargin();
-
-        // Variável para armazenar a posição do sumário
-        $summaryPosition = $this->GetY();
-
         // Calcule a altura do retângulo que ficará por baixo do sumário
+        $footerPosition = $pageHeight - $this->getFooterMargin();
         $rectHeight = $footerPosition - $summaryPosition;
 
         // Desenhe o retângulo por baixo do sumário
-        $this->Rect(10, $summaryPosition, $pageWidth, $rectHeight, 'F');
+        $this->Rect(10, $summaryPosition, $summaryColumnWidth, $rectHeight, 'F');
 
-        // Escrever o título do Sumário (usando a largura da página como largura para ocupar toda a largura)
-        $this->Cell($pageWidth - 10, 10, 'Sumário', 0, 1, 'C', true, '');
+        // Escrever o título do Sumário (usando a largura da coluna do sumário)
+        $this->Cell($summaryColumnWidth - 10, 10, 'Sumário', 0, 1, 'C', true, '');
+        $this->Ln(2); // Espaço adicional
+
+        $columnHeight = 0; // Altura da coluna atual
         foreach ($summary as $item) {
             $this->SetFont('times', 'B', 9);
             // Calcule a quantidade de pontos necessários para preencher o espaço no sumário
-            $dots = str_repeat('.', $pageWidth - $this->GetStringWidth($item['title']) - 10);
+            $dots = str_repeat('.', $summaryColumnWidth - $this->GetStringWidth($item['title']) - 10);
             // Escrever o título do Sumário com os pontinhos no sumário
-            $this->Cell($pageWidth - 20, 10, '          ' . $item['title'] . ' ' . $dots . ' ' . $item['page'], 0, 1, 'L', true, $item['url']);
-
+            $this->Cell($summaryColumnWidth - 20, 10, '          ' . $item['title'] . ' ' . $dots . ' ' . $item['page'], 0, 1, 'L', true, $item['url']);
+            
+            $columnHeight += 10; // Adiciona a altura do título
             foreach ($item['items'] as $subItem) {
                 $this->SetFont('times', '', 9);
-                $dots = str_repeat('.', $pageWidth - $this->GetStringWidth($item['title']) - 20);
-                $this->Cell($pageWidth - 30, 10, '                    ' . $subItem['title'] . ' ' . $dots . ' ' . $subItem['page'], 0, 1, 'L', true, $subItem['url']);
+                $dots = str_repeat('.', $summaryColumnWidth - $this->GetStringWidth($item['title']) - 20);
+                $this->Cell($summaryColumnWidth - 30, 10, '                    ' . $subItem['title'] . ' ' . $dots . ' ' . $subItem['page'], 0, 1, 'L', true, $subItem['url']);
+                $columnHeight += 10; // Adiciona a altura do subitem
             }
+        }
+    
+        // Ajusta a posição Y para centralizar verticalmente
+        $this->SetY($summaryPosition + ($rectHeight - $columnHeight) / 2); 
+
+        // Calcula a posição X inicial da segunda coluna
+        $secondColumnX = $summaryColumnWidth + 30; // Margem esquerda + largura da primeira coluna + espaço entre as colunas
+
+        // Chama o método para gerar a segunda coluna
+        $this->secondColumnX = $summaryColumnWidth + 30; // Margem esquerda + largura da primeira coluna + espaço entre as colunas
+        $this->summaryPosition = $summaryPosition;
+        $this->summaryColumnWidth = $summaryColumnWidth;
+        $this->rectHeight = $rectHeight;
+    }
+
+    protected function generateSecondColumn($officeHour, $councilors)
+    {
+        // Defina a cor de fundo para a segunda coluna
+        $this->SetFillColor(210, 221, 233);
+        // Desenhe o retângulo por baixo da segunda coluna
+        $this->Rect($this->secondColumnX, $this->summaryPosition, $this->summaryColumnWidth, $this->rectHeight, 'F');
+        
+        // Defina a posição Y inicial da segunda coluna
+        $secondColumnY = $this->summaryPosition + 5; // Adicione um pequeno recuo
+    
+        $this->SetFont('times', 'B', 12);
+        $this->SetXY($this->secondColumnX + 5, $secondColumnY);
+        $this->Cell($this->summaryColumnWidth - 10, 5, 'EXPEDIENTE', 0, 1, 'L');
+        $secondColumnY += $this->getFontSize() + 2; // Adicione 2 de espaço após o título
+    
+        // Adicione o texto do office hour
+        $this->SetFont('times', '', 10);
+        $this->SetXY($this->secondColumnX + 5, $secondColumnY);
+        $this->MultiCell($this->summaryColumnWidth - 10, 5, $officeHour->frequency, 0, 'L', false);
+        $secondColumnY += $this->getStringHeight($this->summaryColumnWidth - 10, $officeHour->frequency) + 10; // Adicione 10 de espaço após o texto
+    
+        $this->SetFont('times', 'B', 12);
+        $this->SetXY($this->secondColumnX + 5, $secondColumnY);
+        $this->Cell($this->summaryColumnWidth - 10, 5, 'ACERVO', 0, 1, 'L');
+        $secondColumnY += $this->getFontSize() + 2; // Adicione 2 de espaço após o título
+    
+        // Adicione o texto do office hour
+        $this->SetFont('times', '', 10);
+        $this->SetXY($this->secondColumnX + 5, $secondColumnY);
+        $this->MultiCell($this->summaryColumnWidth - 10, 5, $officeHour->information, 0, 'L', false);
+        $secondColumnY += $this->getStringHeight($this->summaryColumnWidth - 10, $officeHour->information) + 10; // Adicione 10 de espaço após o texto
+        
+        // Pule uma linha antes de adicionar o próximo bloco de texto
+        $secondColumnY += 5;
+        
+        // Adicione o título ENTIDADE
+        $this->SetFont('times', 'B', 12);
+        $this->SetXY($this->secondColumnX + 5, $secondColumnY);
+        $this->Cell($this->summaryColumnWidth - 10, 5, 'ENTIDADE', 0, 1, 'L');
+        $secondColumnY += $this->getFontSize() + 2; // Adicione 2 de espaço após o título
+        
+        // Adicione os dados da entidade na segunda coluna
+        $entityData = array(
+            'Nome da entidade: ' . $officeHour->entity_name,
+            'Endereço da entidade: ' . $officeHour->entity_address,
+            'CNPJ: ' . $officeHour->entity_cnpj,
+            'Telefone: ' . $officeHour->entity_phone
+        );
+        foreach ($entityData as $data) {
+            $this->SetFont('times', '', 10);
+            $this->SetX($this->secondColumnX + 5);
+            $this->MultiCell($this->summaryColumnWidth - 10, 5, $data, 0, 'L', false);
+            $secondColumnY += $this->getStringHeight($this->summaryColumnWidth - 10, $data) + 2; // Adicione 2 de espaço após cada linha
+        }
+    
+        // Adicione o título MESA Diretora
+        $this->SetFont('times', 'B', 12);
+        $this->SetXY($this->secondColumnX + 5, $secondColumnY);
+        $this->Cell($this->summaryColumnWidth - 10, 5, 'MESA DIRETORA', 0, 1, 'L');
+        $secondColumnY += $this->getFontSize() + 2; // Adicione 2 de espaço após o título
+    
+        // Adicione os dados dos conselheiros
+        foreach ($councilors as $index => $councilor) {
+            $councilorData = array(
+                $councilor->legislatureRelations[$index]->office->office. ' ' . $councilor['name'] . ' ' . $councilor['surname'] . ' - ' . $councilor->partyAffiliation->name,
+            );
+            foreach ($councilorData as $data) {
+                $this->SetFont('times', '', 10);
+                $this->SetX($this->secondColumnX + 5);
+                $this->MultiCell($this->summaryColumnWidth - 10, 5, $data, 0, 'L', false);
+                $secondColumnY += $this->getStringHeight($this->summaryColumnWidth - 10, $data) + 2; // Adicione 2 de espaço após cada linha
+            }
+            // Adicione espaço extra após cada conselheiro
+            $secondColumnY += 5; // Ajuste conforme necessário
         }
     }
 
-    public function generate($official_diary, $headerData, $footerData, $summaryGroup)
+    protected function addLastPage($sistem)
+    {
+        $this->AddPage('P', 'A4');
+        
+        if (empty($this->headerData)) {
+            return;
+        }
+        
+        // Carrega a imagem do logo
+        $logoImage = $this->headerData['logoPath'];
+        $logoWidth = 50;
+        $logoHeight = 50;
+        
+        // Exibe o logo do cabeçalho
+        $logoX = ($this->GetPageWidth() - $logoWidth) / 2;
+        $logoY = 10;
+        $this->Image($logoImage, $logoX, $logoY, $logoWidth, $logoHeight, 'PNG', '', 'T');
+        
+        // Adicione o título DIÁRIO OFICIAL
+        $this->SetFont('times', 'B', 35);
+        $title = 'DIÁRIO OFICIAL';
+        $titleWidth = $this->GetStringWidth($title);
+        $titleX = ($this->GetPageWidth() - $titleWidth) / 2; // Centraliza o texto horizontalmente
+        $titleY = $logoY + $logoHeight + 10;
+        $this->Text($titleX, $titleY, $title);
+        
+        // Adicione o texto "MUNICIPIO DE CIDELÂNDIA" e suas informações
+        $this->SetFont('times', '', 12);
+        $municipioText = "MUNICIPIO DE CIDELÂNDIA";
+        $municipioWidth = $this->GetStringWidth($municipioText);
+        $municipioX = ($this->GetPageWidth() - $municipioWidth) / 2; // Centraliza o texto horizontalmente
+        $municipioY = $titleY + 30;
+        $this->Text($municipioX, $municipioY, $municipioText);
+        
+        // Adicione o texto "Conforme Lei nº 005, de 25 de agosto de 2023" centralizado
+        $leiText = "Conforme Lei nº 005, de 25 de agosto de 2023";
+        $leiWidth = $this->GetStringWidth($leiText);
+        $leiX = ($this->GetPageWidth() - $leiWidth) / 2; // Centraliza o texto horizontalmente
+        $leiY = $municipioY + 15;
+        $this->Text($leiX, $leiY, $leiText);
+        
+        // Adicione as informações do sistema
+        $infoX = 10;
+        $infoY = $leiY + 15; // Espaçamento entre o texto da lei e as informações do sistema
+        
+        // Adicione as informações do sistema centralizadas
+        $this->SetXY($infoX, $infoY);
+        $this->MultiCell(0, 5, $sistem['system_name'], 0, 'C');
+        $this->SetX($infoX);
+        $this->MultiCell(0, 5, 'CNPJ: ' . $sistem['cnpj'], 0, 'C');
+        $this->SetX($infoX);
+        $this->MultiCell(0, 5, 'Endereço: ' . $sistem['address'] . ', ' . $sistem['number'] . ', ' . $sistem['neighborhood'], 0, 'C');
+        $this->SetX($infoX);
+        $this->MultiCell(0, 5, 'Telefone: ' . $sistem['phone'], 0, 'C');
+    }
+    
+    
+    
+    public function generate($official_diary, $headerData, $footerData, $summaryGroup, $officeHour, $councilors, $sistem)
     {
         // Defina o título do cabeçalho para exibição
         $this->CustomSetHeaderData($headerData);
@@ -326,6 +491,9 @@ class PDFGenerator extends TCPDF
             $this->writeHTML($content->content, true, false, true, false);
             $this->Ln(10);
         }
+        $this->showHeaderOnLastPage = false;
+
+        $this->addLastPage($sistem);
 
         $this->setPage(1); // Volte para a primeira página
 
@@ -333,7 +501,8 @@ class PDFGenerator extends TCPDF
         $this->setEqualColumns(1, $this->getPageWidth() - 15);
 
         $this->SetY($sumarioY); // Defina a posição Y para onde o sumário será adicionado
-        $this->createSummary($summary);
+        $this->createSummary($summary, $officeHour);
+        $this->generateSecondColumn($officeHour, $councilors);
 
         // Salvar o PDF no armazenamento (storage)
         $fileName = 'diary' . '_' . uniqid() . '.pdf';

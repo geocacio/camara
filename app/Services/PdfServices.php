@@ -5,6 +5,11 @@ namespace App\Services;
 use App\Generators\PDFGenerator;
 use App\Models\Category;
 use App\Models\ConfigureOfficialDiary;
+use App\Models\Councilor;
+use App\Models\Legislature;
+use App\Models\LegislatureRelation;
+use App\Models\officehour;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Storage;
 
 class PdfServices
@@ -23,6 +28,21 @@ class PdfServices
             }
         }
 
+        // pega dados da mesa diretora atual
+        $legislature = (new Legislature)->getCurrentLegislature();
+        $cargo = [1, 2, 3, 4];
+        $getcouncilorID = LegislatureRelation::whereIn('office_id', $cargo)->where('legislature_id', $legislature->id)->get();
+        $councilors = Councilor::whereIn('id', $getcouncilorID->pluck('legislatureable_id'))->get();
+
+        // Encontrar a posição da legislatura atual
+        $currentLegislaturePosition = $legislature ? $legislature->fresh()->getOriginal('created_at') : null;
+        $currentLegislaturePosition = $currentLegislaturePosition ? Legislature::where('created_at', '<=', $currentLegislaturePosition)->count() : null;
+        // fim da busca de mesa diretora
+
+        // pega dados da camara
+        $sistem = Setting::first();
+
+        $officeHour = officehour::first();
         // Cria um novo objeto PDF usando a classe personalizada PDFGenerator
         $pdf = new PDFGenerator(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
@@ -61,7 +81,7 @@ class PdfServices
             
         }
         
-        $result = $pdf->generate($official_diary, $headerData, $footerData, $summaryGroup);
+        $result = $pdf->generate($official_diary, $headerData, $footerData, $summaryGroup, $officeHour, $councilors, $sistem);
 
         $official_diary->files()->create(['file_id' => $result->id]);
 
