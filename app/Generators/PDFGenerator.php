@@ -242,7 +242,7 @@ class PDFGenerator extends TCPDF
         $this->rectHeight = $rectHeight;
     }
 
-    protected function generateSecondColumn($officeHour, $councilors)
+    protected function generateSecondColumn($officeHour, $councilors, $sistem)
     {
         // Defina a cor de fundo para a segunda coluna
         $this->SetFillColor(210, 221, 233);
@@ -252,72 +252,82 @@ class PDFGenerator extends TCPDF
         // Defina a posição Y inicial da segunda coluna
         $secondColumnY = $this->summaryPosition + 5; // Adicione um pequeno recuo
     
-        $this->SetFont('times', 'B', 12);
-        $this->SetXY($this->secondColumnX + 5, $secondColumnY);
-        $this->Cell($this->summaryColumnWidth - 10, 5, 'EXPEDIENTE', 0, 1, 'L');
-        $secondColumnY += $this->getFontSize() + 2; // Adicione 2 de espaço após o título
-    
-        // Adicione o texto do office hour
-        $this->SetFont('times', '', 10);
-        $this->SetXY($this->secondColumnX + 5, $secondColumnY);
-        $this->MultiCell($this->summaryColumnWidth - 10, 5, $officeHour->frequency, 0, 'L', false);
-        $secondColumnY += $this->getStringHeight($this->summaryColumnWidth - 10, $officeHour->frequency) + 10; // Adicione 10 de espaço após o texto
-    
-        $this->SetFont('times', 'B', 12);
-        $this->SetXY($this->secondColumnX + 5, $secondColumnY);
-        $this->Cell($this->summaryColumnWidth - 10, 5, 'ACERVO', 0, 1, 'L');
-        $secondColumnY += $this->getFontSize() + 2; // Adicione 2 de espaço após o título
-    
-        // Adicione o texto do office hour
-        $this->SetFont('times', '', 10);
-        $this->SetXY($this->secondColumnX + 5, $secondColumnY);
-        $this->MultiCell($this->summaryColumnWidth - 10, 5, $officeHour->information, 0, 'L', false);
-        $secondColumnY += $this->getStringHeight($this->summaryColumnWidth - 10, $officeHour->information) + 10; // Adicione 10 de espaço após o texto
+        // Verifique se $officeHour está definido e não é nulo
+        if (isset($officeHour)) {
+            $this->SetFont('times', 'B', 12);
+            $this->SetXY($this->secondColumnX + 5, $secondColumnY);
+            $this->Cell($this->summaryColumnWidth - 10, 5, 'EXPEDIENTE', 0, 1, 'L');
+            $secondColumnY += $this->getFontSize() + 2; // Adicione 2 de espaço após o título
         
-        // Pule uma linha antes de adicionar o próximo bloco de texto
-        $secondColumnY += 5;
-        
-        // Adicione o título ENTIDADE
-        $this->SetFont('times', 'B', 12);
-        $this->SetXY($this->secondColumnX + 5, $secondColumnY);
-        $this->Cell($this->summaryColumnWidth - 10, 5, 'ENTIDADE', 0, 1, 'L');
-        $secondColumnY += $this->getFontSize() + 2; // Adicione 2 de espaço após o título
-        
-        // Adicione os dados da entidade na segunda coluna
-        $entityData = array(
-            $officeHour->entity_name,
-            $officeHour->entity_address,
-            'CNPJ: ' . $officeHour->entity_cnpj,
-            'Telefone: ' . $officeHour->entity_phone
-        );
-        foreach ($entityData as $data) {
+            // Adicione o texto do office hour
             $this->SetFont('times', '', 10);
-            $this->SetX($this->secondColumnX + 5);
-            $this->MultiCell($this->summaryColumnWidth - 10, 5, $data, 0, 'L', false);
-            $secondColumnY += $this->getStringHeight($this->summaryColumnWidth - 10, $data) + 2; // Adicione 2 de espaço após cada linha
-        }
-    
-        // Adicione o título MESA Diretora
-        $this->SetFont('times', 'B', 12);
-        $this->SetXY($this->secondColumnX + 5, $secondColumnY);
-        $this->Cell($this->summaryColumnWidth - 10, 5, 'MESA DIRETORA', 0, 1, 'L');
-        $secondColumnY += $this->getFontSize() + 2; // Adicione 2 de espaço após o título
-    
-        // Adicione os dados dos conselheiros
-        foreach ($councilors as $index => $councilor) {
-            $councilorData = array(
-                $councilor->legislatureRelations[$index]->office->office. ' ' . $councilor['name'] . ' ' . $councilor['surname'] . ' - ' . $councilor->partyAffiliation->name,
+            $this->SetXY($this->secondColumnX + 5, $secondColumnY);
+            $this->MultiCell($this->summaryColumnWidth - 10, 5, $officeHour->frequency, 0, 'L', false);
+            $secondColumnY += $this->getStringHeight($this->summaryColumnWidth - 10, $officeHour->frequency) + 10; // Adicione 10 de espaço após o texto
+            
+            $this->SetFont('times', 'B', 12);
+            $this->SetXY($this->secondColumnX + 5, $secondColumnY);
+            $this->Cell($this->summaryColumnWidth - 10, 5, 'ACERVO', 0, 1, 'L');
+            $secondColumnY += $this->getFontSize() + 2; // Adicione 2 de espaço após o título
+        
+            // Adicione o texto do office hour
+            $this->SetFont('times', '', 10);
+            $this->SetXY($this->secondColumnX + 5, $secondColumnY);
+            $this->MultiCell($this->summaryColumnWidth - 10, 5, $officeHour->information, 0, 'L', false);
+            $secondColumnY += $this->getStringHeight($this->summaryColumnWidth - 10, $officeHour->information) + 10; // Adicione 10 de espaço após o texto
+            
+            // Pule uma linha antes de adicionar o próximo bloco de texto
+            $secondColumnY += 5;
+            
+            // Adicione o título ENTIDADE
+            $this->SetFont('times', 'B', 12);
+            $this->SetXY($this->secondColumnX + 5, $secondColumnY);
+            $this->Cell($this->summaryColumnWidth - 10, 5, 'ENTIDADE', 0, 1, 'L');
+            $secondColumnY += $this->getFontSize() + 2; // Adicione 2 de espaço após o título
+            
+            // Adicione os dados da entidade na segunda coluna
+            $entityData = array(
+                $officeHour->entity_name,
+                $officeHour->entity_address,
+                'CNPJ: ' . $officeHour->entity_cnpj,
+                $sistem['address'] . ', ' . $sistem['number'] . ', ' . $sistem['neighborhood'],
+                'Telefone: ' . $officeHour->entity_phone,
+                'Site: ' . $officeHour->site,
+                'Diário: ' . $officeHour->url_diario
             );
-            foreach ($councilorData as $data) {
+            foreach ($entityData as $data) {
                 $this->SetFont('times', '', 10);
                 $this->SetX($this->secondColumnX + 5);
                 $this->MultiCell($this->summaryColumnWidth - 10, 5, $data, 0, 'L', false);
                 $secondColumnY += $this->getStringHeight($this->summaryColumnWidth - 10, $data) + 2; // Adicione 2 de espaço após cada linha
             }
-            // Adicione espaço extra após cada conselheiro
-            $secondColumnY += 5; // Ajuste conforme necessário
+        }
+    
+        // Verifique se $councilors está definido e não é nulo
+        if (isset($councilors) && $councilors) {
+            // Adicione o título MESA Diretora
+            $this->SetFont('times', 'B', 12);
+            $this->SetXY($this->secondColumnX + 5, $secondColumnY);
+            $this->Cell($this->summaryColumnWidth - 10, 5, 'MESA DIRETORA', 0, 1, 'L');
+            $secondColumnY += $this->getFontSize() + 2; // Adicione 2 de espaço após o título
+        
+            // Adicione os dados dos conselheiros
+            foreach ($councilors as $index => $councilor) {
+                $councilorData = array(
+                    $councilor->legislatureRelations[$index]->office->office. ' ' . $councilor['name'] . ' ' . $councilor['surname'] . ' - ' . $councilor->partyAffiliation->name,
+                );
+                foreach ($councilorData as $data) {
+                    $this->SetFont('times', '', 10);
+                    $this->SetX($this->secondColumnX + 5);
+                    $this->MultiCell($this->summaryColumnWidth - 10, 5, $data, 0, 'L', false);
+                    $secondColumnY += $this->getStringHeight($this->summaryColumnWidth - 10, $data) + 2; // Adicione 2 de espaço após cada linha
+                }
+                // Adicione espaço extra após cada conselheiro
+                $secondColumnY += 5; // Ajuste conforme necessário
+            }
         }
     }
+    
 
     protected function addLastPage($sistem)
     {
@@ -509,7 +519,7 @@ class PDFGenerator extends TCPDF
 
         $this->SetY($sumarioY); // Defina a posição Y para onde o sumário será adicionado
         $this->createSummary($summary, $officeHour);
-        $this->generateSecondColumn($officeHour, $councilors);
+        $this->generateSecondColumn($officeHour, $councilors, $sistem);
 
         // Salvar o PDF no armazenamento (storage)
         $fileName = 'diary' . '_' . uniqid() . '.pdf';
