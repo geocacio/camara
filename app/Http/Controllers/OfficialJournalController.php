@@ -418,6 +418,10 @@ class OfficialJournalController extends Controller
             'entity_cnpj' => 'required',
             'entity_email' => 'required',
             'entity_phone' => 'required',
+
+            'site' => 'required',
+            'url_diario' => 'required',
+            'expedient' => 'required',
         ], [
             'information.required' => 'O campo Informações é obrigatório!',
             'frequency.required' => 'O campo Frequência é obrigatório!',
@@ -429,6 +433,10 @@ class OfficialJournalController extends Controller
             'entity_cnpj.required' => 'O campo CNPJ da entidade é obrigatório!',
             'entity_email.required' => 'O campo E-mail da entidade é obrigatório!',
             'entity_phone.required' => 'O campo Telefone da entidade é obrigatório!',
+
+            'site.required' => 'O campo SITE é obrigatório!',
+            'url_diario.required' => 'O campo URL do diário é obrigatório!',
+            'expedient.required' => 'O campo Expediente é obrigatório!',
         ]);
     
         $officeHour = OfficeHour::first();

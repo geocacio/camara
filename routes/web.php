@@ -587,7 +587,7 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-Route::get('/diario-oficial/reading/{id?}', [OfficialJournalController::class, 'page'])->name('official.diary.page');
+Route::get('/diario-oficial/diario/{id?}', [OfficialJournalController::class, 'page'])->name('official.diary.page');
 Route::match(['get', 'post'], '/diario-oficial/publicacoes', [OfficialJournalController::class, 'search'])->name('official.diary.search');
 Route::get('/diario-oficial/edicoes', [OfficialJournalController::class, 'allEditions'])->name('official.diary.all');
 Route::get('/diario-oficial/normativas', [OfficialJournalController::class, 'normative'])->name('official.diary.normative');

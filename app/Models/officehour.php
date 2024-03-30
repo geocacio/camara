@@ -20,5 +20,8 @@ class officehour extends Model
         'entity_cnpj',
         'entity_email',
         'entity_phone',
+        'url_diario',
+        'site',
+        'expedient',
     ];
 }

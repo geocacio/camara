@@ -285,8 +285,8 @@ class PDFGenerator extends TCPDF
         
         // Adicione os dados da entidade na segunda coluna
         $entityData = array(
-            'Nome da entidade: ' . $officeHour->entity_name,
-            'Endereço da entidade: ' . $officeHour->entity_address,
+            $officeHour->entity_name,
+            $officeHour->entity_address,
             'CNPJ: ' . $officeHour->entity_cnpj,
             'Telefone: ' . $officeHour->entity_phone
         );
@@ -365,14 +365,16 @@ class PDFGenerator extends TCPDF
         $infoY = $leiY + 15; // Espaçamento entre o texto da lei e as informações do sistema
         
         // Adicione as informações do sistema centralizadas
-        $this->SetXY($infoX, $infoY);
-        $this->MultiCell(0, 5, $sistem['system_name'], 0, 'C');
-        $this->SetX($infoX);
-        $this->MultiCell(0, 5, 'CNPJ: ' . $sistem['cnpj'], 0, 'C');
-        $this->SetX($infoX);
-        $this->MultiCell(0, 5, 'Endereço: ' . $sistem['address'] . ', ' . $sistem['number'] . ', ' . $sistem['neighborhood'], 0, 'C');
-        $this->SetX($infoX);
-        $this->MultiCell(0, 5, 'Telefone: ' . $sistem['phone'], 0, 'C');
+        if($sistem){
+            $this->SetXY($infoX, $infoY);
+            $this->MultiCell(0, 5, $sistem['system_name'], 0, 'C');
+            $this->SetX($infoX);
+            $this->MultiCell(0, 5, 'CNPJ: ' . $sistem['cnpj'], 0, 'C');
+            $this->SetX($infoX);
+            $this->MultiCell(0, 5, 'Endereço: ' . $sistem['address'] . ', ' . $sistem['number'] . ', ' . $sistem['neighborhood'], 0, 'C');
+            $this->SetX($infoX);
+            $this->MultiCell(0, 5, 'Telefone: ' . $sistem['phone'], 0, 'C');
+        }
     }
     
     

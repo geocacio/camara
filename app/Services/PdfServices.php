@@ -29,15 +29,21 @@ class PdfServices
         }
 
         // pega dados da mesa diretora atual
+        $councilors = [];
         $legislature = (new Legislature)->getCurrentLegislature();
-        $cargo = [1, 2, 3, 4];
-        $getcouncilorID = LegislatureRelation::whereIn('office_id', $cargo)->where('legislature_id', $legislature->id)->get();
-        $councilors = Councilor::whereIn('id', $getcouncilorID->pluck('legislatureable_id'))->get();
+        // Pega dados da mesa diretora atual
+        if ($legislature) {
+            $cargo = [1, 2, 3, 4];
+            $getcouncilorID = LegislatureRelation::whereIn('office_id', $cargo)->where('legislature_id', $legislature->id)->get();
+            if ($getcouncilorID->isNotEmpty()) {
+                $councilors = Councilor::whereIn('id', $getcouncilorID->pluck('legislatureable_id'))->get();
+                // Encontrar a posição da legislatura atual
+                $currentLegislaturePosition = $legislature->fresh()->getOriginal('created_at');
+                $currentLegislaturePosition = Legislature::where('created_at', '<=', $currentLegislaturePosition)->count();
+                // Seu código para lidar com os conselheiros e a posição da legislatura atual aqui
+            }
+        }
 
-        // Encontrar a posição da legislatura atual
-        $currentLegislaturePosition = $legislature ? $legislature->fresh()->getOriginal('created_at') : null;
-        $currentLegislaturePosition = $currentLegislaturePosition ? Legislature::where('created_at', '<=', $currentLegislaturePosition)->count() : null;
-        // fim da busca de mesa diretora
 
         // pega dados da camara
         $sistem = Setting::first();

@@ -69,10 +69,28 @@
                         <input type="text" name="entity_phone" class="form-control" autocomplete="off" value="{{ old('entity_phone', $officeHour->entity_phone) }}">
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Site</label>
+                        <input type="text" name="site" class="form-control" autocomplete="off" value="{{ old('site', $officeHour->site) }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>URL do diário</label>
+                        <input type="text" name="url_diario" class="form-control" autocomplete="off" value="{{ old('url_diario', $officeHour->url_diario) }}">
+                    </div>
+                </div>
                 <div class="col-md-12">
                     <div class="form-group">
                         <label>Acervo</label>
                         <textarea name="information" class="form-control" autocomplete="off">{{ old('information', $officeHour->information) }}</textarea>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Expediente</label>
+                        <textarea name="expedient" class="form-control" autocomplete="off">{{ old('expedient', $officeHour->expedient) }}</textarea>
                     </div>
                 </div>
             </div>
