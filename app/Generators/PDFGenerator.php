@@ -209,25 +209,27 @@ class PDFGenerator extends TCPDF
 
         $columnHeight = 0; // Altura da coluna atual
         foreach ($summary as $item) {
+            // Definir a altura das células
+            $cellHeight = 6; // Altere este valor para ajustar o espaço entre os itens
+
             $this->SetFont('times', 'B', 9); // Definir a fonte do título
             // Calcular os pontos necessários para preencher o espaço no sumário para o título
             $dotsTitle = str_repeat('.', $summaryColumnWidth - $this->GetStringWidth($item['title']) - 10);
             // Escrever o título do Sumário no sumário
-            $this->Cell($summaryColumnWidth - 20, 10, '          ' . $item['title'] . ' ' . $dotsTitle . ' ' . $item['page'], 0, 1, 'L', true, $item['url']);
-            
-            $columnHeight += 10; // Adicionar a altura do título
+            $this->Cell($summaryColumnWidth - 20, $cellHeight, '          ' . $item['title'] . ' ' . $dotsTitle . ' ' . $item['page'], 0, 1, 'L', true, $item['url']);
+
+            $columnHeight += $cellHeight; // Adicionar a altura do título
             foreach ($item['items'] as $subItem) {
                 // Definir a fonte do subtítulo igual à fonte do título
-                $this->SetFont('times', 'B', 9); // Remover o negrito para o subtítulo
+                $this->SetFont('times', '', 9); // Remover o negrito para o subtítulo
                 // Calcular os pontos necessários para preencher o espaço no sumário para o subtítulo
-                $dotsSubTitle = str_repeat('.', $summaryColumnWidth - $this->GetStringWidth($subItem['title']) - 10);
+                $dotsSubTitle = str_repeat('.', $summaryColumnWidth - $this->GetStringWidth($subItem['title']) - 20);
                 // Escrever o subtítulo no sumário
-                $this->Cell($summaryColumnWidth - 20, 10, '          ' . $subItem['title'] . ' ' . $dotsSubTitle . ' ' . $subItem['page'], 0, 1, 'L', true, $subItem['url']);
-                $columnHeight += 10; // Adicionar a altura do subtítulo
+                $this->Cell($summaryColumnWidth - 20, $cellHeight, '                    ' . $subItem['title'] . ' ' . $dotsSubTitle . ' ' . $subItem['page'], 0, 1, 'L', true, $subItem['url']);
+                $columnHeight += $cellHeight; // Adicionar a altura do subtítulo
             }
+
         }
-        
-        
     
         // Ajusta a posição Y para centralizar verticalmente
         $this->SetY($summaryPosition + ($rectHeight - $columnHeight) / 2); 
@@ -256,7 +258,7 @@ class PDFGenerator extends TCPDF
         if (isset($officeHour)) {
             $this->SetFont('times', 'B', 12);
             $this->SetXY($this->secondColumnX + 5, $secondColumnY);
-            $this->Cell($this->summaryColumnWidth - 10, 5, 'EXPEDIENTE', 0, 1, 'L');
+            $this->Cell($this->summaryColumnWidth - 10, 5, 'EXPEDIENTE', 0, 1, 'C');
             $secondColumnY += $this->getFontSize() + 2; // Adicione 2 de espaço após o título
         
             // Adicione o texto do office hour
@@ -267,7 +269,7 @@ class PDFGenerator extends TCPDF
             
             $this->SetFont('times', 'B', 12);
             $this->SetXY($this->secondColumnX + 5, $secondColumnY);
-            $this->Cell($this->summaryColumnWidth - 10, 5, 'ACERVO', 0, 1, 'L');
+            $this->Cell($this->summaryColumnWidth - 10, 5, 'ACERVO', 0, 1, 'C');
             $secondColumnY += $this->getFontSize() + 2; // Adicione 2 de espaço após o título
         
             // Adicione o texto do office hour
@@ -282,7 +284,7 @@ class PDFGenerator extends TCPDF
             // Adicione o título ENTIDADE
             $this->SetFont('times', 'B', 12);
             $this->SetXY($this->secondColumnX + 5, $secondColumnY);
-            $this->Cell($this->summaryColumnWidth - 10, 5, 'ENTIDADE', 0, 1, 'L');
+            $this->Cell($this->summaryColumnWidth - 10, 5, 'ENTIDADE', 0, 1, 'C');
             $secondColumnY += $this->getFontSize() + 2; // Adicione 2 de espaço após o título
             
             // Adicione os dados da entidade na segunda coluna
