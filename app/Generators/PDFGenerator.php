@@ -315,9 +315,13 @@ class PDFGenerator extends TCPDF
         
             // Adicione os dados dos conselheiros
             foreach ($councilors as $index => $councilor) {
-                $councilorData = array(
-                    $councilor->legislatureRelations[$index]->office->office. ' ' . $councilor['name'] . ' ' . $councilor['surname'] . ' - ' . $councilor->partyAffiliation->name,
-                );
+                $councilorData = array();
+                if (isset($councilor->legislatureRelations[$index])) {
+                    $officeName = isset($councilor->legislatureRelations[$index]->office->office) ? $councilor->legislatureRelations[$index]->office->office : '';
+                    $partyName = isset($councilor->partyAffiliation->name) ? $councilor->partyAffiliation->name : '';
+                    $councilorData[] = $officeName . ' ' . $councilor['name'] . ' ' . $councilor['surname'] . ' - ' . $partyName;
+                }
+                
                 foreach ($councilorData as $data) {
                     $this->SetFont('times', '', 10);
                     $this->SetX($this->secondColumnX + 5);
@@ -327,6 +331,7 @@ class PDFGenerator extends TCPDF
                 // Adicione espaço extra após cada conselheiro
                 $secondColumnY += 5; // Ajuste conforme necessário
             }
+            
         }
     }
     
