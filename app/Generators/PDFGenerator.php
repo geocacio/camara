@@ -221,11 +221,11 @@ class PDFGenerator extends TCPDF
             $columnHeight += $cellHeight; // Adicionar a altura do título
             foreach ($item['items'] as $subItem) {
                 // Definir a fonte do subtítulo igual à fonte do título
-                $this->SetFont('times', '', 9); // Remover o negrito para o subtítulo
+                $this->SetFont('times', 'B', 9); // Remover o negrito para o subtítulo
                 // Calcular os pontos necessários para preencher o espaço no sumário para o subtítulo
-                $dotsSubTitle = str_repeat('.', $summaryColumnWidth - $this->GetStringWidth($subItem['title']) - 20);
+                $dotsSubTitle = str_repeat('.', $summaryColumnWidth - $this->GetStringWidth($subItem['title']) - 10);
                 // Escrever o subtítulo no sumário
-                $this->Cell($summaryColumnWidth - 20, $cellHeight, '                    ' . $subItem['title'] . ' ' . $dotsSubTitle . ' ' . $subItem['page'], 0, 1, 'L', true, $subItem['url']);
+                $this->Cell($summaryColumnWidth - 20, $cellHeight, '          ' . $subItem['title'] . ' ' . $dotsSubTitle . ' ' . $subItem['page'], 0, 1, 'L', true, $subItem['url']);
                 $columnHeight += $cellHeight; // Adicionar a altura do subtítulo
             }
 
@@ -306,6 +306,7 @@ class PDFGenerator extends TCPDF
         }
     
         // Verifique se $councilors está definido e não é nulo
+        // dd($councilors);
         if (isset($councilors) && $councilors) {
             // Adicione o título MESA Diretora
             $this->SetFont('times', 'B', 12);
@@ -314,10 +315,11 @@ class PDFGenerator extends TCPDF
             $secondColumnY += $this->getFontSize() + 2; // Adicione 2 de espaço após o título
         
             // Adicione os dados dos conselheiros
-            foreach ($councilors as $index => $councilor) {
+            foreach ($councilors as $councilor) {
                 $councilorData = array();
-                if (isset($councilor->legislatureRelations[$index])) {
-                    $officeName = isset($councilor->legislatureRelations[$index]->office->office) ? $councilor->legislatureRelations[$index]->office->office : '';
+                $legislatureRelation = isset($councilor->legislatureRelations[0]) ? $councilor->legislatureRelations[0] : null;
+                if ($legislatureRelation) {
+                    $officeName = isset($legislatureRelation->office->office) ? $legislatureRelation->office->office : '';
                     $partyName = isset($councilor->partyAffiliation->name) ? $councilor->partyAffiliation->name : '';
                     $councilorData[] = $officeName . ' ' . $councilor['name'] . ' ' . $councilor['surname'] . ' - ' . $partyName;
                 }
@@ -331,6 +333,7 @@ class PDFGenerator extends TCPDF
                 // Adicione espaço extra após cada conselheiro
                 $secondColumnY += 5; // Ajuste conforme necessário
             }
+            
             
         }
     }

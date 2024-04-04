@@ -44,7 +44,6 @@ class PdfServices
             }
         }
 
-
         // pega dados da camara
         $sistem = Setting::first();
 
