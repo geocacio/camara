@@ -534,9 +534,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/official-diary/expediente/page',[ OfficialJournalController::class, 'expedient'])->name('diary.expedient');
         Route::match(['post', 'put'], '/official-diary/expediente', [OfficialJournalController::class, 'expedienteStore'])->name('diary.expedient.store');
 
-        Route::get('/official-diary/page/{type}', [OfficialJournalController::class, 'normativePage'])->name('diary.normative.page');
-        Route::put('/official-diary/page/{type}', [OfficialJournalController::class, 'normativePresentationStore'])->name('normative.presentation.store');
-
         Route::get('/official-diary/{official_diary:id}/finish', [OfficialJournalController::class, 'createOfficialDiary'])->name('official.diary.finish');
         Route::resource('/official-diary/{official_diary:id}/publications', SecretaryPublicationController::class)->middleware('can:secretary-access');
         Route::resource('/schedules', ScheduleController::class)->middleware('can:secretary-access');

@@ -75,8 +75,18 @@
             </div>
 
             <div class="form-group">
+                <label>Normativas</label>
+                <textarea name="normatives" class="form-control">{{ old('normatives', $configure->normatives) }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Apresentação</label>
+                <textarea name="presentation" class="form-control">{{ old('presentation', $configure->presentation) }}</textarea>
+            </div>
+
+            <div class="form-group">
                 <div class="custom-input-file">
-                    <label for="logo">Imagem do Funcionário</label>
+                    <label for="logo">Logo</label>
                     <input type="file" name="file" accept="image/*" class="form-control" onchange="showTempFile(event, 'custom-input-file', 'container-temp-file')">
                     <div class="container-temp-file">
                         @if($configure->files->count() > 0)

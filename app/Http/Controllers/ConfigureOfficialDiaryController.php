@@ -46,6 +46,8 @@ class ConfigureOfficialDiaryController extends Controller
             'text_three' => 'nullable',
             'footer_title' => 'nullable',
             'footer_text' => 'nullable',
+            'normatives' => 'nullable',
+            'presentation' => 'nullable',
             'file' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
         ]);
 
@@ -84,6 +86,8 @@ class ConfigureOfficialDiaryController extends Controller
             'text_three' => 'nullable',
             'footer_title' => 'nullable',
             'footer_text' => 'nullable',
+            'normatives' => 'nullable',
+            'presentation' => 'nullable',
             'file' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
         ]);
 

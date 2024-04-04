@@ -570,12 +570,6 @@
                 <li class="sub-item {{ request()->routeIs('configure-official-diary.index') ? 'active' : '' }}">
                     <a href="{{ route('configure-official-diary.index') }}" class="sub-link">Configurações</a>
                 </li>
-                <li class="sub-item {{ request()->routeIs('diary.normative.page', 'normative') ? 'active' : '' }}">
-                    <a href="{{ route('diary.normative.page', 'normative') }}" class="sub-link">Normativas</a>
-                </li>
-                <li class="sub-item {{ request()->routeIs('diary.normative.page') ? 'active' : '' }}">
-                    <a href="{{ route('diary.normative.page', 'presentation') }}" class="sub-link">Apresentação</a>
-                </li>
                 <li class="sub-item {{ request()->routeIs('diary.expedient') ? 'active' : '' }}">
                     <a href="{{ route('diary.expedient') }}" class="sub-link">Expediente</a>
                 </li>

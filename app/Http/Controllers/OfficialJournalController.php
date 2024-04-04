@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ConfigureOfficialDiary;
 use App\Models\File;
 use App\Models\FileContent;
 use App\Models\Law;
@@ -160,10 +161,9 @@ class OfficialJournalController extends Controller
         $validatedData['visibility'] = 'enabled';
 
         $updatePage = Page::where('name', $slug)->first();
+        $configure = ConfigureOfficialDiary::first();
 
-        if ($updatePage->update($validatedData)) {
-            $updatePage->groupContents()->delete();
-
+        if ($configure->update($validatedData)) {
             return redirect()->back()->with('success', 'Página atualizada com sucesso!');
         }
 

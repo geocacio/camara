@@ -17,6 +17,8 @@ class ConfigureOfficialDiary extends Model
         'text_three',
         'footer_title',
         'footer_text',
+        'presentation',
+        'normatives',
     ];
 
     public function files()
