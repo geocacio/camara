@@ -586,7 +586,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/diario-oficial/diario/{id?}', [OfficialJournalController::class, 'page'])->name('official.diary.page');
 Route::match(['get', 'post'], '/diario-oficial/publicacoes', [OfficialJournalController::class, 'search'])->name('official.diary.search');
-Route::get('/diario-oficial/edicoes', [OfficialJournalController::class, 'allEditions'])->name('official.diary.all');
+// Route::get('/diario-oficial/edicoes', [OfficialJournalController::class, 'allEditions'])->name('official.diary.all');
 Route::get('/diario-oficial/normativas', [OfficialJournalController::class, 'normative'])->name('official.diary.normative');
 Route::get('/diario-oficial/apresentacao', [OfficialJournalController::class, 'presentation'])->name('official.diary.presentation');
 Route::get('/diario-oficial/expediente', [OfficialJournalController::class, 'expedientShow'])->name('expediente.show');
