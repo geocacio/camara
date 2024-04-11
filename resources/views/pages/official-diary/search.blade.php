@@ -97,7 +97,7 @@
     </div>
 </section>
 
-@include('pages.partials.satisfactionSurvey', ['page_name' => 'Obras'])
+@include('pages.partials.satisfactionSurvey', ['page_name' => 'Diário Oficial Eletrônico'])
 
 @include('layouts.footer')
 
