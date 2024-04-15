@@ -128,7 +128,7 @@
 
                 @endforeach
 
-                {{-- {{ $sessions->render() }} --}}
+                {{ $vehicles->render() }}
 
             </div>
 

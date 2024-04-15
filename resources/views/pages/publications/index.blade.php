@@ -116,8 +116,8 @@
             @endforeach
 
 
-            {{-- {{ $construction->render() }} --}}
-
+            {{ $publications->render() }}
+            
         </div>
 
         @else

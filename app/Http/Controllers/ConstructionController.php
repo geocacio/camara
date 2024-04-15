@@ -146,7 +146,6 @@ class ConstructionController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            "secretary_id" => "required",
             "type_id" => "required",
             "title" => "required",
             "description" => "nullable",
@@ -154,7 +153,6 @@ class ConstructionController extends Controller
             "local" => "nullable",
             "expected_date" => "nullable",
         ], [
-            'secretary_id.required' => 'O campo Secretaria é obrigatório.',
             'type_id.required' => 'O campo Tipo é obrigatório.',
             'title.required' => 'O campo Título é obrigatório.',
             'date.required' => 'O campo Data é obrigatório.',
@@ -248,7 +246,6 @@ class ConstructionController extends Controller
     public function update(Request $request, Construction $construction)
     {
         $validateData = $request->validate([
-            "secretary_id" => "required",
             "type_id" => "required",
             "title" => "required",
             "description" => "nullable",

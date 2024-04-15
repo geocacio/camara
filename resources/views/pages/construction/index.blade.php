@@ -99,7 +99,7 @@
         @endif
 
 
-            {{-- {{ $construction->render() }} --}}
+        {{ $construction->render() }}
 
         @if ($noInformatios->count() > 0)
             <h4>Periodos sem obras</h4>

@@ -59,8 +59,7 @@ class EmployeeController extends Controller
         // if($request->filled('secretary')){
         //     $query->where('secretary_id', 'LIKE', '%' . $request->input('secretary') . '%');
         // }
-    
-        $employees = $query->get();
+        $employees = $query->paginate(10);
     
         $searchData = $request->only(['name' ,'secretary', 'credor', 'contact_number', 'start_date', 'end_date']);
     
@@ -105,7 +104,7 @@ class EmployeeController extends Controller
             $query->where('contact_number', 'LIKE', '%' . $request->input('contact_number') . '%');
         }
     
-        $employees = $query->get();
+        $employees = $query->paginate(10);
     
         $searchData = $request->only(['name' ,'secretary', 'credor', 'contact_number', 'start_date', 'end_date']);
     

@@ -54,7 +54,7 @@
                                         <input type="text" name="name" value="{{ old('name', $searchData['name'] ?? '') }}" class="form-control  input-sm" />
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="form-group mb-0">
                                         <label>Secretaria</label>
                                         <select name="secretary" class="form-control  input-sm">
@@ -66,7 +66,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
 
                             <div class="row">
@@ -106,7 +106,7 @@
 
                 @endforeach
 
-                {{-- {{ $glossary->render() }} --}}
+                {{ $employees->render() }}
 
             </div>
 
