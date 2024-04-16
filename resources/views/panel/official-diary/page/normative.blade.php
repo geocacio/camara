@@ -1,5 +1,5 @@
 @extends('panel.index')
-@section('pageTitle', 'Página de ' . $normative->name)
+@section('pageTitle', 'Página de Normativas')
 
 @section('content')
 
@@ -12,66 +12,44 @@
 @endif
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('normative.presentation.store', $normative->slug) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('normative.store') }}" method="post" enctype="multipart/form-data">
             @csrf
-            @method('PUT')
-            <div class="row">
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label>Ícone</label>
-                        <input type="text" name="icon" class="form-control icon" autocomplete="off" value="{{ old('icon', $normative->icon) }}" onfocus="getIconInputValues(event)">
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="form-group">
-                        <label>Título Principal</label>
-                        <input type="text" name="main_title" class="form-control" autocomplete="off" value="{{ old('main_title', $normative->main_title) }}">
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="form-group">
-                        <label>Título</label>
-                        <input type="text" name="title" class="form-control" autocomplete="off" value="{{ old('title', $normative->title) }}">
-                    </div>
-                </div>
-            </div>
+            <div id="container">
 
-            <div class="form-group">
-                <label>Lei que será exibida nessa página</label>
-                <select name="law_id" class="form-control">
-                    <option value="">Selecione o grupo</option>
-                    @foreach($laws as $law)
-                    <option value="{{ $law->id }}" {{ $law->id == $normative->law_id ? 'selected' : '' }}>{{ $law->description }}</option>
-                    @endforeach
-                </select>
-            </div>
+                <div class="form-normative">
+                    <div class="form-group">
+                        <label for="logo">Arquivo</label>
+                        <input type="file" name="files[]" accept="application/pdf" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Descrição do documentos</label>
+                        <textarea name="descriptions[]" class="form-control">{{ old('description') }}</textarea>
+                    </div>
+                </div>
+                <button type="button" id="addLawBtn">Adicionar outra lei</button>
 
-            <div class="form-footer text-right">
-                <button type="submit" class="btn-submit-default">Guardar</button>
+                <div class="form-footer text-right">
+                    <button type="submit" class="btn-submit-default">Guardar</button>
+                </div>
             </div>
         </form>
     </div>
 </div>
-<!-- Modal -->
-<div class="modal fade modal-icon-list" id="modalIconList" tabindex="-1" role="dialog" aria-labelledby="iconListModalTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-center w-100" id="iconListModalTitle">Escolha seu ícone</h5>
-                <button type="button" class="close simple-close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                @include('panel.partials.iconLists')
-            </div>
-        </div>
-    </div>
-</div>
+
 @endsection
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @section('js')
 
 @include('panel.scripts')
-
+<script>
+    $(document).ready(function() {
+        $('#addLawBtn').click(function() {
+            var newForm = $('.form-normative').first().clone();
+            newForm.find('input[type="file"]').val(''); // Clear file input
+            newForm.find('textarea').val(''); // Clear description textarea
+            $('#container').append(newForm);
+        });
+    });
+</script>
 @endsection

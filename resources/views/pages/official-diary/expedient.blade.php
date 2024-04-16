@@ -9,7 +9,7 @@
         <a href="{{ route('expediente.show') }}" class="link">expediente</a>
     </li>
 </ul>
-<h3 class="title text-center">Expediente</h3>
+<h3 class="title text-center">Diário Oficial Eletrônico</h3>
 @endsection
 
 @section('content')
@@ -23,7 +23,7 @@
             @include('pages.official-diary.sidebar')
             @if($officeHour)
                 <div class="col-md-8">
-                    {{-- <h3 class="secondary-title text-center mb-20">{{ $esicPage->title }}</h3> --}}
+                    <h3 class="title-journal mb-20">Expediente</h3>
                     <div class="card main-card card-manager">
                         <div class="tab-content" id="myTabContent">
                             <div class="gd-managers tab-pane fadeshow active" id="index" role="tabpanel" aria-labelledby="index-tab">
@@ -37,58 +37,48 @@
                                     </div>
 
                                     <div class="col-12">
-                                        <div class="table-responsive">
-                                            <table class="table-simple">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="simple-th">PERIODICIDADE</th>
-                                                        <th class="simple-th">RESPONSÁVEL</th>
-                                                        <th class="simple-th">Cargo do responsável</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                
-                                                    <tr>
-                                                        <td class="simple-td">{{ $officeHour->frequency }}</td>
-                                                        <td class="simple-td">{{ $officeHour->responsible_name  ?? '' }}</td>
-                                                        <td class="simple-td">{{ $officeHour->responsible_position ?? '' }}</td>
-                                                    </tr>
-                                
-                                                </tbody>
-                                            </table>
+                                        <div class="office-hours">
+                                            <p><strong>PERIODICIDADE:</strong> {{ $officeHour->frequency }}</p>
+                                            <p><strong>RESPONSÁVEL:</strong> {{ $officeHour->responsible_name ?? 'N/A' }}</p>
+                                            <p><strong>Cargo do responsável:</strong> {{ $officeHour->responsible_position ?? 'N/A' }}</p>
                                         </div>
                                     </div>
-
-                                    <p class="title">Sobre a câmara:</p>
-                                    <br/>
-                                    <br/>
-
-                                    <div class="col-12">
-                                        <div class="table-responsive">
-                                            <table class="table-simple">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="simple-th">Entidade</th>
-                                                        <th class="simple-th">Endereço</th>
-                                                        <th class="simple-th">Cep</th>
-                                                        <th class="simple-th">CNPJ</th>
-                                                        <th class="simple-th">Telefone</th>
-                                                        <th class="simple-th">Email</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                
-                                                    <tr>
-                                                        <td class="simple-td">{{ $officeHour->entity_name }}</td>
-                                                        <td class="simple-td">{{ $officeHour->entity_address  ?? '' }}</td>
-                                                        <td class="simple-td">{{ $officeHour->entity_zip_code  ?? '' }}</td>
-                                                        <td class="simple-td">{{ $officeHour->entity_cnpj ?? '' }}</td>
-                                                        <td class="simple-td">{{ $officeHour->entity_phone ?? '' }}</td>
-                                                        <td class="simple-td">{{ $officeHour->entity_email ?? '' }}</td>
-                                                    </tr>
-                                
-                                                </tbody>
-                                            </table>
+                                    <div style="display: flex; flex-direction:row;">
+                                        <div class="col-6">
+                                            <div class="row">
+                                                <div>
+                                                    <br/>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <strong>Entidade:</strong> {{ $officeHour->entity_name }}
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <strong>Endereço:</strong> {{ $officeHour->entity_address ?? '' }}
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <strong>Cep:</strong> {{ $officeHour->entity_zip_code ?? '' }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="row">
+                                                <div>
+                                                    <br/>
+                                                    <div class="row">                                             
+                                                        <div class="col-md-12">
+                                                            <strong>CNPJ:</strong> {{ $officeHour->entity_cnpj ?? '' }}
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <strong>Telefone:</strong> {{ $officeHour->entity_phone ?? '' }}
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <strong>Email:</strong> {{ $officeHour->entity_email ?? '' }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

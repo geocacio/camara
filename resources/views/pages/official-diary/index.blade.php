@@ -23,7 +23,7 @@
                 </div>
                 @endif
 
-                    <div class="card main-card card-manager">
+                    <div class="card main-card card-manager" style="min-height: 358;">
                         <div class="tab-content" id="myTabContent">
                             <div class="gd-managers tab-pane fadeshow active" id="index" role="tabpanel" aria-labelledby="index-tab">
                                 <p class="title-journal">Diário Oficial Eletrônico</p>

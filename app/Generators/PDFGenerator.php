@@ -311,7 +311,7 @@ class PDFGenerator extends TCPDF
             // Adicione o título MESA Diretora
             $this->SetFont('times', 'B', 12);
             $this->SetXY($this->secondColumnX + 5, $secondColumnY);
-            $this->Cell($this->summaryColumnWidth - 10, 5, 'MESA DIRETORA', 0, 1, 'L');
+            $this->Cell($this->summaryColumnWidth - 10, 5, 'MESA DIRETORA', 0, 1, 'C');
             $secondColumnY += $this->getFontSize() + 2; // Adicione 2 de espaço após o título
         
             // Adicione os dados dos conselheiros

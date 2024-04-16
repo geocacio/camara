@@ -382,8 +382,9 @@ Route::middleware('auth')->group(function () {
 
             Route::resource('external-links', ExternalLinkController::class);
             Route::resource('veiculos', VehicleController::class);
-            Route::get('no-vehicles', [VehicleController::class, 'noVehicle'])->name('no-vehicle.create');
-            Route::post('no-vehicles', [VehicleController::class, 'noVehicleStore'])->name('no-veiculos.store');
+            Route::get('no-vehicles', [VehicleController::class, 'noInfoIndex'])->name('no-vehicle.index');
+            Route::get('no-vehicles/create', [VehicleController::class, 'noInfo'])->name('no-vehicle.create');
+            Route::post('no-vehicles', [VehicleController::class, 'noInformatiostore'])->name('no-veiculos.store');
             Route::resource('lrfs', LRFController::class);
             Route::put('page-lrfs', [LRFController::class, 'pageUpdate'])->name('lrfs-page.update');
             Route::get('page-lrfs', [LRFController::class, 'pageEdit'])->name('lrf-edit.page');
@@ -538,6 +539,9 @@ Route::middleware('auth')->group(function () {
         Route::resource('/official-diary/{official_diary:id}/publications', SecretaryPublicationController::class)->middleware('can:secretary-access');
         Route::resource('/schedules', ScheduleController::class)->middleware('can:secretary-access');
         Route::resource('/configure-official-diary', ConfigureOfficialDiaryController::class);
+        // Route::get('/normativas-page', [OfficialJournalController::class, 'normativePage']);
+        // Route::post('/normativas-page/store', [OfficialJournalController::class, 'normativePresentationStore'])->name('normative.store');
+        
 
         Route::resource('/services', ServiceController::class);
 

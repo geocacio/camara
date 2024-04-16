@@ -104,16 +104,16 @@ class OfficialJournalController extends Controller
 
     public function normative()
     {
-        $normative = Page::where('name', 'Normativas')->first();
-        $law = Law::where('id', $normative->law_id)->first();
-        return view('pages.official-diary.normative', compact('normative', 'law'));
+        $normative = ConfigureOfficialDiary::first();
+
+        return view('pages.official-diary.normative', compact('normative'));
     }
 
     
     public function presentation()
     {
-        $presentation = Page::where('name', 'Apresentação')->first();
-        $law = Law::where('id', $presentation->law_id)->first();
+        $presentation = ConfigureOfficialDiary::first();
+
         $dayle = OfficialJournal::first();
 
         $getJournalID = FileContent::where('fileable_type', 'official_journals')->get();
@@ -128,47 +128,42 @@ class OfficialJournalController extends Controller
     
         $adjustedPosition = $position !== false ? $position + 1 : null;
 
-        return view('pages.official-diary.presentation', compact('presentation', 'law', 'dayle', 'adjustedPosition'));
+        return view('pages.official-diary.presentation', compact('presentation', 'dayle', 'adjustedPosition'));
     }
 
-    public function normativePage($type)
-    {
-        $normative = null;
+    // public function normativePage()
+    // {
+    //     $filesReferences = FileContent::where('fileable_type', 'Normativas')->get();
+        
+    //     // $normativeFiles = File::whereIn('id', $filesReferences->fileable_id)->get();
+    //     return view('panel.official-diary.page.normative', compact('filesReferences'));
+    // }
 
-        if($type == 'normative')
-            $normative = Page::where('name', 'Normativas')->first();
-        else if($type == 'presentation') {
-            $normative = Page::where('name', 'Apresentação')->first();
-        }else {
-            return redirect()->route('official-diary.index');
-        }
+    // public function normativePresentationStore(Request $request){
+    //     dd($request);
+    //     // $validatedData = $request->validate([
+            
+    //     // ], [
+            
+    //     // ]);
 
-        $laws = Law::all();
-        return view('panel.official-diary.page.normative', compact('normative', 'laws'));
-    }
+    //     $configure = ConfigureOfficialDiary::first();
 
-    public function normativePresentationStore(Request $request, $slug){
-        $validatedData = $request->validate([
-            'main_title' => 'required',
-            'title' => 'required',
-            'icon' => 'nullable',
-            'law_id' => 'required'
-        ], [
-            'main_title.required' => 'O campo Título principal é obrigatório!',
-            'title.required' => 'O campo Título é obrigatório!',
-            'law_id.required' => 'O campo Lei é obrigatório!',
-        ]);
-        $validatedData['visibility'] = 'enabled';
+    //     if ($configure) {
 
-        $updatePage = Page::where('name', $slug)->first();
-        $configure = ConfigureOfficialDiary::first();
+    //         // $configure->types()->attach($request->type);
 
-        if ($configure->update($validatedData)) {
-            return redirect()->back()->with('success', 'Página atualizada com sucesso!');
-        }
+    //         if ($request->hasFile('files')) {
+    //             $url = $this->fileUploadService->upload($request->file('file'), 'Normativas');
+    //             $newFile = File::create(['url' => $url, 'description' => $request->description]);
+    //             $configure->files()->create(['file_id' => $newFile->id]);
+    //         }
 
-        return redirect()->back()->with('error', 'Por favor tente novamente!');
-    }
+    //         return redirect()->back()->with('success', 'Página atualizada com sucesso!');
+    //     }
+
+    //     return redirect()->back()->with('error', 'Por favor tente novamente!');
+    // }
 
     public function allEditions()
     {
