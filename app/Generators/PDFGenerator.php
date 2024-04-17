@@ -262,10 +262,12 @@ class PDFGenerator extends TCPDF
             $secondColumnY += $this->getFontSize() + 2; // Adicione 2 de espaço após o título
         
             // Adicione o texto do office hour
-            $this->SetFont('times', '', 10);
+            $expedient = $officeHour->expedient."\n"; // Usando aspas duplas para interpretar \n como quebra de linha
+            $this->SetFont('times', '', 9);
             $this->SetXY($this->secondColumnX + 5, $secondColumnY);
-            $this->MultiCell($this->summaryColumnWidth - 10, 5, $officeHour->frequency, 0, 'L', false);
-            $secondColumnY += $this->getStringHeight($this->summaryColumnWidth - 10, $officeHour->frequency) + 10; // Adicione 10 de espaço após o texto
+            $this->MultiCell($this->summaryColumnWidth - 10, 5, $expedient, 0, 'J', false);
+            $secondColumnY += $this->getStringHeight($this->summaryColumnWidth - 10, $expedient) + 10; // Adicione 10 de espaço após o texto
+
             
             $this->SetFont('times', 'B', 12);
             $this->SetXY($this->secondColumnX + 5, $secondColumnY);
@@ -273,10 +275,11 @@ class PDFGenerator extends TCPDF
             $secondColumnY += $this->getFontSize() + 2; // Adicione 2 de espaço após o título
         
             // Adicione o texto do office hour
-            $this->SetFont('times', '', 10);
+            $information = $officeHour->information."\n";
+            $this->SetFont('times', '', 9);
             $this->SetXY($this->secondColumnX + 5, $secondColumnY);
-            $this->MultiCell($this->summaryColumnWidth - 10, 5, $officeHour->information, 0, 'L', false);
-            $secondColumnY += $this->getStringHeight($this->summaryColumnWidth - 10, $officeHour->information) + 10; // Adicione 10 de espaço após o texto
+            $this->MultiCell($this->summaryColumnWidth - 10, 5, $information, 0, 'J', false);
+            $secondColumnY += $this->getStringHeight($this->summaryColumnWidth - 10, $information) + 10; // Adicione 10 de espaço após o texto
             
             // Pule uma linha antes de adicionar o próximo bloco de texto
             $secondColumnY += 5;
@@ -298,7 +301,7 @@ class PDFGenerator extends TCPDF
                 'Diário: ' . $officeHour->url_diario
             );
             foreach ($entityData as $data) {
-                $this->SetFont('times', '', 10);
+                $this->SetFont('times', '', 9);
                 $this->SetX($this->secondColumnX + 5);
                 $this->MultiCell($this->summaryColumnWidth - 10, 5, $data, 0, 'L', false);
                 $secondColumnY += $this->getStringHeight($this->summaryColumnWidth - 10, $data) + 2; // Adicione 2 de espaço após cada linha
