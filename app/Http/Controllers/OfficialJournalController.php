@@ -155,7 +155,7 @@ class OfficialJournalController extends Controller
     
             if ($configure) {
                 // Verifique se o ID está presente na requisição
-                if (!empty($request->id)) {
+                if (!is_null($request->id)) {
                     // Encontre o registro de arquivo existente
                     $existingFile = File::find($request->id);
     
@@ -170,17 +170,23 @@ class OfficialJournalController extends Controller
                         $existingFile->update(['description' => $request->description]);
                     }
     
-                    return redirect()->back()->with('success', 'Arquivo atualizado com sucesso!');
+                    return redirect()->route('normative.index')->with('success', 'Arquivo atualizado com sucesso!');
+                } else {
+                    // Crie um novo arquivo
+                    $url = $this->fileUploadService->upload($request->file('file'), 'normativas');
+                    $newFile = File::create(['url' => $url, 'description' => $request->description]);
+                    $configure->files()->create(['file_id' => $newFile->id]);
+                    
+                    return redirect()->route('normative.index')->with('success', 'Novo arquivo criado com sucesso!');
                 }
-    
-                return redirect()->back()->with('error', 'ID de arquivo inválido.');
             }
     
-            return redirect()->back()->with('error', 'ConfigureOfficialDiary não encontrado.');
+            return redirect()->route('normative.index')->with('error', 'Item não encontrado.');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->route('normative.index')->with('error', $e->getMessage());
         }
     }
+    
 
     public function allEditions()
     {
