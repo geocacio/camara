@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\ConfigureOfficialDiary;
 use App\Models\File;
 use App\Models\FileContent;
@@ -105,8 +106,9 @@ class OfficialJournalController extends Controller
     public function normative()
     {
         $normative = ConfigureOfficialDiary::first();
-
-        return view('pages.official-diary.normative', compact('normative'));
+        $filesReferences = FileContent::where('fileable_type', 'configure_official_diary')->pluck('file_id');
+        $files = File::whereIn('id', $filesReferences)->where('url', 'LIKE', 'normativas%')->get();
+        return view('pages.official-diary.normative', compact('normative', 'files'));
     }
 
     
@@ -131,39 +133,54 @@ class OfficialJournalController extends Controller
         return view('pages.official-diary.presentation', compact('presentation', 'dayle', 'adjustedPosition'));
     }
 
-    // public function normativePage()
-    // {
-    //     $filesReferences = FileContent::where('fileable_type', 'Normativas')->get();
-        
-    //     // $normativeFiles = File::whereIn('id', $filesReferences->fileable_id)->get();
-    //     return view('panel.official-diary.page.normative', compact('filesReferences'));
-    // }
+    public function normativeIndex(){
+        $filesReferences = FileContent::where('fileable_type', 'configure_official_diary')->pluck('file_id');
+        $files = File::whereIn('id', $filesReferences)->where('url', 'LIKE', 'normativas%')->get();
+        return view('panel.official-diary.page.normative-index', compact('files'));
+    }
 
-    // public function normativePresentationStore(Request $request){
-    //     dd($request);
-    //     // $validatedData = $request->validate([
-            
-    //     // ], [
-            
-    //     // ]);
+    public function normativeLaws($id = null)
+    {
+        $filesReferences = FileContent::where('fileable_type', 'Normativas')->get();
+        if($id != null){
+            $file = File::where('id', $id)->first();
+            return view('panel.official-diary.page.normative', compact('file', 'id'));
+        }
+        return view('panel.official-diary.page.normative');
+    }
 
-    //     $configure = ConfigureOfficialDiary::first();
-
-    //     if ($configure) {
-
-    //         // $configure->types()->attach($request->type);
-
-    //         if ($request->hasFile('files')) {
-    //             $url = $this->fileUploadService->upload($request->file('file'), 'Normativas');
-    //             $newFile = File::create(['url' => $url, 'description' => $request->description]);
-    //             $configure->files()->create(['file_id' => $newFile->id]);
-    //         }
-
-    //         return redirect()->back()->with('success', 'Página atualizada com sucesso!');
-    //     }
-
-    //     return redirect()->back()->with('error', 'Por favor tente novamente!');
-    // }
+    public function normativePresentationStore(Request $request){
+        try {
+            $configure = ConfigureOfficialDiary::first();
+    
+            if ($configure) {
+                // Verifique se o ID está presente na requisição
+                if (!empty($request->id)) {
+                    // Encontre o registro de arquivo existente
+                    $existingFile = File::find($request->id);
+    
+                    // Atualize apenas a descrição se não houver arquivo enviado
+                    if ($request->hasFile('file')) {
+                        // Faça upload do novo arquivo
+                        $url = $this->fileUploadService->upload($request->file('file'), 'normativas');
+                        // Atualize a URL e a descrição do arquivo
+                        $existingFile->update(['url' => $url, 'description' => $request->description]);
+                    } else {
+                        // Apenas atualize a descrição
+                        $existingFile->update(['description' => $request->description]);
+                    }
+    
+                    return redirect()->back()->with('success', 'Arquivo atualizado com sucesso!');
+                }
+    
+                return redirect()->back()->with('error', 'ID de arquivo inválido.');
+            }
+    
+            return redirect()->back()->with('error', 'ConfigureOfficialDiary não encontrado.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
 
     public function allEditions()
     {
@@ -200,7 +217,10 @@ class OfficialJournalController extends Controller
     {
         $getJournalID = FileContent::where('fileable_type', 'official_journals')->get();
         $query = OfficialJournal::query()->whereIn('id', $getJournalID->pluck('fileable_id'));
-
+        $category = Category::where('slug', 'sumario')->first();
+        $sumarys = Category::where('parent_id', $category->id)->get();
+        $publication = SecretaryPublication::get();
+    
         if ($request->filled('start_date') && $request->filled('end_date')) {
             $start_date = date("Y-m-d", strtotime($request->input('start_date')));
             $end_date = date("Y-m-d", strtotime($request->input('end_date')));
@@ -214,12 +234,18 @@ class OfficialJournalController extends Controller
             // Se apenas a data final estiver definida
             $end_date = date("Y-m-d", strtotime($request->input('end_date')));
             $query->where('created_at', '<=', $end_date);
+        } else if ($request->filled('sumary_id')) {
+            // Se apenas a data final estiver definida
+            $pub = $publication->where('summary_id', $request->sumary_id)->pluck('diary_id');
+            $pubArray = $pub->toArray();
+            $query->whereIn('id', $pubArray);
+
         }       
 
         $dayles = $query->paginate(10);
-        $searchData = $request->only(['start_date', 'end_date', 'description']);
+        $searchData = $request->only(['start_date', 'end_date', 'description', 'sumary_id']);
 
-        return view('pages.official-diary.search', compact('dayles', 'searchData'));
+        return view('pages.official-diary.search', compact('dayles', 'searchData', 'sumarys'));
     }
 
     /**
@@ -451,5 +477,33 @@ class OfficialJournalController extends Controller
     
         return redirect()->back()->with('error', 'Por favor, tente novamente!');
     }
+
+    public function normativePresentationDelete(Request $request){
+        try {
+            $configure = ConfigureOfficialDiary::first();
+    
+            if ($configure) {
+                // Verifique se o ID está presente na requisição
+                if (!empty($request->id)) {
+                    // Exclua os registros filhos na tabela file_contents
+                    FileContent::where('file_id', $request->id)->delete();
+                    
+                    // Em seguida, exclua o registro na tabela files
+                    $existingFile = File::find($request->id);
+                    if ($existingFile) {
+                        Storage::delete($existingFile->url); // Deleta o arquivo do armazenamento
+                        $existingFile->delete(); // Deleta o registro do arquivo do banco de dados
+                    }
+    
+                    return redirect()->route('normative.index')->with('success', 'Excluido com sucesso!');
+                }
+    
+            }
+    
+        } catch (\Exception $e) {
+            return redirect()->route('normative.index')->with('error', 'Houve um erro!');
+        }
+    }
+    
     
 }

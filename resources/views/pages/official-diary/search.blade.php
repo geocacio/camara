@@ -40,6 +40,17 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-0">
+                                    <label>Sumário</label>
+                                    <select name="sumary_id" class="form-control input-sm">
+                                        <option value="">Selecione</option>
+                                        @foreach ($sumarys as $sumary)
+                                            <option value="{{ $sumary->id }}" {{ old('sumary_id', $searchData['sumary_id'] ?? '') == $sumary->id ? 'selected' : '' }}>{{ $sumary->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="mt-2 col-md-12">
                                     <div class="h-100 form-group mb-0">

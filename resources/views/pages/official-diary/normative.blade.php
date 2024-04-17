@@ -42,6 +42,16 @@
                             </span>
 
                             {{ $normative->normatives ?? '' }}
+
+                            <div class="files mt-3">
+                                @foreach ($files as $file)
+                                    <h6>
+                                        <a href="{{ asset('storage/'.$file->url) }}" target="_blank">
+                                            {{ $file->description }}
+                                        </a>
+                                    </h6>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -12,25 +12,39 @@
 @endif
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('normative.store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('normative.store') }}" method="post" id="normativeForm" enctype="multipart/form-data">
             @csrf
             <div id="container">
-
                 <div class="form-normative">
                     <div class="form-group">
-                        <label for="logo">Arquivo</label>
-                        <input type="file" name="files[]" accept="application/pdf" class="form-control">
+                        <label for="logo">Arquivo Existente</label>
+                        @if (!empty($file))
+                        <td>{{ Illuminate\Support\Str::limit($file->description, $limit = 50, $end = '...') }}</td>
+                        @else
+                            <p>Nenhum arquivo existente</p>
+                        @endif
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="logo">Atualizar Arquivo</label>
+                        <input type="file" name="file" accept="application/pdf" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        {{-- <label for="logo">Título</label>
+                        <input type="text" name="name" value="{{ isset($file) ? old('name', $file->name) : old('name') }}" class="form-control"> --}}
+                        @if(isset($file->id))
+                        <input type="hidden" name="id" value="{{ isset($file) ? old('id', $file->id) : old('id') }}" class="form-control">
+                        @endif
                     </div>
                     <div class="form-group">
-                        <label>Descrição do documentos</label>
-                        <textarea name="descriptions[]" class="form-control">{{ old('description') }}</textarea>
+                        <label>Descrição da lei</label>
+                        <textarea name="description" class="form-control">{{ isset($file) ? old('description', $file->description) : old('description') }}</textarea>
                     </div>
                 </div>
-                <button type="button" id="addLawBtn">Adicionar outra lei</button>
-
-                <div class="form-footer text-right">
-                    <button type="submit" class="btn-submit-default">Guardar</button>
-                </div>
+            </div>
+            <div class="form-footer text-right">
+                <button type="submit" class="btn-submit-default">Guardar</button>
             </div>
         </form>
     </div>
@@ -42,14 +56,4 @@
 @section('js')
 
 @include('panel.scripts')
-<script>
-    $(document).ready(function() {
-        $('#addLawBtn').click(function() {
-            var newForm = $('.form-normative').first().clone();
-            newForm.find('input[type="file"]').val(''); // Clear file input
-            newForm.find('textarea').val(''); // Clear description textarea
-            $('#container').append(newForm);
-        });
-    });
-</script>
 @endsection

@@ -23,7 +23,7 @@
             @include('pages.official-diary.sidebar')
             @if($officeHour)
                 <div class="col-md-8">
-                    <h3 class="title-journal mb-20">Expediente</h3>
+                    {{-- <h3 class="title-journal mb-20">Expediente</h3> --}}
                     <div class="card main-card card-manager">
                         <div class="tab-content" id="myTabContent">
                             <div class="gd-managers tab-pane fadeshow active" id="index" role="tabpanel" aria-labelledby="index-tab">
@@ -47,7 +47,6 @@
                                         <div class="col-6">
                                             <div class="row">
                                                 <div>
-                                                    <br/>
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <strong>Entidade:</strong> {{ $officeHour->entity_name }}
@@ -65,7 +64,6 @@
                                         <div class="col-6">
                                             <div class="row">
                                                 <div>
-                                                    <br/>
                                                     <div class="row">                                             
                                                         <div class="col-md-12">
                                                             <strong>CNPJ:</strong> {{ $officeHour->entity_cnpj ?? '' }}

@@ -539,8 +539,10 @@ Route::middleware('auth')->group(function () {
         Route::resource('/official-diary/{official_diary:id}/publications', SecretaryPublicationController::class)->middleware('can:secretary-access');
         Route::resource('/schedules', ScheduleController::class)->middleware('can:secretary-access');
         Route::resource('/configure-official-diary', ConfigureOfficialDiaryController::class);
-        // Route::get('/normativas-page', [OfficialJournalController::class, 'normativePage']);
-        // Route::post('/normativas-page/store', [OfficialJournalController::class, 'normativePresentationStore'])->name('normative.store');
+        Route::get('/normativas-page', [OfficialJournalController::class, 'normativeIndex'])->name('normative.index');
+        Route::get('/normativas-page/laws/{id?}', [OfficialJournalController::class, 'normativeLaws'])->name('normative.laws');
+        Route::delete('/normativas-delete/laws/{id?}', [OfficialJournalController::class, 'normativePresentationDelete'])->name('normative.laws.delete');
+        Route::post('/normativas-page/store', [OfficialJournalController::class, 'normativePresentationStore'])->name('normative.store');
         
 
         Route::resource('/services', ServiceController::class);
