@@ -41,7 +41,7 @@
                                 Normativas de Publicação
                             </span>
 
-                            {{ $normative->normatives ?? '' }}
+                            <div style="text-align: justify">{{ $normative->normatives ?? '' }}</div>
 
                             <div class="files mt-3">
                                 @foreach ($files as $file)
