@@ -74,10 +74,10 @@
                 </div>
             </div>
 
-            {{-- <div class="form-group">
+            <div class="form-group">
                 <label>Normativas</label>
                 <textarea name="normatives" class="form-control">{{ old('normatives', $configure->normatives) }}</textarea>
-            </div> --}}
+            </div>
 
             <div class="form-group">
                 <label>Apresentação</label>

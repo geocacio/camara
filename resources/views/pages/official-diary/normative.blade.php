@@ -45,13 +45,14 @@
 
                             <div class="files mt-3">
                                 @foreach ($files as $file)
-                                    <h6>
-                                        <a href="{{ asset('storage/'.$file->url) }}" target="_blank">
+                                    <h6 class="truncate-text">
+                                        <a title="Ver arquivo pdf" href="{{ asset('storage/'.$file->url) }}" target="_blank">
                                             {{ $file->description }}
                                         </a>
                                     </h6>
                                 @endforeach
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -123,4 +124,15 @@
         gap: 13px;
         margin-bottom: 20px;
     }
+    .truncate-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.truncate-text:hover {
+    white-space: normal;
+    overflow: visible;
+}
+
 </style>
