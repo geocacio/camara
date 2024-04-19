@@ -72,7 +72,16 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="form-group">
+                <label>Normativas</label>
+                <textarea name="normatives" class="form-control">{{ old('normatives') }}</textarea>
+            </div>
 
+            <div class="form-group">
+                <label>Apresentação</label>
+                <textarea name="presentation" class="form-control">{{ old('presentation') }}</textarea>
+            </div>
 
             <div class="form-group">
                 <div class="custom-input-file">
