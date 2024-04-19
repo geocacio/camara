@@ -16,6 +16,7 @@ use App\Services\FileUploadService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class OfficialJournalController extends Controller
@@ -241,15 +242,39 @@ class OfficialJournalController extends Controller
             $end_date = date("Y-m-d", strtotime($request->input('end_date')));
             $query->where('created_at', '<=', $end_date);
         } else if ($request->filled('sumary_id')) {
-            // Se apenas a data final estiver definida
             $pub = $publication->where('summary_id', $request->sumary_id)->pluck('diary_id');
             $pubArray = $pub->toArray();
             $query->whereIn('id', $pubArray);
+        } else if ($request->filled('keyword')) {
+            // Extrair palavras-chave do $request->keyword
+            $keywords = explode(' ', $request->keyword);
+            // Inicializar um array para armazenar os resultados
+            $diaryIds = [];
+            
+            // Iterar sobre cada palavra-chave
+            foreach ($keywords as $keyword) {
+                // Buscar na tabela de publicações onde o campo 'content' contenha a palavra-chave
+                $foundDiaryIds = SecretaryPublication::where('content', 'like', '%' . $keyword . '%')
+                ->orWhere('title', 'like', '%' . $keyword . '%')
+                ->pluck('diary_id')
+                ->toArray();
+
+                
+                // Mesclar os resultados encontrados com os resultados anteriores
+                $diaryIds = array_merge($diaryIds, $foundDiaryIds);
+            }
+
+            // Remover duplicatas, se houver
+            $diaryIds = array_unique($diaryIds);
+
+            // Agora $diaryIds contém os ids das publicações que contêm pelo menos uma das palavras-chave fornecidas, usando uma pesquisa com cláusula LIKE.
+
+            $query->whereIn('id', $diaryIds);
 
         }       
 
         $dayles = $query->paginate(10);
-        $searchData = $request->only(['start_date', 'end_date', 'description', 'sumary_id']);
+        $searchData = $request->only(['start_date', 'end_date', 'description', 'sumary_id', 'keyword']);
 
         return view('pages.official-diary.search', compact('dayles', 'searchData', 'sumarys'));
     }

@@ -27,28 +27,40 @@
                         <form action="{{ route('official.diary.search') }}" method="post">
                             @csrf
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-2">
                                     <div class="form-group mb-0">
                                         <label>De:</label>
                                         <input type="date" name="start_date" value="{{ old('start_date', $searchData['start_date'] ?? '') }}" class="form-control input-sm" />
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-2">
                                     <div class="form-group mb-0">
                                         <label>Até:</label>
                                         <input type="date" name="end_date" value="{{ old('end_date', $searchData['end_date'] ?? '') }}" class="form-control input-sm" />
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group mb-0">
-                                    <label>Sumário</label>
-                                    <select name="sumary_id" class="form-control input-sm">
-                                        <option value="">Selecione</option>
-                                        @foreach ($sumarys as $sumary)
-                                            <option value="{{ $sumary->id }}" {{ old('sumary_id', $searchData['sumary_id'] ?? '') == $sumary->id ? 'selected' : '' }}>{{ $sumary->name }}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="col-md-3">
+                                    <div class="form-group mb-0">
+                                        <label>Número</label>
+                                        <input type="text" name="number" value="{{ old('number', $searchData['number'] ?? '') }}" class="form-control input-sm" />
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group mb-0">
+                                        <label>Palavras chaves</label>
+                                        <input type="text" name="keyword" value="{{ old('keyword', $searchData['keyword'] ?? '') }}" class="form-control input-sm" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group mb-0">
+                                        <label>Sumário</label>
+                                        <select name="sumary_id" class="form-control input-sm">
+                                            <option value="">Selecione</option>
+                                            @foreach ($sumarys as $sumary)
+                                                <option value="{{ $sumary->id }}" {{ old('sumary_id', $searchData['sumary_id'] ?? '') == $sumary->id ? 'selected' : '' }}>{{ $sumary->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -108,7 +120,7 @@
     </div>
 </section>
 
-@include('pages.partials.satisfactionSurvey', ['page_name' => 'Diário Oficial Eletrônico'])
+@include('pages.partials.satisfactionSurvey', ['page_name' => 'Diário Oficial Eletrônico - Buscas'])
 
 @include('layouts.footer')
 
