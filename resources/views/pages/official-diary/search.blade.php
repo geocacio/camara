@@ -110,7 +110,7 @@
                     </div>
                 @endif
             @endforeach
-
+            {{ $dayles->render() }}
         </div>
 
         @else
