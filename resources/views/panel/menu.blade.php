@@ -576,6 +576,9 @@
                 <li class="sub-item {{ request()->routeIs('diary.expedient') ? 'active' : '' }}">
                     <a href="{{ route('normative.index') }}" class="sub-link">Normativas</a>
                 </li>
+                <li class="sub-item {{ request()->routeIs('presentation.index') ? 'active' : '' }}">
+                    <a href="{{ route('presentation.index') }}" class="sub-link">Apresentação</a>
+                </li>
                 <li class="sub-item {{ request()->routeIs('journal.page') ? 'active' : '' }}">
                     <a href="{{ route('journal.page') }}" class="sub-link">Página</a>
                 </li>

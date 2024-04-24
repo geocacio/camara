@@ -73,6 +73,34 @@ class ConfigureOfficialDiaryController extends Controller
         //
     }
 
+    public function presentationIndex(){
+        $presentation = ConfigureOfficialDiary::first();
+        return view('panel.official-diary.page.presentation', compact('presentation'));
+    }
+
+    public function presentationStore(Request $request, ){
+        $configureOfficialDiary = ConfigureOfficialDiary::first();
+        // dd($configureOfficialDiary);
+        $validatedData = $request->validate([
+            'presentation' => 'required',
+        ]);
+    
+        // Verificar se existe um registro de ConfigureOfficialDiary
+        if ($configureOfficialDiary->exists()) {
+            // Se existir, atualizar
+            if ($configureOfficialDiary->update($validatedData)) {
+                return redirect()->route('presentation.index')->with('success', 'Configurações atualizadas com sucesso!');
+            }
+            // Se a atualização falhar, redirecionar com erro
+            return redirect()->route('presentation.index')->with('error', 'Por favor, tente novamente!');
+        } else {
+            // Se não existir, criar um novo registro
+            $configureOfficialDiary->create($validatedData);
+            return redirect()->route('presentation.index')->with('success', 'Configurações criadas com sucesso!');
+        }
+    }
+    
+
     /**
      * Update the specified resource in storage.
      */
@@ -87,7 +115,6 @@ class ConfigureOfficialDiaryController extends Controller
             'footer_title' => 'nullable',
             'footer_text' => 'nullable',
             'normatives' => 'nullable',
-            'presentation' => 'nullable',
             'file' => "nullable|file|max:{$this->fileUploadService->getMaxSize()}",
         ]);
 

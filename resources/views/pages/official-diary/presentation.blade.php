@@ -40,7 +40,7 @@
                                 Apresentação
                             </span>
 
-                            {{ $presentation->presentation ?? '' }}
+                            {!! $presentation->presentation ?? '' !!}
                         </div>
                     </div>
                 </div>

@@ -80,11 +80,6 @@
             </div>
 
             <div class="form-group">
-                <label>Apresentação</label>
-                <textarea name="presentation" class="form-control">{{ old('presentation', $configure->presentation) }}</textarea>
-            </div>
-
-            <div class="form-group">
                 <div class="custom-input-file">
                     <label for="logo">Logo</label>
                     <input type="file" name="file" accept="image/*" class="form-control" onchange="showTempFile(event, 'custom-input-file', 'container-temp-file')">

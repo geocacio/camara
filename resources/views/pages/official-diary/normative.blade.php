@@ -125,14 +125,14 @@
         margin-bottom: 20px;
     }
     .truncate-text {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 
-.truncate-text:hover {
-    white-space: normal;
-    overflow: visible;
-}
+    .truncate-text:hover {
+        white-space: normal;
+        overflow: visible;
+    }
 
 </style>
