@@ -5,6 +5,7 @@ namespace App\Generators;
 
 use App\Models\File;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Support\Facades\Storage;
 use TCPDF;
 
@@ -114,8 +115,48 @@ class PDFGenerator extends TCPDF
         // Obtém o número total de páginas
         $totalPages = $this->getAliasNbPages();
         $this->SetY($this->GetY() + 15);
+        // Array associativo para mapear os dias da semana para seus equivalentes em português
+        $diasSemana = array(
+            'Sunday' => 'DOMINGO',
+            'Monday' => 'SEGUNDA',
+            'Tuesday' => 'TERÇA',
+            'Wednesday' => 'QUARTA',
+            'Thursday' => 'QUINTA',
+            'Friday' => 'SEXTA',
+            'Saturday' => 'SÁBADO'
+        );
+
+        // Array associativo para mapear os números dos meses para seus equivalentes em português
+        $meses = array(
+            1 => 'JANEIRO',
+            2 => 'FEVEREIRO',
+            3 => 'MARÇO',
+            4 => 'ABRIL',
+            5 => 'MAIO',
+            6 => 'JUNHO',
+            7 => 'JULHO',
+            8 => 'AGOSTO',
+            9 => 'SETEMBRO',
+            10 => 'OUTUBRO',
+            11 => 'NOVEMBRO',
+            12 => 'DEZEMBRO'
+        );
+
+        // Crie um objeto DateTime representando a data atual
+        $dataAtual = new DateTime();
+
+        // Obtenha o dia da semana, o dia, o mês e o ano
+        $diaSemana = $diasSemana[$dataAtual->format('l')]; // Obtém o dia da semana traduzido
+        $dia = $dataAtual->format('d');
+        $numeroMes = (int) $dataAtual->format('n');
+        $mes = $meses[$numeroMes]; // Obtém o nome do mês traduzido
+        $ano = $dataAtual->format('Y');
+
+        // Crie a string com a data formatada
+        $dataFormatada = $diaSemana . ', ' . $dia . ' de ' . $mes . ' de ' . $ano;
+
         // Largura da célula para cada coluna
-        $col1Width = $this->GetStringWidth($this->currentDate->formatLocalized('%A, %d de %Y'));
+        $col1Width = $this->GetStringWidth($dataFormatada);
         $col2Width = $this->GetStringWidth('Ano VII | Edição nº 285 ISSN: XXXX-XXXX');
         $col3Width = $this->GetStringWidth('Página ' . $pageNumber . ' de ' . $totalPages);
 
@@ -123,7 +164,7 @@ class PDFGenerator extends TCPDF
         // $this->SetY($this->GetY() - 5); // Ajuste o valor conforme necessário
         $this->Ln(-7);
         // Coluna 1 (à esquerda)
-        $this->Cell($col1Width, $cellHeight, $this->currentDate->formatLocalized('%A, %d de %Y'), 0, false, 'L', 0, '', 0, false, 'M', 'M');
+        $this->Cell($col1Width, $cellHeight, $dataFormatada, 0, false, 'L', 0, '', 0, false, 'M', 'M');
 
         // Coluna 2 (no centro)
         $col2X = ($pageWidth - $col2Width) / 2;
@@ -341,7 +382,6 @@ class PDFGenerator extends TCPDF
         }
     }
     
-
     protected function addLastPage($sistem)
     {
         $this->AddPage('P', 'A4');
@@ -349,7 +389,82 @@ class PDFGenerator extends TCPDF
         if (empty($this->headerData)) {
             return;
         }
-        
+
+        $pageNumber = $this->getAliasNumPage();
+        $totalPages = $this->getAliasNbPages();
+        // Define a cor de preenchimento do retângulo como azul
+        $this->SetFillColor(210, 221, 233);
+
+        // Define as coordenadas e dimensões do retângulo
+        $boxWidth = $this->GetPageWidth();
+        $boxHeight = 10;
+        $boxX = 0;
+        $boxY = 10;
+
+        // Desenha o retângulo azul
+        $this->Rect($boxX, $boxY, $boxWidth, $boxHeight, 'F');
+
+        // Array associativo para mapear os dias da semana para seus equivalentes em português
+        $diasSemana = array(
+            'Sunday' => 'DOMINGO',
+            'Monday' => 'SEGUNDA',
+            'Tuesday' => 'TERÇA',
+            'Wednesday' => 'QUARTA',
+            'Thursday' => 'QUINTA',
+            'Friday' => 'SEXTA',
+            'Saturday' => 'SÁBADO'
+        );
+
+        // Array associativo para mapear os números dos meses para seus equivalentes em português
+        $meses = array(
+            1 => 'JANEIRO',
+            2 => 'FEVEREIRO',
+            3 => 'MARÇO',
+            4 => 'ABRIL',
+            5 => 'MAIO',
+            6 => 'JUNHO',
+            7 => 'JULHO',
+            8 => 'AGOSTO',
+            9 => 'SETEMBRO',
+            10 => 'OUTUBRO',
+            11 => 'NOVEMBRO',
+            12 => 'DEZEMBRO'
+        );
+
+        // Crie um objeto DateTime representando a data atual
+        $dataAtual = new DateTime();
+
+        // Obtenha o dia da semana, o dia, o mês e o ano
+        $diaSemana = $diasSemana[$dataAtual->format('l')]; // Obtém o dia da semana traduzido
+        $dia = $dataAtual->format('d');
+        $numeroMes = (int) $dataAtual->format('n');
+        $mes = $meses[$numeroMes]; // Obtém o nome do mês traduzido
+        $ano = $dataAtual->format('Y');
+
+        // Crie a string com a data formatada
+        $dataFormatada = $diaSemana . ', ' . $dia . ' de ' . $mes . ' de ' . $ano. ' | '.'ANO VII | Nº 1';
+        $col1Text = 'CIDELÂNDIA';
+        $col2Text = $dataFormatada;
+
+        $col3Text = 'Página ' . $pageNumber . ' de ' . $totalPages;
+
+        // Define as larguras de cada texto
+        $col1Width = $this->GetStringWidth($col1Text);
+        $col2Width = $this->GetStringWidth($col2Text);
+        $col3Width = $this->GetStringWidth($col3Text);
+
+        // Calcula a posição X para centralizar o texto horizontalmente
+        $textX = $boxX + ($boxWidth - ($col1Width + $col2Width + $col3Width + 40)) / 2;
+
+        // Define a posição Y para centralizar o texto verticalmente
+        $textY = $boxY + ($boxHeight - 5) / 2;
+
+        // Adiciona os textos centralizados dentro do retângulo
+        $this->SetFont('times', '', 12);
+        $this->SetTextColor(0, 0, 0); // Cor do texto (preto)
+        $this->SetXY($textX, $textY);
+        $this->Cell($col1Width + $col2Width + $col3Width + 40, 5, $col1Text . ', ' . $col2Text . ' | ' . $col3Text, 0, 0, 'C');
+
         // Carrega a imagem do logo
         $logoImage = $this->headerData['logoPath'];
         $logoWidth = 50;
@@ -376,8 +491,8 @@ class PDFGenerator extends TCPDF
         $municipioY = $titleY + 30;
         $this->Text($municipioX, $municipioY, $municipioText);
         
-        // Adicione o texto "Conforme Lei nº 005, de 25 de agosto de 2023" centralizado
-        $leiText = "Conforme Lei nº 005, de 25 de agosto de 2023";
+        // Adicione o texto "Conforme Lei nº 005, de 25 de AGOSTO de 2023" centralizado
+        $leiText = "Conforme Lei nº 005, de 25 de AGOSTO de 2023";
         $leiWidth = $this->GetStringWidth($leiText);
         $leiX = ($this->GetPageWidth() - $leiWidth) / 2; // Centraliza o texto horizontalmente
         $leiY = $municipioY + 15;
@@ -399,8 +514,6 @@ class PDFGenerator extends TCPDF
             $this->MultiCell(0, 5, 'Telefone: ' . $sistem['phone'], 0, 'C');
         }
     }
-    
-    
     
     public function generate($official_diary, $headerData, $footerData, $summaryGroup, $officeHour, $councilors, $sistem)
     {
