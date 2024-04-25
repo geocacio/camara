@@ -9,6 +9,8 @@ use App\Models\Councilor;
 use App\Models\Legislature;
 use App\Models\LegislatureRelation;
 use App\Models\officehour;
+use App\Models\OfficialJournal;
+use App\Models\SecretaryPublication;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,7 +18,8 @@ class PdfServices
 {
     public function officialDiaryGenerate($official_diary)
     {
-        // dd($official_diary);
+        $countEditions = OfficialJournal::count();
+
         $summaryGroup = Category::where('slug', 'sumario')->with('children')->first();
         $summaryGroup = $summaryGroup->children->toArray();
         //Remove a versão atual...
@@ -43,6 +46,8 @@ class PdfServices
                 // Seu código para lidar com os conselheiros e a posição da legislatura atual aqui
             }
         }
+
+
 
         // pega dados da camara
         $sistem = Setting::first();
@@ -86,7 +91,7 @@ class PdfServices
             
         }
         
-        $result = $pdf->generate($official_diary, $headerData, $footerData, $summaryGroup, $officeHour, $councilors, $sistem);
+        $result = $pdf->generate($official_diary, $headerData, $footerData, $summaryGroup, $officeHour, $councilors, $sistem, $countEditions);
 
         $official_diary->files()->create(['file_id' => $result->id]);
 

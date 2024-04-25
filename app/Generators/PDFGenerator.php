@@ -16,6 +16,7 @@ class PDFGenerator extends TCPDF
     protected $headerData;
     protected $footerData;
     protected $currentDate;
+    protected $countEditions;
     protected $showHeaderOnLastPage = true;
 
 
@@ -26,9 +27,10 @@ class PDFGenerator extends TCPDF
     }
 
     // Método para definir os dados do cabeçalho
-    protected function CustomSetHeaderData($headerData)
+    protected function CustomSetHeaderData($headerData, $countEditions)
     {
         $this->headerData = $headerData;
+        $this->countEditions = $countEditions;
         $this->currentDate = Carbon::now()->locale('pt_BR');
     }
     protected function CustomSetFooterData($footerData)
@@ -157,7 +159,7 @@ class PDFGenerator extends TCPDF
 
         // Largura da célula para cada coluna
         $col1Width = $this->GetStringWidth($dataFormatada);
-        $col2Width = $this->GetStringWidth('Ano VII | Edição nº 285 ISSN: XXXX-XXXX');
+        $col2Width = $this->GetStringWidth('Ano VII | Edição nº'.$this->countEditions.'  ISSN: XXXX-XXXX');
         $col3Width = $this->GetStringWidth('Página ' . $pageNumber . ' de ' . $totalPages);
 
         // Ajusta a posição das três colunas para cima
@@ -169,7 +171,7 @@ class PDFGenerator extends TCPDF
         // Coluna 2 (no centro)
         $col2X = ($pageWidth - $col2Width) / 2;
         $this->SetX($col2X);
-        $this->Cell($col2Width, $cellHeight, 'Ano VII | Edição nº 285 ISSN: XXXX-XXXX', 0, false, 'C', 0, '', 0, false, 'M', 'M');
+        $this->Cell($col2Width, $cellHeight, 'Ano VII | Edição nº'.$this->countEditions.' ISSN: XXXX-XXXX', 0, false, 'C', 0, '', 0, false, 'M', 'M');
 
         // Coluna 3 (à direita)
         $col3X = $pageWidth - $col3Width - $padding;
@@ -442,7 +444,7 @@ class PDFGenerator extends TCPDF
         $ano = $dataAtual->format('Y');
 
         // Crie a string com a data formatada
-        $dataFormatada = $diaSemana . ', ' . $dia . ' de ' . $mes . ' de ' . $ano. ' | '.'ANO VII | Nº 1';
+        $dataFormatada = $diaSemana . ', ' . $dia . ' de ' . $mes . ' de ' . $ano. ' | '.'ANO VII | Nº '. $this->countEditions;
         $col1Text = 'CIDELÂNDIA';
         $col2Text = $dataFormatada;
 
@@ -515,10 +517,10 @@ class PDFGenerator extends TCPDF
         }
     }
     
-    public function generate($official_diary, $headerData, $footerData, $summaryGroup, $officeHour, $councilors, $sistem)
+    public function generate($official_diary, $headerData, $footerData, $summaryGroup, $officeHour, $councilors, $sistem, $countEditions)
     {
         // Defina o título do cabeçalho para exibição
-        $this->CustomSetHeaderData($headerData);
+        $this->CustomSetHeaderData($headerData, $countEditions);
         $this->CustomSetFooterData($footerData);
 
         // // Definir o tamanho da página
