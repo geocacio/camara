@@ -187,8 +187,12 @@
                                                 </div>
                                                 <div class="second-part">
                                                     <div class="body">
+                                                        @if(isset($session->session->types[0]))
                                                         <h3 class="title">{{ $session->session->types[0]->name . ': ' . $session->session->id . '/' . date('Y', strtotime($session->session->created_at)) }}</h3>
-                                                        <p class="description">{{ Str::limit($session->session->description, '75', '...') }}</p>
+                                                        @endif
+                                                        @if(isset($session->session->description))
+                                                            <p class="description">{{ Str::limit($session->session->description, '75', '...') }}</p>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </a>

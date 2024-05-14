@@ -185,14 +185,18 @@ class SessionController extends Controller
      */
     public function destroy(Session $session)
     {
+        $session->sessionAttendance()->delete();
+    
         $typeContent = TypeContent::where('typeable_id', $session->id)->where('typeable_type', 'Session')->first();
         if ($typeContent) {
             $typeContent->delete();
         }
-
-        if ($session->delete()){
+    
+        if ($session->delete()) {
             return redirect()->route('sessions.index')->with('success', 'Sessão removida com sucesso!');
         }
-        return redirect()->back()->with('error', 'Error, por favor tente novamente!');
+        
+        return redirect()->back()->with('error', 'Erro, por favor tente novamente!');
     }
+    
 }
