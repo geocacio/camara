@@ -261,6 +261,10 @@
 
     // filter by yaer
     $(document).ready(function(){
+        $("#exercicio").trigger("click");
+    });
+    
+    $(document).ready(function(){
         $(".sub-item").click(function(){
             var divClicada = $(this).attr('id');
             $(".lrf-item-a").hide();
