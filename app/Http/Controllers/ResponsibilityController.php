@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bidding;
 use App\Models\Category;
+use App\Models\Employee;
 use App\Models\ResponsibilityEmployee;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class ResponsibilityController extends Controller
     {
         $responsibilities = $bidding->responsibilities;
         $categories = Category::where('slug', 'responsabilidades')->with('children')->get();
-        $employees = $bidding->secretary->getAllEmployees();
+        $employees = Employee::all();
 
         return view('panel.biddings.responsibilities.create', compact('bidding', 'responsibilities', 'categories', 'employees'));
     }
