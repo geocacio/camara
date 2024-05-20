@@ -279,6 +279,8 @@
 
     // filter by document
     $(document).ready(function(){
+        $(".document-filter:first").trigger("click");
+
         $(".document-filter").click(function(){
             var divClicada = $(this).attr('id');
             $(".lrf-item-a").hide();
