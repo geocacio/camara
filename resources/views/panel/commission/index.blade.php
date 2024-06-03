@@ -79,7 +79,7 @@
         </div>
         @else
         <div class="no-data">
-            <span>Ainda não existem leis cadastradas.</span>
+            <span>Ainda não existem comissões cadastradas.</span>
         </div>
         @endif
 

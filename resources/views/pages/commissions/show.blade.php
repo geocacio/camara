@@ -75,7 +75,7 @@
                         @if($commission)
                             <div class="gd-managers tab-pane fadeshow active" id="index" role="tabpanel" aria-labelledby="index-tab">
 
-                                <h3 class="name-managers">{{ $commission->description }}</h3>
+                                {{-- <h3 class="name-managers">{{ $commission->description }}</h3> --}}
 
                                 <div class="row container-descriptions">
                                     <div class="col-md-6">
