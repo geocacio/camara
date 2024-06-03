@@ -155,7 +155,9 @@ class ContractController extends Controller
      */
     public function destroy(Bidding $bidding, $id)
     {
+        
         $contract = Contract::find($id);
+        $contract->inspectorContracts()->delete();
         $contract->types()->detach();
         $contract->children()->delete();
         $contract->delete();

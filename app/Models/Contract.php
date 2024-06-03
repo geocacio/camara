@@ -43,6 +43,11 @@ class Contract extends Model
         return $this->hasMany(Contract::class, 'parent_id');
     }
 
+    public function inspectorContracts()
+    {
+        return $this->hasMany(InspectorContract::class, 'contract_id');
+    }
+
     public function files()
     {
         return $this->morphOne(FileContent::class, 'fileable');

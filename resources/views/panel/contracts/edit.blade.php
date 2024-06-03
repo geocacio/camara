@@ -76,7 +76,7 @@
                 <select required name="inspector_id" class="form-control" {{ $types->count() <= 0 ? 'disabled' : '' }}>
                     <option value="">Selecione</option>
                     @foreach ($inspectors as $inspector)
-                        <option value="{{ $inspector->id }}" {{ $inspector->inspectorContracts->contract_id == $contract->id ? 'selected' : '' }}>
+                        <option value="{{ $inspector->id }}" {{ optional($inspector->inspectorContracts)->contract_id == $contract->id ? 'selected' : '' }}>
                             {{ $inspector->name }}
                         </option>
                     @endforeach
