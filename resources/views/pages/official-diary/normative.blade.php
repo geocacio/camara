@@ -45,11 +45,20 @@
 
                             <div class="files mt-3">
                                 @foreach ($files as $file)
-                                    <h6 class="truncate-text">
+                                    {{-- <h6 class="truncate-text">
                                         <a title="Ver arquivo pdf" href="{{ asset('storage/'.$file->url) }}" target="_blank">
                                             {{ $file->description }}
                                         </a>
-                                    </h6>
+                                    </h6> --}}
+                                    <div class="box-de">
+                                        <div class="item-de">
+                                            <p class="item-title-de"> {{ $file->description }}</p>
+                                            <div class="item-actions-de">
+                                                <span><input type="checkbox" checked disabled> Ativo</span>
+                                                <a href="{{ asset('storage/'.$file->url) }}"  target="_blank" class="download-link-de"><i class="fa-solid fa-download"></i> Baixar</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endforeach
                             </div>
                             
@@ -133,6 +142,53 @@
     .truncate-text:hover {
         white-space: normal;
         overflow: visible;
+    }
+
+    .box-de {
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        /* padding: 20px; */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .item-de {
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .item-title-de {
+        font-weight: bold;
+        color: #333333;
+        margin: 0 0 10px 0;
+    }
+
+    .item-actions-de {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        color: #666666;
+    }
+
+    .item-actions-de span {
+        display: flex;
+        align-items: center;
+    }
+
+    .item-actions-de input {
+        margin-right: 5px;
+    }
+
+    .download-link-de {
+        text-decoration: none;
+        color: #007bff;
+    }
+
+    .download-link-de:hover {
+        text-decoration: underline;
     }
 
 </style>
