@@ -598,6 +598,7 @@ Route::match(['get', 'post'], '/diario-oficial/publicacoes', [OfficialJournalCon
 Route::get('/diario-oficial/normativas', [OfficialJournalController::class, 'normative'])->name('official.diary.normative');
 Route::get('/diario-oficial/apresentacao', [OfficialJournalController::class, 'presentation'])->name('official.diary.presentation');
 Route::get('/diario-oficial/expediente', [OfficialJournalController::class, 'expedientShow'])->name('expediente.show');
+Route::get('/diario-oficial/entidade', [OfficialJournalController::class, 'entidadeShow'])->name('entidade.show');
 Route::post('/advanced-search', [AdvancedSearchController::class, 'search'])->name('advanced.search');
 Route::get('/busca', [AdvancedSearchController::class, 'result'])->name('advanced-search.result');
 Route::get('/pcs', [PcsController::class, 'show'])->name('prestacao-conta-gestao');

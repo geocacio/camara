@@ -39,6 +39,12 @@
                     Expediente
                 </a>
             </div>
+            <div class="group-links">
+                <a href="{{ route('entidade.show') }}" class="link {{ request()->routeIs('entidade.show') ? 'active' : '' }}">
+                    <i class="fa-solid fa-circle-info"></i>
+                    Entidade
+                </a>
+            </div>
         </div>
     </div>
 </div>

@@ -457,6 +457,12 @@ class OfficialJournalController extends Controller
         return view('pages.official-diary.expedient', compact('officeHour', 'dayle'));
     }
 
+    public function entidadeShow(){
+        $officeHour = OfficeHour::first();
+        $dayle = OfficialJournal::latest()->first();
+        return view('pages.official-diary.entidade', compact('officeHour', 'dayle'));
+    }
+
     public function expedienteStore()
     {
         $validatedData = request()->validate([
