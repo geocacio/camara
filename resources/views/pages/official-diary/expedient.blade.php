@@ -43,42 +43,6 @@
                                             <p><strong>Cargo do responsável:</strong> {{ $officeHour->responsible_position ?? 'N/A' }}</p>
                                         </div>
                                     </div>
-                                    <div style="display: flex; flex-direction:row;">
-                                        <div class="col-6">
-                                            <div class="row">
-                                                <div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <strong>Entidade:</strong> {{ $officeHour->entity_name }}
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <strong>Endereço:</strong> {{ $officeHour->entity_address ?? '' }}
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <strong>Cep:</strong> {{ $officeHour->entity_zip_code ?? '' }}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="row">
-                                                <div>
-                                                    <div class="row">                                             
-                                                        <div class="col-md-12">
-                                                            <strong>CNPJ:</strong> {{ $officeHour->entity_cnpj ?? '' }}
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <strong>Telefone:</strong> {{ $officeHour->entity_phone ?? '' }}
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <strong>Email:</strong> {{ $officeHour->entity_email ?? '' }}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
