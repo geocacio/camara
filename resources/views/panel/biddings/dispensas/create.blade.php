@@ -121,7 +121,7 @@
                                 <select name="type" class="form-control">
                                     <option value="">Selecione</option>
                                     @foreach($types as $type)
-                                    <option value="{{ $type->id}}">{{ $type->name }}</option>
+                                        <option value="{{ $type->id}}">{{ $type->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -311,7 +311,11 @@
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" name="company_data" id="companyDataInput" value="">
+
                 </form>
+
+                <button id="adicionarEmpresaButton"  class="btn-submit-default" onclick="adicionarEmpresa()">Adicionar outra empresa</button>
             </div>
         </div>
 
@@ -434,6 +438,10 @@
         font-weight: 900;
         color: tomato;
     }
+
+    .formCompany {
+        margin-bottom: 30px;
+    }
 </style>
 
 <script>
@@ -442,6 +450,8 @@
     let files = [];
 
     function submitBiddingForm() {
+        enviarFormulario();
+    
         const biddingForm = document.getElementById('biddingSubmit');
         const biddingData = new FormData(biddingForm);
 
@@ -461,6 +471,7 @@
             const file = fileData[fileId].file;
             biddingData.append(fileId, file);
         });
+
 
         axios.post('/panel/biddings', biddingData, {
                 headers: {
@@ -622,81 +633,92 @@
     }
 
     function addNewTab() {
-        // Crie um novo ID único para a nova guia
+        var tabList = document.querySelector('.tab-vertical');
         var newTabId = 'new-tab-' + Date.now();
+        var isEditing = false;
 
-        // Crie um novo item de navegação (li) para a nova guia
         var newNavItem = document.createElement('li');
         newNavItem.className = 'nav-item';
         newNavItem.setAttribute('role', 'presentation');
 
-        // Crie um novo botão dentro do item de navegação
         var newTabButton = document.createElement('button');
         newTabButton.className = 'nav-link';
         newTabButton.setAttribute('type', 'button');
         newTabButton.setAttribute('role', 'tab');
         newTabButton.setAttribute('aria-selected', 'false');
 
-        // Crie um input de texto para o nome da guia
         var tabNameInput = document.createElement('input');
         tabNameInput.setAttribute('type', 'text');
         tabNameInput.setAttribute('placeholder', 'Nome do arquivo');
 
-        // Adicione o input de texto ao botão
-        newTabButton.appendChild(tabNameInput);
-
         var deleteButton = document.createElement('button');
         deleteButton.innerText = 'Excluir';
-        deleteButton.classList.add('btn-del-tab'); // Adiciona a classe "btn-del-tab" ao botão
+        deleteButton.classList.add('btn-del-tab');
 
-        // Adicione um ouvinte de evento de clique ao botão de exclusão
         deleteButton.addEventListener('click', function () {
-            // Remova a guia e seu conteúdo
             var tabContentArea = document.querySelector('.tabFileNew');
             var tabToRemove = document.getElementById(newTabId);
 
             if (tabContentArea && tabToRemove) {
                 tabContentArea.removeChild(tabToRemove);
-
-                // Remova o item de navegação
-                var tabList = document.querySelector('.tab-vertical');
                 tabList.removeChild(newNavItem);
             }
         });
 
-        // Adicione o botão de exclusão ao item de navegação
+        var editButton = document.createElement('button');
+        editButton.innerText = 'Editar';
+
         newNavItem.appendChild(deleteButton);
-
-
-        // Adicione o botão de exclusão ao item de navegação
-        newNavItem.appendChild(deleteButton);
-
-        // Adicione o novo botão ao item de navegação
+        newNavItem.appendChild(editButton);
         newNavItem.appendChild(newTabButton);
-
-        // Adicione o item de navegação à lista de guias
-        var tabList = document.querySelector('.tab-vertical');
         tabList.appendChild(newNavItem);
 
-        // Adicione o evento de clique ao botão
+        newTabButton.appendChild(tabNameInput);
+
+        editButton.addEventListener('click', function () {
+            isEditing = true;
+            tabNameInput.removeAttribute('readonly');
+            tabNameInput.focus();
+        });
+
+        tabNameInput.addEventListener('blur', function () {
+            isEditing = false;
+            updateTabButton();
+        });
+
+        tabNameInput.addEventListener('keydown', function (event) {
+            if (event.keyCode === 32) {
+                var cursorPosition = tabNameInput.selectionStart;
+                var inputValue = tabNameInput.value;
+
+                tabNameInput.value = inputValue.substring(0, cursorPosition) + ' ' + inputValue.substring(cursorPosition);
+
+                tabNameInput.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
+
+                event.preventDefault();
+            }
+        });
+
         newTabButton.addEventListener('click', function () {
-            // Formate o texto para torná-lo adequado como parte do ID
+            updateTabButton();
+        });
+
+        function updateTabButton() {
             var formattedText = tabNameInput.value.trim().replace(/\s+/g, '-').toLowerCase();
 
-            // Verifique se o nome é fornecido
             if (formattedText.length > 0) {
-                // Atualize o ID da guia
-                newTabId = formattedText;
+                newTabId = 'new-tab-' + formattedText;
 
-                // Atualize os atributos do botão
                 newTabButton.setAttribute('data-bs-toggle', 'tab');
                 newTabButton.setAttribute('data-bs-target', '#' + newTabId);
                 newTabButton.setAttribute('aria-controls', newTabId);
 
-                // Atualize o nome da guia
-                newTabButton.innerText = formattedText || 'Nova Guia';
+                if (isEditing) {
+                    newTabButton.innerHTML = `<input type="text" placeholder="Nome do arquivo" value="${formattedText}">`;
+                } else {
+                    newTabButton.innerHTML = `<input type="text" placeholder="Nome do arquivo" value="${formattedText}">`;
+                }
 
-                // Crie uma nova guia na área de conteúdo
                 var newTabContent = document.createElement('div');
                 newTabContent.className = 'tab-pane fade text-center';
                 newTabContent.id = newTabId;
@@ -709,32 +731,73 @@
                     </div>
                 `;
 
-                // Adicione a nova guia à área de conteúdo
                 var tabContentArea = document.querySelector('.tabFileNew');
                 tabContentArea.appendChild(newTabContent);
 
-                // Ative a nova guia
                 newTabButton.click();
             }
-        });
-        
-        tabNameInput.addEventListener('keydown', function (event) {
-            if (event.keyCode === 32) {
-                // Adicione um espaço ao valor do input em vez de prevenir o comportamento padrão
-                var cursorPosition = tabNameInput.selectionStart;
-                var inputValue = tabNameInput.value;
+        }
+    }
 
-                // Insira um espaço na posição do cursor
-                tabNameInput.value = inputValue.substring(0, cursorPosition) + ' ' + inputValue.substring(cursorPosition);
+</script>
 
-                // Mova o cursor para a posição após o espaço
-                tabNameInput.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
+<script>
+function adicionarEmpresa() {
+    var cloneForm = document.getElementById('formCompany').cloneNode(true);
 
-                // Impedir o evento padrão para evitar a adição do espaço pelo navegador
-                event.preventDefault();
+    // Remover o campo companyDataInput do formulário clonado, se existir
+    var existingCompanyDataInput = cloneForm.querySelector('#companyDataInput');
+    if (existingCompanyDataInput) {
+        existingCompanyDataInput.remove();
+    }
+
+    // Limpar os valores dos campos clonados
+    var inputs = cloneForm.querySelectorAll('input');
+    inputs.forEach(function(input) {
+        input.value = '';
+    });
+
+    // Adicionar o formulário clonado antes do botão
+    var button = document.getElementById('adicionarEmpresaButton');
+    document.getElementById('tabCompany').insertBefore(cloneForm, button);
+}
+
+
+function enviarFormulario() {
+    // Obter todos os formulários dentro da div com a classe "tab-pane"
+    var forms = document.querySelectorAll('#tabCompany form');
+
+    // Criar um array para armazenar os dados dos formulários
+    var formDataArray = [];
+
+    // Iterar sobre cada formulário e obter os dados
+    forms.forEach(function(form) {
+        var formData = new FormData(form);
+
+        // Converter FormData para objeto JavaScript
+        var dataObject = {};
+        formData.forEach(function(value, key) {
+            // Verificar se a chave já existe no objeto
+            if (dataObject[key] !== undefined) {
+                // Se já existir, converter para array e adicionar o valor
+                if (!Array.isArray(dataObject[key])) {
+                    dataObject[key] = [dataObject[key]];
+                }
+                dataObject[key].push(value);
+            } else {
+                // Se não existir, atribuir o valor diretamente
+                dataObject[key] = value;
             }
         });
-    }
+
+        // Adicionar o objeto de dados ao array
+        formDataArray.push(dataObject);
+    });
+
+    // Converter o array para JSON e definir como valor do input hidden
+    document.getElementById('companyDataInput').value = JSON.stringify(formDataArray);
+    console.log(formDataArray);
+}
 
 </script>
 
