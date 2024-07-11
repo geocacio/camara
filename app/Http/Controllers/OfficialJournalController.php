@@ -44,7 +44,9 @@ class OfficialJournalController extends Controller
         $currentDate = $currentDateTime->toDateString();
         $timeLimit = $this->timeLimit;
         $diaries = OfficialJournal::orderBy('id', 'desc')->get();
-        return view('panel.official-diary.index', compact('diaries', 'officialJournal', 'timeLimit', 'currentTime', 'currentDate'));
+        $summaries = Category::where('slug', 'sumario')->with('children')->first();
+
+        return view('panel.official-diary.index', compact('diaries', 'officialJournal', 'timeLimit', 'currentTime', 'currentDate', 'summaries'));
     }
 
     public function page($id = null)

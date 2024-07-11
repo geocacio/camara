@@ -9,7 +9,7 @@ class OfficialJournal extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'status', 'content', 'summary'];
+    protected $fillable = ['user_id', 'status', 'content', 'summary', 'publication_date', 'created_at'];
 
     public function user(){
         return $this->hasOne(User::class);

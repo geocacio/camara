@@ -36,9 +36,16 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label>Título</label>
-                <input type="text" name="title" class="form-control" value="{{ old('title') }}" />
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Título</label>
+                    <input type="text" name="title" class="form-control" value="{{ old('title') }}" />
+                </div>
+
+                <div class="col-md-6">
+                    <label>Data de publicação</label>
+                    <input type="date" id="datePicker" name="publication_date" class="form-control" value="{{ old('publication_date') }}" required/>
+                </div>
             </div>
 
             <div class="form-group">
@@ -64,7 +71,10 @@
             toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify',
             menubar: false
         });
+
     });
+
+    document.getElementById('datePicker').valueAsDate = new Date();
 
     function displayTempImages(e, container) {
         var reader = new FileReader();

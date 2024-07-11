@@ -103,7 +103,16 @@
 
                             <div class="second-part">
                                 <div class="body">
-                                    <p class="description">Vol: {{ $index + 1 }}/{{ $dayle->created_at->format('Y') }} | <span>{{ $dayle->created_at->format('d/m/Y H:i:s') }}</span></p>
+                                    <p class="description">
+                                        Vol: {{ $index + 1 }}/{{ $dayle->created_at->format('Y') }} | 
+                                        <span>
+                                            @if($dayle->publication_date)
+                                                {{ $dayle->publication_date->format('d/m/Y') }}
+                                            @else
+                                                {{ $dayle->created_at->format('d/m/Y') }}
+                                            @endif
+                                        </span>
+                                    </p>
                                 </div>
                             </div>
                         </div>

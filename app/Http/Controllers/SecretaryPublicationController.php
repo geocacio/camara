@@ -36,7 +36,8 @@ class SecretaryPublicationController extends Controller
     public function index(OfficialJournal $official_diary)
     {
         $publications = $official_diary->publications;
-        return view('panel.official-diary.publications.index', compact('publications', 'official_diary'));
+        $summaries = Category::where('slug', 'sumario')->with('children')->first();
+        return view('panel.official-diary.publications.index', compact('publications', 'official_diary', 'summaries'));
     }
 
     /**
@@ -53,28 +54,58 @@ class SecretaryPublicationController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'summary_id' => 'required',
-            'title' => 'required',
-            'content' => 'required',
+        $rules = [
+            'summary_id' => 'nullable',
+            'title' => 'nullable',
+            'content' => 'nullable',
+            'publication_date' => 'required',
             'column' => 'nullable',
-        ]);
+        ];
+    
+        // Se 'exportedDiary' estiver vazio, tornar os campos obrigatórios
+        if (empty($request->exportedDiary)) {
+            $rules['summary_id'] = 'required';
+            $rules['title'] = 'required';
+            $rules['content'] = 'required';
+        }
+    
+        $validatedData = $request->validate($rules);
+        // dd($validatedData);
+
         $validatedData['secretary_id'] = Auth::user()->employee && Auth::user()->employee->responsible ? Auth::user()->employee->responsible->responsibleable->id : null;
         $validatedData['slug'] = Str::slug($request->title);
+
         if(SecretaryPublication::where('slug', $validatedData['slug'])->exists()){
             $nextId = SecretaryPublication::max('id') + 1;
             $validatedData['slug'] = $validatedData['slug'].'-'.$nextId;
         }
 
-        $official_diary = OfficialJournal::whereDate('created_at', Carbon::today())->first();
+        if($request->exportedDiary == null){
 
-        if (empty($official_diary)) {
-            $official_diary = OfficialJournal::create(['status' => 'em andamento']);
+            $official_diary = OfficialJournal::whereDate('created_at', Carbon::today())->first();
+    
+            if (empty($official_diary)) {
+                $official_diary = OfficialJournal::create(['status' => 'em andamento']);
+            }
+    
+            $validatedData['diary_id'] = $official_diary->id;
+    
+            $publication = SecretaryPublication::create($validatedData);
         }
-        $validatedData['diary_id'] = $official_diary->id;
 
-        $publication = SecretaryPublication::create($validatedData);
-        if ($publication) {
+        if ($request->exportedDiary != null) {
+            $officialJournal = OfficialJournal::create(['status' => 'em andamento', 'created_at' => $request->publication_date]);
+            $validatedData['diary_id'] = $officialJournal->id;
+            $publication = SecretaryPublication::create($validatedData);
+
+            $url = $this->fileUploadService->upload($request->file('exportedDiary'), 'official-diary-export');
+            $newFile = File::create(['name' => $request->title ,'url' => $url]);
+            $officialJournal->files()->create(['file_id' => $newFile->id]);
+
+            return redirect()->back()->with('success', 'Publicação criada com sucesso!');
+        }
+
+        if ($publication && empty($request->exportedDiary)) {
             $this->officialDiaryPdf->officialDiaryGenerate($official_diary);
 
             return redirect()->route('publications.index', $official_diary->id)->with('success', 'Diário Oficial finalizado com sucesso!');

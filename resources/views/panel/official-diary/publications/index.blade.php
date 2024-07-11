@@ -10,7 +10,13 @@
     <div class="card-body">
 
         <div class="card-header text-right">
-            <a href="{{ route('publications.create', $official_diary->id) }}" class="btn-default">Novo</a>
+            <div class="btn-group dropleft">
+                <button type="button" class="btn-dropdown-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{ route('publications.create', $official_diary->id) }}">Novo</a>
+                    {{-- <a class="dropdown-item" href="#upload">Enviar PDF pronto</a> --}}
+                </div>
+            </div>
         </div>
 
         @if($publications && $publications->count() > 0)
@@ -25,7 +31,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($publications as $publication)
+                    @foreach($publications as $index => $publication)
                     <tr>
                         <td>{{ $publication->id }}</td>
                         <td>{{ $publication->title }}</td>
@@ -33,9 +39,9 @@
                         <td class="actions text-right">
                             <a href="{{ route('publications.edit', ['official_diary' => $official_diary->id, 'publication' => $publication->slug]) }}" class="link edit"><i class="fas fa-edit"></i></a>
                             <a data-toggle="modal" data-target="#myModal{{$publication->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a>
-                            <a href="{{ asset('storage/'.$publication->diary->files[0]->file->url) }}" target="_blank">
+                            {{-- <a href="{{ asset('storage/'.$publication->diary->files[$index]->file->url) }}" target="_blank">
                                 <i class="fa fa-download"></i>                        
-                            </a>
+                            </a> --}}
 
                             <div id="myModal{{$publication->id}}" class="modal fade modal-warning" role="dialog">
                                 <div class="modal-dialog modal-dialog-centered">
@@ -56,8 +62,6 @@
                                                 document.getElementById('delete-form-{{ $publication->id }}').submit();">
                                                 Deletar
                                             </a>
-
-
 
                                             <form id="delete-form-{{ $publication->id }}" action="{{ route('publications.destroy', ['official_diary' => $official_diary->id, 'publication' => $publication->slug]) }}" method="post" style="display: none;">
                                                 @csrf
@@ -80,9 +84,74 @@
         </div>
         @endif
 
+        <div class="modal fade" id="uploadPdfModal" tabindex="-1" role="dialog" aria-labelledby="uploadPdfModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="uploadPdfModalLabel">Enviar PDF</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form action="{{ route('publications.store', $official_diary->id) }}" method="post" id="uploadPdfForm" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        @csrf
+                        <div class="form-group">
+                            <label>Título</label>
+                            <input type="text" name="title" class="form-control" value="{{ old('title') }}" required/>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label for="title1">Selecione a categoria</label>
+    
+                                <select required name="summary_id" class="form-control">
+                                    <option value="">Selecione</option>
+                                    @foreach($summaries->children as $summary)
+                                    <option value="{{ $summary->id}}">{{ $summary->name }}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+                            <div class="col-md-6">
+                                <label>Data de publicação</label>
+                                <input type="date" id="datePicker" name="publication_date" class="form-control" value="{{ old('publication_date') }}" required/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                        <label for="pdfFile">Escolha o arquivo PDF</label>
+                        <input type="file" name="exportedDiary" class="form-control-file" id="pdfFile" accept="application/pdf" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+                </form>
+              </div>
+            </div>
+        </div>
+
     </div>
 </div>
 @endsection
 
 @section('js')
+<link rel="stylesheet" href="/path/to/bootstrap.min.css">
+<script src="/path/to/jquery.min.js"></script>
+<script src="/path/to/bootstrap.bundle.min.js"></script>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('a[href="#upload"]').addEventListener('click', function(event) {
+            event.preventDefault();
+            $('#uploadPdfModal').modal('show');
+        });
+        document.getElementById('datePicker').valueAsDate = new Date();
+    });
+
+
+</script>
+  
 @endsection

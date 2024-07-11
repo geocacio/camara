@@ -16,6 +16,7 @@ class SecretaryPublication extends Model
         'title',
         'column',
         'content',
+        'publication_date',
         'slug',
     ];
 
