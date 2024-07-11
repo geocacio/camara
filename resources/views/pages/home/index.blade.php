@@ -14,9 +14,9 @@ if($isStyles){
 $styles = $isStyles;
 }
 @endphp
-
+@if($section->component != 'postSection')
 @include('pages.home.sections.' . $section->component)
-
+@endif
 @endforeach
 
 @endif

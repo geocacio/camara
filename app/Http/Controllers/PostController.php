@@ -48,6 +48,12 @@ class PostController extends Controller
 
     public function getPosts(Request $request)
     {
+        $disabled = true;
+
+        if($disabled == true){
+            return redirect()->back();
+        }
+
         $page_post = Page::where('name', 'Posts')->first();
         $query = Post::query();
 
@@ -137,6 +143,12 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        $disabled = true;
+        
+        if($disabled == true){
+            return redirect()->back();
+        }
+
 
         $post->update(['views' => ($post->views + 1)]);
         $image = !$post->files->isEmpty() ? $post->files[0]->file : [];

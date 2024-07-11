@@ -126,6 +126,21 @@ class VehicleController extends Controller
         return view('panel.vehicles.no-vehicle', compact('info', 'currentFile'));
     }
 
+    public function noInfoIndex(){
+        $pageID = Page::where('name', 'Veículos')->first();
+        $infos = NoInfo::where('page_id', $pageID->id)->get();
+
+        // $currentFile = null;
+
+        // if($infos){
+        //     $fileContent = FileContent::where('fileable_type', 'no-info')->where('fileable_id', $info->id)->get();
+    
+        //     $currentFile = File::where('id', $fileContent->file_id)->first();
+        // }
+
+        return view('panel.vehicles.no-vehicle-index', compact('infos'));
+    }
+
     public function noInformatiostore(Request $request){
 
         $pageID = Page::where('name', 'Veículos')->first();
