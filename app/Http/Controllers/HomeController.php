@@ -100,8 +100,8 @@ class HomeController extends Controller
 
         $videos = Video::with('categories', 'files')->limit('2')->get();
         $banners = Banner::all();
-        $leis = Law::limit('3')->get();
-        $lrfs = LRF::limit('3')->get();
+        $leis = Law::orderBy('created_at', 'desc')->limit(3)->get();
+        $lrfs = LRF::orderBy('created_at', 'desc')->limit(3)->get();        
         $today = Carbon::today();
         $pageIdfavorite = ShortcutTransparency::all();
 
