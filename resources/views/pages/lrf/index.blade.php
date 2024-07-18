@@ -275,6 +275,11 @@
             // Simulando o clique no primeiro item
             $(".sub-item:first").trigger("click");
         });
+
+        $("#exercicio-conteudo").click(function(){
+            // Simulando o clique no primeiro item
+            $(".sub-item:first").trigger("click");
+        });
     });
 
     // filter by document
