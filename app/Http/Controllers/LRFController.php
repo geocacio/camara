@@ -57,7 +57,7 @@ class LRFController extends Controller
             $query->whereIn('id', $getCategoryRelation->pluck('categoryable_id'));
         }
 
-        $lrfs = $query->paginate(10);
+        $lrfs = $query->get();
 
         $category = Category::where('slug', 'exercicios')->first();
         $subCategories = Category::where('parent_id', $category->id)->get();
