@@ -263,23 +263,24 @@
     $(document).ready(function(){
         $("#exercicio").trigger("click");
     });
+
     
     $(document).ready(function(){
+        console.log('document is ready');
+
         $(".sub-item").click(function(){
             var divClicada = $(this).attr('id');
+            console.log(divClicada + ' foi clicado');
             $(".lrf-item-a").hide();
-            let lrf = $("." + divClicada + "-lrf").show();
+            $("." + divClicada + "-lrf").show();
         });
 
-        $("#exercicio").click(function(){
-            // Simulando o clique no primeiro item
-            $(".sub-item:first").trigger("click");
-        });
-
-        $("#exercicio-conteudo").click(function(){
-            // Simulando o clique no primeiro item
-            $(".sub-item:first").trigger("click");
-        });
+        setTimeout(function(){
+            var firstItem = $(".sub-item:first");
+            if (firstItem.length) {
+                firstItem.click();
+            }
+        }, 100);
     });
 
     // filter by document
@@ -290,11 +291,6 @@
             var divClicada = $(this).attr('id');
             $(".lrf-item-a").hide();
             let lrf = $(".document-type-" + divClicada).show();
-        });
-
-        $("#document").click(function(){
-            // Simulando o clique no primeiro item
-            $(".document-filter:first").trigger("click");
         });
     });
 
