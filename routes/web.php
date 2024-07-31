@@ -382,9 +382,9 @@ Route::middleware('auth')->group(function () {
 
             Route::resource('external-links', ExternalLinkController::class);
             Route::resource('veiculos', VehicleController::class);
-            Route::get('no-vehicles', [VehicleController::class, 'noInfoIndex'])->name('no-vehicle.index');
-            Route::get('no-vehicles/create', [VehicleController::class, 'noInfo'])->name('no-vehicle.create');
-            Route::post('no-vehicles', [VehicleController::class, 'noInformatiostore'])->name('no-veiculos.store');
+            Route::post('no-vehicles', [VehicleController::class, 'noInformationstore'])->name('no-veiculos.store');
+            Route::get('no-vehicles/edit/{id}', [VehicleController::class, 'noInfo'])->name('no-vehicle.edit');
+            Route::post('no-vehicles/update/{id}', [VehicleController::class, 'noInformationUpdate'])->name('no-veiculos.update');
             Route::resource('lrfs', LRFController::class);
             Route::put('page-lrfs', [LRFController::class, 'pageUpdate'])->name('lrfs-page.update');
             Route::get('page-lrfs', [LRFController::class, 'pageEdit'])->name('lrf-edit.page');

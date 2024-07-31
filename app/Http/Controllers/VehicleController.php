@@ -27,8 +27,13 @@ class VehicleController extends Controller
     public function index()
     {
         $vehicles = Vehicle::all();
-        return view('panel.vehicles.index', compact('vehicles'));
+    
+        $pageID = Page::where('name', 'Veículos')->first();
+        $infos = NoInfo::where('page_id', $pageID->id)->get();
+    
+        return view('panel.vehicles.index', compact('vehicles', 'infos'));
     }
+    
 
     public function page()
     {
@@ -111,9 +116,9 @@ class VehicleController extends Controller
 
     }
 
-    public function noInfo(){
+    public function noInfo($id){
         $pageID = Page::where('name', 'Veículos')->first();
-        $info = NoInfo::where('page_id', $pageID->id)->first();
+        $info = NoInfo::where('id', $id)->first();
 
         $currentFile = null;
 
@@ -126,22 +131,34 @@ class VehicleController extends Controller
         return view('panel.vehicles.no-vehicle', compact('info', 'currentFile'));
     }
 
-    public function noInfoIndex(){
+    public function noInformationstore(Request $request)
+    {
         $pageID = Page::where('name', 'Veículos')->first();
-        $infos = NoInfo::where('page_id', $pageID->id)->get();
-
-        // $currentFile = null;
-
-        // if($infos){
-        //     $fileContent = FileContent::where('fileable_type', 'no-info')->where('fileable_id', $info->id)->get();
     
-        //     $currentFile = File::where('id', $fileContent->file_id)->first();
-        // }
-
-        return view('panel.vehicles.no-vehicle-index', compact('infos'));
+        $validateData = $request->validate([
+            'description' => 'required',
+            'periodo' => 'required',
+        ]);
+    
+        $validateData['page_id'] = $pageID->id;
+        
+        // Cria um novo registro em NoInfo
+        $vehicle = NoInfo::create($validateData);
+    
+        // Se houver um arquivo enviado, faz o upload e associa ao novo registro
+        if ($request->hasFile('file')) {
+            $url = $this->fileUploadService->upload($request->file('file'), 'no-vehicles');
+            $file = File::create(['url' => $url]);
+    
+            // Associa o novo arquivo ao modelo criado
+            $vehicle->files()->create(['file_id' => $file->id]);
+        }
+    
+        return redirect()->route('veiculos.index')->with('success', 'Arquivo cadastrado com sucesso!');
     }
 
-    public function noInformatiostore(Request $request){
+    
+    public function noInformationUpdate(Request $request, $id){
 
         $pageID = Page::where('name', 'Veículos')->first();
     
@@ -152,7 +169,7 @@ class VehicleController extends Controller
 
         $validateData['page_id'] = $pageID->id;
         
-        $existingVehicle = NoInfo::where('page_id', $pageID->id)->first();
+        $existingVehicle = NoInfo::where('id', $id)->first();
     
         if ($existingVehicle) {
             $existingVehicle->update($validateData);
@@ -185,7 +202,7 @@ class VehicleController extends Controller
             }
         }
     }
-
+    
     /**
      * Display the specified resource.
      */
