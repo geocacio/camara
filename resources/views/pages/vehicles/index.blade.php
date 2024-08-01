@@ -134,23 +134,20 @@
 
         @endif
         @if ($noInformatios->count() > 0)
-            <h4>Periodos sem veículos</h4>
-            @foreach ($noInformatios as $obj)
-                <div class="col-md-12">
+            @foreach ($noInformatios as $index => $obj)
+                <div style="cursor: pointer;" class="col-md-12" onclick="toggleIframe({{ $index }})">
                     <div class="card-with-links">
                         <div class="second-part">
                             <div class="body">
                                 <p class="no-vehicle">{{ $obj->description }}</p>
                                 <p class="no-vehicle">Periodo: {{ $obj->periodo }}</p>
                             </div>
-
-                            <div class="footer">
-                                @if(!empty($obj->fileWhenNoInfo))
-                                    <a href="{{ asset('storage/'.$obj->fileWhenNoInfo->url) }}" target="_blank" class="links" data-toggle="tooltip" title="Ver documento"><i class="fa-solid fa-file-pdf"></i></a>
-                                @endif
-                            </div>
                         </div>
                     </div>
+                    @if(!empty($obj->fileWhenNoInfo))
+                        <iframe id="iframe-{{ $index }}" src="{{ asset('storage/'.$obj->fileWhenNoInfo->url) }}" width="100%" height="780" style="border: none; display: none; margin-bottom: 1pc;"></iframe>
+                    @endif
+
                 </div>
             @endforeach
         @endif
@@ -182,5 +179,20 @@
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
     })
+
+    let openIframeIndex = null;
+
+    function toggleIframe(index) {
+        const iframes = document.querySelectorAll('iframe[id^="iframe-"]');
+        
+        iframes.forEach(iframe => iframe.style.display = 'none');
+        
+        if (openIframeIndex === index) {
+            openIframeIndex = null;
+        } else {
+            document.getElementById('iframe-' + index).style.display = 'block';
+            openIframeIndex = index;
+        }
+    }
 </script>
 @endsection
