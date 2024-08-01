@@ -13,13 +13,86 @@
                     <a class="dropdown-item" href="{{ route('constructions.page') }}">Página</a>
                     <a class="dropdown-item" href="{{ route('constructions.create') }}">Novo</a>
                     <a class="dropdown-item" href="{{ route('subtypes.index', 'constructions') }}">Tipos</a>
-                    <a class="dropdown-item" href="{{ route('no-construction.create') }}">Não há obras</a>
+                    <a class="dropdown-item" data-toggle="modal" data-target="#modalNoData">Não há obras</a>
                 </div>
             </div>
         
         </div>
 
+        <x-modal-no-info modalId="modalNoData" modalTitle="Período sem Obras" formAction="{{ route('no-construction.store') }}">
+            <div class="form-group row">
+                <div class="col-6">
+                    <label for="logo">Arquivo</label>
+                    <input type="file" name="file" accept="application/pdf" class="form-control">
+                </div>
+        
+                <div class="col-6">
+                    <label for="logo">Periodo</label>
+                    <input type="text" name="periodo" value="{{ old('periodo') }}" placeholder="10/10/2020 - 12/11/2023" class="form-control mask-period">
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <label>Descrição</label>
+                <textarea name="description" class="form-control">{{ old('description') }}</textarea>
+            </div>
 
+            <x-slot name="list">
+                <div class="mt-5 list">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Descrição</th>
+                                    <th>Periodo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($infos as $info)
+                                <tr>
+                                    <td>{{ $info->id }}</td>
+                                    <td>{{ Str::limit($info->description, 10, '...') }}</td>
+                                    <td>{{ $info->periodo }}</td>
+                                    <td class="actions">
+                                        <a href="{{ route('no-construction.create', $info->id) }}" class="link edit"><i class="fas fa-edit"></i></a>
+                                        {{-- <a data-toggle="modal" data-target="#myModalInfo{{$info->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a> --}}
+        
+                                        {{-- <div id="myModalInfo{{$info->id}}" class="modal fade modal-warning" role="dialog">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <span class="icon">
+                                                            <!-- SVG Icon -->
+                                                        </span>
+                                                        <span class="title">Você tem certeza?</span>
+                                                        <span class="message">Você realmente quer apagar este item?<br> Esta ação não poderá ser desfeita.</span>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-cancel" data-dismiss="modal">Cancelar</button>
+                                                        <a href="#" class="btn btn-default" onclick="event.preventDefault();
+                                                            document.getElementById('delete-form-{{ $info->id }}').submit();">
+                                                            Deletar
+                                                        </a>
+        
+                                                        <form id="delete-form-{{ $info->id }}" action="{{ route('veiculos.destroy', $info->id) }}" method="post" style="display: none;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> --}}
+        
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </x-slot>
+        </x-modal-no-info>
         @if($constructions && $constructions->count() > 0)
         <div class="table-responsive">
             <table class="table table-striped table-with-dropdown">

@@ -21,7 +21,7 @@
         </div>
         @endif
         
-        <form action="{{ route('no-construction.store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('no-constructions.update', $info->id) }}" method="post" enctype="multipart/form-data">
             @csrf
         
             <div class="form-group row">

@@ -29,7 +29,11 @@ class ConstructionController extends Controller
     public function index()
     {
         $constructions = Construction::all();
-        return view('panel.construction.index', compact('constructions'));
+        $pageID = Page::where('name', 'Obras')->first();
+
+        $infos = NoInfo::where('page_id', $pageID->id)->get();
+
+        return view('panel.construction.index', compact('constructions', 'infos'));
     }
 
     
@@ -80,9 +84,9 @@ class ConstructionController extends Controller
     }
 
     
-    public function noInfo(){
+    public function noInfo($id){
         $pageID = Page::where('name', 'Obras')->first();
-        $info = NoInfo::where('page_id', $pageID->id)->first();
+        $info = NoInfo::where('id', $id)->first();
 
         $currentFile = null;
 
@@ -95,7 +99,33 @@ class ConstructionController extends Controller
         return view('panel.construction.no-construction', compact('info', 'currentFile'));
     }
 
-    public function noInfostore(Request $request){
+    public function noInformationstore(Request $request)
+    {
+        $pageID = Page::where('name', 'Obras')->first();
+    
+        $validateData = $request->validate([
+            'description' => 'required',
+            'periodo' => 'required',
+        ]);
+    
+        $validateData['page_id'] = $pageID->id;
+        
+        // Cria um novo registro em NoInfo
+        $vehicle = NoInfo::create($validateData);
+    
+        // Se houver um arquivo enviado, faz o upload e associa ao novo registro
+        if ($request->hasFile('file')) {
+            $url = $this->fileUploadService->upload($request->file('file'), 'no-construction');
+            $file = File::create(['url' => $url]);
+    
+            // Associa o novo arquivo ao modelo criado
+            $vehicle->files()->create(['file_id' => $file->id]);
+        }
+    
+        return redirect()->back()->with('success', 'Arquivo cadastrado com sucesso!');
+    }
+
+    public function noInformationUpdate(Request $request, $id){
 
         $pageID = Page::where('name', 'Obras')->first();
     
@@ -106,7 +136,7 @@ class ConstructionController extends Controller
 
         $validateData['page_id'] = $pageID->id;
         
-        $existingVehicle = NoInfo::where('page_id', $pageID->id)->first();
+        $existingVehicle = NoInfo::where('id', $id)->first();
     
         if ($existingVehicle) {
             $existingVehicle->update($validateData);
@@ -120,12 +150,12 @@ class ConstructionController extends Controller
                 // Faz o upload do novo arquivo
                 $url = $this->fileUploadService->upload($request->file('file'), 'no-construction');
                 $file = File::create(['url' => $url]);
-    
+
                 // Associa o novo arquivo ao modelo existente
                 $existingVehicle->files()->create(['file_id' => $file->id]);
             }
     
-            return redirect()->route('constructions.index')->with('success', 'Arquivo atualizado com sucesso!');
+            return redirect()->back()->with('success', 'Arquivo atualizado com sucesso!');
         } else {
             if($vehicle = NoInfo::create($validateData)){
                 if ($request->hasFile('file')) {
@@ -133,7 +163,7 @@ class ConstructionController extends Controller
                     $file = File::create(['url' => $url]);
                     $vehicle->files()->create(['file_id' => $file->id]);
                 }
-                return redirect()->route('constructions.index')->with('success', 'Arquivo cadastrado com sucesso!');
+                return redirect()->back()->with('success', 'Arquivo cadastrado com sucesso!');
             } else {
                 return redirect()->back()->with('error', 'Falha ao cadastrar arquivo!');
             }

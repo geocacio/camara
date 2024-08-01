@@ -47,9 +47,8 @@
                                     <td>{{ $info->periodo }}</td>
                                     <td class="actions">
                                         <a href="{{ route('no-vehicle.edit', $info->id) }}" class="link edit"><i class="fas fa-edit"></i></a>
-                                        <a data-toggle="modal" data-target="#myModalInfo{{$info->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a>
-        
-                                        <div id="myModalInfo{{$info->id}}" class="modal fade modal-warning" role="dialog">
+                                        {{-- <a data-toggle="modal" data-target="#myModalInfo{{$info->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a> --}}
+                                        {{-- <div id="myModalInfo{{$info->id}}" class="modal fade modal-warning" role="dialog">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-body">
@@ -73,8 +72,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-        
+                                        </div> --}}
                                     </td>
                                 </tr>
                                 @endforeach

@@ -133,7 +133,7 @@
             </div>
 
         @endif
-        @if ($noInformatios->count() > 0)
+        {{-- @if ($noInformatios->count() > 0) --}}
             @foreach ($noInformatios as $index => $obj)
                 <div style="cursor: pointer;" class="col-md-12" onclick="toggleIframe({{ $index }})">
                     <div class="card-with-links">
@@ -150,7 +150,7 @@
 
                 </div>
             @endforeach
-        @endif
+        {{-- @endif --}}
     </div>
 </section>
 

@@ -157,7 +157,6 @@ class VehicleController extends Controller
         return redirect()->route('veiculos.index')->with('success', 'Arquivo cadastrado com sucesso!');
     }
 
-    
     public function noInformationUpdate(Request $request, $id){
 
         $pageID = Page::where('name', 'Veículos')->first();
