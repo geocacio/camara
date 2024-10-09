@@ -34,6 +34,7 @@
 <body class="main-body">
     
     @extends('pages.partials.flash-messages')
+    @include('pages.partials.cookie')
 
     <div id="app">@yield('content')</div>
     
