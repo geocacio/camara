@@ -121,7 +121,7 @@ class MaterialController extends Controller
                     // ->where('bond_id', 19); // Verifique se a relação correta é usada
             })->get();
         } else {
-            $councilors = [];
+            $councilors = collect(); // Usa collect() para garantir que seja uma coleção
         }
 
         
