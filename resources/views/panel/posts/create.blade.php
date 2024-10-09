@@ -29,6 +29,11 @@
             </div>
 
             <div class="form-group">
+                <label>Data</label>
+                <input type="datetime-local" name="data" class="form-control title" value="{{ old('data') }}" />
+            </div>
+
+            <div class="form-group">
                 <label for="title1">Categoria</label>
                 <select id="parent_id" name="category" class="form-control">
                     <option value="">Selecione</option>

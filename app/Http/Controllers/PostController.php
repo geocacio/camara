@@ -91,6 +91,7 @@ class PostController extends Controller
             'title' => 'required',
             'category' => 'required',
             'description' => 'nullable',
+            'data' => 'nullable',
             'content' => 'required',
         ],[
             'title.required' => 'O campo título é obrigatório',
@@ -186,6 +187,7 @@ class PostController extends Controller
             'title' => 'required',
             'category' => 'required',
             'description' => 'nullable',
+            'data' => 'nullable',
             'content' => 'required',
         ],[
             'title.required' => 'O campo título é obrigatório',
