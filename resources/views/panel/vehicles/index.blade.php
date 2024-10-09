@@ -7,10 +7,10 @@
 
         <div class="card-header text-right">
             <a href="{{ route('veiculos.create') }}" class="btn-default">Novo</a>
-            <a data-toggle="modal" data-target="#modalNoData" class="btn-default">Não há veiculos</a>
+            <a data-toggle="modal" data-target="#modalNoData" class="btn-default">Período sem Veículo</a>
         </div>
                 
-        <x-modal-no-info modalId="modalNoData" modalTitle="Período sem Veículo" formAction="{{ route('no-veiculos.store') }}">
+        <x-modal-no-info modalId="modalNoData" modalTitle="Período sem Veículo" formAction="{{ route('noInformationstore') }}">
             <div class="form-group row">
                 <div class="col-6">
                     <label for="logo">Arquivo</label>
@@ -20,6 +20,7 @@
                 <div class="col-6">
                     <label for="logo">Periodo</label>
                     <input type="text" name="periodo" value="{{ old('periodo') }}" placeholder="10/10/2020 - 12/11/2023" class="form-control mask-period">
+                    <input type="hidden" value="Veículos" name="page">
                 </div>
             </div>
         
@@ -37,6 +38,7 @@
                                     <th>#</th>
                                     <th>Descrição</th>
                                     <th>Periodo</th>
+                                    <th>Periodo</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,34 +47,29 @@
                                     <td>{{ $info->id }}</td>
                                     <td>{{ Str::limit($info->description, 10, '...') }}</td>
                                     <td>{{ $info->periodo }}</td>
-                                    <td class="actions">
+                                    <td class="">
                                         <a href="{{ route('no-vehicle.edit', $info->id) }}" class="link edit"><i class="fas fa-edit"></i></a>
-                                        {{-- <a data-toggle="modal" data-target="#myModalInfo{{$info->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a> --}}
-                                        {{-- <div id="myModalInfo{{$info->id}}" class="modal fade modal-warning" role="dialog">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                                                    <div class="modal-body">
-                                                        <span class="icon">
-                                                            <!-- SVG Icon -->
-                                                        </span>
-                                                        <span class="title">Você tem certeza?</span>
-                                                        <span class="message">Você realmente quer apagar este item?<br> Esta ação não poderá ser desfeita.</span>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-cancel" data-dismiss="modal">Cancelar</button>
-                                                        <a href="#" class="btn btn-default" onclick="event.preventDefault();
-                                                            document.getElementById('delete-form-{{ $info->id }}').submit();">
-                                                            Deletar
-                                                        </a>
-        
-                                                        <form id="delete-form-{{ $info->id }}" action="{{ route('veiculos.destroy', $info->id) }}" method="post" style="display: none;">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                        </form>
-                                                    </div>
+                                        <a style="cursor: pointer; color: #cd4646;" class="link delete" onclick="openPopup({{ $info->id }})">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                        
+                                        <!-- Popup -->
+                                        <div class="popup" id="popup-{{ $info->id }}" style="display: none;">
+                                            <div class="popup-content">
+                                                <span class="popup-icon">&#9432;</span>
+                                                <span class="popup-message">Você realmente quer apagar este item?</span>
+                                                <div class="popup-footer">
+                                                    <button class="btn cancel" onclick="closePopup({{ $info->id }})">Cancelar</button>
+                                                    <a class="btn delete" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $info->id }}').submit();">Deletar</a>
                                                 </div>
+
+                                                <form id="delete-form-{{ $info->id }}" action="{{ route('info.destroy', $info->id) }}" method="post" style="display: none;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
                                             </div>
-                                        </div> --}}
+                                        </div>
+
                                     </td>
                                 </tr>
                                 @endforeach
@@ -82,7 +79,7 @@
                 </div>
             </x-slot>
         </x-modal-no-info>
-
+        
         @if($vehicles && $vehicles->count() > 0)
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -155,4 +152,16 @@
 @endsection
 
 @section('js')
+<script>
+function openPopup(id) {
+    // Exibe o popup correspondente ao ID
+    document.getElementById('popup-' + id).style.display = 'block';
+}
+
+function closePopup(id) {
+    // Oculta o popup correspondente ao ID
+    document.getElementById('popup-' + id).style.display = 'none';
+}
+
+</script>
 @endsection

@@ -57,6 +57,7 @@ use App\Http\Controllers\MaterialsProgressController;
 use App\Http\Controllers\MaterialVoteController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ModelController;
+use App\Http\Controllers\NoInfoController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\OfficialJournalController;
 use App\Http\Controllers\OmbudsmanPageController;
@@ -382,9 +383,10 @@ Route::middleware('auth')->group(function () {
 
             Route::resource('external-links', ExternalLinkController::class);
             Route::resource('veiculos', VehicleController::class);
-            Route::post('no-vehicles', [VehicleController::class, 'noInformationstore'])->name('no-veiculos.store');
+            Route::post('no-infos', [NoInfoController::class, 'noInformationstore'])->name('noInformationstore');
             Route::get('no-vehicles/edit/{id}', [VehicleController::class, 'noInfo'])->name('no-vehicle.edit');
             Route::post('no-vehicles/update/{id}', [VehicleController::class, 'noInformationUpdate'])->name('no-veiculos.update');
+            Route::delete('/info/{id}', [NoInfoController::class, 'destroy'])->name('info.destroy');
             Route::resource('lrfs', LRFController::class);
             Route::put('page-lrfs', [LRFController::class, 'pageUpdate'])->name('lrfs-page.update');
             Route::get('page-lrfs', [LRFController::class, 'pageEdit'])->name('lrf-edit.page');

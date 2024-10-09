@@ -1,8 +1,8 @@
 @extends('panel.index')
-@section('pageTitle', 'não há veiculos')
+@section('pageTitle', 'Período sem Veiculos')
 @section('breadcrumb')
 <li><a href="{{ route('veiculos.index') }}">Veiculos</a></li>
-<li><span>Não há veiculos</span></li>
+<li><span>Período sem Veiculos</span></li>
 @endsection
 @section('content')
 <div class="card">
