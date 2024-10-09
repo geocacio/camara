@@ -1,8 +1,8 @@
 @extends('panel.index')
-@section('pageTitle', 'não há obras')
+@section('pageTitle', 'Período sem ' . $page->name)
 @section('breadcrumb')
-<li><a href="{{ route('constructions.index') }}">Obras</a></li>
-<li><span>Não há obras</span></li>
+<li><a href="{{ url()->previous() }}">{{ $page->name }}</a></li>
+<li><span>Período sem {{ $page->name }}</span></li>
 @endsection
 @section('content')
 <div class="card">
@@ -21,13 +21,14 @@
         </div>
         @endif
         
-        <form action="{{ route('no-constructions.update', $info->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('no-info.update', [$info->id, $page->slug]) }}" method="post" enctype="multipart/form-data">
             @csrf
         
             <div class="form-group row">
                 <div class="col-6">
                     <label for="logo">Arquivo</label>
                     <input type="file" name="file" accept="application/pdf" class="form-control">
+                    <input type="hidden" value="Veículos" name="page">
                 </div>
 
                 <div class="col-6">

@@ -381,12 +381,13 @@ Route::middleware('auth')->group(function () {
                 'destroy' => 'transparency.groups.destroy',
             ]);
 
+            Route::post('no-info/update/{id}/{slug}', [NoInfoController::class, 'noInformationUpdate'])->name('no-info.update');
+            Route::post('no-infos', [NoInfoController::class, 'noInformationstore'])->name('noInformationstore');
+            Route::delete('no-info/{id}', [NoInfoController::class, 'destroy'])->name('info.destroy');
+            Route::get('no-info/edit/{id}/{slug}', [NoInfoController::class, 'noInfo'])->name('no-info.edit');
+
             Route::resource('external-links', ExternalLinkController::class);
             Route::resource('veiculos', VehicleController::class);
-            Route::post('no-infos', [NoInfoController::class, 'noInformationstore'])->name('noInformationstore');
-            Route::get('no-vehicles/edit/{id}', [VehicleController::class, 'noInfo'])->name('no-vehicle.edit');
-            Route::post('no-vehicles/update/{id}', [VehicleController::class, 'noInformationUpdate'])->name('no-veiculos.update');
-            Route::delete('/info/{id}', [NoInfoController::class, 'destroy'])->name('info.destroy');
             Route::resource('lrfs', LRFController::class);
             Route::put('page-lrfs', [LRFController::class, 'pageUpdate'])->name('lrfs-page.update');
             Route::get('page-lrfs', [LRFController::class, 'pageEdit'])->name('lrf-edit.page');
@@ -525,9 +526,6 @@ Route::middleware('auth')->group(function () {
                 'show' => 'constructions.file.show',
                 'destroy' => 'constructions.file.destroy',
             ]);
-            Route::get('no-constructions/{id}', [ConstructionController::class, 'noInfo'])->name('no-construction.create');
-            Route::post('no-constructions', [ConstructionController::class, 'noInformationstore'])->name('no-construction.store');
-            Route::post('no-constructions/update/{id}', [ConstructionController::class, 'noInformationUpdate'])->name('no-constructions.update');
             Route::resource('pcg', PcgController::class);
             Route::resource('pcs', PcsController::class);
 

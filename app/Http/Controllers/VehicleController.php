@@ -115,21 +115,6 @@ class VehicleController extends Controller
         }
 
     }
-
-    public function noInfo($id){
-        $pageID = Page::where('name', 'Veículos')->first();
-        $info = NoInfo::where('id', $id)->first();
-
-        $currentFile = null;
-
-        if($info){
-            $fileContent = FileContent::where('fileable_type', 'no-info')->where('fileable_id', $info->id)->first();
-    
-            $currentFile = File::where('id', $fileContent->file_id)->first();
-        }
-
-        return view('panel.vehicles.no-vehicle', compact('info', 'currentFile'));
-    }
     
     /**
      * Display the specified resource.

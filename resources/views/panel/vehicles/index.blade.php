@@ -20,7 +20,7 @@
                 <div class="col-6">
                     <label for="logo">Periodo</label>
                     <input type="text" name="periodo" value="{{ old('periodo') }}" placeholder="10/10/2020 - 12/11/2023" class="form-control mask-period">
-                    <input type="hidden" value="Veículos" name="page">
+                    <input type="hidden" value="veiculos" name="page">
                 </div>
             </div>
         
@@ -48,7 +48,7 @@
                                     <td>{{ Str::limit($info->description, 10, '...') }}</td>
                                     <td>{{ $info->periodo }}</td>
                                     <td class="">
-                                        <a href="{{ route('no-vehicle.edit', $info->id) }}" class="link edit"><i class="fas fa-edit"></i></a>
+                                        <a href="{{ route('no-info.edit', [$info->id, 'veiculos']) }}" class="link edit"><i class="fas fa-edit"></i></a>
                                         <a style="cursor: pointer; color: #cd4646;" class="link delete" onclick="openPopup({{ $info->id }})">
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
@@ -152,16 +152,4 @@
 @endsection
 
 @section('js')
-<script>
-function openPopup(id) {
-    // Exibe o popup correspondente ao ID
-    document.getElementById('popup-' + id).style.display = 'block';
-}
-
-function closePopup(id) {
-    // Oculta o popup correspondente ao ID
-    document.getElementById('popup-' + id).style.display = 'none';
-}
-
-</script>
 @endsection
