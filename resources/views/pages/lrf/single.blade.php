@@ -29,7 +29,7 @@
     </div>
 </section>
 
-@include('pages.partials.satisfactionSurvey', ['page_name' => 'Materiais'])
+@include('pages.partials.satisfactionSurvey', ['page_name' => 'Matérias'])
 
 @include('layouts.footer')
 

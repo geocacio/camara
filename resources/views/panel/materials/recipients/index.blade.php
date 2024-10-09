@@ -2,7 +2,7 @@
 @section('pageTitle', 'Destinatários')
 
 @section('breadcrumb')
-<li><a href="{{ route('materials.index') }}">Materiais</a></li>
+<li><a href="{{ route('materials.index') }}">Matérias</a></li>
 <li><span>Destinatários</span></li>
 @endsection
 

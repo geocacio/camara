@@ -2,7 +2,7 @@
 @section('pageTitle', 'Adicionar Material à comissão')
 
 @section('breadcrumb')
-<li><a href="{{ route('materials.index') }}">Materiais</a></li>
+<li><a href="{{ route('materials.index') }}">Matérias</a></li>
 <li><a href="{{ route('material-commissions.index', $material->slug) }}">Comissões</a></li>
 <li><span>Novo</span></li>
 @endsection

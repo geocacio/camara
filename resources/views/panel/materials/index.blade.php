@@ -1,5 +1,5 @@
 @extends('panel.index')
-@section('pageTitle', 'Materiais')
+@section('pageTitle', 'Matérias')
 
 @section('content')
 <div class="card">

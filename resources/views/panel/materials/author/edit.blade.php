@@ -2,7 +2,7 @@
 @section('pageTitle', 'Atualizar Subescritor')
 
 @section('breadcrumb')
-<li><a href="{{ route('materials.index') }}">Materiais</a></li>
+<li><a href="{{ route('materials.index') }}">Matérias</a></li>
 <li><a href="{{ route('authors.index', $material->slug) }}">Subescritores</a></li>
 <li><span>Atualizar</span></li>
 @endsection

@@ -141,7 +141,7 @@ class MaterialController extends Controller
             "description" => "nullable",
             'file' => "required|max:{$this->fileUploadService->getMaxSize()}",
         ]);
-        $validateData['slug'] = Material::uniqSlug('material-'.$validateData['date']);
+        $validateData['slug'] = Material::uniqSlug('materia-'.$validateData['date']);
         $material = Material::create($validateData);
 
         if($material){

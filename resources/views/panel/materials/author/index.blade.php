@@ -2,7 +2,7 @@
 @section('pageTitle', 'Subescritores')
 
 @section('breadcrumb')
-<li><a href="{{ route('materials.index') }}">Materiais</a></li>
+<li><a href="{{ route('materials.index') }}">Matérias</a></li>
 <li><span>Subescritores</span></li>
 @endsection
 

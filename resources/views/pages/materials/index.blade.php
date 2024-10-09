@@ -9,11 +9,11 @@
         <a href="{{ route('transparency.show') }}" class="link">Portal da transparência</a>
     </li>
     <li class="item">
-        <span>Materiais</span>
+        <span>Matérias</span>
     </li>
 </ul>
 
-<h3 class="title-sub-page main">Materiais</h3>
+<h3 class="title-sub-page main">Matérias</h3>
 {{-- <p class="description-text main mb-30">{{ $page_law->description }}</p> --}}
 @endsection
 
@@ -124,7 +124,7 @@
     </div>
 </section>
 
-@include('pages.partials.satisfactionSurvey', ['page_name' => 'Materiais'])
+@include('pages.partials.satisfactionSurvey', ['page_name' => 'Matérias'])
 
 @include('layouts.footer')
 

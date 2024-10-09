@@ -1,8 +1,8 @@
 @extends('panel.index')
-@section('pageTitle', 'Página de Materiais')
+@section('pageTitle', 'Página de Matérias')
 
 @section('breadcrumb')
-<li><a href="{{ route('materials.index') }}">Materiais</a></li>
+<li><a href="{{ route('materials.index') }}">Matérias</a></li>
 <li><span>Página</span></li>
 @endsection
 

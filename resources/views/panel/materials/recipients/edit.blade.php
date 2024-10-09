@@ -2,7 +2,7 @@
 @section('pageTitle', 'Editando Destinatário')
 
 @section('breadcrumb')
-<li><a href="{{ route('materials.index') }}">Materiais</a></li>
+<li><a href="{{ route('materials.index') }}">Matérias</a></li>
 <li><a href="{{ route('recipients.index', $material->slug) }}">Destinatários</a></li>
 <li><span>{{ $recipient->name }}</span></li>
 @endsection

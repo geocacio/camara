@@ -9,7 +9,7 @@
         <a href="{{ route('transparency.show') }}" class="link">Portal da transparência</a>
     </li>
     <li class="item">
-        <a href="{{ route('materiais-all') }}" class="link">Materiais</a>
+        <a href="{{ route('materiais-all') }}" class="link">Matérias</a>
     </li>
     <li class="item">
         <span>{{ $material->type->name }}: {{ $material->id }}/{{ date('Y', strtotime($material->date)) }}</span>
