@@ -6,9 +6,7 @@
         <a href="{{ route('home') }}" class="link">Início</a>
     </li>
     <li class="item">
-        @if($page)
-        <span>{{ $page->title }}</span>
-        @endif
+        Acessibilidade
     </li>
 </ul>
 @if($page)
