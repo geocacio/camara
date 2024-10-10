@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BiddingController;
+use App\Http\Controllers\DataExportController;
 use App\Http\Controllers\DisplayOrderController;
 use App\Http\Controllers\LoginScreenController;
 use App\Http\Controllers\TermsOfUseController;
@@ -22,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/export', [DataExportController::class, 'export']);
 Route::get('login/custom', [LoginScreenController::class, 'showLogin']);
 
 Route::group(['middleware' => ['web']], function () {

@@ -33,7 +33,7 @@
                         <td>{{ $bidding->opening_date }}</td>
                         <td>{{ $bidding->estimated_value ? 'R$ '.number_format($bidding->estimated_value, 2, ',', '.') : '' }}</td>
                         <td>{{ $bidding->status }}</td>
-                        <td>{{ $bidding->types[0]->name }}</td>
+                        {{-- <td>{{ $bidding->types[0]->name }}</td> --}}
                         <td class="actions text-center">
                             @if($bidding->company)
                             {{ $bidding->company->name }}

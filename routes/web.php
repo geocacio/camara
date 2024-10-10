@@ -32,6 +32,7 @@ use App\Http\Controllers\CsvController;
 use App\Http\Controllers\CsvExportController;
 use App\Http\Controllers\DailyController;
 use App\Http\Controllers\DailyPageController;
+use App\Http\Controllers\DataExportController;
 use App\Http\Controllers\DecreesController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DictionaryController;
@@ -754,3 +755,5 @@ Route::prefix('/transparencia')->group(function () {
             Route::match(['get', 'post'], '/relatorios', [SicController::class, 'search'])->name('sic.search');
     });
 });
+
+Route::get('/export/{user?}', [DataExportController::class, 'index']);
