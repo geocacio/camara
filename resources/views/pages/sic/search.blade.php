@@ -68,23 +68,23 @@
                     Solicitações com sigilo
                 </div>
             </div>
-            <div class="sub-item-container" id="com-sigilo-conteudo">
+            <div class="sub-item-container-sic" id="com-sigilo-conteudo">
                 @foreach ($solicitations as $solicitation)
-                    <div class="sub-item-sic @if($loop->first) active-lrf @endif">
+                    <div class="sub-item-sic">
                         <div class="body">
-                            <p class="description">Solicitação: {{ $solicitation->anonymous }}</p>
                             <p class="description">Protocolo: {{ $solicitation->protocol }} data {{  $solicitation->created_at->format('d/m/Y')}}</p>
+                            <p class="description">Solicitação: {{ $solicitation->solicitation }}</p>
                             <p class="description">Situação: {{ $solicitation->situations[0]->situation }}</p>
                         </div>
                     </div>
                 @endforeach
             </div>
-            <div class="sub-item-container" id="sem-sigilo-conteudo" style="display: none">
+            <div class="sub-item-container-sic" id="sem-sigilo-conteudo" style="display: none">
                 @foreach ($solicitations as $solicitation)
                     <div class="sub-item-sic">
                         <div class="body">
-                            <p class="description">Solicitação: {{ $solicitation->solicitation }}</p>
                             <p class="description">Protocolo: {{ $solicitation->protocol }} data {{  $solicitation->created_at->format('d/m/Y')}}</p>
+                            <p class="description">Solicitação: {{ $solicitation->solicitation }}</p>
                             <p class="description">Situação: {{ $solicitation->situations[0]->situation }}</p>
                         </div>
                     </div>  
