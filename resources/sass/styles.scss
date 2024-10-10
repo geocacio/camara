@@ -4017,6 +4017,20 @@ section{
                 font-weight: 600;
             }
         }
+
+        .sub-item-sic {
+            width: 100%;
+            align-items: center;
+            display: flex;
+            word-break: break-all;
+            padding: 11px;
+            cursor: pointer;
+            &:hover {
+                background-color: transparent;
+                color: #004080;
+                font-weight: 600;
+            }
+        }
     }
 
 

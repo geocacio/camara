@@ -58,23 +58,40 @@
 
         @if($solicitations->count() > 0)
 
-        <div class="row">
             
-            @foreach($solicitations as $solicitation)
-                <div class="col-md-12">
-                    <div class="card-with-links">
-                        <div class="second-part">
-                            <div class="body">
-                                <p class="description">Solicitação: {{ $solicitation->solicitation }}</p>
-                                <p class="description">Protocolo: {{ $solicitation->protocol }} data {{  $solicitation->created_at->format('d/m/Y')}}</p>
-                                <p class="description">Situação: {{ $solicitation->situations[0]->situation }}</p>
-                            </div>
+        <div class="container-lrf-menu">
+            <div class="search-by">
+                <div class="item-lrf-type active-lrf" id="com-sigilo">
+                    Solicitações não classificadas com sigilo
+                </div>
+                <div class="item-lrf-type" id="sem-sigilo">
+                    Solicitações com sigilo
+                </div>
+            </div>
+            <div class="sub-item-container" id="com-sigilo-conteudo">
+                @foreach ($solicitations as $solicitation)
+                    <div class="sub-item-sic @if($loop->first) active-lrf @endif">
+                        <div class="body">
+                            <p class="description">Solicitação: {{ $solicitation->anonymous }}</p>
+                            <p class="description">Protocolo: {{ $solicitation->protocol }} data {{  $solicitation->created_at->format('d/m/Y')}}</p>
+                            <p class="description">Situação: {{ $solicitation->situations[0]->situation }}</p>
                         </div>
                     </div>
-                </div>
-            @endforeach
-
+                @endforeach
+            </div>
+            <div class="sub-item-container" id="sem-sigilo-conteudo" style="display: none">
+                @foreach ($solicitations as $solicitation)
+                    <div class="sub-item-sic">
+                        <div class="body">
+                            <p class="description">Solicitação: {{ $solicitation->solicitation }}</p>
+                            <p class="description">Protocolo: {{ $solicitation->protocol }} data {{  $solicitation->created_at->format('d/m/Y')}}</p>
+                            <p class="description">Situação: {{ $solicitation->situations[0]->situation }}</p>
+                        </div>
+                    </div>  
+                @endforeach
+            </div>
         </div>
+
 
         @else
             <div class="empty-data">Nenhum comissão encontrada.</div>
@@ -98,5 +115,90 @@
     $(function() {
         $('[data-toggle="tooltip"]').tooltip()
     })
+
+    $(document).ready(function(){
+        $(".item-lrf-type").click(function(){
+            // Esconde todas as divs
+            $(".sub-item-container").hide();
+
+            // Obtém o ID da div clicada
+            var divClicada = $(this).attr('id');
+            // Exibe a div correspondente ao ID
+            let item = $("#" + divClicada + "-conteudo").show();
+
+            if(item.attr("id") == "about-conteudo"){
+                $("#law-lrf-content").hide();
+                $(".lrf-item-a").hide();
+            }else {
+                $("#law-lrf-content").show();
+                $(".sem-sigilo-lrf-explain").hide();
+            }
+        });
+    });
+
+    // filter by yaer
+    $(document).ready(function(){
+        $("#com-sigilo").trigger("click");
+    });
+
+    
+    $(document).ready(function(){
+        $(".sub-item").click(function(){
+            var divClicada = $(this).attr('id');
+            console.log(divClicada + ' foi clicado');
+            $(".lrf-item-a").hide();
+            $("." + divClicada + "-lrf").show();
+        });
+
+        setTimeout(function(){
+            var firstItem = $(".sub-item:first");
+            if (firstItem.length) {
+                firstItem.click();
+            }
+        }, 100);
+    });
+
+    // filter by sem-sigilo
+    $(document).ready(function(){
+        $(".sem-sigilo-filter:first").trigger("click");
+
+        $(".sem-sigilo-filter").click(function(){
+            var divClicada = $(this).attr('id');
+            $(".lrf-item-a").hide();
+            let lrf = $(".sem-sigilo-type-" + divClicada).show();
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var itemTypes = document.querySelectorAll('.item-lrf-type');
+        var subItems = document.querySelectorAll('.sub-item');
+
+        // Adiciona evento de clique para os itens em search-by
+        itemTypes.forEach(function (item) {
+            item.addEventListener('click', function () {
+                // Remove a classe ativa de todos os itens em search-by
+                itemTypes.forEach(function (i) {
+                    i.classList.remove('active-lrf');
+                });
+                
+                // Adiciona a classe ativa apenas ao item clicado
+                item.classList.add('active-lrf');
+            });
+        });
+
+        // Adiciona evento de clique para os sub-itens
+        subItems.forEach(function (subItem) {
+            subItem.addEventListener('click', function () {
+                // Remove a classe ativa de todos os sub-itens
+                subItems.forEach(function (s) {
+                    s.classList.remove('active-lrf');
+                });
+                
+                // Adiciona a classe ativa apenas ao sub-item clicado
+                subItem.classList.add('active-lrf');
+            });
+        });
+    });
+
 </script>
 @endsection

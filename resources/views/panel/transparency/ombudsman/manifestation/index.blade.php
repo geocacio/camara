@@ -118,10 +118,6 @@
                                                         </div>
                                                         @endif
                                                         <div class="item">
-                                                            <span class="label">Secretaria: </span>
-                                                            <span class="value">{{ $feedback->secretary->name }}</span>
-                                                        </div>
-                                                        <div class="item">
                                                             <span class="label">Prazo: </span>
                                                             <span class="value">{{ $feedback->new_deadline ? $feedback->new_deadline : $feedback->deadline }} {{ $feedback->status == 'Finalizado' ? ' - '.$feedback->updated_at : ''}}</span>
                                                         </div>
