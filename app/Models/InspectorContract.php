@@ -13,4 +13,8 @@ class InspectorContract extends Model
         'inspector_id',
         'contract_id',
     ];
+
+    public function inspector(){
+        return $this->belongsTo(Inspector::class, 'inspector_id');
+    }
 }

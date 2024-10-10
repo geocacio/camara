@@ -113,7 +113,7 @@
                                         <td>{{ date('d/m/Y', strtotime($item->end_date)) }}</td>
                                         <td>R${{ $item->total_value }}</td>
                                         <td style="cursor: pointer"> 
-                                            <a href="{{ asset('storage/'.$item->files->file->url) }}" target="_blank">
+                                            <a href="{{ route('contrato.index', $item->slug) }}" class="nav-link" id="document-tab">
                                                 <i class="fa-regular fa-file"></i>
                                             </a>
                                         </td>

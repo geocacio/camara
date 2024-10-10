@@ -723,6 +723,7 @@ Route::prefix('/transparencia')->group(function () {
         Route::match(['get', 'post'], 'registro-preco', [BiddingController::class, 'PriceRegistration'])->name('price.registration.index');
         Route::match(['get', 'post'], 'atodeadesao', [BiddingController::class, 'AtoAdesao'])->name('atodeadesao.index');
         Route::match(['get', 'post'], 'contratos', [BiddingController::class, 'contracts'])->name('contracts.biddings.index');
+        Route::get('/contrato/{slug}', [BiddingController::class, 'contractShow'])->name('contrato.index');
         Route::get('fiscais-contrato/{slug}', [InspectorController::class, 'show'])->name('fiscais.show');
         Route::get('register-price/{ata}', [RegisterPriceController::class, 'show'])->name('register-price.show');
 

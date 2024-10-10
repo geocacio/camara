@@ -22,6 +22,7 @@ use App\Models\TypeContent;
 use App\Models\User;
 use App\Services\FileUploadService;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Mailables\Content;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -917,6 +918,14 @@ class BiddingController extends Controller
 
         $searchData = $request->only(['description', 'number']);
         return view('pages.biddings.contracts.index', compact('contracts', 'categories', 'searchData'));
+    }
+
+    public function contractShow($slug)
+    {
+        $contract = Contract::where('slug', $slug)->first();
+        $contract->load(['company', 'inspectorContracts.inspector', 'files']);
+
+        return view('pages.biddings.contracts.show', compact('contract'));
     }
 
     public function addNotices(Request $request){
