@@ -46,6 +46,15 @@
                         </li>
                         @endif
 
+                        @if($contract->company->bidding->count())
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="bidding-tab" data-bs-toggle="tab" data-bs-target="#bidding" type="button" role="tab">
+                                <i class="fa-solid fa-file-contract"></i>
+                                Licitações
+                            </button>
+                        </li>
+                        @endif
+
                         @if($contract->files)
                         <li class="nav-item" role="presentation">
                             <a href="{{ asset('storage/'.$contract->files->file->url) }}" target="_blank" class="nav-link" id="document-tab">
@@ -118,6 +127,39 @@
                             </div>
 
                         </div>
+                        @endif
+
+                        @if($contract->company->bidding->count())
+                            <div class="tab-pane fade" id="bidding" role="tabpanel" aria-labelledby="bidding-tab">
+
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-data-default">
+                                            <thead>
+                                                <tr>
+                                                    <th>Data</th>
+                                                    <th>Número da Licitação</th>
+                                                    <th>Modalidade</th>
+                                                    <th>Mais</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{ $categorieModalidade->created_at->format('d/m/Y') ?? 'N/A' }}</td>
+                                                    <td>{{ $bidding->number ?? 'N/A' }}</td>
+                                                    <td>{{ $categorieModalidade->name ?? 'N/A' }}</td>
+                                                    <td style="cursor: pointer"> 
+                                                        <a href="{{ route('bidding.show', $bidding->slug) }}">
+                                                            <i class="fa-regular fa-eye"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            
+                            </div>
                         @endif
 
                     </div>

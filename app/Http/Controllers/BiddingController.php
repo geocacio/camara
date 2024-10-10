@@ -925,7 +925,15 @@ class BiddingController extends Controller
         $contract = Contract::where('slug', $slug)->first();
         $contract->load(['company', 'inspectorContracts.inspector', 'files']);
 
-        return view('pages.biddings.contracts.show', compact('contract'));
+        $bidding = Bidding::where('id', $contract->company->bidding_id)->first();
+        $categoryFather = Category::where('slug', 'modalidades')->first();
+
+        $categorieModalidade = $bidding->categories->pluck('category')->where('parent_id', $categoryFather->id)->first();
+
+        $typeBidding = Type::where('id', $bidding->bidding_type)->first();
+
+
+        return view('pages.biddings.contracts.show', compact('contract', 'bidding', 'categorieModalidade', 'categoryFather'));
     }
 
     public function addNotices(Request $request){
