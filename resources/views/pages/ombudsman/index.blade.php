@@ -48,6 +48,12 @@
                         <p class="description">Fale Conosco</p>
                         <button class="fake-link">Acessar</button>
                     </a>
+                    <a href="{{ route('cartaservicos.index') }}" class="link-box">
+                        <i class="fa-solid fa-envelope-open-text"></i>
+                        <h5 class="title">SERVIÇOS AO CIDADÃO</h5>
+                        <p class="description">CARTA DE SERVIÇOS AO CIDADÃO</p>
+                        <button class="fake-link">Acessar</button>
+                    </a>
 
                 </div>
             </div>

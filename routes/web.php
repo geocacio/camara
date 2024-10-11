@@ -302,7 +302,12 @@ Route::middleware('auth')->group(function () {
         Route::put('official-diary/page', [App\Http\Controllers\OfficialJournalController::class, 'journalPageUpdate'])->name('journal.page.update');
         Route::resource('/fiscais', InspectorController::class);
 
-
+        Route::get('/cartaservicos', [App\Http\Controllers\ServiceCharterController::class, 'index'])->name('cartaservicos.index');
+        Route::get('/cartaservicos/create', [App\Http\Controllers\ServiceCharterController::class, 'create'])->name('cartaservicos.create');
+        Route::get('/cartaservicos/edit/{id}', [App\Http\Controllers\ServiceCharterController::class, 'edit'])->name('cartaservicos.edit');
+        Route::post('/cartaservicos', [App\Http\Controllers\ServiceCharterController::class, 'store'])->name('cartaservicos.store');
+        Route::put('/cartaservicos/{id}', [App\Http\Controllers\ServiceCharterController::class, 'update'])->name('cartaservicos.update');
+        Route::delete('/cartaservicos/{id}', [App\Http\Controllers\ServiceCharterController::class, 'destroy'])->name('cartaservicos.destroy');
 
         //Routes linked to biddings
         Route::resource('/progress', ProgressController::class);
@@ -758,3 +763,4 @@ Route::prefix('/transparencia')->group(function () {
 });
 
 Route::get('/export/{user?}', [DataExportController::class, 'index']);
+Route::get('/cartaservicos', [App\Http\Controllers\SecretaryController::class, 'show'])->name('cartaservicos.page');

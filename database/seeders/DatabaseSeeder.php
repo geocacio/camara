@@ -37,5 +37,6 @@ class DatabaseSeeder extends Seeder
         $this->call(BoardDirectorsSeeder::class);
         $this->call(SectionFavoritesSeeder::class);
         $this->call(LoginScreenSeeder::class);
+        $this->call(CartaDeServicoSeeder::class);
     }
 }
