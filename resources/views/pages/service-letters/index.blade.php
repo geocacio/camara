@@ -22,7 +22,7 @@
 @include('layouts.header')
 
 
-<section class="section-service-letters adjust-min-height no-padding-top">
+<section class="section-service-letters adjust-min-height">
     <div class="container">
 
         <div class="row">
@@ -52,24 +52,15 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group mb-0">
-                                        <label>Órgão</label>
-                                        <select name="secretary_id" class="form-control input-sm">
-                                            <option>Todas</option>
-                                            @foreach($secretaries as $service)
-                                            <option value="{{ $service->id}}" {{ $searchData && $service->id == $searchData['secretary_id'] ? 'selected' : ''}}>{{ $service->name }}</option>
-                                            @endforeach
-                                        </select>
+                                        <div class="form-group mb-0">
+                                            <label>Descrição</label>
+                                            <input type="text" name="description" class="form-control input-sm" value="{{ old('description', $searchData ? $searchData['description'] : '') }}" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group mb-0">
-                                        <label>Descrição</label>
-                                        <input type="text" name="description" class="form-control input-sm" value="{{ old('description', $searchData ? $searchData['description'] : '') }}" />
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
+                                <div class="col-md-12">
                                     <div class="h-100 form-group mb-0">
                                         <div class="btn-groups">
                                             <button type="submit" class="btn btn-search btn-sm" title="Pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button>

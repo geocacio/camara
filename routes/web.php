@@ -756,4 +756,3 @@ Route::prefix('/transparencia')->group(function () {
 });
 
 Route::get('/export/{user?}', [DataExportController::class, 'index']);
-Route::get('/cartaservicos', [App\Http\Controllers\SecretaryController::class, 'show'])->name('cartaservicos.page');

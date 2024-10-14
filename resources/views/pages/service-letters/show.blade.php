@@ -80,37 +80,23 @@
                 <div class="card main">
                     <div class="card-header">
                         <!-- <h3 class="title">Informações da secretaria</h3> -->
-                        <h3 class="title text-center">{{ $serviceLetter->secretary->name }}</h3>
-                        <!-- <h4 class="subtitle">{{ $serviceLetter->secretary->name }}</h4> -->
+                        <h3 class="title text-center">Mais informações</h3>
+                        <!-- <h4 class="subtitle">NAn</h4> -->
                     </div>
                     <div class="card-body">
                         <ul class="information-secretary">
                             <li class="item">
-                                <i class="fa-solid fa-phone"></i>
+                                <i class="fa-regular fa-eye"></i>
                                 <div class="description">
-                                    <span class="title">Telefone</span>
-                                    <span class="text">{{ $serviceLetter->secretary->phone1 }}</span>
+                                    <span class="title">Visualizações</span>
+                                    <span class="text">{{ $serviceLetter->views }}</span>
                                 </div>
                             </li>
                             <li class="item">
-                                <i class="fa-solid fa-envelope"></i>
+                                <i class="fa-solid fa-star"></i>
                                 <div class="description">
-                                    <span class="title">E-mail</span>
-                                    <span class="text">{{ $serviceLetter->secretary->email }}</span>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <i class="fa-solid fa-clock"></i>
-                                <div class="description">
-                                    <span class="title">Horário de funcionamento</span>
-                                    <span class="text">{{ $serviceLetter->secretary->business_hours }}</span>
-                                </div>
-                            </li>
-                            <li class="item">
-                                <i class="fa-solid fa-location-dot"></i>
-                                <div class="description">
-                                    <span class="title">Endereço</span>
-                                    <span class="text">{{ $serviceLetter->secretary->address }}</span>
+                                    <span class="title">Avaliação Média</span>
+                                    <span class="text">0</span>
                                 </div>
                             </li>
                         </ul>
