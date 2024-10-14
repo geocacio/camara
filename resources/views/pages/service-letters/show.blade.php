@@ -92,13 +92,6 @@
                                     <span class="text">{{ $serviceLetter->views }}</span>
                                 </div>
                             </li>
-                            <li class="item">
-                                <i class="fa-solid fa-star"></i>
-                                <div class="description">
-                                    <span class="title">Avaliação Média</span>
-                                    <span class="text">0</span>
-                                </div>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -109,7 +102,10 @@
 </section>
 @endif
 
+@include('pages.partials.satisfactionSurvey', ['page_name' => 'Single Cartas de Serviços'])
+
 @include('layouts.footer')
+
 
 @endsection
 

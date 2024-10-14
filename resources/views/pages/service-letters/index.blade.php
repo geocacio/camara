@@ -111,6 +111,8 @@
     </div>
 </section>
 
+@include('pages.partials.satisfactionSurvey', ['page_name' => 'Cartas de Serviços'])
+
 @include('layouts.footer')
 
 @endsection
