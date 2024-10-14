@@ -18,7 +18,6 @@
     @endif
 
     <div class="card-body">
-        @if($secretaries->count() > 0)
 
         <form id="formServiceLetter" class="form-multple-items" action="{{ route('serviceLetter.store') }}" method="post" enctype="multipart/form-data">
             @csrf
@@ -37,26 +36,12 @@
                         </select>
                     </div>
                 </div>
-                @if($secretary_id)
-                <input type="hidden" name="secretary_id" value="{{$secretary_id}}">
-                @else
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Secretaria</label>
-                        <select name="secretary_id" class="form-control">
-                            <option value="">Selecione</option>
-                            @foreach($secretaries as $secretary)
-                            <option value="{{ $secretary->id }}">{{ $secretary->name }}</option>
-                            @endforeach
-                        </select>
+                        <label>Título</label>
+                        <input type="text" name="title" class="form-control" autocomplete="off" value="{{ old('title') }}">
                     </div>
                 </div>
-                @endif
-            </div>
-
-            <div class="form-group">
-                <label>Título</label>
-                <input type="text" name="title" class="form-control" autocomplete="off" value="{{ old('title') }}">
             </div>
 
             <div class="form-group">
@@ -95,13 +80,6 @@
         <div class="form-footer text-right">
             <button type="button" class="btn-submit-default" onclick="submit()">Guardar</button>
         </div>
-        
-        @else
-        <div class="no-data">
-            <span>Você precisa ter pelo menos uma secretaria cadastrada!</span>
-            <a href="{{ route('secretaries.create') }}" class="link">Criar</a>
-        </div>
-        @endif
     </div>
 </div>
 @endsection

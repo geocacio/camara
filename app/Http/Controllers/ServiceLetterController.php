@@ -49,11 +49,6 @@ class ServiceLetterController extends Controller
             $query->where('category_id', $request->input('category_id'));
         }
 
-        // Verifica se o campo de órgão foi selecionado
-        if ($request->filled('secretary_id') && $request->input('secretary_id') !== 'Todas') {
-            $query->where('secretary_id', $request->input('secretary_id'));
-        }
-
         // Verifica se o campo de descrição foi preenchido
         if ($request->filled('description')) {
             $query->where('description', 'LIKE', '%' . $request->input('description') . '%');
@@ -62,10 +57,9 @@ class ServiceLetterController extends Controller
         // Realiza a busca com os filtros aplicados
         $serviceLetter = $query->paginate(10);
         // Recupere os dados buscados para retorná-los juntamente com a paginação
-        $searchData = $request->only(['title', 'category_id', 'secretary_id', 'description']);
+        $searchData = $request->only(['title', 'category_id', 'description']);
         $categories = Category::where('slug', 'cartas-de-servicos')->with('children')->first();
-        $secretaries = Secretary::all();
-        return view('pages.service-letters.index', compact('pageServiceLetter', 'serviceLetter', 'categories', 'secretaries', 'searchData'));
+        return view('pages.service-letters.index', compact('pageServiceLetter', 'serviceLetter', 'categories', 'searchData'));
     }
 
     public function indexPage(){
@@ -104,15 +98,12 @@ class ServiceLetterController extends Controller
     public function create()
     {
         $user = Auth::user();
-        $secretary_id = null;
         $secretaries = '';
         if ($user->employee && $user->employee->responsible) {
             $secretary_id = $user->employee->responsible->responsibleable_id;
-        } else {
-            $secretaries = Secretary::all();
         }
         $categories = Category::where('slug', 'cartas-de-servicos')->with('children')->first();
-        return view('panel.service-letters.create', compact('secretary_id', 'secretaries', 'categories'));
+        return view('panel.service-letters.create', compact('categories'));
     }
 
     /**
@@ -120,10 +111,8 @@ class ServiceLetterController extends Controller
      */
     public function store(Request $request)
     {
-        // dd('passou aqui');
         $validateData = $request->validate(
             [
-                'secretary_id' => 'required',
                 'category_id' => 'required',
                 'title' => 'required',
                 'description' => 'nullable',
@@ -139,7 +128,6 @@ class ServiceLetterController extends Controller
                 'views' => 'nullable',
             ],
             [
-                'secretary_id.required' => 'O campo Secretaria é obrigatótio',
                 'category_id.required' => 'O campo Categoria é obrigatótio',
                 'title.required' => 'O campo Título é obrigatótio',
             ]
@@ -172,17 +160,14 @@ class ServiceLetterController extends Controller
      */
     public function edit(ServiceLetter $serviceLetter)
     {
-        // dd(json_decode($serviceLetter->service_letters)[0]->input_value);
         $user = Auth::user();
-        $secretary_id = null;
         $secretaries = '';
         if ($user->employee && $user->employee->responsible) {
             $secretary_id = $user->employee->responsible->responsibleable_id;
-        } else {
-            $secretaries = Secretary::all();
         }
+
         $categories = Category::where('slug', 'cartas-de-servicos')->with('children')->first();
-        return view('panel.service-letters.edit', compact('serviceLetter', 'secretary_id', 'secretaries', 'categories'));
+        return view('panel.service-letters.edit', compact('serviceLetter', 'categories'));
     }
 
     /**
@@ -192,7 +177,6 @@ class ServiceLetterController extends Controller
     {
         $validateData = $request->validate(
             [
-                'secretary_id' => 'required',
                 'category_id' => 'required',
                 'title' => 'required',
                 'description' => 'nullable',
@@ -208,7 +192,6 @@ class ServiceLetterController extends Controller
                 'views' => 'nullable',
             ],
             [
-                'secretary_id.required' => 'O campo Secretaria é obrigatótio',
                 'category_id.required' => 'O campo Categoria é obrigatótio',
                 'title.required' => 'O campo Título é obrigatótio',
             ]

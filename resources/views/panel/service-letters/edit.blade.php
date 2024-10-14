@@ -26,6 +26,12 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
+                        <label>Título</label>
+                        <input type="text" name="title" class="form-control" autocomplete="off" value="{{ old('title', $serviceLetter->title) }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
                         <label>Categoria</label>
                         <select name="category_id" class="form-control">
                             <option value="">Selecione</option>
@@ -37,26 +43,6 @@
                         </select>
                     </div>
                 </div>
-                @if($secretary_id)
-                <input type="hidden" name="secretary_id" value="{{$secretary_id}}">
-                @else
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Secretaria</label>
-                        <select name="secretary_id" class="form-control">
-                            <option value="">Selecione</option>
-                            @foreach($secretaries as $secretary)
-                            <option value="{{ $secretary->id }}" {{ $secretary->id == $serviceLetter->secretary->id ? 'selected' : ''}}>{{ $secretary->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                @endif
-            </div>
-
-            <div class="form-group">
-                <label>Título</label>
-                <input type="text" name="title" class="form-control" autocomplete="off" value="{{ old('title', $serviceLetter->title) }}">
             </div>
 
             <div class="form-group">
@@ -111,7 +97,6 @@
                             <textarea name="item_description_{{ $index + 1 }}" class="form-control">{{ $serviceLetterData->textarea_value }}</textarea>
                         </div>
 
-                        <!-- Botão de remover (opcional) -->
                         <button class="remove-button" onclick="removeItem(event)"><i class="fa-sharp fa-solid fa-xmark"></i></button>
                     </div>
                     @endforeach
