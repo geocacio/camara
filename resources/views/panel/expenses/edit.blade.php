@@ -2,8 +2,12 @@
 @section('pageTitle', 'Editar Despesa')
 
 @section('breadcrumb')
-<li><a href="{{ route('expenses.index') }}">Despesa</a></li>
-<li><span>Novo</span></li>
+<li>
+    <a href="{{ route('expenses.index', ['voucher' => $expense->voucher_id]) }}">
+        Despesa
+    </a>
+</li>
+<li><span>Editar</span></li>
 @endsection
 
 @section('content')
@@ -23,6 +27,7 @@
             @csrf
             
             <div class="form-group">
+                <input type="hidden" name="voucher_id" class="form-control" value="{{ $expense->voucher_id }}" />
                 <label>Tipo de link</label>
                 <select name="link_type" id="type_item" class="form-control">
                     <option value="internal" {{ old('link_type') == 'internal' ? 'selected' : '' }}>Interno</option>
@@ -77,6 +82,12 @@
                                 <option value="">Orgão</option>
                                 <option value="Câmara Municipal" {{ old('organ', $expense->organ) == 'Câmara Municipal' ? 'selected' : '' }} >Camara municipal</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Número do pagamento</label>
+                            <input type="number" name="payment_number" class="form-control" value="{{ old('payment_number') }}" />
                         </div>
                     </div>
                 </div>

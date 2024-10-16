@@ -10,6 +10,8 @@ class Expenses extends Model
     use HasFactory;
 
     protected $fillable = [
+        'voucher_id',
+        'payment_number',
         'creditor_number',
         'date',
         'exercise',

@@ -48,6 +48,7 @@ use App\Http\Controllers\LaiController;
 use App\Http\Controllers\LawController;
 use App\Http\Controllers\LegislatureController;
 use App\Http\Controllers\LinkController;
+use App\Http\Controllers\LiquidationController;
 use App\Http\Controllers\LoginScreenController;
 use App\Http\Controllers\LRFController;
 use App\Http\Controllers\MaintenanceController;
@@ -118,6 +119,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\VoteController;
+use App\Http\Controllers\VoucherController;
 use App\Models\ChamberFinancial;
 use App\Models\Inspector;
 use App\Models\Recipes;
@@ -577,7 +579,26 @@ Route::middleware('auth')->group(function () {
         Route::resource('/recipes', RecipesController::class);
         Route::get('/recipes-page', [RecipesController::class, 'page'])->name('recipes.page');
         Route::put('/recipes-page', [RecipesController::class, 'pageUpdate'])->name('recipes.page.update');
-        Route::resource('/expenses', ExpensesController::class);
+
+        Route::get('/expenses/{voucher}', [ExpensesController::class, 'index'])->name('expenses.index');
+        Route::get('/expenses/create/{voucher}', [ExpensesController::class, 'create'])->name('expenses.create');
+        Route::post('/expenses', [ExpensesController::class, 'store'])->name('expenses.store');
+        Route::put('/expenses', [ExpensesController::class, 'update'])->name('expenses.update');
+        Route::put('/expenses', [ExpensesController::class, 'update'])->name('expenses.update');
+        Route::get('/expenses/edit/{expense}', [ExpensesController::class, 'edit'])->name('expenses.edit');
+        Route::delete('/expenses/{expense}', [ExpensesController::class, 'destroy'])->name('expenses.destroy');
+
+        Route::get('/liquidation/{voucher}', [LiquidationController::class, 'index'])->name('liquidation.index');
+        Route::get('/liquidation/create/{voucher}', [LiquidationController::class, 'create'])->name('liquidation.create');
+        Route::post('/liquidation', [LiquidationController::class, 'store'])->name('liquidation.store');
+        Route::put('/liquidation', [LiquidationController::class, 'update'])->name('liquidation.update');
+        Route::put('/liquidation', [LiquidationController::class, 'update'])->name('liquidation.update');
+        Route::get('/liquidation/edit/{liquidation}', [LiquidationController::class, 'edit'])->name('liquidation.edit');
+        Route::delete('/liquidation/{liquidation}', [LiquidationController::class, 'destroy'])->name('liquidation.destroy');
+        
+        Route::resource('vouchers', VoucherController::class);
+
+        Route::resource('liquidations', LiquidationController::class);
         Route::get('/expenses-page', [ExpensesController::class, 'page'])->name('expenses.page');
         Route::put('/expenses-page', [ExpensesController::class, 'pageUpdate'])->name('expenses.page.update');
         Route::get('/construction-page', [ConstructionController::class, 'page'])->name('constructions.page');

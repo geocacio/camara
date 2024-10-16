@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Expenses;
 use App\Models\Page;
 use App\Models\TransparencyGroup;
+use App\Models\Voucher;
 use Illuminate\Http\Request;
 
 class ExpensesController extends Controller
@@ -12,11 +13,11 @@ class ExpensesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($voucher)
     {
-        $expenses = Expenses::all();
+        $expenses = Expenses::where('voucher_id', $voucher)->get();
 
-        return view('panel.expenses.index', compact('expenses'));
+        return view('panel.expenses.index', compact('expenses', 'voucher'));
     }
 
     
@@ -59,9 +60,9 @@ class ExpensesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Voucher $voucher)
     {
-        return view('panel.expenses.create');
+        return view('panel.expenses.create', compact('voucher'));
     }
 
     /**
@@ -70,11 +71,13 @@ class ExpensesController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'voucher_id' => 'nullable',
             'creditor_number' => 'nullable',
             'date' => 'nullable|date',
             'exercise' => 'nullable|string',
             'organ' => 'nullable|string',
             'valor' => 'nullable',
+            'payment_number' => 'required',
             'fase' => 'nullable',
             'text_button' => 'nullable',
             'url' => 'nullable',
@@ -84,9 +87,9 @@ class ExpensesController extends Controller
         $newExpenses->fill($validatedData);
 
         if ($newExpenses->save()) {
-            return redirect()->route('expenses.index')->with('success', 'Registro criado com sucesso!');
+            return redirect()->route('expenses.index', $request->voucher_id)->with('success', 'Registro criado com sucesso!');
         } else {
-            return redirect()->route('expenses.index')->with('error', 'Por favor, tente novamente!');
+            return redirect()->route('expenses.index', $request->voucher_id)->with('error', 'Por favor, tente novamente!');
         }
     }
 
@@ -112,20 +115,22 @@ class ExpensesController extends Controller
     public function update(Request $request, Expenses $expense)
     {
         $validatedData = $request->validate([
+            'voucher_id' => 'nullable',
             'creditor_number' => 'nullable',
-            'date' => 'date',
-            'exercise' => 'string',
-            'organ' => 'string',
+            'date' => 'nullable|date',
+            'exercise' => 'nullable|string',
+            'organ' => 'nullable|string',
             'valor' => 'nullable',
+            'payment_number' => 'required',
             'fase' => 'nullable',
             'text_button' => 'nullable',
             'url' => 'nullable',
         ]);
 
         if ($expense->update($validatedData)) {
-            return redirect()->route('expenses.index')->with('success', 'Registro atualizado com sucesso!');
+            return redirect()->route('expenses.index', $expense->voucher_id)->with('success', 'Registro atualizado com sucesso!');
         } else {
-            return redirect()->route('expenses.index')->with('error', 'Erro ao atualizar o registro. Por favor, tente novamente.');
+            return redirect()->route('expenses.index', $expense->voucher_id)->with('error', 'Erro ao atualizar o registro. Por favor, tente novamente.');
         }
     }
 
@@ -135,15 +140,15 @@ class ExpensesController extends Controller
     public function destroy(Expenses $expense)
     {
         if (!$expense) {
-            return redirect()->route('ex$expenses.index')->with('error', 'Registro não encontrado!');
+            return redirect()->back()->with('error', 'Registro não encontrado!');
         }
     
         $deleted = $expense->delete();
     
         if ($deleted) {
-            return redirect()->route('expenses.index')->with('success', 'Registro excluído com sucesso!');
+            return redirect()->back()->with('success', 'Registro excluído com sucesso!');
         } else {
-            return redirect()->route('expenses.index')->with('error', 'Erro ao excluir o registro. Por favor, tente novamente.');
+            return redirect()->back()->with('error', 'Erro ao excluir o registro. Por favor, tente novamente.');
         }
     }
 }

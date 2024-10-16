@@ -725,9 +725,9 @@
             <span>Receitas</span>
         </a>
     </li>
-    <li class="menu-item {{ request()->routeIs('expenses.index') ? 'active' : '' }}">
-        <a href="{{ route('expenses.index') }}" class="menu-link">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-smile"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+    <li class="menu-item {{ request()->routeIs('vouchers.index') ? 'active' : '' }}">
+        <a href="{{ route('vouchers.index') }}" class="menu-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
             <span>Gastos</span>
         </a>
     </li>

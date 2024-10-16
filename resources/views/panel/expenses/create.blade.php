@@ -2,7 +2,7 @@
 @section('pageTitle', 'Nova Despesa')
 
 @section('breadcrumb')
-<li><a href="{{ route('expenses.index') }}">Despesa</a></li>
+<li><a href="{{ route('expenses.index', $voucher->id) }}">Despesa</a></li>
 <li><span>Novo</span></li>
 @endsection
 
@@ -26,6 +26,7 @@
                     <select name="link_type" id="type_item" class="form-control">
                         <option value="internal" {{ old('link_type') == 'internal' ? 'selected' : '' }}>Interno</option>
                         <option value="external" {{ old('link_type') == 'external' ? 'selected' : '' }}>Externo</option>
+                        <input type="hidden" name="voucher_id" class="form-control" value="{{ $voucher->id }}" />
                     </select>
                 </div>
             </div>
@@ -76,6 +77,14 @@
                                 <option value="">Orgão</option>
                                 <option value="Câmara Municipal">Câmara Municipal</option>
                             </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Número do pagamento</label>
+                            <input type="number" name="payment_number" class="form-control" value="{{ old('payment_number') }}" />
                         </div>
                     </div>
                 </div>

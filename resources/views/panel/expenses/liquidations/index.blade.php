@@ -1,5 +1,5 @@
 @extends('panel.index')
-@section('pageTitle', 'Despesas')
+@section('pageTitle', 'Liquidações')
 
 @section('content')
 <div class="card">
@@ -10,42 +10,40 @@
             <div class="btn-group dropleft">
                 <button type="button" class="btn-dropdown-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ route('expenses.create', $voucher) }}">Novo</a>
+                    <a class="dropdown-item" href="{{ route('liquidation.create', $voucher) }}">Novo</a>
                 </div>
             </div>
         </div>
 
 
-        @if($expenses && $expenses->count() > 0)
+        @if($liquidations && $liquidations->count() > 0)
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Data</th>
-                        <th>Número credor</th>
-                        <th>Órgão</th>
+                        <th>invoice_number</th>
                         <th>Valor</th>
-                        <th>Fase</th>
+                        <th>Ano</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($expenses as $expense)
+                    @foreach($liquidations as $liquidation)
                     
                     <tr>
-                        <td>{{ $expense->id }}</td>
-                        <td>{{ date('d/m/Y', strtotime($expense->recipe_data)) }}</td>
-                        <td>{{ $expense->creditor_number }}</td>
-                        <td>{{ ucwords(str_replace('_', ' ', $expense->organ)) }}</td>
-                        <td>{{ $expense->valor }}</td>
-                        <td>{{ $expense->fase }}</td>
+                        <td>{{ $liquidation->id }}</td>
+                        <td>{{ date('d/m/Y', strtotime($liquidation->liquidation_date)) }}</td>
+                        <td>{{ $liquidation->invoice_number }}</td>
+                        <td>{{ $liquidation->amount }}</td>
+                        <td>{{ $liquidation->fiscal_year }}</td>
                         <td class="actions text-center">
-                            <a href="{{ route('expenses.edit', $expense->id) }}" class="link edit"><i class="fas fa-edit"></i></a>
+                            <a href="{{ route('liquidation.edit', $liquidation->id) }}" class="link edit"><i class="fas fa-edit"></i></a>
                         
-                            <a data-toggle="modal" data-target="#myModal-{{ $expense->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a>
+                            <a data-toggle="modal" data-target="#myModal-{{ $liquidation->id}}" class="link delete"><i class="fas fa-trash-alt"></i></a>
                         
-                            <div id="myModal-{{$expense->id}}" class="modal fade modal-warning" role="dialog">
+                            <div id="myModal-{{$liquidation->id}}" class="modal fade modal-warning" role="dialog">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <!-- Modal content-->
                                     <div class="modal-content">
@@ -61,11 +59,11 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-cancel" data-dismiss="modal">Cancelar</button>
                                             <a href="#" class="btn btn-default" onclick="event.preventDefault();
-                                                document.getElementById('delete-form-{{ $expense->id }}').submit();">
+                                                document.getElementById('delete-form-{{ $liquidation->id }}').submit();">
                                                 Deletar
                                             </a>
 
-                                            <form id="delete-form-{{ $expense->id }}" action="{{ route('expenses.destroy', $expense->id) }}" method="post" style="display: none;">
+                                            <form id="delete-form-{{ $liquidation->id }}" action="{{ route('liquidation.destroy', $liquidation->id) }}" method="post" style="display: none;">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
