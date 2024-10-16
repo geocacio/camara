@@ -47,7 +47,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="{{ route('expenses.index', $voucher->id) }}">Pagamentos</a>
-                                    <a class="dropdown-item" href="{{ route('expenses.index', $voucher->id) }}">Liquidações</a>
+                                    <a class="dropdown-item" href="{{ route('liquidation.index', $voucher->id) }}">Liquidações</a>
                                     <a class="dropdown-item" href="{{ route('vouchers.edit', $voucher->id) }}">Editar</a>
                                     <a class="dropdown-item" data-toggle="modal" data-target="#myModal{{$voucher->id}}" href="#">Excluir</a>
                                 </div>
