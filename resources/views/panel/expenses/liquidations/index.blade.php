@@ -23,7 +23,7 @@
                     <tr>
                         <th>#</th>
                         <th>Data</th>
-                        <th>invoice_number</th>
+                        <th>Número da fatura</th>
                         <th>Valor</th>
                         <th>Ano</th>
                         <th class="text-center">Actions</th>
