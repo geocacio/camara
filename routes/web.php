@@ -628,7 +628,8 @@ Route::get('/pcg', [PcgController::class, 'show'])->name('prestacao-conta-govern
 Route::get('/acessibilidade', [AcessibilityController::class, 'page'])->name('acessibilidade.page');
 Route::get('/acessibilidade', [AcessibilityController::class, 'page'])->name('acessibilidade.page');
 Route::get('/mapa-site', [SiteMapController::class, 'page'])->name('mapa-site.page');
-Route::get('/expenses', [ExpensesController::class, 'show'])->name('despesas.page');
+Route::get('/despesas', [VoucherController::class, 'page'])->name('despesas.page');
+Route::get('/despesa/{voucher}', [VoucherController::class, 'show'])->name('despesas.show');
 Route::get('/recipes', [RecipesController::class, 'show'])->name('receitas.page');
 Route::match(['get', 'post'], '/construcoes', [ConstructionController::class, 'show'])->name('obras.page');
 Route::get('/simbolos', [SymbolsController::class, 'page'])->name('simbolos.page');
@@ -731,6 +732,23 @@ Route::prefix('/transparencia')->group(function () {
     Route::put('/mapa-site', [SiteMapController::class, 'pageUpdate'])->name('mapa-site.page.update');
     
     Route::get('/regulamentacao-lai', [LaiController::class, 'pageShow'])->name('regulamentacao-lai');
+    Route::prefix('licitacoes')->group(function () {
+        Route::get('/', [BiddingController::class, 'BiddingPage'])->name('shopping.portal.page');//
+        Route::get('portal-compras', [BiddingController::class, 'ShoppingPortal'])->name('bidding.page'); //
+        Route::get('/show/{slug?}', [BiddingController::class, 'show'])->name('bidding.show');
+        Route::match(['get', 'post'], 'dispensa-e-inexigibilidade', [BiddingController::class, 'DispensaInexigibilidade'])->name('dispensa.inexigibilidade');
+        Route::match(['get', 'post'], 'fiscais-contrato', [InspectorController::class, 'showAll'])->name('fiscais.contrato');
+        Route::match(['get', 'post'], 'chamamento-publico', [BiddingController::class, 'publicCall'])->name('public.call');
+        Route::match(['get', 'post'], 'suspensas-inidoneas', [BiddingController::class, 'suspended'])->name('suspended.index');
+        Route::match(['get', 'post'], 'registro-preco', [BiddingController::class, 'PriceRegistration'])->name('price.registration.index');
+        Route::match(['get', 'post'], 'atodeadesao', [BiddingController::class, 'AtoAdesao'])->name('atodeadesao.index');
+        Route::match(['get', 'post'], 'contratos', [BiddingController::class, 'contracts'])->name('contracts.biddings.index');
+        Route::get('/contrato/{slug}', [BiddingController::class, 'contractShow'])->name('contrato.index');
+        Route::get('fiscais-contrato/{slug}', [InspectorController::class, 'show'])->name('fiscais.show');
+        Route::get('register-price/{ata}', [RegisterPriceController::class, 'show'])->name('register-price.show');
+
+    });
+
     Route::prefix('licitacoes')->group(function () {
         Route::get('/', [BiddingController::class, 'BiddingPage'])->name('shopping.portal.page');//
         Route::get('portal-compras', [BiddingController::class, 'ShoppingPortal'])->name('bidding.page'); //

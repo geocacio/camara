@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Page;
+use App\Models\TransparencyGroup;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
 
@@ -11,6 +13,26 @@ class VoucherController extends Controller
     {
         $vouchers = Voucher::all();
         return view('panel.expenses.voucher.index', compact('vouchers'));
+    }
+
+    public function page(Request $request)
+    {
+        $query = Voucher::query();
+        $expensesPage = Page::where('name', 'Despesas')->first();
+        $groups = TransparencyGroup::all();
+    
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $start_date = date("Y-m-d", strtotime($request->input('start_date')));
+            $end_date = date("Y-m-d", strtotime($request->input('end_date')));
+        
+            $query->whereBetween('created_at', [$start_date, $end_date]);
+        }   
+
+        $vouchers = $query->paginate(10);
+        $searchData = $request->only(['start_date']);
+    
+        return view('pages.expenses.index', compact('expensesPage', 'searchData', 'vouchers'));
+
     }
 
     public function create()
@@ -44,7 +66,7 @@ class VoucherController extends Controller
     public function show($id)
     {
         $voucher = Voucher::with(['liquidations', 'payments'])->findOrFail($id);
-        return view('vouchers.show', compact('voucher'));
+        return view('pages.expenses.show', compact('voucher'));
     }
 
     public function edit($id)
