@@ -49,6 +49,12 @@
                                 Pagamentos
                             </button>
                         </li>
+                        <li class="nav-item" role="presentation">
+                            <a target="_blank" href="{{ route('despesas.pdf', $voucher->id) }}" class="nav-link" type="button" role="tab" aria-controls="trip" aria-selected="false">
+                                <i class="fa-regular fa-file-pdf"></i>
+                                Imprimir
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -223,18 +229,6 @@
                             </div>
 
                         </div>
-
-                        <div class="tab-pane fade" id="documentations" role="tabpanel" aria-labelledby="documentation-tab">
-                            <h1 class="title"><i class="fa-solid fa-file-pdf mr-10"></i>Documentações</h1>
-                            @if($voucher->files)
-                                <div class="group-files">
-                                    @foreach($voucher->files as $item)
-                                        <a class="link" target="_blank" href="{{ asset('storage/'.$item->file->url) }}"><i class="fa-regular fa-file-pdf"></i>{{ $item->file->name }}</a>
-                                    @endforeach
-                                </div>
-                            @endif
-                        </div>
-
                     </div>
                 </div>
             </div>
