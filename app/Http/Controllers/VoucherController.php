@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
+use App\Models\Setting;
 use App\Models\TransparencyGroup;
 use App\Models\Voucher;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
 class VoucherController extends Controller
@@ -67,6 +69,18 @@ class VoucherController extends Controller
     {
         $voucher = Voucher::with(['liquidations', 'payments'])->findOrFail($id);
         return view('pages.expenses.show', compact('voucher'));
+    }
+
+    public function generatePdf($id)
+    {
+        $voucher = Voucher::with(['liquidations', 'payments'])->findOrFail($id);
+        $setting = Setting::first();
+
+        $html = view('pages.expenses.pdf.index', compact('voucher', 'setting'))->render();
+        $pdf = app()->make('dompdf.wrapper');
+        $pdf->loadHTML($html);
+
+        return $pdf->stream('documento.pdf');
     }
 
     public function edit($id)

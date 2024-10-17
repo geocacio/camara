@@ -630,6 +630,7 @@ Route::get('/acessibilidade', [AcessibilityController::class, 'page'])->name('ac
 Route::get('/mapa-site', [SiteMapController::class, 'page'])->name('mapa-site.page');
 Route::get('/despesas', [VoucherController::class, 'page'])->name('despesas.page');
 Route::get('/despesa/{voucher}', [VoucherController::class, 'show'])->name('despesas.show');
+Route::get('/despesa-pdf/{voucher}', [VoucherController::class, 'generatePdf'])->name('despesas.pdf');
 Route::get('/recipes', [RecipesController::class, 'show'])->name('receitas.page');
 Route::match(['get', 'post'], '/construcoes', [ConstructionController::class, 'show'])->name('obras.page');
 Route::get('/simbolos', [SymbolsController::class, 'page'])->name('simbolos.page');
