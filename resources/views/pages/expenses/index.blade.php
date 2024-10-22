@@ -6,11 +6,11 @@
         <a href="{{ route('home') }}" class="link">Início</a>
     </li>
     <li class="item">
-        <span>{{ !empty($expensesPage->title) ? $expensesPage->title : 'Dicionário'}}</span>
+        <span>{{ !empty($expensesPage->title) ? $expensesPage->title : 'DEMONSTRATIVO DAS DESPESAS'}}</span>
     </li>
 </ul>
 
-<h3 class="title-sub-page main">{{ !empty($expensesPage->title) ? $expensesPage->title : 'Dicionário'}}</h3>
+<h3 class="title-sub-page main">{{ !empty($expensesPage->title) ? $expensesPage->title : 'DEMONSTRATIVO DAS DESPESAS'}}</h3>
 @endsection
 
 @section('content')
@@ -28,10 +28,31 @@
                         <h3 class="title">Campos para pesquisa</h3>
                         <form action="#" method="post">
                             @csrf
-
-                            <div class="form-group mb-0">
-                                <label>Pesquisar por palavra</label>
-                                <input type="text" name="description" class="form-control input-sm" value="{{ old('description', $searchData ? $searchData['description'] : '') }}" />
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group mb-0">
+                                        <label>Número</label>
+                                        <input type="text" name="number" class="form-control input-sm" value="{{ old('number', $searchData ? $searchData['number'] : '') }}" />
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group mb-0">
+                                        <label>De:</label>
+                                        <input type="text" name="start_date" class="form-control input-sm mask-date" value="{{ old('start_date', $searchData ? $searchData['start_date'] : '') }}" />
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group mb-0">
+                                        <label>Até:</label>
+                                        <input type="text" name="end_date" class="form-control input-sm mask-date" value="{{ old('end_date', $searchData ? $searchData['end_date'] : '') }}" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group mb-0">
+                                        <label>Descrição</label>
+                                        <input type="text" name="description" class="form-control input-sm" value="{{ old('description', $searchData ? $searchData['description'] : '') }}" />
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">

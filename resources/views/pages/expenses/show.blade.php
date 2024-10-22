@@ -6,17 +6,14 @@
         <a href="{{ route('home') }}" class="link">Início</a>
     </li>
     <li class="item">
-        <a href="{{ route('transparency.show') }}" class="link">Portal da transparência</a>
+        <a href="{{ route('despesas.page') }}" class="link">Despesas</a>
     </li>
     <li class="item">
-        <a href="{{ route('diarias.show') }}" class="link">Diárias</a>
-    </li>
-    <li class="item">
-        <span>{{ $voucher ? $voucher->number : '' }}</span>
+        <span>{{ $voucher ? $voucher->voucher_number : '' }}</span>
     </li>
 </ul>
 
-<h3 class="title text-center">Diária {{ $voucher ? $voucher->number : ''}}</h3>
+<h3 class="title text-center">Despesa {{ $voucher ? $voucher->voucher_number : ''}}</h3>
 
 @endsection
 

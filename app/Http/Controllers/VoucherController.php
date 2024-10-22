@@ -19,6 +19,7 @@ class VoucherController extends Controller
 
     public function page(Request $request)
     {
+        // dd($request->all());
         $query = Voucher::query();
         $expensesPage = Page::where('name', 'Despesas')->first();
         $groups = TransparencyGroup::all();
@@ -27,11 +28,25 @@ class VoucherController extends Controller
             $start_date = date("Y-m-d", strtotime($request->input('start_date')));
             $end_date = date("Y-m-d", strtotime($request->input('end_date')));
         
-            $query->whereBetween('created_at', [$start_date, $end_date]);
+            $query->whereBetween('voucher_date', [$start_date, $end_date]);
         }   
 
+        //voucher_number, description
+
+        if($request->filled('number')){
+            $query->where('voucher_number', 'LIKE', '%' . $request->input('number') . '%');
+        }
+
+        if($request->filled('description')){
+            $query->where('description', 'LIKE', '%' . $request->input('description') . '%');
+        }
+
+        if($request->filled('exercice')){
+            $query->where('voucher_date', 'LIKE', '%' . $request->input('exercice') . '%');
+        }
+
         $vouchers = $query->paginate(10);
-        $searchData = $request->only(['start_date']);
+        $searchData = $request->only(['start_date', 'end_date', 'number', 'description', 'exercice']);
     
         return view('pages.expenses.index', compact('expensesPage', 'searchData', 'vouchers'));
 
