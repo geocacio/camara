@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ExportDataRequest;
 use App\Models\Legislature;
 use App\Models\Page;
 use App\Models\TransparencyGroup;
+use App\Services\DataExportService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -149,4 +151,40 @@ class LegislatureController extends Controller
 
         return redirect()->route('legislatures.index')->with('error', 'Legislatura não encontrada ou já excluída.');
     }
+
+    /**
+     * Exporta os dados de uma legislatura em um formato especificado.
+     * 
+     * @param  ExportDataRequest  $request
+     * @param  string  $slug
+     * @return \Illuminate\Http\Response
+     */
+    public function export(ExportDataRequest $request, $slug)
+    {
+        $format = $request->input('format');
+
+        $legislature = Legislature::where('slug', $slug)
+            ->with('legislatureRelations.legislatureable')
+            ->first();
+
+        if (!$legislature || $legislature->legislatureRelations->isEmpty()) {
+            return redirect()->back()->with('error', 'Nenhum registro encontrado.');
+        }
+
+        $vereadores = $legislature->legislatureRelations->map(function ($relation) {
+            $legislatureable = $relation->legislatureable;
+
+            return [
+                'party_affiliation' => $legislatureable->partyAffiliation->acronym,
+                'name' => $legislatureable->name,
+                'surname' => $legislatureable->surname,
+            ];
+        });
+
+        $columns = ['Partido', 'Nome', 'Sobrenome'];
+
+        $dataExportService = new DataExportService($columns);
+        return $dataExportService->export($vereadores->toArray(), $format);
+    }
+
 }

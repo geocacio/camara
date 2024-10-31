@@ -61,7 +61,7 @@
             </div>
         </div>
 
-        @include('components.modal-export', ['route' => route('export.legislations', $legislature->slug)])
+        @include('components.modal-export', ['route' => route('export.legislations', $legislature->slug), 'filename' => 'Legislatura-' . $legislature->slug])
 
         @if($legislature->legislatureRelations)
 

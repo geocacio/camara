@@ -55,14 +55,9 @@
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
 
-                // Obter a data atual e formatá-la como "1-10"
-                const today = new Date();
-                const options = { day: 'numeric', month: 'numeric' };
-                const formattedDate = today.toLocaleDateString('pt-BR', options).replace(/\//g, '-');
-
                 // Definir o nome do arquivo
                 a.href = url;
-                a.download = `data-${formattedDate}.${format}`;
+                a.download = `{{ $filename }}.${format}`;
                 document.body.appendChild(a);
                 a.click();
                 a.remove();
