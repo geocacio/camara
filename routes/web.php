@@ -29,10 +29,7 @@ use App\Http\Controllers\CouncilorComissionController;
 use App\Http\Controllers\CouncilorController;
 use App\Http\Controllers\CouncilorLegislatureController;
 use App\Http\Controllers\CsvController;
-use App\Http\Controllers\CsvExportController;
 use App\Http\Controllers\DailyController;
-use App\Http\Controllers\DailyPageController;
-use App\Http\Controllers\DataExportController;
 use App\Http\Controllers\DecreesController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DictionaryController;
@@ -41,7 +38,6 @@ use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\ExternalLinkController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\GlossaryController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\InspectorController;
 use App\Http\Controllers\LaiController;
@@ -53,7 +49,6 @@ use App\Http\Controllers\LoginScreenController;
 use App\Http\Controllers\LRFController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\ManagerController;
-use App\Http\Controllers\MandateController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MaterialsProgressController;
 use App\Http\Controllers\MaterialVoteController;
@@ -67,9 +62,7 @@ use App\Http\Controllers\OmbudsmanQuestionController;
 use App\Http\Controllers\OmbudsmanSurveyController;
 use App\Http\Controllers\OpenDatesController;
 use App\Http\Controllers\OrdinanceController;
-use App\Http\Controllers\OrdinancePageController;
 use App\Http\Controllers\OrganController;
-use App\Http\Controllers\OutsourcedController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PageServiceLetterController;
 use App\Http\Controllers\PartyAffiliationController;
@@ -83,7 +76,6 @@ use App\Http\Controllers\ProceedingController;
 use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\PublicationFormController;
-use App\Http\Controllers\PublicationPageController;
 use App\Http\Controllers\RecipesController;
 use App\Http\Controllers\RecipientController;
 use App\Http\Controllers\RegisterPriceController;
@@ -98,7 +90,6 @@ use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SectorController;
 use App\Http\Controllers\SectorEmployeesController;
 use App\Http\Controllers\SelectiveProcessController;
-use App\Http\Controllers\SelectiveProcessPageController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceLetterController;
 use App\Http\Controllers\SessionAttendanceController;
@@ -107,7 +98,6 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ShortcutTransparencyController;
 use App\Http\Controllers\SicController;
 use App\Http\Controllers\SicFaqController;
-use App\Http\Controllers\SicSolicitationController;
 use App\Http\Controllers\SicSolicitationPanelController;
 use App\Http\Controllers\SiteMapController;
 use App\Http\Controllers\SymbolsController;
@@ -118,15 +108,9 @@ use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\VideoController;
-use App\Http\Controllers\VoteController;
 use App\Http\Controllers\VoucherController;
-use App\Models\ChamberFinancial;
-use App\Models\Inspector;
-use App\Models\Recipes;
-use App\Models\RegisterPrice;
 use App\Models\ServiceLetter;
 use App\Models\Setting;
-use App\Models\ShortcutTransparency;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -140,14 +124,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/panel', function () {
-//     return view('panel.index');
-// });
 
 Auth::routes();
 
