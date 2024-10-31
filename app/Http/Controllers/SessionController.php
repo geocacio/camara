@@ -3,15 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\File;
 use App\Models\Page;
 use App\Models\Session;
 use App\Models\TransparencyGroup;
 use App\Models\Type;
 use App\Models\TypeContent;
+use App\Services\FileUploadService;
 use Illuminate\Http\Request;
 
 class SessionController extends Controller
 {
+    private $fileUploadService;
+
+    public function __construct(FileUploadService $fileUploadService)
+    {
+        $this->fileUploadService = $fileUploadService;
+    }
 
     public function page()
     {
@@ -110,6 +118,8 @@ class SessionController extends Controller
             'type_id' => 'required',
             'exercicy_id' => 'required',
             'description' => 'required',
+            'ata' => 'nullable',
+            'pauta' => 'nullable',
         ],[
             'date.required' => 'O campo data é obrigatório',
             'type_id.required' => 'O campo tipo é obrigatório',
@@ -118,10 +128,14 @@ class SessionController extends Controller
             'description.required' => 'O campo descrição é obrigatório'
         ]);
         $validateData['slug'] = Session::uniqSlug();
-
+        
         $session = Session::create($validateData);
 
+        
         if ($session){
+            $this->handleFileUpload($session, $request, 'ata');
+            $this->handleFileUpload($session, $request, 'pauta');
+
             TypeContent::create([
                 'type_id' => $validateData['type_id'],
                 'typeable_id' => $session->id,
@@ -132,6 +146,30 @@ class SessionController extends Controller
         }
         return redirect()->back()->with('error', 'Error, por favor tente novamente!');
     }
+
+    private function handleFileUpload($session, Request $request, $fileKey)
+    {
+        if ($request->hasFile($fileKey)) {
+            $url = $this->fileUploadService->upload($request->file($fileKey), 'sessions');
+            
+            $existingFile = $session->files()->where('fileable_type', get_class($session))->first();
+            
+            if ($existingFile) {
+                $this->fileUploadService->deleteFile($existingFile->url);
+    
+                $existingFile->update(['url' => $url]);
+            } else {
+                $newFile = File::create(['url' => $url]);
+                
+                $session->files()->create([
+                    'file_id' => $newFile->id,
+                    'fileable_id' => $session->id,
+                    'fileable_type' => get_class($session)
+                ]);
+            }
+        }
+    }
+    
 
     /**
      * Display the specified resource.
@@ -163,6 +201,8 @@ class SessionController extends Controller
             'type_id' => 'required',
             'exercicy_id' => 'required',
             'description' => 'required',
+            'ata' => 'nullable',
+            'pauta' => 'nullable',
         ],[
             'date.required' => 'O campo data é obrigatório',
             'type_id.required' => 'O campo tipo é obrigatório',
@@ -174,6 +214,9 @@ class SessionController extends Controller
         if ($session->update($validateData)){
             $typeContent = TypeContent::where('typeable_id', $session->id)->where('typeable_type', 'Session')->first();
             $typeContent->update(['type_id' => $validateData['type_id']]);
+
+            $this->handleFileUpload($session, $request, 'ata');
+            $this->handleFileUpload($session, $request, 'pauta');
 
             return redirect()->route('sessions.index')->with('success', 'Sessão atualizada com sucesso!');
         }

@@ -15,6 +15,8 @@ class Session extends Model
         'status_id',
         'exercicy_id',
         'description',
+        'ata',
+        'pauta',
         'slug',
     ];
 
@@ -53,6 +55,11 @@ class Session extends Model
         $year = date('Y');
         $slug = $year . '-' . str_pad($nextId, 5, '0', STR_PAD_LEFT);
         return $slug;
+    }
+
+    public function files()
+    {
+        return $this->morphMany(FileContent::class, 'fileable');
     }
 
     public function getRouteKeyName()

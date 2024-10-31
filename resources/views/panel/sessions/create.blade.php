@@ -18,7 +18,7 @@
     @endif
 
     <div class="card-body">
-        <form action="{{ route('sessions.store') }}" method="post">
+        <form action="{{ route('sessions.store') }}" method="post" enctype="multipart/form-data">
             @csrf
 
             <div class="row">
@@ -69,6 +69,16 @@
                         </select>
                     </div>
                 </div>
+            </div>
+
+            <div class="form-group">
+                <label for="logo">ATA</label>
+                <input type="file" name="ata" accept="application/pdf" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="logo">Pauta</label>
+                <input type="file" name="pauta" accept="application/pdf" class="form-control">
             </div>
             
             <div class="form-group">
