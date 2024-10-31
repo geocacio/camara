@@ -159,7 +159,7 @@ class SessionController extends Controller
     
                 $existingFile->update(['url' => $url]);
             } else {
-                $newFile = File::create(['url' => $url]);
+                $newFile = File::create(['url' => $url, 'name' => $fileKey]);
                 
                 $session->files()->create([
                     'file_id' => $newFile->id,

@@ -54,7 +54,15 @@
                                 </li>
                         @endforeach
                         @endif
-                        
+
+                        @foreach($session->files as $file)
+                            <li class="nav-item" role="presentation">
+                                <a href="{{ asset('storage/'.$file->file->url) }}" class="nav-link" target="_blank">
+                                    <i class="fa-solid fa-file"></i>
+                                    Clique aqui para visualizar {{ $file->file->name }}
+                                </a>
+                            </li>
+                        @endforeach                        
                     </ul>
                 </div>
             </div>
