@@ -67,7 +67,7 @@
                 </div>
             </div>
             
-            @include('partials.tableDefault', ['data' => $diaries, 'actions' => [ 'route' => 'diarias.single', 'param_type' => 'slug' ] ])
+            @include('partials.tableDefault', ['data' => $diaries, 'actions' => [ 'route' => 'diarias.single', 'param_type' => 'id' ] ])
 
         </div>
         {{-- @include('partials.cardByDecreeOrLaw', ['data' => $laws]) --}}

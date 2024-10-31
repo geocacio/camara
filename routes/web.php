@@ -706,8 +706,8 @@ Route::prefix('/transparencia')->group(function () {
     Route::match(['get', 'post'], '/leis', [App\Http\Controllers\LawController::class, 'show'])->name('leis.show');
     Route::get('leis/{category?}', [App\Http\Controllers\LawController::class, 'byCategory'])->name('leis.category');
     Route::match(['get', 'post'], '/decretos', [App\Http\Controllers\DecreesController::class, 'show'])->name('decretos.show');
-    Route::get('/diarias/{daily:id}', [App\Http\Controllers\DailyController::class, 'single'])->name('diarias.single');
     Route::match(['get', 'post'], '/diarias', [App\Http\Controllers\DailyController::class, 'show'])->name('diarias.show');
+    Route::get('/single/diarias/{daily:id}', [App\Http\Controllers\DailyController::class, 'single'])->name('diarias.single');
     Route::get('/decreto/{decree:slug}', [App\Http\Controllers\DecreesController::class, 'showDecree'])->name('decreto.show');
     Route::match(['get', 'post'], '/portarias', [App\Http\Controllers\OrdinanceController::class, 'show'])->name('portarias.show');
     Route::match(['get', 'post'], '/publicacoes', [App\Http\Controllers\PublicationController::class, 'show'])->name('publicacoes.show');
@@ -795,4 +795,6 @@ Route::prefix('/transparencia')->group(function () {
     });
 });
 
-Route::get('/export/{user?}', [DataExportController::class, 'index']);
+Route::prefix('/export')->group(function () {
+    Route::get('/legislaturas/{slug}', [LegislatureController::class, 'export'])->name('export.legislations'); 
+});

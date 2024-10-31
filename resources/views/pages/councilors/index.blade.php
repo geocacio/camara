@@ -48,6 +48,9 @@
                                         <div class="btn-groups">
                                             <button type="submit" class="btn btn-search btn-sm" data-toggle="tooltip" title="Pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button>
                                             <a href="{{ route('legislaturas-all') }}" class="btn btn-search close btn-sm" data-toggle="tooltip" title="Limpar pesquisa"><i class="fa-solid fa-xmark"></i></a>
+                                            <button type="button" class="btn btn-search close btn-sm" data-toggle="modal" data-target="#exportModal" title="Exportação">
+                                                Exportação <i class="fa-solid fa-file-export"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -57,6 +60,8 @@
                 </div>
             </div>
         </div>
+
+        @include('components.modal-export', ['route' => route('export.legislations', $legislature->slug)])
 
         @if($legislature->legislatureRelations)
 
