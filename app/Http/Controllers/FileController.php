@@ -63,7 +63,9 @@ class FileController extends Controller
     {
         Storage::disk('public')->delete($file->url);
         $file->fileContents()->delete();
+        $fileName = $file->name;
         $file->delete();
-        return response()->json(['success' => true, 'message' => 'Arquivo excluído com sucesso!']);
+
+        return response()->json(['message' => 'Arquivo deletado com sucesso.', 'file_name' => $fileName]);
     }
 }

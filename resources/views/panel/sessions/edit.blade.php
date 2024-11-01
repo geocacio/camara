@@ -18,7 +18,7 @@
     @endif
 
     <div class="card-body">
-        <form action="{{ route('sessions.update', $session->slug) }}" method="post">
+        <form action="{{ route('sessions.update', $session->slug) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -71,6 +71,37 @@
                     </div>
                 </div>
             </div>
+
+            @php
+                $expectedFiles = ['ata', 'pauta']; 
+                $existingFileNames = $session->files->pluck('file.name')->toArray();
+            @endphp
+
+            <div class="col-12 pt-30 container-all-files">
+                @foreach($session->files as $file)
+                    <div class="form-group" id="file-container-{{ $file->file->id }}">
+                        <div class="form-control">
+                            <div style="display: flex; align-items: center; justify-content: space-between">
+                                <a href="{{ asset('storage/'.$file->file->url) }}" target="_blank">
+                                    Visualizar {{ $file->file->name }}
+                                </a>
+                                <button type="button" onclick="deleteFile({{ $file->file->id }})" class="btn btn-danger btn-sm ml-2">
+                                    Deletar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
+                @foreach($expectedFiles as $expectedFile)
+                    @if(!in_array($expectedFile, $existingFileNames))
+                        <div class="form-group">
+                            <label for="{{ $expectedFile }}">Arquivo {{ ucfirst($expectedFile) }}</label>
+                            <input type="file" name="{{ $expectedFile }}" accept="application/pdf" class="form-control mt-2">
+                        </div>
+                    @endif
+                @endforeach
+            </div>
             
             <div class="form-group">
                 <label>Descrição</label>
@@ -88,5 +119,47 @@
 @section('js')
 
 @include('panel.scripts')
+<script>
+function deleteFile(fileId) {
+    if (confirm('Tem certeza de que deseja deletar este arquivo?')) {
+        fetch(`/panel/files/${fileId}`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
 
+            // Ocultar o elemento do arquivo deletado no DOM
+            const fileContainer = document.getElementById(`file-container-${fileId}`);
+            if (fileContainer) {
+                fileContainer.style.display = 'none';
+            }
+
+            // Adicionar label e input para o upload do arquivo excluído
+            const uploadContainer = document.querySelector('.container-all-files');
+            const formGroup = document.createElement('div');
+            formGroup.classList.add('form-group');
+
+            const label = document.createElement('label');
+            label.setAttribute('for', data.file_name);
+            label.textContent = `Arquivo ${data.file_name.charAt(0).toUpperCase() + data.file_name.slice(1)}`;
+
+            const newInput = document.createElement('input');
+            newInput.type = 'file';
+            newInput.name = data.file_name;
+            newInput.accept = 'application/pdf';
+            newInput.classList.add('form-control', 'mt-2');
+
+            formGroup.appendChild(label);
+            formGroup.appendChild(newInput);
+            uploadContainer.appendChild(formGroup);
+        })
+        .catch(error => console.error('Erro:', error));
+    }
+}
+
+</script>
 @endsection
