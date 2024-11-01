@@ -164,7 +164,7 @@ class SectionFavoritesSeeder extends Seeder
             "Silverstone Gray" => "#a5a5a5"
         ];
 
-        $section = [
+        $sectionData = [
             'component' => 'favorites-pages',
             'name' => 'Páginas Favoritas',
             'styles' => [

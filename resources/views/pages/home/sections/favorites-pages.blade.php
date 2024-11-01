@@ -4,7 +4,7 @@
                 @foreach ($pageInFavorite as $page)
                     <a href="{{ route('dispensa.inexigibilidade') }}" class="item-bidding">
                         <i class="{{ $page->icon }}"></i>
-                        <span>{{ $page->title }}</span>
+                        <span>{{ $page->name }}</span>
                     </a>
                 @endforeach
             </div>
