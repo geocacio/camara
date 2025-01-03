@@ -127,6 +127,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('{any}', function () {
+    return redirect('https://www.governotransparente.com.br/transparencia/despesas/opcoes/21669589?datainfo=MTIwMjQwMTAzMTYxM1BQUA==&clean=false');
+})->where('any', '.*');
+
 Route::get('/gerar-pdf', [PdfController::class, 'gerarPDF'])->name('gerarPDF');
 Route::get('/gerar-csv', [CsvController::class, 'gerarCSV'])->name('gerarCSV');
 Route::get('/pdf', function () {
